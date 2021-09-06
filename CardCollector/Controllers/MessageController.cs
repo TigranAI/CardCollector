@@ -2,12 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using CardCollector.Commands.MessageCommands;
+using CardCollector.DataBase.Entity;
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.InputFiles;
 using Telegram.Bot.Types.ReplyMarkups;
+using Message = CardCollector.Commands.Message.Message;
+using CallBackQuery = CardCollector.Commands.CallbackQuery.CallbackQuery;
+using MyChatMember = CardCollector.Commands.MyChatMember.MyChatMember;
+using TgMessage = Telegram.Bot.Types.Message;
 
 namespace CardCollector.Controllers
 {
@@ -15,7 +20,7 @@ namespace CardCollector.Controllers
 
     public static class MessageController
     {
-        private static Dictionary<long, List<int>> _deletingMessagePool = new();
+        private static readonly Dictionary<long, List<int>> DeletingMessagePool = new();
 
         public static async Task HandleUpdateAsync(ITelegramBotClient client, Update update, CancellationToken ct)
         {
@@ -23,19 +28,28 @@ namespace CardCollector.Controllers
             {
                 var executor = update.Type switch
                 {
-                    UpdateType.Message => await MessageCommand.Factory(update),
+                    UpdateType.Message => await Message.Factory(update),
+                    UpdateType.CallbackQuery => await CallBackQuery.Factory(update),
+                    UpdateType.MyChatMember => await MyChatMember.Factory(update),
                     _ => throw new ArgumentOutOfRangeException()
                 };
-                var message = await executor.Execute();
-                AddNewMessageToPool(message.Chat.Id, message.MessageId);
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                LogOut(update.Type.ToString());
+                // var message =
+                await executor.Execute();
             }
             catch (Exception e)
             {
-                await HandleErrorAsync(client, e, ct);
+                switch (e)
+                {
+                    case ArgumentOutOfRangeException:
+                        LogOut(update.Type);
+                        break;
+                    case ApiRequestException:
+                        LogOutWarning(e.Message);
+                        break;
+                    default:
+                        LogOutError(e);
+                        break;
+                }
             }
         }
 
@@ -43,43 +57,37 @@ namespace CardCollector.Controllers
         {
             switch (e)
             {
-                case ApiRequestException apiRequestException:
-                    LogOutWarning($"API Error:[{apiRequestException.ErrorCode}] - {apiRequestException.Message}");
+                case ApiRequestException:
+                    LogOutWarning(e.Message);
                     break;
                 default:
-                    LogOutError(e.ToString());
+                    LogOutError(e);
                     break;
             }
-
             return Task.CompletedTask;
         }
 
-        public static async Task DeleteMessageAsync(long chatId, int messageId)
-        {
-            await Bot.Client.DeleteMessageAsync(chatId, messageId);
-        }
-
-        public static void AddNewMessageToPool(long chatId, int messageId)
+        public static void AddNewMessageToPool(UserEntity user, int messageId)
         {
             try
             {
-                _deletingMessagePool[chatId].Add(messageId);
+                DeletingMessagePool[user.ChatId].Add(messageId);
             }
             catch (Exception)
             {
-                _deletingMessagePool.Add(chatId, new List<int>());
-                _deletingMessagePool[chatId].Add(messageId);
+                DeletingMessagePool.Add(user.ChatId, new List<int>());
+                DeletingMessagePool[user.ChatId].Add(messageId);
             }
         }
 
-        public static async Task DeleteMessagesFromPool(long chatId)
+        public static async Task DeleteMessagesFromPool(UserEntity user)
         {
             try
             {
-                foreach (var id in _deletingMessagePool[chatId])
-                    await Bot.Client.DeleteMessageAsync(chatId, id);
-                _deletingMessagePool[chatId].Clear();
-                _deletingMessagePool.Remove(chatId);
+                foreach (var id in DeletingMessagePool[user.ChatId])
+                    await DeleteMessage(user, id);
+                DeletingMessagePool[user.ChatId].Clear();
+                DeletingMessagePool.Remove(user.ChatId);
             }
             catch (Exception)
             {
@@ -87,10 +95,101 @@ namespace CardCollector.Controllers
             }
         }
 
-        public static async Task<Message> SendMessage(long chatId, string messageText, IReplyMarkup keyboard = null)
+        public static async Task<TgMessage> SendMessage(UserEntity user, string message, IReplyMarkup keyboard = null)
         {
-            return await Bot.Client.SendTextMessageAsync(chatId, messageText, ParseMode.Html,
-                replyMarkup: keyboard, disableNotification: true);
+            try
+            {
+                if (!user.IsBlocked)
+                    return await Bot.Client.SendTextMessageAsync(user.ChatId, message, replyMarkup: keyboard, disableNotification: true);
+            }
+            catch (Exception e)
+            {
+                LogOutWarning("Can't send text message " + e);
+            }
+            return new TgMessage();
+        }
+        
+        public static async Task<TgMessage> SendTextWithHtml(UserEntity info, string message, IReplyMarkup keyboard = null)
+        {
+            try
+            {
+                if (!info.IsBlocked)
+                    return await Bot.Client.SendTextMessageAsync(info.ChatId, message, ParseMode.Html, replyMarkup: keyboard, disableNotification: true);
+            }
+            catch (Exception e)
+            {
+                LogOutWarning("Can't send text message with html " + e);
+            }
+            return new TgMessage();
+        }
+        
+        public static async Task<TgMessage> SendSticker(UserEntity info, string fileId)
+        {
+            try
+            {
+                if (!info.IsBlocked)
+                    return await Bot.Client.SendStickerAsync(info.ChatId, fileId, true);
+            }
+            catch (Exception e)
+            {
+                LogOutWarning("Can't send sticker " + e);
+            }
+            return new TgMessage();
+        }
+
+        public static async Task<TgMessage> EditMessage(UserEntity info, int messageId, string message, InlineKeyboardMarkup keyboard = null)
+        {
+            try
+            {
+                if (!info.IsBlocked)
+                    return await Bot.Client.EditMessageTextAsync(info.ChatId, messageId, message, replyMarkup: keyboard);
+            }
+            catch (Exception e)
+            {
+                LogOutWarning("Can't edit message text " + e);
+            }
+            return new TgMessage();
+        }
+
+        public static async Task<TgMessage> EditReplyMarkup(UserEntity info, int messageId, InlineKeyboardMarkup keyboard)
+        {
+            try
+            {
+                if (!info.IsBlocked)
+                    return await Bot.Client.EditMessageReplyMarkupAsync(info.ChatId, messageId, keyboard);
+            }
+            catch (Exception e)
+            {
+                LogOutWarning("Can't edit reply markup " + e);
+            }
+            return new TgMessage();
+        }
+        
+        public static async Task DeleteMessage(UserEntity user, int messageId)
+        {
+            try
+            {
+                if (!user.IsBlocked)
+                    await Bot.Client.DeleteMessageAsync(user.ChatId, messageId);
+            }
+            catch (Exception e)
+            {
+                LogOutWarning("Can't delete message " + e);
+            }
+        }
+
+        public static async Task<TgMessage> SendImage(UserEntity info, InputOnlineFile inputOnlineFile, string message = null, InlineKeyboardMarkup replyMarkup = null)
+        {
+            try
+            {
+                if (!info.IsBlocked)
+                    return await Bot.Client.SendPhotoAsync(info.ChatId, inputOnlineFile, message, replyMarkup: replyMarkup, disableNotification: true);
+            }
+            catch (Exception e)
+            {
+                LogOutWarning("Can't send photo " + e);
+            }
+            return new TgMessage();
         }
     }
 }

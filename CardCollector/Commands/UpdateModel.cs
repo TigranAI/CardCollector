@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using CardCollector.Commands.MessageCommands;
 using CardCollector.DataBase.Entity;
 using Telegram.Bot.Types;
 
@@ -10,12 +8,24 @@ namespace CardCollector.Commands
     {
         protected abstract string Command { get; }
         protected UserEntity User;
+        protected Update Update;
 
-        public abstract Task<Message> Execute();
+        public abstract Task<Telegram.Bot.Types.Message> Execute();
 
         protected virtual bool IsMatches(string command)
         {
             return command.Contains(Command);
+        }
+
+        protected UpdateModel()
+        {
+            User = null;
+        }
+
+        protected UpdateModel(UserEntity user, Update update)
+        {
+            User = user;
+            Update = update;
         }
     }
 }

@@ -10,9 +10,14 @@ namespace CardCollector.DataBase.EntityDao
 {
     public static class UserDao
     {
-        private static CardCollectorDatabase DataBase = CardCollectorDatabase.Instance;
+        private static readonly CardCollectorDatabase DataBase = CardCollectorDatabase.Instance;
         
-        private static Dictionary<long, UserEntity> ActiveUsers = new();
+        private static readonly Dictionary<long, UserEntity> ActiveUsers = new();
+
+        public static async Task<UserEntity> GetOrAddNew(User user)
+        {
+            return await GetById(user.Id) ?? await AddNew(user);
+        }
         
         public static async Task<UserEntity?> GetById(long userId)
         {
@@ -32,10 +37,13 @@ namespace CardCollector.DataBase.EntityDao
 
         public static async Task<UserEntity> AddNew(User user)
         {
-            var userEntity = new UserEntity();
-            userEntity.Id = user.Id;
-            userEntity.ChatId = user.Id;
-            userEntity.Username = user.Username;
+            var userEntity = new UserEntity
+            {
+                Id = user.Id,
+                ChatId = user.Id,
+                Username = user.Username,
+                IsBlocked = false
+            };
             await DataBase.Users.AddAsync(userEntity);
             await DataBase.SaveChangesAsync();
             return userEntity;
