@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
+using CardCollector.Resources;
 using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.Message
@@ -31,7 +32,7 @@ namespace CardCollector.Commands.Message
             
                 // Добавляем сообщения пользователя в пул для удаления
                 MessageController.AddNewMessageToPool(user, update.Message.MessageId);
-            
+                
                 // Возвращаем объект, если команда совпала
                 foreach (var item in List.Where(item => item.IsMatches(command)))
                     if(Activator.CreateInstance(item.GetType(), user, update) is Message executor && executor.IsMatches(command))

@@ -1,6 +1,6 @@
 namespace CardCollector.Resources
 {
-    public class Constants
+    public static class Constants
     {
         public const bool DEBUG = true;
 

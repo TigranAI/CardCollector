@@ -13,4 +13,37 @@
       <PackageReference Include="Telegram.Bot.Extensions.Polling" Version="1.0.0-alpha.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <EmbeddedResource Update="Resources\MessageCommands.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>MessageCommands.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Messages.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\CallbackQueryCommands.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>CallbackQueryCommands.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Resources\MessageCommands.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>MessageCommands.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Messages.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Messages.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\CallbackQueryCommands.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>CallbackQueryCommands.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
 </Project>
