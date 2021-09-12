@@ -6,17 +6,8 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace CardCollector.Commands.Message
 {
-    public class ProfileMessage:Message
+    public class ProfileMessage : Message
     {
-        public ProfileMessage():base(null,null)
-        {
-            
-        }
-        public ProfileMessage(UserEntity user, Update update) : base(user, update)
-        {
-            
-        }
-
         protected override string Command => "Профиль";
         public override async Task<Telegram.Bot.Types.Message> Execute()
         {
@@ -25,7 +16,14 @@ namespace CardCollector.Commands.Message
                     InlineKeyboardButton.WithCallbackData("Собрать прибыль")
                 }
             );
-            return await MessageController.SendMessage(User,$"{User.Username}", keyboard);
+            return await MessageController.SendMessage(User, 
+                $"{User.Username}\n" +
+                       $"Монеты: {User.Cash.Coins}\n" +
+                       $"Алмазы: {User.Cash.Gems}",
+                keyboard);
         }
+        
+        public ProfileMessage() { }
+        public ProfileMessage(UserEntity user, Update update) : base(user, update) { }
     }
 }

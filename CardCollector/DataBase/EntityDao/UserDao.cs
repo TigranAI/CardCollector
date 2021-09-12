@@ -30,6 +30,9 @@ namespace CardCollector.DataBase.EntityDao
             {
                 var user = await DataBase.Users.FindAsync(userId);
                 
+                // Build user object
+                user.Cash = await CashDao.GetById(user.Id);
+                
                 ActiveUsers.Add(user.Id, user);
                 return user;
             }

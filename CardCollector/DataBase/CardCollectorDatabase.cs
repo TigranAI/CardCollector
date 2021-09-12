@@ -23,6 +23,7 @@ namespace CardCollector.DataBase
         
         // Таблицы базы данных, представленные Entity объектами
         public DbSet<UserEntity> Users { get; set; }
+        public DbSet<CashEntity> CashTable { get; set; }
 
         
         // Конфигурация подключения к БД

@@ -36,8 +36,8 @@ namespace CardCollector.Commands.Message
                 
                 // Возвращаем объект, если команда совпала
                 foreach (var item in List.Where(item => item.IsMatches(command)))
-                    if(Activator.CreateInstance(item.GetType(), user, update) is Message executor && executor.IsMatches(command))
-                        return executor;
+                    if(Activator.CreateInstance(item.GetType(), user, update) is Message executor)
+                        if (executor.IsMatches(command)) return executor;
             
                 // Возвращаем команда не найдена, если код дошел до сюда
                 return new CommandNotFound(user, update, command);
@@ -50,5 +50,6 @@ namespace CardCollector.Commands.Message
         }
 
         protected Message(UserEntity user, Update update) : base(user, update) { }
+        protected Message() { }
     }
 }
