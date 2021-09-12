@@ -15,7 +15,8 @@ namespace CardCollector.Commands.Message
     {
         private static readonly List<Message> List = new()
         {
-            new ProfileMessage()
+            new ProfileMessage(),
+            new StartMessage()
         };
 
         public static async Task<UpdateModel> Factory(Update update)
