@@ -1,7 +1,9 @@
 using System;
+using System.Threading.Tasks;
 using System.Timers;
 using CardCollector.DataBase;
 using CardCollector.Resources;
+using Microsoft.EntityFrameworkCore;
 using Telegram.Bot;
 using CancellationTokenSource = System.Threading.CancellationTokenSource;
 
@@ -17,6 +19,15 @@ namespace CardCollector
         {
             var cts = new CancellationTokenSource();
             Client.StartReceiving(HandleUpdateAsync, HandleErrorAsync, cancellationToken: cts.Token);
+            
+            RunMemoryCleaner();
+            
+            Console.ReadLine();
+            cts.Cancel();
+        }
+
+        private static void RunMemoryCleaner()
+        {
             var timer = new Timer
             {
                 AutoReset = true,
@@ -24,8 +35,6 @@ namespace CardCollector
                 Interval = Constants.SAVING_CHANGES_INTERVAL
             };
             timer.Elapsed += SavingChanges;
-            Console.ReadLine();
-            cts.Cancel();
         }
 
         private static async void SavingChanges(object o, ElapsedEventArgs e)

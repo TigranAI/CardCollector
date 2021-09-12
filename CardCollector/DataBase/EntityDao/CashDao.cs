@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CardCollector.DataBase.EntityDao
 {
-    public class CashDao
+    public static class CashDao
     {
         private static readonly DbSet<CashEntity> Table = CardCollectorDatabase.Instance.CashTable;
         

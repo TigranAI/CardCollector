@@ -9,7 +9,7 @@ namespace CardCollector.DataBase.EntityDao
     public static class UserDao
     {
         private static readonly DbSet<UserEntity> Table = CardCollectorDatabase.Instance.Users;
-        private static Dictionary<long, UserEntity> ActiveUsers = new();
+        private static readonly Dictionary<long, UserEntity> ActiveUsers = new();
 
         public static async Task<UserEntity> GetUser(User user)
         {

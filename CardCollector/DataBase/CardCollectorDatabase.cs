@@ -6,10 +6,7 @@ namespace CardCollector.DataBase
     using static Resources.AppSettings;
     public class CardCollectorDatabase : DbContext
     {
-        private CardCollectorDatabase()
-        {
-            Database.EnsureCreated();
-        }
+        private CardCollectorDatabase() { }
         private static CardCollectorDatabase _instance;
         public static CardCollectorDatabase Instance
         {
@@ -17,6 +14,7 @@ namespace CardCollector.DataBase
             {
                 if (_instance != null) return _instance;
                 _instance = new CardCollectorDatabase();
+                _instance.Database.EnsureCreated();
                 return _instance;
             }
         }
