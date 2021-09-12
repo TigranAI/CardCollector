@@ -23,13 +23,13 @@ namespace CardCollector.Commands.CallbackQuery
             try
             {
                 // Текст команды
-                var command = update.CallbackQuery.Data;
+                var command = update.CallbackQuery!.Data;
 
                 // Объект пользователя
-                var user = await UserDao.GetOrAddNew(update.CallbackQuery.From);
+                var user = await UserDao.GetUser(update.CallbackQuery.From);
 
                 // Добавляем сообщения пользователя в пул для удаления
-                MessageController.AddNewMessageToPool(user, update.CallbackQuery.Message.MessageId);
+                MessageController.AddNewMessageToPool(user, update.CallbackQuery!.Message!.MessageId);
 
                 // Возвращаем объект, если команда совпала
                 foreach (var item in List.Where(item => item.IsMatches(command)))

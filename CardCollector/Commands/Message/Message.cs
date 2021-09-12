@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
-using CardCollector.Resources;
 using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.Message
@@ -25,11 +24,9 @@ namespace CardCollector.Commands.Message
             {
                 // Текст команды
                 var command = update.Message!.Text;
-            
-                // Id пользователя, отправившего команду
-                var userId = update.Message!.From!.Id;
+                
                 // Объект пользователя
-                var user = await UserDao.GetById(userId) ?? await UserDao.AddNew(update.Message.From);
+                var user = await UserDao.GetUser(update.Message.From);
             
                 // Добавляем сообщения пользователя в пул для удаления
                 MessageController.AddNewMessageToPool(user, update.Message.MessageId);

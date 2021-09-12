@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
 using Telegram.Bot.Types;
@@ -16,10 +15,10 @@ namespace CardCollector.Commands.MyChatMember
             switch (_status)
             {
                 case ChatMemberStatus.Creator:
-                    await UserDao.GetOrAddNew(ChatToUser(Update.MyChatMember.Chat));
+                    await UserDao.GetUser(ChatToUser(Update.MyChatMember!.Chat));
                     break;
                 case ChatMemberStatus.Administrator:
-                    await UserDao.GetOrAddNew(ChatToUser(Update.MyChatMember.Chat));
+                    await UserDao.GetUser(ChatToUser(Update.MyChatMember!.Chat));
                     break;
                 case ChatMemberStatus.Member:
                     User.IsBlocked = false;
@@ -38,11 +37,11 @@ namespace CardCollector.Commands.MyChatMember
         public static async Task<UpdateModel> Factory(Update update)
         {
             // Объект пользователя
-            var user = await UserDao.GetOrAddNew(update.MyChatMember.From);
+            var user = await UserDao.GetUser(update.MyChatMember!.From);
             return new MyChatMember(user, update, update.MyChatMember.NewChatMember.Status);
         }
-        
-        protected static User ChatToUser(Chat chat)
+
+        private static User ChatToUser(Chat chat)
         {
             return new User
             {
@@ -54,7 +53,7 @@ namespace CardCollector.Commands.MyChatMember
             };
         }
 
-        protected MyChatMember(UserEntity user, Update update, ChatMemberStatus status) : base(user, update)
+        private MyChatMember(UserEntity user, Update update, ChatMemberStatus status) : base(user, update)
         {
             _status = status;
         }

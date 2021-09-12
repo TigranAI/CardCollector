@@ -1,5 +1,3 @@
-#nullable enable
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
@@ -10,32 +8,27 @@ namespace CardCollector.DataBase.EntityDao
 {
     public static class UserDao
     {
-        private static readonly CardCollectorDatabase DataBase = CardCollectorDatabase.Instance;
-        
-        private static readonly Dictionary<long, UserEntity> ActiveUsers = new();
+        private static readonly DbSet<UserEntity> Table = CardCollectorDatabase.Instance.Users;
+        private static Dictionary<long, UserEntity> ActiveUsers = new();
 
-        public static async Task<UserEntity> GetOrAddNew(User user)
+        public static async Task<UserEntity> GetUser(User user)
         {
-            return await GetById(user.Id) ?? await AddNew(user);
-        }
-        
-        public static async Task<UserEntity?> GetById(long userId)
-        {
-            if (!await UserExists(userId)) return null;
+            UserEntity result;
             try
             {
-                return ActiveUsers[userId];
+                result = ActiveUsers[user.Id];
             }
-            catch (Exception)
+            catch
             {
-                var user = await DataBase.Users.FindAsync(userId);
+                result = await Table.FindAsync(user.Id) ?? await AddNew(user);
                 
                 // Build user object
-                user.Cash = await CashDao.GetById(user.Id);
+                result.Cash = await CashDao.GetById(user.Id);
                 
-                ActiveUsers.Add(user.Id, user);
-                return user;
+                // Add to avoid database fetching
+                ActiveUsers.Add(user.Id, result);
             }
+            return result;
         }
 
         public static async Task<UserEntity> AddNew(User user)
@@ -47,15 +40,8 @@ namespace CardCollector.DataBase.EntityDao
                 Username = user.Username,
                 IsBlocked = false
             };
-            await DataBase.Users.AddAsync(userEntity);
-            await DataBase.SaveChangesAsync();
-            return userEntity;
-        }
-
-        private static async Task<bool> UserExists(long userId)
-        {
-            if(ActiveUsers.ContainsKey(userId)) return true;
-            return await DataBase.Users.AnyAsync(e => e.Id == userId);
+            var result = await Table.AddAsync(userEntity);
+            return result.Entity;
         }
     }
 }
