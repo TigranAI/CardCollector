@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
+using CardCollector.Resources;
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.InlineQueryResults;
 using Telegram.Bot.Types.InputFiles;
 using Telegram.Bot.Types.ReplyMarkups;
 using Message = CardCollector.Commands.Message.Message;
 using CallBackQuery = CardCollector.Commands.CallbackQuery.CallbackQuery;
 using MyChatMember = CardCollector.Commands.MyChatMember.MyChatMember;
+using InlineQuery = CardCollector.Commands.InlineQuery.InlineQuery;
+using ChosenInlineResult = CardCollector.Commands.ChosenInlineResult.ChosenInlineResult;
 using TgMessage = Telegram.Bot.Types.Message;
 
 namespace CardCollector.Controllers
@@ -31,6 +35,8 @@ namespace CardCollector.Controllers
                     UpdateType.Message => await Message.Factory(update),
                     UpdateType.CallbackQuery => await CallBackQuery.Factory(update),
                     UpdateType.MyChatMember => await MyChatMember.Factory(update),
+                    UpdateType.InlineQuery => await InlineQuery.Factory(update),
+                    UpdateType.ChosenInlineResult => await ChosenInlineResult.Factory(update),
                     _ => throw new ArgumentOutOfRangeException()
                 };
                 // var message =
@@ -190,6 +196,11 @@ namespace CardCollector.Controllers
                 LogOutWarning("Can't send photo " + e);
             }
             return new TgMessage();
+        }
+
+        public static async Task AnswerInlineQuery(string queryId, IEnumerable<InlineQueryResult> results, string offset = null)
+        {
+            await Bot.Client.AnswerInlineQueryAsync(queryId, results, isPersonal: true, nextOffset: offset, cacheTime: Constants.INLINE_RESULTS_CACHE_TIME);
         }
     }
 }
