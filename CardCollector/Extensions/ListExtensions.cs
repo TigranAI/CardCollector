@@ -1,6 +1,6 @@
 namespace CardCollector.Extensions
 {
-    public static class DictionaryExtensions
+    public static class ListExtensions
     {
     }
 }
