@@ -14,7 +14,7 @@ namespace CardCollector.Commands.ChosenInlineResult
         
         private static readonly List<ChosenInlineResult> List = new()
         {
-            //new StickerInlineResult(),
+            new SendStickerResult(),
         };
         
         public static async Task<UpdateModel> Factory(Update update)

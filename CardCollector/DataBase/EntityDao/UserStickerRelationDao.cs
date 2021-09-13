@@ -13,9 +13,14 @@ namespace CardCollector.DataBase.EntityDao
         public static async Task<Dictionary<string, UserStickerRelationEntity>> GetListById(long userId)
         {
             var result = await Table
-                .Where(i => i.UserId == userId)
+                .Where(i => i.UserId == userId && i.Count > 0)
                 .ToDictionaryAsync(p=> p.StickerId, p=> p);
             return result;
+        }
+
+        public static async Task<UserStickerRelationEntity> GetByShortHash(string shortHash)
+        {
+            return await Table.FirstAsync(i => i.ShortHash == shortHash);
         }
 
         private static async Task<UserStickerRelationEntity> AddNew(long userId, string stickerId, int count)
