@@ -30,7 +30,7 @@ namespace CardCollector.DataBase.EntityDao
                 UserId = userId,
                 StickerId = stickerId,
                 Count = count,
-                ShortHash = Utilities.CreateMD5(stickerId)
+                ShortHash = Utilities.CreateMD5(stickerId + userId)
             };
             var result = await Table.AddAsync(cash);
             return result.Entity;
