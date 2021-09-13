@@ -22,11 +22,14 @@ namespace CardCollector.Commands.Message
         {
             try
             {
+                // Объект пользователя
+                var user = await UserDao.GetUser(update.Message!.From);
+                
+                //Если сообщение не содержит текст
+                if (update.Message!.Text == null) return new IgnoreUpdate(user, update);
+                
                 // Текст команды
                 var command = update.Message!.Text;
-                
-                // Объект пользователя
-                var user = await UserDao.GetUser(update.Message.From);
             
                 // Добавляем сообщения пользователя в пул для удаления
                 MessageController.AddNewMessageToPool(user, update.Message.MessageId);

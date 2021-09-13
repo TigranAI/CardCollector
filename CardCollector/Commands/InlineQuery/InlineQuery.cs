@@ -14,7 +14,7 @@ namespace CardCollector.Commands.InlineQuery
         
         private static readonly List<InlineQuery> List = new()
         {
-            new EmptyInlineQuery(),
+            new ShowStickersInGroup(),
             //new FilteredInlineQuery(),
         };
         
@@ -23,7 +23,7 @@ namespace CardCollector.Commands.InlineQuery
             try
             {
                 // Текст команды
-                var command = update.InlineQuery!.Query;
+                var command = $"{update.InlineQuery!.ChatType}={update.InlineQuery!.Query}";
                 
                 // Объект пользователя
                 var user = await UserDao.GetUser(update.InlineQuery!.From);
