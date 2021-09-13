@@ -10,7 +10,7 @@ namespace CardCollector.Commands.MyChatMember
     {
         protected override string Command => "";
         private readonly ChatMemberStatus _status;
-        public override async Task<Telegram.Bot.Types.Message> Execute()
+        public override async Task Execute()
         {
             switch (_status)
             {
@@ -29,10 +29,9 @@ namespace CardCollector.Commands.MyChatMember
                 case ChatMemberStatus.Restricted or ChatMemberStatus.Left:
                     break;
                 default:
-                    return await new CommandNotFound(User, Update, _status.ToString()).Execute();
+                    await new CommandNotFound(User, Update, _status.ToString()).Execute();
+                    break;
             }
-
-            return new Telegram.Bot.Types.Message();
         }
         public static async Task<UpdateModel> Factory(Update update)
         {

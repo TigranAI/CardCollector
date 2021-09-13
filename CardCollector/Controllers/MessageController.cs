@@ -39,7 +39,6 @@ namespace CardCollector.Controllers
                     UpdateType.ChosenInlineResult => await ChosenInlineResult.Factory(update),
                     _ => throw new ArgumentOutOfRangeException()
                 };
-                // var message =
                 await executor.Execute();
             }
             catch (Exception e)

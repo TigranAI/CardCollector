@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.DataBase.EntityDao;
 using Telegram.Bot.Types.InlineQueryResults;
@@ -17,12 +18,12 @@ namespace CardCollector.DataBase.Entity
         [Column("is_blocked"), MaxLength(11)] public bool IsBlocked { get; set; }
         
         [NotMapped] public CashEntity Cash { get; set; }
+        [NotMapped] public Dictionary<string, UserStickerRelationEntity> Stickers { get; set; }
         
         public async Task<IEnumerable<InlineQueryResult>> GetStickersList(string command, string filter)
         {
             var result = new List<InlineQueryResult>();
-            var stickers = await UserStickerRelationDao.GetListById(Id);
-            foreach (var sticker in stickers.Values)
+            foreach (var sticker in Stickers.Values.Where(i => i.Count > 0))
             {
                 if (filter != "")
                 {

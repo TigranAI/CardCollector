@@ -24,6 +24,7 @@ namespace CardCollector.DataBase.EntityDao
                 
                 // Build user object
                 result.Cash = await CashDao.GetById(user.Id);
+                result.Stickers = await UserStickerRelationDao.GetListById(user.Id);
                 
                 // Add to avoid database fetching
                 ActiveUsers.Add(user.Id, result);

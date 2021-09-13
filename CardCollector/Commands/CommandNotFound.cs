@@ -10,9 +10,9 @@ namespace CardCollector.Commands
         protected override string Command => "";
         private readonly string _command;
 
-        public override async Task<Telegram.Bot.Types.Message> Execute()
+        public override async Task Execute()
         {
-            return await MessageController.SendMessage(User, "Команда не найдена " + _command);
+            await MessageController.SendMessage(User, "Команда не найдена " + _command);
         }
 
         public CommandNotFound(UserEntity user, Update update, string command) : base(user, update)

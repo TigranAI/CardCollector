@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using Telegram.Bot.Types;
@@ -10,12 +9,11 @@ namespace CardCollector.Commands.InlineQuery
     {
         protected override string Command => "";
         
-        public override async Task<Telegram.Bot.Types.Message> Execute()
+        public override async Task Execute()
         {
             var filter = Update.InlineQuery!.Query;
             var stickersList = await User.GetStickersList("send_sticker",filter);
             await MessageController.AnswerInlineQuery(InlineQueryId, stickersList, "название");
-            return new Telegram.Bot.Types.Message();
         }
 
         protected override bool IsMatches(string command)

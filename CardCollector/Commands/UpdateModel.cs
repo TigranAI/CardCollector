@@ -10,7 +10,7 @@ namespace CardCollector.Commands
         protected UserEntity User;
         protected Update Update;
 
-        public abstract Task<Telegram.Bot.Types.Message> Execute();
+        public abstract Task Execute();
 
         protected virtual bool IsMatches(string command)
         {
