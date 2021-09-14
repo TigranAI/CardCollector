@@ -5,17 +5,25 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.InlineQuery
 {
+    /* Отображение стикеров в чатах, кроме личной беседы с ботом */
     public class ShowStickersInGroup : InlineQuery
     {
+        /* Команда - пустая строка, поскольку пользователь может вводить любые слова
+         после @имя_бота, введенная фраза будет использоваться для фильтрации стикеров */
         protected override string Command => "";
         
         public override async Task Execute()
         {
+            // Фильтр - введенная пользователем фраза
             var filter = Update.InlineQuery!.Query;
+            // Получаем список стикеров
             var stickersList = await User.GetStickersList("send_sticker",filter);
-            await MessageController.AnswerInlineQuery(InlineQueryId, stickersList, "название");
+            // Посылаем пользователю ответ на его запрос
+            await MessageController.AnswerInlineQuery(InlineQueryId, stickersList);
         }
 
+        /* Команда пользователя удовлетворяет условию, если она вызвана
+         в беседе/канале/личных сообщениях (кроме личных сообщений с ботом) */
         protected override bool IsMatches(string command)
         {
             return command.Contains("Group") || command.Contains("Supergroup") || command.Contains("Private");

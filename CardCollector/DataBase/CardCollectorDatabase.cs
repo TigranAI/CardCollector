@@ -4,10 +4,17 @@ using Microsoft.EntityFrameworkCore;
 namespace CardCollector.DataBase
 {
     using static Resources.AppSettings;
+    
+    /* Предоставляет доступ к базе данных */
     public class CardCollectorDatabase : DbContext
     {
+        /* Скрываем конструктор, чтобы его нельзя было использовать извне */
         private CardCollectorDatabase() { }
+        
+        /* Объект базы данных */
         private static CardCollectorDatabase _instance;
+        
+        /* Предоставляет доступ к объекту */
         public static CardCollectorDatabase Instance
         {
             get
@@ -19,14 +26,14 @@ namespace CardCollector.DataBase
             }
         }
         
-        // Таблицы базы данных, представленные Entity объектами
+        /* Таблицы базы данных, представленные Entity объектами */
         public DbSet<UserEntity> Users { get; set; }
         public DbSet<CashEntity> CashTable { get; set; }
         public DbSet<UserStickerRelationEntity> UserStickerRelations { get; set; }
         public DbSet<StickerEntity> Stickers { get; set; }
 
         
-        // Конфигурация подключения к БД
+        /* Конфигурация подключения к БД */
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySQL(

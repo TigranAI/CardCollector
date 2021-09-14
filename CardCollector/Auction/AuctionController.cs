@@ -1,33 +1,27 @@
-﻿using System.Diagnostics;
-using CardCollector.DataBase;
+﻿using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
-using CardCollector.DataBase.EntityDao;
-using Microsoft.EntityFrameworkCore;
-using Telegram.Bot.Types;
+using CardCollector.Resources;
 
-namespace CardCollector.Auction
+namespace CardCollector.Auction 
 {
+    /* Контроллер аукциона, управляет всеми транзакциями
+     между пользователями */
     public static class AuctionController 
     {
-
-        private static async void SellCard(UserEntity user, string hashCode)
+        /*Метод используется для продажи стикеров на аукционе
+        user - пользователь, продающий стикер
+        stickerShortHashCode - MD5 хеш представляющий собой сумму id стикера и id пользователя, используется в словаре как ключ
+        price - цена за штуку
+        count - количество продаваемых стикеров*/
+        private static async Task<ResultCode> SellCard(UserEntity user, string stickerShortHashCode, int price, int count = 1)
         {
-            
-            var countStikers = user.Stickers[hashCode].Count;
-            var price = 0;//устанавливаем сумму за штуку 
-            var countForSell = 0;//тут как-то кнопками регулировать количество стикеров для продажи
-            if (countForSell > countStikers)
-            {
-                Debug.Fail("Ты шо, ебобо?");
-                //выводим сообщение о ошибке мол у тебя столько нету стикеров
-            }
-            else
-            {
-                var summa = price * countForSell;
-                //подтверждаем действие
-                user.Stickers[hashCode].Count -= countForSell;
-                user.Cash.Coins += summa;
-            }
+            if (count > user.Stickers[stickerShortHashCode].Count)
+                return ResultCode.NotEnoughStickers;
+            var summa = price * count;
+            //подтверждаем действие
+            user.Stickers[stickerShortHashCode].Count -= count;
+            user.Cash.Coins += summa;
+            return ResultCode.Ok;
         }
         
         private static async void BuyCard()

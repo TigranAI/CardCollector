@@ -6,10 +6,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CardCollector.DataBase.EntityDao
 {
+    /* Предоставляет доступ к соотношениям таблицы user_to_sticker_relation */
     public static class UserStickerRelationDao
     {
+        /* Таблица user_to_sticker_relation в представлении Entity Framework */
         private static readonly DbSet<UserStickerRelationEntity> Table = CardCollectorDatabase.Instance.UserStickerRelations;
         
+        /* Возвращает словарь стикеров по Id пользователя */
         public static async Task<Dictionary<string, UserStickerRelationEntity>> GetListById(long userId)
         {
             var result = await Table
@@ -18,11 +21,7 @@ namespace CardCollector.DataBase.EntityDao
             return result;
         }
 
-        public static async Task<UserStickerRelationEntity> GetByShortHash(string shortHash)
-        {
-            return await Table.FirstAsync(i => i.ShortHash == shortHash);
-        }
-
+        /* Добавляет новое отношение в таблицу */
         private static async Task<UserStickerRelationEntity> AddNew(long userId, string stickerId, int count)
         {
             var cash = new UserStickerRelationEntity

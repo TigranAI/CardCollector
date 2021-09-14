@@ -1,23 +1,21 @@
 ﻿using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
+using CardCollector.Resources;
 using Telegram.Bot.Types;
-using Telegram.Bot.Types.ReplyMarkups;
 
 namespace CardCollector.Commands.Message
 {
+    /* Обработка команды "/start" */
     public class StartMessage : Message
     {
-        protected override string Command => "/start";
+        /* */
+        protected override string Command => MessageCommands.start;
         
         public override async Task Execute()
         {
-            var keyboard = new ReplyKeyboardMarkup(new []
-            {
-                new KeyboardButton[] {"Профиль", "Коллекция"},
-                new KeyboardButton[] {"Магазин", "Аукцион"},
-            }) { ResizeKeyboard = true };
-            await MessageController.SendMessage(User,"Привет!", keyboard);
+            /* Отправляем пользователю сообщение со стандартной клавиатурой */
+            await MessageController.SendMessage(User,"Привет!", Keyboard.Menu);
         }
         
         public StartMessage(UserEntity user, Update update) : base(user, update) { }

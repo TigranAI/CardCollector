@@ -4,6 +4,13 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands
 {
+    /* Реализация базового класса для обработки получаемых
+     с сервера Телеграм обновлений.
+     Поле User - пользователь, вызвавший команду 
+     Поле Update - полученное обновление
+     Поле Command - команда или же ключевое слово, по которому идентифицируется команда
+     Метод Execute - реализация логики команды во время ее выполнения 
+     Метод IsMatches - проверяет команду на сопадение по ключу */
     public abstract class UpdateModel
     {
         protected abstract string Command { get; }

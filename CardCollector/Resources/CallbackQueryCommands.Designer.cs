@@ -59,5 +59,14 @@ namespace CardCollector.Resources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Собрать прибыль.
+        /// </summary>
+        internal static string collect_income {
+            get {
+                return ResourceManager.GetString("collect_income", resourceCulture);
+            }
+        }
     }
 }

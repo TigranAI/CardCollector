@@ -8,39 +8,46 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.ChosenInlineResult
 {
+    /* Родительский класс для входящих обновлений типа ChosenInlineResult
+     (выбор пользователем инлайн команды)
+     при наследовании укажите ключевое слово, содержащееся в запросе
+     для поля Command и определите логику действий в Execute
+     Также необходимо определить констуктор с параметрами UserEntity,
+     Update и InlineResult, наслеуемый от base(user, update, inlineResult)
+     И После реализации добавить команду в список List в этом классе
+     Для обработки команды определены следующие поля
+     User - пользователь, вызвавший команду
+     Update - обновление, полученное от сервера Телеграм
+     InlineResult - результат входящего запроса */
     public abstract class ChosenInlineResult : UpdateModel
     {
+        /* Результат запроса (id выбранного пользователем элемента) */
         protected readonly string InlineResult = "";
         
+        /* Список команд */
         private static readonly List<ChosenInlineResult> List = new()
         {
+            // Обработка результата при отправке стикера
             new SendStickerResult(),
         };
         
+        /* Метод, создающий объекты команд исходя из полученного обновления */
         public static async Task<UpdateModel> Factory(Update update)
         {
-            try
-            {
-                // Текст команды
-                var command = update.ChosenInlineResult!.ResultId;
-                
-                // Объект пользователя
-                var user = await UserDao.GetUser(update.ChosenInlineResult!.From);
-                
-                // Возвращаем объект, если команда совпала
-                foreach (var item in List.Where(item => item.IsMatches(command)))
-                    if(Activator.CreateInstance(item.GetType(), 
-                        user, update, update.ChosenInlineResult.ResultId) is ChosenInlineResult executor)
-                        if (executor.IsMatches(command)) return executor;
+            // Текст команды
+            var command = update.ChosenInlineResult!.ResultId;
             
-                // Возвращаем команда не найдена, если код дошел до сюда
-                return new CommandNotFound(user, update, command);
-            }
-            catch (Exception e)
-            {
-                Logs.LogOutError(e);
-                throw;
-            }
+            // Объект пользователя
+            var user = await UserDao.GetUser(update.ChosenInlineResult!.From);
+            
+            // Возвращаем объект, если команда совпала
+            foreach (var item in List.Where(item => item.IsMatches(command)))
+                if(Activator.CreateInstance(item.GetType(), 
+                    user, update, update.ChosenInlineResult.ResultId) is ChosenInlineResult executor)
+                    if (executor.IsMatches(command)) return executor;
+        
+            // Возвращаем команда не найдена, если код дошел до сюда
+            return new CommandNotFound(user, update, command);
         }
 
         protected ChosenInlineResult(UserEntity user, Update update, string inlineResult)

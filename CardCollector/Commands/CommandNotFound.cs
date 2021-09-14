@@ -5,6 +5,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands
 {
+    /* Данный класс реализует операцию "Команда не найдена" */
     public class CommandNotFound : UpdateModel
     {
         protected override string Command => "";

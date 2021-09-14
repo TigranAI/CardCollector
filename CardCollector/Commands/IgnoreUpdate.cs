@@ -6,6 +6,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands
 {
+    /* Данный класс позволяет проигнорировать действие пользователя */
     public class IgnoreUpdate : UpdateModel
     {
         protected override string Command => "";

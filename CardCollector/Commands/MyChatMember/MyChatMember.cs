@@ -6,6 +6,9 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.MyChatMember
 {
+    /* Родительский класс для входящих обновлений типа MyChatMember
+     (Добавление/Добавление в чаты/Добавление в каналы/Блокировки/Исключения бота)
+     Данный класс полностью реализован и не нуждается в наследовании */
     public class MyChatMember : UpdateModel
     {
         protected override string Command => "";

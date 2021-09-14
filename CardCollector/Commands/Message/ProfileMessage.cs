@@ -1,27 +1,28 @@
 ﻿using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
+using CardCollector.Resources;
 using Telegram.Bot.Types;
-using Telegram.Bot.Types.ReplyMarkups;
 
 namespace CardCollector.Commands.Message
 {
+    /* Команда "Профиль" Отображает профиль пользователя и его баланс */
     public class ProfileMessage : Message
     {
-        protected override string Command => "Профиль";
+        /* Для данной команды ключевое слово "Профиль" */
+        protected override string Command => MessageCommands.profile;
         public override async Task Execute()
         {
-            var keyboard = new InlineKeyboardMarkup(new[]
-                {
-                    InlineKeyboardButton.WithCallbackData("Собрать прибыль")
-                }
-            );
-            await MessageController.SendMessage(
-                User, 
+            /* Отправляем сообщение */
+            await MessageController.SendMessage(User, 
+                /* Имя пользователя */
                 $"{User.Username}\n" +
-                       $"Монеты: {User.Cash.Coins}\n" +
-                       $"Алмазы: {User.Cash.Gems}",
-                keyboard);
+                /* Количество монет */
+                $"Монеты: {User.Cash.Coins}\n" +
+                /* Количество алмазов */
+                $"Алмазы: {User.Cash.Gems}",
+                /* Клавиатура профиля */
+                Keyboard.ProfileKeyboard);
         }
         
         public ProfileMessage() { }
