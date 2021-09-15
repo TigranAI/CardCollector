@@ -18,25 +18,19 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="collect_income" xml:space="preserve">
-        <value>Собрать прибыль</value>
+    <data name="None" xml:space="preserve">
+        <value>(Нет)</value>
     </data>
-    <data name="author" xml:space="preserve">
-        <value>Автор</value>
+    <data name="ByTierDecrease" xml:space="preserve">
+        <value>По тиру (убывание)</value>
     </data>
-    <data name="tier" xml:space="preserve">
-        <value>Тир</value>
+    <data name="ByTierIncrease" xml:space="preserve">
+        <value>По тиру (возрастание)</value>
     </data>
-    <data name="emoji" xml:space="preserve">
-        <value>Эмоция</value>
+    <data name="ByAuthor" xml:space="preserve">
+        <value>По автору</value>
     </data>
-    <data name="sorting" xml:space="preserve">
-        <value>Сортировка</value>
-    </data>
-    <data name="cancel_menu" xml:space="preserve">
-        <value>Отмена</value>
-    </data>
-    <data name="show_stickers" xml:space="preserve">
-        <value>Показать стикеры</value>
+    <data name="ByTitle" xml:space="preserve">
+        <value>По названию</value>
     </data>
 </root>

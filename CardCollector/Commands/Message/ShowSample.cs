@@ -8,7 +8,7 @@ using Telegram.Bot.Types.ReplyMarkups;
 namespace CardCollector.Commands.Message
 {
     /* Этот класс можно использовать для тестирования или наброски эскизов
-     Команда "Показать пример" доступна только пользователям суровнем доступа "Разработчик" и выше
+     Команда "Показать пример" доступна только пользователям с уровнем доступа "Разработчик" и выше
      PrivilegeLevel = 5 */
     public class ShowSample : Message
     {

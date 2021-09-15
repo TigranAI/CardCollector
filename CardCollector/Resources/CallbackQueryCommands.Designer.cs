@@ -61,11 +61,65 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Автор.
+        /// </summary>
+        internal static string author {
+            get {
+                return ResourceManager.GetString("author", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Отмена.
+        /// </summary>
+        internal static string cancel_menu {
+            get {
+                return ResourceManager.GetString("cancel_menu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Собрать прибыль.
         /// </summary>
         internal static string collect_income {
             get {
                 return ResourceManager.GetString("collect_income", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Эмоция.
+        /// </summary>
+        internal static string emoji {
+            get {
+                return ResourceManager.GetString("emoji", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Показать стикеры.
+        /// </summary>
+        internal static string show_stickers {
+            get {
+                return ResourceManager.GetString("show_stickers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сортировка.
+        /// </summary>
+        internal static string sorting {
+            get {
+                return ResourceManager.GetString("sorting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Тир.
+        /// </summary>
+        internal static string tier {
+            get {
+                return ResourceManager.GetString("tier", resourceCulture);
             }
         }
     }

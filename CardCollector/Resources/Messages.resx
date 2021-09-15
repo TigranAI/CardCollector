@@ -18,4 +18,31 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    <data name="start_message" xml:space="preserve">
+        <value>Приветственное сообщение</value>
+    </data>
+    <data name="current_filters" xml:space="preserve">
+        <value>Текущие примененные фильтры:</value>
+    </data>
+    <data name="select_filter" xml:space="preserve">
+        <value>Установите фильтры кнопками ниже:</value>
+    </data>
+    <data name="author" xml:space="preserve">
+        <value>Автор:</value>
+    </data>
+    <data name="tier" xml:space="preserve">
+        <value>Тир:</value>
+    </data>
+    <data name="emoji" xml:space="preserve">
+        <value>Эмоция:</value>
+    </data>
+    <data name="sorting" xml:space="preserve">
+        <value>Сортировка:</value>
+    </data>
+    <data name="all" xml:space="preserve">
+        <value>(все)</value>
+    </data>
+    <data name="no" xml:space="preserve">
+        <value>(нет)</value>
+    </data>
 </root>

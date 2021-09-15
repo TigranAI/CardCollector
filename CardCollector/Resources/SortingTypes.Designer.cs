@@ -22,14 +22,14 @@ namespace CardCollector.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Messages {
+    internal class SortingTypes {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Messages() {
+        internal SortingTypes() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace CardCollector.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CardCollector.Resources.Messages", typeof(Messages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CardCollector.Resources.SortingTypes", typeof(SortingTypes).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,83 +61,47 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to (все).
+        ///   Looks up a localized string similar to По автору.
         /// </summary>
-        internal static string all {
+        internal static string ByAuthor {
             get {
-                return ResourceManager.GetString("all", resourceCulture);
+                return ResourceManager.GetString("ByAuthor", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Автор:.
+        ///   Looks up a localized string similar to По тиру (убывание).
         /// </summary>
-        internal static string author {
+        internal static string ByTierDecrease {
             get {
-                return ResourceManager.GetString("author", resourceCulture);
+                return ResourceManager.GetString("ByTierDecrease", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Текущие примененные фильтры:.
+        ///   Looks up a localized string similar to По тиру (возрастание).
         /// </summary>
-        internal static string current_filters {
+        internal static string ByTierIncrease {
             get {
-                return ResourceManager.GetString("current_filters", resourceCulture);
+                return ResourceManager.GetString("ByTierIncrease", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Эмоция:.
+        ///   Looks up a localized string similar to По названию.
         /// </summary>
-        internal static string emoji {
+        internal static string ByTitle {
             get {
-                return ResourceManager.GetString("emoji", resourceCulture);
+                return ResourceManager.GetString("ByTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to (нет).
+        ///   Looks up a localized string similar to (Нет).
         /// </summary>
-        internal static string no {
+        internal static string None {
             get {
-                return ResourceManager.GetString("no", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Установите фильтры кнопками ниже:.
-        /// </summary>
-        internal static string select_filter {
-            get {
-                return ResourceManager.GetString("select_filter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Сортировка:.
-        /// </summary>
-        internal static string sorting {
-            get {
-                return ResourceManager.GetString("sorting", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Приветственное сообщение.
-        /// </summary>
-        internal static string start_message {
-            get {
-                return ResourceManager.GetString("start_message", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Тир:.
-        /// </summary>
-        internal static string tier {
-            get {
-                return ResourceManager.GetString("tier", resourceCulture);
+                return ResourceManager.GetString("None", resourceCulture);
             }
         }
     }

@@ -3,7 +3,9 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using CardCollector.Controllers;
 using CardCollector.DataBase.EntityDao;
+using CardCollector.Resources;
 using Telegram.Bot.Types.InlineQueryResults;
 
 namespace CardCollector.DataBase.Entity
@@ -28,11 +30,37 @@ namespace CardCollector.DataBase.Entity
         /* Уровень привилегий пользователя */
         [Column("privilege_level"), MaxLength(32)] public int PrivilegeLevel { get; set; } = 0;
         
+        [Column("current_profile_massage_id")] public int CurrentProfileMessageId { get; set; }
+        
         /* Счет пользователя */
         [NotMapped] public CashEntity Cash { get; set; }
         
         /* Стикеры пользователя */
         [NotMapped] public Dictionary<string, UserStickerRelationEntity> Stickers { get; set; }
+
+        /* Текущее состояние пользователя */
+        [NotMapped] public UserState State = UserState.Default;
+
+        /* Фильтры, примененные пользователем в меню коллекции/магазина/аукциона */
+        [NotMapped] public readonly Dictionary<string, object> Filters = new()
+        {
+            {"author", ""},
+            {"tier", -1},
+            {"emoji", ""},
+            {"sorting", SortingTypes.None},
+            {"price", 0},
+        };
+
+        /* Сообщения в чате пользователя */
+        [NotMapped] public readonly List<int> Messages = new();
+
+        /* Удаляет из чата все сообщения, добавленные в список выше */
+        public async Task ClearChat()
+        {
+            foreach (var messageId in Messages)
+                await MessageController.DeleteMessage(this, messageId);
+            Messages.Clear();
+        }
         
         /* Возвращает стикеры в виде объектов телеграм */
         public async Task<IEnumerable<InlineQueryResult>> GetStickersList(string command, string filter)

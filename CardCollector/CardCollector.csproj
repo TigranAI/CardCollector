@@ -26,6 +26,14 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>CallbackQueryCommands.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\SortingTypes.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>SortingTypes.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\SortingTypes.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>SortingTypes.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -43,6 +51,16 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>CallbackQueryCommands.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\SortingTypes.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>SortingTypes.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\SortingTypes.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>SortingTypes.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
+using CardCollector.Resources;
+using Telegram.Bot;
 using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.Message
@@ -27,6 +29,8 @@ namespace CardCollector.Commands.Message
             new ProfileMessage(),
             // Команда "/start"
             new StartMessage(),
+            // Команда "Коллекция"
+            new CollectionMessage(),
             
             // Команда "Показать пример"
             new ShowSample()
@@ -35,16 +39,23 @@ namespace CardCollector.Commands.Message
         /* Метод, создающий объекты команд исходя из полученного обновления */
         public static async Task<UpdateModel> Factory(Update update)
         {
+            // Если сообщение от нашего бота
+            if (update.Message!.From!.Username == AppSettings.NAME)
+            {
+                await Bot.Client.DeleteMessageAsync(update.Message.Chat.Id, update.Message.MessageId);
+                return new IgnoreUpdate();
+            }
+            
             // Объект пользователя
             var user = await UserDao.GetUser(update.Message!.From);
             
-            //Если сообщение не содержит текст
-            if (update.Message!.Text == null) return new IgnoreUpdate(user, update);
-            
+            // Если пользователь заблокирован или сообщение не содержит текст или пользователь - бот
+            if (user.IsBlocked || update.Message!.Text == null || update.Message!.From!.IsBot) return new IgnoreUpdate();
+
             // Текст команды
             var command = update.Message!.Text;
         
-            // Добавляем сообщения пользователя в пул для удаления
+            // Удаляем сообщение пользователя, оно нам больше не нужно
             await MessageController.DeleteMessage(user, update.Message.MessageId);
             
             // Возвращаем объект, если команда совпала

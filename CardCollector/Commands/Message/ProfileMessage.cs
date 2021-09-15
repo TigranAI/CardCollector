@@ -2,6 +2,7 @@
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
+using Telegram.Bot;
 using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.Message
@@ -14,7 +15,7 @@ namespace CardCollector.Commands.Message
         public override async Task Execute()
         {
             /* Отправляем сообщение */
-            await MessageController.SendMessage(User, 
+            var message = await MessageController.SendMessage(User, 
                 /* Имя пользователя */
                 $"{User.Username}\n" +
                 /* Количество монет */
@@ -23,6 +24,14 @@ namespace CardCollector.Commands.Message
                 $"Алмазы: {User.Cash.Gems}",
                 /* Клавиатура профиля */
                 Keyboard.ProfileKeyboard);
+            /* Открепляем все закрепы */
+            await Bot.Client.UnpinAllChatMessages(User.ChatId);
+            /* Удаляем предыдущее сообщение профиля пользователя */
+            if (User.CurrentProfileMessageId != default) await MessageController.DeleteMessage(User, User.CurrentProfileMessageId);
+            /* Записываем id нового сообщения */
+            User.CurrentProfileMessageId = message.MessageId;
+            /* Закрепляем новое сообщение профиля */
+            await Bot.Client.PinChatMessageAsync(User.ChatId, message.MessageId, true);
         }
         
         public ProfileMessage() { }

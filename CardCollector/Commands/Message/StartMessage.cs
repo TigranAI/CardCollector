@@ -15,7 +15,10 @@ namespace CardCollector.Commands.Message
         public override async Task Execute()
         {
             /* Отправляем пользователю сообщение со стандартной клавиатурой */
-            await MessageController.SendMessage(User,"Привет!", Keyboard.Menu);
+            await MessageController.SendMessage(User, Messages.start_message, Keyboard.Menu);
+            
+            /* Отправляем пользователю его профиль */
+            await new ProfileMessage(User, Update).Execute();
         }
         
         public StartMessage(UserEntity user, Update update) : base(user, update) { }
