@@ -14,6 +14,10 @@ namespace CardCollector.Commands.Message
         protected override string Command => MessageCommands.profile;
         public override async Task Execute()
         {
+            /* Открепляем все закрепы */
+            await Bot.Client.UnpinAllChatMessages(User.ChatId);
+            /* Удаляем предыдущее сообщение профиля пользователя */
+            if (User.CurrentProfileMessageId != default) await MessageController.DeleteMessage(User, User.CurrentProfileMessageId);
             /* Отправляем сообщение */
             var message = await MessageController.SendMessage(User, 
                 /* Имя пользователя */
@@ -24,10 +28,6 @@ namespace CardCollector.Commands.Message
                 $"Алмазы: {User.Cash.Gems}",
                 /* Клавиатура профиля */
                 Keyboard.ProfileKeyboard);
-            /* Открепляем все закрепы */
-            await Bot.Client.UnpinAllChatMessages(User.ChatId);
-            /* Удаляем предыдущее сообщение профиля пользователя */
-            if (User.CurrentProfileMessageId != default) await MessageController.DeleteMessage(User, User.CurrentProfileMessageId);
             /* Записываем id нового сообщения */
             User.CurrentProfileMessageId = message.MessageId;
             /* Закрепляем новое сообщение профиля */
