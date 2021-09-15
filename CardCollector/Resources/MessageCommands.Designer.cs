@@ -97,6 +97,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Показать пример.
+        /// </summary>
+        internal static string show_sample {
+            get {
+                return ResourceManager.GetString("show_sample", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /start.
         /// </summary>
         internal static string start {

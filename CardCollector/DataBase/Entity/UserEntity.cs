@@ -24,6 +24,9 @@ namespace CardCollector.DataBase.Entity
         
         /* Заблокирован ли пользователь */
         [Column("is_blocked"), MaxLength(11)] public bool IsBlocked { get; set; }
+
+        /* Уровень привилегий пользователя */
+        [Column("privilege_level"), MaxLength(32)] public int PrivilegeLevel { get; set; } = 0;
         
         /* Счет пользователя */
         [NotMapped] public CashEntity Cash { get; set; }

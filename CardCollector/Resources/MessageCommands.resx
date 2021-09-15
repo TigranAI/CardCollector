@@ -33,4 +33,7 @@
     <data name="start" xml:space="preserve">
         <value>/start</value>
     </data>
+    <data name="show_sample" xml:space="preserve">
+        <value>Показать пример</value>
+    </data>
 </root>

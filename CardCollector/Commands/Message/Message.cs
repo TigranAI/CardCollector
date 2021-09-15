@@ -26,7 +26,10 @@ namespace CardCollector.Commands.Message
             // Команда "Профиль"
             new ProfileMessage(),
             // Команда "/start"
-            new StartMessage()
+            new StartMessage(),
+            
+            // Команда "Показать пример"
+            new ShowSample()
         };
 
         /* Метод, создающий объекты команд исходя из полученного обновления */
