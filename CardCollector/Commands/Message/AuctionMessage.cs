@@ -9,7 +9,7 @@ namespace CardCollector.Commands.Message
     /* Реалищует команду "Аукцион" */
     public class AuctionMessage : Message
     {
-        protected override string Command => MessageCommands.shop;
+        protected override string Command => MessageCommands.auction;
         public override async Task Execute()
         {
             /* Очищаем чат с пользователем */
