@@ -10,7 +10,7 @@ namespace CardCollector.Commands.Message
     /* Этот класс можно использовать для тестирования или наброски эскизов
      Команда "Показать пример" доступна только пользователям с уровнем доступа "Разработчик" и выше
      PrivilegeLevel = 5 */
-    public class ShowSample : Message
+    public class ShowSampleMessage : Message
     {
         protected override string Command => MessageCommands.show_sample;
         public override async Task Execute()
@@ -59,7 +59,7 @@ namespace CardCollector.Commands.Message
             return base.IsMatches(command) && User is not {PrivilegeLevel: < Constants.PROGRAMMER_PRIVILEGE_LEVEL};
         }
         
-        public ShowSample(UserEntity user, Update update) : base(user, update) { }
-        public ShowSample() { }
+        public ShowSampleMessage(UserEntity user, Update update) : base(user, update) { }
+        public ShowSampleMessage() { }
     }
 }

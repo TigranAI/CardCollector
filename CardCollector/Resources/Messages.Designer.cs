@@ -97,11 +97,11 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to (нет).
+        ///   Looks up a localized string similar to Стоимость:.
         /// </summary>
-        internal static string no {
+        internal static string price {
             get {
-                return ResourceManager.GetString("no", resourceCulture);
+                return ResourceManager.GetString("price", resourceCulture);
             }
         }
         

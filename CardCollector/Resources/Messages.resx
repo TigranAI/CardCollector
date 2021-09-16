@@ -42,7 +42,7 @@
     <data name="all" xml:space="preserve">
         <value>(все)</value>
     </data>
-    <data name="no" xml:space="preserve">
-        <value>(нет)</value>
+    <data name="price" xml:space="preserve">
+        <value>Стоимость:</value>
     </data>
 </root>

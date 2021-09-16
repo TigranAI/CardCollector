@@ -33,7 +33,7 @@ namespace CardCollector.Commands.Message
             new CollectionMessage(),
             
             // Команда "Показать пример"
-            new ShowSample()
+            new ShowSampleMessage()
         };
 
         /* Метод, создающий объекты команд исходя из полученного обновления */
