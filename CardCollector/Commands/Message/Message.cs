@@ -31,6 +31,10 @@ namespace CardCollector.Commands.Message
             new StartMessage(),
             // Команда "Коллекция"
             new CollectionMessage(),
+            // Команда "Магазин"
+            new ShopMessage(),
+            // Команда "Аукцион"
+            new AuctionMessage(),
             
             // Команда "Показать пример"
             new ShowSampleMessage()
