@@ -54,7 +54,7 @@ namespace CardCollector.Commands.Message
         }
 
         /* Нужно помимо совпадения текста проверить пользователя на уровень привилегий */
-        protected override bool IsMatches(string command)
+        protected internal override bool IsMatches(string command)
         {
             return base.IsMatches(command) && User is not {PrivilegeLevel: < Constants.PROGRAMMER_PRIVILEGE_LEVEL};
         }

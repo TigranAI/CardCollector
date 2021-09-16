@@ -10,7 +10,7 @@ namespace CardCollector.Resources
         /* Время кэширования результатов @имя_бота команд */
         public const int INLINE_RESULTS_CACHE_TIME = 1;
         /* Включает бесконечные стикеры без наличия их в коллекции */
-        public const bool UNLIMITED_ALL_STICKERS = DEBUG;
+        public static readonly bool UNLIMITED_ALL_STICKERS = DEBUG;
 
 
         /* Уровни привилегий пользователей системы */

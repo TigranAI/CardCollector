@@ -19,7 +19,7 @@ namespace CardCollector.DataBase.Entity
         /* Количество стикеров данного вида у пользователя */
         [Column("count"), MaxLength(32)] public int Count { get; set; }
         
-        /* MD5 хеш id стикера и пользователя */
+        /* MD5 хеш id стикера */
         [Column("short_hash"), MaxLength(40)] public string ShortHash { get; set; }
     }
 }
