@@ -45,4 +45,7 @@
     <data name="price" xml:space="preserve">
         <value>Стоимость:</value>
     </data>
+    <data name="choose_author" xml:space="preserve">
+        <value>Выберите автора из списка ниже:</value>
+    </data>
 </root>

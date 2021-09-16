@@ -33,10 +33,37 @@
     <data name="sorting" xml:space="preserve">
         <value>Сортировка</value>
     </data>
-    <data name="cancel_menu" xml:space="preserve">
+    <data name="cancel" xml:space="preserve">
         <value>Отмена</value>
     </data>
     <data name="show_stickers" xml:space="preserve">
         <value>Показать стикеры</value>
+    </data>
+    <data name="All" xml:space="preserve">
+        <value>Все</value>
+    </data>
+    <data name="back" xml:space="preserve">
+        <value>back</value>
+    </data>
+    <data name="author_callback" xml:space="preserve">
+        <value>author</value>
+    </data>
+    <data name="emoji_callback" xml:space="preserve">
+        <value>emoji</value>
+    </data>
+    <data name="sorting_callback" xml:space="preserve">
+        <value>sorting</value>
+    </data>
+    <data name="tier_callback" xml:space="preserve">
+        <value>tier</value>
+    </data>
+    <data name="previous" xml:space="preserve">
+        <value>←</value>
+    </data>
+    <data name="next" xml:space="preserve">
+        <value>→</value>
+    </data>
+    <data name="change_page" xml:space="preserve">
+        <value>change_page</value>
     </data>
 </root>

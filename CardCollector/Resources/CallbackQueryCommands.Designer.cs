@@ -61,6 +61,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Все.
+        /// </summary>
+        internal static string All {
+            get {
+                return ResourceManager.GetString("All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Автор.
         /// </summary>
         internal static string author {
@@ -70,11 +79,38 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to author.
+        /// </summary>
+        internal static string author_callback {
+            get {
+                return ResourceManager.GetString("author_callback", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to back.
+        /// </summary>
+        internal static string back {
+            get {
+                return ResourceManager.GetString("back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Отмена.
         /// </summary>
-        internal static string cancel_menu {
+        internal static string cancel {
             get {
-                return ResourceManager.GetString("cancel_menu", resourceCulture);
+                return ResourceManager.GetString("cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to change_page.
+        /// </summary>
+        internal static string change_page {
+            get {
+                return ResourceManager.GetString("change_page", resourceCulture);
             }
         }
         
@@ -97,6 +133,33 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to emoji.
+        /// </summary>
+        internal static string emoji_callback {
+            get {
+                return ResourceManager.GetString("emoji_callback", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to →.
+        /// </summary>
+        internal static string next {
+            get {
+                return ResourceManager.GetString("next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ←.
+        /// </summary>
+        internal static string previous {
+            get {
+                return ResourceManager.GetString("previous", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Показать стикеры.
         /// </summary>
         internal static string show_stickers {
@@ -115,11 +178,29 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to sorting.
+        /// </summary>
+        internal static string sorting_callback {
+            get {
+                return ResourceManager.GetString("sorting_callback", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Тир.
         /// </summary>
         internal static string tier {
             get {
                 return ResourceManager.GetString("tier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to tier.
+        /// </summary>
+        internal static string tier_callback {
+            get {
+                return ResourceManager.GetString("tier_callback", resourceCulture);
             }
         }
     }

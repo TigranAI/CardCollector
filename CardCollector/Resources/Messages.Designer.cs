@@ -79,6 +79,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выберите автора из списка ниже:.
+        /// </summary>
+        internal static string choose_author {
+            get {
+                return ResourceManager.GetString("choose_author", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Текущие примененные фильтры:.
         /// </summary>
         internal static string current_filters {
