@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,6 +39,14 @@ namespace CardCollector.DataBase.EntityDao
             };
             var result = await Table.AddAsync(cash);
             return result.Entity;
+        }
+
+        public static async Task<List<string>> GetAuthorsList()
+        {
+            return await Table
+                .Select(item => item.Author)
+                .Distinct()
+                .ToListAsync();
         }
     }
 }

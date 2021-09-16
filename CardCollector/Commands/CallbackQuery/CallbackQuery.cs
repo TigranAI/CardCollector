@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
 using Telegram.Bot.Types;
@@ -20,10 +19,17 @@ namespace CardCollector.Commands.CallbackQuery
      Update - обновление, полученное от сервера Телеграм */
     public abstract class CallbackQuery : UpdateModel
     {
+        /* Данные, поступившие после нажатия на кнокпку */
+        protected string CallbackData;
+        
+        /* Id сообщения, под которым нажали на кнопку */
+        protected int CallbackMessageId;
+        
         /* Список команд, распознаваемых ботом */
         private static readonly List<CallbackQuery> List = new()
         {
-
+            /* Кнопка "Автор" */
+            new AuthorCallback(),
         };
 
         /* Метод, создающий объекты команд исходя из полученного обновления */
@@ -44,7 +50,11 @@ namespace CardCollector.Commands.CallbackQuery
             return new CommandNotFound(user, update, command);
         }
 
-        protected CallbackQuery(UserEntity user, Update update) : base(user, update) { }
+        protected CallbackQuery(UserEntity user, Update update) : base(user, update)
+        {
+            CallbackData = update.CallbackQuery!.Data;
+            CallbackMessageId = update.CallbackQuery!.Message!.MessageId;
+        }
         protected CallbackQuery() { }
     }
 }
