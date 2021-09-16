@@ -30,6 +30,11 @@ namespace CardCollector.Commands.CallbackQuery
         {
             /* Кнопка "Автор" */
             new AuthorCallback(),
+            /* Выбор автора из списка */
+            new SelectAuthorCallback(),
+            
+            /* Отмена в момент выбора "значения фильтра", не в самом меню */
+            new BackToFiltersMenu(),
         };
 
         /* Метод, создающий объекты команд исходя из полученного обновления */

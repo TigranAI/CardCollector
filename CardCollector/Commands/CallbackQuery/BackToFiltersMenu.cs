@@ -4,11 +4,11 @@ using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using Telegram.Bot.Types;
 
-namespace CardCollector.Commands.Custom
+namespace CardCollector.Commands.CallbackQuery
 {
-    public class BackToFiltersMenu : CallbackQuery.CallbackQuery
+    public class BackToFiltersMenu : CallbackQuery
     {
-        protected override string Command => "CallbackQuery";
+        protected override string Command => CallbackQueryCommands.back;
         public override async Task Execute()
         {
             /* Формируем сообщение с имеющимися фильтрами у пользователя */
@@ -23,6 +23,7 @@ namespace CardCollector.Commands.Custom
             await MessageController.EditMessage(User, CallbackMessageId, text, Keyboard.SortingOptions);
         }
         
+        public BackToFiltersMenu() { }
         public BackToFiltersMenu(UserEntity user, Update update) : base(user, update) { }
     }
 }

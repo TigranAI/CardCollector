@@ -106,6 +106,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to change_page.
+        /// </summary>
+        internal static string change_page {
+            get {
+                return ResourceManager.GetString("change_page", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Собрать прибыль.
         /// </summary>
         internal static string collect_income {
@@ -142,29 +151,11 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to next.
-        /// </summary>
-        internal static string next_callback {
-            get {
-                return ResourceManager.GetString("next_callback", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to ←.
         /// </summary>
         internal static string previous {
             get {
                 return ResourceManager.GetString("previous", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to previous.
-        /// </summary>
-        internal static string previous_callback {
-            get {
-                return ResourceManager.GetString("previous_callback", resourceCulture);
             }
         }
         

@@ -66,17 +66,25 @@ namespace CardCollector.DataBase.Entity
         public async Task<IEnumerable<InlineQueryResult>> GetStickersList(string command, string filter)
         {
             var result = new List<InlineQueryResult>();
-            foreach (var sticker in Stickers.Values.Where(i => i.Count > 0))
-            {
-                if (filter != "")
+            if (Constants.UNLIMITED_ALL_STICKERS)
+                foreach (var sticker in await StickerDao.GetAll())
                 {
-                    var stickerInfo = await StickerDao.GetStickerInfo(sticker.StickerId);
-                    if (!stickerInfo.Title.Contains(filter)) break;
+                    var item = new InlineQueryResultCachedSticker($"unlimited_sticker={sticker.Title}", sticker.Id);
+                    result.Add(item);
+                    if (result.Count > 49) return result;
                 }
-                var item = new InlineQueryResultCachedSticker($"{command}={sticker.ShortHash}", sticker.StickerId);
-                result.Add(item);
-                if (result.Count > 49) return result;
-            }
+            else
+                foreach (var sticker in Stickers.Values.Where(i => i.Count > 0))
+                {
+                    if (filter != "")
+                    {
+                        var stickerInfo = await StickerDao.GetStickerInfo(sticker.StickerId);
+                        if (!stickerInfo.Title.Contains(filter)) break;
+                    }
+                    var item = new InlineQueryResultCachedSticker($"{command}={sticker.ShortHash}", sticker.StickerId);
+                    result.Add(item);
+                    if (result.Count > 49) return result;
+                }
             return result;
         }
     }

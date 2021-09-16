@@ -48,5 +48,10 @@ namespace CardCollector.DataBase.EntityDao
                 .Distinct()
                 .ToListAsync();
         }
+
+        public static async Task<List<StickerEntity>> GetAll()
+        {
+            return await Table.ToListAsync();
+        }
     }
 }

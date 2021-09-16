@@ -46,7 +46,7 @@ namespace CardCollector.Resources
                 {
                     /* Добавляем в список кнопку "Все" */
                     InlineKeyboardButton.WithCallbackData(CallbackQueryCommands.All,
-                        $"{CallbackQueryCommands.author_callback}={CallbackQueryCommands.All}")
+                        $"{CallbackQueryCommands.author_callback}=")
                 }
             };
             /* Копируем список */
@@ -81,19 +81,19 @@ namespace CardCollector.Resources
                         <10 => new[]
                         {
                             InlineKeyboardButton.WithCallbackData(CallbackQueryCommands.previous,
-                                $"{CallbackQueryCommands.previous_callback}={page - 1}")
+                                $"{CallbackQueryCommands.change_page}={page - 1}")
                         },
                         >=10 when page == 1 => new[]
                         {
                             InlineKeyboardButton.WithCallbackData(CallbackQueryCommands.next,
-                                $"{CallbackQueryCommands.next_callback}={page + 1}")
+                                $"{CallbackQueryCommands.change_page}={page + 1}")
                         },
                         _ => new[]
                         {
                             InlineKeyboardButton.WithCallbackData(CallbackQueryCommands.previous,
-                                $"{CallbackQueryCommands.previous_callback}={page - 1}"),
+                                $"{CallbackQueryCommands.change_page}={page - 1}"),
                             InlineKeyboardButton.WithCallbackData(CallbackQueryCommands.next,
-                                $"{CallbackQueryCommands.next_callback}={page + 1}")
+                                $"{CallbackQueryCommands.change_page}={page + 1}")
                         }
                     }
                 );
