@@ -17,16 +17,20 @@ namespace CardCollector.Auction
         {
             if (count > user.Stickers[stickerShortHashCode].Count)
                 return ResultCode.NotEnoughStickers;
-            var summa = price * count;
             //подтверждаем действие
             user.Stickers[stickerShortHashCode].Count -= count;
-            user.Cash.Coins += summa;
+            user.Cash.Coins += price * count;
             return ResultCode.Ok;
         }
         
-        private static async void BuyCard()
+        private static async Task<ResultCode> BuyCard(UserEntity user, string stickerShortHashCode, int price, int count = 1)
         {
-            
+            if (user.Cash.Coins < count * price)
+                return ResultCode.NotEnoughCash;
+            //подтверждаем действие
+            user.Stickers[stickerShortHashCode].Count += count;
+            user.Cash.Coins += price * count;
+            return ResultCode.Ok;
         }
     }
 }
