@@ -6,6 +6,6 @@ namespace CardCollector.Commands
     public class IgnoreUpdate : UpdateModel
     {
         protected override string Command => "";
-        public override async Task Execute() { }
+        public override Task Execute() { return  Task.CompletedTask; }
     }
 }

@@ -2,14 +2,14 @@
 
 namespace CardCollector
 {
-    public class Utilities
+    public static class Utilities
     {
         public static string ToJson(object obj)
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(obj);
         }
         
-        public static string CreateMD5(string input)
+        public static string CreateMd5(string input)
         {
             // Use input string to calculate MD5 hash
             using var md5 = System.Security.Cryptography.MD5.Create();

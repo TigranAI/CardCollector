@@ -35,5 +35,8 @@ namespace CardCollector.DataBase.Entity
         
         /* Описание стикера */
         [Column("description"), MaxLength(1024)] public string Description { get; set; } = "";
+        
+        /* Хеш id стикера для определения его в системе */
+        [Column("md5hash"), MaxLength(40)] public string Md5Hash { get; set; }
     }
 }

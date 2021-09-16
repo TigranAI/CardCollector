@@ -34,6 +34,10 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>SortingTypes.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\InlineQueryCommands.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>InlineQueryCommands.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -61,6 +65,11 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>SortingTypes.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\InlineQueryCommands.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>InlineQueryCommands.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

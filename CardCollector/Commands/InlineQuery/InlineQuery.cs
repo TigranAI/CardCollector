@@ -28,6 +28,8 @@ namespace CardCollector.Commands.InlineQuery
         {
             // Показать стикеры в чатах для отправки (кроме личного чата с ботом)
             new ShowStickersInGroup(),
+            // Показать стикеры в личных сообщениях с ботом для выбора или просмотра информации
+            new ShowStickersInBotChat(),
         };
         
         

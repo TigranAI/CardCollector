@@ -22,16 +22,22 @@ namespace CardCollector.DataBase.EntityDao
         }
 
         /* Добавляет новое отношение в таблицу */
-        private static async Task<UserStickerRelationEntity> AddNew(long userId, string stickerId, int count)
+        public static async Task<UserStickerRelationEntity> AddNew(UserEntity user, StickerEntity sticker, int count)
         {
-            var cash = new UserStickerRelationEntity
+            if (await Table.FirstOrDefaultAsync(item => item.ShortHash == sticker.Md5Hash) is { } entity)
             {
-                UserId = userId,
-                StickerId = stickerId,
+                entity.Count += count;
+                return entity;
+            }
+            var relation = new UserStickerRelationEntity
+            {
+                UserId = user.Id,
+                StickerId = sticker.Id,
                 Count = count,
-                ShortHash = Utilities.CreateMD5(stickerId + userId)
+                ShortHash = sticker.Md5Hash
             };
-            var result = await Table.AddAsync(cash);
+            var result = await Table.AddAsync(relation);
+            user.Stickers.Add(sticker.Md5Hash, result.Entity);
             return result.Entity;
         }
     }

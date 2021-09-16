@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
+using CardCollector.Resources;
 using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.ChosenInlineResult
@@ -8,7 +9,7 @@ namespace CardCollector.Commands.ChosenInlineResult
     public class SendStickerResult : ChosenInlineResult
     {
         /* Ключевое слово для данной команды send_sticker */
-        protected override string Command => "send_sticker";
+        protected override string Command => InlineQueryCommands.send_sticker;
         public override Task Execute()
         {
             // Получаем MD5 хеш из полученного запроса разделением по символу '='
@@ -19,8 +20,8 @@ namespace CardCollector.Commands.ChosenInlineResult
             return Task.CompletedTask;
         }
         
+        public SendStickerResult() { }
         public SendStickerResult(UserEntity user, Update update, string inlineResult)
             : base(user, update, inlineResult) { }
-        public SendStickerResult() { }
     }
 }

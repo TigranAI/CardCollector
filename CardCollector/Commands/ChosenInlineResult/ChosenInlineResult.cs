@@ -25,8 +25,12 @@ namespace CardCollector.Commands.ChosenInlineResult
         protected readonly string InlineResult = "";
         
         /* Список команд */
-        private static readonly List<ChosenInlineResult> List = new()
+        protected static readonly List<ChosenInlineResult> List = new()
         {
+            /* Этот объект должен быть всегда в начале списка, так как он должен быть вызван
+             вперед других, если в коде включен режим бесконечных стикеров */
+            new GetUnlimitedStickerAndExecuteCommand(),
+        
             // Обработка результата при отправке стикера
             new SendStickerResult(),
         };

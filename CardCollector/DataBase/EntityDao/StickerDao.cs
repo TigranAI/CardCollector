@@ -12,10 +12,10 @@ namespace CardCollector.DataBase.EntityDao
         /* Таблица stickers в представлении Entity Framework */
         private static readonly DbSet<StickerEntity> Table = CardCollectorDatabase.Instance.Stickers;
         
-        /* Получение информации о стикере по его Id, возвращает Null, если стикера не существует */
-        public static async Task<StickerEntity> GetStickerInfo(string stickerId)
+        /* Получение информации о стикере по его хешу, возвращает Null, если стикера не существует */
+        public static async Task<StickerEntity> GetStickerByHash(string hash)
         {
-            return await Table.FindAsync(stickerId);
+            return await Table.FirstOrDefaultAsync(item => item.Md5Hash == hash);
         }
 
          /* Добавление новго стикера в систему
@@ -35,7 +35,8 @@ namespace CardCollector.DataBase.EntityDao
             {
                 Id = fileId, Title = title, Author = author,
                 IncomeCoins = incomeCoins, IncomeGems = incomeGems,
-                Tier = tier, Emoji = emoji, Description = description
+                Tier = tier, Emoji = emoji, Description = description,
+                Md5Hash = Utilities.CreateMd5(fileId)
             };
             var result = await Table.AddAsync(cash);
             return result.Entity;

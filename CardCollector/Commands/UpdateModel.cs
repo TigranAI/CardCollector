@@ -19,7 +19,7 @@ namespace CardCollector.Commands
 
         public abstract Task Execute();
 
-        protected virtual bool IsMatches(string command)
+        protected internal virtual bool IsMatches(string command)
         {
             return command.Contains(Command);
         }
