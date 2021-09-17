@@ -2,7 +2,7 @@
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FResources_002FCallbackQueryCommands/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FResources_002FInlineQueryCommands/@EntryIndexedValue">True</s:Boolean>
 	
-	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FResources_002FMessageCommands/@EntryIndexedValue">False</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FResources_002FMessageCommands/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FResources_002FMessages/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FResources_002FSortingTypes/@EntryIndexedValue">False</s:Boolean>
 	
