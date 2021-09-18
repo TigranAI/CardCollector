@@ -42,9 +42,6 @@
     <data name="back" xml:space="preserve">
         <value>back</value>
     </data>
-    <data name="change_page" xml:space="preserve">
-        <value>change_page</value>
-    </data>
     <data name="unlimited_stickers" xml:space="preserve">
         <value>unlim</value>
     </data>

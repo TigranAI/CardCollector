@@ -25,7 +25,7 @@ namespace CardCollector.Resources
         {
             var keyboard = new List<InlineKeyboardButton[]>
             {
-                new[] {InlineKeyboardButton.WithCallbackData(Text.author, Command.author)},
+                new[] {InlineKeyboardButton.WithCallbackData(Text.author, $"{Command.author}=1")},
                 new[] {InlineKeyboardButton.WithCallbackData(Text.tier, Command.tier)},
                 new[] {InlineKeyboardButton.WithCallbackData(Text.emoji, Command.emoji)}
             };
@@ -134,16 +134,16 @@ namespace CardCollector.Resources
                     {
                         <10 => new[]
                         {
-                            InlineKeyboardButton.WithCallbackData(Text.previous, $"{Command.change_page}={page - 1}")
+                            InlineKeyboardButton.WithCallbackData(Text.previous, $"{Command.author}={page - 1}")
                         },
                         >=10 when page == 1 => new[]
                         {
-                            InlineKeyboardButton.WithCallbackData(Text.next, $"{Command.change_page}={page + 1}")
+                            InlineKeyboardButton.WithCallbackData(Text.next, $"{Command.author}={page + 1}")
                         },
                         _ => new[]
                         {
-                            InlineKeyboardButton.WithCallbackData(Text.previous, $"{Command.change_page}={page - 1}"),
-                            InlineKeyboardButton.WithCallbackData(Text.next, $"{Command.change_page}={page + 1}")
+                            InlineKeyboardButton.WithCallbackData(Text.previous, $"{Command.author}={page - 1}"),
+                            InlineKeyboardButton.WithCallbackData(Text.next, $"{Command.author}={page + 1}")
                         }
                     }
                 );

@@ -14,13 +14,14 @@ namespace CardCollector.Commands.CallbackQuery
 
         public override async Task Execute()
         {
+            var page = int.Parse(CallbackData.Split('=')[1]);
             /* Получаем из бд список всех авторов */
             var list = await StickerDao.GetAuthorsList();
             /* Сортируем по алфавиту */
             list.Sort();
             /* Заменяем сообщение меню на сообщение со списком */
             await MessageController.EditMessage(User, CallbackMessageId,
-                Messages.choose_author, Keyboard.GetAuthorsKeyboard(list));
+                Messages.choose_author, Keyboard.GetAuthorsKeyboard(list, page));
         }
 
         public AuthorCallback() { }

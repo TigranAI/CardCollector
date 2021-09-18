@@ -10,6 +10,7 @@ namespace CardCollector.Commands.CallbackQuery
         protected override string CommandText => Command.cancel;
         public override async Task Execute()
         {
+            User.State = UserState.Default;
             await User.ClearChat();
         }
 
