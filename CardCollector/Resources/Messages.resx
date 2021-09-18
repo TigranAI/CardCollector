@@ -51,4 +51,19 @@
     <data name="choose_tier" xml:space="preserve">
         <value>Выберите тир из списка ниже:</value>
     </data>
+    <data name="enter_emoji" xml:space="preserve">
+        <value>Введите эмоцию</value>
+    </data>
+    <data name="enter_only_one_emoji" xml:space="preserve">
+        <value>Введите только одну эмоцию!</value>
+    </data>
+    <data name="please_enter_emoji" xml:space="preserve">
+        <value>Пожалуйста, введите только эмоцию</value>
+    </data>
+    <data name="choose_price" xml:space="preserve">
+        <value>Выберите диапазон цен из списка ниже:</value>
+    </data>
+    <data name="choose_sort" xml:space="preserve">
+        <value>Выберите сортировку из списка ниже:</value>
+    </data>
 </root>

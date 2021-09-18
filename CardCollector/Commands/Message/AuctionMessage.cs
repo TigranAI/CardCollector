@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Commands.Custom;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using Telegram.Bot.Types;

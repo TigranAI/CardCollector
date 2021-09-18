@@ -124,6 +124,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to От.
+        /// </summary>
+        internal static string from {
+            get {
+                return ResourceManager.GetString("from", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to →.
         /// </summary>
         internal static string next {
@@ -133,11 +142,29 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Нет.
+        /// </summary>
+        internal static string no {
+            get {
+                return ResourceManager.GetString("no", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ←.
         /// </summary>
         internal static string previous {
             get {
                 return ResourceManager.GetString("previous", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Цена.
+        /// </summary>
+        internal static string price {
+            get {
+                return ResourceManager.GetString("price", resourceCulture);
             }
         }
         
@@ -201,6 +228,15 @@ namespace CardCollector.Resources {
         internal static string tier {
             get {
                 return ResourceManager.GetString("tier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to До.
+        /// </summary>
+        internal static string to {
+            get {
+                return ResourceManager.GetString("to", resourceCulture);
             }
         }
     }

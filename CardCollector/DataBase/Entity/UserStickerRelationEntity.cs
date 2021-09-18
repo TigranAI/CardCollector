@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CardCollector.DataBase.Entity
@@ -18,6 +19,9 @@ namespace CardCollector.DataBase.Entity
         
         /* Количество стикеров данного вида у пользователя */
         [Column("count"), MaxLength(32)] public int Count { get; set; }
+        
+        /* Последняя выплата по данному стикеру */
+        [Column("payout"), MaxLength(32)] public DateTime Payout { get; set; } = DateTime.Now;
         
         /* MD5 хеш id стикера */
         [Column("short_hash"), MaxLength(40)] public string ShortHash { get; set; }

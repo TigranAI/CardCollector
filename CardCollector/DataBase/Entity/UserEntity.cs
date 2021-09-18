@@ -44,11 +44,12 @@ namespace CardCollector.DataBase.Entity
         /* Фильтры, примененные пользователем в меню коллекции/магазина/аукциона */
         [NotMapped] public readonly Dictionary<string, object> Filters = new()
         {
-            {"author", ""},
-            {"tier", -1},
-            {"emoji", ""},
-            {"sorting", SortingTypes.None},
-            {"price", 0},
+            {Command.author, ""},
+            {Command.tier, -1},
+            {Command.emoji, ""},
+            {Command.price, 0},
+            {Command.price_to, 0},
+            {Command.sort, SortingTypes.None},
         };
 
         /* Сообщения в чате пользователя */
@@ -67,39 +68,61 @@ namespace CardCollector.DataBase.Entity
         {
             /* Получаем список стикеров исходя из того, нужно ли для отладки получить бесконечные стикеры */
             var stickersList = Constants.UNLIMITED_ALL_STICKERS
-                ? await GetUnlimitedStickers(filter) : await GetUserStickers(filter);
+                ? await GetUnlimitedStickers(filter)
+                : State switch
+                {
+                    UserState.CollectionMenu => await GetUserStickers(filter),
+                    UserState.AuctionMenu => await GetAuctionStickers(filter),
+                    UserState.ShopMenu => await GetShopStickers(filter),
+                    _ => await GetUserStickers(filter)
+                };
             /* Если пользовательская сортировка не применена, то возвращаем реультат */
             if (!userFilterEnabled) return ToTelegramResults(stickersList, command);
             /* Фильтруем по автору */
-            if (Filters["author"] is not "")
-                stickersList = stickersList.Where(item => item.Author.Contains((string) Filters["author"]));
+            if (Filters[Command.author] is not "")
+                stickersList = stickersList.Where(item => item.Author.Contains((string) Filters[Command.author]));
             /* Фильтруем по тиру */
-            if (Filters["tier"] is not -1)
-                stickersList = stickersList.Where(item => item.Tier.Equals((int) Filters["tier"]));
+            if (Filters[Command.tier] is not -1)
+                stickersList = stickersList.Where(item => item.Tier.Equals((int) Filters[Command.tier]));
             /* Фильтруем по эмоции */
-            if (Filters["emoji"] is not "")
-                stickersList = stickersList.Where(item => item.Emoji.Contains((string) Filters["emoji"]));
-            /* Фильтруем по цене если пользователь не в меню коллекции */
-            if (Filters["emoji"] is not "" && State is not UserState.CollectionMenu)
-                stickersList = stickersList.Where(item => item.Emoji.Contains((string) Filters["emoji"]));
+            if (Filters[Command.emoji] is not "")
+                stickersList = stickersList.Where(item => item.Emoji.Contains((string) Filters[Command.emoji]));
+            /* Фильтруем по цене ОТ если пользователь не в меню коллекции */
+            if (Filters[Command.price] is not 0 && State is not UserState.CollectionMenu)
+                stickersList = stickersList.Where(item => item.Price >= (int)Filters[Command.price]);
+            /* Фильтруем по цене ДО если пользователь не в меню коллекции */
+            if (Filters[Command.price_to] is not 0 && State is not UserState.CollectionMenu)
+                stickersList = stickersList.Where(item => item.Price <= (int)Filters[Command.price_to]);
             /* Если не установлена сортировка, возвращаем результат */
-            if ((string) Filters["sorting"] == SortingTypes.None) return ToTelegramResults(stickersList, command);
+            if ((string) Filters[Command.sort] == SortingTypes.None) return ToTelegramResults(stickersList, command);
             
             /* Сортируем список, если тип сортировки установлен */
             /* Сортируем по автору */
-            if ((string) Filters["sorting"] == SortingTypes.ByAuthor)
+            if ((string) Filters[Command.sort] == SortingTypes.ByAuthor)
                 stickersList = stickersList.OrderBy(item => item.Author);
             /* Сортируем по названию */
-            if ((string) Filters["sorting"] == SortingTypes.ByTitle)
+            if ((string) Filters[Command.sort] == SortingTypes.ByTitle)
                 stickersList = stickersList.OrderBy(item => item.Title);
             /* Сортируем по увеличению тира */
-            if ((string) Filters["sorting"] == SortingTypes.ByTierIncrease)
+            if ((string) Filters[Command.sort] == SortingTypes.ByTierIncrease)
                 stickersList = stickersList.OrderBy(item => item.Tier);
             /* Сортируем по уменьшению тира */
-            if ((string) Filters["sorting"] == SortingTypes.ByTierDecrease)
+            if ((string) Filters[Command.sort] == SortingTypes.ByTierDecrease)
                 stickersList = stickersList.OrderByDescending(item => item.Tier);
             
             return ToTelegramResults(stickersList, command);
+        }
+
+        private static async Task<IEnumerable<StickerEntity>> GetShopStickers(string filter)
+        {
+            // TODO return shop stickers
+            return await GetUnlimitedStickers(filter);
+        }
+
+        private static async Task<IEnumerable<StickerEntity>> GetAuctionStickers(string filter)
+        {
+            // TODO return auction stickers
+            return await GetUnlimitedStickers(filter);
         }
 
         /* Возвращает все стикеры системы */

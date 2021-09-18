@@ -54,4 +54,10 @@
     <data name="select_sticker" xml:space="preserve">
         <value>select</value>
     </data>
+    <data name="price" xml:space="preserve">
+        <value>price</value>
+    </data>
+    <data name="price_to" xml:space="preserve">
+        <value>price_to</value>
+    </data>
 </root>

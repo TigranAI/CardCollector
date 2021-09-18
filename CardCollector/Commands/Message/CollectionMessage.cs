@@ -16,17 +16,8 @@ namespace CardCollector.Commands.Message
             await User.ClearChat();
             /* Переводим состояние пользователя в меню коллекции */
             User.State = UserState.CollectionMenu;
-            /* Формируем сообщение с имеющимися фильтрами у пользователя */
-            var text = $"{Messages.current_filters}\n" +
-                       $"{Messages.author} {(User.Filters["author"].Equals("") ? Messages.all : User.Filters["author"])}\n" +
-                       $"{Messages.tier} {(User.Filters["tier"].Equals(-1) ? Messages.all : new string('⭐', (int)User.Filters["tier"]))}\n" +
-                       $"{Messages.emoji} {(User.Filters["emoji"].Equals("") ? Messages.all : User.Filters["emoji"])}\n" +
-                       $"{Messages.sorting} {User.Filters["sorting"]}\n" +
-                       $"\n{Messages.select_filter}";
-            /* Отправляем сообщение */
-            var message = await MessageController.SendMessage(User, text, Keyboard.SortingOptions);
-            /* Добавляем это сообщение в список для удаления */
-            User.Messages.Add(message.MessageId);
+            /* Отображаем сообщение с фильтрами */
+            await new ShowFiltersMenu(User, Update).Execute();
         }
         
         public CollectionMessage() { }

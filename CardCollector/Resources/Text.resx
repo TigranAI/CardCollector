@@ -66,4 +66,16 @@
     <data name="start" xml:space="preserve">
         <value>/start</value>
     </data>
+    <data name="from" xml:space="preserve">
+        <value>От</value>
+    </data>
+    <data name="to" xml:space="preserve">
+        <value>До</value>
+    </data>
+    <data name="price" xml:space="preserve">
+        <value>Цена</value>
+    </data>
+    <data name="no" xml:space="preserve">
+        <value>Нет</value>
+    </data>
 </root>

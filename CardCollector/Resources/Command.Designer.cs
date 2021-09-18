@@ -115,6 +115,24 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to price.
+        /// </summary>
+        internal static string price {
+            get {
+                return ResourceManager.GetString("price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to price_to.
+        /// </summary>
+        internal static string price_to {
+            get {
+                return ResourceManager.GetString("price_to", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to select.
         /// </summary>
         internal static string select_sticker {

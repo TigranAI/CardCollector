@@ -32,8 +32,16 @@ namespace CardCollector.Commands.CallbackQuery
             new AuthorCallback(),
             /* Кнопка "Тир" */
             new TierCallback(),
+            /* Кнопка "Эмоция" */
+            new EmojiCallback(),
+            /* Кнопка "Цена" */
+            new PriceCallback(),
+            /* Кнопка "Сортировка" */
+            new SortCallback(),
             /* Установка фильтра */
             new SetFilterCallback(),
+            /* Команда отмены */
+            new CancelCallback(),
             
             /* Отмена в момент выбора "значения фильтра", не в самом меню */
             new BackToFiltersMenu(),

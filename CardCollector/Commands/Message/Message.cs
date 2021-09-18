@@ -35,6 +35,8 @@ namespace CardCollector.Commands.Message
             new ShopMessage(),
             // Команда "Аукцион"
             new AuctionMessage(),
+            // Ожидание ввода эмоджи
+            new EnterEmojiMessage(),
             
             // Команда "Показать пример"
             new ShowSampleMessage()

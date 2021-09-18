@@ -88,6 +88,24 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выберите диапазон цен из списка ниже:.
+        /// </summary>
+        internal static string choose_price {
+            get {
+                return ResourceManager.GetString("choose_price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выберите сортировку из списка ниже:.
+        /// </summary>
+        internal static string choose_sort {
+            get {
+                return ResourceManager.GetString("choose_sort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Выберите тир из списка ниже:.
         /// </summary>
         internal static string choose_tier {
@@ -111,6 +129,33 @@ namespace CardCollector.Resources {
         internal static string emoji {
             get {
                 return ResourceManager.GetString("emoji", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введите эмоцию.
+        /// </summary>
+        internal static string enter_emoji {
+            get {
+                return ResourceManager.GetString("enter_emoji", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введите только одну эмоцию!.
+        /// </summary>
+        internal static string enter_only_one_emoji {
+            get {
+                return ResourceManager.GetString("enter_only_one_emoji", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пожалуйста, введите только эмоцию.
+        /// </summary>
+        internal static string please_enter_emoji {
+            get {
+                return ResourceManager.GetString("please_enter_emoji", resourceCulture);
             }
         }
         

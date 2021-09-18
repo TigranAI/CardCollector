@@ -21,15 +21,29 @@ namespace CardCollector.Resources
             new KeyboardButton[] {Text.shop, Text.auction},
         }) {ResizeKeyboard = true};
 
-        /* Клавиатура меню сортировки */
-        public static readonly InlineKeyboardMarkup SortingOptions = new(new[]
+        public static InlineKeyboardMarkup GetSortingMenu(UserState state)
         {
-            new[] {InlineKeyboardButton.WithCallbackData(Text.author, Command.author)},
-            new[] {InlineKeyboardButton.WithCallbackData(Text.tier, Command.tier)},
-            new[] {InlineKeyboardButton.WithCallbackData(Text.emoji, Command.emoji)},
-            new[] {InlineKeyboardButton.WithCallbackData(Text.sort, Command.sort)},
-            new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.cancel)},
-            new[] {InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.show_stickers)},
+            var keyboard = new List<InlineKeyboardButton[]>
+            {
+                new[] {InlineKeyboardButton.WithCallbackData(Text.author, Command.author)},
+                new[] {InlineKeyboardButton.WithCallbackData(Text.tier, Command.tier)},
+                new[] {InlineKeyboardButton.WithCallbackData(Text.emoji, Command.emoji)}
+            };
+            if (state != UserState.CollectionMenu) keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.price, Command.price)});
+            keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.sort, Command.sort)});
+            keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.cancel)});
+            keyboard.Add(new[] {InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.show_stickers)});
+            return new InlineKeyboardMarkup(keyboard);
+        }
+        /* Клавиатура меню сортировки */
+        public static readonly InlineKeyboardMarkup SortOptions = new(new[]
+        {
+            new[] {InlineKeyboardButton.WithCallbackData(Text.no, $"{Command.set}={Command.sort}={SortingTypes.None}")},
+            new[] {InlineKeyboardButton.WithCallbackData(SortingTypes.ByTierIncrease, $"{Command.set}={Command.sort}={SortingTypes.ByTierIncrease}")},
+            new[] {InlineKeyboardButton.WithCallbackData(SortingTypes.ByTierDecrease, $"{Command.set}={Command.sort}={SortingTypes.ByTierDecrease}")},
+            new[] {InlineKeyboardButton.WithCallbackData(SortingTypes.ByAuthor, $"{Command.set}={Command.sort}={SortingTypes.ByAuthor}")},
+            new[] {InlineKeyboardButton.WithCallbackData(SortingTypes.ByTitle, $"{Command.set}={Command.sort}={SortingTypes.ByTitle}")},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.back)},
         });
 
         /* Клавиатура меню выбора тира */
@@ -41,6 +55,35 @@ namespace CardCollector.Resources
             new[] {InlineKeyboardButton.WithCallbackData("3", $"{Command.set}={Command.tier}=3")},
             new[] {InlineKeyboardButton.WithCallbackData("4", $"{Command.set}={Command.tier}=4")},
             new[] {InlineKeyboardButton.WithCallbackData("5", $"{Command.set}={Command.tier}=5")},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.back)},
+        });
+
+        /* Клавиатура меню ввода эмоджи */
+        public static readonly InlineKeyboardMarkup EmojiOptions = new (new[]
+        {
+            new[] {InlineKeyboardButton.WithCallbackData(Text.all, $"{Command.set}={Command.emoji}=")},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.back)},
+        });
+
+        /* Клавиатура меню выбора цен */
+        public static readonly InlineKeyboardMarkup PriceOptions = new (new[]
+        {
+            new[] {
+                InlineKeyboardButton.WithCallbackData($"{Text.from} 0", $"{Command.set}={Command.price}=0"),
+                InlineKeyboardButton.WithCallbackData($"{Text.to} 100", $"{Command.set}={Command.price_to}=100"),
+            },
+            new[] {
+                InlineKeyboardButton.WithCallbackData($"{Text.from} 100", $"{Command.set}={Command.price}=100"),
+                InlineKeyboardButton.WithCallbackData($"{Text.to} 500", $"{Command.set}={Command.price_to}=500"),
+            },
+            new[] {
+                InlineKeyboardButton.WithCallbackData($"{Text.from} 500", $"{Command.set}={Command.price}=500"),
+                InlineKeyboardButton.WithCallbackData($"{Text.to} 1000", $"{Command.set}={Command.price_to}=1000"),
+            },
+            new[] {
+                InlineKeyboardButton.WithCallbackData($"{Text.from} 1000", $"{Command.set}={Command.price}=1000"),
+                InlineKeyboardButton.WithCallbackData($"{Text.to} ∞", $"{Command.set}={Command.price_to}=0"),
+            },
             new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.back)},
         });
 
