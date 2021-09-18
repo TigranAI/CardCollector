@@ -8,7 +8,7 @@ namespace CardCollector.Commands.CallbackQuery
 {
     public class BackToFiltersMenu : CallbackQuery
     {
-        protected override string Command => CallbackQueryCommands.back;
+        protected override string CommandText => Command.back;
         public override async Task Execute()
         {
             /* Формируем сообщение с имеющимися фильтрами у пользователя */

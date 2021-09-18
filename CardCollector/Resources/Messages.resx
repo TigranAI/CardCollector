@@ -48,4 +48,7 @@
     <data name="choose_author" xml:space="preserve">
         <value>Выберите автора из списка ниже:</value>
     </data>
+    <data name="choose_tier" xml:space="preserve">
+        <value>Выберите тир из списка ниже:</value>
+    </data>
 </root>

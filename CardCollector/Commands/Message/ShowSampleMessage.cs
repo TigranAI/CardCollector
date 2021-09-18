@@ -12,7 +12,7 @@ namespace CardCollector.Commands.Message
      PrivilegeLevel = 5 */
     public class ShowSampleMessage : Message
     {
-        protected override string Command => MessageCommands.show_sample;
+        protected override string CommandText => Text.show_sample;
         public override async Task Execute()
         {
             await MessageController.SendMessage(User, "Текущие примененные фильтры:" +

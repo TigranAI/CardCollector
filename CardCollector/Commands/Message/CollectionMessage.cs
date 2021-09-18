@@ -9,7 +9,7 @@ namespace CardCollector.Commands.Message
     /* Реализует команду "Коллекция" */
     public class CollectionMessage : Message
     {
-        protected override string Command => MessageCommands.collection;
+        protected override string CommandText => Text.collection;
         public override async Task Execute()
         {
             /* Очищаем чат с пользователем */

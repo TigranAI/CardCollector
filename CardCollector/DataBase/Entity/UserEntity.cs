@@ -129,7 +129,7 @@ namespace CardCollector.DataBase.Entity
             {
                 result.Add(new 
                     InlineQueryResultCachedSticker(
-                        $"{(Constants.UNLIMITED_ALL_STICKERS ? InlineQueryCommands.unlimited_stickers : "")}{command}={item.Md5Hash}",
+                        $"{(Constants.UNLIMITED_ALL_STICKERS ? Command.unlimited_stickers : "")}{command}={item.Md5Hash}",
                         item.Id));
                 /* Ограничение Telegram API по количеству результатов в 50 шт. */
                 if (result.Count > 49) return result;

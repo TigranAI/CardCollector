@@ -11,7 +11,7 @@ namespace CardCollector.Commands.Message
     public class ProfileMessage : Message
     {
         /* Для данной команды ключевое слово "Профиль" */
-        protected override string Command => MessageCommands.profile;
+        protected override string CommandText => Text.profile;
         public override async Task Execute()
         {
             /* Открепляем все закрепы */

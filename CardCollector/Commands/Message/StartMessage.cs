@@ -10,7 +10,7 @@ namespace CardCollector.Commands.Message
     public class StartMessage : Message
     {
         /* */
-        protected override string Command => MessageCommands.start;
+        protected override string CommandText => Text.start;
         
         public override async Task Execute()
         {

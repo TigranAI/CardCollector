@@ -18,13 +18,40 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    <data name="collect_income" xml:space="preserve">
+        <value>collect_income</value>
+    </data>
+    <data name="author" xml:space="preserve">
+        <value>author</value>
+    </data>
+    <data name="tier" xml:space="preserve">
+        <value>tier</value>
+    </data>
+    <data name="emoji" xml:space="preserve">
+        <value>emoji</value>
+    </data>
+    <data name="sort" xml:space="preserve">
+        <value>sort</value>
+    </data>
+    <data name="cancel" xml:space="preserve">
+        <value>cancel</value>
+    </data>
+    <data name="set" xml:space="preserve">
+        <value>set</value>
+    </data>
+    <data name="back" xml:space="preserve">
+        <value>back</value>
+    </data>
+    <data name="change_page" xml:space="preserve">
+        <value>change_page</value>
+    </data>
+    <data name="unlimited_stickers" xml:space="preserve">
+        <value>unlim</value>
+    </data>
     <data name="send_sticker" xml:space="preserve">
         <value>send</value>
     </data>
     <data name="select_sticker" xml:space="preserve">
         <value>select</value>
-    </data>
-    <data name="unlimited_stickers" xml:space="preserve">
-        <value>unlim</value>
     </data>
 </root>

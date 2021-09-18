@@ -30,8 +30,10 @@ namespace CardCollector.Commands.CallbackQuery
         {
             /* Кнопка "Автор" */
             new AuthorCallback(),
-            /* Выбор автора из списка */
-            new SelectAuthorCallback(),
+            /* Кнопка "Тир" */
+            new TierCallback(),
+            /* Установка фильтра */
+            new SetFilterCallback(),
             
             /* Отмена в момент выбора "значения фильтра", не в самом меню */
             new BackToFiltersMenu(),
@@ -53,6 +55,12 @@ namespace CardCollector.Commands.CallbackQuery
 
             // Возвращаем команда не найдена, если код дошел до сюда
             return new CommandNotFound(user, update, command);
+        }
+
+        protected internal override bool IsMatches(string command)
+        {
+            var query = command.Split('=')[0];
+            return base.IsMatches(query);
         }
 
         protected CallbackQuery(UserEntity user, Update update) : base(user, update)

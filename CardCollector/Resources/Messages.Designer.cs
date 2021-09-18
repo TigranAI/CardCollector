@@ -88,6 +88,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выберите тир из списка ниже:.
+        /// </summary>
+        internal static string choose_tier {
+            get {
+                return ResourceManager.GetString("choose_tier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Текущие примененные фильтры:.
         /// </summary>
         internal static string current_filters {

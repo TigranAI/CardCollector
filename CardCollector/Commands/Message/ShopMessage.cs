@@ -9,7 +9,7 @@ namespace CardCollector.Commands.Message
     /* Реализует команду "Магазин" */
     public class ShopMessage : Message
     {
-        protected override string Command => MessageCommands.shop;
+        protected override string CommandText => Text.shop;
         public override async Task Execute()
         {
             /* Очищаем чат с пользователем */

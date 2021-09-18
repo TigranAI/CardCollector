@@ -22,14 +22,14 @@ namespace CardCollector.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class MessageCommands {
+    internal class Command {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal MessageCommands() {
+        internal Command() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace CardCollector.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CardCollector.Resources.MessageCommands", typeof(MessageCommands).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CardCollector.Resources.Command", typeof(Command).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,56 +61,110 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Аукцион.
+        ///   Looks up a localized string similar to author.
         /// </summary>
-        internal static string auction {
+        internal static string author {
             get {
-                return ResourceManager.GetString("auction", resourceCulture);
+                return ResourceManager.GetString("author", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Коллекция.
+        ///   Looks up a localized string similar to back.
         /// </summary>
-        internal static string collection {
+        internal static string back {
             get {
-                return ResourceManager.GetString("collection", resourceCulture);
+                return ResourceManager.GetString("back", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Профиль.
+        ///   Looks up a localized string similar to cancel.
         /// </summary>
-        internal static string profile {
+        internal static string cancel {
             get {
-                return ResourceManager.GetString("profile", resourceCulture);
+                return ResourceManager.GetString("cancel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Магазин.
+        ///   Looks up a localized string similar to change_page.
         /// </summary>
-        internal static string shop {
+        internal static string change_page {
             get {
-                return ResourceManager.GetString("shop", resourceCulture);
+                return ResourceManager.GetString("change_page", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Показать пример.
+        ///   Looks up a localized string similar to collect_income.
         /// </summary>
-        internal static string show_sample {
+        internal static string collect_income {
             get {
-                return ResourceManager.GetString("show_sample", resourceCulture);
+                return ResourceManager.GetString("collect_income", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /start.
+        ///   Looks up a localized string similar to emoji.
         /// </summary>
-        internal static string start {
+        internal static string emoji {
             get {
-                return ResourceManager.GetString("start", resourceCulture);
+                return ResourceManager.GetString("emoji", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to select.
+        /// </summary>
+        internal static string select_sticker {
+            get {
+                return ResourceManager.GetString("select_sticker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to send.
+        /// </summary>
+        internal static string send_sticker {
+            get {
+                return ResourceManager.GetString("send_sticker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to set.
+        /// </summary>
+        internal static string set {
+            get {
+                return ResourceManager.GetString("set", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to sort.
+        /// </summary>
+        internal static string sort {
+            get {
+                return ResourceManager.GetString("sort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to tier.
+        /// </summary>
+        internal static string tier {
+            get {
+                return ResourceManager.GetString("tier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to unlim.
+        /// </summary>
+        internal static string unlimited_stickers {
+            get {
+                return ResourceManager.GetString("unlimited_stickers", resourceCulture);
             }
         }
     }

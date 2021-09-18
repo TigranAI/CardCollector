@@ -10,7 +10,7 @@ namespace CardCollector.Commands.CallbackQuery
     /* Реализует нажатие на кнопку "Автор" (открывается меню с выбором автора) */
     public class AuthorCallback : CallbackQuery
     {
-        protected override string Command => CallbackQueryCommands.author;
+        protected override string CommandText => Command.author;
 
         public override async Task Execute()
         {

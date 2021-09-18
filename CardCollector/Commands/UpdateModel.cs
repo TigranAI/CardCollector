@@ -13,7 +13,7 @@ namespace CardCollector.Commands
      Метод IsMatches - проверяет команду на сопадение по ключу */
     public abstract class UpdateModel
     {
-        protected abstract string Command { get; }
+        protected abstract string CommandText { get; }
         protected UserEntity User;
         protected Update Update;
 
@@ -21,7 +21,7 @@ namespace CardCollector.Commands
 
         protected internal virtual bool IsMatches(string command)
         {
-            return command.Contains(Command);
+            return command.Contains(CommandText);
         }
 
         protected UpdateModel()

@@ -9,7 +9,7 @@ namespace CardCollector.Commands.ChosenInlineResult
     public class SendStickerResult : ChosenInlineResult
     {
         /* Ключевое слово для данной команды send_sticker */
-        protected override string Command => InlineQueryCommands.send_sticker;
+        protected override string CommandText => Command.send_sticker;
         public override Task Execute()
         {
             // Получаем MD5 хеш из полученного запроса разделением по символу '='

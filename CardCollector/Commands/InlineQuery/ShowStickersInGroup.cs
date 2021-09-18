@@ -11,14 +11,14 @@ namespace CardCollector.Commands.InlineQuery
     {
         /* Команда - пустая строка, поскольку пользователь может вводить любые слова
          после @имя_бота, введенная фраза будет использоваться для фильтрации стикеров */
-        protected override string Command => "";
+        protected override string CommandText => "";
         
         public override async Task Execute()
         {
             // Фильтр - введенная пользователем фраза
             var filter = Update.InlineQuery!.Query;
             // Получаем список стикеров
-            var stickersList = await User.GetStickersList(InlineQueryCommands.send_sticker, filter);
+            var stickersList = await User.GetStickersList(Command.send_sticker, filter);
             // Посылаем пользователю ответ на его запрос
             await MessageController.AnswerInlineQuery(InlineQueryId, stickersList);
         }

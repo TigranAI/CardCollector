@@ -11,7 +11,7 @@ namespace CardCollector.Commands.MyChatMember
      Данный класс полностью реализован и не нуждается в наследовании */
     public class MyChatMember : UpdateModel
     {
-        protected override string Command => "";
+        protected override string CommandText => "";
         private readonly ChatMemberStatus _status;
         public override async Task Execute()
         {

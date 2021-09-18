@@ -5,7 +5,7 @@ namespace CardCollector.Commands
     /* Данный класс позволяет проигнорировать входящее обновление */
     public class IgnoreUpdate : UpdateModel
     {
-        protected override string Command => "";
+        protected override string CommandText => "";
         public override Task Execute() { return  Task.CompletedTask; }
     }
 }

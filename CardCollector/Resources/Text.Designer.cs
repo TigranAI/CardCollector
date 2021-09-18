@@ -22,14 +22,14 @@ namespace CardCollector.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class CallbackQueryCommands {
+    internal class Text {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal CallbackQueryCommands() {
+        internal Text() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace CardCollector.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CardCollector.Resources.CallbackQueryCommands", typeof(CallbackQueryCommands).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CardCollector.Resources.Text", typeof(Text).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -63,9 +63,18 @@ namespace CardCollector.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Все.
         /// </summary>
-        internal static string All {
+        internal static string all {
             get {
-                return ResourceManager.GetString("All", resourceCulture);
+                return ResourceManager.GetString("all", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Аукцион.
+        /// </summary>
+        internal static string auction {
+            get {
+                return ResourceManager.GetString("auction", resourceCulture);
             }
         }
         
@@ -79,38 +88,11 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to author.
-        /// </summary>
-        internal static string author_callback {
-            get {
-                return ResourceManager.GetString("author_callback", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to back.
-        /// </summary>
-        internal static string back {
-            get {
-                return ResourceManager.GetString("back", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Отмена.
         /// </summary>
         internal static string cancel {
             get {
                 return ResourceManager.GetString("cancel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to change_page.
-        /// </summary>
-        internal static string change_page {
-            get {
-                return ResourceManager.GetString("change_page", resourceCulture);
             }
         }
         
@@ -124,20 +106,20 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Коллекция.
+        /// </summary>
+        internal static string collection {
+            get {
+                return ResourceManager.GetString("collection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Эмоция.
         /// </summary>
         internal static string emoji {
             get {
                 return ResourceManager.GetString("emoji", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to emoji.
-        /// </summary>
-        internal static string emoji_callback {
-            get {
-                return ResourceManager.GetString("emoji_callback", resourceCulture);
             }
         }
         
@@ -160,6 +142,33 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Профиль.
+        /// </summary>
+        internal static string profile {
+            get {
+                return ResourceManager.GetString("profile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Магазин.
+        /// </summary>
+        internal static string shop {
+            get {
+                return ResourceManager.GetString("shop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пример.
+        /// </summary>
+        internal static string show_sample {
+            get {
+                return ResourceManager.GetString("show_sample", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Показать стикеры.
         /// </summary>
         internal static string show_stickers {
@@ -171,18 +180,18 @@ namespace CardCollector.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Сортировка.
         /// </summary>
-        internal static string sorting {
+        internal static string sort {
             get {
-                return ResourceManager.GetString("sorting", resourceCulture);
+                return ResourceManager.GetString("sort", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to sorting.
+        ///   Looks up a localized string similar to /start.
         /// </summary>
-        internal static string sorting_callback {
+        internal static string start {
             get {
-                return ResourceManager.GetString("sorting_callback", resourceCulture);
+                return ResourceManager.GetString("start", resourceCulture);
             }
         }
         
@@ -192,15 +201,6 @@ namespace CardCollector.Resources {
         internal static string tier {
             get {
                 return ResourceManager.GetString("tier", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to tier.
-        /// </summary>
-        internal static string tier_callback {
-            get {
-                return ResourceManager.GetString("tier_callback", resourceCulture);
             }
         }
     }

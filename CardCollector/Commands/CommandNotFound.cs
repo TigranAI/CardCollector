@@ -8,7 +8,7 @@ namespace CardCollector.Commands
     /* Данный класс реализует операцию "Команда не найдена" */
     public class CommandNotFound : UpdateModel
     {
-        protected override string Command => "";
+        protected override string CommandText => "";
         private readonly string _command;
 
         public override async Task Execute()

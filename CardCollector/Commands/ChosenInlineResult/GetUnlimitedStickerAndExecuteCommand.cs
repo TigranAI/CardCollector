@@ -11,7 +11,7 @@ namespace CardCollector.Commands.ChosenInlineResult
 {
     public class GetUnlimitedStickerAndExecuteCommand : ChosenInlineResult
     {
-        protected override string Command => InlineQueryCommands.unlimited_stickers;
+        protected override string CommandText => Command.unlimited_stickers;
         
         public override async Task Execute()
         {

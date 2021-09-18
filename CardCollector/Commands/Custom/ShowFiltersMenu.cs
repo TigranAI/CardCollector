@@ -9,7 +9,7 @@ namespace CardCollector.Commands.Custom
     /* Этот класс реализует отправку нового сообщения с фильтрами пользователя */
     public class ShowFiltersMenu : Message.Message
     {
-        protected override string Command => "Message";
+        protected override string CommandText => "Message";
         public override async Task Execute()
         {
             /* Формируем сообщение с имеющимися фильтрами у пользователя */
