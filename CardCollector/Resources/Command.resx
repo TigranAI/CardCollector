@@ -51,10 +51,19 @@
     <data name="select_sticker" xml:space="preserve">
         <value>select</value>
     </data>
+    <data name="price_coins_from" xml:space="preserve">
+        <value>price_coins_from</value>
+    </data>
+    <data name="price_coins_to" xml:space="preserve">
+        <value>price_coins_to</value>
+    </data>
+    <data name="price_gems_from" xml:space="preserve">
+        <value>price_gems_from</value>
+    </data>
+    <data name="price_gems_to" xml:space="preserve">
+        <value>price_gems_to</value>
+    </data>
     <data name="price" xml:space="preserve">
         <value>price</value>
-    </data>
-    <data name="price_to" xml:space="preserve">
-        <value>price_to</value>
     </data>
 </root>

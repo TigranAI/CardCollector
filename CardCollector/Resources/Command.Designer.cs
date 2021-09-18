@@ -115,11 +115,38 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to price_to.
+        ///   Looks up a localized string similar to price_coins_from.
         /// </summary>
-        internal static string price_to {
+        internal static string price_coins_from {
             get {
-                return ResourceManager.GetString("price_to", resourceCulture);
+                return ResourceManager.GetString("price_coins_from", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to price_coins_to.
+        /// </summary>
+        internal static string price_coins_to {
+            get {
+                return ResourceManager.GetString("price_coins_to", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to price_gems_from.
+        /// </summary>
+        internal static string price_gems_from {
+            get {
+                return ResourceManager.GetString("price_gems_from", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to price_gems_to.
+        /// </summary>
+        internal static string price_gems_to {
+            get {
+                return ResourceManager.GetString("price_gems_to", resourceCulture);
             }
         }
         

@@ -17,8 +17,11 @@ namespace CardCollector.Commands.Message
                        $"{Messages.author} {(User.Filters[Command.author].Equals("") ? Messages.all : User.Filters[Command.author])}\n" +
                        $"{Messages.tier} {(User.Filters[Command.tier].Equals(-1) ? Messages.all : new string('⭐', (int) User.Filters[Command.tier]))}\n" +
                        $"{Messages.emoji} {(User.Filters[Command.emoji].Equals("") ? Messages.all : User.Filters[Command.emoji])}\n";
-            if (User.State != UserState.CollectionMenu) text += $"{Messages.price} {User.Filters[Command.price]} -" +
-                                                                $" {(User.Filters[Command.price_to] is int p && p != 0 ? p : "∞")}\n";
+            if (User.State != UserState.CollectionMenu) 
+                text += $"{Messages.price} 💰 {User.Filters[Command.price_coins_from]} -" +
+                        $" {(User.Filters[Command.price_coins_to] is int c && c != 0 ? c : "∞")}\n" +
+                        $"{Messages.price} 💎 {User.Filters[Command.price_gems_from]} -" +
+                        $" {(User.Filters[Command.price_gems_to] is int g && g != 0 ? g : "∞")}\n";
             text += $"{Messages.sorting} {User.Filters[Command.sort]}\n\n{Messages.select_filter}";
             /* Отправляем сообщение */
             var message = await MessageController.SendMessage(User, text, Keyboard.GetSortingMenu(User.State));

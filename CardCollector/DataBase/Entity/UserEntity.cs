@@ -47,8 +47,10 @@ namespace CardCollector.DataBase.Entity
             {Command.author, ""},
             {Command.tier, -1},
             {Command.emoji, ""},
-            {Command.price, 0},
-            {Command.price_to, 0},
+            {Command.price_coins_from, 0},
+            {Command.price_coins_to, 0},
+            {Command.price_gems_from, 0},
+            {Command.price_gems_to, 0},
             {Command.sort, SortingTypes.None},
         };
 
@@ -87,12 +89,18 @@ namespace CardCollector.DataBase.Entity
             /* Фильтруем по эмоции */
             if (Filters[Command.emoji] is not "")
                 stickersList = stickersList.Where(item => item.Emoji.Contains((string) Filters[Command.emoji]));
-            /* Фильтруем по цене ОТ если пользователь не в меню коллекции */
-            if (Filters[Command.price] is not 0 && State is not UserState.CollectionMenu)
-                stickersList = stickersList.Where(item => item.Price >= (int)Filters[Command.price]);
-            /* Фильтруем по цене ДО если пользователь не в меню коллекции */
-            if (Filters[Command.price_to] is not 0 && State is not UserState.CollectionMenu)
-                stickersList = stickersList.Where(item => item.Price <= (int)Filters[Command.price_to]);
+            /* Фильтруем по цене монет ОТ если пользователь не в меню коллекции */
+            if (Filters[Command.price_coins_from] is not 0 && State is not UserState.CollectionMenu)
+                stickersList = stickersList.Where(item => item.PriceCoins >= (int)Filters[Command.price_coins_from]);
+            /* Фильтруем по цене монет ДО если пользователь не в меню коллекции */
+            if (Filters[Command.price_coins_to] is not 0 && State is not UserState.CollectionMenu)
+                stickersList = stickersList.Where(item => item.PriceCoins <= (int)Filters[Command.price_coins_to]);
+            /* Фильтруем по цене алмазов ОТ если пользователь не в меню коллекции */
+            if (Filters[Command.price_gems_from] is not 0 && State is not UserState.CollectionMenu)
+                stickersList = stickersList.Where(item => item.PriceGems >= (int)Filters[Command.price_gems_from]);
+            /* Фильтруем по цене адмазов ДО если пользователь не в меню коллекции */
+            if (Filters[Command.price_gems_to] is not 0 && State is not UserState.CollectionMenu)
+                stickersList = stickersList.Where(item => item.PriceGems <= (int)Filters[Command.price_gems_to]);
             /* Если не установлена сортировка, возвращаем результат */
             if ((string) Filters[Command.sort] == SortingTypes.None) return ToTelegramResults(stickersList, command);
             

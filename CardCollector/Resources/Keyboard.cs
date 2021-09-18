@@ -69,20 +69,36 @@ namespace CardCollector.Resources
         public static readonly InlineKeyboardMarkup PriceOptions = new (new[]
         {
             new[] {
-                InlineKeyboardButton.WithCallbackData($"{Text.from} 0", $"{Command.set}={Command.price}=0"),
-                InlineKeyboardButton.WithCallbackData($"{Text.to} 100", $"{Command.set}={Command.price_to}=100"),
+                InlineKeyboardButton.WithCallbackData($"💰 {Text.from} 0", $"{Command.set}={Command.price_coins_from}=0"),
+                InlineKeyboardButton.WithCallbackData($"💰 {Text.to} 100", $"{Command.set}={Command.price_coins_to}=100"),
             },
             new[] {
-                InlineKeyboardButton.WithCallbackData($"{Text.from} 100", $"{Command.set}={Command.price}=100"),
-                InlineKeyboardButton.WithCallbackData($"{Text.to} 500", $"{Command.set}={Command.price_to}=500"),
+                InlineKeyboardButton.WithCallbackData($"💰 {Text.from} 100", $"{Command.set}={Command.price_coins_from}=100"),
+                InlineKeyboardButton.WithCallbackData($"💰 {Text.to} 500", $"{Command.set}={Command.price_coins_to}=500"),
             },
             new[] {
-                InlineKeyboardButton.WithCallbackData($"{Text.from} 500", $"{Command.set}={Command.price}=500"),
-                InlineKeyboardButton.WithCallbackData($"{Text.to} 1000", $"{Command.set}={Command.price_to}=1000"),
+                InlineKeyboardButton.WithCallbackData($"💰 {Text.from} 500", $"{Command.set}={Command.price_coins_from}=500"),
+                InlineKeyboardButton.WithCallbackData($"💰 {Text.to} 1000", $"{Command.set}={Command.price_coins_to}=1000"),
             },
             new[] {
-                InlineKeyboardButton.WithCallbackData($"{Text.from} 1000", $"{Command.set}={Command.price}=1000"),
-                InlineKeyboardButton.WithCallbackData($"{Text.to} ∞", $"{Command.set}={Command.price_to}=0"),
+                InlineKeyboardButton.WithCallbackData($"💰 {Text.from} 1000", $"{Command.set}={Command.price_coins_from}=1000"),
+                InlineKeyboardButton.WithCallbackData($"💰 {Text.to} ∞", $"{Command.set}={Command.price_coins_to}=0"),
+            },
+            new[] {
+                InlineKeyboardButton.WithCallbackData($"💎 {Text.from} 0", $"{Command.set}={Command.price_gems_from}=0"),
+                InlineKeyboardButton.WithCallbackData($"💎 {Text.to} 10", $"{Command.set}={Command.price_gems_to}=10"),
+            },
+            new[] {
+                InlineKeyboardButton.WithCallbackData($"💎 {Text.from} 10", $"{Command.set}={Command.price_gems_from}=10"),
+                InlineKeyboardButton.WithCallbackData($"💎 {Text.to} 50", $"{Command.set}={Command.price_gems_to}=50"),
+            },
+            new[] {
+                InlineKeyboardButton.WithCallbackData($"💎 {Text.from} 50", $"{Command.set}={Command.price_gems_from}=50"),
+                InlineKeyboardButton.WithCallbackData($"💎 {Text.to} 100", $"{Command.set}={Command.price_gems_to}=100"),
+            },
+            new[] {
+                InlineKeyboardButton.WithCallbackData($"💎 {Text.from} 100", $"{Command.set}={Command.price_gems_from}=100"),
+                InlineKeyboardButton.WithCallbackData($"💎 {Text.to} ∞", $"{Command.set}={Command.price_gems_to}=0"),
             },
             new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.back)},
         });

@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CardCollector.DataBase.Entity
@@ -31,8 +30,11 @@ namespace CardCollector.DataBase.Entity
         /* Время, необходимое для получения дохода */
         [Column("income_time"), MaxLength(32)] public int IncomeTime { get; set; } = 0;
         
-        /* Стоимость стикера в магазине */
-        [Column("income_time"), MaxLength(32)] public int Price { get; set; } = 0;
+        /* Стоимость стикера в магазине (монеты) */
+        [Column("price_coins"), MaxLength(32)] public int PriceCoins { get; set; } = 0;
+        
+        /* Стоимость стикера в магазине (алмазы) */
+        [Column("price_gems"), MaxLength(32)] public int PriceGems { get; set; } = 0;
         
         /* Количество звезд стикера (редкость) */
         [Column("tier"), MaxLength(32)] public int Tier { get; set; } = 1;
