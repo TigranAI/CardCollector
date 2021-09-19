@@ -73,15 +73,15 @@ namespace CardCollector.Commands.Message
             var data = update.Message.Type switch
             {
                 MessageType.Text => update.Message.Text,
-                MessageType.Document => update.Message.Document.FileId,
+                MessageType.Document => update.Message.Document!.FileId,
                 _ => ""
             };
             
             // Объект пользователя
             var user = await UserDao.GetUser(update.Message!.From);
             
-            // Если пользователь заблокирован или пользователь - бот, то мы игнорируем дальнейшие действия
-            if (user.IsBlocked || update.Message!.From!.IsBot) return new IgnoreUpdate();
+            // Если пользователь заблокирован или пользователь - бот, или сообщение где-то в другом канале - игонрируем
+            if (user.IsBlocked || update.Message!.From!.IsBot || update.Message.Chat.Id != user.ChatId) return new IgnoreUpdate();
         
             // Удаляем сообщение пользователя, оно нам больше не нужно
             await MessageController.DeleteMessage(user, update.Message.MessageId);

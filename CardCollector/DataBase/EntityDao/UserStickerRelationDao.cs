@@ -24,10 +24,10 @@ namespace CardCollector.DataBase.EntityDao
         /* Добавляет новое отношение в таблицу */
         public static async Task<UserStickerRelationEntity> AddNew(UserEntity user, StickerEntity sticker, int count)
         {
-            if (await Table.FirstOrDefaultAsync(item => item.ShortHash == sticker.Md5Hash) is { } entity)
+            if (user.Stickers.ContainsKey(sticker.Md5Hash))
             {
-                entity.Count += count;
-                return entity;
+                user.Stickers[sticker.Md5Hash].Count++;
+                return user.Stickers[sticker.Md5Hash];
             }
             var relation = new UserStickerRelationEntity
             {
