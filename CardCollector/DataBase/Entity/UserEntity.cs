@@ -79,7 +79,7 @@ namespace CardCollector.DataBase.Entity
                     _ => await GetUserStickers(filter)
                 };
             /* Если пользовательская сортировка не применена, то возвращаем реультат */
-            if (!userFilterEnabled) return ToTelegramResults(stickersList, command);
+            if (!userFilterEnabled || State == UserState.Default) return ToTelegramResults(stickersList, command);
             /* Фильтруем по автору */
             if (Filters[Command.author] is not "")
                 stickersList = stickersList.Where(item => item.Author.Contains((string) Filters[Command.author]));
