@@ -102,7 +102,7 @@ namespace CardCollector.Commands.Message.DocumentMessage
                 {
                     var stickerSet = (await Bot.Client.GetStickerSetAsync(
                         $"{(isAnimated ? "animated" : "static")}_by_{AppSettings.NAME}")).Stickers.ToList();
-                    Logs.LogOut("Saving stickers " + stickerSet.Count);
+                    Logs.LogOut("Saving " + newStickers.Count + " stickers from " + stickerSet.Count);
                     for (var i = 0; i < newStickers.Count; i++)
                     {
                         var stickerId = stickerSet[i].FileId;
@@ -110,20 +110,15 @@ namespace CardCollector.Commands.Message.DocumentMessage
                         newStickers[i].Md5Hash = Utilities.CreateMd5(stickerId);
                         await StickerDao.AddNew(newStickers[i]);
                     }
-                    while (stickerSet.Count > stickerSet.Count - newStickers.Count)
+                    foreach (var sticker in newStickers)
                     {
-                        var stickerId = stickerSet[0].FileId;
                         try
                         {
-                            await Bot.Client.DeleteStickerFromSetAsync(stickerId);
-                            stickerSet.RemoveAt(0);
+                            await Bot.Client.DeleteStickerFromSetAsync(sticker.Id);
                         }
                         catch (Exception)
                         {
-                            Logs.LogOut("Cant delete sticker " + stickerId);
-                            Logs.LogOut(stickerSet.Count);
-                            Logs.LogOutJson(stickerSet[0]);
-                            stickerSet.RemoveAt(0);
+                            Logs.LogOut("Cant delete sticker " + sticker.Title);
                         }
                     }
                 }
