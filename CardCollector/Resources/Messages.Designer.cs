@@ -124,6 +124,24 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Удаляю файлы....
+        /// </summary>
+        internal static string deleting_files {
+            get {
+                return ResourceManager.GetString("deleting_files", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Загружаю файл....
+        /// </summary>
+        internal static string downloading_file {
+            get {
+                return ResourceManager.GetString("downloading_file", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Эмоция:.
         /// </summary>
         internal static string emoji {
@@ -169,6 +187,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Читаю документ....
+        /// </summary>
+        internal static string reading_document {
+            get {
+                return ResourceManager.GetString("reading_document", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Установите фильтры кнопками ниже:.
         /// </summary>
         internal static string select_filter {
@@ -196,11 +223,47 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Стикеры будут обновлены через 10 минут.
+        /// </summary>
+        internal static string stickers_will_be_updated {
+            get {
+                return ResourceManager.GetString("stickers_will_be_updated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Тир:.
         /// </summary>
         internal static string tier {
             get {
                 return ResourceManager.GetString("tier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Произошла неожиданная ошибка, попробуйте еще раз..
+        /// </summary>
+        internal static string unexpected_exception {
+            get {
+                return ResourceManager.GetString("unexpected_exception", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Распаковываю архив.....
+        /// </summary>
+        internal static string unzipping_file {
+            get {
+                return ResourceManager.GetString("unzipping_file", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Загрузите архив со стикерами и таблицей в формате zip.
+        /// </summary>
+        internal static string upload_file {
+            get {
+                return ResourceManager.GetString("upload_file", resourceCulture);
             }
         }
     }

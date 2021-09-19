@@ -4,7 +4,7 @@ using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using Telegram.Bot.Types;
 
-namespace CardCollector.Commands.Message
+namespace CardCollector.Commands.Message.TextMessage
 {
     /* Обработка команды "/start" */
     public class StartMessage : Message

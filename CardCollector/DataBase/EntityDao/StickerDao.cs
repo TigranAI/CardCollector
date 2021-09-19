@@ -54,5 +54,10 @@ namespace CardCollector.DataBase.EntityDao
         {
             return await Table.ToListAsync();
         }
+
+        public static async Task AddNew(StickerEntity sticker)
+        {
+            await Table.AddAsync(sticker);
+        }
     }
 }

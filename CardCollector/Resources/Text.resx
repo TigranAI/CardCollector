@@ -78,4 +78,7 @@
     <data name="no" xml:space="preserve">
         <value>Нет</value>
     </data>
+    <data name="download_stickerpack" xml:space="preserve">
+        <value>Загрузить стикерпак</value>
+    </data>
 </root>

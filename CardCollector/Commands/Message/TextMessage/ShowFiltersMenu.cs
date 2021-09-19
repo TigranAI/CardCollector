@@ -4,7 +4,7 @@ using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using Telegram.Bot.Types;
 
-namespace CardCollector.Commands.Message
+namespace CardCollector.Commands.Message.TextMessage
 {
     /* Этот класс реализует отправку нового сообщения с фильтрами пользователя */
     public class ShowFiltersMenu : Message

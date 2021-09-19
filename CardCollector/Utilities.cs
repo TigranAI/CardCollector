@@ -1,4 +1,9 @@
-﻿using System.Text;
+﻿using System;
+using System.Net;
+using System.Text;
+using System.Threading.Tasks;
+using CardCollector.Resources;
+using Telegram.Bot;
 
 namespace CardCollector
 {
@@ -20,6 +25,20 @@ namespace CardCollector
             foreach (var t in hashBytes)
                 sb.Append(t.ToString("X2"));
             return sb.ToString();
+        }
+
+        public static async Task DownloadFile(string fileId)
+        {
+            await Task.Run(async () =>
+            {
+                /* Получаем информацию о файле */
+                var fileInfo = await Bot.Client.GetFileAsync(fileId);
+                /* Собираем ссылку на файл */
+                var fileUri = $"https://api.telegram.org/file/bot{AppSettings.TOKEN}/{fileInfo.FilePath}";
+                /* Загружаем файл */
+                var client = new WebClient();
+                client.DownloadFile(new Uri(fileUri), "pack.zip");
+            });
         }
     }
 }

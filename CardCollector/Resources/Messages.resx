@@ -66,4 +66,25 @@
     <data name="choose_sort" xml:space="preserve">
         <value>Выберите сортировку из списка ниже:</value>
     </data>
+    <data name="upload_file" xml:space="preserve">
+        <value>Загрузите архив со стикерами и таблицей в формате zip</value>
+    </data>
+    <data name="downloading_file" xml:space="preserve">
+        <value>Загружаю файл...</value>
+    </data>
+    <data name="unzipping_file" xml:space="preserve">
+        <value>Распаковываю архив....</value>
+    </data>
+    <data name="reading_document" xml:space="preserve">
+        <value>Читаю документ...</value>
+    </data>
+    <data name="deleting_files" xml:space="preserve">
+        <value>Удаляю файлы...</value>
+    </data>
+    <data name="stickers_will_be_updated" xml:space="preserve">
+        <value>Стикеры будут обновлены через 10 минут</value>
+    </data>
+    <data name="unexpected_exception" xml:space="preserve">
+        <value>Произошла неожиданная ошибка, попробуйте еще раз.</value>
+    </data>
 </root>

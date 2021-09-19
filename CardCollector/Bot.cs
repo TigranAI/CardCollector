@@ -39,7 +39,14 @@ namespace CardCollector
 
         private static async void SavingChanges(object o, ElapsedEventArgs e)
         {
-            await CardCollectorDatabase.Instance.SaveChangesAsync();
+            try
+            {
+                await CardCollectorDatabase.Instance.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
         }
     }
 }

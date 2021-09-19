@@ -115,6 +115,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Загрузить стикерпак.
+        /// </summary>
+        internal static string download_stickerpack {
+            get {
+                return ResourceManager.GetString("download_stickerpack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Эмоция.
         /// </summary>
         internal static string emoji {

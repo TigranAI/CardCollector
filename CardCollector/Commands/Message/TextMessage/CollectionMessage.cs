@@ -1,10 +1,9 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using Telegram.Bot.Types;
 
-namespace CardCollector.Commands.Message
+namespace CardCollector.Commands.Message.TextMessage
 {
     /* Реализует команду "Коллекция" */
     public class CollectionMessage : Message

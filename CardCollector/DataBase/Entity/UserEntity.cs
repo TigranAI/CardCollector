@@ -158,8 +158,7 @@ namespace CardCollector.DataBase.Entity
             var result = new List<InlineQueryResult>();
             foreach (var item in list)
             {
-                result.Add(new 
-                    InlineQueryResultCachedSticker(
+                result.Add(new InlineQueryResultCachedSticker(
                         $"{(Constants.UNLIMITED_ALL_STICKERS ? Command.unlimited_stickers : "")}{command}={item.Md5Hash}",
                         item.Id));
                 /* Ограничение Telegram API по количеству результатов в 50 шт. */

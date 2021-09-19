@@ -65,6 +65,12 @@ namespace CardCollector.Resources
             new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.back)},
         });
 
+        /* Клавиатура с одной кнопкой отмены */
+        public static readonly InlineKeyboardMarkup CancelKeyboard = new (new[]
+        {
+            new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.cancel)},
+        });
+
         /* Клавиатура меню выбора цен */
         public static readonly InlineKeyboardMarkup PriceOptions = new (new[]
         {

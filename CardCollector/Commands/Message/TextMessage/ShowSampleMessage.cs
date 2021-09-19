@@ -5,7 +5,7 @@ using CardCollector.Resources;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;
 
-namespace CardCollector.Commands.Message
+namespace CardCollector.Commands.Message.TextMessage
 {
     /* Этот класс можно использовать для тестирования или наброски эскизов
      Команда "Показать пример" доступна только пользователям с уровнем доступа "Разработчик" и выше
