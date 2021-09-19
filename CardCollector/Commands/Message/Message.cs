@@ -54,10 +54,12 @@ namespace CardCollector.Commands.Message
         /* Метод, создающий объекты команд исходя из полученного обновления */
         public static async Task<UpdateModel> Factory(Update update)
         {
-            // Если сообщение от нашего бота
-            if (update.Message!.From!.Username == AppSettings.NAME)
+            // Если сообщение от бота - игнорируем, нам не нужны боты
+            if (update.Message!.From!.IsBot)
             {
-                await Bot.Client.DeleteMessageAsync(update.Message.Chat.Id, update.Message.MessageId);
+                // Если это вдруг написал наш бот (сообщенияуведомления о закрпеах и пр.), то удаляем
+                if (update.Message!.From!.Username == AppSettings.NAME)
+                    await Bot.Client.DeleteMessageAsync(update.Message.Chat.Id, update.Message.MessageId);
                 return new IgnoreUpdate();
             }
 
@@ -80,11 +82,14 @@ namespace CardCollector.Commands.Message
             // Объект пользователя
             var user = await UserDao.GetUser(update.Message!.From);
             
-            // Если пользователь заблокирован или пользователь - бот, или сообщение где-то в другом канале - игонрируем
-            if (user.IsBlocked || update.Message!.From!.IsBot || update.Message.Chat.Id != user.ChatId) return new IgnoreUpdate();
+            // Если пользователь заблокирован или сообщение где-то в другом канале, привате - игонрируем
+            if (user.IsBlocked || update.Message.Chat.Id != user.ChatId) return new IgnoreUpdate();
         
-            // Удаляем сообщение пользователя, оно нам больше не нужно
+            // Удаляем сообщение пользователя в лс, оно нам больше не нужно
             await MessageController.DeleteMessage(user, update.Message.MessageId);
+            
+            // Если сообщение - это команда, полученная от бота, то мы игнорируем, так как получим ее через ChosenInlineResult
+            if (update.Message.ViaBot is { }) return new IgnoreUpdate();
             
             // Возвращаем объект, если команда совпала
             foreach (var item in list.Where(item => item.IsMatches(data)))
