@@ -82,7 +82,7 @@
         <value>Удаляю файлы...</value>
     </data>
     <data name="stickers_will_be_updated" xml:space="preserve">
-        <value>Стикеры будут обновлены через 10 минут</value>
+        <value>Стикеры будут обновлены через 15 минут</value>
     </data>
     <data name="unexpected_exception" xml:space="preserve">
         <value>Произошла неожиданная ошибка, попробуйте еще раз.</value>

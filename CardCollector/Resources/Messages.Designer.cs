@@ -223,7 +223,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Стикеры будут обновлены через 10 минут.
+        ///   Looks up a localized string similar to Стикеры будут обновлены через 15 минут.
         /// </summary>
         internal static string stickers_will_be_updated {
             get {

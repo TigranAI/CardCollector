@@ -93,7 +93,7 @@ namespace CardCollector.Commands.Message.DocumentMessage
 
                 var timer = new Timer
                 {
-                    Interval = 10 * 60 * 1000,
+                    Interval = 15 * 60 * 1000,
                     Enabled = true,
                     AutoReset = false,
                 };
@@ -110,7 +110,7 @@ namespace CardCollector.Commands.Message.DocumentMessage
                         newStickers[i].Md5Hash = Utilities.CreateMd5(stickerId);
                         await StickerDao.AddNew(newStickers[i]);
                     }
-                    while (stickerSet.Count > 0)
+                    while (stickerSet.Count > stickerSet.Count - newStickers.Count)
                     {
                         var stickerId = stickerSet[0].FileId;
                         try
