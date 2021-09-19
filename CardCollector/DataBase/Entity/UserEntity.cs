@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -137,7 +138,7 @@ namespace CardCollector.DataBase.Entity
         private static async Task<IEnumerable<StickerEntity>> GetUnlimitedStickers(string filter)
         {
             return (await StickerDao.GetAll())
-                .Where(item => item.Title.Contains(filter));
+                .Where(item => item.Title.Contains(filter, StringComparison.OrdinalIgnoreCase));
         }
 
         /* Возвращает все стикеры системы */
@@ -147,7 +148,7 @@ namespace CardCollector.DataBase.Entity
             foreach (var relation in Stickers.Values.Where(i => i.Count > 0))
             {
                 var sticker = await StickerDao.GetStickerByHash(relation.StickerId);
-                if (sticker.Title.Contains(filter)) result.Add(sticker);
+                if (sticker.Title.Contains(filter, StringComparison.OrdinalIgnoreCase)) result.Add(sticker);
             }
             return result;
         }
