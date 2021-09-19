@@ -123,6 +123,7 @@ namespace CardCollector.Commands.Message.DocumentMessage
                             Logs.LogOut("Cant delete sticker " + stickerId);
                             Logs.LogOut(stickerSet.Count);
                             Logs.LogOutJson(stickerSet[0]);
+                            stickerSet.RemoveAt(0);
                         }
                     }
                 }
