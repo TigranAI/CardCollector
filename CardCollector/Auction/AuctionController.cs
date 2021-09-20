@@ -35,6 +35,7 @@ namespace CardCollector.Auction
 
         public static async Task<int> GetStickerCount(string stickerId)
         {
+            
             //TODO вернуть количество стикера на аукционе по его id
             return 0;
         }
