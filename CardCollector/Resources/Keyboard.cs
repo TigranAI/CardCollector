@@ -176,5 +176,26 @@ namespace CardCollector.Resources
             /* Вовзращаем клавиатуру */
             return new InlineKeyboardMarkup(keyboardList);
         }
+
+        public static InlineKeyboardMarkup GetStickerKeyboard(UserState state, string hash, string query)
+        {
+            return state switch
+            {
+                UserState.AuctionMenu or UserState.ShopMenu => new InlineKeyboardMarkup(new[] {
+                    new[] {InlineKeyboardButton.WithCallbackData(Text.buy, $"{Command.buy_sticker}={hash}")},
+                    new[] {InlineKeyboardButton.WithCallbackData(Text.back, $"{Command.back}={Command.clear_chat}")},
+                }),
+                UserState.CollectionMenu => new InlineKeyboardMarkup(new[] {
+                    new[] {InlineKeyboardButton.WithSwitchInlineQuery(Text.send_sticker, query)},
+                    new[] {InlineKeyboardButton.WithCallbackData(Text.sell_on_auction, $"{Command.sell_on_auction}={hash}")},
+                    new[] {InlineKeyboardButton.WithCallbackData(Text.combine, $"{Command.combine}={hash}")},
+                    new[] {InlineKeyboardButton.WithCallbackData(Text.back, $"{Command.back}={Command.clear_chat}")},
+                }),
+                _ => new InlineKeyboardMarkup(new[] {
+                    new[] {InlineKeyboardButton.WithSwitchInlineQuery(Text.send_sticker, query)},
+                    new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.clear_chat)},
+                }),
+            };
+        }
     }
 }

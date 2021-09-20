@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Commands.Message;
 using CardCollector.Commands.Message.TextMessage;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
@@ -15,6 +14,9 @@ namespace CardCollector.Commands.CallbackQuery
         {
             /* Удаляем пользователя из очереди */
             EnterEmojiMessage.RemoveFromQueue(User.Id);
+            /* Очищаем чат, если был передан параметр очистки */
+            var clearChat = CallbackData.Contains(Command.clear_chat);
+            if (clearChat) await User.ClearChat();
             /* Формируем сообщение с имеющимися фильтрами у пользователя */
             var text = $"{Messages.current_filters}\n" +
                        $"{Messages.author} {(User.Filters[Command.author].Equals("") ? Messages.all : User.Filters[Command.author])}\n" +
@@ -27,7 +29,13 @@ namespace CardCollector.Commands.CallbackQuery
                         $" {(User.Filters[Command.price_gems_to] is int g && g != 0 ? g : "∞")}\n";
             text += $"{Messages.sorting} {User.Filters[Command.sort]}\n\n{Messages.select_filter}";
             /* Редактируем сообщение */
-            await MessageController.EditMessage(User, CallbackMessageId, text, Keyboard.GetSortingMenu(User.State));
+            if (!clearChat) 
+                await MessageController.EditMessage(User, CallbackMessageId, text, Keyboard.GetSortingMenu(User.State));
+            else
+            {
+                var message = await MessageController.SendMessage(User, text, Keyboard.GetSortingMenu(User.State));
+                User.Messages.Add(message.MessageId);
+            }
         }
         
         public BackToFiltersMenu() { }

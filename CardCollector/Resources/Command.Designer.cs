@@ -79,6 +79,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to buy.
+        /// </summary>
+        internal static string buy_sticker {
+            get {
+                return ResourceManager.GetString("buy_sticker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to cancel.
         /// </summary>
         internal static string cancel {
@@ -88,11 +97,29 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to clear.
+        /// </summary>
+        internal static string clear_chat {
+            get {
+                return ResourceManager.GetString("clear_chat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to collect_income.
         /// </summary>
         internal static string collect_income {
             get {
                 return ResourceManager.GetString("collect_income", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to combine.
+        /// </summary>
+        internal static string combine {
+            get {
+                return ResourceManager.GetString("combine", resourceCulture);
             }
         }
         
@@ -156,6 +183,15 @@ namespace CardCollector.Resources {
         internal static string select_sticker {
             get {
                 return ResourceManager.GetString("select_sticker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to sell.
+        /// </summary>
+        internal static string sell_on_auction {
+            get {
+                return ResourceManager.GetString("sell_on_auction", resourceCulture);
             }
         }
         

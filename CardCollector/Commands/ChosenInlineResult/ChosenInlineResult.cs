@@ -33,6 +33,7 @@ namespace CardCollector.Commands.ChosenInlineResult
         
             // Обработка результата при отправке стикера
             new SendStickerResult(),
+            new SelectStickerInlineResult(),
         };
         
         /* Метод, создающий объекты команд исходя из полученного обновления */

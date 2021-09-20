@@ -66,4 +66,16 @@
     <data name="price" xml:space="preserve">
         <value>price</value>
     </data>
+    <data name="buy_sticker" xml:space="preserve">
+        <value>buy</value>
+    </data>
+    <data name="clear_chat" xml:space="preserve">
+        <value>clear</value>
+    </data>
+    <data name="combine" xml:space="preserve">
+        <value>combine</value>
+    </data>
+    <data name="sell_on_auction" xml:space="preserve">
+        <value>sell</value>
+    </data>
 </root>

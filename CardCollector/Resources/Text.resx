@@ -81,4 +81,40 @@
     <data name="download_stickerpack" xml:space="preserve">
         <value>Загрузить стикерпак</value>
     </data>
+    <data name="star" xml:space="preserve">
+        <value>⭐</value>
+    </data>
+    <data name="coin" xml:space="preserve">
+        <value>💰</value>
+    </data>
+    <data name="gem" xml:space="preserve">
+        <value>💎</value>
+    </data>
+    <data name="count" xml:space="preserve">
+        <value>Количество</value>
+    </data>
+    <data name="minutes" xml:space="preserve">
+        <value>мин</value>
+    </data>
+    <data name="time" xml:space="preserve">
+        <value>⏱</value>
+    </data>
+    <data name="description" xml:space="preserve">
+        <value>Описание</value>
+    </data>
+    <data name="buy" xml:space="preserve">
+        <value>Купить</value>
+    </data>
+    <data name="back" xml:space="preserve">
+        <value>Назад</value>
+    </data>
+    <data name="send_sticker" xml:space="preserve">
+        <value>Отправить стикер</value>
+    </data>
+    <data name="combine" xml:space="preserve">
+        <value>Объединить</value>
+    </data>
+    <data name="sell_on_auction" xml:space="preserve">
+        <value>Выставить на аукцион</value>
+    </data>
 </root>

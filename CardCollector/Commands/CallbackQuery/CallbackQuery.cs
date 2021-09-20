@@ -45,6 +45,8 @@ namespace CardCollector.Commands.CallbackQuery
             
             /* Отмена в момент выбора "значения фильтра", не в самом меню */
             new BackToFiltersMenu(),
+            /* Очистка чата */
+            new ClearChat(),
         };
 
         /* Метод, создающий объекты команд исходя из полученного обновления */

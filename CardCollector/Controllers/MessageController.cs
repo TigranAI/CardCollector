@@ -95,7 +95,7 @@ namespace CardCollector.Controllers
             }
             catch (Exception e)
             {
-                LogOutWarning("Can't send text message " + e);
+                LogOutWarning("Can't send text message " + e.Message);
             }
             return new TgMessage();
         }
@@ -113,7 +113,7 @@ namespace CardCollector.Controllers
             }
             catch (Exception e)
             {
-                LogOutWarning("Can't send text message with html " + e);
+                LogOutWarning("Can't send text message with html " + e.Message);
             }
             return new TgMessage();
         }
@@ -130,7 +130,7 @@ namespace CardCollector.Controllers
             }
             catch (Exception e)
             {
-                LogOutWarning("Can't send sticker " + e);
+                LogOutWarning("Can't send sticker " + e.Message);
             }
             return new TgMessage();
         }
@@ -149,7 +149,8 @@ namespace CardCollector.Controllers
             }
             catch (Exception e)
             {
-                LogOutWarning("Can't edit message text " + e);
+                LogOutWarning("Can't edit message text " + e.Message);
+                return await SendMessage(user, message, keyboard);
             }
             return new TgMessage();
         }
@@ -167,7 +168,7 @@ namespace CardCollector.Controllers
             }
             catch (Exception e)
             {
-                LogOutWarning("Can't edit reply markup " + e);
+                LogOutWarning("Can't edit reply markup " + e.Message);
             }
             return new TgMessage();
         }
@@ -184,7 +185,7 @@ namespace CardCollector.Controllers
             }
             catch (Exception e)
             {
-                LogOutWarning("Can't delete message " + e);
+                LogOutWarning("Can't delete message " + e.Message);
             }
         }
 
@@ -202,7 +203,7 @@ namespace CardCollector.Controllers
             }
             catch (Exception e)
             {
-                LogOutWarning("Can't send photo " + e);
+                LogOutWarning("Can't send photo " + e.Message);
             }
             return new TgMessage();
         }
