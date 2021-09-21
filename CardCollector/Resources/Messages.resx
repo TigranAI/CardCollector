@@ -102,4 +102,7 @@
     <data name="menu_message" xml:space="preserve">
         <value>Вы можете выбрать одну из опций ниже</value>
     </data>
+    <data name="your_cash" xml:space="preserve">
+        <value>Ваш баланс</value>
+    </data>
 </root>

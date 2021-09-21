@@ -311,5 +311,14 @@ namespace CardCollector.Resources {
                 return ResourceManager.GetString("you_collected", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ваш баланс.
+        /// </summary>
+        internal static string your_cash {
+            get {
+                return ResourceManager.GetString("your_cash", resourceCulture);
+            }
+        }
     }
 }

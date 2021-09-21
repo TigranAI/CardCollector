@@ -17,7 +17,10 @@ namespace CardCollector.Commands.CallbackQuery
             await Bot.Client.AnswerCallbackQueryAsync(Update.CallbackQuery.Id, 
                 $"{Messages.you_collected}: " +
                 $"{User.Session.IncomeCoins}{Text.coin} " +
-                $"{User.Session.IncomeGems}{Text.gem}", true);
+                $"{User.Session.IncomeGems}{Text.gem}" +
+                $"\n\n{Messages.your_cash}: " +
+                $"{User.Cash.Coins}{Text.coin} " +
+                $"{User.Cash.Gems}{Text.gem}", true);
         }
 
         public CollectIncomeQuery() { }
