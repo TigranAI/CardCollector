@@ -56,7 +56,7 @@ namespace CardCollector.DataBase.Entity
                 {
                     var stickerInfo = await StickerDao.GetStickerByHash(sticker.ShortHash);
                     var payoutInterval = LastPayout - sticker.Payout;
-                    var payoutsCount = payoutInterval.Minutes / stickerInfo.IncomeTime;
+                    var payoutsCount = (int)(payoutInterval.TotalSeconds / stickerInfo.IncomeTime / 60);
                     if (payoutsCount < 1) continue;
                     var multiplier = payoutsCount * sticker.Count;
                     IncomeCoins += stickerInfo.IncomeCoins * multiplier;
@@ -72,10 +72,9 @@ namespace CardCollector.DataBase.Entity
                 {
                     var stickerInfo = await StickerDao.GetStickerByHash(sticker.ShortHash);
                     var payoutInterval = LastPayout - sticker.Payout;
-                    var payoutsCount = payoutInterval.Minutes / stickerInfo.IncomeTime;
+                    var payoutsCount = (int)(payoutInterval.TotalSeconds / stickerInfo.IncomeTime / 60);
                     if (payoutsCount < 1) continue;
                     var multiplier = payoutsCount * sticker.Count;
-                    var prevDate = sticker.Payout;
                     sticker.Payout += new TimeSpan(0, stickerInfo.IncomeTime, 0) * payoutsCount;
                     IncomeCoins += stickerInfo.IncomeCoins * multiplier;
                     IncomeGems += stickerInfo.IncomeGems * multiplier;
