@@ -11,6 +11,8 @@ namespace CardCollector.DataBase.Entity
     {
         public class UserSession
         {
+            private DateTime _lastAccess = DateTime.Now;
+            
             private readonly UserEntity user;
             public UserSession(UserEntity user)
             {
@@ -19,6 +21,16 @@ namespace CardCollector.DataBase.Entity
             /* Текущее состояние пользователя */
             public UserState State = UserState.Default;
 
+            public void UpdateLastAccess()
+            {
+                _lastAccess = DateTime.Now;
+            }
+
+            public int GetLastAccessInterval()
+            {
+                return (int)(DateTime.Now - _lastAccess).TotalMinutes;
+            }
+            
             /* Фильтры, примененные пользователем в меню коллекции/магазина/аукциона */
             public readonly Dictionary<string, object> Filters = new()
             {
@@ -56,7 +68,7 @@ namespace CardCollector.DataBase.Entity
                 {
                     var stickerInfo = await StickerDao.GetStickerByHash(sticker.ShortHash);
                     var payoutInterval = LastPayout - sticker.Payout;
-                    var payoutsCount = (int)(payoutInterval.TotalSeconds / stickerInfo.IncomeTime / 60);
+                    var payoutsCount = (int)(payoutInterval.TotalMinutes / stickerInfo.IncomeTime);
                     if (payoutsCount < 1) continue;
                     var multiplier = payoutsCount * sticker.Count;
                     IncomeCoins += stickerInfo.IncomeCoins * multiplier;
@@ -72,7 +84,7 @@ namespace CardCollector.DataBase.Entity
                 {
                     var stickerInfo = await StickerDao.GetStickerByHash(sticker.ShortHash);
                     var payoutInterval = LastPayout - sticker.Payout;
-                    var payoutsCount = (int)(payoutInterval.TotalSeconds / stickerInfo.IncomeTime / 60);
+                    var payoutsCount = (int)(payoutInterval.TotalMinutes / stickerInfo.IncomeTime);
                     if (payoutsCount < 1) continue;
                     var multiplier = payoutsCount * sticker.Count;
                     sticker.Payout += new TimeSpan(0, stickerInfo.IncomeTime, 0) * payoutsCount;
@@ -81,6 +93,11 @@ namespace CardCollector.DataBase.Entity
                 }
                 user.Cash.Coins += IncomeCoins;
                 user.Cash.Gems += IncomeGems;
+            }
+
+            public async void EndSession()
+            {
+                await ClearMessages();
             }
         }
     }

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Timers;
 using CardCollector.DataBase.Entity;
+using CardCollector.Resources;
 using Microsoft.EntityFrameworkCore;
 using Telegram.Bot.Types;
 
@@ -53,6 +55,18 @@ namespace CardCollector.DataBase.EntityDao
             };
             var result = await Table.AddAsync(userEntity);
             return result.Entity;
+        }
+
+        public static void ClearMemory(object sender, ElapsedEventArgs e)
+        {
+            foreach (var (id, user) in ActiveUsers)
+            {
+                if (user.Session.GetLastAccessInterval() > Constants.SESSION_ACTIVE_PERIOD)
+                {
+                    user.Session.EndSession();
+                    ActiveUsers.Remove(id);
+                }
+            }
         }
     }
 }

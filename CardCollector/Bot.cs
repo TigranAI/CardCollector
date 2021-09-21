@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Timers;
 using CardCollector.DataBase;
+using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
 using Telegram.Bot;
 using Telegram.Bot.Types;
@@ -42,6 +43,7 @@ namespace CardCollector
                 Interval = Constants.SAVING_CHANGES_INTERVAL
             };
             timer.Elapsed += SavingChanges;
+            timer.Elapsed += UserDao.ClearMemory;
         }
 
         private static async void SavingChanges(object o, ElapsedEventArgs e)

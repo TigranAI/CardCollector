@@ -32,6 +32,7 @@ namespace CardCollector.Commands
         protected UpdateModel(UserEntity user, Update update)
         {
             User = user;
+            user.Session.UpdateLastAccess();
             Update = update;
         }
     }

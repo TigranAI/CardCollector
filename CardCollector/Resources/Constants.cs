@@ -18,5 +18,6 @@ namespace CardCollector.Resources
         public const int ADMIN_PRIVILEGE_LEVEL = 9;
         public const int PROGRAMMER_PRIVILEGE_LEVEL = 5;
         public const int ARTIST_PRIVILEGE_LEVEL = 4;
+        public const int SESSION_ACTIVE_PERIOD = DEBUG ? 1 : 60;
     }
 }
