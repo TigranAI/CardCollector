@@ -34,12 +34,12 @@ namespace CardCollector.Controllers
             user.Cash.Coins += price * count;
             return ResultCode.Ok;
         }
-
+        
+        //TODO вернуть количество стикера на аукционе по его id
         public static async Task<int> GetStickerCount(string stickerId)
         {
-            
-            //TODO вернуть количество стикера на аукционе по его id
-            return 0;
+            var count = await AuctionDao.GetProduct(stickerId);
+            return count;
         }
 
         public static async Task<List<StickerEntity>> GetStickers(string filter)
