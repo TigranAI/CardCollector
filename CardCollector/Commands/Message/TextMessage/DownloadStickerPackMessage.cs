@@ -12,9 +12,9 @@ namespace CardCollector.Commands.Message.TextMessage
         public override async Task Execute()
         {
             await User.ClearChat();
-            User.State = UserState.UploadFile;
+            User.Session.State = UserState.UploadFile;
             var result = await MessageController.SendMessage(User, Messages.upload_file, Keyboard.CancelKeyboard);
-            User.Messages.Add(result.MessageId);
+            User.Session.Messages.Add(result.MessageId);
         }
 
         protected internal override bool IsMatches(string command)

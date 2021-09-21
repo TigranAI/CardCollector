@@ -14,7 +14,7 @@ namespace CardCollector.Commands.Message.TextMessage
             /* Очищаем чат с пользователем */
             await User.ClearChat();
             /* Переводим состояние пользователя в меню аукциона */
-            User.State = UserState.AuctionMenu;
+            User.Session.State = UserState.AuctionMenu;
             /* Отображаем сообщение с фильтрами */
             await new ShowFiltersMenu(User, Update).Execute();
         }

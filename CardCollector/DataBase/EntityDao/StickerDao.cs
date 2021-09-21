@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
@@ -50,9 +51,11 @@ namespace CardCollector.DataBase.EntityDao
                 .ToListAsync();
         }
 
-        public static async Task<List<StickerEntity>> GetAll()
+        public static async Task<List<StickerEntity>> GetAll(string filter = "")
         {
-            return await Table.ToListAsync();
+            var list = await Table.ToListAsync();
+            return filter == "" ? list : list.Where
+                (item => item.Title.Contains(filter, StringComparison.OrdinalIgnoreCase)).ToList();
         }
 
         public static async Task AddNew(StickerEntity sticker)

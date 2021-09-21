@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
+using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
 
-namespace CardCollector.Auction 
+namespace CardCollector.Controllers 
 {
     /* Контроллер аукциона, управляет всеми транзакциями
      между пользователями */
@@ -37,6 +39,12 @@ namespace CardCollector.Auction
         {
             //TODO вернуть количество стикера на аукционе по его id
             return 0;
+        }
+
+        public static async Task<List<StickerEntity>> GetStickers(string filter)
+        {
+            //TODO вернуть список стикеров, имеющихся на аукционе
+            return await StickerDao.GetAll(filter);
         }
     }
 }

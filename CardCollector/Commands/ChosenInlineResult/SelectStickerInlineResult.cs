@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.Auction;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
@@ -17,7 +16,7 @@ namespace CardCollector.Commands.ChosenInlineResult
             await User.ClearChat();
             var hash = InlineResult.Split('=')[1];
             var sticker = await StickerDao.GetStickerByHash(hash);
-            var stickerCount = User.State switch
+            var stickerCount = User.Session.State switch
             {
                 UserState.AuctionMenu => await AuctionController.GetStickerCount(sticker.Id),
                 UserState.ShopMenu => await ShopController.GetStickerCount(sticker.Id),
@@ -31,9 +30,9 @@ namespace CardCollector.Commands.ChosenInlineResult
                            $"\n{sticker.IncomeCoins}{Text.coin} / {sticker.IncomeGems}{Text.gem} {sticker.IncomeTime}{Text.time}{Text.minutes}";
             if (sticker.Description != "") messageText += $"\n\n{Text.description}: {sticker.Description}";
             var stickerMessage = await MessageController.SendSticker(User, sticker.Id);
-            var infoMessage = await MessageController.SendMessage(User, messageText, Keyboard.GetStickerKeyboard(User.State, sticker.Md5Hash, sticker.Title));
-            User.Messages.Add(stickerMessage.MessageId);
-            User.Messages.Add(infoMessage.MessageId);
+            var infoMessage = await MessageController.SendMessage(User, messageText, Keyboard.GetStickerKeyboard(User, sticker.Md5Hash, sticker.Title));
+            User.Session.Messages.Add(stickerMessage.MessageId);
+            User.Session.Messages.Add(infoMessage.MessageId);
         }
 
         public SelectStickerInlineResult() { }

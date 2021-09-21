@@ -24,7 +24,7 @@ namespace CardCollector.Commands.Message.DocumentMessage
         {
             /* Очищаем чат */
             await User.ClearChat();
-            User.State = UserState.Default;
+            User.Session.State = UserState.Default;
             /* Соообщаем, что начали загрузку файла */
             var message = await MessageController.SendMessage(User, Messages.downloading_file);
             /* Загружаем файл */
@@ -180,7 +180,7 @@ namespace CardCollector.Commands.Message.DocumentMessage
         protected internal override bool IsMatches(string command)
         {
             return User != null 
-                ? User.State == UserState.UploadFile
+                ? User.Session.State == UserState.UploadFile
                 : base.IsMatches(command);
         }
 

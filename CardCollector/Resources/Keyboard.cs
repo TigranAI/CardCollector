@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CardCollector.DataBase.Entity;
 using Telegram.Bot.Types.ReplyMarkups;
 
 namespace CardCollector.Resources
@@ -177,12 +178,17 @@ namespace CardCollector.Resources
             return new InlineKeyboardMarkup(keyboardList);
         }
 
-        public static InlineKeyboardMarkup GetStickerKeyboard(UserState state, string hash, string query)
+        public static InlineKeyboardMarkup GetStickerKeyboard(UserEntity user, string hash, string query)
         {
-            return state switch
+            return user.Session.State switch
             {
                 UserState.AuctionMenu or UserState.ShopMenu => new InlineKeyboardMarkup(new[] {
-                    new[] {InlineKeyboardButton.WithCallbackData(Text.buy, $"{Command.buy_sticker}={hash}")},
+                    new[]
+                    {
+                        InlineKeyboardButton.WithCallbackData(Text.buy, $"{Command.buy_sticker}={hash}"),
+                        InlineKeyboardButton.WithCallbackData(Text.buy, $"{Command.buy_sticker}={hash}"),
+                        InlineKeyboardButton.WithCallbackData(Text.buy, $"{Command.buy_sticker}={hash}"),
+                    },
                     new[] {InlineKeyboardButton.WithCallbackData(Text.back, $"{Command.back}={Command.clear_chat}")},
                 }),
                 UserState.CollectionMenu => new InlineKeyboardMarkup(new[] {

@@ -18,23 +18,15 @@ namespace CardCollector.Commands.CallbackQuery
             var clearChat = CallbackData.Contains(Command.clear_chat);
             if (clearChat) await User.ClearChat();
             /* Формируем сообщение с имеющимися фильтрами у пользователя */
-            var text = $"{Messages.current_filters}\n" +
-                       $"{Messages.author} {(User.Filters[Command.author].Equals("") ? Messages.all : User.Filters[Command.author])}\n" +
-                       $"{Messages.tier} {(User.Filters[Command.tier].Equals(-1) ? Messages.all : new string('⭐', (int) User.Filters[Command.tier]))}\n" +
-                       $"{Messages.emoji} {(User.Filters[Command.emoji].Equals("") ? Messages.all : User.Filters[Command.emoji])}\n";
-            if (User.State != UserState.CollectionMenu) 
-                text += $"{Messages.price} 💰 {User.Filters[Command.price_coins_from]} -" +
-                        $" {(User.Filters[Command.price_coins_to] is int c && c != 0 ? c : "∞")}\n" +
-                        $"{Messages.price} 💎 {User.Filters[Command.price_gems_from]} -" +
-                        $" {(User.Filters[Command.price_gems_to] is int g && g != 0 ? g : "∞")}\n";
-            text += $"{Messages.sorting} {User.Filters[Command.sort]}\n\n{Messages.select_filter}";
+            var text = User.Session.Filters.ToMessage(User.Session.State);
             /* Редактируем сообщение */
             if (!clearChat) 
-                await MessageController.EditMessage(User, CallbackMessageId, text, Keyboard.GetSortingMenu(User.State));
+                await MessageController.EditMessage(User, CallbackMessageId, 
+                    text, Keyboard.GetSortingMenu(User.Session.State));
             else
             {
-                var message = await MessageController.SendMessage(User, text, Keyboard.GetSortingMenu(User.State));
-                User.Messages.Add(message.MessageId);
+                var message = await MessageController.SendMessage(User, text, Keyboard.GetSortingMenu(User.Session.State));
+                User.Session.Messages.Add(message.MessageId);
             }
         }
         
