@@ -42,6 +42,8 @@ namespace CardCollector.Commands.CallbackQuery
             new SetFilterCallback(),
             /* Команда отмены */
             new CancelCallback(),
+            /* Команда отмены */
+            new CollectIncomeQuery(),
             
             /* Отмена в момент выбора "значения фильтра", не в самом меню */
             new BackToFiltersMenu(),

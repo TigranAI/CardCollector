@@ -124,6 +124,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Собрать.
+        /// </summary>
+        internal static string collect {
+            get {
+                return ResourceManager.GetString("collect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Собрать прибыль.
         /// </summary>
         internal static string collect_income {
@@ -187,6 +196,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /error.
+        /// </summary>
+        internal static string error {
+            get {
+                return ResourceManager.GetString("error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to От.
         /// </summary>
         internal static string from {
@@ -201,6 +219,24 @@ namespace CardCollector.Resources {
         internal static string gem {
             get {
                 return ResourceManager.GetString("gem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /help.
+        /// </summary>
+        internal static string help {
+            get {
+                return ResourceManager.GetString("help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /menu.
+        /// </summary>
+        internal static string menu {
+            get {
+                return ResourceManager.GetString("menu", resourceCulture);
             }
         }
         

@@ -19,7 +19,7 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="start_message" xml:space="preserve">
-        <value>Приветственное сообщение</value>
+        <value>Добро пожаловать! Этот бот позволяет вам коллекционировать стикеры. Вы можете выбрать одну из опций ниже. Напишите /help, чтобы получить подробную справку.</value>
     </data>
     <data name="current_filters" xml:space="preserve">
         <value>Текущие примененные фильтры:</value>
@@ -86,5 +86,20 @@
     </data>
     <data name="unexpected_exception" xml:space="preserve">
         <value>Произошла неожиданная ошибка, попробуйте еще раз.</value>
+    </data>
+    <data name="coins" xml:space="preserve">
+        <value>Монеты</value>
+    </data>
+    <data name="gems" xml:space="preserve">
+        <value>Алмазы</value>
+    </data>
+    <data name="uncllected_income" xml:space="preserve">
+        <value>Несобранная прибыль</value>
+    </data>
+    <data name="you_collected" xml:space="preserve">
+        <value>Вы получили</value>
+    </data>
+    <data name="menu_message" xml:space="preserve">
+        <value>Вы можете выбрать одну из опций ниже</value>
     </data>
 </root>

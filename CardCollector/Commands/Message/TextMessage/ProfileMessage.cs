@@ -2,7 +2,6 @@
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
-using Telegram.Bot;
 using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.Message.TextMessage
@@ -14,24 +13,20 @@ namespace CardCollector.Commands.Message.TextMessage
         protected override string CommandText => Text.profile;
         public override async Task Execute()
         {
-            /* Открепляем все закрепы */
-            await Bot.Client.UnpinAllChatMessages(User.ChatId);
-            /* Удаляем предыдущее сообщение профиля пользователя */
-            if (User.CurrentProfileMessageId != default) await MessageController.DeleteMessage(User, User.CurrentProfileMessageId);
+            /* Подсчитываем прибыль */
+            await User.Session.CalculateIncome();
             /* Отправляем сообщение */
             var message = await MessageController.SendMessage(User, 
                 /* Имя пользователя */
                 $"{User.Username}\n" +
                 /* Количество монет */
-                $"Монеты: {User.Cash.Coins}\n" +
+                $"{Messages.coins}: {User.Cash.Coins}{Text.coin}\n" +
                 /* Количество алмазов */
-                $"Алмазы: {User.Cash.Gems}",
+                $"{Messages.gems}: {User.Cash.Gems}{Text.gem}",
                 /* Клавиатура профиля */
-                Keyboard.ProfileKeyboard);
+                Keyboard.GetProfileKeyboard(User));
             /* Записываем id нового сообщения */
-            User.CurrentProfileMessageId = message.MessageId;
-            /* Закрепляем новое сообщение профиля */
-            await Bot.Client.PinChatMessageAsync(User.ChatId, message.MessageId, true);
+            User.Session.Messages.Add(message.MessageId);
         }
         
         public ProfileMessage() { }

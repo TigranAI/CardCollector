@@ -115,6 +115,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Монеты.
+        /// </summary>
+        internal static string coins {
+            get {
+                return ResourceManager.GetString("coins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Текущие примененные фильтры:.
         /// </summary>
         internal static string current_filters {
@@ -169,6 +178,24 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Алмазы.
+        /// </summary>
+        internal static string gems {
+            get {
+                return ResourceManager.GetString("gems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы можете выбрать одну из опций ниже.
+        /// </summary>
+        internal static string menu_message {
+            get {
+                return ResourceManager.GetString("menu_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Пожалуйста, введите только эмоцию.
         /// </summary>
         internal static string please_enter_emoji {
@@ -214,7 +241,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Приветственное сообщение.
+        ///   Looks up a localized string similar to Добро пожаловать! Этот бот позволяет вам коллекционировать стикеры. Вы можете выбрать одну из опций ниже. Напишите /help, чтобы получить подробную справку..
         /// </summary>
         internal static string start_message {
             get {
@@ -237,6 +264,15 @@ namespace CardCollector.Resources {
         internal static string tier {
             get {
                 return ResourceManager.GetString("tier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Несобранная прибыль.
+        /// </summary>
+        internal static string uncllected_income {
+            get {
+                return ResourceManager.GetString("uncllected_income", resourceCulture);
             }
         }
         
@@ -264,6 +300,15 @@ namespace CardCollector.Resources {
         internal static string upload_file {
             get {
                 return ResourceManager.GetString("upload_file", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы получили.
+        /// </summary>
+        internal static string you_collected {
+            get {
+                return ResourceManager.GetString("you_collected", resourceCulture);
             }
         }
     }

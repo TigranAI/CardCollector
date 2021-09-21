@@ -29,8 +29,6 @@ namespace CardCollector.DataBase.Entity
         /* Уровень привилегий пользователя */
         [Column("privilege_level"), MaxLength(32)] public int PrivilegeLevel { get; set; } = 0;
         
-        [Column("current_profile_massage_id")] public int CurrentProfileMessageId { get; set; }
-        
         /* Счет пользователя */
         [NotMapped] public CashEntity Cash { get; set; }
         
@@ -38,12 +36,12 @@ namespace CardCollector.DataBase.Entity
         [NotMapped] public Dictionary<string, UserStickerRelationEntity> Stickers { get; set; }
         
         /* Данные, хранящиеся в рамках одной сессии */
-        [NotMapped] public readonly UserSession Session = new ();
+        [NotMapped] public readonly UserSession Session;
 
         /* Удаляет из чата все сообщения, добавленные в список выше */
         public async Task ClearChat()
         {
-            await Session.ClearMessages(this);
+            await Session.ClearMessages();
         }
         
         /* Возвращает стикеры в виде объектов телеграм */
@@ -62,6 +60,11 @@ namespace CardCollector.DataBase.Entity
             if (!userFilterEnabled || state == UserState.Default) 
                 return stickersList.ToTelegramResults(command);
             return Session.Filters.ApplyTo(stickersList, state).ToTelegramResults(command);
+        }
+
+        public UserEntity()
+        {
+            Session = new UserSession(this);
         }
     }
 }

@@ -8,12 +8,6 @@ namespace CardCollector.Resources
     /* В данном классе содержатся все клавиатуры, используемые в проекте */
     public static class Keyboard
     {
-        /* Клавиатура, отображаемая вместе с сообщением профиля */
-        public static readonly InlineKeyboardMarkup ProfileKeyboard = new(new[]
-            {
-                InlineKeyboardButton.WithCallbackData(Text.collect_income, Command.collect_income)
-            }
-        );
 
         /* Клавиатура, отображаемая с первым сообщением пользователя */
         public static readonly ReplyKeyboardMarkup Menu = new(new[]
@@ -202,6 +196,19 @@ namespace CardCollector.Resources
                     new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.clear_chat)},
                 }),
             };
+        }
+        
+        /* Клавиатура, отображаемая вместе с сообщением профиля */
+        public static InlineKeyboardMarkup GetProfileKeyboard(UserEntity user)
+        {
+            var keyboard = new List<InlineKeyboardButton[]>
+            {
+                new[] {InlineKeyboardButton.WithCallbackData(
+                    $"{Text.collect} {user.Session.IncomeCoins}{Text.coin} {user.Session.IncomeGems}{Text.gem}", 
+                    Command.collect_income)},
+            };
+            
+            return new InlineKeyboardMarkup(keyboard);
         }
     }
 }

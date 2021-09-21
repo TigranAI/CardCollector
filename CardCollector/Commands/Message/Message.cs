@@ -32,6 +32,8 @@ namespace CardCollector.Commands.Message
                 new ProfileMessage(),
                 // Команда "/start"
                 new StartMessage(),
+                // Команда "/menu"
+                new MenuMessage(),
                 // Команда "Коллекция"
                 new CollectionMessage(),
                 // Команда "Магазин"

@@ -1,10 +1,10 @@
 using System;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 using System.Timers;
 using CardCollector.DataBase;
 using CardCollector.Resources;
-using Microsoft.EntityFrameworkCore;
 using Telegram.Bot;
+using Telegram.Bot.Types;
 using CancellationTokenSource = System.Threading.CancellationTokenSource;
 
 namespace CardCollector
@@ -14,12 +14,19 @@ namespace CardCollector
     {
         private static TelegramBotClient _client;
         public static TelegramBotClient Client => _client ??= new TelegramBotClient(AppSettings.TOKEN);
-        
+
+        private static readonly IEnumerable<BotCommand> _commands = new[]
+        {
+            new BotCommand {Command = "/menu", Description = "Показать меню"},
+            new BotCommand {Command = "/help", Description = "Показать информацию"},
+            new BotCommand {Command = "/error", Description = "Сообщить об ошибке"},
+        };
+
         public static void Main(string[] args)
         {
             var cts = new CancellationTokenSource();
             Client.StartReceiving(HandleUpdateAsync, HandleErrorAsync, cancellationToken: cts.Token);
-            
+            Client.SetMyCommandsAsync(_commands, BotCommandScope.AllPrivateChats());
             RunMemoryCleaner();
             
             Console.ReadLine();

@@ -6,19 +6,17 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.Message.TextMessage
 {
-    /* Обработка команды "/start" */
-    public class StartMessage : Message
+    public class MenuMessage : Message
     {
-        /* */
-        protected override string CommandText => Text.start;
-        
+        protected override string CommandText => Text.menu;
         public override async Task Execute()
         {
             /* Отправляем пользователю сообщение со стандартной клавиатурой */
-            await MessageController.SendMessage(User, Messages.start_message, Keyboard.Menu);
+            var message = await MessageController.SendMessage(User, Messages.menu_message, Keyboard.Menu);
+            User.Session.Messages.Add(message.MessageId);
         }
-        
-        public StartMessage(UserEntity user, Update update) : base(user, update) { }
-        public StartMessage() { }
+
+        public MenuMessage() { }
+        public MenuMessage(UserEntity user, Update update) : base(user, update) { }
     }
 }
