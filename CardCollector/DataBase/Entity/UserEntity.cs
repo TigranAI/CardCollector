@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.EntityDao;
+using CardCollector.Others;
 using CardCollector.Resources;
 using Telegram.Bot.Types.InlineQueryResults;
 
@@ -49,12 +50,13 @@ namespace CardCollector.DataBase.Entity
         {
             var state = Session.State;
             /* Получаем список стикеров исходя из того, нужно ли для отладки получить бесконечные стикеры */
-            var stickersList = Constants.UNLIMITED_ALL_STICKERS
-                ? await StickerDao.GetAll(filter) : state switch
+            var stickersList = state switch
                 {
                     UserState.AuctionMenu => await AuctionController.GetStickers(filter),
                     UserState.ShopMenu => await ShopController.GetStickers(filter),
-                    _ => await Stickers.ToStickers(filter),
+                    _ => Constants.UNLIMITED_ALL_STICKERS 
+                        ? await StickerDao.GetAll(filter)
+                        : await Stickers.ToStickers(filter),
                 };
             /* Если пользовательская сортировка не применена, то возвращаем реультат */
             if (!userFilterEnabled || state == UserState.Default) 

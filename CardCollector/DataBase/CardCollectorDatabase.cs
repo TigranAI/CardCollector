@@ -31,8 +31,8 @@ namespace CardCollector.DataBase
         public DbSet<CashEntity> CashTable { get; set; }
         public DbSet<UserStickerRelationEntity> UserStickerRelations { get; set; }
         public DbSet<StickerEntity> Stickers { get; set; }
-        
         public DbSet<AuctionEntity> Auction { get; set; }
+        public DbSet<ShopEntity> Shop { get; set; }
 
         
         /* Конфигурация подключения к БД */

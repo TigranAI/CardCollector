@@ -78,4 +78,7 @@
     <data name="sell_on_auction" xml:space="preserve">
         <value>sell</value>
     </data>
+    <data name="count" xml:space="preserve">
+        <value>count</value>
+    </data>
 </root>

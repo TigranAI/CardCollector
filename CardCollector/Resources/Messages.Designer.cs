@@ -79,6 +79,24 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Невозможно уменьшить количество стикеров!.
+        /// </summary>
+        internal static string cant_decrease {
+            get {
+                return ResourceManager.GetString("cant_decrease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Невозможно увеличить количество стикеров!.
+        /// </summary>
+        internal static string cant_increase {
+            get {
+                return ResourceManager.GetString("cant_increase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Выберите автора из списка ниже:.
         /// </summary>
         internal static string choose_author {

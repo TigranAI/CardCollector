@@ -241,6 +241,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to -.
+        /// </summary>
+        internal static string minus {
+            get {
+                return ResourceManager.GetString("minus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to мин.
         /// </summary>
         internal static string minutes {
@@ -264,6 +273,15 @@ namespace CardCollector.Resources {
         internal static string no {
             get {
                 return ResourceManager.GetString("no", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to +.
+        /// </summary>
+        internal static string plus {
+            get {
+                return ResourceManager.GetString("plus", resourceCulture);
             }
         }
         

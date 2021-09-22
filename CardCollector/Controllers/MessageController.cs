@@ -173,6 +173,19 @@ namespace CardCollector.Controllers
             return new TgMessage();
         }
         
+        public static async Task AnswerCallbackQuery(UserEntity user, string callbackQueryId, string text)
+        {
+            try
+            {
+                if (!user.IsBlocked)
+                    await Bot.Client.AnswerCallbackQueryAsync(callbackQueryId, text);
+            }
+            catch (Exception e)
+            {
+                LogOutWarning("Can't answer callbackquery " + e.Message);
+            }
+        }
+        
         /* Метод для удаления сообщения
          user - пользователь, которому необходимо удалить сообщение
          messageId - Id сообщения */

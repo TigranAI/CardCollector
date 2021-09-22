@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
@@ -9,14 +10,14 @@ namespace CardCollector.Controllers
     {
         public static async Task<int> GetStickerCount(string stickerId)
         {
-            //TODO вернуть количество стикеров в магазине по id
-            return 0;
+            var sticker = await ShopDao.GetSticker(stickerId);
+            return sticker.IsInfinite ? -1 : sticker.Count;
         }
         
         public static async Task<List<StickerEntity>> GetStickers(string filter)
         {
-            //TODO вернуть список стикеров, имеющихся в магазине
-            return await StickerDao.GetAll(filter);
+            var result = await ShopDao.GetAllShopPositions(filter);
+            return result.ToList();
         }
     }
 }

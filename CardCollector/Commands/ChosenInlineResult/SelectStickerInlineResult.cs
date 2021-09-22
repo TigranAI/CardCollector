@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
+using CardCollector.Others;
 using CardCollector.Resources;
 using Telegram.Bot.Types;
 
@@ -30,7 +31,9 @@ namespace CardCollector.Commands.ChosenInlineResult
                            $"\n{sticker.IncomeCoins}{Text.coin} / {sticker.IncomeGems}{Text.gem} {sticker.IncomeTime}{Text.time}{Text.minutes}";
             if (sticker.Description != "") messageText += $"\n\n{Text.description}: {sticker.Description}";
             var stickerMessage = await MessageController.SendSticker(User, sticker.Id);
-            var infoMessage = await MessageController.SendMessage(User, messageText, Keyboard.GetStickerKeyboard(User, sticker.Md5Hash, sticker.Title));
+            var stickerInfo = new StickerInfo(sticker) {count = 1};
+            User.Session.SelectedSticker = stickerInfo;
+            var infoMessage = await MessageController.SendMessage(User, messageText, Keyboard.GetStickerKeyboard(stickerInfo, User.Session.State));
             User.Session.Messages.Add(stickerMessage.MessageId);
             User.Session.Messages.Add(infoMessage.MessageId);
         }

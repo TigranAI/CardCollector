@@ -105,4 +105,10 @@
     <data name="your_cash" xml:space="preserve">
         <value>Ваш баланс</value>
     </data>
+    <data name="cant_increase" xml:space="preserve">
+        <value>Невозможно увеличить количество стикеров!</value>
+    </data>
+    <data name="cant_decrease" xml:space="preserve">
+        <value>Невозможно уменьшить количество стикеров!</value>
+    </data>
 </root>

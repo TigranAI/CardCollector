@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CardCollector.DataBase.Entity;
+using CardCollector.Others;
 using Telegram.Bot.Types.ReplyMarkups;
 
 namespace CardCollector.Resources
@@ -172,27 +173,27 @@ namespace CardCollector.Resources
             return new InlineKeyboardMarkup(keyboardList);
         }
 
-        public static InlineKeyboardMarkup GetStickerKeyboard(UserEntity user, string hash, string query)
+        public static InlineKeyboardMarkup GetStickerKeyboard(StickerInfo stickerInfo, UserState state)
         {
-            return user.Session.State switch
+            return state switch
             {
                 UserState.AuctionMenu or UserState.ShopMenu => new InlineKeyboardMarkup(new[] {
                     new[]
                     {
-                        InlineKeyboardButton.WithCallbackData(Text.buy, $"{Command.buy_sticker}={hash}"),
-                        InlineKeyboardButton.WithCallbackData(Text.buy, $"{Command.buy_sticker}={hash}"),
-                        InlineKeyboardButton.WithCallbackData(Text.buy, $"{Command.buy_sticker}={hash}"),
+                        InlineKeyboardButton.WithCallbackData(Text.minus, $"{Command.count}-"),
+                        InlineKeyboardButton.WithCallbackData($"{Text.buy} ({stickerInfo.count})", $"{Command.buy_sticker}={stickerInfo.Md5Hash}"),
+                        InlineKeyboardButton.WithCallbackData(Text.plus, $"{Command.count}+"),
                     },
                     new[] {InlineKeyboardButton.WithCallbackData(Text.back, $"{Command.back}={Command.clear_chat}")},
                 }),
                 UserState.CollectionMenu => new InlineKeyboardMarkup(new[] {
-                    new[] {InlineKeyboardButton.WithSwitchInlineQuery(Text.send_sticker, query)},
-                    new[] {InlineKeyboardButton.WithCallbackData(Text.sell_on_auction, $"{Command.sell_on_auction}={hash}")},
-                    new[] {InlineKeyboardButton.WithCallbackData(Text.combine, $"{Command.combine}={hash}")},
+                    new[] {InlineKeyboardButton.WithSwitchInlineQuery(Text.send_sticker, stickerInfo.Title)},
+                    new[] {InlineKeyboardButton.WithCallbackData(Text.sell_on_auction, $"{Command.sell_on_auction}={stickerInfo.Md5Hash}")},
+                    new[] {InlineKeyboardButton.WithCallbackData(Text.combine, $"{Command.combine}={stickerInfo.Md5Hash}")},
                     new[] {InlineKeyboardButton.WithCallbackData(Text.back, $"{Command.back}={Command.clear_chat}")},
                 }),
                 _ => new InlineKeyboardMarkup(new[] {
-                    new[] {InlineKeyboardButton.WithSwitchInlineQuery(Text.send_sticker, query)},
+                    new[] {InlineKeyboardButton.WithSwitchInlineQuery(Text.send_sticker, stickerInfo.Title)},
                     new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.clear_chat)},
                 }),
             };
