@@ -1,20 +1,26 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace CardCollector.DataBase.Entity
 {
     [Table("auction")]
     public class AuctionEntity
     {
+        /* добавил, так как один и тот же стикер может продаваться разными людьми,
+         следовательно - он не уникальный */
+        /* id записи */
+        [Column("id"), MaxLength(32)] public int Id { get; set; }
+        
         /* id стикера */
-        [Column("id"), MaxLength(127)] public string Id { get; set; }
+        [Column("sticker_id"), MaxLength(127)] public string StickerId { get; set; }
         
-        /* цена  */
-        [Column("price"), MaxLength(32)] public int Price { get; set; }
+        /* Разбил на 2 отдельных цены, так как я ранее говорил,
+         что можно будет продать стик за 2 валюты одновременно, поле валюты упразднил */
+        /* цена в монетах */
+        [Column("price"), MaxLength(32)] public int PriceCoins { get; set; }
         
-        /* валюта */
-        [Column("valuta"), MaxLength(16)] public string Valuta { get; set; }
+        /* цена в алмазах */
+        [Column("price"), MaxLength(32)] public int PriceGems { get; set; }
         
         /* количество */
         [Column("quantity"), MaxLength(32)] public int Quantity { get; set; }
