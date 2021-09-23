@@ -35,5 +35,19 @@ namespace CardCollector.DataBase.EntityDao
             var stickersList = await StickerDao.GetAll(filter);
             return stickersList.Where(e => entityList.Contains(e.Id));
         }
+        //добавляем объект в аукцион
+        public static void AddNew(AuctionEntity product)
+        {
+            Table.AddAsync(product);
+        }
+        //удаляем проданный объект
+        public static void SoldStikers(string hash)
+        {
+            var list = Table
+                .Where(c => c.StickerId == hash)
+                .FirstOrDefault();
+            
+            Table.Remove(list);
+        }
     }
 }

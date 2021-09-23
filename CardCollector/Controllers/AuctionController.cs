@@ -39,18 +39,19 @@ namespace CardCollector.Controllers
                 Trader = user.Id
             };
             // TODO реализовать добавление позиции на аукцион
-            // await AuctionDao.AddNew(product);
+            AuctionDao.AddNew(product);
         }
         
-        private static async Task<ResultCode> BuyCard(UserEntity user, string stickerShortHashCode, int price, int count = 1)
+        //покупка стикера
+        private static async Task BuyCard(UserEntity user, int price, int count = 1)
         {
             // TODO @darkgolly попробуй переписать метод аналогично тому, что выше
-            if (user.Cash.Coins < count * price)
-                return ResultCode.NotEnoughCash;
-            //подтверждаем действие
-            user.Stickers[stickerShortHashCode].Count += count;
-            user.Cash.Coins += price * count;
-            return ResultCode.Ok;
+            var hash = user.Session.SelectedSticker.Md5Hash;
+            user.Stickers[hash].Count += user.Session.SelectedSticker.Count;
+            user.Cash.Coins -= user.Session.IncomeCoins;
+            user.Cash.Gems -= user.Session.IncomeGems;
+            
+            AuctionDao.SoldStikers(hash);
         }
         
         public static async Task<int> GetStickerCount(string stickerId)
