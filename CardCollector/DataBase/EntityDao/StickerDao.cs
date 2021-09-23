@@ -57,7 +57,7 @@ namespace CardCollector.DataBase.EntityDao
         {
             var list = await Table.ToListAsync();
             return filter == "" ? list : list.Where
-                (item => item.Title.Contains(filter, StringComparison.OrdinalIgnoreCase)).ToList();
+                (item => item.Title.Contains(filter, StringComparison.CurrentCultureIgnoreCase)).ToList();
         }
 
         public static async Task AddNew(StickerEntity sticker)

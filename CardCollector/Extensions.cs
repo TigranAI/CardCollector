@@ -51,7 +51,7 @@ namespace CardCollector
             foreach (var relation in dict.Values.Where(i => i.Count > 0))
             {
                 var sticker = await StickerDao.GetStickerByHash(relation.StickerId);
-                if (sticker.Title.Contains(filter, StringComparison.OrdinalIgnoreCase)) result.Add(sticker);
+                if (sticker.Title.Contains(filter, StringComparison.CurrentCultureIgnoreCase)) result.Add(sticker);
             }
             return result;
         }

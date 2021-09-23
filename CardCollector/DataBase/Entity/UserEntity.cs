@@ -1,19 +1,18 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.Controllers;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Others;
 using CardCollector.Resources;
-using Telegram.Bot.Types.InlineQueryResults;
 
 namespace CardCollector.DataBase.Entity
 {
     /* Этот класс представляет собой строку таблицы users и описывает объект пользователя */
     [Table("users")]
-    public partial class UserEntity
+    public class UserEntity
     {
         /* Id пользователя */
         [Key]
@@ -52,7 +51,8 @@ namespace CardCollector.DataBase.Entity
             if (Constants.UNLIMITED_ALL_STICKERS) return await StickerDao.GetAll(filter);
             return Stickers.Values
                 .Where(relation => relation.Count > 0)
-                .Select(rel => StickerDao.GetStickerByHash(rel.ShortHash).Result);
+                .Select(rel => StickerDao.GetStickerByHash(rel.ShortHash).Result)
+                .Where(sticker => sticker.Title.Contains(filter, StringComparison.CurrentCultureIgnoreCase));
         }
 
         public UserEntity()
