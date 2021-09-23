@@ -15,6 +15,7 @@ namespace CardCollector.Commands.ChosenInlineResult
             await User.ClearChat();
             var productId = int.Parse(InlineResult.Split('=')[1]);
             var trader = await AuctionDao.GetTraderInfo(productId);
+            if (User.Session.SelectedSticker == null) return;
             var sticker = User.Session.SelectedSticker;
             sticker.TraderInfo = trader;
             sticker.MaxCount = trader.Quantity;
