@@ -19,12 +19,8 @@ namespace CardCollector.Commands.CallbackQuery
                 UserState.ShopMenu => await ShopController.GetStickerCount(selectedSticker.Id),
                 _ => 0
             };
-            var coinsPrice = User.Session.SelectedSticker.Count * (User.Session.State == UserState.AuctionMenu 
-                ? User.Session.SelectedSticker.TraderInfo.PriceCoins
-                : User.Session.SelectedSticker.PriceCoins);
-            var gemsPrice = User.Session.SelectedSticker.Count * (User.Session.State == UserState.AuctionMenu 
-                ? User.Session.SelectedSticker.TraderInfo.PriceGems
-                : User.Session.SelectedSticker.PriceGems);
+            var coinsPrice = selectedSticker.GetCoinsPrice();
+            var gemsPrice = selectedSticker.GetGemsPrice();
             if (count < selectedSticker.Count && count != -1)
                 await MessageController.AnswerCallbackQuery(User, Update.CallbackQuery!.Id, Messages.not_enougth_stickers);
             else if (coinsPrice > User.Cash.Coins)

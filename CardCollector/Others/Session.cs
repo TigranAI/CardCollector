@@ -119,7 +119,7 @@ namespace CardCollector.Others
         public async void EndSession()
         {
             await ClearMessages();
-            
+            SelectedSticker = null;
         }
         
         public void Dispose()

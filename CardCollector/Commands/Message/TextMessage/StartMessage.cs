@@ -18,7 +18,7 @@ namespace CardCollector.Commands.Message.TextMessage
             await MessageController.SendMessage(User, Messages.start_message, Keyboard.Menu);
         }
         
-        public StartMessage(UserEntity user, Update update) : base(user, update) { }
         public StartMessage() { }
+        public StartMessage(UserEntity user, Update update) : base(user, update) { }
     }
 }

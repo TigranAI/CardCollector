@@ -1,4 +1,6 @@
-﻿using CardCollector.DataBase.Entity;
+﻿using System.Linq;
+using CardCollector.DataBase.Entity;
+using CardCollector.Resources;
 
 namespace CardCollector.Others
 {
@@ -21,9 +23,32 @@ namespace CardCollector.Others
             Md5Hash = entity.Md5Hash;
         }
         
-        public int Count;
+        public int Count = 1;
+        public int MaxCount;
         
         
         public TraderInformation TraderInfo = null;
+
+        public int GetCoinsPrice()
+        {
+            return Count * TraderInfo?.PriceCoins ?? PriceCoins;
+        }
+        
+        public int GetGemsPrice()
+        {
+            return Count * TraderInfo?.PriceCoins ?? PriceCoins;
+        }
+
+        public override string ToString()
+        {
+            var count = TraderInfo?.Quantity ?? MaxCount;
+            var str = $"\n{Title} {string.Concat(Enumerable.Repeat(Text.star, Tier))}" +
+                $"\n{Text.emoji}: {Emoji}" +
+                $"\n{Text.author}: {Author}" +
+                $"\n{Text.count}: {(count != -1 ? count : "∞")}" +
+                $"\n{IncomeCoins}{Text.coin} / {IncomeGems}{Text.gem} {IncomeTime}{Text.time}{Text.minutes}";
+            if (Description != "") str += $"\n\n{Text.description}: {Description}";
+            return str;
+        }
     }
 }

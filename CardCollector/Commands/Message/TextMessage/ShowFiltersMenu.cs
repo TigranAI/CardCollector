@@ -12,6 +12,7 @@ namespace CardCollector.Commands.Message.TextMessage
         protected override string CommandText => "Message";
         public override async Task Execute()
         {
+            User.Session.SelectedSticker = null;
             /* Формируем сообщение с имеющимися фильтрами у пользователя */
             var text = User.Session.Filters.ToMessage(User.Session.State);
             /* Отправляем сообщение */

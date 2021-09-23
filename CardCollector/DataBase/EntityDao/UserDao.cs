@@ -76,7 +76,7 @@ namespace CardCollector.DataBase.EntityDao
             foreach (var (id, user) in ActiveUsers)
             {
                 if (user.Session.GetLastAccessInterval() <= Constants.SESSION_ACTIVE_PERIOD) continue;
-                user.Session.EndSession();
+                user.Session.Dispose();
                 ActiveUsers.Remove(id);
             }
         }

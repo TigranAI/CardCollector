@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
@@ -23,17 +22,10 @@ namespace CardCollector.Commands.ChosenInlineResult
                 UserState.ShopMenu => await ShopController.GetStickerCount(sticker.Id),
                 _ => User.Stickers[sticker.Md5Hash].Count
             };
-            var messageText = string.Concat(Enumerable.Repeat(Text.star, sticker.Tier));
-            messageText += $"\n<<{sticker.Title}>>" +
-                           $"\n{Text.emoji}: {sticker.Emoji}" +
-                           $"\n{Text.author}: {sticker.Author}" +
-                           $"\n{Text.count}: {(stickerCount != -1 ? stickerCount : "∞")}" +
-                           $"\n{sticker.IncomeCoins}{Text.coin} / {sticker.IncomeGems}{Text.gem} {sticker.IncomeTime}{Text.time}{Text.minutes}";
-            if (sticker.Description != "") messageText += $"\n\n{Text.description}: {sticker.Description}";
-            var stickerMessage = await MessageController.SendSticker(User, sticker.Id);
-            var stickerInfo = new StickerInfo(sticker) {Count = 1};
+            var stickerInfo = new StickerInfo(sticker) {MaxCount = stickerCount};
             User.Session.SelectedSticker = stickerInfo;
-            var infoMessage = await MessageController.SendMessage(User, messageText, Keyboard.GetStickerKeyboard(User.Session));
+            var stickerMessage = await MessageController.SendSticker(User, sticker.Id);
+            var infoMessage = await MessageController.SendMessage(User, stickerInfo.ToString(), Keyboard.GetStickerKeyboard(User.Session));
             User.Session.Messages.Add(stickerMessage.MessageId);
             User.Session.Messages.Add(infoMessage.MessageId);
         }

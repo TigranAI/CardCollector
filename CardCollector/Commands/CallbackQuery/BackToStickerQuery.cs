@@ -12,13 +12,7 @@ namespace CardCollector.Commands.CallbackQuery
         public override async Task Execute()
         {
             var sticker = User.Session.SelectedSticker;
-            var stickerCount = sticker.TraderInfo?.Quantity ?? sticker.Count;
-            var text = $"\n<<{sticker.Title}>>" +
-                       $"\n{Text.emoji}: {sticker.Emoji}" +
-                       $"\n{Text.author}: {sticker.Author}" +
-                       $"\n{Text.count}: {(stickerCount != -1 ? stickerCount : "∞")}" +
-                       $"\n{sticker.IncomeCoins}{Text.coin} / {sticker.IncomeGems}{Text.gem} {sticker.IncomeTime}{Text.time}{Text.minutes}";
-            await MessageController.EditMessage(User, CallbackMessageId, text, Keyboard.GetStickerKeyboard(User.Session));
+            await MessageController.EditMessage(User, CallbackMessageId, sticker.ToString(), Keyboard.GetStickerKeyboard(User.Session));
         }
 
         public BackToStickerQuery() { }

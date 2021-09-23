@@ -11,6 +11,7 @@ namespace CardCollector.Commands.CallbackQuery
         public override async Task Execute()
         {
             User.Session.State = UserState.Default;
+            User.Session.SelectedSticker = null;
             await User.ClearChat();
         }
 

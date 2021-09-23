@@ -28,7 +28,7 @@ namespace CardCollector.DataBase
             }
         }
 
-        private static Dictionary<Type, CardCollectorDatabase> _specificInstances = new ();
+        private static readonly Dictionary<Type, CardCollectorDatabase> _specificInstances = new ();
 
         public static CardCollectorDatabase GetSpecificInstance(Type type)
         {
