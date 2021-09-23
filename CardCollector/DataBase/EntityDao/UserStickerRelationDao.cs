@@ -26,7 +26,7 @@ namespace CardCollector.DataBase.EntityDao
         {
             if (user.Stickers.ContainsKey(sticker.Md5Hash))
             {
-                user.Stickers[sticker.Md5Hash].Count++;
+                user.Stickers[sticker.Md5Hash].Count += count;
                 return user.Stickers[sticker.Md5Hash];
             }
             var relation = new UserStickerRelationEntity

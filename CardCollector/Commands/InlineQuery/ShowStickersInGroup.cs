@@ -18,9 +18,10 @@ namespace CardCollector.Commands.InlineQuery
             // Фильтр - введенная пользователем фраза
             var filter = Update.InlineQuery!.Query;
             // Получаем список стикеров
-            var stickersList = await User.GetStickersList(Command.send_sticker, filter);
+            var stickersList = await User.GetStickersList(filter);
+            var results = stickersList.ToTelegramResults(Command.send_sticker);
             // Посылаем пользователю ответ на его запрос
-            await MessageController.AnswerInlineQuery(InlineQueryId, stickersList);
+            await MessageController.AnswerInlineQuery(InlineQueryId, results);
         }
 
         /* Команда пользователя удовлетворяет условию, если она вызвана
@@ -30,8 +31,7 @@ namespace CardCollector.Commands.InlineQuery
             return command.Contains("Group") || command.Contains("Supergroup") || command.Contains("Private");
         }
 
-        public ShowStickersInGroup(UserEntity user, Update update, string inlineQueryId)
-            : base(user, update, inlineQueryId) { }
         public ShowStickersInGroup() { }
+        public ShowStickersInGroup(UserEntity user, Update update, string inlineQueryId) : base(user, update, inlineQueryId) { }
     }
 }

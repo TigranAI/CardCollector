@@ -11,7 +11,7 @@ namespace CardCollector.Commands.CallbackQuery
         protected override string CommandText => Command.count;
         public override async Task Execute()
         {
-            var buyPositionCount = User.Session.SelectedSticker.count;
+            var buyPositionCount = User.Session.SelectedSticker.Count;
             var stickerCount = User.Session.State switch
             {
                 UserState.CollectionMenu => User.Stickers[User.Session.SelectedSticker.Md5Hash].Count,
@@ -25,7 +25,7 @@ namespace CardCollector.Commands.CallbackQuery
             {
                 if (buyPositionCount < stickerCount || stickerCount == -1)
                 {
-                    User.Session.SelectedSticker.count++;
+                    User.Session.SelectedSticker.Count++;
                     await MessageController.EditReplyMarkup(User, CallbackMessageId,
                         Keyboard.GetStickerKeyboard(User.Session.SelectedSticker, User.Session.State));
                 }
@@ -36,7 +36,7 @@ namespace CardCollector.Commands.CallbackQuery
             {
                 if (buyPositionCount > 1)
                 {
-                    User.Session.SelectedSticker.count--;
+                    User.Session.SelectedSticker.Count--;
                     await MessageController.EditReplyMarkup(User, CallbackMessageId,
                         Keyboard.GetStickerKeyboard(User.Session.SelectedSticker, User.Session.State));
                 }

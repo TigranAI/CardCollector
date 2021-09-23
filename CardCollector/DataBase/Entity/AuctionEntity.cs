@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Telegram.Bot.Types.InlineQueryResults;
 
 namespace CardCollector.DataBase.Entity
 {
@@ -17,16 +19,15 @@ namespace CardCollector.DataBase.Entity
         /* Разбил на 2 отдельных цены, так как я ранее говорил,
          что можно будет продать стик за 2 валюты одновременно, поле валюты упразднил */
         /* цена в монетах */
-        [Column("price"), MaxLength(32)] public int PriceCoins { get; set; }
+        [Column("price_coins"), MaxLength(32)] public int PriceCoins { get; set; }
         
         /* цена в алмазах */
-        [Column("price"), MaxLength(32)] public int PriceGems { get; set; }
+        [Column("price_gems"), MaxLength(32)] public int PriceGems { get; set; }
         
         /* количество */
         [Column("quantity"), MaxLength(32)] public int Quantity { get; set; }
         
         /* продавец */
         [Column("trader"), MaxLength(127)] public long Trader { get; set; }
-        
     }
 }

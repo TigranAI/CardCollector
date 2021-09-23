@@ -135,4 +135,13 @@
     <data name="minus" xml:space="preserve">
         <value>-</value>
     </data>
+    <data name="show_traders" xml:space="preserve">
+        <value>Показать продавцов</value>
+    </data>
+    <data name="items" xml:space="preserve">
+        <value>шт.</value>
+    </data>
+    <data name="per" xml:space="preserve">
+        <value>за</value>
+    </data>
 </root>

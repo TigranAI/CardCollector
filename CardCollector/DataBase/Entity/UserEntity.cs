@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.EntityDao;
@@ -45,23 +46,13 @@ namespace CardCollector.DataBase.Entity
             await Session.ClearMessages();
         }
         
-        /* Возвращает стикеры в виде объектов телеграм */
-        public async Task<IEnumerable<InlineQueryResult>> GetStickersList(string command, string filter, bool userFilterEnabled = false)
+        /* Возвращает стикеры пользователя */
+        public async Task<IEnumerable<StickerEntity>> GetStickersList(string filter)
         {
-            var state = Session.State;
-            /* Получаем список стикеров исходя из того, нужно ли для отладки получить бесконечные стикеры */
-            var stickersList = state switch
-                {
-                    UserState.AuctionMenu => await AuctionController.GetStickers(filter),
-                    UserState.ShopMenu => await ShopController.GetStickers(filter),
-                    _ => Constants.UNLIMITED_ALL_STICKERS 
-                        ? await StickerDao.GetAll(filter)
-                        : await Stickers.ToStickers(filter),
-                };
-            /* Если пользовательская сортировка не применена, то возвращаем реультат */
-            if (!userFilterEnabled || state == UserState.Default) 
-                return stickersList.ToTelegramResults(command);
-            return Session.Filters.ApplyTo(stickersList, state).ToTelegramResults(command);
+            if (Constants.UNLIMITED_ALL_STICKERS) return await StickerDao.GetAll(filter);
+            return Stickers.Values
+                .Where(relation => relation.Count > 0)
+                .Select(rel => StickerDao.GetStickerByHash(rel.ShortHash).Result);
         }
 
         public UserEntity()

@@ -214,6 +214,33 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Недостаточно монет!.
+        /// </summary>
+        internal static string not_enougth_coins {
+            get {
+                return ResourceManager.GetString("not_enougth_coins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Недостаточно алмазов!.
+        /// </summary>
+        internal static string not_enougth_gems {
+            get {
+                return ResourceManager.GetString("not_enougth_gems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Недостаточно стикеров в магазине!.
+        /// </summary>
+        internal static string not_enougth_stickers {
+            get {
+                return ResourceManager.GetString("not_enougth_stickers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Пожалуйста, введите только эмоцию.
         /// </summary>
         internal static string please_enter_emoji {

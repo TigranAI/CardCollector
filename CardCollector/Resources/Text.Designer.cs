@@ -232,6 +232,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to шт..
+        /// </summary>
+        internal static string items {
+            get {
+                return ResourceManager.GetString("items", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /menu.
         /// </summary>
         internal static string menu {
@@ -273,6 +282,15 @@ namespace CardCollector.Resources {
         internal static string no {
             get {
                 return ResourceManager.GetString("no", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to за.
+        /// </summary>
+        internal static string per {
+            get {
+                return ResourceManager.GetString("per", resourceCulture);
             }
         }
         
@@ -354,6 +372,15 @@ namespace CardCollector.Resources {
         internal static string show_stickers {
             get {
                 return ResourceManager.GetString("show_stickers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Показать продавцов.
+        /// </summary>
+        internal static string show_traders {
+            get {
+                return ResourceManager.GetString("show_traders", resourceCulture);
             }
         }
         

@@ -173,12 +173,12 @@ namespace CardCollector.Controllers
             return new TgMessage();
         }
         
-        public static async Task AnswerCallbackQuery(UserEntity user, string callbackQueryId, string text)
+        public static async Task AnswerCallbackQuery(UserEntity user, string callbackQueryId, string text, bool showAlert = false)
         {
             try
             {
                 if (!user.IsBlocked)
-                    await Bot.Client.AnswerCallbackQueryAsync(callbackQueryId, text);
+                    await Bot.Client.AnswerCallbackQueryAsync(callbackQueryId, text, showAlert);
             }
             catch (Exception e)
             {
@@ -189,10 +189,11 @@ namespace CardCollector.Controllers
         /* Метод для удаления сообщения
          user - пользователь, которому необходимо удалить сообщение
          messageId - Id сообщения */
-        public static async Task DeleteMessage(UserEntity user, int messageId)
+        public static async Task DeleteMessage(UserEntity user, int messageId, bool deleteFromList = true)
         {
             try
             {
+                if (deleteFromList) user.Session.Messages.Remove(messageId);
                 if (!user.IsBlocked)
                     await Bot.Client.DeleteMessageAsync(user.ChatId, messageId);
             }

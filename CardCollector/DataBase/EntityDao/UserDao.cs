@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
 using CardCollector.DataBase.Entity;
@@ -41,6 +42,12 @@ namespace CardCollector.DataBase.EntityDao
             /* Обновляем имя пользователя, если он его сменил */
             result.Username = user.Username;
             return result;
+        }
+
+        /* Получение пользователя по представлению user из Базы данных */
+        public static async Task<List<UserEntity>> GetUsersList(string filter)
+        {
+            return await Table.Where(user => user.Username.Contains(filter)).ToListAsync();
         }
 
         /* Добавление новго пользователя в систему */

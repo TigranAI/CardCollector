@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
@@ -6,34 +7,30 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.InlineQuery
 {
-    /* Отображение стикеров в личной беседt с ботом */
-    public class ShowStickersInBotChat : InlineQuery
+    public class ShowCollectionStickers : InlineQuery
     {
-        /* Команда - пустая строка, поскольку пользователь может вводить любые слова
-         после @имя_бота, введенная фраза будет использоваться для фильтрации стикеров */
         protected override string CommandText => "";
-        
         public override async Task Execute()
         {
             // Фильтр - введенная пользователем фраза
             var filter = Update.InlineQuery!.Query;
             // Получаем список стикеров
             var stickersList = await User.GetStickersList(filter);
-            var results = stickersList.ToTelegramResults(Command.send_sticker);
+            var results = User.Session.Filters.ApplyTo(stickersList, User.Session.State).ToTelegramResults(Command.select_sticker);
             // Посылаем пользователю ответ на его запрос
             await MessageController.AnswerInlineQuery(InlineQueryId, results);
         }
-
+        
         /* Команда пользователя удовлетворяет условию, если она вызвана
-         в личных сообщениях с ботом и у пользователя нет выбранного стикера */
+         в личных сообщениях с ботом и пользователь в меню коллекции */
         protected internal override bool IsMatches(string command)
         {
             return User == null 
                 ? command.Contains("Sender")
-                : User.Session.State == UserState.Default && User.Session.SelectedSticker == null;
+                : User.Session.State == UserState.CollectionMenu;
         }
 
-        public ShowStickersInBotChat() { }
-        public ShowStickersInBotChat(UserEntity user, Update update, string inlineQueryId) : base(user, update, inlineQueryId) { }
+        public ShowCollectionStickers() { }
+        public ShowCollectionStickers(UserEntity user, Update update, string inlineQueryId) : base(user, update, inlineQueryId) { }
     }
 }

@@ -124,6 +124,24 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to confirm_buying.
+        /// </summary>
+        internal static string confirm_buying {
+            get {
+                return ResourceManager.GetString("confirm_buying", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to confirm_selling.
+        /// </summary>
+        internal static string confirm_selling {
+            get {
+                return ResourceManager.GetString("confirm_selling", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to count.
         /// </summary>
         internal static string count {
@@ -219,6 +237,15 @@ namespace CardCollector.Resources {
         internal static string set {
             get {
                 return ResourceManager.GetString("set", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to show_traders.
+        /// </summary>
+        internal static string show_traders {
+            get {
+                return ResourceManager.GetString("show_traders", resourceCulture);
             }
         }
         

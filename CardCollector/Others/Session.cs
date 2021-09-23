@@ -59,7 +59,7 @@ namespace CardCollector.Others
         public async Task ClearMessages()
         {
             foreach (var messageId in Messages)
-                await MessageController.DeleteMessage(user, messageId);
+                await MessageController.DeleteMessage(user, messageId, false);
             Messages.Clear();
         }
 
@@ -95,6 +95,23 @@ namespace CardCollector.Others
                 IncomeCoins += stickerInfo.IncomeCoins * multiplier;
                 IncomeGems += stickerInfo.IncomeGems * multiplier;
             }
+            user.Cash.Coins += IncomeCoins;
+            user.Cash.Gems += IncomeGems;
+        }
+
+        public async Task PayOutOne(string hash)
+        {
+            IncomeCoins = 0;
+            IncomeGems = 0;
+            var sticker = user.Stickers[hash];
+            var stickerInfo = await StickerDao.GetStickerByHash(hash);
+            var payoutInterval = DateTime.Now - sticker.Payout;
+            var payoutsCount = (int) (payoutInterval.TotalMinutes / stickerInfo.IncomeTime);
+            if (payoutsCount < 1) return;
+            var multiplier = payoutsCount * sticker.Count;
+            sticker.Payout += new TimeSpan(0, stickerInfo.IncomeTime, 0) * payoutsCount;
+            IncomeCoins += stickerInfo.IncomeCoins * multiplier;
+            IncomeGems += stickerInfo.IncomeGems * multiplier;
             user.Cash.Coins += IncomeCoins;
             user.Cash.Gems += IncomeGems;
         }

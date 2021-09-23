@@ -21,6 +21,6 @@ namespace CardCollector.Others
             Md5Hash = entity.Md5Hash;
         }
         
-        public int count;
+        public int Count;
     }
 }

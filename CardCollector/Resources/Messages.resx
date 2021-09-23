@@ -111,4 +111,13 @@
     <data name="cant_decrease" xml:space="preserve">
         <value>Невозможно уменьшить количество стикеров!</value>
     </data>
+    <data name="not_enougth_stickers" xml:space="preserve">
+        <value>Недостаточно стикеров в магазине!</value>
+    </data>
+    <data name="not_enougth_coins" xml:space="preserve">
+        <value>Недостаточно монет!</value>
+    </data>
+    <data name="not_enougth_gems" xml:space="preserve">
+        <value>Недостаточно алмазов!</value>
+    </data>
 </root>

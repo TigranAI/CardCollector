@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
+using CardCollector.Others;
 using CardCollector.Resources;
 using Telegram.Bot.Types.InlineQueryResults;
 
@@ -21,6 +22,21 @@ namespace CardCollector
                 result.Add(new InlineQueryResultCachedSticker(
                     $"{(Constants.UNLIMITED_ALL_STICKERS ? Command.unlimited_stickers : "")}{command}={item.Md5Hash}",
                     item.Id));
+                /* Ограничение Telegram API по количеству результатов в 50 шт. */
+                if (result.Count > 49) return result;
+            }
+            return result;
+        }
+        /* Преобразует список продавцов в список результатов для телеграм */
+        public static IEnumerable<InlineQueryResult> ToTelegramResults
+            (this IEnumerable<TraderInformation> list, string command)
+        {
+            var result = new List<InlineQueryResult>();
+            foreach (var item in list)
+            {
+                result.Add(new InlineQueryResultArticle($"{command}={item.Id}",
+                        $"{item.Username} {item.Quantity}{Text.items}", new InputTextMessageContent("Купить")) 
+                    { Description = $"{item.PriceCoins}{Text.coin}/{item.PriceGems}{Text.gem} {Text.per} 1{Text.items}" });
                 /* Ограничение Telegram API по количеству результатов в 50 шт. */
                 if (result.Count > 49) return result;
             }

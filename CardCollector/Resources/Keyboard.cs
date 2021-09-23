@@ -177,19 +177,28 @@ namespace CardCollector.Resources
         {
             return state switch
             {
-                UserState.AuctionMenu or UserState.ShopMenu => new InlineKeyboardMarkup(new[] {
+                UserState.ShopMenu => new InlineKeyboardMarkup(new[] {
+                    new[] {InlineKeyboardButton.WithCallbackData($"{Text.buy} ({stickerInfo.Count})", Command.buy_sticker),},
                     new[]
                     {
                         InlineKeyboardButton.WithCallbackData(Text.minus, $"{Command.count}-"),
-                        InlineKeyboardButton.WithCallbackData($"{Text.buy} ({stickerInfo.count})", $"{Command.buy_sticker}={stickerInfo.Md5Hash}"),
                         InlineKeyboardButton.WithCallbackData(Text.plus, $"{Command.count}+"),
                     },
                     new[] {InlineKeyboardButton.WithCallbackData(Text.back, $"{Command.back}={Command.clear_chat}")},
                 }),
+                UserState.AuctionMenu => new InlineKeyboardMarkup(new[] {
+                    new[] {InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.show_traders)},
+                    new[] {InlineKeyboardButton.WithCallbackData(Text.back, $"{Command.back}={Command.clear_chat}")},
+                }),
                 UserState.CollectionMenu => new InlineKeyboardMarkup(new[] {
                     new[] {InlineKeyboardButton.WithSwitchInlineQuery(Text.send_sticker, stickerInfo.Title)},
-                    new[] {InlineKeyboardButton.WithCallbackData(Text.sell_on_auction, $"{Command.sell_on_auction}={stickerInfo.Md5Hash}")},
-                    new[] {InlineKeyboardButton.WithCallbackData(Text.combine, $"{Command.combine}={stickerInfo.Md5Hash}")},
+                    new[] {InlineKeyboardButton.WithCallbackData($"{Text.sell_on_auction} ({stickerInfo.Count})", Command.confirm_selling)},
+                    new[]
+                    {
+                        InlineKeyboardButton.WithCallbackData(Text.minus, $"{Command.count}-"),
+                        InlineKeyboardButton.WithCallbackData(Text.plus, $"{Command.count}+"),
+                    },
+                    new[] {InlineKeyboardButton.WithCallbackData(Text.combine, Command.combine)},
                     new[] {InlineKeyboardButton.WithCallbackData(Text.back, $"{Command.back}={Command.clear_chat}")},
                 }),
                 _ => new InlineKeyboardMarkup(new[] {

@@ -27,11 +27,11 @@ namespace CardCollector.Commands.ChosenInlineResult
             messageText += $"\n<<{sticker.Title}>>" +
                            $"\n{Text.emoji}: {sticker.Emoji}" +
                            $"\n{Text.author}: {sticker.Author}" +
-                           $"\n{Text.count}: {stickerCount}" +
+                           $"\n{Text.count}: {(stickerCount != -1 ? stickerCount : "∞")}" +
                            $"\n{sticker.IncomeCoins}{Text.coin} / {sticker.IncomeGems}{Text.gem} {sticker.IncomeTime}{Text.time}{Text.minutes}";
             if (sticker.Description != "") messageText += $"\n\n{Text.description}: {sticker.Description}";
             var stickerMessage = await MessageController.SendSticker(User, sticker.Id);
-            var stickerInfo = new StickerInfo(sticker) {count = 1};
+            var stickerInfo = new StickerInfo(sticker) {Count = 1};
             User.Session.SelectedSticker = stickerInfo;
             var infoMessage = await MessageController.SendMessage(User, messageText, Keyboard.GetStickerKeyboard(stickerInfo, User.Session.State));
             User.Session.Messages.Add(stickerMessage.MessageId);

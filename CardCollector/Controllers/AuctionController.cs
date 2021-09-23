@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
+using CardCollector.Others;
 using CardCollector.Resources;
+using Telegram.Bot.Types.InlineQueryResults;
 
 namespace CardCollector.Controllers 
 {
@@ -24,14 +27,14 @@ namespace CardCollector.Controllers
              так что можно не передавать хеш код  и количество */
             //подтверждаем действие
             var hash = user.Session.SelectedSticker.Md5Hash;
-            user.Stickers[hash].Count -= user.Session.SelectedSticker.count;
+            user.Stickers[hash].Count -= user.Session.SelectedSticker.Count;
             /* Пока не думаю, что стоит сразу начислять сумму, пускай останется на будущее
             user.Cash.Coins += price * count;*/
             var product = new AuctionEntity
             {
                 PriceCoins = priceCoins,
                 PriceGems = priceGems,
-                Quantity = user.Session.SelectedSticker.count,
+                Quantity = user.Session.SelectedSticker.Count,
                 StickerId = user.Session.SelectedSticker.Id,
                 Trader = user.Id
             };
@@ -57,8 +60,20 @@ namespace CardCollector.Controllers
 
         public static async Task<List<StickerEntity>> GetStickers(string filter)
         {
-            //TODO вернуть список стикеров, имеющихся на аукционе
-            return await StickerDao.GetAll(filter);
+            return (await AuctionDao.GetStickers(filter)).ToList();
+        }
+
+        public static async Task<IEnumerable<TraderInformation>> GetTradersList(string filter, string stickerId)
+        {
+            var result = new List<TraderInformation>();
+            var products = await AuctionDao.GetProducts(stickerId);
+            var users = await UserDao.GetUsersList(filter);
+            foreach (var product in products)
+            {
+                if (users.FirstOrDefault(i => i.Id == product.Trader) is { } user)
+                    result.Add(new TraderInformation(product) {Username = user.Username});
+            }
+            return result;
         }
     }
 }

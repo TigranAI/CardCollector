@@ -26,5 +26,14 @@ namespace CardCollector.DataBase.EntityDao
             return list.Sum(e => e.Quantity);
         }
 
+        public static async Task<IEnumerable<StickerEntity>> GetStickers(string filter)
+        {
+            var entityList = Table
+                .Select(e => e.StickerId)
+                .Distinct()
+                .ToHashSet();
+            var stickersList = await StickerDao.GetAll(filter);
+            return stickersList.Where(e => entityList.Contains(e.Id));
+        }
     }
 }

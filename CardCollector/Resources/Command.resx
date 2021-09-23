@@ -81,4 +81,13 @@
     <data name="count" xml:space="preserve">
         <value>count</value>
     </data>
+    <data name="confirm_buying" xml:space="preserve">
+        <value>confirm_buying</value>
+    </data>
+    <data name="confirm_selling" xml:space="preserve">
+        <value>confirm_selling</value>
+    </data>
+    <data name="show_traders" xml:space="preserve">
+        <value>show_traders</value>
+    </data>
 </root>
