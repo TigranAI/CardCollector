@@ -27,7 +27,7 @@ namespace CardCollector
         {
             var cts = new CancellationTokenSource();
             Client.StartReceiving(HandleUpdateAsync, HandleErrorAsync, cancellationToken: cts.Token);
-            Client.SetMyCommandsAsync(_commands, BotCommandScope.AllPrivateChats());
+            Client.SetMyCommandsAsync(_commands, BotCommandScope.AllPrivateChats(), cancellationToken: cts.Token);
             RunMemoryCleaner();
             
             Console.ReadLine();
@@ -46,16 +46,11 @@ namespace CardCollector
             timer.Elapsed += UserDao.ClearMemory;
         }
 
-        private static async void SavingChanges(object o, ElapsedEventArgs e)
+        private static void SavingChanges(object o, ElapsedEventArgs e)
         {
-            try
-            {
-                await CardCollectorDatabase.Instance.SaveChangesAsync();
-            }
-            catch (Exception)
-            {
-                // ignored
-            }
+            try {
+                CardCollectorDatabase.SaveAllChangesAsync();
+            } catch (Exception) { /*ignored*/ }
         }
     }
 }

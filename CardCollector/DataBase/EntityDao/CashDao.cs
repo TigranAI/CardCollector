@@ -7,8 +7,9 @@ namespace CardCollector.DataBase.EntityDao
     /* Класс, позволяющий получить доступ к объектам таблицы Cash*/
     public static class CashDao
     {
+        private static readonly CardCollectorDatabase Instance = CardCollectorDatabase.GetSpecificInstance(typeof(CashDao));
         /* Таблица cash в представлении EntityFramework */
-        private static readonly DbSet<CashEntity> Table = CardCollectorDatabase.Instance.CashTable;
+        private static readonly DbSet<CashEntity> Table = Instance.CashTable;
         
         /* Получение объекта по Id */
         public static async Task<CashEntity> GetById(long userId)
@@ -22,6 +23,7 @@ namespace CardCollector.DataBase.EntityDao
         {
             var cash = new CashEntity { UserId = userId };
             var result = await Table.AddAsync(cash);
+            await Instance.SaveChangesAsync();
             return result.Entity;
         }
     }

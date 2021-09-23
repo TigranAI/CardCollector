@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CardCollector.DataBase;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Others;
 using CardCollector.Resources;
-using Telegram.Bot.Types.InlineQueryResults;
 
 namespace CardCollector.Controllers 
 {
@@ -43,15 +43,18 @@ namespace CardCollector.Controllers
         }
         
         //покупка стикера
-        private static async Task BuyCard(UserEntity user, int price, int count = 1)
+        public static async Task BuyCard(StickerInfo sticker)
         {
-            // TODO @darkgolly попробуй переписать метод аналогично тому, что выше
-            var hash = user.Session.SelectedSticker.Md5Hash;
-            user.Stickers[hash].Count += user.Session.SelectedSticker.Count;
-            user.Cash.Coins -= user.Session.IncomeCoins;
-            user.Cash.Gems -= user.Session.IncomeGems;
-            
-            AuctionDao.SoldStikers(hash);
+            var product = await AuctionDao.GetProduct(sticker.TraderInfo.Id);
+            product.Quantity -= sticker.Count;
+            var user = await UserDao.GetById(product.Trader);
+            var coinsSum = product.PriceCoins * sticker.Count;
+            var gemsSum = product.PriceGems * sticker.Count;
+            await MessageController.SendMessage(user, $"{Messages.you_sold} {sticker.Title} {sticker.Count}{Text.items}" +
+                                                      $"\n{Messages.you_collected} {coinsSum}{Text.coin} / {gemsSum}{Text.gem}");
+            user.Cash.Coins += coinsSum;
+            user.Cash.Gems += gemsSum;
+            if (product.Quantity == 0) AuctionDao.DeleteRow(sticker.TraderInfo.Id);
         }
         
         public static async Task<int> GetStickerCount(string stickerId)
@@ -75,6 +78,11 @@ namespace CardCollector.Controllers
                     result.Add(new TraderInformation(product) {Username = user.Username});
             }
             return result;
+        }
+
+        public static async Task<int> GetStickerCount(int productId)
+        {
+            return await AuctionDao.GetQuantity(productId);
         }
     }
 }

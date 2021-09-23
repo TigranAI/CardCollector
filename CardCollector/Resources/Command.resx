@@ -90,4 +90,7 @@
     <data name="show_traders" xml:space="preserve">
         <value>show_traders</value>
     </data>
+    <data name="back_to_sticker" xml:space="preserve">
+        <value>back_to_sticker</value>
+    </data>
 </root>

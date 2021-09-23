@@ -144,4 +144,7 @@
     <data name="per" xml:space="preserve">
         <value>за</value>
     </data>
+    <data name="yes" xml:space="preserve">
+        <value>Да</value>
+    </data>
 </root>

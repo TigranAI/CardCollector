@@ -173,38 +173,97 @@ namespace CardCollector.Resources
             return new InlineKeyboardMarkup(keyboardList);
         }
 
-        public static InlineKeyboardMarkup GetStickerKeyboard(StickerInfo stickerInfo, UserState state)
+        public static InlineKeyboardMarkup GetShopStickerKeyboard(StickerInfo stickerInfo)
         {
-            return state switch
+            return new InlineKeyboardMarkup(new[] {
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(
+                        $"{Text.buy} ({stickerInfo.Count})" +
+                        $" {stickerInfo.PriceCoins * stickerInfo.Count}{Text.coin} / " +
+                        $"{stickerInfo.PriceGems * stickerInfo.Count}{Text.gem}",
+                        Command.confirm_buying),
+                },
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(Text.minus, $"{Command.count}-"),
+                    InlineKeyboardButton.WithCallbackData(Text.plus, $"{Command.count}+"),
+                },
+                new[] {InlineKeyboardButton.WithCallbackData(Text.back, $"{Command.back}={Command.clear_chat}")},
+            });
+        }
+
+        public static InlineKeyboardMarkup GetCollectionStickerKeyboard(StickerInfo stickerInfo)
+        {
+            return new InlineKeyboardMarkup(new[] {
+                new[] {InlineKeyboardButton.WithSwitchInlineQuery(Text.send_sticker, stickerInfo.Title)},
+                new[] {InlineKeyboardButton.WithCallbackData($"{Text.sell_on_auction} ({stickerInfo.Count})", Command.confirm_selling)},
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(Text.minus, $"{Command.count}-"),
+                    InlineKeyboardButton.WithCallbackData(Text.plus, $"{Command.count}+"),
+                },
+                new[] {InlineKeyboardButton.WithCallbackData(Text.combine, Command.combine)},
+                new[] {InlineKeyboardButton.WithCallbackData(Text.back, $"{Command.back}={Command.clear_chat}")},
+            });
+        }
+
+        public static InlineKeyboardMarkup GetAuctionStickerKeyboard()
+        {
+            return new InlineKeyboardMarkup(new[] {
+                new[] {InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.show_traders)},
+                new[] {InlineKeyboardButton.WithCallbackData(Text.back, $"{Command.back}={Command.clear_chat}")},
+            });
+        }
+
+        public static InlineKeyboardMarkup GetAuctionProductKeyboard(StickerInfo stickerInfo)
+        {
+            return new InlineKeyboardMarkup(new[] {
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(
+                        $"{Text.buy} ({stickerInfo.Count})" +
+                        $" {stickerInfo.TraderInfo.PriceCoins * stickerInfo.Count}{Text.coin} / " +
+                        $"{stickerInfo.TraderInfo.PriceGems * stickerInfo.Count}{Text.gem}",
+                        Command.confirm_buying),
+                },
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(Text.minus, $"{Command.count}-"),
+                    InlineKeyboardButton.WithCallbackData(Text.plus, $"{Command.count}+"),
+                },
+                new[] {InlineKeyboardButton.WithCallbackData(Text.back, $"{Command.back}={Command.clear_chat}")},
+            });
+        }
+
+        public static InlineKeyboardMarkup GetStickerKeyboard(StickerInfo stickerInfo)
+        {
+            return new InlineKeyboardMarkup(new[] {
+                new[] {InlineKeyboardButton.WithSwitchInlineQuery(Text.send_sticker, stickerInfo.Title)},
+                new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.clear_chat)},
+            });
+        }
+
+        public static InlineKeyboardMarkup GetConfirmationKeyboard(string command)
+        {
+            return new InlineKeyboardMarkup(new[] {
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(Text.no, Command.back_to_sticker),
+                    InlineKeyboardButton.WithCallbackData(Text.yes, command)
+                }
+            });
+        }
+
+        public static InlineKeyboardMarkup GetStickerKeyboard(UserSession session)
+        {
+            return session.State switch
             {
-                UserState.ShopMenu => new InlineKeyboardMarkup(new[] {
-                    new[] {InlineKeyboardButton.WithCallbackData($"{Text.buy} ({stickerInfo.Count})", Command.buy_sticker),},
-                    new[]
-                    {
-                        InlineKeyboardButton.WithCallbackData(Text.minus, $"{Command.count}-"),
-                        InlineKeyboardButton.WithCallbackData(Text.plus, $"{Command.count}+"),
-                    },
-                    new[] {InlineKeyboardButton.WithCallbackData(Text.back, $"{Command.back}={Command.clear_chat}")},
-                }),
-                UserState.AuctionMenu => new InlineKeyboardMarkup(new[] {
-                    new[] {InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.show_traders)},
-                    new[] {InlineKeyboardButton.WithCallbackData(Text.back, $"{Command.back}={Command.clear_chat}")},
-                }),
-                UserState.CollectionMenu => new InlineKeyboardMarkup(new[] {
-                    new[] {InlineKeyboardButton.WithSwitchInlineQuery(Text.send_sticker, stickerInfo.Title)},
-                    new[] {InlineKeyboardButton.WithCallbackData($"{Text.sell_on_auction} ({stickerInfo.Count})", Command.confirm_selling)},
-                    new[]
-                    {
-                        InlineKeyboardButton.WithCallbackData(Text.minus, $"{Command.count}-"),
-                        InlineKeyboardButton.WithCallbackData(Text.plus, $"{Command.count}+"),
-                    },
-                    new[] {InlineKeyboardButton.WithCallbackData(Text.combine, Command.combine)},
-                    new[] {InlineKeyboardButton.WithCallbackData(Text.back, $"{Command.back}={Command.clear_chat}")},
-                }),
-                _ => new InlineKeyboardMarkup(new[] {
-                    new[] {InlineKeyboardButton.WithSwitchInlineQuery(Text.send_sticker, stickerInfo.Title)},
-                    new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.clear_chat)},
-                }),
+                UserState.AuctionMenu when session.SelectedSticker.TraderInfo is not null => GetAuctionProductKeyboard(session.SelectedSticker),
+                UserState.AuctionMenu => GetAuctionStickerKeyboard(),
+                UserState.ShopMenu => GetShopStickerKeyboard(session.SelectedSticker),
+                UserState.CollectionMenu => GetCollectionStickerKeyboard(session.SelectedSticker),
+                _ => GetStickerKeyboard(session.SelectedSticker)
             };
         }
         

@@ -9,7 +9,8 @@ namespace CardCollector.DataBase.EntityDao
 {
     public static class ShopDao
     {
-        private static readonly DbSet<ShopEntity> Table = CardCollectorDatabase.Instance.Shop;
+        private static readonly CardCollectorDatabase Instance = CardCollectorDatabase.GetSpecificInstance(typeof(ShopDao));
+        private static readonly DbSet<ShopEntity> Table = Instance.Shop;
 
         public static async Task<IEnumerable<StickerEntity>> GetAllShopPositions(string filter = "")
         {
@@ -24,6 +25,14 @@ namespace CardCollector.DataBase.EntityDao
         public static async Task<ShopEntity> GetSticker(string stickerId)
         {
             return await Table.FirstAsync(e => e.StickerId == stickerId);
+        }
+
+        public static async void DeleteRow(int productId)
+        {
+            if (await Table.FirstOrDefaultAsync(c => c.Id == productId) is not { } item) return;
+            Table.Attach(item);
+            Table.Remove(item);
+            await Instance.SaveChangesAsync();
         }
     }
 }

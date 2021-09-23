@@ -13,9 +13,9 @@ namespace CardCollector.DataBase.Entity
         [Column("user_id"), MaxLength(127)] public long UserId { get; set; }
         
         /* Количество монет */
-        [Column("coins"), MaxLength(32)] public int Coins { get; set; } = 0;
+        [Column("coins"), MaxLength(32)] public int Coins { get; set; } = 10000;
         
         /* Количество алмазов */
-        [Column("gems"), MaxLength(32)] public int Gems { get; set; } = 0;
+        [Column("gems"), MaxLength(32)] public int Gems { get; set; } = 1000;
     }
 }

@@ -15,10 +15,8 @@ namespace CardCollector.Commands.CallbackQuery
             var stickerCount = User.Session.State switch
             {
                 UserState.CollectionMenu => User.Stickers[User.Session.SelectedSticker.Md5Hash].Count,
-                UserState.ShopMenu => await ShopController.GetStickerCount(
-                    User.Session.SelectedSticker.Id),
-                UserState.AuctionMenu => await AuctionController.GetStickerCount(
-                    User.Session.SelectedSticker.Id),
+                UserState.ShopMenu => await ShopController.GetStickerCount(User.Session.SelectedSticker.Id),
+                UserState.AuctionMenu => User.Session.SelectedSticker.TraderInfo.Quantity,
                 _ => 0
             };
             if (CallbackData.Contains('+'))
@@ -26,8 +24,7 @@ namespace CardCollector.Commands.CallbackQuery
                 if (buyPositionCount < stickerCount || stickerCount == -1)
                 {
                     User.Session.SelectedSticker.Count++;
-                    await MessageController.EditReplyMarkup(User, CallbackMessageId,
-                        Keyboard.GetStickerKeyboard(User.Session.SelectedSticker, User.Session.State));
+                    await MessageController.EditReplyMarkup(User, CallbackMessageId, Keyboard.GetStickerKeyboard(User.Session));
                 }
                 else await MessageController.AnswerCallbackQuery(User, 
                     Update.CallbackQuery!.Id, Messages.cant_increase);
@@ -37,8 +34,7 @@ namespace CardCollector.Commands.CallbackQuery
                 if (buyPositionCount > 1)
                 {
                     User.Session.SelectedSticker.Count--;
-                    await MessageController.EditReplyMarkup(User, CallbackMessageId,
-                        Keyboard.GetStickerKeyboard(User.Session.SelectedSticker, User.Session.State));
+                    await MessageController.EditReplyMarkup(User, CallbackMessageId, Keyboard.GetStickerKeyboard(User.Session));
                 }
                 else await MessageController.AnswerCallbackQuery(User, 
                     Update.CallbackQuery!.Id, Messages.cant_decrease);

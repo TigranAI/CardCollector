@@ -70,6 +70,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Вы уверены?.
+        /// </summary>
+        internal static string are_you_sure {
+            get {
+                return ResourceManager.GetString("are_you_sure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Автор:.
         /// </summary>
         internal static string author {
@@ -138,6 +147,15 @@ namespace CardCollector.Resources {
         internal static string coins {
             get {
                 return ResourceManager.GetString("coins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Подтверидте покупку.
+        /// </summary>
+        internal static string confirm_buying {
+            get {
+                return ResourceManager.GetString("confirm_buying", resourceCulture);
             }
         }
         
@@ -354,6 +372,15 @@ namespace CardCollector.Resources {
         internal static string you_collected {
             get {
                 return ResourceManager.GetString("you_collected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы продали.
+        /// </summary>
+        internal static string you_sold {
+            get {
+                return ResourceManager.GetString("you_sold", resourceCulture);
             }
         }
         

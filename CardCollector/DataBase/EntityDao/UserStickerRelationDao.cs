@@ -9,8 +9,9 @@ namespace CardCollector.DataBase.EntityDao
     /* Предоставляет доступ к соотношениям таблицы user_to_sticker_relation */
     public static class UserStickerRelationDao
     {
+        private static readonly CardCollectorDatabase Instance = CardCollectorDatabase.GetSpecificInstance(typeof(UserStickerRelationDao));
         /* Таблица user_to_sticker_relation в представлении Entity Framework */
-        private static readonly DbSet<UserStickerRelationEntity> Table = CardCollectorDatabase.Instance.UserStickerRelations;
+        private static readonly DbSet<UserStickerRelationEntity> Table = Instance.UserStickerRelations;
         
         /* Возвращает словарь стикеров по Id пользователя */
         public static async Task<Dictionary<string, UserStickerRelationEntity>> GetListById(long userId)
@@ -38,6 +39,7 @@ namespace CardCollector.DataBase.EntityDao
             };
             var result = await Table.AddAsync(relation);
             user.Stickers.Add(sticker.Md5Hash, result.Entity);
+            await Instance.SaveChangesAsync();
             return result.Entity;
         }
     }

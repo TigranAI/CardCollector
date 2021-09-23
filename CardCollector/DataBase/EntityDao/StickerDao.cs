@@ -10,8 +10,9 @@ namespace CardCollector.DataBase.EntityDao
     /* Класс, предоставляющий доступ к объектам таблицы Stickers*/
     public static class StickerDao
     {
+        private static readonly CardCollectorDatabase Instance = CardCollectorDatabase.GetSpecificInstance(typeof(StickerDao));
         /* Таблица stickers в представлении Entity Framework */
-        private static readonly DbSet<StickerEntity> Table = CardCollectorDatabase.Instance.Stickers;
+        private static readonly DbSet<StickerEntity> Table = Instance.Stickers;
         
         /* Получение информации о стикере по его хешу, возвращает Null, если стикера не существует */
         public static async Task<StickerEntity> GetStickerByHash(string hash)
@@ -40,6 +41,7 @@ namespace CardCollector.DataBase.EntityDao
                 Md5Hash = Utilities.CreateMd5(fileId)
             };
             var result = await Table.AddAsync(cash);
+            await Instance.SaveChangesAsync();
             return result.Entity;
         }
 

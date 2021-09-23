@@ -120,4 +120,13 @@
     <data name="not_enougth_gems" xml:space="preserve">
         <value>Недостаточно алмазов!</value>
     </data>
+    <data name="confirm_buying" xml:space="preserve">
+        <value>Подтверидте покупку</value>
+    </data>
+    <data name="are_you_sure" xml:space="preserve">
+        <value>Вы уверены?</value>
+    </data>
+    <data name="you_sold" xml:space="preserve">
+        <value>Вы продали</value>
+    </data>
 </root>

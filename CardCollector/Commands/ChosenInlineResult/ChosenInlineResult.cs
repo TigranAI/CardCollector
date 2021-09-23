@@ -33,6 +33,9 @@ namespace CardCollector.Commands.ChosenInlineResult
         
             // Обработка результата при отправке стикера
             new SendStickerResult(),
+            // Обработка результата при выборе продавца
+            new SelectTraderResult(),
+            
             new SelectStickerInlineResult(),
         };
         

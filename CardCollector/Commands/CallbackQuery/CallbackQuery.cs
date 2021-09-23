@@ -46,8 +46,12 @@ namespace CardCollector.Commands.CallbackQuery
             new CollectIncomeQuery(),
             /* Команда для упралвения количеством стикеров */
             new CountQuery(),
+            /* Команда для подтверждения покупки */
+            new ConfirmBuyingQuery(),
             /* Команда для покупки стикера */
             new BuyStickerQuery(),
+            /* Команда возврата к стикеру */
+            new BackToStickerQuery(),
             
             /* Отмена в момент выбора "значения фильтра", не в самом меню */
             new BackToFiltersMenu(),

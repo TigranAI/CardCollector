@@ -437,5 +437,14 @@ namespace CardCollector.Resources {
                 return ResourceManager.GetString("to", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Да.
+        /// </summary>
+        internal static string yes {
+            get {
+                return ResourceManager.GetString("yes", resourceCulture);
+            }
+        }
     }
 }

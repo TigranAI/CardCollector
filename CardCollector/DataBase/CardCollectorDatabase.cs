@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using CardCollector.DataBase.Entity;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,7 +27,31 @@ namespace CardCollector.DataBase
                 return _instance;
             }
         }
-        
+
+        private static Dictionary<Type, CardCollectorDatabase> _specificInstances = new ();
+
+        public static CardCollectorDatabase GetSpecificInstance(Type type)
+        {
+            try
+            {
+                return _specificInstances[type];
+            }
+            catch (Exception)
+            {
+                var newInstance = new CardCollectorDatabase();
+                _specificInstances.Add(type, newInstance);
+                newInstance.Database.EnsureCreated();
+                return newInstance;
+            }
+        }
+
+        public static async void SaveAllChangesAsync()
+        {
+            await Instance.SaveChangesAsync();
+            foreach (var instance in _specificInstances.Values)
+                await instance.SaveChangesAsync();
+        }
+
         /* Таблицы базы данных, представленные Entity объектами */
         public DbSet<UserEntity> Users { get; set; }
         public DbSet<CashEntity> CashTable { get; set; }

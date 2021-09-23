@@ -13,25 +13,44 @@ namespace CardCollector.Commands.CallbackQuery
         public override async Task Execute()
         {
             var selectedSticker = User.Session.SelectedSticker;
-            var product = await ShopDao.GetSticker(selectedSticker.Id);
-            if (selectedSticker.Count > product.Count && !product.IsInfinite)
+            var count = User.Session.State switch
+            {
+                UserState.AuctionMenu => await AuctionController.GetStickerCount(selectedSticker.TraderInfo.Id),
+                UserState.ShopMenu => await ShopController.GetStickerCount(selectedSticker.Id),
+                _ => 0
+            };
+            var coinsPrice = User.Session.SelectedSticker.Count * (User.Session.State == UserState.AuctionMenu 
+                ? User.Session.SelectedSticker.TraderInfo.PriceCoins
+                : User.Session.SelectedSticker.PriceCoins);
+            var gemsPrice = User.Session.SelectedSticker.Count * (User.Session.State == UserState.AuctionMenu 
+                ? User.Session.SelectedSticker.TraderInfo.PriceGems
+                : User.Session.SelectedSticker.PriceGems);
+            if (count < selectedSticker.Count && count != -1)
                 await MessageController.AnswerCallbackQuery(User, Update.CallbackQuery!.Id, Messages.not_enougth_stickers);
-            else if (selectedSticker.Count * selectedSticker.PriceCoins > User.Cash.Coins)
+            else if (coinsPrice > User.Cash.Coins)
                 await MessageController.AnswerCallbackQuery(User, Update.CallbackQuery!.Id, Messages.not_enougth_coins);
-            else if (selectedSticker.Count * selectedSticker.PriceGems > User.Cash.Gems)
+            else if (gemsPrice > User.Cash.Gems)
                 await MessageController.AnswerCallbackQuery(User, Update.CallbackQuery!.Id, Messages.not_enougth_gems);
             else
             {
-                if (!product.IsInfinite) product.Count -= selectedSticker.Count;
+                switch (User.Session.State)
+                {
+                    case UserState.AuctionMenu:
+                        await AuctionController.BuyCard(selectedSticker);
+                        break;
+                    case UserState.ShopMenu:
+                        await ShopController.SoldCard(selectedSticker);
+                        break;
+                }
                 if (User.Stickers.ContainsKey(selectedSticker.Md5Hash))
                 {
                     await User.Session.PayOutOne(selectedSticker.Md5Hash);
                     await MessageController.AnswerCallbackQuery(User, Update.CallbackQuery!.Id, 
-                        $"{Messages.you_collected} {User.Session.IncomeCoins}{Text.coin}/{User.Session.IncomeGems}{Text.gem}");
+                        $"{Messages.you_collected} {User.Session.IncomeCoins}{Text.coin} / {User.Session.IncomeGems}{Text.gem}");
                 }
                 await UserStickerRelationDao.AddNew(User, selectedSticker, selectedSticker.Count);
-                User.Cash.Coins -= selectedSticker.Count * selectedSticker.PriceCoins;
-                User.Cash.Gems -= selectedSticker.Count * selectedSticker.PriceGems;
+                User.Cash.Coins -= coinsPrice;
+                User.Cash.Gems -= gemsPrice;
                 User.Session.SelectedSticker = null;
                 await User.ClearChat();
             }

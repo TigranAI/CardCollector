@@ -12,8 +12,9 @@ namespace CardCollector.DataBase.EntityDao
     /* Класс, предоставляющий доступ к объектам пользователей таблицы Users */
     public static class UserDao
     {
+        private static readonly CardCollectorDatabase Instance = CardCollectorDatabase.GetSpecificInstance(typeof(UserDao));
         /* Таблица Users в представлении EntityFramework */
-        private static readonly DbSet<UserEntity> Table = CardCollectorDatabase.Instance.Users;
+        private static readonly DbSet<UserEntity> Table = Instance.Users;
         
         /* Активные пользователи в системе */
         private static readonly Dictionary<long, UserEntity> ActiveUsers = new();
@@ -44,6 +45,11 @@ namespace CardCollector.DataBase.EntityDao
             return result;
         }
 
+        public static async Task<UserEntity> GetById(long userId)
+        {
+            return await Table.FirstAsync(item => item.Id == userId);
+        }
+
         /* Получение пользователя по представлению user из Базы данных */
         public static async Task<List<UserEntity>> GetUsersList(string filter)
         {
@@ -61,6 +67,7 @@ namespace CardCollector.DataBase.EntityDao
                 IsBlocked = false
             };
             var result = await Table.AddAsync(userEntity);
+            await Instance.SaveChangesAsync();
             return result.Entity;
         }
 
@@ -68,11 +75,9 @@ namespace CardCollector.DataBase.EntityDao
         {
             foreach (var (id, user) in ActiveUsers)
             {
-                if (user.Session.GetLastAccessInterval() > Constants.SESSION_ACTIVE_PERIOD)
-                {
-                    user.Session.EndSession();
-                    ActiveUsers.Remove(id);
-                }
+                if (user.Session.GetLastAccessInterval() <= Constants.SESSION_ACTIVE_PERIOD) continue;
+                user.Session.EndSession();
+                ActiveUsers.Remove(id);
             }
         }
     }

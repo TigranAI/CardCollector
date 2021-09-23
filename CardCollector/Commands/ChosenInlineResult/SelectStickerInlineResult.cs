@@ -33,7 +33,7 @@ namespace CardCollector.Commands.ChosenInlineResult
             var stickerMessage = await MessageController.SendSticker(User, sticker.Id);
             var stickerInfo = new StickerInfo(sticker) {Count = 1};
             User.Session.SelectedSticker = stickerInfo;
-            var infoMessage = await MessageController.SendMessage(User, messageText, Keyboard.GetStickerKeyboard(stickerInfo, User.Session.State));
+            var infoMessage = await MessageController.SendMessage(User, messageText, Keyboard.GetStickerKeyboard(User.Session));
             User.Session.Messages.Add(stickerMessage.MessageId);
             User.Session.Messages.Add(infoMessage.MessageId);
         }

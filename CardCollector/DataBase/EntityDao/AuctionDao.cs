@@ -2,21 +2,30 @@
 using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
+using CardCollector.Others;
 using Microsoft.EntityFrameworkCore;
 
 namespace CardCollector.DataBase.EntityDao
 {
     public static class AuctionDao
     {
-        /* Таблица stickers в представлении Entity Framework */
-        private static readonly DbSet<AuctionEntity> Table = CardCollectorDatabase.Instance.Auction;
+        private static readonly CardCollectorDatabase Instance = CardCollectorDatabase.GetSpecificInstance(typeof(AuctionDao));
+        /* Таблица auction в представлении Entity Framework */
+        private static readonly DbSet<AuctionEntity> Table = Instance.Auction;
         
         public static async Task<List<AuctionEntity>> GetProducts(string stickerId)
         {
-            /* Заменил цикл на LINQ выражение и тип возвращаемого значение - список позиций,
+            /* Заменил цикл на LINQ выражение и тип возвращаемого значения - список позиций,
              так как один и тот же стикер может продавать несколько людей */
             return await Table
                 .Where(e => e.StickerId == stickerId).ToListAsync();
+        }
+
+        public static async Task<TraderInformation> GetTraderInfo(int productId)
+        {
+            var product = await Table.FirstAsync(item => item.Id == productId);
+            var trader = await UserDao.GetById(product.Trader);
+            return new TraderInformation(product) {Username = trader.Username};
         }
 
         public static async Task<int> GetTotalQuantity(string stickerId)
@@ -36,18 +45,28 @@ namespace CardCollector.DataBase.EntityDao
             return stickersList.Where(e => entityList.Contains(e.Id));
         }
         //добавляем объект в аукцион
-        public static void AddNew(AuctionEntity product)
+        public static async void AddNew(AuctionEntity product)
         {
-            Table.AddAsync(product);
+            await Table.AddAsync(product);
+            await Instance.SaveChangesAsync();
         }
         //удаляем проданный объект
-        public static void SoldStikers(string hash)
+        public static async void DeleteRow(int productId)
         {
-            var list = Table
-                .Where(c => c.StickerId == hash)
-                .FirstOrDefault();
-            
-            Table.Remove(list);
+            if (await Table.FirstOrDefaultAsync(c => c.Id == productId) is not { } item) return;
+            Table.Attach(item);
+            Table.Remove(item);
+            await Instance.SaveChangesAsync();
+        }
+
+        public static async Task<int> GetQuantity(int productId)
+        {
+            return (await Table.FirstAsync(item => item.Id == productId)).Quantity;
+        }
+
+        public static async Task<AuctionEntity> GetProduct(int productId)
+        {
+            return await Table.FirstAsync(item => item.Id == productId);
         }
     }
 }

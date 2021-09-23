@@ -22,5 +22,8 @@ namespace CardCollector.Others
         }
         
         public int Count;
+        
+        
+        public TraderInformation TraderInfo = null;
     }
 }

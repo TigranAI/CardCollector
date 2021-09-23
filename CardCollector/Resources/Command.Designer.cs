@@ -79,6 +79,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to back_to_sticker.
+        /// </summary>
+        internal static string back_to_sticker {
+            get {
+                return ResourceManager.GetString("back_to_sticker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to buy.
         /// </summary>
         internal static string buy_sticker {
