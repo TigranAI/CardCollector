@@ -19,8 +19,7 @@ namespace CardCollector.Commands.CallbackQuery
                     User.Session.SelectedSticker.Count++;
                     await MessageController.EditReplyMarkup(User, CallbackMessageId, Keyboard.GetStickerKeyboard(User.Session));
                 }
-                else await MessageController.AnswerCallbackQuery(User, 
-                    Update.CallbackQuery!.Id, Messages.cant_increase);
+                else await MessageController.AnswerCallbackQuery(User, Update.CallbackQuery!.Id, Messages.cant_increase);
             }
             else if (CallbackData.Contains('-'))
             {
@@ -29,8 +28,7 @@ namespace CardCollector.Commands.CallbackQuery
                     User.Session.SelectedSticker.Count--;
                     await MessageController.EditReplyMarkup(User, CallbackMessageId, Keyboard.GetStickerKeyboard(User.Session));
                 }
-                else await MessageController.AnswerCallbackQuery(User, 
-                    Update.CallbackQuery!.Id, Messages.cant_decrease);
+                else await MessageController.AnswerCallbackQuery(User, Update.CallbackQuery!.Id, Messages.cant_decrease);
             }
         }
 

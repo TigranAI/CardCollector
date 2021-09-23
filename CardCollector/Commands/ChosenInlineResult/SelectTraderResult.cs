@@ -17,6 +17,7 @@ namespace CardCollector.Commands.ChosenInlineResult
             var trader = await AuctionDao.GetTraderInfo(productId);
             var sticker = User.Session.SelectedSticker;
             sticker.TraderInfo = trader;
+            sticker.MaxCount = trader.Quantity;
             var messageSticker = await MessageController.SendSticker(User, User.Session.SelectedSticker.Id);
             var message = await MessageController.SendMessage(User, sticker.ToString(), Keyboard.GetStickerKeyboard(User.Session));
             User.Session.Messages.Add(messageSticker.MessageId);
