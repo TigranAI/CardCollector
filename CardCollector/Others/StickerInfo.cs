@@ -36,7 +36,7 @@ namespace CardCollector.Others
         
         public int GetGemsPrice()
         {
-            return Count * TraderInfo?.PriceCoins ?? PriceCoins;
+            return Count * TraderInfo?.PriceGems ?? PriceGems;
         }
 
         public override string ToString()

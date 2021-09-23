@@ -151,7 +151,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Подтверидте покупку.
+        ///   Looks up a localized string similar to Подтвердите покупку:.
         /// </summary>
         internal static string confirm_buying {
             get {

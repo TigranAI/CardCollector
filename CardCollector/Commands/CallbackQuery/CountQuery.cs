@@ -12,16 +12,9 @@ namespace CardCollector.Commands.CallbackQuery
         public override async Task Execute()
         {
             var buyPositionCount = User.Session.SelectedSticker.Count;
-            var stickerCount = User.Session.State switch
-            {
-                UserState.CollectionMenu => User.Stickers[User.Session.SelectedSticker.Md5Hash].Count,
-                UserState.ShopMenu => await ShopController.GetStickerCount(User.Session.SelectedSticker.Id),
-                UserState.AuctionMenu => User.Session.SelectedSticker.TraderInfo.Quantity,
-                _ => 0
-            };
             if (CallbackData.Contains('+'))
             {
-                if (buyPositionCount < stickerCount || stickerCount == -1)
+                if (buyPositionCount < User.Session.SelectedSticker.MaxCount || User.Session.SelectedSticker.MaxCount == -1)
                 {
                     User.Session.SelectedSticker.Count++;
                     await MessageController.EditReplyMarkup(User, CallbackMessageId, Keyboard.GetStickerKeyboard(User.Session));

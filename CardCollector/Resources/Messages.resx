@@ -121,7 +121,7 @@
         <value>Недостаточно алмазов!</value>
     </data>
     <data name="confirm_buying" xml:space="preserve">
-        <value>Подтверидте покупку</value>
+        <value>Подтвердите покупку:</value>
     </data>
     <data name="are_you_sure" xml:space="preserve">
         <value>Вы уверены?</value>
