@@ -169,6 +169,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Поздравляем! Вы получили стикер.
+        /// </summary>
+        internal static string combined_sticker {
+            get {
+                return ResourceManager.GetString("combined_sticker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Подтвердите покупку:.
         /// </summary>
         internal static string confirm_buying {

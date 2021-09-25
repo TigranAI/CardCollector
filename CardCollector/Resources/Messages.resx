@@ -135,4 +135,7 @@
     <data name="combine_added_only" xml:space="preserve">
         <value>Не удалось добавить все стикеры. Было добавлено только</value>
     </data>
+    <data name="combined_sticker" xml:space="preserve">
+        <value>Поздравляем! Вы получили стикер</value>
+    </data>
 </root>

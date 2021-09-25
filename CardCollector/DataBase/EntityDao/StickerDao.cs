@@ -64,5 +64,10 @@ namespace CardCollector.DataBase.EntityDao
         {
             await Table.AddAsync(sticker);
         }
+
+        public static async Task<List<StickerEntity>> GetListWhere(Func<StickerEntity, bool> func)
+        {
+            return (await Table.ToListAsync()).Where(func).ToList();
+        }
     }
 }

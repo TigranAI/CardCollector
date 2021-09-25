@@ -17,6 +17,15 @@ namespace CardCollector.Resources
             new KeyboardButton[] {Text.shop, Text.auction},
         }) {ResizeKeyboard = true};
 
+        public static InlineKeyboardMarkup BackToFilters(string stickerTitle)
+        {
+            return new InlineKeyboardMarkup(new[]
+            {
+                new[] {InlineKeyboardButton.WithSwitchInlineQuery(Text.send_sticker, stickerTitle)},
+                new[] {InlineKeyboardButton.WithCallbackData(Text.back, $"{Command.back}={Command.clear_chat}")}
+            });
+        }
+
         public static InlineKeyboardMarkup GetSortingMenu(UserState state)
         {
             var keyboard = new List<InlineKeyboardButton[]>
@@ -293,9 +302,14 @@ namespace CardCollector.Resources
                     $"{Command.delete_combine}={id}")});
             }
             keyboard.Add(new []{InlineKeyboardButton.WithCallbackData(Text.cancel, Command.back)});
-            keyboard.Add(session.GetCombineCount() == Constants.COMBINE_COUNT
-                ? new[] {InlineKeyboardButton.WithCallbackData(Text.combine, Command.combine_stickers)}
-                : new[] {InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.add_sticker)});
+            if (session.GetCombineCount() == Constants.COMBINE_COUNT)
+            {
+                session.CalculateCombinePrice();
+                keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(
+                    $"{Text.combine} {session.CombineCoinsPrice}{Text.coin}/{session.CombineGemsPrice}{Text.gem}", 
+                    Command.combine_stickers)});
+            }
+            else keyboard.Add(new[] {InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.add_sticker)});
             return new InlineKeyboardMarkup(keyboard);
         }
 

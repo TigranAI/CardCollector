@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using CardCollector.Resources;
 
 namespace CardCollector.DataBase.Entity
 {
@@ -47,5 +49,15 @@ namespace CardCollector.DataBase.Entity
         
         /* Хеш id стикера для определения его в системе */
         [Column("md5hash"), MaxLength(40)] public string Md5Hash { get; set; }
+
+        public override string ToString()
+        {
+            var str = $"\n{Title} {string.Concat(Enumerable.Repeat(Text.star, Tier))}" +
+                             $"\n{Text.emoji}: {Emoji}" +
+                             $"\n{Text.author}: {Author}" +
+                             $"\n{IncomeCoins}{Text.coin} / {IncomeGems}{Text.gem} {IncomeTime}{Text.time}{Text.minutes}";
+            if (Description != "") str += $"\n\n{Text.description}: {Description}";
+            return str;
+        }
     }
 }

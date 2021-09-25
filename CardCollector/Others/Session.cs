@@ -68,6 +68,18 @@ namespace CardCollector.Others
             Messages.Clear();
         }
 
+        public int CombineCoinsPrice = 0;
+        public int CombineGemsPrice = 0;
+
+        public void CalculateCombinePrice()
+        {
+            var coinsSum = CombineList.Values.Sum(i => 1440 / i.IncomeTime * i.IncomeCoins);
+            var gemsSum = CombineList.Values.Sum(i => 1440 / i.IncomeTime * i.IncomeGems);
+            var multiplier = SelectedSticker.Tier * 0.25 + 1;
+            CombineCoinsPrice = (int)(coinsSum * multiplier);
+            CombineGemsPrice = (int)(gemsSum * multiplier);
+        }
+
         public async Task CalculateIncome()
         {
             IncomeCoins = 0;
