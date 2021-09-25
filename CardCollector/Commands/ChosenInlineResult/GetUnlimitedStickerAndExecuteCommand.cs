@@ -40,8 +40,7 @@ namespace CardCollector.Commands.ChosenInlineResult
             
             // Возвращаем объект, если команда совпала
             foreach (var item in PrivateList.Where(item => item.IsMatches(command)))
-                if(Activator.CreateInstance(item.GetType(), 
-                    user, update, update.ChosenInlineResult.ResultId) is ChosenInlineResult executor)
+                if(Activator.CreateInstance(item.GetType(), user, update) is ChosenInlineResult executor)
                     if (executor.IsMatches(command)) return executor;
         
             // Возвращаем команда не найдена, если код дошел до сюда
