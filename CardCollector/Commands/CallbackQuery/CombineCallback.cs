@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
@@ -24,9 +23,10 @@ namespace CardCollector.Commands.CallbackQuery
                         $"{User.Session.SelectedSticker.Count}{Text.items}", true);
                 }
 
-                if (User.Session.CombineList.ContainsKey(User.Session.SelectedSticker.Md5Hash))
-                    User.Session.CombineList[User.Session.SelectedSticker.Md5Hash].Count += User.Session.SelectedSticker.Count;
-                else User.Session.CombineList.Add(User.Session.SelectedSticker.Md5Hash, User.Session.SelectedSticker);
+                if (!User.Session.CombineList.ContainsKey(User.Session.SelectedSticker.Md5Hash))
+                    User.Session.CombineList.Add(User.Session.SelectedSticker.Md5Hash, User.Session.SelectedSticker);
+                else
+                    User.Session.CombineList[User.Session.SelectedSticker.Md5Hash].Count = User.Session.SelectedSticker.Count;
             }
             await new BackToCombine(User, Update).Execute();
         }
