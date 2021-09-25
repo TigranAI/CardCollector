@@ -9,7 +9,7 @@ using CardCollector.Resources;
 
 namespace CardCollector.Others
 {
-    public class UserSession : IDisposable
+    public class UserSession
     {
         private DateTime _lastAccess = DateTime.Now;
 
@@ -144,12 +144,6 @@ namespace CardCollector.Others
             await ClearMessages();
             SelectedSticker = null;
             CombineList.Clear();
-        }
-
-        public void Dispose()
-        {
-            EndSession();
-            GC.SuppressFinalize(this);
         }
 
         public string GetCombineMessage()

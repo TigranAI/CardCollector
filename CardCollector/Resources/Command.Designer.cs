@@ -295,6 +295,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Остановить.
+        /// </summary>
+        internal static string stop_bot {
+            get {
+                return ResourceManager.GetString("stop_bot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to tier.
         /// </summary>
         internal static string tier {

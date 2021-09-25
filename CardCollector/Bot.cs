@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Timers;
 using CardCollector.DataBase;
 using CardCollector.DataBase.EntityDao;
@@ -7,6 +8,7 @@ using CardCollector.Resources;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using CancellationTokenSource = System.Threading.CancellationTokenSource;
+using Timer = System.Timers.Timer;
 
 namespace CardCollector
 {
@@ -15,6 +17,13 @@ namespace CardCollector
     {
         private static TelegramBotClient _client;
         public static TelegramBotClient Client => _client ??= new TelegramBotClient(AppSettings.TOKEN);
+
+        private static readonly ManualResetEvent _end = new(false);
+        private static readonly Timer _timer = new () {
+            AutoReset = true,
+            Enabled = true,
+            Interval = Constants.SAVING_CHANGES_INTERVAL
+        };
 
         private static readonly IEnumerable<BotCommand> _commands = new[]
         {
@@ -28,22 +37,24 @@ namespace CardCollector
             var cts = new CancellationTokenSource();
             Client.StartReceiving(HandleUpdateAsync, HandleErrorAsync, cancellationToken: cts.Token);
             Client.SetMyCommandsAsync(_commands, BotCommandScope.AllPrivateChats(), cancellationToken: cts.Token);
-            RunMemoryCleaner();
             
-            Console.ReadLine();
+            _timer.Elapsed += SavingChanges;
+            _timer.Elapsed += UserDao.ClearMemory;
+            
+            _end.WaitOne();
+            Logs.LogOut("Stopping program");
+            
             cts.Cancel();
         }
 
-        private static void RunMemoryCleaner()
+        public static void StopProgram()
         {
-            var timer = new Timer
+            _timer.Elapsed += (_, _) =>
             {
-                AutoReset = true,
-                Enabled = true,
-                Interval = Constants.SAVING_CHANGES_INTERVAL
+                _timer.Stop();
+                UserDao.EndOfProgram();
+                _end.Set();
             };
-            timer.Elapsed += SavingChanges;
-            timer.Elapsed += UserDao.ClearMemory;
         }
 
         private static void SavingChanges(object o, ElapsedEventArgs e)

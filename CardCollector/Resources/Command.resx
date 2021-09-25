@@ -102,4 +102,7 @@
     <data name="combine_stickers" xml:space="preserve">
         <value>comb_stickers</value>
     </data>
+    <data name="stop_bot" xml:space="preserve">
+        <value>Остановить</value>
+    </data>
 </root>

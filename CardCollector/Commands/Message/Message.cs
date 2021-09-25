@@ -46,7 +46,9 @@ namespace CardCollector.Commands.Message
                 new DownloadStickerPackMessage(),
 
                 // Команда "Показать пример"
-                new ShowSampleMessage()
+                new ShowSampleMessage(),
+                // Команда "Остановить"
+                new StopBot()
             },
             FileCommandsList = new() {
                 /* Выгрузка файлов к боту */
