@@ -26,6 +26,6 @@ namespace CardCollector.Commands.ChosenInlineResult
         }
 
         public SelectTraderResult() { }
-        public SelectTraderResult(UserEntity user, Update update, string inlineResult) : base(user, update, inlineResult) { }
+        public SelectTraderResult(UserEntity user, Update update) : base(user, update) { }
     }
 }

@@ -31,6 +31,6 @@ namespace CardCollector.Commands.InlineQuery
         }
 
         public ShowAuctionStickers() { }
-        public ShowAuctionStickers(UserEntity user, Update update, string inlineQueryId) : base(user, update, inlineQueryId) { }
+        public ShowAuctionStickers(UserEntity user, Update update) : base(user, update) { }
     }
 }

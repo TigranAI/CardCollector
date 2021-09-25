@@ -147,4 +147,7 @@
     <data name="yes" xml:space="preserve">
         <value>Да</value>
     </data>
+    <data name="select" xml:space="preserve">
+        <value>Выбрать</value>
+    </data>
 </root>

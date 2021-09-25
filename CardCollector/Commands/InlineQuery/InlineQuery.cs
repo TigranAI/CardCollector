@@ -52,16 +52,16 @@ namespace CardCollector.Commands.InlineQuery
             
             // Возвращаем объект, если команда совпала
             foreach (var item in List.Where(item => item.IsMatches(command)))
-                if(Activator.CreateInstance(item.GetType(), user, update, update.InlineQuery.Id) is InlineQuery executor)
+                if(Activator.CreateInstance(item.GetType(), user, update) is InlineQuery executor)
                     if (executor.IsMatches(command)) return executor;
         
             // Возвращаем команда не найдена, если код дошел до сюда
             return new CommandNotFound(user, update, command);
         }
 
-        protected InlineQuery(UserEntity user, Update update, string inlineQueryId) : base(user, update)
+        protected InlineQuery(UserEntity user, Update update) : base(user, update)
         {
-            InlineQueryId = inlineQueryId;
+            InlineQueryId = update.InlineQuery!.Id;
         }
         
         protected InlineQuery() { }

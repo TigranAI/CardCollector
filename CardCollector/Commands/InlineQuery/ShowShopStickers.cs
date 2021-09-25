@@ -31,6 +31,6 @@ namespace CardCollector.Commands.InlineQuery
         }
 
         public ShowShopStickers() { }
-        public ShowShopStickers(UserEntity user, Update update, string inlineQueryId) : base(user, update, inlineQueryId) { }
+        public ShowShopStickers(UserEntity user, Update update) : base(user, update) { }
     }
 }

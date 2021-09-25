@@ -26,8 +26,7 @@ namespace CardCollector.Commands.ChosenInlineResult
         }
         
         public GetUnlimitedStickerAndExecuteCommand() { }
-        public GetUnlimitedStickerAndExecuteCommand(UserEntity user, Update update, string inlineResult)
-            : base(user, update, inlineResult) { }
+        public GetUnlimitedStickerAndExecuteCommand(UserEntity user, Update update) : base(user, update) { }
         
         
         /* Список команд, аналогичный родительскому, только не включает эту команду (unlimited) */

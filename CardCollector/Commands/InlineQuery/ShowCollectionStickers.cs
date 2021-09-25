@@ -32,6 +32,6 @@ namespace CardCollector.Commands.InlineQuery
         }
 
         public ShowCollectionStickers() { }
-        public ShowCollectionStickers(UserEntity user, Update update, string inlineQueryId) : base(user, update, inlineQueryId) { }
+        public ShowCollectionStickers(UserEntity user, Update update) : base(user, update) { }
     }
 }

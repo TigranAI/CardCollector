@@ -34,6 +34,6 @@ namespace CardCollector.Commands.InlineQuery
         }
 
         public ShowStickersInBotChat() { }
-        public ShowStickersInBotChat(UserEntity user, Update update, string inlineQueryId) : base(user, update, inlineQueryId) { }
+        public ShowStickersInBotChat(UserEntity user, Update update) : base(user, update) { }
     }
 }

@@ -19,7 +19,7 @@ namespace CardCollector.Commands.InlineQuery
             var filter = Update.InlineQuery!.Query;
             // Получаем список стикеров
             var stickersList = await User.GetStickersList(filter);
-            var results = stickersList.ToTelegramResults(Command.send_sticker);
+            var results = stickersList.ToTelegramResults(Command.send_sticker, false);
             // Посылаем пользователю ответ на его запрос
             await MessageController.AnswerInlineQuery(InlineQueryId, results);
         }
@@ -32,6 +32,6 @@ namespace CardCollector.Commands.InlineQuery
         }
 
         public ShowStickersInGroup() { }
-        public ShowStickersInGroup(UserEntity user, Update update, string inlineQueryId) : base(user, update, inlineQueryId) { }
+        public ShowStickersInGroup(UserEntity user, Update update) : base(user, update) { }
     }
 }

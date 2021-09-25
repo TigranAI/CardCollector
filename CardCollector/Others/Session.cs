@@ -24,6 +24,10 @@ namespace CardCollector.Others
         
         /* Выбранный пользователем стикер для покупки (продажи, слияния) */
         public StickerInfo SelectedSticker { get; set; }
+        
+        /* Выбранные пользователем стикеры для слияния */
+        public List<StickerInfo> CombineList { get; set; } = new();
+        
 
         public void UpdateLastAccess()
         {
@@ -120,6 +124,7 @@ namespace CardCollector.Others
         {
             await ClearMessages();
             SelectedSticker = null;
+            CombineList.Clear();
         }
         
         public void Dispose()

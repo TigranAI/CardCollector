@@ -31,6 +31,6 @@ namespace CardCollector.Commands.ChosenInlineResult
         }
 
         public SelectStickerInlineResult() { }
-        public SelectStickerInlineResult(UserEntity user, Update update, string inlineResult) : base(user, update, inlineResult) { }
+        public SelectStickerInlineResult(UserEntity user, Update update) : base(user, update) { }
     }
 }

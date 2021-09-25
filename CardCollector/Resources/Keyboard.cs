@@ -195,17 +195,19 @@ namespace CardCollector.Resources
 
         public static InlineKeyboardMarkup GetCollectionStickerKeyboard(StickerInfo stickerInfo)
         {
-            return new InlineKeyboardMarkup(new[] {
+            var keyboard = new List<InlineKeyboardButton[]>
+            {
                 new[] {InlineKeyboardButton.WithSwitchInlineQuery(Text.send_sticker, stickerInfo.Title)},
                 new[] {InlineKeyboardButton.WithCallbackData($"{Text.sell_on_auction} ({stickerInfo.Count})", Command.confirm_selling)},
                 new[]
                 {
                     InlineKeyboardButton.WithCallbackData(Text.minus, $"{Command.count}-"),
                     InlineKeyboardButton.WithCallbackData(Text.plus, $"{Command.count}+"),
-                },
-                new[] {InlineKeyboardButton.WithCallbackData(Text.combine, Command.combine)},
-                new[] {InlineKeyboardButton.WithCallbackData(Text.back, $"{Command.back}={Command.clear_chat}")},
-            });
+                }
+            };
+            if (stickerInfo.Tier != 5) keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.combine, Command.combine)});
+            keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.back, $"{Command.back}={Command.clear_chat}")});
+            return new InlineKeyboardMarkup(keyboard);
         }
 
         public static InlineKeyboardMarkup GetAuctionStickerKeyboard()
@@ -262,6 +264,7 @@ namespace CardCollector.Resources
                 UserState.AuctionMenu when session.SelectedSticker.TraderInfo is not null => GetAuctionProductKeyboard(session.SelectedSticker),
                 UserState.AuctionMenu => GetAuctionStickerKeyboard(),
                 UserState.ShopMenu => GetShopStickerKeyboard(session.SelectedSticker),
+                UserState.CollectionMenu when session.CombineList.Count > 0 => GetCollectionStickerKeyboard(session.SelectedSticker),
                 UserState.CollectionMenu => GetCollectionStickerKeyboard(session.SelectedSticker),
                 _ => GetStickerKeyboard(session.SelectedSticker)
             };

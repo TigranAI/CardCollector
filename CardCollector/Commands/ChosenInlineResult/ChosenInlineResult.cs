@@ -50,18 +50,16 @@ namespace CardCollector.Commands.ChosenInlineResult
             
             // Возвращаем объект, если команда совпала
             foreach (var item in List.Where(item => item.IsMatches(command)))
-                if(Activator.CreateInstance(item.GetType(), 
-                    user, update, update.ChosenInlineResult.ResultId) is ChosenInlineResult executor)
+                if(Activator.CreateInstance(item.GetType(), user, update) is ChosenInlineResult executor)
                     if (executor.IsMatches(command)) return executor;
         
             // Возвращаем команда не найдена, если код дошел до сюда
             return new CommandNotFound(user, update, command);
         }
 
-        protected ChosenInlineResult(UserEntity user, Update update, string inlineResult)
-            : base(user, update)
+        protected ChosenInlineResult(UserEntity user, Update update) : base(user, update)
         {
-            InlineResult = inlineResult;
+            InlineResult = update.ChosenInlineResult!.ResultId;
         }
 
         protected ChosenInlineResult() { }
