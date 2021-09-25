@@ -21,11 +21,13 @@ namespace CardCollector.Commands.CallbackQuery
             else
             {
                 await User.ClearChat();
-                
                 User.Cash.Coins -= User.Session.CombineCoinsPrice;
                 User.Cash.Gems -= User.Session.CombineGemsPrice;
                 foreach (var item in User.Session.CombineList.Values)
+                {
+                    await User.Session.PayOutOne(item.Md5Hash);
                     User.Stickers[item.Md5Hash].Count -= item.Count;
+                }
                 var authors = User.Session.CombineList.Values.Select(i => i.Author).ToList();
                 var tier = User.Session.CombineList.Values.First().Tier;
                 var rnd = new Random();
