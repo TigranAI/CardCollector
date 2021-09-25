@@ -52,7 +52,7 @@ namespace CardCollector
             _timer.Elapsed += (_, _) =>
             {
                 _timer.Stop();
-                UserDao.EndOfProgram();
+                UserDao.ClearMemory();
                 _end.Set();
             };
         }

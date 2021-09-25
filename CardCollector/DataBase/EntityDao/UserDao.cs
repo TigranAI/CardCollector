@@ -6,7 +6,6 @@ using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using Microsoft.EntityFrameworkCore;
 using Telegram.Bot.Types;
-using File = System.IO.File;
 
 namespace CardCollector.DataBase.EntityDao
 {
@@ -82,7 +81,7 @@ namespace CardCollector.DataBase.EntityDao
             }
         }
 
-        public static void EndOfProgram()
+        public static void ClearMemory()
         {
             foreach (var (id, user) in ActiveUsers)
             {

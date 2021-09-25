@@ -43,7 +43,7 @@ namespace CardCollector.Commands.Message.DocumentMessage
                 await MessageController.EditMessage(User, message.MessageId, Messages.deleting_files);
                 File.Delete("pack.zip");
                 Directory.Delete("pack", true);
-                /* Сообщаем пользователю, что список стикеров обновится через 1.5 часа */
+                /* Сообщаем пользователю, что список стикеров обновится через 15 минут */
                 await MessageController.EditMessage(User, message.MessageId, Messages.stickers_will_be_updated);
             }
             catch (Exception)
@@ -101,7 +101,7 @@ namespace CardCollector.Commands.Message.DocumentMessage
                 async void SavingStickersToDatabase(object sender, ElapsedEventArgs args)
                 {
                     var stickerSet = (await Bot.Client.GetStickerSetAsync(
-                        $"{(isAnimated ? "animated" : "static")}_by_{AppSettings.NAME}")).Stickers.ToList();
+                        $"{(isAnimated ? "a" : "s")}{User.Id}_by_{AppSettings.NAME}")).Stickers.ToList();
                     Logs.LogOut("Saving " + newStickers.Count + " stickers from " + stickerSet.Count);
                     for (var i = 0; i < newStickers.Count; i++)
                     {
@@ -151,12 +151,12 @@ namespace CardCollector.Commands.Message.DocumentMessage
             try
             {
                 if (isAnimated)
-                    await Bot.Client.AddAnimatedStickerToSetAsync(User.Id, $"animated_by_{AppSettings.NAME}",
+                    await Bot.Client.AddAnimatedStickerToSetAsync(User.Id, $"a{User.Id}_by_{AppSettings.NAME}",
                     new InputFileStream(fileStream), emoji);
                 else
                 {
                     var onlineFile = await Bot.Client.UploadStickerFileAsync(User.Id, fileInfo.OpenRead());
-                    await Bot.Client.AddStickerToSetAsync(User.Id, $"static_by_{AppSettings.NAME}",
+                    await Bot.Client.AddStickerToSetAsync(User.Id, $"s{User.Id}_by_{AppSettings.NAME}",
                         new InputMedia(onlineFile.FileId), emoji);
                 }
             }
@@ -165,12 +165,12 @@ namespace CardCollector.Commands.Message.DocumentMessage
                 fileStream.Close();
                 fileStream = fileInfo.OpenRead();
                 if (isAnimated) 
-                    await Bot.Client.CreateNewAnimatedStickerSetAsync(User.Id, $"animated_by_{AppSettings.NAME}",
+                    await Bot.Client.CreateNewAnimatedStickerSetAsync(User.Id, $"a{User.Id}_by_{AppSettings.NAME}",
                     "animated", new InputFileStream(fileStream), emoji);
                 else
                 {
                     var onlineFile = await Bot.Client.UploadStickerFileAsync(User.Id, fileInfo.OpenRead());
-                    await Bot.Client.CreateNewStickerSetAsync(User.Id, $"static_by_{AppSettings.NAME}",
+                    await Bot.Client.CreateNewStickerSetAsync(User.Id, $"s{User.Id}_by_{AppSettings.NAME}",
                         "static", new InputMedia(onlineFile.FileId), emoji);
                 }
             }
