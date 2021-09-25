@@ -25,6 +25,9 @@ namespace CardCollector.Commands.CallbackQuery
         /* Id сообщения, под которым нажали на кнопку */
         protected int CallbackMessageId;
         
+        /* Id запроса */
+        protected string CallbackQueryId;
+        
         /* Список команд, распознаваемых ботом */
         private static readonly List<CallbackQuery> List = new()
         {
@@ -52,6 +55,14 @@ namespace CardCollector.Commands.CallbackQuery
             new BuyStickerQuery(),
             /* Команда возврата к стикеру */
             new BackToStickerQuery(),
+            /* Команда возврата к комбинированию */
+            new BackToCombine(),
+            /* Команда добавления к комбинироавнию */
+            new CombineCallback(),
+            /* Команда удаления из комбинации */
+            new DeleteCombine(),
+            /* Команда удаления из комбинации */
+            new CombineStickers(),
             
             /* Отмена в момент выбора "значения фильтра", не в самом меню */
             new BackToFiltersMenu(),
@@ -87,7 +98,9 @@ namespace CardCollector.Commands.CallbackQuery
         {
             CallbackData = update.CallbackQuery!.Data;
             CallbackMessageId = update.CallbackQuery!.Message!.MessageId;
+            CallbackQueryId = update.CallbackQuery!.Id;
         }
+
         protected CallbackQuery() { }
     }
 }

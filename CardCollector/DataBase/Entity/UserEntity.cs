@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Others;
 using CardCollector.Resources;
+using Telegram.Bot.Types;
 
 namespace CardCollector.DataBase.Entity
 {
@@ -46,13 +47,15 @@ namespace CardCollector.DataBase.Entity
         }
         
         /* Возвращает стикеры пользователя */
-        public async Task<IEnumerable<StickerEntity>> GetStickersList(string filter)
+        public async Task<IEnumerable<StickerEntity>> GetStickersList(string filter, int tier = -1)
         {
             if (Constants.UNLIMITED_ALL_STICKERS) return await StickerDao.GetAll(filter);
-            return Stickers.Values
+            var result = Stickers.Values
                 .Where(relation => relation.Count > 0)
                 .Select(rel => StickerDao.GetStickerByHash(rel.ShortHash).Result)
                 .Where(sticker => sticker.Title.Contains(filter, StringComparison.CurrentCultureIgnoreCase));
+            if (tier != -1) result = result.Where(sticker => sticker.Tier == tier);
+            return result;
         }
 
         public UserEntity()

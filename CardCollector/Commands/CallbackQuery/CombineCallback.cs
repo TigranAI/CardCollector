@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using Telegram.Bot.Types;
@@ -10,8 +12,23 @@ namespace CardCollector.Commands.CallbackQuery
         protected override string CommandText => Command.combine;
         public override async Task Execute()
         {
-            User.Session.CombineList.Add(User.Session.SelectedSticker);
-            
+            var combineCount = User.Session.GetCombineCount();
+            if (combineCount == Constants.COMBINE_COUNT)
+                await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.cant_combine, true);
+            else
+            {
+                if (combineCount + User.Session.SelectedSticker.Count > Constants.COMBINE_COUNT)
+                {
+                    User.Session.SelectedSticker.Count = Constants.COMBINE_COUNT - combineCount;
+                    await MessageController.AnswerCallbackQuery(User, CallbackQueryId, $"{Messages.combine_added_only} " +
+                        $"{User.Session.SelectedSticker.Count}{Text.items}", true);
+                }
+
+                if (User.Session.CombineList.ContainsKey(User.Session.SelectedSticker.Md5Hash))
+                    User.Session.CombineList[User.Session.SelectedSticker.Md5Hash].Count += User.Session.SelectedSticker.Count;
+                else User.Session.CombineList.Add(User.Session.SelectedSticker.Md5Hash, User.Session.SelectedSticker);
+            }
+            await new BackToCombine(User, Update).Execute();
         }
 
         public CombineCallback() { }

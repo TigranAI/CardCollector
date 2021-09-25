@@ -61,6 +61,33 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Добавить.
+        /// </summary>
+        internal static string add {
+            get {
+                return ResourceManager.GetString("add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Добавить стикер.
+        /// </summary>
+        internal static string add_sticker {
+            get {
+                return ResourceManager.GetString("add_sticker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Добавлено стикеров.
+        /// </summary>
+        internal static string added_stickers {
+            get {
+                return ResourceManager.GetString("added_stickers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Все.
         /// </summary>
         internal static string all {
@@ -165,6 +192,15 @@ namespace CardCollector.Resources {
         internal static string count {
             get {
                 return ResourceManager.GetString("count", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Удалить.
+        /// </summary>
+        internal static string delete {
+            get {
+                return ResourceManager.GetString("delete", resourceCulture);
             }
         }
         
@@ -340,6 +376,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выбрать другой стикер.
+        /// </summary>
+        internal static string select_another {
+            get {
+                return ResourceManager.GetString("select_another", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Выставить на аукцион.
         /// </summary>
         internal static string sell_on_auction {
@@ -417,6 +462,15 @@ namespace CardCollector.Resources {
         internal static string start {
             get {
                 return ResourceManager.GetString("start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Стикер.
+        /// </summary>
+        internal static string sticker {
+            get {
+                return ResourceManager.GetString("sticker", resourceCulture);
             }
         }
         

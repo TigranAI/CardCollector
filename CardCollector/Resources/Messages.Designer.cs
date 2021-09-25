@@ -88,6 +88,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Не удалось добавить стикеры. Необходимое количество уже собрано..
+        /// </summary>
+        internal static string cant_combine {
+            get {
+                return ResourceManager.GetString("cant_combine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Невозможно уменьшить количество стикеров!.
         /// </summary>
         internal static string cant_decrease {
@@ -147,6 +156,15 @@ namespace CardCollector.Resources {
         internal static string coins {
             get {
                 return ResourceManager.GetString("coins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Не удалось добавить все стикеры. Было добавлено только.
+        /// </summary>
+        internal static string combine_added_only {
+            get {
+                return ResourceManager.GetString("combine_added_only", resourceCulture);
             }
         }
         
@@ -367,7 +385,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вы получили.
+        ///   Looks up a localized string similar to Получено.
         /// </summary>
         internal static string you_collected {
             get {
@@ -385,7 +403,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ваш баланс.
+        ///   Looks up a localized string similar to Баланс.
         /// </summary>
         internal static string your_cash {
             get {

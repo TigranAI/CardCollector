@@ -15,6 +15,7 @@ namespace CardCollector.Commands.CallbackQuery
             /* Удаляем пользователя из очереди */
             EnterEmojiMessage.RemoveFromQueue(User.Id);
             User.Session.SelectedSticker = null;
+            User.Session.CombineList.Clear();
             /* Очищаем чат, если был передан параметр очистки */
             var clearChat = CallbackData.Contains(Command.clear_chat);
             if (clearChat) await User.ClearChat();

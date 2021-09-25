@@ -150,4 +150,22 @@
     <data name="select" xml:space="preserve">
         <value>Выбрать</value>
     </data>
+    <data name="select_another" xml:space="preserve">
+        <value>Выбрать другой стикер</value>
+    </data>
+    <data name="add" xml:space="preserve">
+        <value>Добавить</value>
+    </data>
+    <data name="added_stickers" xml:space="preserve">
+        <value>Добавлено стикеров</value>
+    </data>
+    <data name="sticker" xml:space="preserve">
+        <value>Стикер</value>
+    </data>
+    <data name="add_sticker" xml:space="preserve">
+        <value>Добавить стикер</value>
+    </data>
+    <data name="delete" xml:space="preserve">
+        <value>Удалить</value>
+    </data>
 </root>

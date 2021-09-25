@@ -97,13 +97,13 @@
         <value>Несобранная прибыль</value>
     </data>
     <data name="you_collected" xml:space="preserve">
-        <value>Вы получили</value>
+        <value>Получено</value>
     </data>
     <data name="menu_message" xml:space="preserve">
         <value>Вы можете выбрать одну из опций ниже</value>
     </data>
     <data name="your_cash" xml:space="preserve">
-        <value>Ваш баланс</value>
+        <value>Баланс</value>
     </data>
     <data name="cant_increase" xml:space="preserve">
         <value>Невозможно увеличить количество стикеров!</value>
@@ -128,5 +128,11 @@
     </data>
     <data name="you_sold" xml:space="preserve">
         <value>Вы продали</value>
+    </data>
+    <data name="cant_combine" xml:space="preserve">
+        <value>Не удалось добавить стикеры. Необходимое количество уже собрано.</value>
+    </data>
+    <data name="combine_added_only" xml:space="preserve">
+        <value>Не удалось добавить все стикеры. Было добавлено только</value>
     </data>
 </root>

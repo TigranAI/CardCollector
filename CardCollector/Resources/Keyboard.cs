@@ -205,7 +205,7 @@ namespace CardCollector.Resources
                     InlineKeyboardButton.WithCallbackData(Text.plus, $"{Command.count}+"),
                 }
             };
-            if (stickerInfo.Tier != 5) keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.combine, Command.combine)});
+            if (stickerInfo.Tier != 5) keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData($"{Text.combine} ({stickerInfo.Count})", Command.combine)});
             keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.back, $"{Command.back}={Command.clear_chat}")});
             return new InlineKeyboardMarkup(keyboard);
         }
@@ -264,12 +264,41 @@ namespace CardCollector.Resources
                 UserState.AuctionMenu when session.SelectedSticker.TraderInfo is not null => GetAuctionProductKeyboard(session.SelectedSticker),
                 UserState.AuctionMenu => GetAuctionStickerKeyboard(),
                 UserState.ShopMenu => GetShopStickerKeyboard(session.SelectedSticker),
-                UserState.CollectionMenu when session.CombineList.Count > 0 => GetCollectionStickerKeyboard(session.SelectedSticker),
+                UserState.CollectionMenu when session.CombineList.Count > 0 => GetCombineStickerKeyboard(session.SelectedSticker),
                 UserState.CollectionMenu => GetCollectionStickerKeyboard(session.SelectedSticker),
                 _ => GetStickerKeyboard(session.SelectedSticker)
             };
         }
-        
+
+        public static InlineKeyboardMarkup GetCombineStickerKeyboard(StickerInfo stickerInfo)
+        {
+            return new InlineKeyboardMarkup(new[] {
+                new[] {InlineKeyboardButton.WithCallbackData($"{Text.add} ({stickerInfo.Count})", Command.combine)},
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(Text.minus, $"{Command.count}-"),
+                    InlineKeyboardButton.WithCallbackData(Text.plus, $"{Command.count}+"),
+                },
+                new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.back_to_combine)},
+                new[] {InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.select_another)},
+            });
+        }
+
+        public static InlineKeyboardMarkup GetCombineKeyboard(UserSession session)
+        {
+            var keyboard = new List<InlineKeyboardButton[]>();
+            foreach (var (id, _) in session.CombineList)
+            {
+                keyboard.Add(new []{InlineKeyboardButton.WithCallbackData($"{Text.delete} {Text.sticker} {keyboard.Count + 1}",
+                    $"{Command.delete_combine}={id}")});
+            }
+            keyboard.Add(new []{InlineKeyboardButton.WithCallbackData(Text.cancel, Command.back)});
+            keyboard.Add(session.GetCombineCount() == Constants.COMBINE_COUNT
+                ? new[] {InlineKeyboardButton.WithCallbackData(Text.combine, Command.combine_stickers)}
+                : new[] {InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.add_sticker)});
+            return new InlineKeyboardMarkup(keyboard);
+        }
+
         /* Клавиатура, отображаемая вместе с сообщением профиля */
         public static InlineKeyboardMarkup GetProfileKeyboard(UserEntity user)
         {

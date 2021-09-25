@@ -79,6 +79,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to back_to_combine.
+        /// </summary>
+        internal static string back_to_combine {
+            get {
+                return ResourceManager.GetString("back_to_combine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to back_to_sticker.
         /// </summary>
         internal static string back_to_sticker {
@@ -133,6 +142,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to comb_stickers.
+        /// </summary>
+        internal static string combine_stickers {
+            get {
+                return ResourceManager.GetString("combine_stickers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to confirm_buying.
         /// </summary>
         internal static string confirm_buying {
@@ -156,6 +174,15 @@ namespace CardCollector.Resources {
         internal static string count {
             get {
                 return ResourceManager.GetString("count", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to delete.
+        /// </summary>
+        internal static string delete_combine {
+            get {
+                return ResourceManager.GetString("delete_combine", resourceCulture);
             }
         }
         

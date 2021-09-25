@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
@@ -21,13 +22,13 @@ namespace CardCollector.Others
 
         /* Текущее состояние пользователя */
         public UserState State = UserState.Default;
-        
+
         /* Выбранный пользователем стикер для покупки (продажи, слияния) */
         public StickerInfo SelectedSticker { get; set; }
-        
+
         /* Выбранные пользователем стикеры для слияния */
-        public List<StickerInfo> CombineList { get; set; } = new();
-        
+        public Dictionary<string, StickerInfo> CombineList { get; set; } = new();
+
 
         public void UpdateLastAccess()
         {
@@ -99,6 +100,7 @@ namespace CardCollector.Others
                 IncomeCoins += stickerInfo.IncomeCoins * multiplier;
                 IncomeGems += stickerInfo.IncomeGems * multiplier;
             }
+
             user.Cash.Coins += IncomeCoins;
             user.Cash.Gems += IncomeGems;
         }
@@ -120,17 +122,33 @@ namespace CardCollector.Others
             user.Cash.Gems += IncomeGems;
         }
 
+        public int GetCombineCount()
+        {
+            return CombineList.Values.Sum(e => e.Count);
+        }
+
         public async void EndSession()
         {
             await ClearMessages();
             SelectedSticker = null;
             CombineList.Clear();
         }
-        
+
         public void Dispose()
         {
             EndSession();
             GC.SuppressFinalize(this);
+        }
+
+        public string GetCombineMessage()
+        {
+            var message = $"{Text.added_stickers} {GetCombineCount()}/{Constants.COMBINE_COUNT}:";
+            var i = 0;
+            foreach (var sticker in CombineList.Values){
+                message += $"\n{Text.sticker} {i + 1}: {sticker.Title} {sticker.Count}{Text.items}";
+                ++i;
+            }
+            return message;
         }
     }
 }

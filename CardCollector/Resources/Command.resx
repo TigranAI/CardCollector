@@ -93,4 +93,13 @@
     <data name="back_to_sticker" xml:space="preserve">
         <value>back_to_sticker</value>
     </data>
+    <data name="back_to_combine" xml:space="preserve">
+        <value>back_to_combine</value>
+    </data>
+    <data name="delete_combine" xml:space="preserve">
+        <value>delete</value>
+    </data>
+    <data name="combine_stickers" xml:space="preserve">
+        <value>comb_stickers</value>
+    </data>
 </root>

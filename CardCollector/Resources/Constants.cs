@@ -10,7 +10,7 @@ namespace CardCollector.Resources
         /* Время кэширования результатов @имя_бота команд */
         public const int INLINE_RESULTS_CACHE_TIME = 1;
         /* Включает бесконечные стикеры без наличия их в коллекции */
-        public static readonly bool UNLIMITED_ALL_STICKERS = DEBUG;
+        public static readonly bool UNLIMITED_ALL_STICKERS = !DEBUG;
 
 
         /* Уровни привилегий пользователей системы */
@@ -19,5 +19,6 @@ namespace CardCollector.Resources
         public const int PROGRAMMER_PRIVILEGE_LEVEL = 5;
         public const int ARTIST_PRIVILEGE_LEVEL = 4;
         public const int SESSION_ACTIVE_PERIOD = DEBUG ? 1 : 60;
+        public const int COMBINE_COUNT = 5;
     }
 }
