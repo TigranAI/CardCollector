@@ -89,12 +89,12 @@ namespace CardCollector
                 /* Фильтруем по цене алмазов ОТ */
                 if (dict[Command.price_gems_from] is int PGF && PGF != 0)
                     list = list.Where(item => state == UserState.AuctionMenu
-                        ? AuctionDao.HaveAny(item.Id, i => i.PriceCoins >= PGF)
+                        ? AuctionDao.HaveAny(item.Id, i => i.PriceGems >= PGF)
                         : item.PriceGems >= PGF);
                 /* Фильтруем по цене адмазов ДО */
                 if (dict[Command.price_gems_to] is int PGT && PGT != 0)
                     list = list.Where(item => state == UserState.AuctionMenu
-                        ? AuctionDao.HaveAny(item.Id, i => i.PriceCoins <= PGT)
+                        ? AuctionDao.HaveAny(item.Id, i => i.PriceGems <= PGT)
                         : item.PriceGems <= PGT);
             }
             /* Сортируем список, если тип сортировки установлен */
