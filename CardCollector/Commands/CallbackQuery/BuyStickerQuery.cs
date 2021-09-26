@@ -63,6 +63,7 @@ namespace CardCollector.Commands.CallbackQuery
             catch (Exception)
             {
                 await MessageController.AnswerCallbackQuery(User, Update.CallbackQuery!.Id, Messages.not_enougth_stickers);
+                await new BackToStickerQuery(User, Update).Execute();
             }
         }
 
