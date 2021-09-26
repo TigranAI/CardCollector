@@ -20,16 +20,10 @@ namespace CardCollector.Controllers
         count - количество продаваемых стикеров*/
         public static async Task SellCard(UserEntity user, int priceCoins, int priceGems)
         {
-            /* Учитывая, что мы будем управлять кнопками + и -, то сюда никогда не поступят ложные данные
-             решил метод упростить и задачу проверки переложил на взаимодействие с ботом 
-             Пускай сам аукцион делает только то - что должен, проверки в сделку не входили
-             Также в сессии пользователя теперь есть данные о выбранном текущем стикере, 
-             так что можно не передавать хеш код  и количество */
             //подтверждаем действие
             var hash = user.Session.SelectedSticker.Md5Hash;
             user.Stickers[hash].Count -= user.Session.SelectedSticker.Count;
-            /* Пока не думаю, что стоит сразу начислять сумму, пускай останется на будущее
-            user.Cash.Coins += price * count;*/
+            /* user.Cash.Coins += price * count; */
             var product = new AuctionEntity
             {
                 PriceCoins = priceCoins,
@@ -38,7 +32,6 @@ namespace CardCollector.Controllers
                 StickerId = user.Session.SelectedSticker.Id,
                 Trader = user.Id
             };
-            // TODO реализовать добавление позиции на аукцион
             AuctionDao.AddNew(product);
         }
         

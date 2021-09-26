@@ -141,4 +141,19 @@
     <data name="please_enter_price" xml:space="preserve">
         <value>Пожалуйста, введите положительное целое число</value>
     </data>
+    <data name="current_price" xml:space="preserve">
+        <value>Текущая стоимость</value>
+    </data>
+    <data name="enter_your_coins_price" xml:space="preserve">
+        <value>Введите вашу стоимость в монетах</value>
+    </data>
+    <data name="enter_your_gems_price" xml:space="preserve">
+        <value>Введите вашу стоимость в алмазах</value>
+    </data>
+    <data name="confirm_selling" xml:space="preserve">
+        <value>Подтвердите выставление</value>
+    </data>
+    <data name="successfully_selling" xml:space="preserve">
+        <value>Товар успешно попал на аукцион</value>
+    </data>
 </root>

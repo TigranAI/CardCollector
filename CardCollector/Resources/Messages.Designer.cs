@@ -187,11 +187,29 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Подтвердите выставление.
+        /// </summary>
+        internal static string confirm_selling {
+            get {
+                return ResourceManager.GetString("confirm_selling", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Текущие примененные фильтры:.
         /// </summary>
         internal static string current_filters {
             get {
                 return ResourceManager.GetString("current_filters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Текущая стоимость.
+        /// </summary>
+        internal static string current_price {
+            get {
+                return ResourceManager.GetString("current_price", resourceCulture);
             }
         }
         
@@ -237,6 +255,24 @@ namespace CardCollector.Resources {
         internal static string enter_only_one_emoji {
             get {
                 return ResourceManager.GetString("enter_only_one_emoji", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введите вашу стоимость в монетах.
+        /// </summary>
+        internal static string enter_your_coins_price {
+            get {
+                return ResourceManager.GetString("enter_your_coins_price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введите вашу стоимость в алмазах.
+        /// </summary>
+        internal static string enter_your_gems_price {
+            get {
+                return ResourceManager.GetString("enter_your_gems_price", resourceCulture);
             }
         }
         
@@ -354,6 +390,15 @@ namespace CardCollector.Resources {
         internal static string stickers_will_be_updated {
             get {
                 return ResourceManager.GetString("stickers_will_be_updated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Товар успешно попал на аукцион.
+        /// </summary>
+        internal static string successfully_selling {
+            get {
+                return ResourceManager.GetString("successfully_selling", resourceCulture);
             }
         }
         

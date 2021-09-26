@@ -66,7 +66,7 @@ namespace CardCollector.Commands.CallbackQuery
             /* Команда удаления из комбинации */
             new CombineStickers(),
             //команда подтверждения выставления на аукцион
-            new PutForAuctionPart2Query(),
+            new ConfirmationSellingQuery(),
             /* Отмена в момент выбора "значения фильтра", не в самом меню */
             new BackToFiltersMenu(),
             /* Очистка чата */

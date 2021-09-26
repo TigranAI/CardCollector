@@ -76,6 +76,13 @@ namespace CardCollector.Resources
             new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.cancel)},
         });
 
+        /* Клавиатура с отменой и выставлением */
+        public static readonly InlineKeyboardMarkup AuctionPutCancelKeyboard = new (new[]
+        {
+            new[] {InlineKeyboardButton.WithCallbackData(Text.sell_on_auction, Command.confirm_selling)},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.cancel)},
+        });
+
         /* Клавиатура меню выбора цен */
         public static readonly InlineKeyboardMarkup PriceOptions = new (new[]
         {
@@ -207,7 +214,7 @@ namespace CardCollector.Resources
             var keyboard = new List<InlineKeyboardButton[]>
             {
                 new[] {InlineKeyboardButton.WithSwitchInlineQuery(Text.send_sticker, stickerInfo.Title)},
-                new[] {InlineKeyboardButton.WithCallbackData($"{Text.sell_on_auction} ({stickerInfo.Count})", Command.confirm_selling)},
+                new[] {InlineKeyboardButton.WithCallbackData($"{Text.sell_on_auction} ({stickerInfo.Count})", Command.sell_on_auction)},
                 new[]
                 {
                     InlineKeyboardButton.WithCallbackData(Text.minus, $"{Command.count}-"),

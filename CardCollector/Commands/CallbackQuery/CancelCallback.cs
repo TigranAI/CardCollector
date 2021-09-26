@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using CardCollector.Commands.Message.TextMessage;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using Telegram.Bot.Types;
@@ -12,6 +13,9 @@ namespace CardCollector.Commands.CallbackQuery
         {
             User.Session.State = UserState.Default;
             User.Session.SelectedSticker = null;
+            EnterEmojiMessage.RemoveFromQueue(User.Id);
+            EnterCoinsPriceMessage.RemoveFromQueue(User.Id);
+            EnterGemsPriceMessage.RemoveFromQueue(User.Id);
             await User.ClearChat();
         }
 

@@ -19,93 +19,87 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="collect_income" xml:space="preserve">
-        <value>collect_income</value>
+        <value>AAH</value>
     </data>
     <data name="author" xml:space="preserve">
-        <value>author</value>
+        <value>AAA</value>
     </data>
     <data name="tier" xml:space="preserve">
-        <value>tier</value>
+        <value>ABB</value>
     </data>
     <data name="emoji" xml:space="preserve">
-        <value>emoji</value>
+        <value>AAP</value>
     </data>
     <data name="sort" xml:space="preserve">
-        <value>sort</value>
+        <value>ABA</value>
     </data>
     <data name="cancel" xml:space="preserve">
-        <value>cancel</value>
+        <value>AAF</value>
     </data>
     <data name="set" xml:space="preserve">
-        <value>set</value>
+        <value>AAY</value>
     </data>
     <data name="back" xml:space="preserve">
-        <value>back</value>
+        <value>AAB</value>
     </data>
     <data name="unlimited_stickers" xml:space="preserve">
-        <value>unlim</value>
+        <value>ABC</value>
     </data>
     <data name="send_sticker" xml:space="preserve">
-        <value>send</value>
+        <value>AAX</value>
     </data>
     <data name="select_sticker" xml:space="preserve">
-        <value>select</value>
+        <value>AAV</value>
     </data>
     <data name="price_coins_from" xml:space="preserve">
-        <value>price_coins_from</value>
+        <value>AAR</value>
     </data>
     <data name="price_coins_to" xml:space="preserve">
-        <value>price_coins_to</value>
+        <value>AAS</value>
     </data>
     <data name="price_gems_from" xml:space="preserve">
-        <value>price_gems_from</value>
+        <value>AAT</value>
     </data>
     <data name="price_gems_to" xml:space="preserve">
-        <value>price_gems_to</value>
+        <value>AAU</value>
     </data>
     <data name="price" xml:space="preserve">
-        <value>price</value>
+        <value>AAQ</value>
     </data>
     <data name="buy_sticker" xml:space="preserve">
-        <value>buy</value>
+        <value>AAE</value>
     </data>
     <data name="clear_chat" xml:space="preserve">
-        <value>clear</value>
+        <value>AAG</value>
     </data>
     <data name="combine" xml:space="preserve">
-        <value>combine</value>
+        <value>AAI</value>
     </data>
     <data name="sell_on_auction" xml:space="preserve">
-        <value>sell</value>
+        <value>AAW</value>
     </data>
     <data name="count" xml:space="preserve">
-        <value>count</value>
+        <value>AAN</value>
     </data>
     <data name="confirm_buying" xml:space="preserve">
-        <value>confirm_buying</value>
+        <value>AAL</value>
     </data>
     <data name="confirm_selling" xml:space="preserve">
-        <value>confirm_selling</value>
-    </data>
-    <data name="show_traders" xml:space="preserve">
-        <value>show_traders</value>
+        <value>AAM</value>
     </data>
     <data name="back_to_sticker" xml:space="preserve">
-        <value>back_to_sticker</value>
+        <value>AAD</value>
     </data>
     <data name="back_to_combine" xml:space="preserve">
-        <value>back_to_combine</value>
+        <value>AAC</value>
     </data>
     <data name="delete_combine" xml:space="preserve">
-        <value>delete</value>
+        <value>AAO</value>
     </data>
     <data name="combine_stickers" xml:space="preserve">
-        <value>comb_stickers</value>
+        <value>AAJ</value>
     </data>
     <data name="stop_bot" xml:space="preserve">
         <value>Остановить</value>
-    </data>
-    <data name="command_yes_on_auction" xml:space="preserve">
-        <value>sell_product</value>
     </data>
 </root>

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
@@ -9,31 +7,28 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.Message.TextMessage
 {
-    public class EnterPriceMessage : Message
+    public class EnterCoinsPriceMessage : Message
     {
         protected override string CommandText => "";
-        private const string pattern = @"^[0-9]+$";
 
         //Список пользователей, от которых ожидается ввод эмоджи ключ - id пользователя, значение - сообщение с меню #1#
         private static readonly Dictionary<long, int> Queue = new ();
 
         public override async Task Execute()
         {
-            
-            var input = "" + Update.Message!
-                .Text; // это чтоб варн не показывлся, тут никогда не null, так как в Factory все уже проверено
-            /* если пользователь ввел что-то кроме эмодзи */
-            if (!Regex.IsMatch(input, pattern))
-                await MessageController.EditMessage(User, Queue[User.Id], Messages.please_enter_price,
-                    Keyboard.CancelKeyboard);
+            if (!int.TryParse(Update.Message!.Text, out var price) || price < 0)
+                await MessageController.EditMessage(User, Queue[User.Id], 
+                    $"{Messages.current_price} {User.Session.CoinPrice}{Text.coin} / {User.Session.GemPrice}{Text.gem}" +
+                    $"\n{Messages.please_enter_price}", Keyboard.AuctionPutCancelKeyboard);
             else
             {
-                User.Session.CoinPrice = Convert.ToInt32(input);
+                User.Session.CoinPrice = price;
                 /* Редактируем сообщение */
-                await MessageController.EditMessage(User, Queue[User.Id], "Введите алмазы", Keyboard.CancelKeyboard);
-                EnterPricePart2Message.AddToQueue(User.Id,Queue[User.Id]);
+                await MessageController.EditMessage(User, Queue[User.Id], 
+                    $"{Messages.current_price} {User.Session.CoinPrice}{Text.coin} / {User.Session.GemPrice}{Text.gem}" +
+                    $"{Messages.enter_your_gems_price} {Text.gem}:", Keyboard.AuctionPutCancelKeyboard);
+                EnterGemsPriceMessage.AddToQueue(User.Id,Queue[User.Id]);
                 Queue.Remove(User.Id);
-                
             }
         }
 
@@ -55,7 +50,7 @@ namespace CardCollector.Commands.Message.TextMessage
             return User == null ? base.IsMatches(command) : Queue.ContainsKey(User.Id);
         }
 
-        public EnterPriceMessage() { }
-        public EnterPriceMessage(UserEntity user, Update update) : base(user, update) { }
-        }
+        public EnterCoinsPriceMessage() { }
+        public EnterCoinsPriceMessage(UserEntity user, Update update) : base(user, update) { }
+    }
 }
