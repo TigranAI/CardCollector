@@ -76,23 +76,25 @@ namespace CardCollector
             {
                 /* Фильтруем по цене монет ОТ */
                 if (dict[Command.price_coins_from] is int PCF && PCF != 0)
+                {
                     list = list.Where(item => state == UserState.AuctionMenu
-                        ? AuctionDao.GetPriceList(item.Id, true).Any(i => i >= PCF)
+                        ? AuctionDao.HaveAny(item.Id, i => i.PriceCoins >= PCF)
                         : item.PriceCoins >= PCF);
+                }
                 /* Фильтруем по цене монет ДО */
                 if (dict[Command.price_coins_to] is int PCT && PCT != 0)
                     list = list.Where(item => state == UserState.AuctionMenu
-                        ? AuctionDao.GetPriceList(item.Id, true).Any(i => i <= PCT)
+                        ? AuctionDao.HaveAny(item.Id, i => i.PriceCoins <= PCT)
                         : item.PriceCoins <= PCT);
                 /* Фильтруем по цене алмазов ОТ */
                 if (dict[Command.price_gems_from] is int PGF && PGF != 0)
                     list = list.Where(item => state == UserState.AuctionMenu
-                        ? AuctionDao.GetPriceList(item.Id, false).Any(i => i >= PGF)
+                        ? AuctionDao.HaveAny(item.Id, i => i.PriceCoins >= PGF)
                         : item.PriceGems >= PGF);
                 /* Фильтруем по цене адмазов ДО */
                 if (dict[Command.price_gems_to] is int PGT && PGT != 0)
                     list = list.Where(item => state == UserState.AuctionMenu
-                        ? AuctionDao.GetPriceList(item.Id, false).Any(i => i <= PGT)
+                        ? AuctionDao.HaveAny(item.Id, i => i.PriceCoins <= PGT)
                         : item.PriceGems <= PGT);
             }
             /* Сортируем список, если тип сортировки установлен */

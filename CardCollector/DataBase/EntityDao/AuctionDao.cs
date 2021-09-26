@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Threading;
 using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
 using CardCollector.Others;
@@ -59,11 +62,9 @@ namespace CardCollector.DataBase.EntityDao
             await Instance.SaveChangesAsync();
         }
 
-        public static IEnumerable<int> GetPriceList(string stickerId, bool coins)
+        public static bool HaveAny(string stickerId, Expression<Func<AuctionEntity, bool>> source)
         {
-            return Table
-                .Where(i => i.StickerId == stickerId)
-                .Select(i => coins ? i.PriceCoins : i.PriceGems);
+            return Table.Where(i => i.StickerId == stickerId).AnyAsync(source).Result;
         }
 
         public static async Task<int> GetQuantity(int productId)
