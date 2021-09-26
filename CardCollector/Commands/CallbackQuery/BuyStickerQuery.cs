@@ -26,8 +26,11 @@ namespace CardCollector.Commands.CallbackQuery
                 var coinsPrice = selectedSticker.GetCoinsPrice();
                 var gemsPrice = selectedSticker.GetGemsPrice();
                 if (count < selectedSticker.Count && count != -1)
+                {
                     await MessageController.AnswerCallbackQuery(User, Update.CallbackQuery!.Id,
                         Messages.not_enougth_stickers);
+                    await new BackToFiltersMenu(User, Update).Execute();
+                }
                 else if (coinsPrice > User.Cash.Coins)
                     await MessageController.AnswerCallbackQuery(User, Update.CallbackQuery!.Id,
                         Messages.not_enougth_coins);

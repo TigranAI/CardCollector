@@ -20,7 +20,9 @@ namespace CardCollector.Commands.CallbackQuery
             else
             {
                 var text = $"{Messages.confirm_buying}\n{User.Session.SelectedSticker.Count}{Text.items}" +
-                           $" {Text.per} {coinsPrice}{Text.coin} / {gemsPrice}{Text.gem}\n{Messages.are_you_sure}";
+                           $" {Text.per} {coinsPrice}{Text.coin} / {gemsPrice}{Text.gem}" +
+                           $"\n{Text.total}: {coinsPrice*User.Session.SelectedSticker.Count}{Text.coin} / {gemsPrice*User.Session.SelectedSticker.Count}{Text.gem}" +
+                           $"\n{Messages.are_you_sure}";
                 await MessageController.EditMessage(User, CallbackMessageId, text, Keyboard.GetConfirmationKeyboard(Command.buy_sticker));
             }
         }

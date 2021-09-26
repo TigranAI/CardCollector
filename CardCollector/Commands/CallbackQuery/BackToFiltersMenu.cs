@@ -17,19 +17,13 @@ namespace CardCollector.Commands.CallbackQuery
             User.Session.SelectedSticker = null;
             User.Session.CombineList.Clear();
             /* Очищаем чат, если был передан параметр очистки */
-            var clearChat = CallbackData.Contains(Command.clear_chat);
-            if (clearChat) await User.ClearChat();
+            await User.ClearChat();
             /* Формируем сообщение с имеющимися фильтрами у пользователя */
             var text = User.Session.Filters.ToMessage(User.Session.State);
             /* Редактируем сообщение */
-            if (!clearChat) 
-                await MessageController.EditMessage(User, CallbackMessageId, 
+            var message = await MessageController.EditMessage(User, CallbackMessageId, 
                     text, Keyboard.GetSortingMenu(User.Session.State));
-            else
-            {
-                var message = await MessageController.SendMessage(User, text, Keyboard.GetSortingMenu(User.Session.State));
-                User.Session.Messages.Add(message.MessageId);
-            }
+            User.Session.Messages.Add(message.MessageId);
         }
         
         public BackToFiltersMenu() { }

@@ -168,4 +168,7 @@
     <data name="delete" xml:space="preserve">
         <value>Удалить</value>
     </data>
+    <data name="total" xml:space="preserve">
+        <value>Всего</value>
+    </data>
 </root>
