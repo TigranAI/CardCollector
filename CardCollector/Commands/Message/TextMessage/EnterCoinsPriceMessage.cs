@@ -26,7 +26,7 @@ namespace CardCollector.Commands.Message.TextMessage
                 /* Редактируем сообщение */
                 await MessageController.EditMessage(User, Queue[User.Id], 
                     $"{Messages.current_price} {User.Session.CoinPrice}{Text.coin} / {User.Session.GemPrice}{Text.gem}" +
-                    $"{Messages.enter_your_gems_price} {Text.gem}:", Keyboard.AuctionPutCancelKeyboard);
+                    $"\n{Messages.enter_your_gems_price} {Text.gem}:", Keyboard.AuctionPutCancelKeyboard);
                 EnterGemsPriceMessage.AddToQueue(User.Id,Queue[User.Id]);
                 Queue.Remove(User.Id);
             }
