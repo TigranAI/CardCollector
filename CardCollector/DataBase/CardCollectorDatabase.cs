@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
 using Microsoft.EntityFrameworkCore;
 
@@ -45,11 +46,14 @@ namespace CardCollector.DataBase
             }
         }
 
-        public static async void SaveAllChangesAsync()
+        public static async Task SaveAllChangesAsync()
         {
-            await Instance.SaveChangesAsync();
-            foreach (var instance in _specificInstances.Values)
-                await instance.SaveChangesAsync();
+            try
+            {
+                await Instance.SaveChangesAsync();
+                foreach (var instance in _specificInstances.Values)
+                    await instance.SaveChangesAsync();
+            } catch (Exception) { /* Ignored */ }
         }
 
         /* Таблицы базы данных, представленные Entity объектами */

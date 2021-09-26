@@ -57,10 +57,10 @@ namespace CardCollector
             };
         }
 
-        private static void SavingChanges(object o, ElapsedEventArgs e)
+        private static async void SavingChanges(object o, ElapsedEventArgs e)
         {
             try {
-                CardCollectorDatabase.SaveAllChangesAsync();
+                await CardCollectorDatabase.SaveAllChangesAsync();
             } catch (Exception) { /*ignored*/ }
         }
     }
