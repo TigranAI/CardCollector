@@ -18,7 +18,7 @@ namespace CardCollector.Commands.ChosenInlineResult
             var sticker = await StickerDao.GetStickerByHash(hash);
             var stickerCount = User.Session.State switch
             {
-                UserState.AuctionMenu => await AuctionController.GetStickerCount(sticker.Id),
+                UserState.AuctionMenu => await AuctionController.GetStickerCount(sticker.Id, User.Session.Filters),
                 UserState.ShopMenu => await ShopController.GetStickerCount(sticker.Id),
                 _ => User.Stickers[sticker.Md5Hash].Count
             };

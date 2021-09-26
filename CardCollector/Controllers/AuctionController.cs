@@ -77,5 +77,11 @@ namespace CardCollector.Controllers
         {
             return await AuctionDao.GetQuantity(productId);
         }
+
+        public static async Task<int> GetStickerCount(string stickerId, Dictionary<string, object> sessionFilters)
+        {
+            var traders = await GetTradersList("", stickerId);
+            return sessionFilters.ApplyTo(traders).Sum(i => i.Quantity);
+        }
     }
 }
