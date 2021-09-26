@@ -59,7 +59,7 @@ namespace CardCollector
             return result;
         }
 
-        public static IEnumerable<StickerEntity> ApplyTo (this Dictionary<string, object> dict, 
+        public static IEnumerable<StickerEntity> ApplyTo(this Dictionary<string, object> dict,
             IEnumerable<StickerEntity> list, UserState state)
         {
             /* Фильтруем по автору */
@@ -72,19 +72,28 @@ namespace CardCollector
             if (dict[Command.emoji] is string emoji && emoji != "")
                 list = list.Where(item => item.Emoji.Contains(emoji));
             /* Если пользвователь не находится в меню коллекции, то фильтруем по цене */
-            if (state is not UserState.CollectionMenu){
+            if (state is not UserState.CollectionMenu)
+            {
                 /* Фильтруем по цене монет ОТ */
                 if (dict[Command.price_coins_from] is int PCF && PCF != 0)
-                    list = list.Where(item => item.PriceCoins >= PCF);
+                    list = list.Where(item => state == UserState.AuctionMenu
+                        ? AuctionDao.GetPriceList(item.Id, true).Any(i => i >= PCF)
+                        : item.PriceCoins >= PCF);
                 /* Фильтруем по цене монет ДО */
                 if (dict[Command.price_coins_to] is int PCT && PCT != 0)
-                    list = list.Where(item => item.PriceCoins <= PCT);
+                    list = list.Where(item => state == UserState.AuctionMenu
+                        ? AuctionDao.GetPriceList(item.Id, true).Any(i => i <= PCT)
+                        : item.PriceCoins <= PCT);
                 /* Фильтруем по цене алмазов ОТ */
                 if (dict[Command.price_gems_from] is int PGF && PGF != 0)
-                    list = list.Where(item => item.PriceGems >= PGF);
+                    list = list.Where(item => state == UserState.AuctionMenu
+                        ? AuctionDao.GetPriceList(item.Id, false).Any(i => i >= PGF)
+                        : item.PriceGems >= PGF);
                 /* Фильтруем по цене адмазов ДО */
                 if (dict[Command.price_gems_to] is int PGT && PGT != 0)
-                    list = list.Where(item => item.PriceGems <= PGT);
+                    list = list.Where(item => state == UserState.AuctionMenu
+                        ? AuctionDao.GetPriceList(item.Id, false).Any(i => i <= PGT)
+                        : item.PriceGems <= PGT);
             }
             /* Сортируем список, если тип сортировки установлен */
             if (dict[Command.sort] is not string sort || sort == SortingTypes.None) return list;
@@ -102,6 +111,23 @@ namespace CardCollector
                 if (sort == SortingTypes.ByTierDecrease)
                     list = list.OrderByDescending(item => item.Tier);
             }
+            return list;
+        }
+
+        public static IEnumerable<TraderInformation> ApplyTo(this Dictionary<string, object> dict, IEnumerable<TraderInformation> list)
+        {
+            /* Фильтруем по цене монет ОТ */
+            if (dict[Command.price_coins_from] is int PCF && PCF != 0)
+                list = list.Where(item => item.PriceCoins >= PCF);
+            /* Фильтруем по цене монет ДО */
+            if (dict[Command.price_coins_to] is int PCT && PCT != 0)
+                list = list.Where(item => item.PriceCoins <= PCT);
+            /* Фильтруем по цене алмазов ОТ */
+            if (dict[Command.price_gems_from] is int PGF && PGF != 0)
+                list = list.Where(item => item.PriceGems >= PGF);
+            /* Фильтруем по цене адмазов ДО */
+            if (dict[Command.price_gems_to] is int PGT && PGT != 0)
+                list = list.Where(item => item.PriceGems <= PGT);
             return list;
         }
         

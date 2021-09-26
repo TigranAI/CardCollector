@@ -23,7 +23,7 @@ namespace CardCollector.Commands.CallbackQuery
             /* Редактируем сообщение */
             var message = await MessageController.EditMessage(User, CallbackMessageId, 
                     text, Keyboard.GetSortingMenu(User.Session.State));
-            User.Session.Messages.Add(message.MessageId);
+            if (!User.Session.Messages.Contains(message.MessageId)) User.Session.Messages.Add(message.MessageId);
         }
         
         public BackToFiltersMenu() { }

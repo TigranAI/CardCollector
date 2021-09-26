@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
@@ -16,7 +15,7 @@ namespace CardCollector.Commands.InlineQuery
             var filter = Update.InlineQuery!.Query;
             // Получаем список продавцов
             var traders = await AuctionController.GetTradersList(filter, User.Session.SelectedSticker.Id);
-            var results = traders.ToTelegramResults(Command.buy_sticker);
+            var results = User.Session.Filters.ApplyTo(traders).ToTelegramResults(Command.buy_sticker);
             // Посылаем пользователю ответ на его запрос
             await MessageController.AnswerInlineQuery(InlineQueryId, results);
         }

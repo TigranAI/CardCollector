@@ -149,7 +149,6 @@ namespace CardCollector.Controllers
             }
             catch (Exception e)
             {
-                LogOutWarning("Can't edit message text " + e.Message);
                 return await SendMessage(user, message, keyboard);
             }
             return new TgMessage();

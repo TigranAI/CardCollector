@@ -59,6 +59,13 @@ namespace CardCollector.DataBase.EntityDao
             await Instance.SaveChangesAsync();
         }
 
+        public static IEnumerable<int> GetPriceList(string stickerId, bool coins)
+        {
+            return Table
+                .Where(i => i.StickerId == stickerId)
+                .Select(i => coins ? i.PriceCoins : i.PriceGems);
+        }
+
         public static async Task<int> GetQuantity(int productId)
         {
             return (await Table.FirstAsync(item => item.Id == productId)).Quantity;
