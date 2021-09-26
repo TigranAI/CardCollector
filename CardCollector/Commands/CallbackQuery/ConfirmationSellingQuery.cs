@@ -17,7 +17,7 @@ namespace CardCollector.Commands.CallbackQuery
             await User.Session.PayOutOne(User.Session.SelectedSticker.Md5Hash);
             await MessageController.AnswerCallbackQuery(User, CallbackQueryId, 
                 $"{Messages.you_collected} {User.Session.IncomeCoins}{Text.coin} / {User.Session.IncomeGems}{Text.gem}");
-            await AuctionController.SellCard(User, User.Session.CoinPrice, User.Session.GemPrice);
+            AuctionController.SellCard(User, User.Session.CoinPrice, User.Session.GemPrice);
             await MessageController.EditMessage(User, CallbackMessageId, Messages.successfully_selling);
         }
         public ConfirmationSellingQuery(){}

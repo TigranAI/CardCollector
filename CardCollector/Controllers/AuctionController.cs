@@ -18,7 +18,7 @@ namespace CardCollector.Controllers
         stickerShortHashCode - MD5 хеш представляющий собой сумму id стикера и id пользователя, используется в словаре как ключ
         price - цена за штуку
         count - количество продаваемых стикеров*/
-        public static async Task SellCard(UserEntity user, int priceCoins, int priceGems)
+        public static void SellCard(UserEntity user, int priceCoins, int priceGems)
         {
             //подтверждаем действие
             var hash = user.Session.SelectedSticker.Md5Hash;
