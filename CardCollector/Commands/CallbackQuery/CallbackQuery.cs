@@ -51,6 +51,8 @@ namespace CardCollector.Commands.CallbackQuery
             new CountQuery(),
             /* Команда для подтверждения покупки */
             new ConfirmBuyingQuery(),
+            /* команда для подтверждения выставления на аукцион */
+            new PutForAuctionQuery(),
             /* Команда для покупки стикера */
             new BuyStickerQuery(),
             /* Команда возврата к стикеру */
@@ -63,7 +65,8 @@ namespace CardCollector.Commands.CallbackQuery
             new DeleteCombine(),
             /* Команда удаления из комбинации */
             new CombineStickers(),
-            
+            //команда подтверждения выставления на аукцион
+            new PutForAuctionPart2Query(),
             /* Отмена в момент выбора "значения фильтра", не в самом меню */
             new BackToFiltersMenu(),
             /* Очистка чата */

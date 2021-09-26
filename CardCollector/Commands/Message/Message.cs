@@ -42,9 +42,13 @@ namespace CardCollector.Commands.Message
                 new AuctionMessage(),
                 // Ожидание ввода эмоджи
                 new EnterEmojiMessage(),
+                //Очередь воода цены на аукцион
+                new EnterPriceMessage(),
                 // Загрузка стикерпака
                 new DownloadStickerPackMessage(),
-
+                //команда ввода цены
+                new EnterPriceMessage(),
+                new EnterPricePart2Message(),
                 // Команда "Показать пример"
                 new ShowSampleMessage(),
                 // Команда "Остановить"

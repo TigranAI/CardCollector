@@ -138,4 +138,7 @@
     <data name="combined_sticker" xml:space="preserve">
         <value>Поздравляем! Вы получили стикер</value>
     </data>
+    <data name="please_enter_price" xml:space="preserve">
+        <value>Пожалуйста, введите положительное целое число</value>
+    </data>
 </root>

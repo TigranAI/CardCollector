@@ -151,6 +151,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to sell_product.
+        /// </summary>
+        internal static string command_yes_on_auction {
+            get {
+                return ResourceManager.GetString("command_yes_on_auction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to confirm_buying.
         /// </summary>
         internal static string confirm_buying {

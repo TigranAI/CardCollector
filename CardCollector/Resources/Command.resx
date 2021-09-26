@@ -105,4 +105,7 @@
     <data name="stop_bot" xml:space="preserve">
         <value>Остановить</value>
     </data>
+    <data name="command_yes_on_auction" xml:space="preserve">
+        <value>sell_product</value>
+    </data>
 </root>

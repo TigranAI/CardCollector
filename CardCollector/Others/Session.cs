@@ -71,6 +71,9 @@ namespace CardCollector.Others
         public int CombineCoinsPrice;
         public int CombineGemsPrice;
 
+        public int CoinPrice;
+        public int GemPrice;
+
         public void CalculateCombinePrice()
         {
             var coinsSum = CombineList.Values.Sum(i => 1440 / i.IncomeTime * i.IncomeCoins * i.Count);

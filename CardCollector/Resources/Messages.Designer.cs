@@ -295,6 +295,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Пожалуйста, введите положительное целое число.
+        /// </summary>
+        internal static string please_enter_price {
+            get {
+                return ResourceManager.GetString("please_enter_price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Стоимость:.
         /// </summary>
         internal static string price {

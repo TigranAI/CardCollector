@@ -18,7 +18,7 @@ namespace CardCollector.Controllers
         stickerShortHashCode - MD5 хеш представляющий собой сумму id стикера и id пользователя, используется в словаре как ключ
         price - цена за штуку
         count - количество продаваемых стикеров*/
-        private static async Task SellCard(UserEntity user, int priceCoins, int priceGems)
+        public static async Task SellCard(UserEntity user, int priceCoins, int priceGems)
         {
             /* Учитывая, что мы будем управлять кнопками + и -, то сюда никогда не поступят ложные данные
              решил метод упростить и задачу проверки переложил на взаимодействие с ботом 
