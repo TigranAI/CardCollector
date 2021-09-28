@@ -34,6 +34,8 @@ namespace CardCollector.Commands.CallbackQuery
                 var author = authors[rnd.Next(authors.Count)];
                 var stickers = await StickerDao.GetListWhere(i => i.Author == author && i.Tier == tier + 1);
                 var sticker = stickers[rnd.Next(stickers.Count)];
+                if (User.Stickers.ContainsKey(sticker.Md5Hash))
+                    await User.Session.PayOutOne(sticker.Md5Hash);
                 await UserStickerRelationDao.AddNew(User, sticker, 1);
                 var text = $"{Messages.combined_sticker}:\n" + sticker;
                 var stickerMessage = await MessageController.SendSticker(User, sticker.Id);
