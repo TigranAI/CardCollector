@@ -19,8 +19,7 @@ namespace CardCollector.DataBase.EntityDao
         {
             /* Заменил цикл на LINQ выражение и тип возвращаемого значения - список позиций,
              так как один и тот же стикер может продавать несколько людей */
-            return await Table
-                .Where(e => e.StickerId == stickerId).ToListAsync();
+            return (await Table.WhereAsync(e => Task.FromResult(e.StickerId == stickerId))).ToList();
         }
 
         public static async Task<TraderInformation> GetTraderInfo(int productId)
@@ -53,7 +52,7 @@ namespace CardCollector.DataBase.EntityDao
             await Instance.SaveChangesAsync();
         }
         //удаляем проданный объект
-        public static async void DeleteRow(int productId)
+        public static async Task DeleteRow(int productId)
         {
             if (await Table.FirstOrDefaultAsync(c => c.Id == productId) is not { } item) return;
             Table.Attach(item);

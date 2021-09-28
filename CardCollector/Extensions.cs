@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -146,6 +147,20 @@ namespace CardCollector
                         $" {(dict[Command.price_gems_to] is int g and not 0 ? g : "∞")}\n";
             text += $"{Messages.sorting} {dict[Command.sort]}\n\n{Messages.select_filter}";
             return text;
+        }
+        
+        public static async Task<IEnumerable<T>> WhereAsync<T>(
+            this IEnumerable<T> source, Func<T, Task<bool>> predicate)
+        {
+            var results = new ConcurrentQueue<T>();
+            var tasks = source.Select(
+                async x =>
+                {
+                    if (await predicate(x))
+                        results.Enqueue(x);
+                });
+            await Task.WhenAll(tasks);
+            return results;
         }
     }
 }

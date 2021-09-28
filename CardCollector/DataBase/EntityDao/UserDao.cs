@@ -47,7 +47,10 @@ namespace CardCollector.DataBase.EntityDao
 
         public static async Task<UserEntity> GetById(long userId)
         {
-            return await Table.FirstAsync(item => item.Id == userId);
+            var user = await Table.FirstAsync(item => item.Id == userId);
+            user.Cash = await CashDao.GetById(user.Id);
+            //user.Stickers = await UserStickerRelationDao.GetListById(user.Id);
+            return user;
         }
 
         /* Получение пользователя по представлению user из Базы данных */

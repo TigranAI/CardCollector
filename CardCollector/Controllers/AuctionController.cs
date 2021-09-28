@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.DataBase;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Others;
@@ -47,7 +46,8 @@ namespace CardCollector.Controllers
                                                       $"\n{Messages.you_collected} {coinsSum}{Text.coin} / {gemsSum}{Text.gem}");
             user.Cash.Coins += coinsSum;
             user.Cash.Gems += gemsSum;
-            if (product.Quantity == 0) AuctionDao.DeleteRow(sticker.TraderInfo.Id);
+            if (product.Quantity == 0)
+                await AuctionDao.DeleteRow(sticker.TraderInfo.Id);
         }
         
         public static async Task<int> GetStickerCount(string stickerId)
