@@ -10,19 +10,19 @@ namespace CardCollector.Commands.PreCheckoutQuery
 {
     public abstract class PreCheckoutQuery : UpdateModel
     {
-        protected string PreCheckoutQueryId;
+        protected readonly string PreCheckoutQueryId;
         
         private static readonly List<PreCheckoutQuery> List = new()
             {
-                // Стандартная обработка платежа
-                new StandartPreCheckoutQuery(),
+                // Тестовая покупка
+                new TestPreCheckoutQuery(),
             };
 
         /* Метод, создающий объекты команд исходя из полученного обновления */
         public static async Task<UpdateModel> Factory(Update update)
         {
-            /* Данные определяем исходя из типа сообщения */
-            var data = update.PreCheckoutQuery!.Id;
+            /* Данные определяем исходя из указанного нами продукта */
+            var data = update.PreCheckoutQuery!.InvoicePayload;
             
             // Объект пользователя
             var user = await UserDao.GetUser(update.PreCheckoutQuery!.From);

@@ -1,11 +1,9 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Payments;
-using Telegram.Bot.Types.ReplyMarkups;
 
 namespace CardCollector.Commands.Message.TextMessage
 {
@@ -17,7 +15,7 @@ namespace CardCollector.Commands.Message.TextMessage
         protected override string CommandText => Text.show_sample;
         public override async Task Execute()
         {
-            await Bot.Client.SendInvoiceAsync(User.ChatId, "test", "test", "test", "401643678:TEST:f13667cd-bbf7-4ca1-ba9e-7aa49e4d3faa",
+            await Bot.Client.SendInvoiceAsync(User.ChatId, "test", "test", "test", AppSettings.PAYMENT_PROVIDER,
                 "USD", new []
                 {
                     new LabeledPrice("text", 100)

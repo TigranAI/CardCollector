@@ -63,10 +63,13 @@ namespace CardCollector.Commands.Message
         public static async Task<UpdateModel> Factory(Update update)
         {
             // Если сообщение от бота - игнорируем, нам не нужны боты
-            if (update.Message!.From!.IsBot)
+            if (update.Message!.From!.IsBot || update.Message.SuccessfulPayment is not null)
             {
                 // Если это вдруг написал наш бот (сообщенияуведомления о закрпеах и пр.), то удаляем
                 if (update.Message!.From!.Username == AppSettings.NAME)
+                    await Bot.Client.DeleteMessageAsync(update.Message.Chat.Id, update.Message.MessageId);
+                // Если это сообщение о платеже
+                if (update.Message.SuccessfulPayment is not null)
                     await Bot.Client.DeleteMessageAsync(update.Message.Chat.Id, update.Message.MessageId);
                 return new IgnoreUpdate();
             }
@@ -84,7 +87,7 @@ namespace CardCollector.Commands.Message
             {
                 MessageType.Text => update.Message.Text,
                 MessageType.Document => update.Message.Document!.FileId,
-                _ => ""
+                _ => "Unknown"
             };
             
             // Объект пользователя
