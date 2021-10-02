@@ -10,12 +10,14 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.InlineQueryResults;
 using Telegram.Bot.Types.InputFiles;
+using Telegram.Bot.Types.Payments;
 using Telegram.Bot.Types.ReplyMarkups;
 using Message = CardCollector.Commands.Message.Message;
 using CallBackQuery = CardCollector.Commands.CallbackQuery.CallbackQuery;
 using MyChatMember = CardCollector.Commands.MyChatMember.MyChatMember;
 using InlineQuery = CardCollector.Commands.InlineQuery.InlineQuery;
 using ChosenInlineResult = CardCollector.Commands.ChosenInlineResult.ChosenInlineResult;
+using PreCheckoutQuery = CardCollector.Commands.PreCheckoutQuery.PreCheckoutQuery;
 using TgMessage = Telegram.Bot.Types.Message;
 
 namespace CardCollector.Controllers
@@ -42,6 +44,8 @@ namespace CardCollector.Controllers
                     UpdateType.InlineQuery => await InlineQuery.Factory(update),
                     // Тип обновления - выбор результата в инлайн меню
                     UpdateType.ChosenInlineResult => await ChosenInlineResult.Factory(update),
+                    // Тип обновления - платеж
+                    UpdateType.PreCheckoutQuery => await PreCheckoutQuery.Factory(update),
                     _ => throw new ArgumentOutOfRangeException()
                 };
                 // Обработать команду

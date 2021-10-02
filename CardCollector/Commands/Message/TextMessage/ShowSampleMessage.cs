@@ -2,7 +2,9 @@
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
+using Telegram.Bot;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Payments;
 using Telegram.Bot.Types.ReplyMarkups;
 
 namespace CardCollector.Commands.Message.TextMessage
@@ -15,42 +17,11 @@ namespace CardCollector.Commands.Message.TextMessage
         protected override string CommandText => Text.show_sample;
         public override async Task Execute()
         {
-            await MessageController.SendMessage(User, "Текущие примененные фильтры:" +
-                                                      "\nАвтор (все)\nТир (все)\nЭмоция (все)\nСортировка(нет)" +
-                                                      "\n\nУстановите фильтры кнопками ниже:",
-                new InlineKeyboardMarkup(new []
+            await Bot.Client.SendInvoiceAsync(User.ChatId, "test", "test", "test", "401643678:TEST:f13667cd-bbf7-4ca1-ba9e-7aa49e4d3faa",
+                "USD", new []
                 {
-                    new [] {InlineKeyboardButton.WithCallbackData("Автор")},
-                    new [] {InlineKeyboardButton.WithCallbackData("Тир")},
-                    new [] {InlineKeyboardButton.WithCallbackData("Эмоция")},
-                    new [] {InlineKeyboardButton.WithCallbackData("Сортировка")},
-                    new [] {InlineKeyboardButton.WithCallbackData("Отмена")},
-                    new [] {InlineKeyboardButton.WithSwitchInlineQueryCurrentChat("Показать стикеры")},
-                }));
-            await MessageController.SendMessage(User, "Выберите автора из списка ниже:",
-                new InlineKeyboardMarkup(new []
-                {
-                    new [] {InlineKeyboardButton.WithCallbackData("Все")},
-                    new [] {InlineKeyboardButton.WithCallbackData("А"),InlineKeyboardButton.WithCallbackData("Б")},
-                    new [] {InlineKeyboardButton.WithCallbackData("В"),InlineKeyboardButton.WithCallbackData("Г"),},
-                    new [] {InlineKeyboardButton.WithCallbackData("Д"),InlineKeyboardButton.WithCallbackData("Е"),},
-                    new [] {InlineKeyboardButton.WithCallbackData("Ё"),InlineKeyboardButton.WithCallbackData("Ж"),},
-                    new [] {InlineKeyboardButton.WithCallbackData("З"),InlineKeyboardButton.WithCallbackData("З"),},
-                    new [] {InlineKeyboardButton.WithCallbackData("←"),InlineKeyboardButton.WithCallbackData("→")},
-                    new [] {InlineKeyboardButton.WithCallbackData("Отмена")},
-                }));
-            await MessageController.SendMessage(User, "Текущие примененные фильтры:" +
-                                                      "\nАвтор (Г)\nТир (все)\nЭмоция (все)\nСортировка(нет)" +
-                                                      "\n\nУстановите фильтры кнопками ниже:",
-                new InlineKeyboardMarkup(new []
-                {
-                    new [] {InlineKeyboardButton.WithCallbackData("Автор")},
-                    new [] {InlineKeyboardButton.WithCallbackData("Тир")},
-                    new [] {InlineKeyboardButton.WithCallbackData("Эмоция")},
-                    new [] {InlineKeyboardButton.WithCallbackData("Сортировка")},
-                    new [] {InlineKeyboardButton.WithCallbackData("Отмена")},
-                    new [] {InlineKeyboardButton.WithSwitchInlineQueryCurrentChat("Показать стикеры")},
-                }));
+                    new LabeledPrice("text", 100)
+                });
         }
 
         /* Нужно помимо совпадения текста проверить пользователя на уровень привилегий */
