@@ -18,7 +18,7 @@ namespace CardCollector.Commands.CallbackQuery
             var income = await User.Cash.Payout(User.Stickers[collectionModule.SelectedSticker.Md5Hash]);
             await MessageController.AnswerCallbackQuery(User, CallbackQueryId, $"{Messages.you_collected} {income}{Text.coin}");
             User.Stickers[collectionModule.SelectedSticker.Md5Hash].Count -= collectionModule.Count;
-            AuctionController.SellCard(User.Id, collectionModule.SelectedSticker.Md5Hash, collectionModule.SellPrice, collectionModule.Count);
+            AuctionController.SellCard(User.Id, collectionModule.SelectedSticker.Id, collectionModule.SellPrice, collectionModule.Count);
             await MessageController.EditMessage(User, CallbackMessageId, Messages.successfully_selling);
         }
         public ConfirmationSellingQuery(){}
