@@ -2,6 +2,7 @@
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
+using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.InlineQuery
@@ -13,11 +14,14 @@ namespace CardCollector.Commands.InlineQuery
         {
             // Фильтр - введенная пользователем фраза
             var filter = Update.InlineQuery!.Query;
+            var module = User.Session.GetModule<AuctionModule>();
             // Получаем список продавцов
-            var traders = await AuctionController.GetTradersList(filter, User.Session.SelectedSticker.Id);
-            var results = User.Session.Filters.ApplyTo(traders).ToTelegramResults(Command.buy_sticker);
+            var traders = await AuctionController.GetTradersList(filter, module.SelectedSticker.Id);
+            var results = User.Session.GetModule<FiltersModule>()
+                .ApplyPriceTo(traders)
+                .ToTelegramResults(Command.buy_sticker);
             // Посылаем пользователю ответ на его запрос
-            await MessageController.AnswerInlineQuery(InlineQueryId, results);
+            await MessageController.AnswerInlineQuery(InlineQueryId, await results);
         }
         
         /* Команда пользователя удовлетворяет условию, если она вызвана
@@ -26,7 +30,7 @@ namespace CardCollector.Commands.InlineQuery
         {
             return User == null 
                 ? command.Contains("Sender")
-                : User.Session.SelectedSticker != null && User.Session.State == UserState.AuctionMenu;
+                : User.Session.State == UserState.ProductMenu;
         }
 
         public ShowTradersInBotChat() { }

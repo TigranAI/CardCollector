@@ -14,7 +14,7 @@ namespace CardCollector.Commands.Message.TextMessage
         public override async Task Execute()
         {
             /* Подсчитываем прибыль */
-            await User.Session.CalculateIncome();
+            var income = await User.Cash.CalculateIncome(User.Stickers);
             /* Отправляем сообщение */
             var message = await MessageController.SendMessage(User, 
                 /* Имя пользователя */
@@ -24,7 +24,7 @@ namespace CardCollector.Commands.Message.TextMessage
                 /* Количество алмазов */
                 $"{Messages.gems}: {User.Cash.Gems}{Text.gem}",
                 /* Клавиатура профиля */
-                Keyboard.GetProfileKeyboard(User));
+                Keyboard.GetProfileKeyboard(income));
             /* Записываем id нового сообщения */
             User.Session.Messages.Add(message.MessageId);
         }

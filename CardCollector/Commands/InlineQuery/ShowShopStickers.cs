@@ -2,6 +2,7 @@
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
+using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.InlineQuery
@@ -15,8 +16,8 @@ namespace CardCollector.Commands.InlineQuery
             var filter = Update.InlineQuery!.Query;
             // Получаем список стикеров
             var stickersList = await ShopController.GetStickers(filter);
-            var results = User.Session.Filters
-                .ApplyTo(stickersList, User.Session.State).ToTelegramResults(Command.select_sticker);
+            var results = User.Session.GetModule<FiltersModule>()
+                .ApplyTo(stickersList).ToTelegramResults(Command.select_sticker);
             // Посылаем пользователю ответ на его запрос
             await MessageController.AnswerInlineQuery(InlineQueryId, results);
         }

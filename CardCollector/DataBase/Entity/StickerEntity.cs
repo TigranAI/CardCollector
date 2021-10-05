@@ -24,19 +24,10 @@ namespace CardCollector.DataBase.Entity
         [Column("author"), MaxLength(128)] public string Author { get; set; }
         
         /* Доход от стикера в монетах */
-        [Column("income_coins"), MaxLength(32)] public int IncomeCoins { get; set; } = 0;
-        
-        /* Доход от стикера в алмазах */
-        [Column("income_gems"), MaxLength(32)] public int IncomeGems { get; set; } = 0;
+        [Column("income_coins"), MaxLength(32)] public int Income { get; set; } = 0;
         
         /* Время, необходимое для получения дохода */
         [Column("income_time"), MaxLength(32)] public int IncomeTime { get; set; } = 0;
-        
-        /* Стоимость стикера в магазине (монеты) */
-        [Column("price_coins"), MaxLength(32)] public int PriceCoins { get; set; } = 0;
-        
-        /* Стоимость стикера в магазине (алмазы) */
-        [Column("price_gems"), MaxLength(32)] public int PriceGems { get; set; } = 0;
         
         /* Количество звезд стикера (редкость) */
         [Column("tier"), MaxLength(32)] public int Tier { get; set; } = 1;
@@ -55,7 +46,18 @@ namespace CardCollector.DataBase.Entity
             var str = $"\n{Title} {string.Concat(Enumerable.Repeat(Text.star, Tier))}" +
                              $"\n{Text.emoji}: {Emoji}" +
                              $"\n{Text.author}: {Author}" +
-                             $"\n{IncomeCoins}{Text.coin} / {IncomeGems}{Text.gem} {IncomeTime}{Text.time}{Text.minutes}";
+                             $"\n{Income}{Text.coin} {IncomeTime}{Text.time}{Text.minutes}";
+            if (Description != "") str += $"\n\n{Text.description}: {Description}";
+            return str;
+        }
+        
+        public string ToString(int count)
+        {
+            var str = $"\n{Title} {string.Concat(Enumerable.Repeat(Text.star, Tier))}" +
+                      $"\n{Text.emoji}: {Emoji}" +
+                      $"\n{Text.author}: {Author}" +
+                      $"\n{Text.count}: {(count != -1 ? count : "∞")}" +
+                      $"\n{Income}{Text.coin} {IncomeTime}{Text.time}{Text.minutes}";
             if (Description != "") str += $"\n\n{Text.description}: {Description}";
             return str;
         }

@@ -15,8 +15,7 @@ namespace CardCollector.Commands.Message.TextMessage
             await User.ClearChat();
             /* Переводим состояние пользователя в меню магазина */
             User.Session.State = UserState.ShopMenu;
-            /* Отображаем сообщение с фильтрами */
-            await new ShowFiltersMenu(User, Update).Execute();
+            
         }
         
         public ShopMessage() { }

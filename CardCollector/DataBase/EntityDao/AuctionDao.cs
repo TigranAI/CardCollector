@@ -4,7 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
-using CardCollector.Others;
 using Microsoft.EntityFrameworkCore;
 
 namespace CardCollector.DataBase.EntityDao
@@ -22,18 +21,11 @@ namespace CardCollector.DataBase.EntityDao
             return (await Table.WhereAsync(e => Task.FromResult(e.StickerId == stickerId))).ToList();
         }
 
-        public static async Task<TraderInformation> GetTraderInfo(int productId)
-        {
-            var product = await Table.FirstAsync(item => item.Id == productId);
-            var trader = await UserDao.GetById(product.Trader);
-            return new TraderInformation(product) {Username = trader.Username};
-        }
-
         public static async Task<int> GetTotalQuantity(string stickerId)
         {
             /* Добавил метод, который считает общее количество данных стикеров на аукционе */
             var list = await GetProducts(stickerId);
-            return list.Sum(e => e.Quantity);
+            return list.Sum(e => e.Count);
         }
 
         public static async Task<IEnumerable<StickerEntity>> GetStickers(string filter)
@@ -67,7 +59,7 @@ namespace CardCollector.DataBase.EntityDao
 
         public static async Task<int> GetQuantity(int productId)
         {
-            return (await Table.FirstAsync(item => item.Id == productId)).Quantity;
+            return (await Table.FirstAsync(item => item.Id == productId)).Count;
         }
 
         public static async Task<AuctionEntity> GetProduct(int productId)

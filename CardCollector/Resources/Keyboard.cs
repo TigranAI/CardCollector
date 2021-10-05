@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CardCollector.DataBase.Entity;
-using CardCollector.Others;
+using CardCollector.Session;
+using CardCollector.Session.Modules;
 using Telegram.Bot.Types.ReplyMarkups;
 
 namespace CardCollector.Resources
@@ -84,7 +85,7 @@ namespace CardCollector.Resources
         });
 
         /* Клавиатура меню выбора цен */
-        public static readonly InlineKeyboardMarkup PriceOptions = new (new[]
+        public static readonly InlineKeyboardMarkup CoinsPriceOptions = new (new[]
         {
             new[] {
                 InlineKeyboardButton.WithCallbackData($"💰 {Text.from} 0", $"{Command.set}={Command.price_coins_from}=0"),
@@ -102,6 +103,12 @@ namespace CardCollector.Resources
                 InlineKeyboardButton.WithCallbackData($"💰 {Text.from} 1000", $"{Command.set}={Command.price_coins_from}=1000"),
                 InlineKeyboardButton.WithCallbackData($"💰 {Text.to} ∞", $"{Command.set}={Command.price_coins_to}=0"),
             },
+            new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.back)},
+        });
+
+        /* Клавиатура меню выбора цен */
+        public static readonly InlineKeyboardMarkup GemsPriceOptions = new (new[]
+        {
             new[] {
                 InlineKeyboardButton.WithCallbackData($"💎 {Text.from} 0", $"{Command.set}={Command.price_gems_from}=0"),
                 InlineKeyboardButton.WithCallbackData($"💎 {Text.to} 10", $"{Command.set}={Command.price_gems_to}=10"),
@@ -189,39 +196,21 @@ namespace CardCollector.Resources
             return new InlineKeyboardMarkup(keyboardList);
         }
 
-        public static InlineKeyboardMarkup GetShopStickerKeyboard(StickerInfo stickerInfo)
+        public static InlineKeyboardMarkup GetCollectionStickerKeyboard(CollectionModule module)
         {
-            return new InlineKeyboardMarkup(new[] {
-                new[]
-                {
-                    InlineKeyboardButton.WithCallbackData(
-                        $"{Text.buy} ({stickerInfo.Count})" +
-                        $" {stickerInfo.PriceCoins * stickerInfo.Count}{Text.coin} / " +
-                        $"{stickerInfo.PriceGems * stickerInfo.Count}{Text.gem}",
-                        Command.confirm_buying),
-                },
-                new[]
-                {
-                    InlineKeyboardButton.WithCallbackData(Text.minus, $"{Command.count}-"),
-                    InlineKeyboardButton.WithCallbackData(Text.plus, $"{Command.count}+"),
-                },
-                new[] {InlineKeyboardButton.WithCallbackData(Text.back, $"{Command.back}={Command.clear_chat}")},
-            });
-        }
-
-        public static InlineKeyboardMarkup GetCollectionStickerKeyboard(StickerInfo stickerInfo)
-        {
+            var sticker = module.SelectedSticker;
+            var count = module.Count;
             var keyboard = new List<InlineKeyboardButton[]>
             {
-                new[] {InlineKeyboardButton.WithSwitchInlineQuery(Text.send_sticker, stickerInfo.Title)},
-                new[] {InlineKeyboardButton.WithCallbackData($"{Text.sell_on_auction} ({stickerInfo.Count})", Command.sell_on_auction)},
+                new[] {InlineKeyboardButton.WithSwitchInlineQuery(Text.send_sticker, sticker.Title)},
+                new[] {InlineKeyboardButton.WithCallbackData($"{Text.sell_on_auction} ({count})", Command.sell_on_auction)},
                 new[]
                 {
                     InlineKeyboardButton.WithCallbackData(Text.minus, $"{Command.count}-"),
                     InlineKeyboardButton.WithCallbackData(Text.plus, $"{Command.count}+"),
                 }
             };
-            if (stickerInfo.Tier != 5) keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData($"{Text.combine} ({stickerInfo.Count})", Command.combine)});
+            if (sticker.Tier != 5) keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData($"{Text.combine} ({count})", Command.combine)});
             keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.back, $"{Command.back}={Command.clear_chat}")});
             return new InlineKeyboardMarkup(keyboard);
         }
@@ -234,17 +223,10 @@ namespace CardCollector.Resources
             });
         }
 
-        public static InlineKeyboardMarkup GetAuctionProductKeyboard(StickerInfo stickerInfo)
+        public static InlineKeyboardMarkup GetAuctionProductKeyboard(AuctionModule module)
         {
             return new InlineKeyboardMarkup(new[] {
-                new[]
-                {
-                    InlineKeyboardButton.WithCallbackData(
-                        $"{Text.buy} ({stickerInfo.Count})" +
-                        $" {stickerInfo.TraderInfo.PriceCoins * stickerInfo.Count}{Text.coin} / " +
-                        $"{stickerInfo.TraderInfo.PriceGems * stickerInfo.Count}{Text.gem}",
-                        Command.confirm_buying),
-                },
+                new[] {InlineKeyboardButton.WithCallbackData($"{Text.buy} ({module.Count}) {module.Price * module.Count}{Text.gem}", Command.confirm_buying)},
                 new[]
                 {
                     InlineKeyboardButton.WithCallbackData(Text.minus, $"{Command.count}-"),
@@ -254,7 +236,7 @@ namespace CardCollector.Resources
             });
         }
 
-        public static InlineKeyboardMarkup GetStickerKeyboard(StickerInfo stickerInfo)
+        public static InlineKeyboardMarkup GetStickerKeyboard(StickerEntity stickerInfo)
         {
             return new InlineKeyboardMarkup(new[] {
                 new[] {InlineKeyboardButton.WithSwitchInlineQuery(Text.send_sticker, stickerInfo.Title)},
@@ -277,19 +259,18 @@ namespace CardCollector.Resources
         {
             return session.State switch
             {
-                UserState.AuctionMenu when session.SelectedSticker.TraderInfo is not null => GetAuctionProductKeyboard(session.SelectedSticker),
+                UserState.ProductMenu => GetAuctionProductKeyboard(session.GetModule<AuctionModule>()),
                 UserState.AuctionMenu => GetAuctionStickerKeyboard(),
-                UserState.ShopMenu => GetShopStickerKeyboard(session.SelectedSticker),
-                UserState.CollectionMenu when session.CombineList.Count > 0 => GetCombineStickerKeyboard(session.SelectedSticker),
-                UserState.CollectionMenu => GetCollectionStickerKeyboard(session.SelectedSticker),
-                _ => GetStickerKeyboard(session.SelectedSticker)
+                UserState.CombineMenu => GetCombineStickerKeyboard(session.GetModule<CombineModule>()),
+                UserState.CollectionMenu => GetCollectionStickerKeyboard(session.GetModule<CollectionModule>()),
+                _ => GetStickerKeyboard(session.GetModule<DefaultModule>().SelectedSticker)
             };
         }
 
-        public static InlineKeyboardMarkup GetCombineStickerKeyboard(StickerInfo stickerInfo)
+        public static InlineKeyboardMarkup GetCombineStickerKeyboard(CombineModule module)
         {
             return new InlineKeyboardMarkup(new[] {
-                new[] {InlineKeyboardButton.WithCallbackData($"{Text.add} ({stickerInfo.Count})", Command.combine)},
+                new[] {InlineKeyboardButton.WithCallbackData($"{Text.add} ({module.Count})", Command.combine)},
                 new[]
                 {
                     InlineKeyboardButton.WithCallbackData(Text.minus, $"{Command.count}-"),
@@ -300,34 +281,29 @@ namespace CardCollector.Resources
             });
         }
 
-        public static InlineKeyboardMarkup GetCombineKeyboard(UserSession session)
+        public static InlineKeyboardMarkup GetCombineKeyboard(CombineModule module)
         {
             var keyboard = new List<InlineKeyboardButton[]>();
-            foreach (var (id, _) in session.CombineList)
+            foreach (var (sticker, _) in module.CombineList)
             {
                 keyboard.Add(new []{InlineKeyboardButton.WithCallbackData($"{Text.delete} {Text.sticker} {keyboard.Count + 1}",
-                    $"{Command.delete_combine}={id}")});
+                    $"{Command.delete_combine}={sticker.Md5Hash}")});
             }
             keyboard.Add(new []{InlineKeyboardButton.WithCallbackData(Text.cancel, Command.back)});
-            if (session.GetCombineCount() == Constants.COMBINE_COUNT)
-            {
-                session.CalculateCombinePrice();
+            if (module.GetCombineCount() == Constants.COMBINE_COUNT)
                 keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(
-                    $"{Text.combine} {session.CombineCoinsPrice}{Text.coin}/{session.CombineGemsPrice}{Text.gem}", 
+                    $"{Text.combine} {module.CalculateCombinePrice()}{Text.coin}",
                     Command.combine_stickers)});
-            }
             else keyboard.Add(new[] {InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.add_sticker)});
             return new InlineKeyboardMarkup(keyboard);
         }
 
         /* Клавиатура, отображаемая вместе с сообщением профиля */
-        public static InlineKeyboardMarkup GetProfileKeyboard(UserEntity user)
+        public static InlineKeyboardMarkup GetProfileKeyboard(int income)
         {
             var keyboard = new List<InlineKeyboardButton[]>
             {
-                new[] {InlineKeyboardButton.WithCallbackData(
-                    $"{Text.collect} {user.Session.IncomeCoins}{Text.coin} {user.Session.IncomeGems}{Text.gem}", 
-                    Command.collect_income)},
+                new[] {InlineKeyboardButton.WithCallbackData($"{Text.collect} {income}{Text.coin}", Command.collect_income)},
             };
             
             return new InlineKeyboardMarkup(keyboard);

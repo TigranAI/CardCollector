@@ -2,6 +2,7 @@
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
+using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
@@ -12,8 +13,8 @@ namespace CardCollector.Commands.CallbackQuery
         public override async Task Execute()
         {
             await User.ClearChat();
-            var message = await MessageController.SendMessage(User, User.Session.GetCombineMessage(), 
-                Keyboard.GetCombineKeyboard(User.Session));
+            var combineModule = User.Session.GetModule<CombineModule>();
+            var message = await MessageController.SendMessage(User, combineModule.ToString(), Keyboard.GetCombineKeyboard(combineModule));
             User.Session.Messages.Add(message.MessageId);
         }
 

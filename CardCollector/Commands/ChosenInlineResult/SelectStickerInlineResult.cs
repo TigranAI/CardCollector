@@ -2,8 +2,8 @@
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
-using CardCollector.Others;
 using CardCollector.Resources;
+using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.ChosenInlineResult
@@ -18,16 +18,39 @@ namespace CardCollector.Commands.ChosenInlineResult
             var sticker = await StickerDao.GetStickerByHash(hash);
             var stickerCount = User.Session.State switch
             {
-                UserState.AuctionMenu => await AuctionController.GetStickerCount(sticker.Id, User.Session.Filters),
-                UserState.ShopMenu => await ShopController.GetStickerCount(sticker.Id),
+                UserState.AuctionMenu => await AuctionController.GetStickerCount(sticker.Id, User.Session.GetModule<FiltersModule>()),
                 _ => User.Stickers[sticker.Md5Hash].Count
             };
-            var stickerInfo = new StickerInfo(sticker) {MaxCount = stickerCount};
-            User.Session.SelectedSticker = stickerInfo;
+            switch (User.Session.State)
+            {
+                case UserState.CollectionMenu:
+                    User.Session.GetModule<CollectionModule>().SelectedSticker = sticker;
+                    User.Session.GetModule<CollectionModule>().Count = 1;
+                    break;
+                case UserState.AuctionMenu:
+                    User.Session.GetModule<AuctionModule>().SelectedSticker = sticker;
+                    User.Session.GetModule<AuctionModule>().Count = 1;
+                    break;
+                case UserState.CombineMenu:
+                    User.Session.GetModule<CombineModule>().SelectedSticker = sticker;
+                    User.Session.GetModule<CombineModule>().Count = 1;
+                    break;
+                case UserState.Default:
+                    User.Session.GetModule<DefaultModule>().SelectedSticker = sticker;
+                    break;
+            }
             var stickerMessage = await MessageController.SendSticker(User, sticker.Id);
-            var infoMessage = await MessageController.SendMessage(User, stickerInfo.ToString(), Keyboard.GetStickerKeyboard(User.Session));
+            var infoMessage = await MessageController.SendMessage(User, sticker.ToString(stickerCount), Keyboard.GetStickerKeyboard(User.Session));
+            if (User.Session.State == UserState.AuctionMenu) User.Session.State = UserState.ProductMenu;
             User.Session.Messages.Add(stickerMessage.MessageId);
             User.Session.Messages.Add(infoMessage.MessageId);
+        }
+
+        protected internal override bool IsMatches(string command)
+        {
+            return User == null 
+                ? base.IsMatches(command)
+                : User.Session.State is UserState.CollectionMenu or UserState.AuctionMenu or UserState.CombineMenu or UserState.Default;
         }
 
         public SelectStickerInlineResult() { }

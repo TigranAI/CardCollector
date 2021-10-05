@@ -2,6 +2,7 @@
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
+using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
@@ -11,25 +12,41 @@ namespace CardCollector.Commands.CallbackQuery
         protected override string CommandText => Command.count;
         public override async Task Execute()
         {
-            var buyPositionCount = User.Session.SelectedSticker.Count;
-            if (CallbackData.Contains('+'))
+            var (stickerCount, maxCount) = User.Session.State switch
             {
-                if (buyPositionCount < User.Session.SelectedSticker.MaxCount || User.Session.SelectedSticker.MaxCount == -1)
-                {
-                    User.Session.SelectedSticker.Count++;
-                    await MessageController.EditReplyMarkup(User, CallbackMessageId, Keyboard.GetStickerKeyboard(User.Session));
-                }
-                else await MessageController.AnswerCallbackQuery(User, Update.CallbackQuery!.Id, Messages.cant_increase);
-            }
-            else if (CallbackData.Contains('-'))
+                UserState.CollectionMenu when User.Session.GetModule<CollectionModule>() is {} module => 
+                    (module.Count, User.Stickers[module.SelectedSticker.Md5Hash].Count),
+                UserState.ProductMenu when User.Session.GetModule<AuctionModule>() is {} module => 
+                    (module.Count, module.MaxCount),
+                UserState.CombineMenu when User.Session.GetModule<CombineModule>() is {} module => 
+                    (module.Count, User.Stickers[module.SelectedSticker.Md5Hash].Count),
+                _ => (0, 0)
+            };
+            var changed = false;
+            if (CallbackData.Contains('+') && (stickerCount < maxCount || maxCount == -1))
             {
-                if (buyPositionCount > 1)
-                {
-                    User.Session.SelectedSticker.Count--;
-                    await MessageController.EditReplyMarkup(User, CallbackMessageId, Keyboard.GetStickerKeyboard(User.Session));
-                }
-                else await MessageController.AnswerCallbackQuery(User, Update.CallbackQuery!.Id, Messages.cant_decrease);
+                stickerCount++;
+                changed = true;
             }
+            else if (CallbackData.Contains('-') && stickerCount > 1)
+            {
+                stickerCount--;
+                changed = true;
+            }
+            switch(User.Session.State)
+            {
+                case UserState.CollectionMenu:
+                    User.Session.GetModule<CollectionModule>().Count = stickerCount;
+                    break;
+                case UserState.ProductMenu: 
+                    User.Session.GetModule<AuctionModule>().Count = stickerCount;
+                    break;
+                case UserState.CombineMenu: 
+                    User.Session.GetModule<CombineModule>().Count = stickerCount;
+                    break;
+            }
+            if (changed) await MessageController.EditReplyMarkup(User, CallbackMessageId, Keyboard.GetStickerKeyboard(User.Session));
+            else await MessageController.AnswerCallbackQuery(User, Update.CallbackQuery!.Id, Messages.cant_change_count);
         }
 
         public CountQuery() { }

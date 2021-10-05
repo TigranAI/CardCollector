@@ -26,5 +26,10 @@ namespace CardCollector.DataBase.EntityDao
             await Instance.SaveChangesAsync();
             return result.Entity;
         }
+
+        public static async Task Save()
+        {
+            await Instance.SaveChangesAsync();
+        }
     }
 }

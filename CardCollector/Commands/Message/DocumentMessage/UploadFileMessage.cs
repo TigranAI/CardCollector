@@ -82,10 +82,8 @@ namespace CardCollector.Commands.Message.DocumentMessage
                     await CreateSticker(fileInfo, fields["Emoji"]);
                     var sticker = new StickerEntity
                     {
-                        Title = fields["Title"], Author = fields["Author"], 
-                        IncomeCoins = int.Parse(fields["IncomeCoins"]), IncomeGems = int.Parse(fields["IncomeGems"]), 
-                        IncomeTime = int.Parse(fields["IncomeTime"]), PriceCoins = int.Parse(fields["PriceCoins"]),
-                        PriceGems = int.Parse(fields["PriceGems"]), Tier = int.Parse(fields["Tier"]), 
+                        Title = fields["Title"], Author = fields["Author"], Income = int.Parse(fields["IncomeCoins"]), 
+                        IncomeTime = int.Parse(fields["IncomeTime"]), Tier = int.Parse(fields["Tier"]), 
                         Emoji = fields["Emoji"], Description = fields["Description"]
                     };
                     newStickers.Add(sticker);

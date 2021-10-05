@@ -11,6 +11,8 @@
         AuctionMenu,
         /* Пользователь, загружающий файл */
         UploadFile,
+        CombineMenu,
+        ProductMenu,
         
         /* Пользователь в базовом состоянии (по умолчанию) */
         Default,

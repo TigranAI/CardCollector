@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
+using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.Message.TextMessage
@@ -30,9 +31,10 @@ namespace CardCollector.Commands.Message.TextMessage
                 await MessageController.EditMessage(User, Queue[User.Id], Messages.enter_only_one_emoji, Keyboard.EmojiOptions);
             else
             {
-                User.Session.Filters[Command.emoji] = input;
+                var filtersModule = User.Session.GetModule<FiltersModule>();
+                filtersModule.Filters[Command.emoji] = input;
                 /* Формируем сообщение с имеющимися фильтрами у пользователя */
-                var text = User.Session.Filters.ToMessage(User.Session.State);
+                var text = filtersModule.ToString(User.Session.State);
                 /* Редактируем сообщение */
                 await MessageController.EditMessage(User, Queue[User.Id], text, Keyboard.GetSortingMenu(User.Session.State));
                 Queue.Remove(User.Id);

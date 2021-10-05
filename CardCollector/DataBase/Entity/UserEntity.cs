@@ -5,8 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.DataBase.EntityDao;
-using CardCollector.Others;
 using CardCollector.Resources;
+using CardCollector.Session;
 using Telegram.Bot.Types;
 
 namespace CardCollector.DataBase.Entity

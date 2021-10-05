@@ -20,31 +20,6 @@ namespace CardCollector.DataBase.EntityDao
             return await Table.FirstOrDefaultAsync(item => item.Md5Hash == hash);
         }
 
-         /* Добавление новго стикера в систему
-         fileId - id стикера на сервере telegram
-         title - название стикера
-         author - автор
-         incomeCoins - прибыль стикера в монетах / минуту
-         incomeGems - прибыль стикера в алзмазах / минуту
-         tier - количество звезд стикера
-         emoji - эмоции, связанные со стикером
-         description - описание стикера */
-        private static async Task<StickerEntity> AddNew(string fileId, string title, string author,
-            int incomeCoins = 0, int incomeGems = 0, int tier = 1, string emoji = "", string description = "")
-
-        {
-            var cash = new StickerEntity
-            {
-                Id = fileId, Title = title, Author = author,
-                IncomeCoins = incomeCoins, IncomeGems = incomeGems,
-                Tier = tier, Emoji = emoji, Description = description,
-                Md5Hash = Utilities.CreateMd5(fileId)
-            };
-            var result = await Table.AddAsync(cash);
-            await Instance.SaveChangesAsync();
-            return result.Entity;
-        }
-
         public static async Task<List<string>> GetAuthorsList()
         {
             return await Table
@@ -68,6 +43,11 @@ namespace CardCollector.DataBase.EntityDao
         public static async Task<List<StickerEntity>> GetListWhere(Func<StickerEntity, bool> func)
         {
             return (await Table.ToListAsync()).Where(func).ToList();
+        }
+
+        public static async Task<StickerEntity> GetById(string id)
+        {
+            return await Table.FirstOrDefaultAsync(sticker => sticker.Id == id);
         }
     }
 }

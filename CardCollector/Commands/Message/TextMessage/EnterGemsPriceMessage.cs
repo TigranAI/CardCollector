@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
+using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.Message.TextMessage
@@ -15,16 +16,16 @@ namespace CardCollector.Commands.Message.TextMessage
         public override async Task Execute()
         {
             /* если пользователь ввел что-то кроме эмодзи */
+            var module = User.Session.GetModule<CollectionModule>();
             if (!int.TryParse(Update.Message!.Text, out var price) || price < 0)
                 await MessageController.EditMessage(User, Queue[User.Id], 
-                    $"{Messages.current_price} {User.Session.CoinPrice}{Text.coin} / {User.Session.GemPrice}{Text.gem}" +
-                    $"\n{Messages.please_enter_price}", Keyboard.AuctionPutCancelKeyboard);
+                    $"{Messages.current_price} {module.SellPrice}{Text.gem}\n{Messages.please_enter_price}",
+                    Keyboard.AuctionPutCancelKeyboard);
             else
             {
-                User.Session.GemPrice = price;
+                module.SellPrice = price;
                 await MessageController.EditMessage(User, Queue[User.Id],
-                    $"{Messages.confirm_selling} {User.Session.CoinPrice}{Text.coin} / {User.Session.GemPrice}{Text.gem}:", 
-                    Keyboard.AuctionPutCancelKeyboard);
+                    $"{Messages.confirm_selling} {module.SellPrice}{Text.gem}:", Keyboard.AuctionPutCancelKeyboard);
                 Queue.Remove(User.Id);
             }
         }

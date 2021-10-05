@@ -1,7 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
+using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.InlineQuery
@@ -14,9 +16,12 @@ namespace CardCollector.Commands.InlineQuery
             // Фильтр - введенная пользователем фраза
             var filter = Update.InlineQuery!.Query;
             // Получаем список стикеров
-            var stickersList = await AuctionController.GetStickers(filter);
-            var results = User.Session.Filters
-                .ApplyTo(stickersList, User.Session.State).ToTelegramResults(Command.select_sticker);
+            var stickersList = (await AuctionController.GetStickers(filter)).AsEnumerable();
+            stickersList = User.Session.GetModule<FiltersModule>()
+                .ApplyTo(stickersList);
+            var results = User.Session.GetModule<FiltersModule>()
+                .ApplyPriceTo(stickersList)
+                .ToTelegramResults(Command.select_sticker);
             // Посылаем пользователю ответ на его запрос
             await MessageController.AnswerInlineQuery(InlineQueryId, results);
         }
@@ -27,7 +32,7 @@ namespace CardCollector.Commands.InlineQuery
         {
             return User == null 
                 ? command.Contains("Sender")
-                : User.Session.State == UserState.AuctionMenu && User.Session.SelectedSticker == null;
+                : User.Session.State == UserState.AuctionMenu;
         }
 
         public ShowAuctionStickers() { }

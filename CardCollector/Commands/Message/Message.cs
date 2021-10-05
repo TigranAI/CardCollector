@@ -37,17 +37,15 @@ namespace CardCollector.Commands.Message
                 // Команда "Коллекция"
                 new CollectionMessage(),
                 // Команда "Магазин"
-                new ShopMessage(),
+                // TODO переписать магазин
+                // new ShopMessage(),
                 // Команда "Аукцион"
                 new AuctionMessage(),
                 // Ожидание ввода эмоджи
                 new EnterEmojiMessage(),
-                //Очередь воода цены на аукцион
-                new EnterCoinsPriceMessage(),
                 // Загрузка стикерпака
                 new DownloadStickerPackMessage(),
                 //команда ввода цены
-                new EnterCoinsPriceMessage(),
                 new EnterGemsPriceMessage(),
                 // Команда "Показать пример"
                 new ShowSampleMessage(),

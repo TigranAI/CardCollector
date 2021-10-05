@@ -11,11 +11,10 @@ namespace CardCollector.Commands.CallbackQuery
         protected override string CommandText => Command.collect_income;
         public override async Task Execute()
         {
-            await User.Session.PayOut();
+            var result = await User.Cash.Payout(User.Stickers);
             await MessageController.AnswerCallbackQuery(User, CallbackQueryId, 
                 $"{Messages.you_collected}: " +
-                $"{User.Session.IncomeCoins}{Text.coin} " +
-                $"{User.Session.IncomeGems}{Text.gem}" +
+                $"{result}{Text.coin} " +
                 $"\n\n{Messages.your_cash}: " +
                 $"{User.Cash.Coins}{Text.coin} " +
                 $"{User.Cash.Gems}{Text.gem}", true);

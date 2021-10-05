@@ -11,7 +11,8 @@ namespace CardCollector.Commands.CallbackQuery
         protected override string CommandText => Command.price;
         public override async Task Execute()
         {
-            await MessageController.EditMessage(User, CallbackMessageId, Messages.choose_price, Keyboard.PriceOptions);
+            await MessageController.EditMessage(User, CallbackMessageId, Messages.choose_price, 
+                User.Session.State == UserState.AuctionMenu ? Keyboard.GemsPriceOptions : Keyboard.CoinsPriceOptions);
         }
 
         public PriceCallback() { }

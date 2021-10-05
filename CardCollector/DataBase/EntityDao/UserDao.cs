@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
+using CardCollector.Session.Modules;
 using Microsoft.EntityFrameworkCore;
 using Telegram.Bot.Types;
 
@@ -36,6 +37,8 @@ namespace CardCollector.DataBase.EntityDao
                 /* Собираем объект пользователя */
                 result.Cash = await CashDao.GetById(user.Id);
                 result.Stickers = await UserStickerRelationDao.GetListById(user.Id);
+                result.Session.InitNewModule<FiltersModule>();
+                result.Session.InitNewModule<DefaultModule>();
                 
                 /* Добавляем пользователя в список активных, чтобы не обращаться к бд лишний раз */
                 ActiveUsers.Add(user.Id, result);

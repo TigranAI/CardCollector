@@ -55,8 +55,6 @@ namespace CardCollector.Commands.CallbackQuery
             new PutForAuctionQuery(),
             /* Команда для покупки стикера */
             new BuyStickerQuery(),
-            /* Команда возврата к стикеру */
-            new BackToStickerQuery(),
             /* Команда возврата к комбинированию */
             new BackToCombine(),
             /* Команда добавления к комбинироавнию */

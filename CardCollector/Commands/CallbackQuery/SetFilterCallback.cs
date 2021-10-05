@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using CardCollector.Commands.Message.TextMessage;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
+using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
@@ -15,7 +16,7 @@ namespace CardCollector.Commands.CallbackQuery
         {
             EnterEmojiMessage.RemoveFromQueue(User.Id);
             var result = CallbackData.Split('=');
-            var filters = User.Session.Filters;
+            var filters = User.Session.GetModule<FiltersModule>().Filters;
             /* Команду set мы получаем в виде set=<key>=<value>, соответственно аргументы 1 и 2 это ключ и значение словаря */
             filters[result[1]] = Convert.ChangeType(result[2], filters[result[1]].GetType());
             /* Если левая граница стоимости алмазов или монет больше правой, то меняем правую на бесконечность */

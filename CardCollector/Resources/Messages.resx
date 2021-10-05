@@ -156,4 +156,7 @@
     <data name="successfully_selling" xml:space="preserve">
         <value>Товар успешно попал на аукцион</value>
     </data>
+    <data name="cant_change_count" xml:space="preserve">
+        <value>Невозможно изменить количество!</value>
+    </data>
 </root>

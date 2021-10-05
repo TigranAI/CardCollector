@@ -1,7 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
+using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.Message.TextMessage
@@ -12,9 +14,29 @@ namespace CardCollector.Commands.Message.TextMessage
         protected override string CommandText => "Message";
         public override async Task Execute()
         {
-            User.Session.SelectedSticker = null;
+            switch (User.Session.State)
+            {
+                case UserState.CollectionMenu:
+                    User.Session.DeleteModule<CollectionModule>();
+                    break;
+                case UserState.ShopMenu:
+                    User.Session.DeleteModule<ShopModule>();
+                    break;
+                case UserState.AuctionMenu:
+                    User.Session.DeleteModule<AuctionModule>();
+                    break;
+                case UserState.CombineMenu:
+                    User.Session.DeleteModule<CombineModule>();
+                    break;
+                case UserState.ProductMenu:
+                    User.Session.DeleteModule<AuctionModule>();
+                    break;
+                case UserState.Default:
+                    User.Session.GetModule<DefaultModule>().Reset();
+                    break;
+            }
             /* Формируем сообщение с имеющимися фильтрами у пользователя */
-            var text = User.Session.Filters.ToMessage(User.Session.State);
+            var text = User.Session.GetModule<FiltersModule>().ToString(User.Session.State);
             /* Отправляем сообщение */
             var message = await MessageController.SendMessage(User, text, Keyboard.GetSortingMenu(User.Session.State));
             /* Добавляем это сообщение в список для удаления */

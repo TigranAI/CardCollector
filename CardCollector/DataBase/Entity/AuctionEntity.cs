@@ -1,31 +1,41 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Threading.Tasks;
+using CardCollector.Controllers;
+using CardCollector.DataBase.EntityDao;
+using CardCollector.Resources;
 
 namespace CardCollector.DataBase.Entity
 {
     [Table("auction")]
     public class AuctionEntity
     {
-        /* добавил, так как один и тот же стикер может продаваться разными людьми,
-         следовательно - он не уникальный */
         /* id записи */
-        [Column("id"), MaxLength(32)] public int Id { get; set; }
+        [Key] [Column("id"), MaxLength(32)] public int Id { get; set; }
         
         /* id стикера */
         [Column("sticker_id"), MaxLength(127)] public string StickerId { get; set; }
-        
-        /* Разбил на 2 отдельных цены, так как я ранее говорил,
-         что можно будет продать стик за 2 валюты одновременно, поле валюты упразднил */
-        /* цена в монетах */
-        [Column("price_coins"), MaxLength(32)] public int PriceCoins { get; set; }
-        
-        /* цена в алмазах */
-        [Column("price_gems"), MaxLength(32)] public int PriceGems { get; set; }
+
+        /* цена (в алмазах) */
+        [Column("price"), MaxLength(32)] public int Price { get; set; }
         
         /* количество */
-        [Column("quantity"), MaxLength(32)] public int Quantity { get; set; }
+        [Column("count"), MaxLength(32)] public int Count { get; set; }
         
         /* продавец */
         [Column("trader"), MaxLength(127)] public long Trader { get; set; }
+
+        public async Task BuyCard(int count)
+        {
+            Count -= count;
+            var user = await UserDao.GetById(Trader);
+            var sticker = await StickerDao.GetById(StickerId);
+            var gemsSum = Price * count;
+            await MessageController.SendMessage(user, $"{Messages.you_sold} {sticker.Title} {count}{Text.items}" +
+                                                      $"\n{Messages.you_collected} {gemsSum}{Text.gem}");
+            user.Cash.Gems += gemsSum;
+            await CashDao.Save();
+            if (Count == 0) await AuctionDao.DeleteRow(Id);
+        }
     }
 }

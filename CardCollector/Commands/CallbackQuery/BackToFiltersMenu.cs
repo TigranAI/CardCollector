@@ -3,6 +3,7 @@ using CardCollector.Commands.Message.TextMessage;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
+using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
@@ -14,16 +15,33 @@ namespace CardCollector.Commands.CallbackQuery
         {
             /* Удаляем пользователя из очереди */
             EnterEmojiMessage.RemoveFromQueue(User.Id);
-            User.Session.SelectedSticker = null;
-            User.Session.CombineList.Clear();
-            /* Очищаем чат, если был передан параметр очистки */
+            switch (User.Session.State)
+            {
+                case UserState.CombineMenu:
+                    User.Session.State = UserState.CollectionMenu;
+                    User.Session.DeleteModule<CombineModule>();
+                    break;
+                case UserState.CollectionMenu:
+                    User.Session.GetModule<CollectionModule>().Reset();
+                    break;
+                case UserState.ProductMenu:
+                    User.Session.State = UserState.AuctionMenu;
+                    User.Session.GetModule<AuctionModule>().Reset();
+                    break;
+                case UserState.ShopMenu:
+                    User.Session.GetModule<ShopModule>().Reset();
+                    break;
+                case UserState.AuctionMenu:
+                    User.Session.GetModule<AuctionModule>().Reset();
+                    break;
+            }
             await User.ClearChat();
             /* Формируем сообщение с имеющимися фильтрами у пользователя */
-            var text = User.Session.Filters.ToMessage(User.Session.State);
-            /* Редактируем сообщение */
-            var message = await MessageController.EditMessage(User, CallbackMessageId, 
-                    text, Keyboard.GetSortingMenu(User.Session.State));
-            if (!User.Session.Messages.Contains(message.MessageId)) User.Session.Messages.Add(message.MessageId);
+            var filtersModule = User.Session.GetModule<FiltersModule>();
+            var text = filtersModule.ToString(User.Session.State);
+            /* Отправляем сообщение */
+            var message = await MessageController.SendMessage(User, text, Keyboard.GetSortingMenu(User.Session.State));
+            User.Session.Messages.Add(message.MessageId);
         }
         
         public BackToFiltersMenu() { }

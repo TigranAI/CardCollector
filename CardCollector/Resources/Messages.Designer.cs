@@ -88,6 +88,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Невозможно изменить количество!.
+        /// </summary>
+        internal static string cant_change_count {
+            get {
+                return ResourceManager.GetString("cant_change_count", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Не удалось добавить стикеры. Необходимое количество уже собрано..
         /// </summary>
         internal static string cant_combine {

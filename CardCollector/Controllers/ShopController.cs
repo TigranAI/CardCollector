@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
-using CardCollector.Others;
 
 namespace CardCollector.Controllers
 {
@@ -19,14 +18,6 @@ namespace CardCollector.Controllers
         {
             var result = await ShopDao.GetAllShopPositions(filter);
             return result.ToList();
-        }
-
-        public static async Task SoldCard(StickerInfo selectedSticker)
-        {
-            var product = await ShopDao.GetSticker(selectedSticker.Id);
-            if (product.IsInfinite) return;
-            product.Count -= selectedSticker.Count;
-            if (product.Count == 0) ShopDao.DeleteRow(product.Id);
         }
     }
 }

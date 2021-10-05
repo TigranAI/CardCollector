@@ -2,6 +2,7 @@
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
+using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
@@ -11,27 +12,35 @@ namespace CardCollector.Commands.CallbackQuery
         protected override string CommandText => Command.combine;
         public override async Task Execute()
         {
-            var selectedSticker = User.Session.SelectedSticker;
-            var combineCount = User.Session.GetCombineCount();
+            User.Session.State = UserState.CombineMenu;
+            var combineModule = User.Session.GetModule<CombineModule>();
+            if (combineModule.SelectedSticker == null)
+            {
+                var collectionModule = User.Session.GetModule<CollectionModule>();
+                combineModule.SelectedSticker = collectionModule.SelectedSticker;
+                combineModule.Count = collectionModule.Count;
+            }
+            var selectedSticker = combineModule.SelectedSticker;
+            var combineCount = combineModule.GetCombineCount();
             if (combineCount == Constants.COMBINE_COUNT)
                 await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.cant_combine, true);
             else
             {
-                if (combineCount + selectedSticker.Count > Constants.COMBINE_COUNT)
+                if (combineCount + combineModule.Count > Constants.COMBINE_COUNT)
                 {
-                    selectedSticker.Count = Constants.COMBINE_COUNT - combineCount;
+                    combineModule.Count = Constants.COMBINE_COUNT - combineCount;
                     await MessageController.AnswerCallbackQuery(User, CallbackQueryId, $"{Messages.combine_added_only} " +
-                        $"{selectedSticker.Count}{Text.items}", true);
+                        $"{combineModule.Count}{Text.items}", true);
                 }
-                if (User.Session.CombineList.ContainsKey(selectedSticker.Md5Hash))
+                if (combineModule.CombineList.ContainsKey(selectedSticker))
                 {
-                    var combineSticker = User.Session.CombineList[selectedSticker.Md5Hash];
-                    if (selectedSticker.MaxCount < combineSticker.Count + selectedSticker.Count)
-                        User.Session.CombineList[selectedSticker.Md5Hash].Count = selectedSticker.Count;
+                    var maxCount = User.Stickers[selectedSticker.Md5Hash].Count;
+                    if (maxCount < combineModule.CombineList[selectedSticker] + combineModule.Count)
+                        combineModule.CombineList[selectedSticker] = combineModule.Count;
                     else
-                        User.Session.CombineList[selectedSticker.Md5Hash].Count += selectedSticker.Count;
+                        combineModule.CombineList[selectedSticker] += combineModule.Count;
                 }
-                else User.Session.CombineList.Add(selectedSticker.Md5Hash, selectedSticker);
+                else combineModule.CombineList.Add(selectedSticker, combineModule.Count);
             }
             await new BackToCombine(User, Update).Execute();
         }

@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
+using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.InlineQuery
@@ -14,8 +14,9 @@ namespace CardCollector.Commands.InlineQuery
         {
             // Фильтр - введенная пользователем фраза
             var filter = Update.InlineQuery!.Query;
+            var module = User.Session.GetModule<CombineModule>();
             // Получаем список стикеров
-            var stickersList = await User.GetStickersList(filter, User.Session.CombineList.First().Value.Tier);
+            var stickersList = await User.GetStickersList(filter, module.Tier);
             var results = stickersList.ToTelegramResults(Command.select_sticker);
             // Посылаем пользователю ответ на его запрос
             await MessageController.AnswerInlineQuery(InlineQueryId, results);
@@ -27,7 +28,7 @@ namespace CardCollector.Commands.InlineQuery
         {
             return User == null 
                 ? command.Contains("Sender")
-                : User.Session.State == UserState.CollectionMenu && User.Session.CombineList.Count > 0;
+                : User.Session.State == UserState.CombineMenu;
         }
 
         public ShowCombineStickers() { }
