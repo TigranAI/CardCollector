@@ -24,10 +24,10 @@ namespace CardCollector.DataBase.Entity
         [Column("author"), MaxLength(128)] public string Author { get; set; }
         
         /* Доход от стикера в монетах */
-        [Column("income_coins"), MaxLength(32)] public int Income { get; set; } = 0;
+        [Column("income"), MaxLength(32)] public int Income { get; set; } = 0;
         
         /* Время, необходимое для получения дохода */
-        [Column("income_time"), MaxLength(32)] public int IncomeTime { get; set; } = 0;
+        [Column("income_time"), MaxLength(32)] public int IncomeTime { get; set; } = 1;
         
         /* Количество звезд стикера (редкость) */
         [Column("tier"), MaxLength(32)] public int Tier { get; set; } = 1;
