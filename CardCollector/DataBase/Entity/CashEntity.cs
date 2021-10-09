@@ -22,6 +22,9 @@ namespace CardCollector.DataBase.Entity
         /* Количество алмазов */
         [Column("gems"), MaxLength(32)] public int Gems { get; set; } = 1000;
         
+        /* Размер копилки */
+        [Column("max_capacity"), MaxLength(32)] public int MaxCapacity { get; set; } = 200;
+        
         [NotMapped] private DateTime LastPayout = DateTime.Now;
         
         public async Task<int> CalculateIncome(Dictionary<string, UserStickerRelationEntity> stickers)
@@ -36,16 +39,20 @@ namespace CardCollector.DataBase.Entity
                 if (payoutsCount < 1) continue;
                 var multiplier = payoutsCount * sticker.Count;
                 result += stickerInfo.Income * multiplier;
+                if (result > MaxCapacity) return MaxCapacity;
             }
             return result;
         }
         
         public async Task<int> Payout(Dictionary<string, UserStickerRelationEntity> stickers)
         {
-            return await stickers.Values.SumAsync(async sticker => await Payout(sticker));
+            var result = await stickers.Values.SumAsync(async sticker => await Payout(sticker));
+            result = result > MaxCapacity ? MaxCapacity : result;
+            Coins += result;
+            return result;
         }
         
-        public async Task<int> Payout(UserStickerRelationEntity relation)
+        private async Task<int> Payout(UserStickerRelationEntity relation)
         {
             var stickerInfo = await StickerDao.GetById(relation.StickerId);
             var payoutInterval = DateTime.Now - relation.Payout;
@@ -53,7 +60,6 @@ namespace CardCollector.DataBase.Entity
             if (payoutsCount < 1) return 0;
             relation.Payout += new TimeSpan(0, stickerInfo.IncomeTime, 0) * payoutsCount;
             var result = stickerInfo.Income * payoutsCount * relation.Count;
-            Coins += result;
             return result;
         }
     }

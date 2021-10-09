@@ -159,4 +159,10 @@
     <data name="cant_change_count" xml:space="preserve">
         <value>Невозможно изменить количество!</value>
     </data>
+    <data name="bot_turning_off" xml:space="preserve">
+        <value>Бот уходит на технический перерыв...</value>
+    </data>
+    <data name="daily_task_alertation" xml:space="preserve">
+        <value>Не забывайте заходить и выполнять ежедневные задания. Список ежедневных заданий вы можете посмотреть в профиле. Хорошего дня и приятного пользования нашим ботом!</value>
+    </data>
 </root>

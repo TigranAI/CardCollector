@@ -1,3 +1,5 @@
+using System;
+
 namespace CardCollector.Resources
 {
     public static class Constants
@@ -20,5 +22,6 @@ namespace CardCollector.Resources
         public const int ARTIST_PRIVILEGE_LEVEL = 4;
         public const int SESSION_ACTIVE_PERIOD = DEBUG ? 1 : 60;
         public const int COMBINE_COUNT = 5;
+        public static readonly TimeSpan DailyTaskAlert = new(12, 0, 0);
     }
 }

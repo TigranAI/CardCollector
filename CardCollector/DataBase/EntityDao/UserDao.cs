@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
+using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using CardCollector.Session.Modules;
@@ -87,13 +89,19 @@ namespace CardCollector.DataBase.EntityDao
             }
         }
 
-        public static void ClearMemory()
+        public static async void ClearMemory()
         {
-            foreach (var (id, user) in ActiveUsers)
+            foreach (var (id, user) in ActiveUsers.ToDictionary(pair => pair.Key, pair => pair.Value))
             {
                 user.Session.EndSession();
                 ActiveUsers.Remove(id);
+                await MessageController.SendMessage(user, Messages.bot_turning_off);
             }
+        }
+
+        public static async Task<IEnumerable<UserEntity>> GetAllWhere(Func<UserEntity, Task<bool>> callback)
+        {
+            return await Table.WhereAsync(callback);
         }
     }
 }

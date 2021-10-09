@@ -88,6 +88,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Бот уходит на технический перерыв....
+        /// </summary>
+        internal static string bot_turning_off {
+            get {
+                return ResourceManager.GetString("bot_turning_off", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Невозможно изменить количество!.
         /// </summary>
         internal static string cant_change_count {
@@ -219,6 +228,15 @@ namespace CardCollector.Resources {
         internal static string current_price {
             get {
                 return ResourceManager.GetString("current_price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Не забывайте заходить и выполнять ежедневные задания. Список ежедневных заданий вы можете посмотреть в профиле. Хорошего дня и приятного пользования нашим ботом!.
+        /// </summary>
+        internal static string daily_task_alertation {
+            get {
+                return ResourceManager.GetString("daily_task_alertation", resourceCulture);
             }
         }
         

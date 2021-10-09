@@ -27,7 +27,7 @@ namespace CardCollector.Commands.CallbackQuery
                 await auctionModule.SelectedPosition.BuyCard(auctionModule.Count);
                 if (User.Stickers.ContainsKey(auctionModule.SelectedSticker.Md5Hash))
                     await MessageController.AnswerCallbackQuery(User, CallbackQueryId, 
-                        $"{Messages.you_collected} {await User.Cash.Payout(User.Stickers[auctionModule.SelectedSticker.Md5Hash])}{Text.coin}");
+                        $"{Messages.you_collected} {await User.Cash.Payout(User.Stickers)}{Text.coin}");
                 else
                     await UserStickerRelationDao.AddNew(User, auctionModule.SelectedSticker, auctionModule.Count);
                 User.Cash.Gems -= auctionModule.Price * auctionModule.Count;

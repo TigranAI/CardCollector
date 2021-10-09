@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Timers;
 using CardCollector.DataBase;
 using CardCollector.DataBase.EntityDao;
@@ -41,6 +42,9 @@ namespace CardCollector
             _timer.Elapsed += SavingChanges;
             _timer.Elapsed += UserDao.ClearMemory;
             
+            /* Запускаем механизм уведомления */
+            Utilities.SetUpTimer(Constants.DailyTaskAlert, DailyTaskAlert);
+            
             _end.WaitOne();
             Logs.LogOut("Stopping program");
             
@@ -62,6 +66,13 @@ namespace CardCollector
             try {
                 await CardCollectorDatabase.SaveAllChangesAsync();
             } catch (Exception) { /*ignored*/ }
+        }
+
+        private static async void DailyTaskAlert(object o, ElapsedEventArgs e)
+        {
+            var users = await UserDao.GetAllWhere(user => Task.FromResult(!user.IsBlocked));
+            foreach (var user in users)
+                await SendMessage(user, Messages.daily_task_alertation);
         }
     }
 }
