@@ -171,4 +171,13 @@
     <data name="total" xml:space="preserve">
         <value>Всего</value>
     </data>
+    <data name="control_panel" xml:space="preserve">
+        <value>Панель управления</value>
+    </data>
+    <data name="daily_tasks" xml:space="preserve">
+        <value>Ежедневные задания</value>
+    </data>
+    <data name="my_opencases" xml:space="preserve">
+        <value>Мои паки</value>
+    </data>
 </root>

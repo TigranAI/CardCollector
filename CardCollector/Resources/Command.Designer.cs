@@ -169,11 +169,29 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ABD.
+        /// </summary>
+        internal static string control_panel {
+            get {
+                return ResourceManager.GetString("control_panel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AAN.
         /// </summary>
         internal static string count {
             get {
                 return ResourceManager.GetString("count", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ABE.
+        /// </summary>
+        internal static string daily_tasks {
+            get {
+                return ResourceManager.GetString("daily_tasks", resourceCulture);
             }
         }
         
@@ -192,6 +210,15 @@ namespace CardCollector.Resources {
         internal static string emoji {
             get {
                 return ResourceManager.GetString("emoji", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ABF.
+        /// </summary>
+        internal static string my_opencases {
+            get {
+                return ResourceManager.GetString("my_opencases", resourceCulture);
             }
         }
         
@@ -255,6 +282,15 @@ namespace CardCollector.Resources {
         internal static string sell_on_auction {
             get {
                 return ResourceManager.GetString("sell_on_auction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ABG.
+        /// </summary>
+        internal static string send_private_sticker {
+            get {
+                return ResourceManager.GetString("send_private_sticker", resourceCulture);
             }
         }
         

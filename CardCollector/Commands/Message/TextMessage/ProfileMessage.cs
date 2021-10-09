@@ -24,7 +24,7 @@ namespace CardCollector.Commands.Message.TextMessage
                 /* Количество алмазов */
                 $"{Messages.gems}: {User.Cash.Gems}{Text.gem}",
                 /* Клавиатура профиля */
-                Keyboard.GetProfileKeyboard(income));
+                Keyboard.GetProfileKeyboard(income, User.PrivilegeLevel));
             /* Записываем id нового сообщения */
             User.Session.Messages.Add(message.MessageId);
         }

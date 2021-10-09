@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
+using CardCollector.DailyTasks;
 using CardCollector.DataBase;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
@@ -44,6 +45,8 @@ namespace CardCollector
             
             /* Запускаем механизм уведомления */
             Utilities.SetUpTimer(Constants.DailyTaskAlert, DailyTaskAlert);
+            /* Запускаем сброс ежедневных заданий */
+            Utilities.SetUpTimer(Constants.DailyTaskReset, DailyTask.ResetTasks);
             
             _end.WaitOne();
             Logs.LogOut("Stopping program");

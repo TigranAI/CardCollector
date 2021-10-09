@@ -1,4 +1,6 @@
 using System;
+// ReSharper disable ConditionIsAlwaysTrueOrFalse
+#pragma warning disable 162
 
 namespace CardCollector.Resources
 {
@@ -22,6 +24,9 @@ namespace CardCollector.Resources
         public const int ARTIST_PRIVILEGE_LEVEL = 4;
         public const int SESSION_ACTIVE_PERIOD = DEBUG ? 1 : 60;
         public const int COMBINE_COUNT = 5;
-        public static readonly TimeSpan DailyTaskAlert = new(12, 0, 0);
+        
+        /* Время оповещения и сброса ежедневных заданий */
+        public static readonly TimeSpan DailyTaskAlert = DEBUG ? new TimeSpan(21, 0, 0) : new TimeSpan(12, 0, 0);
+        public static readonly TimeSpan DailyTaskReset = DEBUG ? new TimeSpan(21, 0, 0) : new TimeSpan(0, 0, 0);
     }
 }

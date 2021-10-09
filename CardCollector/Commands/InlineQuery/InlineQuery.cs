@@ -40,6 +40,7 @@ namespace CardCollector.Commands.InlineQuery
             new ShowTradersInBotChat(),
             // Показать стикеры в личных сообщениях с ботом для выбора или просмотра информации
             new ShowStickersInBotChat(),
+            new ShowStickersInPrivate(),
         };
         
         

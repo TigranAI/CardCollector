@@ -35,6 +35,14 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Command.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="DailyTasks\Titles.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Titles.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="DailyTasks\Descriptions.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Descriptions.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -62,6 +70,16 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>Command.resx</DependentUpon>
+      </Compile>
+      <Compile Update="DailyTasks\Titles.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Title.resx</DependentUpon>
+      </Compile>
+      <Compile Update="DailyTasks\Descriptions.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Description.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

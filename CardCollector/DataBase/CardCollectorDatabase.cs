@@ -63,6 +63,7 @@ namespace CardCollector.DataBase
         public DbSet<StickerEntity> Stickers { get; set; }
         public DbSet<AuctionEntity> Auction { get; set; }
         public DbSet<ShopEntity> Shop { get; set; }
+        public DbSet<DailyTaskEntity> DailyTasks { get; set; }
 
         
         /* Конфигурация подключения к БД */

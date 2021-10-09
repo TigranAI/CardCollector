@@ -187,11 +187,29 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Панель управления.
+        /// </summary>
+        internal static string control_panel {
+            get {
+                return ResourceManager.GetString("control_panel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Количество.
         /// </summary>
         internal static string count {
             get {
                 return ResourceManager.GetString("count", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ежедневные задания.
+        /// </summary>
+        internal static string daily_tasks {
+            get {
+                return ResourceManager.GetString("daily_tasks", resourceCulture);
             }
         }
         
@@ -300,6 +318,15 @@ namespace CardCollector.Resources {
         internal static string minutes {
             get {
                 return ResourceManager.GetString("minutes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Мои паки.
+        /// </summary>
+        internal static string my_opencases {
+            get {
+                return ResourceManager.GetString("my_opencases", resourceCulture);
             }
         }
         

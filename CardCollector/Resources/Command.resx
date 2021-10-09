@@ -102,4 +102,16 @@
     <data name="stop_bot" xml:space="preserve">
         <value>Остановить</value>
     </data>
+    <data name="control_panel" xml:space="preserve">
+        <value>ABD</value>
+    </data>
+    <data name="my_opencases" xml:space="preserve">
+        <value>ABF</value>
+    </data>
+    <data name="daily_tasks" xml:space="preserve">
+        <value>ABE</value>
+    </data>
+    <data name="send_private_sticker" xml:space="preserve">
+        <value>ABG</value>
+    </data>
 </root>

@@ -299,13 +299,16 @@ namespace CardCollector.Resources
         }
 
         /* Клавиатура, отображаемая вместе с сообщением профиля */
-        public static InlineKeyboardMarkup GetProfileKeyboard(int income)
+        public static InlineKeyboardMarkup GetProfileKeyboard(int income, int privilegeLevel)
         {
             var keyboard = new List<InlineKeyboardButton[]>
             {
                 new[] {InlineKeyboardButton.WithCallbackData($"{Text.collect} {income}{Text.coin}", Command.collect_income)},
+                new[] {InlineKeyboardButton.WithCallbackData(Text.daily_tasks, Command.daily_tasks)},
+                new[] {InlineKeyboardButton.WithCallbackData(Text.my_opencases, Command.my_opencases)},
             };
-            
+            if (privilegeLevel > 2) keyboard.Add(
+                new[] {InlineKeyboardButton.WithCallbackData(Text.control_panel, Command.control_panel)});
             return new InlineKeyboardMarkup(keyboard);
         }
     }

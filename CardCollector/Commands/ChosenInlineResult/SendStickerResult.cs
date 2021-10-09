@@ -12,11 +12,6 @@ namespace CardCollector.Commands.ChosenInlineResult
         protected override string CommandText => Command.send_sticker;
         public override Task Execute()
         {
-            /*// Получаем MD5 хеш из полученного запроса разделением по символу '='
-            var shortHash = InlineResult.Split('=')[1];
-            // Вычитаем один стикер из общего их количества
-            User.Stickers[shortHash].Count--;*/
-            // Возвращаем CompletedTask, означающий завершение данного метода
             return Task.CompletedTask;
         }
         
