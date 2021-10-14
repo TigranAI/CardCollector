@@ -242,11 +242,11 @@ namespace CardCollector.Resources
             {
                 var author = await PacksDao.GetById(item.PackId);
                 if (i % 2 == 0) keyboardList.Add(new [] {
-                    InlineKeyboardButton.WithCallbackData($"{author.Author} {item.Count}", $"{Command.open_pack}={item.Id}")
+                    InlineKeyboardButton.WithCallbackData($"{author.Author} {item.Count}", $"{Command.open_pack}={item.PackId}")
                 });
                 else keyboardList[keyboardList.Count - 1] = new [] {
                     keyboardList[keyboardList.Count - 1][0],
-                    InlineKeyboardButton.WithCallbackData($"{author.Author} {item.Count}", $"{Command.open_pack}={item.Id}")
+                    InlineKeyboardButton.WithCallbackData($"{author.Author} {item.Count}", $"{Command.open_pack}={item.PackId}")
                 };
             }
             keyboardList.Add(new[] {
