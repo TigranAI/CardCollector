@@ -27,7 +27,7 @@ namespace CardCollector.Session
 
         public T InitNewModule<T>() where T : Module
         {
-            Modules.Add(typeof(T), Activator.CreateInstance<T>());
+            if (!Modules.ContainsKey(typeof(T))) Modules.Add(typeof(T), Activator.CreateInstance<T>());
             return (T) Modules[typeof(T)];
         }
 

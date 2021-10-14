@@ -132,4 +132,19 @@
     <data name="buy_by_gems" xml:space="preserve">
         <value>ABJ</value>
     </data>
+    <data name="buy_offer" xml:space="preserve">
+        <value>ABK</value>
+    </data>
+    <data name="shop_authors" xml:space="preserve">
+        <value>ABL</value>
+    </data>
+    <data name="pack_info" xml:space="preserve">
+        <value>ABM</value>
+    </data>
+    <data name="gems50" xml:space="preserve">
+        <value>ABN</value>
+    </data>
+    <data name="open_specific" xml:space="preserve">
+        <value>ABO</value>
+    </data>
 </root>

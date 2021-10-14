@@ -210,4 +210,25 @@
     <data name="prize" xml:space="preserve">
         <value>В подарок вы получите</value>
     </data>
+    <data name="buy_random" xml:space="preserve">
+        <value>Случайный пак</value>
+    </data>
+    <data name="buy_author" xml:space="preserve">
+        <value>Пак художника</value>
+    </data>
+    <data name="info" xml:space="preserve">
+        <value>Информация</value>
+    </data>
+    <data name="gems_title" xml:space="preserve">
+        <value>50 алмазов</value>
+    </data>
+    <data name="gems_description" xml:space="preserve">
+        <value>После покупки вы получите 50 алмазов на свой счет</value>
+    </data>
+    <data name="gems_label50" xml:space="preserve">
+        <value>50💎</value>
+    </data>
+    <data name="open_specific" xml:space="preserve">
+        <value>Открыть авторский пак</value>
+    </data>
 </root>

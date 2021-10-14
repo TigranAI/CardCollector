@@ -13,7 +13,7 @@ namespace CardCollector.DailyTasks.CustomTasks
         public override async Task<bool> Execute(long userId, object[] args = null)
         {
             var task = await DailyTaskDao.GetTaskInfo(userId, Id);
-            if (task.Progress == 0) return true;
+            if (task.Progress == 0) return false;
             task.Progress--;
             return task.Progress == 0;
         }

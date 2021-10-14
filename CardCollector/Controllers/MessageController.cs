@@ -232,5 +232,21 @@ namespace CardCollector.Controllers
         {
             await Bot.Client.AnswerInlineQueryAsync(queryId, results, isPersonal: true, nextOffset: offset, cacheTime: Constants.INLINE_RESULTS_CACHE_TIME);
         }
+
+        public static async Task<TgMessage> SendInvoice(UserEntity user, string title, string description, 
+            string payload, IEnumerable<LabeledPrice> prices, Currency currency = Currency.USD)
+        {
+            try
+            {
+                if (!user.IsBlocked)
+                    return await Bot.Client.SendInvoiceAsync(user.ChatId, title, description, payload, 
+                        AppSettings.PAYMENT_PROVIDER, currency.ToString(), prices, disableNotification: true);
+            }
+            catch (Exception e)
+            {
+                LogOutWarning("Can't send photo " + e.Message);
+            }
+            return new TgMessage();
+        }
     }
 }

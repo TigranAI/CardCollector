@@ -19,7 +19,8 @@ namespace CardCollector.DataBase.Entity
         [Column("time_limit"), MaxLength(32)] public DateTime TimeLimit { get; set; } = DateTime.Now;
         [Column("additional_prize"), MaxLength(256)] public string AdditionalPrize { get; set; } = "";
 
-        [NotMapped] public bool IsSpecial => Count > 1 || Discount > 0 || TimeLimited || AdditionalPrize != "";
+        [NotMapped] public bool IsSpecial => Count > 1 || Discount > 0 || TimeLimited ||
+                                             AdditionalPrize != "" || PackId is not 1 and not 2;
         [NotMapped] public bool Expired => TimeLimited && TimeLimit < DateTime.Now;
         [NotMapped] public int ResultPriceCoins => PriceCoins < 0 ? -1 : PriceCoins - PriceCoins * Discount / 100;
         [NotMapped] public int ResultPriceGems => PriceGems < 0 ? -1 : PriceGems - PriceGems * Discount / 100;

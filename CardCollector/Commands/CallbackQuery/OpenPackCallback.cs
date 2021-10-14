@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
@@ -15,18 +16,29 @@ namespace CardCollector.Commands.CallbackQuery
         public override async Task Execute()
         {
             var packId = int.Parse(CallbackData.Split("=")[1]);
-            var pack = await UsersPacksDao.GetPackInfo(User.Id, packId);
-            var packInfo = await PacksDao.GetById(pack.PackId);
-            if (pack.Count < 1)
-                await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.packs_count_zero, true);
-            else
+            var userPack = await UsersPacksDao.GetUserPacks(User.Id);
+            var rnd = new Random();
+            var tier = GetTier(rnd.NextDouble() * 100);
+            switch (packId)
+            {
+                case 1 when userPack.RandomCount < 1:
+                    await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.packs_count_zero, true);
+                    break;
+                case 1:
+                    userPack.RandomCount--;
+                    await OpenPack(await StickerDao.GetListWhere(item => item.Tier == tier));
+                    break;
+                default:
+                    if (!await TryOpen()) 
+                        await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.packs_count_zero, true);
+                    var packInfo = await PacksDao.GetById(packId);
+                    await OpenPack(await StickerDao.GetListWhere(item => item.Tier == tier && item.Author == packInfo.Author));
+                    break;
+            }
+
+            async Task OpenPack(List<StickerEntity> stickers)
             {
                 await User.ClearChat();
-                pack.Count--;
-                var rnd = new Random();
-                var tier = GetTier(rnd.NextDouble() * 100);
-                var stickers = await StickerDao.GetListWhere(item => 
-                    item.Tier == tier && (packId == 0 || item.Author == packInfo.Author));
                 var sticker = stickers[rnd.Next(stickers.Count)];
                 if (User.Stickers.ContainsKey(sticker.Md5Hash))
                 {
@@ -40,6 +52,20 @@ namespace CardCollector.Commands.CallbackQuery
                 var message = await MessageController.SendMessage(User, $"{Messages.congratulation}\n{sticker}");
                 User.Session.Messages.Add(stickerMessage.MessageId);
                 User.Session.Messages.Add(message.MessageId);
+            }
+            
+            async Task<bool> TryOpen()
+            {
+                if (packId == 2)
+                {
+                    if (userPack.AuthorCount < 1) return false;
+                    userPack.AuthorCount--;
+                    return true;
+                }
+                var info = await SpecificPackDao.GetInfo(User.Id, packId);
+                if (info.Count < 1) return false;
+                info.Count--;
+                return true;
             }
         }
 

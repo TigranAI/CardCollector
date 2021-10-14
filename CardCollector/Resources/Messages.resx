@@ -195,4 +195,33 @@
     <data name="shop_message" xml:space="preserve">
         <value>Выберите одну из опций ниже:</value>
     </data>
+    <data name="choose_option" xml:space="preserve">
+        <value>Выберите одну из опций ниже</value>
+    </data>
+    <data name="thanks_for_buying" xml:space="preserve">
+        <value>Спасибо за покупку!</value>
+    </data>
+    <data name="pack_info" xml:space="preserve">
+        <value>При покупке "Случайного пака" Вам может выпасть ЛЮБОЙ стикер от ЛЮБОГО художника
+
+При покупке "Пака художника" Вам может выпасть ЛЮБОЙ стикер от выбранного Вами художника художника
+
+Вероятности выпадения стикера с тиром:
+1 - 80%
+2 - 16%
+3 - 3.3%
+4 - 0.7%</value>
+    </data>
+    <data name="pack_prize" xml:space="preserve">
+        <value>Поздравляем! Вы получили случайный пак! Открыть его можно во вкладке профиля.</value>
+    </data>
+    <data name="you_already_use_this_offer" xml:space="preserve">
+        <value>Вы уже воспользовались данным предложением!</value>
+    </data>
+    <data name="offer_expired" xml:space="preserve">
+        <value>Время акции истекло!</value>
+    </data>
+    <data name="specific_packs" xml:space="preserve">
+        <value>Авторских паков:</value>
+    </data>
 </root>

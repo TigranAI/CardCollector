@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
@@ -15,13 +14,13 @@ namespace CardCollector.Commands.CallbackQuery
         public override async Task Execute()
         {
             await User.ClearChat();
-            var userPacks = await UsersPacksDao.GetUserPacks(User.Id);
-            var randomCount = (await UsersPacksDao.GetPackInfo(User.Id, 0)).Count;
-            var authorCount = userPacks.Sum(pack => pack.PackId != 0 ? pack.Count : 0);
+            var userPack = await UsersPacksDao.GetUserPacks(User.Id);
+            var specificCount = await SpecificPackDao.GetCount(User.Id);
             var message = await MessageController.SendMessage(User, 
                 $"{Messages.your_packs}" +
-                $"\n{Messages.random_packs} {randomCount}{Text.items}" +
-                $"\n{Messages.author_packs} {authorCount}{Text.items}",
+                $"\n{Messages.random_packs} {userPack.RandomCount}{Text.items}" +
+                $"\n{Messages.author_packs} {userPack.AuthorCount}{Text.items}" +
+                $"\n{Messages.specific_packs} {specificCount}{Text.items}",
                 Keyboard.PackMenu);
             User.Session.Messages.Add(message.MessageId);
         }

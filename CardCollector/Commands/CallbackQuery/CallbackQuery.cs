@@ -31,54 +31,36 @@ namespace CardCollector.Commands.CallbackQuery
         /* Список команд, распознаваемых ботом */
         private static readonly List<CallbackQuery> List = new()
         {
-            /* Кнопка "Автор" */
             new AuthorCallback(),
-            /* Кнопка "Тир" */
-            new TierCallback(),
-            /* Кнопка "Эмоция" */
-            new EmojiCallback(),
-            /* Кнопка "Цена" */
-            new PriceCallback(),
-            /* Кнопка "Сортировка" */
-            new SortCallback(),
-            /* Установка фильтра */
-            new SetFilterCallback(),
-            /* Команда отмены */
-            new CancelCallback(),
-            /* Команда отмены */
-            new CollectIncomeQuery(),
-            /* Команда для упралвения количеством стикеров */
-            new CountQuery(),
-            /* Команда для подтверждения покупки */
-            new ConfirmBuyingQuery(),
-            /* команда для подтверждения выставления на аукцион */
-            new PutForAuctionQuery(),
-            /* Команда для покупки стикера */
-            new BuyStickerQuery(),
-            /* Команда возврата к комбинированию */
-            new BackToCombine(),
-            /* Команда добавления к комбинироавнию */
-            new CombineCallback(),
-            /* Команда удаления из комбинации */
-            new DeleteCombine(),
-            /* Команда удаления из комбинации */
-            new CombineStickers(),
-            /* Команда которая позволяет пользователю просмотреть паки */
-            new MyPacksQuery(),
-            /* Показывает меню по автору */
             new AuthorMenuQuery(),
-            /* Открытие пака автора */
-            new OpenPackCallback(),
-            /* Команда которая показывает список ежедневных заданий */
-            new DailyTasksQuery(),
-            //команда подтверждения выставления на аукцион
-            new ConfirmationSellingQuery(),
-            /* Отмена в момент выбора "значения фильтра", не в самом меню */
+            new BackToCombine(),
             new BackToFiltersMenu(),
-            /* Отмена в момент выбора "значения фильтра", не в самом меню */
-            new SelectOfferCallback(),
-            /* Очистка чата */
+            new BuyByCoins(),
+            new BuyByGems(),
+            new BuyGemsQuery(),
+            new BuyPackQuery(),
+            new BuyStickerQuery(),
+            new CancelCallback(),
             new ClearChat(),
+            new CollectIncomeQuery(),
+            new CombineCallback(),
+            new CombineStickers(),
+            new ConfirmationSellingQuery(),
+            new ConfirmBuyingQuery(),
+            new CountQuery(),
+            new DailyTasksQuery(),
+            new DeleteCombine(),
+            new EmojiCallback(),
+            new MyPacksQuery(),
+            new OpenPackCallback(),
+            new OpenSpecificCallback(),
+            new PackInfo(),
+            new PriceCallback(),
+            new PutForAuctionQuery(),
+            new SelectOfferCallback(),
+            new SetFilterCallback(),
+            new SortCallback(),
+            new TierCallback(),
         };
 
         /* Метод, создающий объекты команд исходя из полученного обновления */

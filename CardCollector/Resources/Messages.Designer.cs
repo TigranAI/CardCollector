@@ -151,6 +151,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выберите одну из опций ниже.
+        /// </summary>
+        internal static string choose_option {
+            get {
+                return ResourceManager.GetString("choose_option", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Выберите диапазон цен из списка ниже:.
         /// </summary>
         internal static string choose_price {
@@ -385,6 +394,41 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Время акции истекло!.
+        /// </summary>
+        internal static string offer_expired {
+            get {
+                return ResourceManager.GetString("offer_expired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to При покупке &quot;Случайного пака&quot; Вам может выпасть ЛЮБОЙ стикер от ЛЮБОГО художника
+        ///
+        ///При покупке &quot;Пака художника&quot; Вам может выпасть ЛЮБОЙ стикер от выбранного Вами художника художника
+        ///
+        ///Вероятности выпадения стикера с тиром:
+        ///1 - 80%
+        ///2 - 16%
+        ///3 - 3.3%
+        ///4 - 0.7%.
+        /// </summary>
+        internal static string pack_info {
+            get {
+                return ResourceManager.GetString("pack_info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Поздравляем! Вы получили случайный пак! Открыть его можно во вкладке профиля..
+        /// </summary>
+        internal static string pack_prize {
+            get {
+                return ResourceManager.GetString("pack_prize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to У вас недостаточно паков.
         /// </summary>
         internal static string packs_count_zero {
@@ -475,6 +519,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Авторских паков:.
+        /// </summary>
+        internal static string specific_packs {
+            get {
+                return ResourceManager.GetString("specific_packs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Добро пожаловать! Этот бот позволяет вам коллекционировать стикеры. Вы можете выбрать одну из опций ниже. Напишите /help, чтобы получить подробную справку..
         /// </summary>
         internal static string start_message {
@@ -498,6 +551,15 @@ namespace CardCollector.Resources {
         internal static string successfully_selling {
             get {
                 return ResourceManager.GetString("successfully_selling", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Спасибо за покупку!.
+        /// </summary>
+        internal static string thanks_for_buying {
+            get {
+                return ResourceManager.GetString("thanks_for_buying", resourceCulture);
             }
         }
         
@@ -543,6 +605,15 @@ namespace CardCollector.Resources {
         internal static string upload_file {
             get {
                 return ResourceManager.GetString("upload_file", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы уже воспользовались данным предложением!.
+        /// </summary>
+        internal static string you_already_use_this_offer {
+            get {
+                return ResourceManager.GetString("you_already_use_this_offer", resourceCulture);
             }
         }
         

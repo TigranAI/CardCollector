@@ -16,6 +16,8 @@ namespace CardCollector.Commands.PreCheckoutQuery
             {
                 // Тестовая покупка
                 new TestPreCheckoutQuery(),
+                // Покупка 50 алмазов
+                new Gems50(),
             };
 
         /* Метод, создающий объекты команд исходя из полученного обновления */

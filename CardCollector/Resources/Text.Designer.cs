@@ -133,6 +133,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Пак художника.
+        /// </summary>
+        internal static string buy_author {
+            get {
+                return ResourceManager.GetString("buy_author", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Купить алмазы.
         /// </summary>
         internal static string buy_gems {
@@ -147,6 +156,15 @@ namespace CardCollector.Resources {
         internal static string buy_pack {
             get {
                 return ResourceManager.GetString("buy_pack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Случайный пак.
+        /// </summary>
+        internal static string buy_random {
+            get {
+                return ResourceManager.GetString("buy_random", resourceCulture);
             }
         }
         
@@ -313,11 +331,47 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to После покупки вы получите 50 алмазов на свой счет.
+        /// </summary>
+        internal static string gems_description {
+            get {
+                return ResourceManager.GetString("gems_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 50💎.
+        /// </summary>
+        internal static string gems_label50 {
+            get {
+                return ResourceManager.GetString("gems_label50", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 50 алмазов.
+        /// </summary>
+        internal static string gems_title {
+            get {
+                return ResourceManager.GetString("gems_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /help.
         /// </summary>
         internal static string help {
             get {
                 return ResourceManager.GetString("help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Информация.
+        /// </summary>
+        internal static string info {
+            get {
+                return ResourceManager.GetString("info", resourceCulture);
             }
         }
         
@@ -399,6 +453,15 @@ namespace CardCollector.Resources {
         internal static string open_random {
             get {
                 return ResourceManager.GetString("open_random", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Открыть авторский пак.
+        /// </summary>
+        internal static string open_specific {
+            get {
+                return ResourceManager.GetString("open_specific", resourceCulture);
             }
         }
         

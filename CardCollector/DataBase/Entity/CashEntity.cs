@@ -57,10 +57,9 @@ namespace CardCollector.DataBase.Entity
             var stickerInfo = await StickerDao.GetById(relation.StickerId);
             var payoutInterval = DateTime.Now - relation.Payout;
             var payoutsCount = (int) (payoutInterval.TotalMinutes / stickerInfo.IncomeTime);
+            relation.Payout = DateTime.Now;
             if (payoutsCount < 1) return 0;
-            relation.Payout += new TimeSpan(0, stickerInfo.IncomeTime, 0) * payoutsCount;
-            var result = stickerInfo.Income * payoutsCount * relation.Count;
-            return result;
+            return stickerInfo.Income * payoutsCount * relation.Count;
         }
     }
 }

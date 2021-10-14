@@ -133,6 +133,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ABK.
+        /// </summary>
+        internal static string buy_offer {
+            get {
+                return ResourceManager.GetString("buy_offer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ABG.
         /// </summary>
         internal static string buy_pack {
@@ -259,6 +268,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ABN.
+        /// </summary>
+        internal static string gems50 {
+            get {
+                return ResourceManager.GetString("gems50", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AAS.
         /// </summary>
         internal static string my_packs {
@@ -273,6 +291,24 @@ namespace CardCollector.Resources {
         internal static string open_pack {
             get {
                 return ResourceManager.GetString("open_pack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ABO.
+        /// </summary>
+        internal static string open_specific {
+            get {
+                return ResourceManager.GetString("open_specific", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ABM.
+        /// </summary>
+        internal static string pack_info {
+            get {
+                return ResourceManager.GetString("pack_info", resourceCulture);
             }
         }
         
@@ -372,6 +408,15 @@ namespace CardCollector.Resources {
         internal static string set {
             get {
                 return ResourceManager.GetString("set", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ABL.
+        /// </summary>
+        internal static string shop_authors {
+            get {
+                return ResourceManager.GetString("shop_authors", resourceCulture);
             }
         }
         
