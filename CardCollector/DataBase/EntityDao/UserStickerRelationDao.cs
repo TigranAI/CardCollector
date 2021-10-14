@@ -8,7 +8,6 @@ using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using CardCollector.StickerEffects;
 using Microsoft.EntityFrameworkCore;
-using Telegram.Bot.Types;
 
 namespace CardCollector.DataBase.EntityDao
 {
@@ -47,13 +46,11 @@ namespace CardCollector.DataBase.EntityDao
             {
                 case Effect.PiggyBank200:
                     user.Cash.MaxCapacity += 200;
-                    user.Session.Messages.Add((await MessageController
-                        .SendMessage(user, Messages.effect_PiggyBank200)).MessageId);
+                    await MessageController.SendMessage(user, Messages.effect_PiggyBank200);
                     break;
                 case Effect.Diamonds25Percent:
                     user.Cash.Gems += (int)(user.Cash.Gems * 0.25);
-                    user.Session.Messages.Add((await MessageController
-                        .SendMessage(user, Messages.effect_Diamonds25Percent)).MessageId);
+                    await MessageController.SendMessage(user, Messages.effect_Diamonds25Percent);
                     break;
                 case Effect.Random1Pack5Day:
                     relation.AdditionalData = DateTime.Today.ToString(CultureInfo.CurrentCulture);
