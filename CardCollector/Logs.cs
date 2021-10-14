@@ -1,27 +1,35 @@
 using System;
-using System.Globalization;
+using System.IO;
+using CardCollector.Resources;
+// ReSharper disable ConditionIsAlwaysTrueOrFalse
 // ReSharper disable LocalizableElement
 
 namespace CardCollector
 {
     public static class Logs
     {
+        private static void Print(string message)
+        {
+            if (Constants.DEBUG) Console.WriteLine(message);
+            else File.AppendAllText($"Log {DateTime.Now.Date}.txt", message + Environment.NewLine);
+        }
+        
         public static void LogOut(object message)
         {
-            Console.WriteLine($"[INFO] [{DateTime.Now.ToString(CultureInfo.CurrentCulture)}] {message}");
+            Print($"[INFO] [{DateTime.Now.TimeOfDay.ToString()}] {message}");
         }
         public static void LogOutWarning(object message)
         {
-            Console.WriteLine($"[WARNING] [{DateTime.Now.ToString(CultureInfo.CurrentCulture)}] {message}");
+            Print($"[WARNING] [{DateTime.Now.TimeOfDay.ToString()}] {message}");
         }
         public static void LogOutError(object message)
         {
-            Console.WriteLine($"[ERROR] [{DateTime.Now.ToString(CultureInfo.CurrentCulture)}] {message}");
+            Print($"[ERROR] [{DateTime.Now.TimeOfDay.ToString()}] {message}");
         }
 
         public static void LogOutJson(object message)
         {
-            Console.WriteLine($"[JSON] [{DateTime.Now.ToString(CultureInfo.CurrentCulture)}] {Utilities.ToJson(message)}");
+            Print($"[JSON] [{DateTime.Now.TimeOfDay.ToString()}] {Utilities.ToJson(message)}");
         }
     }
 }

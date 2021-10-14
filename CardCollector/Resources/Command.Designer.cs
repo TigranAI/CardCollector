@@ -106,6 +106,42 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ABI.
+        /// </summary>
+        internal static string buy_by_coins {
+            get {
+                return ResourceManager.GetString("buy_by_coins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ABJ.
+        /// </summary>
+        internal static string buy_by_gems {
+            get {
+                return ResourceManager.GetString("buy_by_gems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ABH.
+        /// </summary>
+        internal static string buy_gems {
+            get {
+                return ResourceManager.GetString("buy_gems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ABG.
+        /// </summary>
+        internal static string buy_pack {
+            get {
+                return ResourceManager.GetString("buy_pack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AAF.
         /// </summary>
         internal static string buy_sticker {
@@ -282,6 +318,15 @@ namespace CardCollector.Resources {
         internal static string price_gems_to {
             get {
                 return ResourceManager.GetString("price_gems_to", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ABF.
+        /// </summary>
+        internal static string select_offer {
+            get {
+                return ResourceManager.GetString("select_offer", resourceCulture);
             }
         }
         

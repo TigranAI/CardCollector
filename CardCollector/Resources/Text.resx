@@ -189,4 +189,25 @@
     <data name="stop_bot" xml:space="preserve">
         <value>Остановить</value>
     </data>
+    <data name="buy_pack" xml:space="preserve">
+        <value>Купить пак</value>
+    </data>
+    <data name="buy_gems" xml:space="preserve">
+        <value>Купить алмазы</value>
+    </data>
+    <data name="card" xml:space="preserve">
+        <value>Карта</value>
+    </data>
+    <data name="tier2" xml:space="preserve">
+        <value>Тира</value>
+    </data>
+    <data name="time_limit" xml:space="preserve">
+        <value>Акция заканчивается</value>
+    </data>
+    <data name="discount" xml:space="preserve">
+        <value>Скидка</value>
+    </data>
+    <data name="prize" xml:space="preserve">
+        <value>В подарок вы получите</value>
+    </data>
 </root>

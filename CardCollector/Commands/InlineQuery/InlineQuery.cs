@@ -34,8 +34,6 @@ namespace CardCollector.Commands.InlineQuery
             new ShowCollectionStickers(),
             // Показать стикеры для комбинации
             new ShowCombineStickers(),
-            // Показать стикеры в магазине
-            new ShowShopStickers(),
             // Показать список продавцов
             new ShowTradersInBotChat(),
             // Показать стикеры в личных сообщениях с ботом для выбора или просмотра информации

@@ -457,6 +457,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выберите одну из опций ниже:.
+        /// </summary>
+        internal static string shop_message {
+            get {
+                return ResourceManager.GetString("shop_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Сортировка:.
         /// </summary>
         internal static string sorting {

@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
+using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.Message.TextMessage
@@ -15,6 +16,7 @@ namespace CardCollector.Commands.Message.TextMessage
             await User.ClearChat();
             /* Переводим состояние пользователя в меню аукциона */
             User.Session.State = UserState.AuctionMenu;
+            User.Session.InitNewModule<AuctionModule>();
             /* Отображаем сообщение с фильтрами */
             await new ShowFiltersMenu(User, Update).Execute();
         }

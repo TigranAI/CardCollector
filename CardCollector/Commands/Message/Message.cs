@@ -37,8 +37,7 @@ namespace CardCollector.Commands.Message
                 // Команда "Коллекция"
                 new CollectionMessage(),
                 // Команда "Магазин"
-                // TODO переписать магазин
-                // new ShopMessage(),
+                new ShopMessage(),
                 // Команда "Аукцион"
                 new AuctionMessage(),
                 // Ожидание ввода эмоджи

@@ -1,6 +1,9 @@
 ﻿using System.Threading.Tasks;
+using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
+using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
+using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.Message.TextMessage
@@ -15,7 +18,11 @@ namespace CardCollector.Commands.Message.TextMessage
             await User.ClearChat();
             /* Переводим состояние пользователя в меню магазина */
             User.Session.State = UserState.ShopMenu;
-            
+            User.Session.InitNewModule<ShopModule>();
+            var specialOffers = await ShopDao.GetSpecialPositions();
+            var message = await MessageController.SendMessage(User, Messages.shop_message, 
+                Keyboard.ShopKeyboard(specialOffers));
+            User.Session.Messages.Add(message.MessageId);
         }
         
         public ShopMessage() { }

@@ -117,4 +117,19 @@
     <data name="open_pack" xml:space="preserve">
         <value>ABE</value>
     </data>
+    <data name="select_offer" xml:space="preserve">
+        <value>ABF</value>
+    </data>
+    <data name="buy_pack" xml:space="preserve">
+        <value>ABG</value>
+    </data>
+    <data name="buy_gems" xml:space="preserve">
+        <value>ABH</value>
+    </data>
+    <data name="buy_by_coins" xml:space="preserve">
+        <value>ABI</value>
+    </data>
+    <data name="buy_by_gems" xml:space="preserve">
+        <value>ABJ</value>
+    </data>
 </root>

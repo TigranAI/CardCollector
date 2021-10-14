@@ -75,6 +75,8 @@ namespace CardCollector.Commands.CallbackQuery
             new ConfirmationSellingQuery(),
             /* Отмена в момент выбора "значения фильтра", не в самом меню */
             new BackToFiltersMenu(),
+            /* Отмена в момент выбора "значения фильтра", не в самом меню */
+            new SelectOfferCallback(),
             /* Очистка чата */
             new ClearChat(),
         };

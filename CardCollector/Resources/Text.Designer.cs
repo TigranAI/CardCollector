@@ -133,11 +133,38 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Купить алмазы.
+        /// </summary>
+        internal static string buy_gems {
+            get {
+                return ResourceManager.GetString("buy_gems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Купить пак.
+        /// </summary>
+        internal static string buy_pack {
+            get {
+                return ResourceManager.GetString("buy_pack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Отмена.
         /// </summary>
         internal static string cancel {
             get {
                 return ResourceManager.GetString("cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Карта.
+        /// </summary>
+        internal static string card {
+            get {
+                return ResourceManager.GetString("card", resourceCulture);
             }
         }
         
@@ -228,6 +255,15 @@ namespace CardCollector.Resources {
         internal static string description {
             get {
                 return ResourceManager.GetString("description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Скидка.
+        /// </summary>
+        internal static string discount {
+            get {
+                return ResourceManager.GetString("discount", resourceCulture);
             }
         }
         
@@ -403,6 +439,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to В подарок вы получите.
+        /// </summary>
+        internal static string prize {
+            get {
+                return ResourceManager.GetString("prize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Профиль.
         /// </summary>
         internal static string profile {
@@ -538,11 +583,29 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Тира.
+        /// </summary>
+        internal static string tier2 {
+            get {
+                return ResourceManager.GetString("tier2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ⏱.
         /// </summary>
         internal static string time {
             get {
                 return ResourceManager.GetString("time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Акция заканчивается.
+        /// </summary>
+        internal static string time_limit {
+            get {
+                return ResourceManager.GetString("time_limit", resourceCulture);
             }
         }
         

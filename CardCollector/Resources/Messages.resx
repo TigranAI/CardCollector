@@ -192,4 +192,7 @@
     <data name="page_not_found" xml:space="preserve">
         <value>Страница не найдена</value>
     </data>
+    <data name="shop_message" xml:space="preserve">
+        <value>Выберите одну из опций ниже:</value>
+    </data>
 </root>

@@ -66,6 +66,7 @@ namespace CardCollector.DataBase
         public DbSet<DailyTaskEntity> DailyTasks { get; set; }
         public DbSet<UsersPacksEntity> UsersPacks { get; set; }
         public DbSet<PackEntity> Packs { get; set; }
+        public DbSet<SpecialOfferUsers> SpecialOfferUsers { get; set; }
 
         
         /* Конфигурация подключения к БД */
