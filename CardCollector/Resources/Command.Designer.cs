@@ -241,15 +241,6 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAT.
-        /// </summary>
-        internal static string open_random {
-            get {
-                return ResourceManager.GetString("open_random", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to AAU.
         /// </summary>
         internal static string price {

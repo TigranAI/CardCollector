@@ -67,8 +67,6 @@ namespace CardCollector.Commands.CallbackQuery
             new MyPacksQuery(),
             /* Показывает меню по автору */
             new AuthorMenuQuery(),
-            /* Открытие рандомного пака */
-            new OpenRandomQuery(),
             /* Открытие пака автора */
             new OpenPackCallback(),
             /* Команда которая показывает список ежедневных заданий */

@@ -20,8 +20,8 @@ namespace CardCollector.Resources
 
         public static readonly InlineKeyboardMarkup PackMenu = new(new[]
         {
-            new[] {InlineKeyboardButton.WithCallbackData(Text.open_random, Command.open_random)},
-            new[] {InlineKeyboardButton.WithCallbackData(Text.open_author, Command.author_menu)}
+            new[] {InlineKeyboardButton.WithCallbackData(Text.open_random, $"{Command.open_pack}=0")},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.open_author, $"{Command.author_menu}=1")}
         });
 
         public static InlineKeyboardMarkup BackToFilters(string stickerTitle)
@@ -196,6 +196,38 @@ namespace CardCollector.Resources
             /* Добавляем кнопку отмены */
             keyboardList.Add(new[] {
                 InlineKeyboardButton.WithCallbackData(Text.cancel, Command.back)
+            });
+            /* Вовзращаем клавиатуру */
+            return new InlineKeyboardMarkup(keyboardList);
+        }
+
+        /* Возвращает клавиатуру со списоком авторов */
+        public static InlineKeyboardMarkup GetAuthorsKeyboard(
+            List<UsersPacksEntity> list, 
+            List<PackEntity> infoList,
+            int page)
+        {
+            /* Список кнопок на клавиатуре */
+            var keyboardList = new List<InlineKeyboardButton[]>();
+            /* Копируем список */
+            foreach (var (item, i) in list.WithIndex())
+            {
+                if (i % 2 == 0) keyboardList.Add(new [] {
+                    InlineKeyboardButton.WithCallbackData($"{infoList[i].Author} {item.Count}{Text.items}",
+                        $"{Command.open_pack}={item.PackId}")
+                });
+                else keyboardList[keyboardList.Count - 1] = new [] {
+                    keyboardList[keyboardList.Count - 1][0],
+                    InlineKeyboardButton.WithCallbackData($"{infoList[i].Author} {item.Count}{Text.items}",
+                        $"{Command.open_pack}={item.PackId}")
+                };
+            }
+            keyboardList.Add(new[] {
+                InlineKeyboardButton.WithCallbackData(Text.previous, $"{Command.author_menu}={page - 1}"),
+                InlineKeyboardButton.WithCallbackData(Text.next, $"{Command.author_menu}={page + 1}")
+            });
+            keyboardList.Add(new[] {
+                InlineKeyboardButton.WithCallbackData(Text.cancel, Command.cancel)
             });
             /* Вовзращаем клавиатуру */
             return new InlineKeyboardMarkup(keyboardList);

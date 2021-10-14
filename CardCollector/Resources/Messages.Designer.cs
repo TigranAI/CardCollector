@@ -394,6 +394,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Страница не найдена.
+        /// </summary>
+        internal static string page_not_found {
+            get {
+                return ResourceManager.GetString("page_not_found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Пожалуйста, введите только эмоцию.
         /// </summary>
         internal static string please_enter_emoji {

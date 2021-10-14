@@ -111,9 +111,6 @@
     <data name="send_private_sticker" xml:space="preserve">
         <value>AAX</value>
     </data>
-    <data name="open_random" xml:space="preserve">
-        <value>AAT</value>
-    </data>
     <data name="author_menu" xml:space="preserve">
         <value>AAB</value>
     </data>

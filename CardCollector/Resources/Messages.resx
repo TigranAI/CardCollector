@@ -189,4 +189,7 @@
     <data name="packs_count_zero" xml:space="preserve">
         <value>У вас недостаточно паков</value>
     </data>
+    <data name="page_not_found" xml:space="preserve">
+        <value>Страница не найдена</value>
+    </data>
 </root>
