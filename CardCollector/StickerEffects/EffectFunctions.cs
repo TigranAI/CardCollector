@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Globalization;
+using System.Threading.Tasks;
 using System.Timers;
 using CardCollector.Controllers;
 using CardCollector.DataBase.EntityDao;
@@ -24,7 +26,8 @@ namespace CardCollector.StickerEffects
                 var packsCount = await Random1Pack5Day.GetPacksCount(stickers);
                 var userPacks = await UsersPacksDao.GetUserPacks(user.Id);
                 userPacks.RandomCount += packsCount;
-                await MessageController.SendMessage(user, $"{Messages.effect_Random1Pack5Day} {packsCount}{Text.items}");
+                if (packsCount > 0) await MessageController.SendMessage(user, 
+                    $"{Messages.effect_Random1Pack5Day} {packsCount}{Text.items}");
             }
         }
 
@@ -40,9 +43,10 @@ namespace CardCollector.StickerEffects
                 foreach (var (sticker, count) in stickerList)
                 {
                     generatedMessage += $"\n{sticker.Title} {count}{Text.items}";
-                    await UserStickerRelationDao.AddNew(user, sticker, count);
+                    var relation = await UserStickerRelationDao.AddNew(user, sticker, count);
                 }
-                await MessageController.SendMessage(user, $"{Messages.effect_RandomSticker2Tier3Day}{generatedMessage}");
+                if (stickerList.Count > 0) await MessageController.SendMessage(user, 
+                    $"{Messages.effect_RandomSticker2Tier3Day}{generatedMessage}");
             }
         }
 
@@ -58,9 +62,10 @@ namespace CardCollector.StickerEffects
                 foreach (var (sticker, count) in stickerList)
                 {
                     generatedMessage += $"\n{sticker.Title} {count}{Text.items}";
-                    await UserStickerRelationDao.AddNew(user, sticker, count);
+                    var relation = await UserStickerRelationDao.AddNew(user, sticker, count);
                 }
-                await MessageController.SendMessage(user, $"{Messages.effect_RandomSticker1Tier3Day}{generatedMessage}");
+                if (stickerList.Count > 0) await MessageController.SendMessage(user, 
+                    $"{Messages.effect_RandomSticker1Tier3Day}{generatedMessage}");
             }
         }
     }

@@ -289,10 +289,11 @@ namespace CardCollector.Resources
             });
         }
 
-        public static InlineKeyboardMarkup GetAuctionProductKeyboard(AuctionModule module)
+        public static InlineKeyboardMarkup GetAuctionProductKeyboard(AuctionModule module, double discount)
         {
+            var price = (int)(module.Price * module.Count * discount);
             return new InlineKeyboardMarkup(new[] {
-                new[] {InlineKeyboardButton.WithCallbackData($"{Text.buy} ({module.Count}) {module.Price * module.Count}{Text.gem}", Command.confirm_buying)},
+                new[] {InlineKeyboardButton.WithCallbackData($"{Text.buy} ({module.Count}) {price}{Text.gem}", Command.confirm_buying)},
                 new[]
                 {
                     InlineKeyboardButton.WithCallbackData(Text.minus, $"{Command.count}-"),
@@ -321,11 +322,11 @@ namespace CardCollector.Resources
             });
         }
 
-        public static InlineKeyboardMarkup GetStickerKeyboard(UserSession session)
+        public static InlineKeyboardMarkup GetStickerKeyboard(UserSession session, double discount = 1.0)
         {
             return session.State switch
             {
-                UserState.ProductMenu => GetAuctionProductKeyboard(session.GetModule<AuctionModule>()),
+                UserState.ProductMenu => GetAuctionProductKeyboard(session.GetModule<AuctionModule>(), discount),
                 UserState.AuctionMenu => GetAuctionStickerKeyboard(),
                 UserState.CombineMenu => GetCombineStickerKeyboard(session.GetModule<CombineModule>()),
                 UserState.CollectionMenu => GetCollectionStickerKeyboard(session.GetModule<CollectionModule>()),

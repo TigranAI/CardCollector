@@ -81,9 +81,7 @@ namespace CardCollector
             this IEnumerable<T> source, Func<T, Task<bool>> predicate)
         {
             foreach (var element in source)
-            {
                 if (await predicate(element)) return true;
-            }
             return false;
         }
 

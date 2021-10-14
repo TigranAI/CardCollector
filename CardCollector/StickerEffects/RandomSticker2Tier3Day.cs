@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
@@ -13,11 +14,17 @@ namespace CardCollector.StickerEffects
 
         public static async Task<int> GetStickersCount(Dictionary<string, UserStickerRelationEntity> stickers)
         {
+            var today = DateTime.Today.ToString(CultureInfo.CurrentCulture);
             var stickersWithEffect = (await StickerDao.GetListWhere(
                 item => item.Effect == (int) Effect.RandomSticker2Tier3Day)).Select(item => item.Md5Hash);
             var userStickers = stickers.Values.Where(item => stickersWithEffect.Contains(item.ShortHash));
-            return userStickers.Sum(item => (DateTime.Today - Convert.ToDateTime(item.AdditionalData)).Days >= Interval 
-                ? item.Count : 0);
+            return userStickers.Sum(item =>
+            {
+                var interval = DateTime.Today - Convert.ToDateTime(item.AdditionalData);
+                if (interval.Days < Interval) return 0;
+                item.AdditionalData = today;
+                return item.Count;
+            });
         }
 
         public static async Task<Dictionary<StickerEntity, int>> GenerateList(int count)
