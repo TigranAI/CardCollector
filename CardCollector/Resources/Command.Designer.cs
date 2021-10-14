@@ -97,15 +97,6 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAE.
-        /// </summary>
-        internal static string back_to_sticker {
-            get {
-                return ResourceManager.GetString("back_to_sticker", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to ABI.
         /// </summary>
         internal static string buy_by_coins {

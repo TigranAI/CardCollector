@@ -213,7 +213,6 @@ namespace CardCollector.Resources
             /* Копируем список */
             foreach (var (item, i) in infoList.WithIndex())
             {
-                Logs.LogOut(i);
                 if (i % 2 == 0) keyboardList.Add(new [] {
                     InlineKeyboardButton.WithCallbackData(item.Author, $"{Command.open_pack}={item.Id}")
                 });
@@ -242,7 +241,6 @@ namespace CardCollector.Resources
             foreach (var (item, i) in infoList.WithIndex())
             {
                 var author = await PacksDao.GetById(item.PackId);
-                Logs.LogOut(i);
                 if (i % 2 == 0) keyboardList.Add(new [] {
                     InlineKeyboardButton.WithCallbackData($"{author.Author} {item.Count}", $"{Command.open_pack}={item.Id}")
                 });
@@ -276,7 +274,7 @@ namespace CardCollector.Resources
                     InlineKeyboardButton.WithCallbackData(Text.plus, $"{Command.count}+"),
                 }
             };
-            if (sticker.Tier != 5) keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData($"{Text.combine} ({count})", Command.combine)});
+            if (sticker.Tier != 4) keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData($"{Text.combine} ({count})", Command.combine)});
             keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.back, $"{Command.back}={Command.clear_chat}")});
             return new InlineKeyboardMarkup(keyboard);
         }
@@ -316,7 +314,7 @@ namespace CardCollector.Resources
             return new InlineKeyboardMarkup(new[] {
                 new[]
                 {
-                    InlineKeyboardButton.WithCallbackData(Text.no, Command.back_to_sticker),
+                    InlineKeyboardButton.WithCallbackData(Text.no, Command.back),
                     InlineKeyboardButton.WithCallbackData(Text.yes, command)
                 }
             });

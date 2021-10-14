@@ -124,20 +124,11 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Невозможно уменьшить количество стикеров!.
+        ///   Looks up a localized string similar to Нельзя продать товар за 0!.
         /// </summary>
-        internal static string cant_decrease {
+        internal static string cant_sell_zero {
             get {
-                return ResourceManager.GetString("cant_decrease", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Невозможно увеличить количество стикеров!.
-        /// </summary>
-        internal static string cant_increase {
-            get {
-                return ResourceManager.GetString("cant_increase", resourceCulture);
+                return ResourceManager.GetString("cant_sell_zero", resourceCulture);
             }
         }
         
@@ -232,7 +223,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Подтвердите выставление.
+        ///   Looks up a localized string similar to Подтвердите выставление за.
         /// </summary>
         internal static string confirm_selling {
             get {
@@ -363,15 +354,6 @@ namespace CardCollector.Resources {
         internal static string enter_only_one_emoji {
             get {
                 return ResourceManager.GetString("enter_only_one_emoji", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Введите вашу стоимость в монетах.
-        /// </summary>
-        internal static string enter_your_coins_price {
-            get {
-                return ResourceManager.GetString("enter_your_coins_price", resourceCulture);
             }
         }
         
@@ -618,15 +600,6 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Несобранная прибыль.
-        /// </summary>
-        internal static string uncllected_income {
-            get {
-                return ResourceManager.GetString("uncllected_income", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Произошла неожиданная ошибка, попробуйте еще раз..
         /// </summary>
         internal static string unexpected_exception {
@@ -663,7 +636,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Получено.
+        ///   Looks up a localized string similar to Получено прибыли со стикеров:.
         /// </summary>
         internal static string you_collected {
             get {

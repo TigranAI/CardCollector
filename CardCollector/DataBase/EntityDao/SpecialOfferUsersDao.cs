@@ -21,6 +21,7 @@ namespace CardCollector.DataBase.EntityDao
                 UserId = userId,
                 OfferId = offerId
             });
+            await Instance.SaveChangesAsync();
         }
     }
 }

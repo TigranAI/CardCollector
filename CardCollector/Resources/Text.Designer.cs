@@ -178,15 +178,6 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Карта.
-        /// </summary>
-        internal static string card {
-            get {
-                return ResourceManager.GetString("card", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to 💰.
         /// </summary>
         internal static string coin {
@@ -201,15 +192,6 @@ namespace CardCollector.Resources {
         internal static string collect {
             get {
                 return ResourceManager.GetString("collect", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Собрать прибыль.
-        /// </summary>
-        internal static string collect_income {
-            get {
-                return ResourceManager.GetString("collect_income", resourceCulture);
             }
         }
         

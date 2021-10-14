@@ -26,7 +26,7 @@ namespace CardCollector.Resources
         public const int COMBINE_COUNT = 5;
         
         /* Время оповещения и сброса ежедневных заданий */
-        public static readonly TimeSpan DailyTaskAlert = DEBUG ? new TimeSpan(21, 0, 0) : new TimeSpan(12, 0, 0);
+        public static readonly TimeSpan DailyTaskAlert = DEBUG ? new TimeSpan(1, 36, 30) : new TimeSpan(12, 0, 0);
         public static readonly TimeSpan DailyTaskReset = DEBUG ? new TimeSpan(0, 13, 0) : new TimeSpan(0, 0, 0);
         public static readonly TimeSpan DailyStickerRewardCheck = DEBUG ? new TimeSpan(1, 9, 0) : new TimeSpan(1, 0, 0);
     }

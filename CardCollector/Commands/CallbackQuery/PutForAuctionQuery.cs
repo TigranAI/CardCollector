@@ -19,7 +19,8 @@ namespace CardCollector.Commands.CallbackQuery
                 Messages.comission_warning, true);
             await User.ClearChat();
             var module = User.Session.GetModule<CollectionModule>();
-            var lowerPrice = (await AuctionController.GetPriceList(module.SelectedSticker.Id)).Min();
+            var priceList = (await AuctionController.GetPriceList(module.SelectedSticker.Id)).ToList();
+            var lowerPrice = priceList.Count > 0 ? priceList.Min() : 0;
             var message = await MessageController.SendMessage(User,
                 $"{Messages.current_price} {module.SellPrice}{Text.gem}" +
                 $"\n{Messages.lower_price} {lowerPrice}{Text.gem}" +

@@ -87,9 +87,6 @@
     <data name="confirm_selling" xml:space="preserve">
         <value>AAM</value>
     </data>
-    <data name="back_to_sticker" xml:space="preserve">
-        <value>AAE</value>
-    </data>
     <data name="back_to_combine" xml:space="preserve">
         <value>AAD</value>
     </data>

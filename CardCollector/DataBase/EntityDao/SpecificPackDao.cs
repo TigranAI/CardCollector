@@ -19,17 +19,19 @@ namespace CardCollector.DataBase.EntityDao
 
         public static async Task<SpecificPacksEntity> AddNew(long userId, int packId, int count)
         {
-            return (await Table.AddAsync(new SpecificPacksEntity
+            var pack = await Table.FirstOrDefaultAsync(item => item.UserId == userId && item.PackId == packId) ??
+            (await Table.AddAsync(new SpecificPacksEntity
             {
                 UserId = userId,
                 PackId = packId,
                 Count = count
             })).Entity;
+            return pack;
         }
 
         public static async Task<int> GetCount(long userId)
         {
-            return await Table.SumAsync(item => Task.FromResult(item.Count));
+            return (await Table.WhereAsync(item => item.UserId == userId)).Sum(item => item.Count);
         }
 
         public static async Task<List<SpecificPacksEntity>> GetUserPacks(long userId)

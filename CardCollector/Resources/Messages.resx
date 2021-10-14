@@ -93,23 +93,14 @@
     <data name="gems" xml:space="preserve">
         <value>Алмазы</value>
     </data>
-    <data name="uncllected_income" xml:space="preserve">
-        <value>Несобранная прибыль</value>
-    </data>
     <data name="you_collected" xml:space="preserve">
-        <value>Получено</value>
+        <value>Получено прибыли со стикеров:</value>
     </data>
     <data name="menu_message" xml:space="preserve">
         <value>Вы можете выбрать одну из опций ниже</value>
     </data>
     <data name="your_cash" xml:space="preserve">
         <value>Баланс</value>
-    </data>
-    <data name="cant_increase" xml:space="preserve">
-        <value>Невозможно увеличить количество стикеров!</value>
-    </data>
-    <data name="cant_decrease" xml:space="preserve">
-        <value>Невозможно уменьшить количество стикеров!</value>
     </data>
     <data name="not_enougth_stickers" xml:space="preserve">
         <value>Недостаточно стикеров в магазине!</value>
@@ -144,14 +135,11 @@
     <data name="current_price" xml:space="preserve">
         <value>Текущая стоимость</value>
     </data>
-    <data name="enter_your_coins_price" xml:space="preserve">
-        <value>Введите вашу стоимость в монетах</value>
-    </data>
     <data name="enter_your_gems_price" xml:space="preserve">
         <value>Введите вашу стоимость в алмазах (за 1шт)</value>
     </data>
     <data name="confirm_selling" xml:space="preserve">
-        <value>Подтвердите выставление</value>
+        <value>Подтвердите выставление за</value>
     </data>
     <data name="successfully_selling" xml:space="preserve">
         <value>Товар успешно попал на аукцион</value>
@@ -238,5 +226,8 @@
     </data>
     <data name="effect_RandomSticker1Tier3Day" xml:space="preserve">
         <value>Поздравляем! Вы получили следующие стикеры:</value>
+    </data>
+    <data name="cant_sell_zero" xml:space="preserve">
+        <value>Нельзя продать товар за 0!</value>
     </data>
 </root>

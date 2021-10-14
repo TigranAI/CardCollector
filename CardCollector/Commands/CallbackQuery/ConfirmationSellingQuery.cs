@@ -14,12 +14,19 @@ namespace CardCollector.Commands.CallbackQuery
         public override async Task Execute()
         {
             var collectionModule = User.Session.GetModule<CollectionModule>();
-            EnterGemsPriceMessage.RemoveFromQueue(User.Id);
-            var income = await User.Cash.Payout(User.Stickers);
-            await MessageController.AnswerCallbackQuery(User, CallbackQueryId, $"{Messages.you_collected} {income}{Text.coin}");
-            User.Stickers[collectionModule.SelectedSticker.Md5Hash].Count -= collectionModule.Count;
-            AuctionController.SellCard(User.Id, collectionModule.SelectedSticker.Id, collectionModule.SellPrice, collectionModule.Count);
-            await MessageController.EditMessage(User, CallbackMessageId, Messages.successfully_selling);
+            if (collectionModule.SellPrice <= 0)
+                await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.cant_sell_zero, true);
+            else
+            {
+                EnterGemsPriceMessage.RemoveFromQueue(User.Id);
+                var income = await User.Cash.Payout(User.Stickers);
+                await MessageController.AnswerCallbackQuery(User, CallbackQueryId,
+                    $"{Messages.you_collected} {income}{Text.coin}");
+                User.Stickers[collectionModule.SelectedSticker.Md5Hash].Count -= collectionModule.Count;
+                AuctionController.SellCard(User.Id, collectionModule.SelectedSticker.Id, collectionModule.SellPrice,
+                    collectionModule.Count);
+                await MessageController.EditMessage(User, CallbackMessageId, Messages.successfully_selling);
+            }
         }
         public ConfirmationSellingQuery(){}
         public ConfirmationSellingQuery(UserEntity user, Update update) : base(user, update){}
