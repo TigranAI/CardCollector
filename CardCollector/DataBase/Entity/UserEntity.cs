@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
 using CardCollector.Session;
-using Telegram.Bot.Types;
+using CardCollector.StickerEffects;
 
 namespace CardCollector.DataBase.Entity
 {
@@ -56,6 +56,11 @@ namespace CardCollector.DataBase.Entity
                 .Where(sticker => sticker.Title.Contains(filter, StringComparison.CurrentCultureIgnoreCase));
             if (tier != -1) result = result.Where(sticker => sticker.Tier == tier);
             return result;
+        }
+
+        public async Task<int> AuctionDiscount()
+        {
+            return await AuctionDiscount5.IsApplied(Stickers) ? 5 : 0;
         }
 
         public UserEntity()

@@ -27,5 +27,8 @@ namespace CardCollector.DataBase.Entity
         
         /* MD5 хеш id стикера */
         [Column("short_hash"), MaxLength(40)] public string ShortHash { get; set; }
+        
+        /* дополнительные данные */
+        [Column("additional_data"), MaxLength(512)] public string AdditionalData { get; set; } = "";
     }
 }

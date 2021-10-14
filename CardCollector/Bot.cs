@@ -7,6 +7,7 @@ using CardCollector.DailyTasks;
 using CardCollector.DataBase;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
+using CardCollector.StickerEffects;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using CancellationTokenSource = System.Threading.CancellationTokenSource;
@@ -47,6 +48,8 @@ namespace CardCollector
             Utilities.SetUpTimer(Constants.DailyTaskAlert, DailyTaskAlert);
             /* Запускаем сброс ежедневных заданий */
             Utilities.SetUpTimer(Constants.DailyTaskReset, DailyTask.ResetTasks);
+            /* Запускаем таймер с эффектами стикеров */
+            Utilities.SetUpTimer(Constants.DailyStickerRewardCheck, EffectFunctions.RunAll);
             
             _end.WaitOne();
             Logs.LogOut("Stopping program");

@@ -103,5 +103,10 @@ namespace CardCollector.DataBase.EntityDao
         {
             return await Table.WhereAsync(callback);
         }
+
+        public static async Task<IEnumerable<UserEntity>> GetAll()
+        {
+            return await Table.ToListAsync();
+        }
     }
 }

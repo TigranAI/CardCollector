@@ -295,6 +295,51 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Поздравляем! Вы получили +25% к своим алмазам!.
+        /// </summary>
+        internal static string effect_Diamonds25Percent {
+            get {
+                return ResourceManager.GetString("effect_Diamonds25Percent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Поздравляем! Ваша копилка увеличена на 200!.
+        /// </summary>
+        internal static string effect_PiggyBank200 {
+            get {
+                return ResourceManager.GetString("effect_PiggyBank200", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Поздравляем! Вы получили паки в количестве.
+        /// </summary>
+        internal static string effect_Random1Pack5Day {
+            get {
+                return ResourceManager.GetString("effect_Random1Pack5Day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Поздравляем! Вы получили следующие стикеры:.
+        /// </summary>
+        internal static string effect_RandomSticker1Tier3Day {
+            get {
+                return ResourceManager.GetString("effect_RandomSticker1Tier3Day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Поздравляем! Вы получили следующие стикеры:.
+        /// </summary>
+        internal static string effect_RandomSticker2Tier3Day {
+            get {
+                return ResourceManager.GetString("effect_RandomSticker2Tier3Day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Эмоция:.
         /// </summary>
         internal static string emoji {

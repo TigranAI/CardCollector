@@ -224,4 +224,19 @@
     <data name="specific_packs" xml:space="preserve">
         <value>Авторских паков:</value>
     </data>
+    <data name="effect_PiggyBank200" xml:space="preserve">
+        <value>Поздравляем! Ваша копилка увеличена на 200!</value>
+    </data>
+    <data name="effect_Diamonds25Percent" xml:space="preserve">
+        <value>Поздравляем! Вы получили +25% к своим алмазам!</value>
+    </data>
+    <data name="effect_Random1Pack5Day" xml:space="preserve">
+        <value>Поздравляем! Вы получили паки в количестве</value>
+    </data>
+    <data name="effect_RandomSticker2Tier3Day" xml:space="preserve">
+        <value>Поздравляем! Вы получили следующие стикеры:</value>
+    </data>
+    <data name="effect_RandomSticker1Tier3Day" xml:space="preserve">
+        <value>Поздравляем! Вы получили следующие стикеры:</value>
+    </data>
 </root>

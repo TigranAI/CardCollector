@@ -28,5 +28,6 @@ namespace CardCollector.Resources
         /* Время оповещения и сброса ежедневных заданий */
         public static readonly TimeSpan DailyTaskAlert = DEBUG ? new TimeSpan(21, 0, 0) : new TimeSpan(12, 0, 0);
         public static readonly TimeSpan DailyTaskReset = DEBUG ? new TimeSpan(0, 13, 0) : new TimeSpan(0, 0, 0);
+        public static readonly TimeSpan DailyStickerRewardCheck = DEBUG ? new TimeSpan(0, 30, 0) : new TimeSpan(1, 0, 0);
     }
 }

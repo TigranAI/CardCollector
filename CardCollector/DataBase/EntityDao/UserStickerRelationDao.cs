@@ -1,8 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
+using CardCollector.Resources;
+using CardCollector.StickerEffects;
 using Microsoft.EntityFrameworkCore;
+using Telegram.Bot.Types;
 
 namespace CardCollector.DataBase.EntityDao
 {
@@ -37,6 +43,28 @@ namespace CardCollector.DataBase.EntityDao
                 Count = count,
                 ShortHash = sticker.Md5Hash
             };
+            switch ((Effect)sticker.Effect)
+            {
+                case Effect.PiggyBank200:
+                    user.Cash.MaxCapacity += 200;
+                    user.Session.Messages.Add((await MessageController
+                        .SendMessage(user, Messages.effect_PiggyBank200)).MessageId);
+                    break;
+                case Effect.Diamonds25Percent:
+                    user.Cash.Gems += (int)(user.Cash.Gems * 0.25);
+                    user.Session.Messages.Add((await MessageController
+                        .SendMessage(user, Messages.effect_Diamonds25Percent)).MessageId);
+                    break;
+                case Effect.Random1Pack5Day:
+                    relation.AdditionalData = DateTime.Today.ToString(CultureInfo.CurrentCulture);
+                    break;
+                case Effect.RandomSticker1Tier3Day:
+                    relation.AdditionalData = DateTime.Today.ToString(CultureInfo.CurrentCulture);
+                    break;
+                case Effect.RandomSticker2Tier3Day:
+                    relation.AdditionalData = DateTime.Today.ToString(CultureInfo.CurrentCulture);
+                    break;
+            }
             var result = await Table.AddAsync(relation);
             user.Stickers.Add(sticker.Md5Hash, result.Entity);
             await Instance.SaveChangesAsync();

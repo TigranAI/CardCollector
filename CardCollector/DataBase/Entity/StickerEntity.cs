@@ -40,6 +40,8 @@ namespace CardCollector.DataBase.Entity
         
         /* Хеш id стикера для определения его в системе */
         [Column("md5hash"), MaxLength(40)] public string Md5Hash { get; set; }
+        
+        [Column("effect"), MaxLength(32)] public int Effect { get; set; }
 
         public override string ToString()
         {

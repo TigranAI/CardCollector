@@ -13,7 +13,7 @@ namespace CardCollector.Commands.CallbackQuery
         public override async Task Execute()
         {
             var auctionModule = User.Session.GetModule<AuctionModule>();
-            var price = auctionModule.Price * auctionModule.Count;
+            var price = auctionModule.Price * auctionModule.Count ;
             if (price > User.Cash.Gems)
                 await MessageController.AnswerCallbackQuery(User, Update.CallbackQuery!.Id, Messages.not_enougth_gems);
             else

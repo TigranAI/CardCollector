@@ -77,6 +77,16 @@ namespace CardCollector
             return results;
         }
 
+        public static async Task<bool> AnyAsync<T>(
+            this IEnumerable<T> source, Func<T, Task<bool>> predicate)
+        {
+            foreach (var element in source)
+            {
+                if (await predicate(element)) return true;
+            }
+            return false;
+        }
+
         public static async Task<IEnumerable<TSource>> WhereAsync<TSource>(
             [NotNull] this IQueryable<TSource> source, 
             [NotNull] Func<TSource, bool> predicate,
