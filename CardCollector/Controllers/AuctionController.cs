@@ -43,6 +43,11 @@ namespace CardCollector.Controllers
             return await AuctionDao.GetProducts(stickerId);
         }
 
+        public static async Task<IEnumerable<int>> GetPriceList(string stickerId)
+        {
+            return (await AuctionDao.GetProducts(stickerId)).Select(item => item.Price);
+        }
+
         public static async Task<int> GetStickerCount(int productId)
         {
             return await AuctionDao.GetQuantity(productId);

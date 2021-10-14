@@ -18,6 +18,12 @@ namespace CardCollector.Resources
             new KeyboardButton[] {Text.shop, Text.auction},
         }) {ResizeKeyboard = true};
 
+        public static readonly InlineKeyboardMarkup PackMenu = new(new[]
+        {
+            new[] {InlineKeyboardButton.WithCallbackData(Text.open_random, Command.open_random)},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.open_author, Command.author_menu)}
+        });
+
         public static InlineKeyboardMarkup BackToFilters(string stickerTitle)
         {
             return new InlineKeyboardMarkup(new[]
@@ -60,7 +66,6 @@ namespace CardCollector.Resources
             new[] {InlineKeyboardButton.WithCallbackData("2", $"{Command.set}={Command.tier}=2")},
             new[] {InlineKeyboardButton.WithCallbackData("3", $"{Command.set}={Command.tier}=3")},
             new[] {InlineKeyboardButton.WithCallbackData("4", $"{Command.set}={Command.tier}=4")},
-            new[] {InlineKeyboardButton.WithCallbackData("5", $"{Command.set}={Command.tier}=5")},
             new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.back)},
         });
 
@@ -305,7 +310,7 @@ namespace CardCollector.Resources
             {
                 new[] {InlineKeyboardButton.WithCallbackData($"{Text.collect} {income}{Text.coin}", Command.collect_income)},
                 new[] {InlineKeyboardButton.WithCallbackData(Text.daily_tasks, Command.daily_tasks)},
-                new[] {InlineKeyboardButton.WithCallbackData(Text.my_opencases, Command.my_opencases)},
+                new[] {InlineKeyboardButton.WithCallbackData(Text.my_packs, Command.my_packs)},
             };
             if (privilegeLevel > 2) keyboard.Add(
                 new[] {InlineKeyboardButton.WithCallbackData(Text.control_panel, Command.control_panel)});

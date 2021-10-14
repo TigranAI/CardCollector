@@ -148,7 +148,7 @@
         <value>Введите вашу стоимость в монетах</value>
     </data>
     <data name="enter_your_gems_price" xml:space="preserve">
-        <value>Введите вашу стоимость в алмазах</value>
+        <value>Введите вашу стоимость в алмазах (за 1шт)</value>
     </data>
     <data name="confirm_selling" xml:space="preserve">
         <value>Подтвердите выставление</value>
@@ -164,5 +164,29 @@
     </data>
     <data name="daily_task_alertation" xml:space="preserve">
         <value>Не забывайте заходить и выполнять ежедневные задания. Список ежедневных заданий вы можете посмотреть в профиле. Хорошего дня и приятного пользования нашим ботом!</value>
+    </data>
+    <data name="your_daily_tasks" xml:space="preserve">
+        <value>Ваши ежедневные задания:</value>
+    </data>
+    <data name="your_packs" xml:space="preserve">
+        <value>У вас сейчас:</value>
+    </data>
+    <data name="random_packs" xml:space="preserve">
+        <value>Случайный пак</value>
+    </data>
+    <data name="author_packs" xml:space="preserve">
+        <value>Пак художника</value>
+    </data>
+    <data name="comission_warning" xml:space="preserve">
+        <value>Внимание! На аукционе действует комиссия в размере 30%.</value>
+    </data>
+    <data name="lower_price" xml:space="preserve">
+        <value>Наименьшая цена:</value>
+    </data>
+    <data name="congratulation" xml:space="preserve">
+        <value>Поздравляем! Вы получили стикер:</value>
+    </data>
+    <data name="packs_count_zero" xml:space="preserve">
+        <value>У вас недостаточно паков</value>
     </data>
 </root>

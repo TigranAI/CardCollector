@@ -8,7 +8,7 @@ namespace CardCollector.Commands.Message.TextMessage
 {
     public class StopBot : Message
     {
-        protected override string CommandText => Command.stop_bot;
+        protected override string CommandText => Text.stop_bot;
         
         public override async Task Execute()
         {

@@ -88,6 +88,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Пак художника.
+        /// </summary>
+        internal static string author_packs {
+            get {
+                return ResourceManager.GetString("author_packs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Бот уходит на технический перерыв....
         /// </summary>
         internal static string bot_turning_off {
@@ -196,6 +205,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Внимание! На аукционе действует комиссия в размере 30%..
+        /// </summary>
+        internal static string comission_warning {
+            get {
+                return ResourceManager.GetString("comission_warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Подтвердите покупку:.
         /// </summary>
         internal static string confirm_buying {
@@ -210,6 +228,15 @@ namespace CardCollector.Resources {
         internal static string confirm_selling {
             get {
                 return ResourceManager.GetString("confirm_selling", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Поздравляем! Вы получили стикер:.
+        /// </summary>
+        internal static string congratulation {
+            get {
+                return ResourceManager.GetString("congratulation", resourceCulture);
             }
         }
         
@@ -295,7 +322,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Введите вашу стоимость в алмазах.
+        ///   Looks up a localized string similar to Введите вашу стоимость в алмазах (за 1шт).
         /// </summary>
         internal static string enter_your_gems_price {
             get {
@@ -309,6 +336,15 @@ namespace CardCollector.Resources {
         internal static string gems {
             get {
                 return ResourceManager.GetString("gems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Наименьшая цена:.
+        /// </summary>
+        internal static string lower_price {
+            get {
+                return ResourceManager.GetString("lower_price", resourceCulture);
             }
         }
         
@@ -349,6 +385,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to У вас недостаточно паков.
+        /// </summary>
+        internal static string packs_count_zero {
+            get {
+                return ResourceManager.GetString("packs_count_zero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Пожалуйста, введите только эмоцию.
         /// </summary>
         internal static string please_enter_emoji {
@@ -372,6 +417,15 @@ namespace CardCollector.Resources {
         internal static string price {
             get {
                 return ResourceManager.GetString("price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Случайный пак.
+        /// </summary>
+        internal static string random_packs {
+            get {
+                return ResourceManager.GetString("random_packs", resourceCulture);
             }
         }
         
@@ -498,6 +552,24 @@ namespace CardCollector.Resources {
         internal static string your_cash {
             get {
                 return ResourceManager.GetString("your_cash", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ваши ежедневные задания:.
+        /// </summary>
+        internal static string your_daily_tasks {
+            get {
+                return ResourceManager.GetString("your_daily_tasks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to У вас сейчас:.
+        /// </summary>
+        internal static string your_packs {
+            get {
+                return ResourceManager.GetString("your_packs", resourceCulture);
             }
         }
     }

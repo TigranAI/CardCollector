@@ -324,9 +324,9 @@ namespace CardCollector.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Мои паки.
         /// </summary>
-        internal static string my_opencases {
+        internal static string my_packs {
             get {
-                return ResourceManager.GetString("my_opencases", resourceCulture);
+                return ResourceManager.GetString("my_packs", resourceCulture);
             }
         }
         
@@ -345,6 +345,24 @@ namespace CardCollector.Resources {
         internal static string no {
             get {
                 return ResourceManager.GetString("no", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Открыть пак художника.
+        /// </summary>
+        internal static string open_author {
+            get {
+                return ResourceManager.GetString("open_author", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Открыть случайный пак.
+        /// </summary>
+        internal static string open_random {
+            get {
+                return ResourceManager.GetString("open_random", resourceCulture);
             }
         }
         
@@ -498,6 +516,15 @@ namespace CardCollector.Resources {
         internal static string sticker {
             get {
                 return ResourceManager.GetString("sticker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Остановить.
+        /// </summary>
+        internal static string stop_bot {
+            get {
+                return ResourceManager.GetString("stop_bot", resourceCulture);
             }
         }
         

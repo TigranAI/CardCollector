@@ -72,6 +72,15 @@ namespace CardCollector.Resources {
         /// <summary>
         ///   Looks up a localized string similar to AAB.
         /// </summary>
+        internal static string author_menu {
+            get {
+                return ResourceManager.GetString("author_menu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AAC.
+        /// </summary>
         internal static string back {
             get {
                 return ResourceManager.GetString("back", resourceCulture);
@@ -79,7 +88,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAC.
+        ///   Looks up a localized string similar to AAD.
         /// </summary>
         internal static string back_to_combine {
             get {
@@ -88,7 +97,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAD.
+        ///   Looks up a localized string similar to AAE.
         /// </summary>
         internal static string back_to_sticker {
             get {
@@ -97,7 +106,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAE.
+        ///   Looks up a localized string similar to AAF.
         /// </summary>
         internal static string buy_sticker {
             get {
@@ -106,7 +115,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAF.
+        ///   Looks up a localized string similar to AAG.
         /// </summary>
         internal static string cancel {
             get {
@@ -115,7 +124,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAG.
+        ///   Looks up a localized string similar to AAH.
         /// </summary>
         internal static string clear_chat {
             get {
@@ -124,7 +133,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAH.
+        ///   Looks up a localized string similar to AAI.
         /// </summary>
         internal static string collect_income {
             get {
@@ -133,7 +142,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAI.
+        ///   Looks up a localized string similar to AAJ.
         /// </summary>
         internal static string combine {
             get {
@@ -142,7 +151,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAJ.
+        ///   Looks up a localized string similar to AAK.
         /// </summary>
         internal static string combine_stickers {
             get {
@@ -169,7 +178,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ABD.
+        ///   Looks up a localized string similar to AAN.
         /// </summary>
         internal static string control_panel {
             get {
@@ -178,7 +187,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAN.
+        ///   Looks up a localized string similar to AAO.
         /// </summary>
         internal static string count {
             get {
@@ -187,7 +196,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ABE.
+        ///   Looks up a localized string similar to AAP.
         /// </summary>
         internal static string daily_tasks {
             get {
@@ -196,7 +205,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAO.
+        ///   Looks up a localized string similar to AAQ.
         /// </summary>
         internal static string delete_combine {
             get {
@@ -205,7 +214,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAP.
+        ///   Looks up a localized string similar to AAR.
         /// </summary>
         internal static string emoji {
             get {
@@ -214,16 +223,34 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ABF.
+        ///   Looks up a localized string similar to AAS.
         /// </summary>
-        internal static string my_opencases {
+        internal static string my_packs {
             get {
-                return ResourceManager.GetString("my_opencases", resourceCulture);
+                return ResourceManager.GetString("my_packs", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAQ.
+        ///   Looks up a localized string similar to ABE.
+        /// </summary>
+        internal static string open_pack {
+            get {
+                return ResourceManager.GetString("open_pack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AAT.
+        /// </summary>
+        internal static string open_random {
+            get {
+                return ResourceManager.GetString("open_random", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AAU.
         /// </summary>
         internal static string price {
             get {
@@ -232,7 +259,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAR.
+        ///   Looks up a localized string similar to AAV.
         /// </summary>
         internal static string price_coins_from {
             get {
@@ -241,7 +268,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAS.
+        ///   Looks up a localized string similar to AAW.
         /// </summary>
         internal static string price_coins_to {
             get {
@@ -250,7 +277,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAT.
+        ///   Looks up a localized string similar to AAX.
         /// </summary>
         internal static string price_gems_from {
             get {
@@ -259,7 +286,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAU.
+        ///   Looks up a localized string similar to AAY.
         /// </summary>
         internal static string price_gems_to {
             get {
@@ -286,7 +313,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ABG.
+        ///   Looks up a localized string similar to AAX.
         /// </summary>
         internal static string send_private_sticker {
             get {
@@ -295,7 +322,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAX.
+        ///   Looks up a localized string similar to AAY.
         /// </summary>
         internal static string send_sticker {
             get {
@@ -304,7 +331,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAY.
+        ///   Looks up a localized string similar to AAZ.
         /// </summary>
         internal static string set {
             get {
@@ -322,16 +349,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Остановить.
-        /// </summary>
-        internal static string stop_bot {
-            get {
-                return ResourceManager.GetString("stop_bot", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ABB.
+        ///   Looks up a localized string similar to ABC.
         /// </summary>
         internal static string tier {
             get {
@@ -340,7 +358,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ABC.
+        ///   Looks up a localized string similar to ABD.
         /// </summary>
         internal static string unlimited_stickers {
             get {

@@ -177,7 +177,16 @@
     <data name="daily_tasks" xml:space="preserve">
         <value>Ежедневные задания</value>
     </data>
-    <data name="my_opencases" xml:space="preserve">
+    <data name="my_packs" xml:space="preserve">
         <value>Мои паки</value>
+    </data>
+    <data name="open_random" xml:space="preserve">
+        <value>Открыть случайный пак</value>
+    </data>
+    <data name="open_author" xml:space="preserve">
+        <value>Открыть пак художника</value>
+    </data>
+    <data name="stop_bot" xml:space="preserve">
+        <value>Остановить</value>
     </data>
 </root>

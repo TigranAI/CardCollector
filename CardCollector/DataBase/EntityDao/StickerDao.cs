@@ -42,7 +42,7 @@ namespace CardCollector.DataBase.EntityDao
 
         public static async Task<List<StickerEntity>> GetListWhere(Func<StickerEntity, bool> func)
         {
-            return (await Table.ToListAsync()).Where(func).ToList();
+            return (await Table.WhereAsync(func)).ToList();
         }
 
         public static async Task<StickerEntity> GetById(string id)

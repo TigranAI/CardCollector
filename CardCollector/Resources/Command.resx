@@ -19,67 +19,67 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="collect_income" xml:space="preserve">
-        <value>AAH</value>
+        <value>AAI</value>
     </data>
     <data name="author" xml:space="preserve">
         <value>AAA</value>
     </data>
     <data name="tier" xml:space="preserve">
-        <value>ABB</value>
+        <value>ABC</value>
     </data>
     <data name="emoji" xml:space="preserve">
-        <value>AAP</value>
+        <value>AAR</value>
     </data>
     <data name="sort" xml:space="preserve">
         <value>ABA</value>
     </data>
     <data name="cancel" xml:space="preserve">
-        <value>AAF</value>
+        <value>AAG</value>
     </data>
     <data name="set" xml:space="preserve">
-        <value>AAY</value>
+        <value>AAZ</value>
     </data>
     <data name="back" xml:space="preserve">
-        <value>AAB</value>
+        <value>AAC</value>
     </data>
     <data name="unlimited_stickers" xml:space="preserve">
-        <value>ABC</value>
+        <value>ABD</value>
     </data>
     <data name="send_sticker" xml:space="preserve">
-        <value>AAX</value>
+        <value>AAY</value>
     </data>
     <data name="select_sticker" xml:space="preserve">
         <value>AAV</value>
     </data>
     <data name="price_coins_from" xml:space="preserve">
-        <value>AAR</value>
+        <value>AAV</value>
     </data>
     <data name="price_coins_to" xml:space="preserve">
-        <value>AAS</value>
+        <value>AAW</value>
     </data>
     <data name="price_gems_from" xml:space="preserve">
-        <value>AAT</value>
+        <value>AAX</value>
     </data>
     <data name="price_gems_to" xml:space="preserve">
-        <value>AAU</value>
+        <value>AAY</value>
     </data>
     <data name="price" xml:space="preserve">
-        <value>AAQ</value>
+        <value>AAU</value>
     </data>
     <data name="buy_sticker" xml:space="preserve">
-        <value>AAE</value>
+        <value>AAF</value>
     </data>
     <data name="clear_chat" xml:space="preserve">
-        <value>AAG</value>
+        <value>AAH</value>
     </data>
     <data name="combine" xml:space="preserve">
-        <value>AAI</value>
+        <value>AAJ</value>
     </data>
     <data name="sell_on_auction" xml:space="preserve">
         <value>AAW</value>
     </data>
     <data name="count" xml:space="preserve">
-        <value>AAN</value>
+        <value>AAO</value>
     </data>
     <data name="confirm_buying" xml:space="preserve">
         <value>AAL</value>
@@ -88,30 +88,36 @@
         <value>AAM</value>
     </data>
     <data name="back_to_sticker" xml:space="preserve">
-        <value>AAD</value>
+        <value>AAE</value>
     </data>
     <data name="back_to_combine" xml:space="preserve">
-        <value>AAC</value>
+        <value>AAD</value>
     </data>
     <data name="delete_combine" xml:space="preserve">
-        <value>AAO</value>
+        <value>AAQ</value>
     </data>
     <data name="combine_stickers" xml:space="preserve">
-        <value>AAJ</value>
-    </data>
-    <data name="stop_bot" xml:space="preserve">
-        <value>Остановить</value>
+        <value>AAK</value>
     </data>
     <data name="control_panel" xml:space="preserve">
-        <value>ABD</value>
+        <value>AAN</value>
     </data>
-    <data name="my_opencases" xml:space="preserve">
-        <value>ABF</value>
+    <data name="my_packs" xml:space="preserve">
+        <value>AAS</value>
     </data>
     <data name="daily_tasks" xml:space="preserve">
-        <value>ABE</value>
+        <value>AAP</value>
     </data>
     <data name="send_private_sticker" xml:space="preserve">
-        <value>ABG</value>
+        <value>AAX</value>
+    </data>
+    <data name="open_random" xml:space="preserve">
+        <value>AAT</value>
+    </data>
+    <data name="author_menu" xml:space="preserve">
+        <value>AAB</value>
+    </data>
+    <data name="open_pack" xml:space="preserve">
+        <value>ABE</value>
     </data>
 </root>

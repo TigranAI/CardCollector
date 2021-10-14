@@ -63,6 +63,16 @@ namespace CardCollector.Commands.CallbackQuery
             new DeleteCombine(),
             /* Команда удаления из комбинации */
             new CombineStickers(),
+            /* Команда которая позволяет пользователю просмотреть паки */
+            new MyPacksQuery(),
+            /* Показывает меню по автору */
+            new AuthorMenuQuery(),
+            /* Открытие рандомного пака */
+            new OpenRandomQuery(),
+            /* Открытие пака автора */
+            new OpenPackCallback(),
+            /* Команда которая показывает список ежедневных заданий */
+            new DailyTasksQuery(),
             //команда подтверждения выставления на аукцион
             new ConfirmationSellingQuery(),
             /* Отмена в момент выбора "значения фильтра", не в самом меню */

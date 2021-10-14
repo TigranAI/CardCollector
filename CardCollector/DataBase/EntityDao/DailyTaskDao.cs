@@ -38,5 +38,11 @@ namespace CardCollector.DataBase.EntityDao
             return await Table.FirstOrDefaultAsync(item => item.UserId == userId && item.TaskId == taskId) 
                    ?? await AddNew(userId, taskId);
         }
+
+        public static async Task<Dictionary<int, DailyTaskEntity>> GetUserTasks(long userId)
+        {
+            return (await Table.WhereAsync(item => Task.FromResult(item.UserId == userId)))
+                .ToDictionary(p => p.TaskId, p => p);
+        }
     }
 }

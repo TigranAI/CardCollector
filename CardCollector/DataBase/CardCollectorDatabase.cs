@@ -64,6 +64,8 @@ namespace CardCollector.DataBase
         public DbSet<AuctionEntity> Auction { get; set; }
         public DbSet<ShopEntity> Shop { get; set; }
         public DbSet<DailyTaskEntity> DailyTasks { get; set; }
+        public DbSet<UsersPacksEntity> UsersPacks { get; set; }
+        public DbSet<PackEntity> Packs { get; set; }
 
         
         /* Конфигурация подключения к БД */

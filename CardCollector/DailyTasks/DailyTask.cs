@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using CardCollector.DailyTasks.CustomTasks;
 using CardCollector.DataBase.EntityDao;
+using CardCollector.Resources;
 
 namespace CardCollector.DailyTasks
 {
@@ -29,6 +30,7 @@ namespace CardCollector.DailyTasks
         {
             await foreach (var item in DailyTaskDao.GetAll())
                 item.Progress = List[(DailyTaskKeys) item.TaskId].Goal;
+            Utilities.SetUpTimer(Constants.DailyTaskReset, ResetTasks);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using CardCollector.Commands.Message.TextMessage;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
@@ -14,10 +15,14 @@ namespace CardCollector.Commands.CallbackQuery
 
         public override async Task Execute()
         {
+            await MessageController.AnswerCallbackQuery(User, CallbackQueryId,
+                Messages.comission_warning, true);
             await User.ClearChat();
             var module = User.Session.GetModule<CollectionModule>();
+            var lowerPrice = (await AuctionController.GetPriceList(module.SelectedSticker.Id)).Min();
             var message = await MessageController.SendMessage(User,
                 $"{Messages.current_price} {module.SellPrice}{Text.gem}" +
+                $"\n{Messages.lower_price} {lowerPrice}{Text.gem}" +
                 $"\n{Messages.enter_your_gems_price} {Text.gem}:", Keyboard.AuctionPutCancelKeyboard);
             EnterGemsPriceMessage.AddToQueue(User.Id, message.MessageId);
             User.Session.Messages.Add(message.MessageId);

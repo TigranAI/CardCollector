@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
+using Microsoft.EntityFrameworkCore;
 using Telegram.Bot.Types.InlineQueryResults;
 
 namespace CardCollector
@@ -71,6 +74,19 @@ namespace CardCollector
                         results.Enqueue(x);
                 });
             await Task.WhenAll(tasks);
+            return results;
+        }
+
+        public static async Task<IEnumerable<TSource>> WhereAsync<TSource>(
+            [NotNull] this IQueryable<TSource> source, 
+            [NotNull] Func<TSource, bool> predicate,
+            CancellationToken cancellationToken = default)
+        {
+            var results = new ConcurrentQueue<TSource>();
+            await foreach (var element in source.AsAsyncEnumerable().WithCancellation(cancellationToken))
+            {
+                if (predicate(element)) results.Enqueue(element);
+            }
             return results;
         }
         
