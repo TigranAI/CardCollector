@@ -70,7 +70,7 @@ namespace CardCollector.StickerEffects {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to При первом получении стикера, колиечство ваших алмазов увеличится на 25%! (эффект не складывается).
+        ///   Looks up a localized string similar to При первом получении стикера, количество ваших алмазов увеличится на 25%! (эффект не складывается).
         /// </summary>
         internal static string _2 {
             get {
