@@ -277,6 +277,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Эффект.
+        /// </summary>
+        internal static string effect {
+            get {
+                return ResourceManager.GetString("effect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Эмоция.
         /// </summary>
         internal static string emoji {

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="1" xml:space="preserve">
+        <value>При первом получении стикера, ваша копилка увеличится на 200 монет! (эффект не складывается)</value>
+    </data>
+    <data name="2" xml:space="preserve">
+        <value>При первом получении стикера, колиечство ваших алмазов увеличится на 25%! (эффект не складывается)</value>
+    </data>
+    <data name="3" xml:space="preserve">
+        <value>При наличии этого стикера, вы будете получать скидку к покупкам на аукционе в размере 5% (эффект не складывается)</value>
+    </data>
+    <data name="4" xml:space="preserve">
+        <value>За каждый такой стикер в коллекции, вы будете получать 1 случайный пак раз в 5 дней!</value>
+    </data>
+    <data name="5" xml:space="preserve">
+        <value>За каждый такой стикер в коллекции, вы будете получать 1 случайный стикер 2-го тира каждые 3 дня!</value>
+    </data>
+    <data name="6" xml:space="preserve">
+        <value>За каждый такой стикер в коллекции, вы будете получать 1 случайный стикер 1-го тира каждые 3 дня!</value>
+    </data>
+</root>

@@ -19,7 +19,7 @@ namespace CardCollector.Commands.InlineQuery
             var traders = await AuctionController.GetTradersList(filter, module.SelectedSticker.Id);
             var results = User.Session.GetModule<FiltersModule>()
                 .ApplyPriceTo(traders)
-                .ToTelegramResults(Command.buy_sticker);
+                .ToTelegramResults(Command.buy_sticker, 1.0 - await User.AuctionDiscount()/100.0);
             // Посылаем пользователю ответ на его запрос
             await MessageController.AnswerInlineQuery(InlineQueryId, await results);
         }

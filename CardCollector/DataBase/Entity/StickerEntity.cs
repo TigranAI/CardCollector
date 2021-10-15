@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using CardCollector.Resources;
+using CardCollector.StickerEffects;
 
 namespace CardCollector.DataBase.Entity
 {
@@ -49,6 +50,7 @@ namespace CardCollector.DataBase.Entity
                              $"\n{Text.emoji}: {Emoji}" +
                              $"\n{Text.author}: {Author}" +
                              $"\n{Income}{Text.coin} {IncomeTime}{Text.time}{Text.minutes}";
+            if (Effect != 0) str += $"\n{Text.effect}: {EffectTranslations.ResourceManager.GetString(Effect.ToString())}";
             if (Description != "") str += $"\n\n{Text.description}: {Description}";
             return str;
         }
@@ -60,6 +62,7 @@ namespace CardCollector.DataBase.Entity
                       $"\n{Text.author}: {Author}" +
                       $"\n{Text.count}: {(count != -1 ? count : "∞")}" +
                       $"\n{Income}{Text.coin} {IncomeTime}{Text.time}{Text.minutes}";
+            if (Effect != 0) str += $"\n{Text.effect}: {EffectTranslations.ResourceManager.GetString(Effect.ToString())}";
             if (Description != "") str += $"\n\n{Text.description}: {Description}";
             return str;
         }

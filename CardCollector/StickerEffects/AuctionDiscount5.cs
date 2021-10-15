@@ -12,7 +12,7 @@ namespace CardCollector.StickerEffects
             return await stickers.AnyAsync(async item =>
             {
                 var stickerInfo = await StickerDao.GetById(item.Value.StickerId);
-                return stickerInfo.Effect == (int) Effect.AuctionDiscount5;
+                return stickerInfo.Effect == (int) Effect.AuctionDiscount5 && item.Value.Count != 0;
             });
         }
     }

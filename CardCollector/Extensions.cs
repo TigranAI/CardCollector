@@ -35,15 +35,16 @@ namespace CardCollector
         }
         /* Преобразует список продавцов в список результатов для телеграм */
         public static async Task<IEnumerable<InlineQueryResult>> ToTelegramResults
-            (this IEnumerable<AuctionEntity> list, string command)
+            (this IEnumerable<AuctionEntity> list, string command, double discount)
         {
             var result = new List<InlineQueryResult>();
             foreach (var item in list)
             {
+                var price = (int)(item.Price * discount);
                 var user = await UserDao.GetById(item.Trader);
                 result.Add(new InlineQueryResultArticle($"{command}={item.Id}",
                     $"{user.Username} {item.Count}{Text.items}", new InputTextMessageContent(Text.buy))
-                { Description = $"{item.Price}{Text.gem} {Text.per} 1{Text.items}" });
+                { Description = $"{price}{Text.gem} {Text.per} 1{Text.items}" });
                 /* Ограничение Telegram API по количеству результатов в 50 шт. */
                 if (result.Count > 49) return result;
             }

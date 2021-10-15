@@ -225,4 +225,7 @@
     <data name="open_specific" xml:space="preserve">
         <value>Открыть авторский пак</value>
     </data>
+    <data name="effect" xml:space="preserve">
+        <value>Эффект</value>
+    </data>
 </root>
