@@ -78,7 +78,7 @@ namespace CardCollector
         {
             var users = await UserDao.GetAllWhere(user => Task.FromResult(!user.IsBlocked));
             foreach (var user in users)
-                await SendMessage(user, Messages.daily_task_alertation);
+                await SendMessage(user, Messages.daily_task_alertation, Keyboard.Menu);
             Utilities.SetUpTimer(Constants.DailyTaskAlert, DailyTaskAlert);
         }
     }

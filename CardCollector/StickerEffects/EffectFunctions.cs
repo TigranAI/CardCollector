@@ -29,6 +29,7 @@ namespace CardCollector.StickerEffects
                 if (packsCount > 0) await MessageController.SendMessage(user, 
                     $"{Messages.effect_Random1Pack5Day} {packsCount}{Text.items}");
             }
+            Utilities.SetUpTimer(Constants.DailyStickerRewardCheck, RunAll);
         }
 
         public static async Task GiveTier2()

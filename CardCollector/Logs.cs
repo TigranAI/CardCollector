@@ -3,6 +3,7 @@ using System.IO;
 using CardCollector.Resources;
 // ReSharper disable ConditionIsAlwaysTrueOrFalse
 // ReSharper disable LocalizableElement
+#pragma warning disable 162
 
 namespace CardCollector
 {

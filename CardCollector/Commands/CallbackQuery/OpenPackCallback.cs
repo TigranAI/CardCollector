@@ -56,14 +56,13 @@ namespace CardCollector.Commands.CallbackQuery
             
             async Task<bool> TryOpen()
             {
-                if (packId == 2)
+                var info = await SpecificPackDao.GetInfo(User.Id, packId);
+                if (info.Count < 1)
                 {
                     if (userPack.AuthorCount < 1) return false;
                     userPack.AuthorCount--;
                     return true;
                 }
-                var info = await SpecificPackDao.GetInfo(User.Id, packId);
-                if (info.Count < 1) return false;
                 info.Count--;
                 return true;
             }

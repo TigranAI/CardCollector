@@ -18,6 +18,7 @@ namespace CardCollector.DataBase.EntityDao
         {
             var newPack = new UsersPacksEntity(){UserId = userId};
             var result = await Table.AddAsync(newPack);
+            await Instance.SaveChangesAsync();
             return result.Entity;
         }
     }

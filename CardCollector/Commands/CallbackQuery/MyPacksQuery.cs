@@ -18,8 +18,8 @@ namespace CardCollector.Commands.CallbackQuery
             var specificCount = await SpecificPackDao.GetCount(User.Id);
             var message = await MessageController.SendMessage(User, 
                 $"{Messages.your_packs}" +
-                $"\n{Messages.random_packs} {userPack.RandomCount}{Text.items}" +
-                $"\n{Messages.author_packs} {userPack.AuthorCount}{Text.items}" +
+                $"\n{Messages.random_packs}: {userPack.RandomCount}{Text.items}" +
+                $"\n{Messages.author_packs}: {userPack.AuthorCount}{Text.items}" +
                 $"\n{Messages.specific_packs} {specificCount}{Text.items}",
                 Keyboard.PackMenu);
             User.Session.Messages.Add(message.MessageId);
