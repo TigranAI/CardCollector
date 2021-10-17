@@ -11,8 +11,9 @@ namespace CardCollector
     {
         private static void Print(string message)
         {
+            var today = DateTime.Today;
             if (Constants.DEBUG) Console.WriteLine(message);
-            else File.AppendAllText($"Log {DateTime.Now.Date}.txt", message + Environment.NewLine);
+            else File.AppendAllText($"Log {today.Day}-{today.Month}-{today.Year}.txt", message + Environment.NewLine);
         }
         
         public static void LogOut(object message)
