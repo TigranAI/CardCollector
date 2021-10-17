@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
@@ -63,7 +64,7 @@ namespace CardCollector.Session
 
         public async Task ClearMessages()
         {
-            foreach (var messageId in Messages)
+            foreach (var messageId in Messages.ToList())
                 await MessageController.DeleteMessage(user, messageId, false);
             Messages.Clear();
         }
