@@ -79,21 +79,21 @@ namespace CardCollector.DataBase.EntityDao
             return result.Entity;
         }
 
-        public static void ClearMemory(object sender, ElapsedEventArgs e)
+        public static async void ClearMemory(object sender, ElapsedEventArgs e)
         {
             foreach (var (id, user) in ActiveUsers)
             {
                 if (user.Session.GetLastAccessInterval() <= Constants.SESSION_ACTIVE_PERIOD) continue;
-                user.Session.EndSession();
+                await user.Session.EndSession();
                 ActiveUsers.Remove(id);
             }
         }
 
-        public static async void ClearMemory()
+        public static async Task ClearMemory()
         {
             foreach (var (id, user) in ActiveUsers.ToDictionary(pair => pair.Key, pair => pair.Value))
             {
-                user.Session.EndSession();
+                await user.Session.EndSession();
                 ActiveUsers.Remove(id);
                 await MessageController.SendMessage(user, Messages.bot_turning_off);
             }

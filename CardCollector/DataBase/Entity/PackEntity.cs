@@ -14,5 +14,8 @@ namespace CardCollector.DataBase.Entity
         
         /* Описание */
         [Column("description"), MaxLength(512)] public string Description { get; set; }
+        
+        /* Количество открытий */
+        [Column("opened_count"), MaxLength(127)] public long OpenedCount { get; set; } = 0;
     }
 }

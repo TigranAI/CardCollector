@@ -68,7 +68,7 @@ namespace CardCollector.Session
             Messages.Clear();
         }
 
-        public async void EndSession()
+        public async Task EndSession()
         {
             await ClearMessages();
             State = UserState.Default;

@@ -18,6 +18,7 @@ namespace CardCollector.Commands.CallbackQuery
             var packId = int.Parse(CallbackData.Split("=")[1]);
             var userPack = await UsersPacksDao.GetUserPacks(User.Id);
             var rnd = new Random();
+            var packInfo = await PacksDao.GetById(packId);
             var tier = GetTier(rnd.NextDouble() * 100);
             switch (packId)
             {
@@ -31,13 +32,13 @@ namespace CardCollector.Commands.CallbackQuery
                 default:
                     if (!await TryOpen()) 
                         await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.packs_count_zero, true);
-                    var packInfo = await PacksDao.GetById(packId);
                     await OpenPack(await StickerDao.GetListWhere(item => item.Tier == tier && item.Author == packInfo.Author));
                     break;
             }
 
             async Task OpenPack(List<StickerEntity> stickers)
             {
+                packInfo.OpenedCount++;
                 await User.ClearChat();
                 var sticker = stickers[rnd.Next(stickers.Count)];
                 if (User.Stickers.ContainsKey(sticker.Md5Hash))

@@ -30,9 +30,9 @@ namespace CardCollector
 
         private static readonly IEnumerable<BotCommand> _commands = new[]
         {
-            new BotCommand {Command = "/menu", Description = "Показать меню"},
+            new BotCommand {Command = "/menu", Description = "Показать меню"},/*
             new BotCommand {Command = "/help", Description = "Показать информацию"},
-            new BotCommand {Command = "/error", Description = "Сообщить об ошибке"},
+            new BotCommand {Command = "/error", Description = "Сообщить об ошибке"},*/
         };
 
         public static void Main(string[] args)
@@ -59,12 +59,14 @@ namespace CardCollector
 
         public static void StopProgram()
         {
-            _timer.Elapsed += (_, _) =>
+            _timer.Elapsed += OnTimerOnElapsed;
+
+            static async void OnTimerOnElapsed(object o, ElapsedEventArgs elapsedEventArgs)
             {
                 _timer.Stop();
-                UserDao.ClearMemory();
+                await UserDao.ClearMemory();
                 _end.Set();
-            };
+            }
         }
 
         private static async void SavingChanges(object o, ElapsedEventArgs e)
