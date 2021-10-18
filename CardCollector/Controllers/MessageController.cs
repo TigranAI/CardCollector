@@ -234,13 +234,13 @@ namespace CardCollector.Controllers
         }
 
         public static async Task<TgMessage> SendInvoice(UserEntity user, string title, string description, 
-            string payload, IEnumerable<LabeledPrice> prices, Currency currency = Currency.USD)
+            string payload, IEnumerable<LabeledPrice> prices, int maxTip = 0, IEnumerable<int> tips = null, Currency currency = Currency.USD)
         {
             try
             {
                 if (!user.IsBlocked)
                     return await Bot.Client.SendInvoiceAsync(user.ChatId, title, description, payload, 
-                        AppSettings.PAYMENT_PROVIDER, currency.ToString(), prices, disableNotification: true);
+                        AppSettings.PAYMENT_PROVIDER, currency.ToString(), prices, maxTip, tips, disableNotification: true);
             }
             catch (Exception e)
             {

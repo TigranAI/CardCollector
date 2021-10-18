@@ -322,7 +322,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to После покупки вы получите 50 алмазов на свой счет.
+        ///   Looks up a localized string similar to После покупки вы получите 50 алмазов на свой счет. Вы также можете оставить чаевые. Вы получите алмазы в рассчете $1 за 50💎.
         /// </summary>
         internal static string gems_description {
             get {
