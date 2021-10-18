@@ -13,7 +13,7 @@ namespace CardCollector.Commands.CallbackQuery
         {
             var result = await User.Cash.Payout(User.Stickers);
             await MessageController.AnswerCallbackQuery(User, CallbackQueryId, 
-                $"{Messages.you_collected}: " +
+                $"{Messages.you_collected} " +
                 $"{result}{Text.coin} " +
                 $"\n\n{Messages.your_cash}: " +
                 $"{User.Cash.Coins}{Text.coin} " +
