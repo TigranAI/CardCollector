@@ -30,34 +30,26 @@ namespace CardCollector.DataBase.Entity
         public async Task<int> CalculateIncome(Dictionary<string, UserStickerRelationEntity> stickers)
         {
             LastPayout = DateTime.Now;
-            var result = 0;
-            foreach (var sticker in stickers.Values)
-            {
-                var stickerInfo = await StickerDao.GetStickerByHash(sticker.ShortHash);
-                var payoutInterval = LastPayout - sticker.Payout;
-                var payoutsCount = (int) (payoutInterval.TotalMinutes / stickerInfo.IncomeTime);
-                if (payoutsCount < 1) continue;
-                var multiplier = payoutsCount * sticker.Count;
-                result += stickerInfo.Income * multiplier;
-                if (result > MaxCapacity) return MaxCapacity;
-            }
-            return result;
+            var result = await stickers.Values.SumAsync(async sticker => await Payout(sticker));
+            return result > MaxCapacity ? MaxCapacity : result;
         }
         
         public async Task<int> Payout(Dictionary<string, UserStickerRelationEntity> stickers)
         {
-            var result = await stickers.Values.SumAsync(async sticker => await Payout(sticker));
+            var result = await stickers.Values.SumAsync(async sticker => await Payout(sticker, true));
             result = result > MaxCapacity ? MaxCapacity : result;
             Coins += result;
             return result;
         }
         
-        private async Task<int> Payout(UserStickerRelationEntity relation)
+        private async Task<int> Payout(UserStickerRelationEntity relation, bool updatePayout = false)
         {
             var stickerInfo = await StickerDao.GetById(relation.StickerId);
-            var payoutInterval = DateTime.Now - relation.Payout;
+            var payoutInterval = LastPayout - relation.Payout;
             var payoutsCount = (int) (payoutInterval.TotalMinutes / stickerInfo.IncomeTime);
-            relation.Payout = DateTime.Now;
+            if (updatePayout) relation.Payout = LastPayout;
+            Logs.LogOut(payoutInterval);
+            Logs.LogOut(payoutsCount);
             if (payoutsCount < 1) return 0;
             return stickerInfo.Income * payoutsCount * relation.Count;
         }
