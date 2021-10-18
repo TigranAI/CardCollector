@@ -70,12 +70,6 @@ namespace CardCollector.Commands.Message
                     await Bot.Client.DeleteMessageAsync(update.Message.Chat.Id, update.Message.MessageId);
                 return new IgnoreUpdate();
             }
-        
-            // Удаляем сообщение пользователя в лс, оно нам больше не нужно
-            await MessageController.DeleteMessage(user, update.Message.MessageId);
-            
-            // Если сообщение - это команда, полученная от бота, то мы игнорируем, так как получим ее через ChosenInlineResult
-            if (update.Message.ViaBot is { }) return new IgnoreUpdate();
 
             /* Список команд определяем исходя из типа сообщения */
             var list = update.Message.Type switch
@@ -87,6 +81,12 @@ namespace CardCollector.Commands.Message
             
             // Объект пользователя
             var user = await UserDao.GetUser(update.Message!.From);
+        
+            // Удаляем сообщение пользователя в лс, оно нам больше не нужно
+            await MessageController.DeleteMessage(user, update.Message.MessageId);
+            
+            // Если сообщение - это команда, полученная от бота, то мы игнорируем, так как получим ее через ChosenInlineResult
+            if (update.Message.ViaBot is { }) return new IgnoreUpdate();
             
             // Если пользователь заблокирован или сообщение где-то в другом канале, привате - игонрируем
             if (user.IsBlocked || update.Message.Chat.Id != user.ChatId) return new IgnoreUpdate();
