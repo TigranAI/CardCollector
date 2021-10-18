@@ -70,6 +70,9 @@ namespace CardCollector.Commands.Message
                     await Bot.Client.DeleteMessageAsync(update.Message.Chat.Id, update.Message.MessageId);
                 return new IgnoreUpdate();
             }
+        
+            // Удаляем сообщение пользователя в лс, оно нам больше не нужно
+            await MessageController.DeleteMessage(user, update.Message.MessageId);
             
             // Если сообщение - это команда, полученная от бота, то мы игнорируем, так как получим ее через ChosenInlineResult
             if (update.Message.ViaBot is { }) return new IgnoreUpdate();
@@ -87,9 +90,6 @@ namespace CardCollector.Commands.Message
             
             // Если пользователь заблокирован или сообщение где-то в другом канале, привате - игонрируем
             if (user.IsBlocked || update.Message.Chat.Id != user.ChatId) return new IgnoreUpdate();
-        
-            // Удаляем сообщение пользователя в лс, оно нам больше не нужно
-            await MessageController.DeleteMessage(user, update.Message.MessageId);
             
             // Возвращаем объект, если команда совпала
             /* Возвращаем первую подходящую команду */
