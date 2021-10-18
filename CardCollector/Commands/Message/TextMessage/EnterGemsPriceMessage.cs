@@ -46,7 +46,7 @@ namespace CardCollector.Commands.Message.TextMessage
         // Переопределяем метод, так как команда удовлетворяет условию, если пользователь находится в очереди #1#
         protected internal override bool IsMatches(UserEntity user, Update update)
         {
-            return Queue.ContainsKey(User.Id) && update.Message!.Type == MessageType.Text;
+            return Queue.ContainsKey(user.Id) && update.Message!.Type == MessageType.Text;
         }
 
         public EnterGemsPriceMessage() { }

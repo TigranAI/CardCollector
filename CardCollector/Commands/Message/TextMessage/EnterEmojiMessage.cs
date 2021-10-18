@@ -56,7 +56,7 @@ namespace CardCollector.Commands.Message.TextMessage
 
         protected internal override bool IsMatches(UserEntity user, Update update)
         {
-            return Queue.ContainsKey(User.Id) && update.Message!.Type == MessageType.Text;
+            return Queue.ContainsKey(user.Id) && update.Message!.Type == MessageType.Text;
         }
 
         public EnterEmojiMessage() { }

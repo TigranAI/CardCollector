@@ -49,7 +49,7 @@ namespace CardCollector.Commands.ChosenInlineResult
         protected internal override bool IsMatches(UserEntity user, Update update)
         {
             return base.IsMatches(user, update) && 
-                   User.Session.State is UserState.CollectionMenu or UserState.AuctionMenu or UserState.CombineMenu or UserState.Default;
+                   user.Session.State is UserState.CollectionMenu or UserState.AuctionMenu or UserState.CombineMenu or UserState.Default;
         }
 
         public SelectStickerInlineResult() { }

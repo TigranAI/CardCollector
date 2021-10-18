@@ -177,7 +177,7 @@ namespace CardCollector.Commands.Message.DocumentMessage
 
         protected internal override bool IsMatches(UserEntity user, Update update)
         {
-            return User.Session.State == UserState.UploadFile;
+            return user.Session.State == UserState.UploadFile;
         }
 
         public UploadFileMessage() { }

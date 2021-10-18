@@ -23,7 +23,7 @@ namespace CardCollector.Commands.InlineQuery
         
         protected internal override bool IsMatches(UserEntity user, Update update)
         {
-            return update.InlineQuery?.ChatType is ChatType.Sender && User.Session.State == UserState.CombineMenu;
+            return update.InlineQuery?.ChatType is ChatType.Sender && user.Session.State == UserState.CombineMenu;
         }
 
         public ShowCombineStickers() { }
