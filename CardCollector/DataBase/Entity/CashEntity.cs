@@ -48,8 +48,6 @@ namespace CardCollector.DataBase.Entity
             var payoutInterval = LastPayout - relation.Payout;
             var payoutsCount = (int) (payoutInterval.TotalMinutes / stickerInfo.IncomeTime);
             if (updatePayout) relation.Payout = LastPayout;
-            Logs.LogOut(payoutInterval);
-            Logs.LogOut(payoutsCount);
             if (payoutsCount < 1) return 0;
             return stickerInfo.Income * payoutsCount * relation.Count;
         }
