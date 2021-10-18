@@ -25,6 +25,7 @@ namespace CardCollector.DailyTasks
         public abstract string Description { get; }
 
         public abstract Task<bool> Execute(long userId, object[] args = null);
+        public abstract Task GiveReward(long userId, object[] args = null);
 
         public static async void ResetTasks(object o, ElapsedEventArgs e)
         {

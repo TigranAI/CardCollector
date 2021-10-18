@@ -23,9 +23,9 @@ namespace CardCollector.Commands.Message.TextMessage
         }
 
         /* Нужно помимо совпадения текста проверить пользователя на уровень привилегий */
-        protected internal override bool IsMatches(string command)
+        protected internal override bool IsMatches(UserEntity user, Update update)
         {
-            return base.IsMatches(command) && User is not {PrivilegeLevel: < Constants.PROGRAMMER_PRIVILEGE_LEVEL};
+            return base.IsMatches(user, update) && User.PrivilegeLevel >= Constants.PROGRAMMER_PRIVILEGE_LEVEL;
         }
         
         public ShowSampleMessage(UserEntity user, Update update) : base(user, update) { }

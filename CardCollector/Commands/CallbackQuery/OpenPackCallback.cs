@@ -42,11 +42,7 @@ namespace CardCollector.Commands.CallbackQuery
                 await User.ClearChat();
                 var sticker = stickers[rnd.Next(stickers.Count)];
                 if (User.Stickers.ContainsKey(sticker.Md5Hash))
-                {
-                    await MessageController.AnswerCallbackQuery(User, CallbackQueryId,
-                        $"{Messages.you_collected} {await User.Cash.Payout(User.Stickers)}");
                     User.Stickers[sticker.Md5Hash].Count++;
-                }
                 else
                     await UserStickerRelationDao.AddNew(User, sticker, 1);
                 var stickerMessage = await MessageController.SendSticker(User, sticker.Id);

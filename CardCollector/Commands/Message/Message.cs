@@ -70,6 +70,9 @@ namespace CardCollector.Commands.Message
                     await Bot.Client.DeleteMessageAsync(update.Message.Chat.Id, update.Message.MessageId);
                 return new IgnoreUpdate();
             }
+            
+            // Если сообщение - это команда, полученная от бота, то мы игнорируем, так как получим ее через ChosenInlineResult
+            if (update.Message.ViaBot is { }) return new IgnoreUpdate();
 
             /* Список команд определяем исходя из типа сообщения */
             var list = update.Message.Type switch
@@ -77,14 +80,6 @@ namespace CardCollector.Commands.Message
                 MessageType.Text => TextCommandsList,
                 MessageType.Document => FileCommandsList,
                 _ => new List<Message>()
-            };
-            
-            /* Данные определяем исходя из типа сообщения */
-            var data = update.Message.Type switch
-            {
-                MessageType.Text => update.Message.Text,
-                MessageType.Document => update.Message.Document!.FileId,
-                _ => "Unknown"
             };
             
             // Объект пользователя
@@ -96,16 +91,20 @@ namespace CardCollector.Commands.Message
             // Удаляем сообщение пользователя в лс, оно нам больше не нужно
             await MessageController.DeleteMessage(user, update.Message.MessageId);
             
-            // Если сообщение - это команда, полученная от бота, то мы игнорируем, так как получим ее через ChosenInlineResult
-            if (update.Message.ViaBot is { }) return new IgnoreUpdate();
-            
             // Возвращаем объект, если команда совпала
-            foreach (var item in list.Where(item => item.IsMatches(data)))
-                if(Activator.CreateInstance(item.GetType(), user, update) is Message executor)
-                    if (executor.IsMatches(data)) return executor;
-        
-            // Возвращаем команда не найдена, если код дошел до сюда
-            return new CommandNotFound(user, update, data);
+            /* Возвращаем первую подходящую команду */
+            return list.FirstOrDefault(item => item.IsMatches(user, update)) is { } executor
+                ? (UpdateModel) Activator.CreateInstance(executor.GetType(), user, update)
+                : new CommandNotFound(user, update, update.Message.Type switch {
+                    MessageType.Text => update.Message.Text,
+                    MessageType.Document => update.Message.Document!.FileId,
+                    _ => "Unknown"
+                });
+        }
+
+        protected internal override bool IsMatches(UserEntity user, Update update)
+        {
+            return update.Message!.Text == CommandText;
         }
 
         protected Message(UserEntity user, Update update) : base(user, update) { }

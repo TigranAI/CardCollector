@@ -37,6 +37,7 @@ namespace CardCollector
 
         public static void Main(string[] args)
         {
+            Logs.LogOut("Bot started");
             var cts = new CancellationTokenSource();
             Client.StartReceiving(HandleUpdateAsync, HandleErrorAsync, cancellationToken: cts.Token);
             Client.SetMyCommandsAsync(_commands, BotCommandScope.AllPrivateChats(), cancellationToken: cts.Token);
@@ -60,7 +61,6 @@ namespace CardCollector
         public static void StopProgram()
         {
             _timer.Elapsed += OnTimerOnElapsed;
-
             static async void OnTimerOnElapsed(object o, ElapsedEventArgs elapsedEventArgs)
             {
                 _timer.Stop();

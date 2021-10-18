@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Reflection;
 using CardCollector.Resources;
 // ReSharper disable ConditionIsAlwaysTrueOrFalse
 // ReSharper disable LocalizableElement
@@ -9,11 +10,24 @@ namespace CardCollector
 {
     public static class Logs
     {
-        private static void Print(string message)
+        private static readonly string path;
+
+        static Logs()
+        {
+            path = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location) + @"\Logs";
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+        }
+        
+        private static async void Print(string message)
         {
             var today = DateTime.Today;
             if (Constants.DEBUG) Console.WriteLine(message);
-            else File.AppendAllText($"Log {today.Day}-{today.Month}-{today.Year}.txt", message + Environment.NewLine);
+            else
+            {
+                using(var sw = File.AppendText($@"{path}\{today.Day}-{today.Month}-{today.Year}.log"))
+                    await sw.WriteLineAsync(message);
+            }
         }
         
         public static void LogOut(object message)

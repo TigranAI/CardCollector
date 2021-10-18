@@ -28,23 +28,16 @@ namespace CardCollector.Commands.ChosenInlineResult
         public GetUnlimitedStickerAndExecuteCommand() { }
         public GetUnlimitedStickerAndExecuteCommand(UserEntity user, Update update) : base(user, update) { }
         
-        
         /* Список команд, аналогичный родительскому, только не включает эту команду (unlimited) */
         private static readonly List<ChosenInlineResult> PrivateList = List.GetRange(1, List.Count - 1);
         
         /* Метод, создающий объекты команд исходя из полученного обновления */
         private static UpdateModel PrivateFactory(Update update, UserEntity user)
         {
-            // Текст команды
-            var command = update.ChosenInlineResult!.ResultId;
-            
             // Возвращаем объект, если команда совпала
-            foreach (var item in PrivateList.Where(item => item.IsMatches(command)))
-                if(Activator.CreateInstance(item.GetType(), user, update) is ChosenInlineResult executor)
-                    if (executor.IsMatches(command)) return executor;
-        
-            // Возвращаем команда не найдена, если код дошел до сюда
-            return new CommandNotFound(user, update, command);
+            return PrivateList.FirstOrDefault(item => item.IsMatches(user, update)) is { } executor
+                ? (UpdateModel) Activator.CreateInstance(executor.GetType(), user, update)
+                : new CommandNotFound(user, update, update.ChosenInlineResult!.ResultId);
         }
     }
 }

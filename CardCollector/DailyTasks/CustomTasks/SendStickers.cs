@@ -17,5 +17,11 @@ namespace CardCollector.DailyTasks.CustomTasks
             task.Progress--;
             return task.Progress == 0;
         }
+
+        public override async Task GiveReward(long userId, object[] args = null)
+        {
+            var userPacks = await UsersPacksDao.GetUserPacks(userId);
+            userPacks.RandomCount++;
+        }
     }
 }

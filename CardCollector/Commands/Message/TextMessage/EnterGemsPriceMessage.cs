@@ -5,6 +5,7 @@ using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.Message.TextMessage
 {
@@ -43,17 +44,13 @@ namespace CardCollector.Commands.Message.TextMessage
         }
 
         // Переопределяем метод, так как команда удовлетворяет условию, если пользователь находится в очереди #1#
-        protected internal override bool IsMatches(string command)
+        protected internal override bool IsMatches(UserEntity user, Update update)
         {
-            return User == null ? base.IsMatches(command) : Queue.ContainsKey(User.Id);
+            return Queue.ContainsKey(User.Id) && update.Message!.Type == MessageType.Text;
         }
 
-        public EnterGemsPriceMessage()
-        {
-        }
+        public EnterGemsPriceMessage() { }
 
-        public EnterGemsPriceMessage(UserEntity user, Update update) : base(user, update)
-        {
-        }
+        public EnterGemsPriceMessage(UserEntity user, Update update) : base(user, update) { }
     }
 }

@@ -331,11 +331,56 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 100💎.
+        /// </summary>
+        internal static string gems_label100 {
+            get {
+                return ResourceManager.GetString("gems_label100", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1000💎.
+        /// </summary>
+        internal static string gems_label1000 {
+            get {
+                return ResourceManager.GetString("gems_label1000", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 250💎.
+        /// </summary>
+        internal static string gems_label250 {
+            get {
+                return ResourceManager.GetString("gems_label250", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2500💎.
+        /// </summary>
+        internal static string gems_label2500 {
+            get {
+                return ResourceManager.GetString("gems_label2500", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 50💎.
         /// </summary>
         internal static string gems_label50 {
             get {
                 return ResourceManager.GetString("gems_label50", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 500💎.
+        /// </summary>
+        internal static string gems_label500 {
+            get {
+                return ResourceManager.GetString("gems_label500", resourceCulture);
             }
         }
         

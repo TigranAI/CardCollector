@@ -11,6 +11,7 @@ namespace CardCollector.Commands.PreCheckoutQuery
     public abstract class PreCheckoutQuery : UpdateModel
     {
         protected readonly string PreCheckoutQueryId;
+        protected readonly int Amount;
         
         private static readonly List<PreCheckoutQuery> List = new()
             {
@@ -23,9 +24,6 @@ namespace CardCollector.Commands.PreCheckoutQuery
         /* Метод, создающий объекты команд исходя из полученного обновления */
         public static async Task<UpdateModel> Factory(Update update)
         {
-            /* Данные определяем исходя из указанного нами продукта */
-            var data = update.PreCheckoutQuery!.InvoicePayload;
-            
             // Объект пользователя
             var user = await UserDao.GetUser(update.PreCheckoutQuery!.From);
             
@@ -33,18 +31,21 @@ namespace CardCollector.Commands.PreCheckoutQuery
             if (user.IsBlocked) return new IgnoreUpdate();
             
             // Возвращаем объект, если команда совпала
-            foreach (var item in List.Where(item => item.IsMatches(data)))
-                if(Activator.CreateInstance(item.GetType(), user, update) is PreCheckoutQuery executor)
-                    if (executor.IsMatches(data)) return executor;
-        
-            // Возвращаем команда не найдена, если код дошел до сюда
-            return new CommandNotFound(user, update, data);
+            return List.FirstOrDefault(item => item.IsMatches(user, update)) is { } executor
+                ? (UpdateModel) Activator.CreateInstance(executor.GetType(), user, update)
+                : new CommandNotFound(user, update, update.PreCheckoutQuery!.InvoicePayload);
+        }
+
+        protected internal override bool IsMatches(UserEntity user, Update update)
+        {
+            return CommandText == update.PreCheckoutQuery!.InvoicePayload;
         }
 
         protected PreCheckoutQuery() { }
         protected PreCheckoutQuery(UserEntity user, Update update) : base(user, update)
         {
             PreCheckoutQueryId = update.PreCheckoutQuery!.Id;
+            Amount = update.PreCheckoutQuery.TotalAmount;
         }
     }
 }

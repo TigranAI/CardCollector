@@ -14,7 +14,15 @@ namespace CardCollector.Commands.CallbackQuery
         {
             await User.ClearChat();
             var messages = await MessageController.SendInvoice(User, Text.gems_title, Text.gems_description, 
-                Command.gems50, new[] {new LabeledPrice(Text.gems_label50, 100)});
+                Command.gems50, new[]
+                {
+                    new LabeledPrice(Text.gems_label50, 100),
+                    new LabeledPrice(Text.gems_label100, 200),
+                    new LabeledPrice(Text.gems_label250, 500),
+                    new LabeledPrice(Text.gems_label500, 1000),
+                    new LabeledPrice(Text.gems_label1000, 2000),
+                    new LabeledPrice(Text.gems_label2500, 5000),
+                });
             User.Session.Messages.Add(messages.MessageId);
         }
 

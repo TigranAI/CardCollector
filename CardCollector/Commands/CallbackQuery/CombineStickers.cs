@@ -23,20 +23,14 @@ namespace CardCollector.Commands.CallbackQuery
             {
                 await User.ClearChat();
                 User.Cash.Coins -= price;
-                var result = 0;
                 foreach (var (item, count) in combineModule.CombineList)
-                {
-                    result += await User.Cash.Payout(User.Stickers);
                     User.Stickers[item.Md5Hash].Count -= count;
-                }
-                await MessageController.AnswerCallbackQuery(User, CallbackQueryId, $"{Messages.you_collected} {result}{Text.coin}");
                 var authors = combineModule.CombineList.Select(i => i.Key.Author).ToList();
                 var tier = combineModule.Tier;
                 var rnd = new Random();
                 var author = authors[rnd.Next(authors.Count)];
                 var stickers = await StickerDao.GetListWhere(i => i.Author == author && i.Tier == tier + 1);
                 var sticker = stickers[rnd.Next(stickers.Count)];
-                if (User.Stickers.ContainsKey(sticker.Md5Hash)) await User.Cash.Payout(User.Stickers);
                 await UserStickerRelationDao.AddNew(User, sticker, 1);
                 var text = $"{Messages.combined_sticker}:\n" + sticker;
                 var stickerMessage = await MessageController.SendSticker(User, sticker.Id);

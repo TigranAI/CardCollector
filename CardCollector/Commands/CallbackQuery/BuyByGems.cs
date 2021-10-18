@@ -66,11 +66,7 @@ namespace CardCollector.Commands.CallbackQuery
                 if (!User.Stickers.ContainsKey(sticker.Md5Hash))
                     await UserStickerRelationDao.AddNew(User, sticker, 1);
                 else
-                {
-                    await MessageController.AnswerCallbackQuery(User, CallbackQueryId,
-                        $"{Messages.you_collected} {await User.Cash.Payout(User.Stickers)}{Text.coin}");
                     User.Stickers[sticker.Md5Hash].Count ++;
-                }
                 var stickerMessage = await MessageController.SendSticker(User, sticker.Id);
                 var message = await MessageController.SendMessage(User, $"{Messages.congratulation}\n{sticker}");
                 User.Session.Messages.Add(stickerMessage.MessageId);

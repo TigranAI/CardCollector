@@ -2,7 +2,6 @@
 using CardCollector.Controllers;
 using CardCollector.DailyTasks;
 using CardCollector.DataBase.Entity;
-using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
 using Telegram.Bot.Types;
 
@@ -17,8 +16,7 @@ namespace CardCollector.Commands.ChosenInlineResult
             var dailyTask = DailyTask.List[DailyTaskKeys.SendStickersToUsers];
             if (await dailyTask.Execute(User.Id))
             {
-                var userPacks = await UsersPacksDao.GetUserPacks(User.Id);
-                userPacks.RandomCount++;
+                await dailyTask.GiveReward(User.Id);
                 var message = await MessageController.SendMessage(User, Messages.pack_prize);
                 User.Session.Messages.Add(message.MessageId);
             }

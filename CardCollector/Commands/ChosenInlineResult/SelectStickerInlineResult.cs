@@ -46,11 +46,10 @@ namespace CardCollector.Commands.ChosenInlineResult
             User.Session.Messages.Add(infoMessage.MessageId);
         }
 
-        protected internal override bool IsMatches(string command)
+        protected internal override bool IsMatches(UserEntity user, Update update)
         {
-            return User == null 
-                ? base.IsMatches(command)
-                : User.Session.State is UserState.CollectionMenu or UserState.AuctionMenu or UserState.CombineMenu or UserState.Default;
+            return base.IsMatches(user, update) && 
+                   User.Session.State is UserState.CollectionMenu or UserState.AuctionMenu or UserState.CombineMenu or UserState.Default;
         }
 
         public SelectStickerInlineResult() { }

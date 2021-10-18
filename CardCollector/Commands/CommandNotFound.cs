@@ -13,8 +13,11 @@ namespace CardCollector.Commands
 
         public override async Task Execute()
         {
-            await MessageController.SendMessage(User, "Команда не найдена " + _command);
+            var message = await MessageController.SendMessage(User, "Команда не найдена " + _command);
+            User.Session.Messages.Add(message.MessageId);
         }
+
+        protected internal override bool IsMatches(UserEntity user, Update update) => true;
 
         public CommandNotFound(UserEntity user, Update update, string command) : base(user, update)
         {

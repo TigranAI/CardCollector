@@ -13,7 +13,7 @@ namespace CardCollector.Commands.PreCheckoutQuery
         public override async Task Execute()
         {
             await Bot.Client.AnswerPreCheckoutQueryAsync(PreCheckoutQueryId);
-            User.Cash.Gems += 50;
+            User.Cash.Gems += 50 * Amount / 100;
             await User.ClearChat();
             var message = await MessageController.SendMessage(User, Messages.thanks_for_buying);
             User.Session.Messages.Add(message.MessageId);

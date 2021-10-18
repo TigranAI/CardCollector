@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.InlineQuery
 {
@@ -13,23 +13,17 @@ namespace CardCollector.Commands.InlineQuery
         protected override string CommandText => "";
         public override async Task Execute()
         {
-            // Фильтр - введенная пользователем фраза
-            var filter = Update.InlineQuery!.Query;
             // Получаем список стикеров
-            var stickersList = await User.GetStickersList(filter);
+            var stickersList = await User.GetStickersList(Query);
             var results = User.Session.GetModule<FiltersModule>()
                 .ApplyTo(stickersList).ToTelegramResults(Command.select_sticker);
             // Посылаем пользователю ответ на его запрос
             await MessageController.AnswerInlineQuery(InlineQueryId, results);
         }
         
-        /* Команда пользователя удовлетворяет условию, если она вызвана
-         в личных сообщениях с ботом и пользователь в меню коллекции */
-        protected internal override bool IsMatches(string command)
+        protected internal override bool IsMatches(UserEntity user, Update update)
         {
-            return User == null 
-                ? command.Contains("Sender")
-                : User.Session.State == UserState.CollectionMenu;
+            return update.InlineQuery?.ChatType is ChatType.Sender && User.Session.State == UserState.CollectionMenu;
         }
 
         public ShowCollectionStickers() { }

@@ -1,4 +1,6 @@
 ﻿using System.Threading.Tasks;
+using CardCollector.DataBase.Entity;
+using Telegram.Bot.Types;
 
 namespace CardCollector.Commands
 {
@@ -7,5 +9,6 @@ namespace CardCollector.Commands
     {
         protected override string CommandText => "";
         public override Task Execute() { return  Task.CompletedTask; }
+        protected internal override bool IsMatches(UserEntity user, Update update) => true;
     }
 }

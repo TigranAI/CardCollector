@@ -17,11 +17,9 @@ namespace CardCollector.Commands.Message.TextMessage
             Bot.StopProgram();
         }
 
-        protected internal override bool IsMatches(string command)
+        protected internal override bool IsMatches(UserEntity user, Update update)
         {
-            return User == null 
-                ? base.IsMatches(command)
-                : User.PrivilegeLevel >= Constants.PROGRAMMER_PRIVILEGE_LEVEL || Constants.DEBUG;
+            return base.IsMatches(user, update) && User.PrivilegeLevel >= Constants.PROGRAMMER_PRIVILEGE_LEVEL;
         }
 
         public StopBot() { }

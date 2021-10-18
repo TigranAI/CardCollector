@@ -175,11 +175,9 @@ namespace CardCollector.Commands.Message.DocumentMessage
             fileStream.Close();
         }
 
-        protected internal override bool IsMatches(string command)
+        protected internal override bool IsMatches(UserEntity user, Update update)
         {
-            return User != null 
-                ? User.Session.State == UserState.UploadFile
-                : base.IsMatches(command);
+            return User.Session.State == UserState.UploadFile;
         }
 
         public UploadFileMessage() { }

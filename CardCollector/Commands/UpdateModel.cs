@@ -19,10 +19,7 @@ namespace CardCollector.Commands
 
         public abstract Task Execute();
 
-        protected internal virtual bool IsMatches(string command)
-        {
-            return command.Contains(CommandText);
-        }
+        protected internal abstract bool IsMatches(UserEntity user, Update update);
 
         protected UpdateModel()
         {

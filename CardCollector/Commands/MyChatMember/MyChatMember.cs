@@ -13,37 +13,35 @@ namespace CardCollector.Commands.MyChatMember
     {
         protected override string CommandText => "";
         private readonly ChatMemberStatus _status;
-        public override async Task Execute()
+        public override Task Execute()
         {
             switch (_status)
             {
-                case ChatMemberStatus.Creator:
-                    await UserDao.GetUser(ChatToUser(Update.MyChatMember!.Chat));
-                    break;
-                case ChatMemberStatus.Administrator:
-                    await UserDao.GetUser(ChatToUser(Update.MyChatMember!.Chat));
-                    break;
                 case ChatMemberStatus.Member:
                     User.IsBlocked = false;
                     break;
                 case ChatMemberStatus.Kicked:
-                    User.IsBlocked = false;
+                    User.IsBlocked = true;
                     break;
                 case ChatMemberStatus.Restricted or ChatMemberStatus.Left:
                     break;
-                default:
-                    await new CommandNotFound(User, Update, _status.ToString()).Execute();
-                    break;
             }
+            return Task.CompletedTask;
         }
+
+        protected internal override bool IsMatches(UserEntity user, Update update)
+        {
+            return true;
+        }
+
         public static async Task<UpdateModel> Factory(Update update)
         {
             // Объект пользователя
             var user = await UserDao.GetUser(update.MyChatMember!.From);
-            return new MyChatMember(user, update, update.MyChatMember.NewChatMember.Status);
+            return new MyChatMember(user, update);
         }
 
-        private static User ChatToUser(Chat chat)
+        /*private static User ChatToUser(Chat chat)
         {
             return new User
             {
@@ -53,11 +51,11 @@ namespace CardCollector.Commands.MyChatMember
                 Id = chat.Id,
                 IsBot = chat.Id < 0
             };
-        }
+        }*/
 
-        private MyChatMember(UserEntity user, Update update, ChatMemberStatus status) : base(user, update)
+        private MyChatMember(UserEntity user, Update update) : base(user, update)
         {
-            _status = status;
+            _status = update.MyChatMember!.NewChatMember.Status;
         }
     }
 }

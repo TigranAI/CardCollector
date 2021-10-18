@@ -228,4 +228,19 @@
     <data name="effect" xml:space="preserve">
         <value>Эффект</value>
     </data>
+    <data name="gems_label100" xml:space="preserve">
+        <value>100💎</value>
+    </data>
+    <data name="gems_label250" xml:space="preserve">
+        <value>250💎</value>
+    </data>
+    <data name="gems_label500" xml:space="preserve">
+        <value>500💎</value>
+    </data>
+    <data name="gems_label1000" xml:space="preserve">
+        <value>1000💎</value>
+    </data>
+    <data name="gems_label2500" xml:space="preserve">
+        <value>2500💎</value>
+    </data>
 </root>

@@ -17,11 +17,9 @@ namespace CardCollector.Commands.Message.TextMessage
             User.Session.Messages.Add(result.MessageId);
         }
 
-        protected internal override bool IsMatches(string command)
+        protected internal override bool IsMatches(UserEntity user, Update update)
         {
-            return User != null 
-                ? base.IsMatches(command) && User.PrivilegeLevel >= Constants.ARTIST_PRIVILEGE_LEVEL
-                : base.IsMatches(command);
+            return base.IsMatches(user, update) && User.PrivilegeLevel >= Constants.ARTIST_PRIVILEGE_LEVEL;
         }
 
         public DownloadStickerPackMessage() { }

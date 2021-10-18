@@ -66,34 +66,30 @@ namespace CardCollector.Commands.CallbackQuery
         /* Метод, создающий объекты команд исходя из полученного обновления */
         public static async Task<UpdateModel> Factory(Update update)
         {
-            // Текст команды
-            var command = update.CallbackQuery!.Data;
-
             // Объект пользователя
-            var user = await UserDao.GetUser(update.CallbackQuery.From);
+            var user = await UserDao.GetUser(update.CallbackQuery!.From);
+            
+            // Если пользователь заблокирован игонрируем
+            if (user.IsBlocked) return new IgnoreUpdate();
 
             // Возвращаем объект, если команда совпала
-            foreach (var item in List.Where(item => item.IsMatches(command)))
-                if (Activator.CreateInstance(item.GetType(), user, update) is CallbackQuery executor && executor.IsMatches(command))
-                    return executor;
-
-            // Возвращаем команда не найдена, если код дошел до сюда
-            return new CommandNotFound(user, update, command);
+            return List.FirstOrDefault(item => item.IsMatches(user, update)) is { } executor
+                ? (UpdateModel) Activator.CreateInstance(executor.GetType(), user, update)
+                : new CommandNotFound(user, update, update.CallbackQuery!.Data);
         }
 
-        protected internal override bool IsMatches(string command)
+        protected internal override bool IsMatches(UserEntity user, Update update)
         {
-            var query = command.Split('=')[0];
-            return base.IsMatches(query);
+            var query = update.CallbackQuery!.Data!.Split('=')[0];
+            return query == CommandText;
         }
 
+        protected CallbackQuery() { }
         protected CallbackQuery(UserEntity user, Update update) : base(user, update)
         {
             CallbackData = update.CallbackQuery!.Data;
             CallbackMessageId = update.CallbackQuery!.Message!.MessageId;
             CallbackQueryId = update.CallbackQuery!.Id;
         }
-
-        protected CallbackQuery() { }
     }
 }

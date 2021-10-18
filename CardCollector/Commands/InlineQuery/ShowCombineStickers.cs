@@ -4,6 +4,7 @@ using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.InlineQuery
 {
@@ -12,23 +13,17 @@ namespace CardCollector.Commands.InlineQuery
         protected override string CommandText => "";
         public override async Task Execute()
         {
-            // Фильтр - введенная пользователем фраза
-            var filter = Update.InlineQuery!.Query;
             var module = User.Session.GetModule<CombineModule>();
             // Получаем список стикеров
-            var stickersList = await User.GetStickersList(filter, module.Tier);
+            var stickersList = await User.GetStickersList(Query, module.Tier);
             var results = stickersList.ToTelegramResults(Command.select_sticker);
             // Посылаем пользователю ответ на его запрос
             await MessageController.AnswerInlineQuery(InlineQueryId, results);
         }
         
-        /* Команда пользователя удовлетворяет условию, если она вызвана
-         в личных сообщениях с ботом и пользователь в меню коллекции */
-        protected internal override bool IsMatches(string command)
+        protected internal override bool IsMatches(UserEntity user, Update update)
         {
-            return User == null 
-                ? command.Contains("Sender")
-                : User.Session.State == UserState.CombineMenu;
+            return update.InlineQuery?.ChatType is ChatType.Sender && User.Session.State == UserState.CombineMenu;
         }
 
         public ShowCombineStickers() { }

@@ -21,7 +21,9 @@ namespace CardCollector.Commands.InlineQuery
     public abstract class InlineQuery : UpdateModel
     {
         /* Id входящего запроса */
-        protected readonly string InlineQueryId = "";
+        protected readonly string InlineQueryId;
+        /* Запрос */
+        protected readonly string Query;
         
         /* Список команд */
         private static readonly List<InlineQuery> List = new()
@@ -45,24 +47,22 @@ namespace CardCollector.Commands.InlineQuery
         /* Метод, создающий объекты команд исходя из полученного обновления */
         public static async Task<UpdateModel> Factory(Update update)
         {
-            // Текст команды
-            var command = $"{update.InlineQuery!.ChatType}={update.InlineQuery!.Query}";
-            
             // Объект пользователя
             var user = await UserDao.GetUser(update.InlineQuery!.From);
             
-            // Возвращаем объект, если команда совпала
-            foreach (var item in List.Where(item => item.IsMatches(command)))
-                if(Activator.CreateInstance(item.GetType(), user, update) is InlineQuery executor)
-                    if (executor.IsMatches(command)) return executor;
-        
-            // Возвращаем команда не найдена, если код дошел до сюда
-            return new CommandNotFound(user, update, command);
+            // Если пользователь заблокирован игонрируем
+            if (user.IsBlocked) return new IgnoreUpdate();
+            
+            /* Возвращаем первую подходящую команду */
+            return List.FirstOrDefault(item => item.IsMatches(user, update)) is { } executor
+                ? (UpdateModel) Activator.CreateInstance(executor.GetType(), user, update)
+                : new CommandNotFound(user, update, $"{update.InlineQuery!.ChatType}={update.InlineQuery!.Query}");
         }
 
         protected InlineQuery(UserEntity user, Update update) : base(user, update)
         {
             InlineQueryId = update.InlineQuery!.Id;
+            Query = update.InlineQuery!.Query;
         }
         
         protected InlineQuery() { }

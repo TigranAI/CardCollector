@@ -3,6 +3,7 @@ using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.InlineQuery
 {
@@ -15,22 +16,16 @@ namespace CardCollector.Commands.InlineQuery
         
         public override async Task Execute()
         {
-            // Фильтр - введенная пользователем фраза
-            var filter = Update.InlineQuery!.Query;
             // Получаем список стикеров
-            var stickersList = await User.GetStickersList(filter);
+            var stickersList = await User.GetStickersList(Query);
             var results = stickersList.ToTelegramResults(Command.select_sticker);
             // Посылаем пользователю ответ на его запрос
             await MessageController.AnswerInlineQuery(InlineQueryId, results);
         }
 
-        /* Команда пользователя удовлетворяет условию, если она вызвана
-         в личных сообщениях с ботом и у пользователя нет выбранного стикера */
-        protected internal override bool IsMatches(string command)
+        protected internal override bool IsMatches(UserEntity user, Update update)
         {
-            return User == null 
-                ? command.Contains("Sender")
-                : User.Session.State == UserState.Default;
+            return update.InlineQuery?.ChatType is ChatType.Sender && User.Session.State == UserState.Default;
         }
 
         public ShowStickersInBotChat() { }

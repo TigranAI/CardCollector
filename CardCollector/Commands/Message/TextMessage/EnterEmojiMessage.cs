@@ -6,6 +6,7 @@ using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.Message.TextMessage
 {
@@ -22,9 +23,9 @@ namespace CardCollector.Commands.Message.TextMessage
         private static readonly Dictionary<long, int> Queue = new ();
         public override async Task Execute()
         {
-            var input = "" + Update.Message!.Text; // это чтоб варн не показывлся, тут никогда не null, так как в Factory все уже проверено
+            var input = Update.Message!.Text;
             /* если пользователь ввел что-то кроме эмодзи */
-            if (!Regex.IsMatch(input, onlyEmojiPattern))
+            if (!Regex.IsMatch(input!, onlyEmojiPattern))
                 await MessageController.EditMessage(User, Queue[User.Id], Messages.please_enter_emoji, Keyboard.EmojiOptions);
             /* если пользователь ввел несколько эмодзи или эмодзи и текст */
             else if (!Regex.IsMatch(input, oneEmojiPattern))
@@ -53,10 +54,9 @@ namespace CardCollector.Commands.Message.TextMessage
             Queue.Remove(userId);
         }
 
-        /* Переопределяем метод, так как команда удовлетворяет условию, если пользователь находится в очереди */
-        protected internal override bool IsMatches(string command)
+        protected internal override bool IsMatches(UserEntity user, Update update)
         {
-            return User == null ? base.IsMatches(command) : Queue.ContainsKey(User.Id);
+            return Queue.ContainsKey(User.Id) && update.Message!.Type == MessageType.Text;
         }
 
         public EnterEmojiMessage() { }
