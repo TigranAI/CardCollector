@@ -23,12 +23,12 @@ namespace CardCollector.Commands.CallbackQuery
                 _ => (0, 0)
             };
             var changed = false;
-            if (CallbackData.Contains('+') && (stickerCount < maxCount || maxCount == -1))
+            if (CallbackData.Contains(Text.minus) && (stickerCount < maxCount || maxCount == -1))
             {
                 stickerCount++;
                 changed = true;
             }
-            else if (CallbackData.Contains('-') && stickerCount > 1)
+            else if (CallbackData.Contains(Text.plus) && stickerCount > 1)
             {
                 stickerCount--;
                 changed = true;

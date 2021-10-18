@@ -214,33 +214,18 @@
         <value>Информация</value>
     </data>
     <data name="gems_title" xml:space="preserve">
-        <value>50 алмазов</value>
+        <value>50💎 за $1</value>
     </data>
     <data name="gems_description" xml:space="preserve">
-        <value>После покупки вы получите 50 алмазов на свой счет. Вы также можете оставить чаевые. Вы получите алмазы в рассчете $1 за 50💎</value>
+        <value>После покупки вы получите 50 алмазов на свой счет. Вы также можете оставить чаевые. Вы получите алмазы в рассчете 50💎 за $1</value>
     </data>
     <data name="gems_label50" xml:space="preserve">
-        <value>50💎</value>
+        <value>50💎 за $1</value>
     </data>
     <data name="open_specific" xml:space="preserve">
         <value>Открыть авторский пак</value>
     </data>
     <data name="effect" xml:space="preserve">
         <value>Эффект</value>
-    </data>
-    <data name="gems_label100" xml:space="preserve">
-        <value>100💎</value>
-    </data>
-    <data name="gems_label250" xml:space="preserve">
-        <value>250💎</value>
-    </data>
-    <data name="gems_label500" xml:space="preserve">
-        <value>500💎</value>
-    </data>
-    <data name="gems_label1000" xml:space="preserve">
-        <value>1000💎</value>
-    </data>
-    <data name="gems_label2500" xml:space="preserve">
-        <value>2500💎</value>
     </data>
 </root>

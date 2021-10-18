@@ -322,7 +322,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to После покупки вы получите 50 алмазов на свой счет. Вы также можете оставить чаевые. Вы получите алмазы в рассчете $1 за 50💎.
+        ///   Looks up a localized string similar to После покупки вы получите 50 алмазов на свой счет. Вы также можете оставить чаевые. Вы получите алмазы в рассчете 50💎 за $1.
         /// </summary>
         internal static string gems_description {
             get {
@@ -331,43 +331,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 100💎.
-        /// </summary>
-        internal static string gems_label100 {
-            get {
-                return ResourceManager.GetString("gems_label100", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 1000💎.
-        /// </summary>
-        internal static string gems_label1000 {
-            get {
-                return ResourceManager.GetString("gems_label1000", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 250💎.
-        /// </summary>
-        internal static string gems_label250 {
-            get {
-                return ResourceManager.GetString("gems_label250", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 2500💎.
-        /// </summary>
-        internal static string gems_label2500 {
-            get {
-                return ResourceManager.GetString("gems_label2500", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 50💎.
+        ///   Looks up a localized string similar to 50💎 за $1.
         /// </summary>
         internal static string gems_label50 {
             get {
@@ -376,16 +340,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 500💎.
-        /// </summary>
-        internal static string gems_label500 {
-            get {
-                return ResourceManager.GetString("gems_label500", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 50 алмазов.
+        ///   Looks up a localized string similar to 50💎 за $1.
         /// </summary>
         internal static string gems_title {
             get {

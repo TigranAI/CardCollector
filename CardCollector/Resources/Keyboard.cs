@@ -270,8 +270,8 @@ namespace CardCollector.Resources
                 new[] {InlineKeyboardButton.WithCallbackData($"{Text.sell_on_auction} ({count})", Command.sell_on_auction)},
                 new[]
                 {
-                    InlineKeyboardButton.WithCallbackData(Text.minus, $"{Command.count}-"),
-                    InlineKeyboardButton.WithCallbackData(Text.plus, $"{Command.count}+"),
+                    InlineKeyboardButton.WithCallbackData(Text.minus, $"{Command.count}={Text.minus}"),
+                    InlineKeyboardButton.WithCallbackData(Text.plus, $"{Command.count}={Text.plus}"),
                 }
             };
             if (sticker.Tier != 4) keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData($"{Text.combine} ({count})", Command.combine)});
@@ -294,8 +294,8 @@ namespace CardCollector.Resources
                 new[] {InlineKeyboardButton.WithCallbackData($"{Text.buy} ({module.Count}) {price}{Text.gem}", Command.confirm_buying)},
                 new[]
                 {
-                    InlineKeyboardButton.WithCallbackData(Text.minus, $"{Command.count}-"),
-                    InlineKeyboardButton.WithCallbackData(Text.plus, $"{Command.count}+"),
+                    InlineKeyboardButton.WithCallbackData(Text.minus, $"{Command.count}={Text.minus}"),
+                    InlineKeyboardButton.WithCallbackData(Text.plus, $"{Command.count}={Text.plus}"),
                 },
                 new[] {InlineKeyboardButton.WithCallbackData(Text.back, $"{Command.back}={Command.clear_chat}")},
             });
@@ -338,8 +338,8 @@ namespace CardCollector.Resources
                 new[] {InlineKeyboardButton.WithCallbackData($"{Text.add} ({module.Count})", Command.combine)},
                 new[]
                 {
-                    InlineKeyboardButton.WithCallbackData(Text.minus, $"{Command.count}-"),
-                    InlineKeyboardButton.WithCallbackData(Text.plus, $"{Command.count}+"),
+                    InlineKeyboardButton.WithCallbackData(Text.minus, $"{Command.count}={Text.minus}"),
+                    InlineKeyboardButton.WithCallbackData(Text.plus, $"{Command.count}={Text.plus}"),
                 },
                 new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.back_to_combine)},
                 new[] {InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.select_another)},
