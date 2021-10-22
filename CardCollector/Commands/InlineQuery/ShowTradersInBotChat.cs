@@ -8,7 +8,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.InlineQuery
 {
-    public class ShowTradersInBotChat : InlineQuery
+    public class ShowTradersInBotChat : InlineQueryCommand
     {
         protected override string CommandText => "";
         

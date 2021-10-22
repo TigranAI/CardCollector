@@ -196,7 +196,7 @@
         <value>Тира</value>
     </data>
     <data name="time_limit" xml:space="preserve">
-        <value>Акция заканчивается</value>
+        <value>Дата окончания акции:</value>
     </data>
     <data name="discount" xml:space="preserve">
         <value>Скидка</value>
@@ -227,5 +227,20 @@
     </data>
     <data name="effect" xml:space="preserve">
         <value>Эффект</value>
+    </data>
+    <data name="special_offers" xml:space="preserve">
+        <value>Специальные предложения </value>
+    </data>
+    <data name="buy_coins" xml:space="preserve">
+        <value>Купить монеты</value>
+    </data>
+    <data name="confirm_exchange" xml:space="preserve">
+        <value>Совершить обмен</value>
+    </data>
+    <data name="unexpired" xml:space="preserve">
+        <value>Бессрочно</value>
+    </data>
+    <data name="gift" xml:space="preserve">
+        <value>🎁</value>
     </data>
 </root>

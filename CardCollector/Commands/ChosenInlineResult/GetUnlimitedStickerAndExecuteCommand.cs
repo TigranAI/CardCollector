@@ -9,7 +9,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.ChosenInlineResult
 {
-    public class GetUnlimitedStickerAndExecuteCommand : ChosenInlineResult
+    public class GetUnlimitedStickerAndExecuteCommand : ChosenInlineResultCommand
     {
         protected override string CommandText => Command.unlimited_stickers;
         
@@ -29,7 +29,7 @@ namespace CardCollector.Commands.ChosenInlineResult
         public GetUnlimitedStickerAndExecuteCommand(UserEntity user, Update update) : base(user, update) { }
         
         /* Список команд, аналогичный родительскому, только не включает эту команду (unlimited) */
-        private static readonly List<ChosenInlineResult> PrivateList = List.GetRange(1, List.Count - 1);
+        private static readonly List<ChosenInlineResultCommand> PrivateList = List.GetRange(1, List.Count - 1);
         
         /* Метод, создающий объекты команд исходя из полученного обновления */
         private static UpdateModel PrivateFactory(Update update, UserEntity user)

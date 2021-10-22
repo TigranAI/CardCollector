@@ -8,13 +8,13 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class BackToFiltersMenu : CallbackQuery
+    public class BackToFiltersMenu : CallbackQueryCommand
     {
         protected override string CommandText => Command.back;
         public override async Task Execute()
         {
             /* Удаляем пользователя из очереди */
-            EnterEmojiMessage.RemoveFromQueue(User.Id);
+            EnterEmoji.RemoveFromQueue(User.Id);
             switch (User.Session.State)
             {
                 case UserState.CombineMenu:

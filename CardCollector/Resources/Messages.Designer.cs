@@ -97,6 +97,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Список доступных специальных предложений:.
+        /// </summary>
+        internal static string available_offers {
+            get {
+                return ResourceManager.GetString("available_offers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Бот уходит на технический перерыв....
         /// </summary>
         internal static string bot_turning_off {
@@ -187,6 +196,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Вы получите монет:.
+        /// </summary>
+        internal static string coins_exchange_count {
+            get {
+                return ResourceManager.GetString("coins_exchange_count", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Не удалось добавить все стикеры. Было добавлено только.
         /// </summary>
         internal static string combine_added_only {
@@ -219,6 +237,15 @@ namespace CardCollector.Resources {
         internal static string confirm_buying {
             get {
                 return ResourceManager.GetString("confirm_buying", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Подтвердите обмен:.
+        /// </summary>
+        internal static string confirm_exchange {
+            get {
+                return ResourceManager.GetString("confirm_exchange", resourceCulture);
             }
         }
         
@@ -349,6 +376,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Введите количество алмазов для обмена:.
+        /// </summary>
+        internal static string enter_exchange_sum {
+            get {
+                return ResourceManager.GetString("enter_exchange_sum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Введите только одну эмоцию!.
         /// </summary>
         internal static string enter_only_one_emoji {
@@ -367,11 +403,29 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Покупка монет производится за алмазы, 1💎 = 150💰..
+        /// </summary>
+        internal static string exchange_mesage {
+            get {
+                return ResourceManager.GetString("exchange_mesage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Алмазы.
         /// </summary>
         internal static string gems {
             get {
                 return ResourceManager.GetString("gems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы платите алмазов:.
+        /// </summary>
+        internal static string gems_exchange_count {
+            get {
+                return ResourceManager.GetString("gems_exchange_count", resourceCulture);
             }
         }
         
@@ -426,6 +480,15 @@ namespace CardCollector.Resources {
         internal static string offer_expired {
             get {
                 return ResourceManager.GetString("offer_expired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Нет доступных специальных предложений! Возвращайтесь позже..
+        /// </summary>
+        internal static string offers_not_found {
+            get {
+                return ResourceManager.GetString("offers_not_found", resourceCulture);
             }
         }
         
@@ -485,9 +548,9 @@ namespace CardCollector.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Пожалуйста, введите положительное целое число.
         /// </summary>
-        internal static string please_enter_price {
+        internal static string please_enter_integer {
             get {
-                return ResourceManager.GetString("please_enter_price", resourceCulture);
+                return ResourceManager.GetString("please_enter_integer", resourceCulture);
             }
         }
         
@@ -641,6 +704,15 @@ namespace CardCollector.Resources {
         internal static string you_collected {
             get {
                 return ResourceManager.GetString("you_collected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы получили.
+        /// </summary>
+        internal static string you_got {
+            get {
+                return ResourceManager.GetString("you_got", resourceCulture);
             }
         }
         

@@ -6,7 +6,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.Message.TextMessage
 {
-    public class StopBot : Message
+    public class StopBot : MessageCommand
     {
         protected override string CommandText => Text.stop_bot;
         

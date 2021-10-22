@@ -5,7 +5,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class ClearChat : CallbackQuery
+    public class ClearChat : CallbackQueryCommand
     {
         protected override string CommandText => Command.clear_chat;
         public override async Task Execute()

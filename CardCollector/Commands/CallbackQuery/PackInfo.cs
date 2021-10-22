@@ -6,7 +6,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class PackInfo : CallbackQuery
+    public class PackInfo : CallbackQueryCommand
     {
         protected override string CommandText => Command.pack_info;
         public override async Task Execute()

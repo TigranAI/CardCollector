@@ -9,7 +9,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class BuyByGems : CallbackQuery
+    public class BuyByGems : CallbackQueryCommand
     {
         protected override string CommandText => Command.buy_by_gems;
         public override async Task Execute()
@@ -23,6 +23,7 @@ namespace CardCollector.Commands.CallbackQuery
                 await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.you_already_use_this_offer);
             else
             {
+                await User.ClearChat();
                 User.Cash.Gems -= offerInfo.ResultPriceGems;
                 if (offerInfo.IsSpecial && !offerInfo.IsInfinite)
                     await SpecialOfferUsersDao.AddNew(User.Id, offerInfo.Id);

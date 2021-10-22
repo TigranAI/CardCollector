@@ -129,7 +129,7 @@
     <data name="combined_sticker" xml:space="preserve">
         <value>Поздравляем! Вы получили стикер</value>
     </data>
-    <data name="please_enter_price" xml:space="preserve">
+    <data name="please_enter_integer" xml:space="preserve">
         <value>Пожалуйста, введите положительное целое число</value>
     </data>
     <data name="current_price" xml:space="preserve">
@@ -229,5 +229,29 @@
     </data>
     <data name="cant_sell_zero" xml:space="preserve">
         <value>Нельзя продать товар за 0!</value>
+    </data>
+    <data name="offers_not_found" xml:space="preserve">
+        <value>Нет доступных специальных предложений! Возвращайтесь позже.</value>
+    </data>
+    <data name="available_offers" xml:space="preserve">
+        <value>Список доступных специальных предложений:</value>
+    </data>
+    <data name="exchange_mesage" xml:space="preserve">
+        <value>Покупка монет производится за алмазы, 1💎 = 150💰.</value>
+    </data>
+    <data name="confirm_exchange" xml:space="preserve">
+        <value>Подтвердите обмен:</value>
+    </data>
+    <data name="enter_exchange_sum" xml:space="preserve">
+        <value>Введите количество алмазов для обмена:</value>
+    </data>
+    <data name="gems_exchange_count" xml:space="preserve">
+        <value>Вы платите алмазов:</value>
+    </data>
+    <data name="coins_exchange_count" xml:space="preserve">
+        <value>Вы получите монет:</value>
+    </data>
+    <data name="you_got" xml:space="preserve">
+        <value>Вы получили</value>
     </data>
 </root>

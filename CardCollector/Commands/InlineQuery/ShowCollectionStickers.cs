@@ -8,7 +8,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.InlineQuery
 {
-    public class ShowCollectionStickers : InlineQuery
+    public class ShowCollectionStickers : InlineQueryCommand
     {
         protected override string CommandText => "";
         public override async Task Execute()

@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using CardCollector.Commands;
+using CardCollector.Commands.MyChatMember;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using Telegram.Bot;
@@ -9,16 +11,8 @@ using Telegram.Bot.Exceptions;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.InlineQueryResults;
-using Telegram.Bot.Types.InputFiles;
 using Telegram.Bot.Types.Payments;
 using Telegram.Bot.Types.ReplyMarkups;
-using Message = CardCollector.Commands.Message.Message;
-using CallBackQuery = CardCollector.Commands.CallbackQuery.CallbackQuery;
-using MyChatMember = CardCollector.Commands.MyChatMember.MyChatMember;
-using InlineQuery = CardCollector.Commands.InlineQuery.InlineQuery;
-using ChosenInlineResult = CardCollector.Commands.ChosenInlineResult.ChosenInlineResult;
-using PreCheckoutQuery = CardCollector.Commands.PreCheckoutQuery.PreCheckoutQuery;
-using TgMessage = Telegram.Bot.Types.Message;
 
 namespace CardCollector.Controllers
 {
@@ -35,17 +29,17 @@ namespace CardCollector.Controllers
                 var executor = update.Type switch
                 {
                     // Тип обновления - сообщение
-                    UpdateType.Message => await Message.Factory(update),
+                    UpdateType.Message => await MessageCommand.Factory(update),
                     // Тип обновления - нажатие на инлайн кнопку
-                    UpdateType.CallbackQuery => await CallBackQuery.Factory(update),
+                    UpdateType.CallbackQuery => await CallbackQueryCommand.Factory(update),
                     // Тип обновления - блокировка/добавление бота
-                    UpdateType.MyChatMember => await MyChatMember.Factory(update),
+                    UpdateType.MyChatMember => await MyChatMemberCommand.Factory(update),
                     // Тип обновления - вызов бота через @имя_бота
-                    UpdateType.InlineQuery => await InlineQuery.Factory(update),
+                    UpdateType.InlineQuery => await InlineQueryCommand.Factory(update),
                     // Тип обновления - выбор результата в инлайн меню
-                    UpdateType.ChosenInlineResult => await ChosenInlineResult.Factory(update),
+                    UpdateType.ChosenInlineResult => await ChosenInlineResultCommand.Factory(update),
                     // Тип обновления - платеж
-                    UpdateType.PreCheckoutQuery => await PreCheckoutQuery.Factory(update),
+                    UpdateType.PreCheckoutQuery => await PreCheckoutQueryCommand.Factory(update),
                     _ => throw new ArgumentOutOfRangeException()
                 };
                 // Обработать команду
@@ -90,7 +84,7 @@ namespace CardCollector.Controllers
          user - пользователь, которому необходимо отправить сообщение
          message - текст сообщения
          keyboard - клавиатура, которую надо добавить к сообщению */
-        public static async Task<TgMessage> SendMessage(UserEntity user, string message, IReplyMarkup keyboard = null)
+        public static async Task<Message> SendMessage(UserEntity user, string message, IReplyMarkup keyboard = null)
         {
             try
             {
@@ -101,14 +95,14 @@ namespace CardCollector.Controllers
             {
                 LogOutWarning("Can't send text message " + e.Message);
             }
-            return new TgMessage();
+            return new Message();
         }
         
         /* Метод для отправки сообщения с разметкой html
          user - пользователь, которому необходимо отправить сообщение
          message - текст сообщения
          keyboard - клавиатура, которую надо добавить к сообщению */
-        public static async Task<TgMessage> SendTextWithHtml(UserEntity user, string message, IReplyMarkup keyboard = null)
+        public static async Task<Message> SendTextWithHtml(UserEntity user, string message, IReplyMarkup keyboard = null)
         {
             try
             {
@@ -119,24 +113,24 @@ namespace CardCollector.Controllers
             {
                 LogOutWarning("Can't send text message with html " + e.Message);
             }
-            return new TgMessage();
+            return new Message();
         }
         
         /* Метод для отправки стикера
          user - пользователь, которому необходимо отправить сообщение
          fileId - id стикера, расположенного на серверах телеграм */
-        public static async Task<TgMessage> SendSticker(UserEntity user, string fileId)
+        public static async Task<Message> SendSticker(UserEntity user, string fileId, IReplyMarkup keyboard = null)
         {
             try
             {
                 if (!user.IsBlocked)
-                    return await Bot.Client.SendStickerAsync(user.ChatId, fileId, true);
+                    return await Bot.Client.SendStickerAsync(user.ChatId, fileId, true, replyMarkup: keyboard);
             }
             catch (Exception e)
             {
                 LogOutWarning("Can't send sticker " + e.Message);
             }
-            return new TgMessage();
+            return new Message();
         }
         
         /* Метод для редактирования сообщения
@@ -144,7 +138,7 @@ namespace CardCollector.Controllers
          messageId - id сообщения
          message - текст сообщения
          keyboard - клавиатура, которую надо добавить к сообщению */
-        public static async Task<TgMessage> EditMessage(UserEntity user, int messageId, string message, InlineKeyboardMarkup keyboard = null)
+        public static async Task<Message> EditMessage(UserEntity user, int messageId, string message, InlineKeyboardMarkup keyboard = null)
         {
             try
             {
@@ -155,14 +149,14 @@ namespace CardCollector.Controllers
             {
                 return await SendMessage(user, message, keyboard);
             }
-            return new TgMessage();
+            return new Message();
         }
 
         /* Метод для редактирования клавиатуры под сообщением
          user - пользователь, которому необходимо отредактировать сообщение
          messageId - Id сообщения
          keyboard - новая клавиатура, которую надо добавить к сообщению */
-        public static async Task<TgMessage> EditReplyMarkup(UserEntity user, int messageId, InlineKeyboardMarkup keyboard)
+        public static async Task<Message> EditReplyMarkup(UserEntity user, int messageId, InlineKeyboardMarkup keyboard)
         {
             try
             {
@@ -173,7 +167,7 @@ namespace CardCollector.Controllers
             {
                 LogOutWarning("Can't edit reply markup " + e.Message);
             }
-            return new TgMessage();
+            return new Message();
         }
         
         public static async Task AnswerCallbackQuery(UserEntity user, string callbackQueryId, string text, bool showAlert = false)
@@ -211,18 +205,18 @@ namespace CardCollector.Controllers
          inputOnlineFile - фото, которое необходимо отправить
          message - текст сообщения
          keyboard - клавиатура, которую надо добавить к сообщению */
-        public static async Task<TgMessage> SendImage(UserEntity user, InputOnlineFile inputOnlineFile, string message = null, InlineKeyboardMarkup keyboard = null)
+        public static async Task<Message> SendImage(UserEntity user, string fileId, string message = null, InlineKeyboardMarkup keyboard = null)
         {
             try
             {
                 if (!user.IsBlocked)
-                    return await Bot.Client.SendPhotoAsync(user.ChatId, inputOnlineFile, message, replyMarkup: keyboard, disableNotification: true);
+                    return await Bot.Client.SendPhotoAsync(user.ChatId, fileId, message, replyMarkup: keyboard, disableNotification: true);
             }
             catch (Exception e)
             {
                 LogOutWarning("Can't send photo " + e.Message);
             }
-            return new TgMessage();
+            return new Message();
         }
 
         /* Метод для ответа на запрос @имя_бота
@@ -233,7 +227,7 @@ namespace CardCollector.Controllers
             await Bot.Client.AnswerInlineQueryAsync(queryId, results, isPersonal: true, nextOffset: offset, cacheTime: Constants.INLINE_RESULTS_CACHE_TIME);
         }
 
-        public static async Task<TgMessage> SendInvoice(UserEntity user, string title, string description, 
+        public static async Task<Message> SendInvoice(UserEntity user, string title, string description, 
             string payload, IEnumerable<LabeledPrice> prices, int maxTip = 0, IEnumerable<int> tips = null, Currency currency = Currency.USD)
         {
             try
@@ -246,7 +240,7 @@ namespace CardCollector.Controllers
             {
                 LogOutWarning("Can't send photo " + e.Message);
             }
-            return new TgMessage();
+            return new Message();
         }
     }
 }

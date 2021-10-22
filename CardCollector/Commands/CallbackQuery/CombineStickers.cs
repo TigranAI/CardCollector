@@ -10,7 +10,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class CombineStickers : CallbackQuery
+    public class CombineStickers : CallbackQueryCommand
     {
         protected override string CommandText => Command.combine_stickers;
         public override async Task Execute()

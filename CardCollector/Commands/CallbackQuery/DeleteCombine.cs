@@ -8,7 +8,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class DeleteCombine : CallbackQuery
+    public class DeleteCombine : CallbackQueryCommand
     {
         protected override string CommandText => Command.delete_combine;
         public override async Task Execute()

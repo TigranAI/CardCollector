@@ -8,7 +8,7 @@ using Telegram.Bot.Types;
 namespace CardCollector.Commands.Message.TextMessage
 {
     /* Этот класс реализует отправку нового сообщения с фильтрами пользователя */
-    public class ShowFiltersMenu : Message
+    public class ShowFiltersMenu : MessageCommand
     {
         protected override string CommandText => "Message";
         public override async Task Execute()

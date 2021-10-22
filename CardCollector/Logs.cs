@@ -14,7 +14,7 @@ namespace CardCollector
 
         static Logs()
         {
-            path = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location) + @"\Logs";
+            path = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location) + "/Logs";
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
         }

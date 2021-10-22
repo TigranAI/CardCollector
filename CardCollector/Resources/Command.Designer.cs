@@ -115,11 +115,29 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ABQ.
+        /// </summary>
+        internal static string buy_coins {
+            get {
+                return ResourceManager.GetString("buy_coins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ABH.
         /// </summary>
         internal static string buy_gems {
             get {
                 return ResourceManager.GetString("buy_gems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ABN.
+        /// </summary>
+        internal static string buy_gems_item {
+            get {
+                return ResourceManager.GetString("buy_gems_item", resourceCulture);
             }
         }
         
@@ -205,6 +223,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ABR.
+        /// </summary>
+        internal static string confirm_exchange {
+            get {
+                return ResourceManager.GetString("confirm_exchange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AAM.
         /// </summary>
         internal static string confirm_selling {
@@ -255,15 +282,6 @@ namespace CardCollector.Resources {
         internal static string emoji {
             get {
                 return ResourceManager.GetString("emoji", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ABN.
-        /// </summary>
-        internal static string gems50 {
-            get {
-                return ResourceManager.GetString("gems50", resourceCulture);
             }
         }
         
@@ -412,11 +430,29 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ABS.
+        /// </summary>
+        internal static string show_offer_info {
+            get {
+                return ResourceManager.GetString("show_offer_info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ABA.
         /// </summary>
         internal static string sort {
             get {
                 return ResourceManager.GetString("sort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ABP.
+        /// </summary>
+        internal static string special_offers {
+            get {
+                return ResourceManager.GetString("special_offers", resourceCulture);
             }
         }
         

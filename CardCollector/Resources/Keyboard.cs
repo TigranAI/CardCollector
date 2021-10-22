@@ -28,6 +28,12 @@ namespace CardCollector.Resources
             new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.cancel)},
         });
 
+        public static InlineKeyboardMarkup BuyCoinsKeyboard = new(new[]
+        {
+            new[] {InlineKeyboardButton.WithCallbackData(Text.confirm_exchange, Command.confirm_exchange)},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.cancel)},
+        });
+
         public static InlineKeyboardMarkup BackToFilters(string stickerTitle)
         {
             return new InlineKeyboardMarkup(new[]
@@ -376,15 +382,24 @@ namespace CardCollector.Resources
             return new InlineKeyboardMarkup(keyboard);
         }
 
-        public static InlineKeyboardMarkup ShopKeyboard(IEnumerable<ShopEntity> specialOffers)
+        public static InlineKeyboardMarkup ShopKeyboard(bool haveOffers)
+        {
+            return new InlineKeyboardMarkup(new[] {
+                new[] {InlineKeyboardButton.WithCallbackData(Text.special_offers + (haveOffers ? Text.gift : ""), Command.special_offers)},
+                new[] {InlineKeyboardButton.WithCallbackData(Text.buy_pack, Command.buy_pack)},
+                new[] {InlineKeyboardButton.WithCallbackData(Text.buy_coins, Command.buy_coins)},
+                new[] {InlineKeyboardButton.WithCallbackData(Text.buy_gems, Command.buy_gems)},
+                new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.cancel)},
+            });
+        }
+
+        public static InlineKeyboardMarkup SpecialOffersKeyboard(IEnumerable<ShopEntity> specialOffers)
         {
             var keyboard = new List<InlineKeyboardButton[]>();
             foreach (var offer in specialOffers)
                 keyboard.Add(new []{InlineKeyboardButton.WithCallbackData(offer.Title,
                         $"{Command.select_offer}={offer.Id}")
                 });
-            keyboard.Add(new []{InlineKeyboardButton.WithCallbackData(Text.buy_pack, Command.buy_pack)});
-            keyboard.Add(new []{InlineKeyboardButton.WithCallbackData(Text.buy_gems, Command.buy_gems)});
             keyboard.Add(new []{InlineKeyboardButton.WithCallbackData(Text.cancel, Command.cancel)});
             return new InlineKeyboardMarkup(keyboard);
         }
@@ -399,7 +414,7 @@ namespace CardCollector.Resources
 
         public static InlineKeyboardMarkup OfferKeyboard(ShopEntity offerInfo)
         {
-            var keyboard = new List<InlineKeyboardButton[]>();
+            var keyboard = new List<InlineKeyboardButton[]> ();
             if (offerInfo.PriceCoins >= 0)
                 keyboard.Add(new [] {InlineKeyboardButton.WithCallbackData(
                     $"{offerInfo.ResultPriceCoins}{Text.coin}", Command.buy_by_coins)
@@ -411,6 +426,7 @@ namespace CardCollector.Resources
                 else keyboard.Add(new [] {InlineKeyboardButton.WithCallbackData(
                     $"{offerInfo.ResultPriceGems}{Text.gem}", Command.buy_by_gems)
                 });
+            keyboard.Add(new [] {InlineKeyboardButton.WithCallbackData(Text.info, Command.show_offer_info)});
             keyboard.Add(new []{InlineKeyboardButton.WithCallbackData(Text.cancel, Command.cancel)});
             return new InlineKeyboardMarkup(keyboard);
         }

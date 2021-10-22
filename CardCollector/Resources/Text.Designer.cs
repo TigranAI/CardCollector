@@ -142,6 +142,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Купить монеты.
+        /// </summary>
+        internal static string buy_coins {
+            get {
+                return ResourceManager.GetString("buy_coins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Купить алмазы.
         /// </summary>
         internal static string buy_gems {
@@ -210,6 +219,15 @@ namespace CardCollector.Resources {
         internal static string combine {
             get {
                 return ResourceManager.GetString("combine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Совершить обмен.
+        /// </summary>
+        internal static string confirm_exchange {
+            get {
+                return ResourceManager.GetString("confirm_exchange", resourceCulture);
             }
         }
         
@@ -345,6 +363,15 @@ namespace CardCollector.Resources {
         internal static string gems_title {
             get {
                 return ResourceManager.GetString("gems_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🎁.
+        /// </summary>
+        internal static string gift {
+            get {
+                return ResourceManager.GetString("gift", resourceCulture);
             }
         }
         
@@ -592,6 +619,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Специальные предложения .
+        /// </summary>
+        internal static string special_offers {
+            get {
+                return ResourceManager.GetString("special_offers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ⭐.
         /// </summary>
         internal static string star {
@@ -655,7 +691,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Акция заканчивается.
+        ///   Looks up a localized string similar to Дата окончания акции:.
         /// </summary>
         internal static string time_limit {
             get {
@@ -678,6 +714,15 @@ namespace CardCollector.Resources {
         internal static string total {
             get {
                 return ResourceManager.GetString("total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Бессрочно.
+        /// </summary>
+        internal static string unexpired {
+            get {
+                return ResourceManager.GetString("unexpired", resourceCulture);
             }
         }
         

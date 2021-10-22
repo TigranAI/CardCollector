@@ -18,6 +18,8 @@ namespace CardCollector.DataBase.Entity
         [Column("time_limited"), MaxLength(32)] public bool TimeLimited { get; set; } = false;
         [Column("time_limit"), MaxLength(32)] public DateTime TimeLimit { get; set; } = DateTime.Now;
         [Column("additional_prize"), MaxLength(256)] public string AdditionalPrize { get; set; } = "";
+        [Column("image_id"), MaxLength(127)] public string ImageId { get; set; } = "";
+        [Column("description"), MaxLength(256)] public string Description { get; set; } = "";
 
         [NotMapped] public bool IsSpecial => Count > 1 || Discount > 0 || TimeLimited ||
                                              AdditionalPrize != "" || PackId is not 1 and not 2;

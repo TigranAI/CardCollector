@@ -9,7 +9,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.InlineQuery
 {
-    public class ShowAuctionStickers : InlineQuery
+    public class ShowAuctionStickers : InlineQueryCommand
     {
         protected override string CommandText => "";
         

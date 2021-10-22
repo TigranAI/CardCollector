@@ -7,7 +7,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.InlineQuery
 {
-    public class ShowStickersInPrivate : InlineQuery
+    public class ShowStickersInPrivate : InlineQueryCommand
     {
         /* Команда - пустая строка, поскольку пользователь может вводить любые слова
          после @имя_бота, введенная фраза будет использоваться для фильтрации стикеров */

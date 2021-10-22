@@ -23,10 +23,10 @@ namespace CardCollector.DataBase.Entity
         [Column("chat_id"), MaxLength(127)] public long ChatId { get; set; }
         
         /* Имя пользователя */
-        [Column("username"), MaxLength(256)] public string Username { get; set; }
+        [Column("username"), MaxLength(256)] public string Username { get; set; } = "";
         
         /* Заблокирован ли пользователь */
-        [Column("is_blocked"), MaxLength(11)] public bool IsBlocked { get; set; }
+        [Column("is_blocked"), MaxLength(11)] public bool IsBlocked { get; set; } = false;
 
         /* Уровень привилегий пользователя */
         [Column("privilege_level"), MaxLength(32)] public int PrivilegeLevel { get; set; } = 0;

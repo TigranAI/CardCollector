@@ -138,10 +138,22 @@
     <data name="pack_info" xml:space="preserve">
         <value>ABM</value>
     </data>
-    <data name="gems50" xml:space="preserve">
+    <data name="buy_gems_item" xml:space="preserve">
         <value>ABN</value>
     </data>
     <data name="open_specific" xml:space="preserve">
         <value>ABO</value>
+    </data>
+    <data name="special_offers" xml:space="preserve">
+        <value>ABP</value>
+    </data>
+    <data name="buy_coins" xml:space="preserve">
+        <value>ABQ</value>
+    </data>
+    <data name="confirm_exchange" xml:space="preserve">
+        <value>ABR</value>
+    </data>
+    <data name="show_offer_info" xml:space="preserve">
+        <value>ABS</value>
     </data>
 </root>
