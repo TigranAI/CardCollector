@@ -26,10 +26,12 @@ namespace CardCollector.Commands.Message.TextMessage
             var input = Update.Message!.Text;
             /* если пользователь ввел что-то кроме эмодзи */
             if (!Regex.IsMatch(input!, onlyEmojiPattern))
-                await MessageController.EditMessage(User, Queue[User.Id], Messages.please_enter_emoji, Keyboard.EmojiOptions);
+                await MessageController.EditMessage(User, Queue[User.Id], Messages.please_enter_emoji,
+                    Keyboard.EmojiOptions);
             /* если пользователь ввел несколько эмодзи или эмодзи и текст */
             else if (!Regex.IsMatch(input, oneEmojiPattern))
-                await MessageController.EditMessage(User, Queue[User.Id], Messages.enter_only_one_emoji, Keyboard.EmojiOptions);
+                await MessageController.EditMessage(User, Queue[User.Id], Messages.enter_only_one_emoji,
+                    Keyboard.EmojiOptions);
             else
             {
                 var filtersModule = User.Session.GetModule<FiltersModule>();

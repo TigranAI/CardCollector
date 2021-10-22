@@ -19,9 +19,11 @@ namespace CardCollector.Commands.Message.TextMessage
             /* если пользователь ввел что-то кроме эмодзи */
             var module = User.Session.GetModule<CollectionModule>();
             if (!int.TryParse(Update.Message!.Text, out var price) || price < 0)
-                await MessageController.EditMessage(User, Queue[User.Id], 
+            {
+                await MessageController.EditMessage(User, Queue[User.Id],
                     $"{Messages.current_price} {module.SellPrice}{Text.gem}\n{Messages.please_enter_integer}",
                     Keyboard.AuctionPutCancelKeyboard);
+            }
             else
             {
                 module.SellPrice = price;

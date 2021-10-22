@@ -20,7 +20,7 @@ namespace CardCollector.Commands.CallbackQuery
                 $"{Messages.exchange_mesage}" +
                 $"\n{Messages.gems_exchange_count} {module.EnteredExchangeSum}{Text.gem}" +
                 $"\n{Messages.coins_exchange_count} {module.EnteredExchangeSum * 150}{Text.coin}" +
-                $"\n{Messages.enter_exchange_sum}",
+                $"\n\n{Messages.enter_exchange_sum}",
                 Keyboard.BuyCoinsKeyboard);
         }
 

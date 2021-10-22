@@ -145,9 +145,9 @@ namespace CardCollector.Controllers
                 if (!user.IsBlocked)
                     return await Bot.Client.EditMessageTextAsync(user.ChatId, messageId, message, replyMarkup: keyboard);
             }
-            catch (Exception)
+            catch (ApiRequestException e)
             {
-                return await SendMessage(user, message, keyboard);
+                if (e.ErrorCode != 400) return await SendMessage(user, message, keyboard);
             }
             return new Message();
         }
