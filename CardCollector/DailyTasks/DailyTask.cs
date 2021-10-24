@@ -31,7 +31,6 @@ namespace CardCollector.DailyTasks
         {
             await foreach (var item in DailyTaskDao.GetAll())
                 item.Progress = List[(DailyTaskKeys) item.TaskId].Goal;
-            Utilities.SetUpTimer(Constants.DailyTaskReset, ResetTasks);
         }
     }
 }

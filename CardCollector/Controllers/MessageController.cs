@@ -43,7 +43,7 @@ namespace CardCollector.Controllers
                     _ => throw new ArgumentOutOfRangeException()
                 };
                 // Обработать команду
-                await executor.Execute();
+                await executor.PrepareAndExecute();
             }
             catch (Exception e)
             {
@@ -145,14 +145,12 @@ namespace CardCollector.Controllers
                 if (!user.IsBlocked)
                     return await Bot.Client.EditMessageTextAsync(user.ChatId, messageId, message, replyMarkup: keyboard);
             }
-            catch (ApiRequestException e)
+            catch (Exception)
             {
-                if (e.ErrorCode != 400)
-                {
-                    var msg = await SendMessage(user, message, keyboard);
-                    user.Session.Messages.Add(msg.MessageId);
-                    return msg;
-                }
+                await user.ClearChat();
+                var msg = await SendMessage(user, message, keyboard);
+                user.Session.Messages.Add(msg.MessageId);
+                return msg;
             }
             return new Message();
         }

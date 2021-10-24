@@ -10,6 +10,9 @@ namespace CardCollector.Commands.CallbackQuery
     public class Count : CallbackQueryCommand
     {
         protected override string CommandText => Command.count;
+        protected override bool ClearMenu => false;
+        protected override bool AddToStack => false;
+
         public override async Task Execute()
         {
             var (stickerCount, maxCount) = User.Session.State switch

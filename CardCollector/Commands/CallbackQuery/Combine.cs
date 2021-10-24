@@ -10,6 +10,9 @@ namespace CardCollector.Commands.CallbackQuery
     public class Combine : CallbackQueryCommand
     {
         protected override string CommandText => Command.combine;
+        protected override bool ClearMenu => false;
+        protected override bool AddToStack => false;
+
         public override async Task Execute()
         {
             User.Session.State = UserState.CombineMenu;
@@ -42,7 +45,7 @@ namespace CardCollector.Commands.CallbackQuery
                 }
                 else combineModule.CombineList.Add(selectedSticker, combineModule.Count);
             }
-            await new BackToCombine(User, Update).Execute();
+            await new CombineMenu(User, Update).PrepareAndExecute();
         }
 
         public Combine() { }

@@ -10,6 +10,9 @@ namespace CardCollector.Commands.CallbackQuery
     public class SelectEmoji : CallbackQueryCommand
     {
         protected override string CommandText => Command.emoji;
+        protected override bool ClearMenu => false;
+        protected override bool AddToStack => false;
+
         public override async Task Execute()
         {
             EnterEmoji.AddToQueue(User.Id, CallbackMessageId);

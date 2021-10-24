@@ -12,6 +12,9 @@ namespace CardCollector.Commands.Message
     public class CreateToken : MessageCommand
     {
         protected override string CommandText => "create_token";
+        protected override bool ClearMenu => false;
+        protected override bool AddToStack => false;
+
         private const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-_";
         private const string site = "http://127.0.0.1:8080/";
         

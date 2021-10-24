@@ -8,7 +8,10 @@ namespace CardCollector.Commands.CallbackQuery
 {
     public class SelectPrice : CallbackQueryCommand
     {
-        protected override string CommandText => Command.price;
+        protected override string CommandText => Command.select_price;
+        protected override bool ClearMenu => false;
+        protected override bool AddToStack => false;
+
         public override async Task Execute()
         {
             await MessageController.EditMessage(User, CallbackMessageId, Messages.choose_price, 

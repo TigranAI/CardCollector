@@ -11,6 +11,8 @@ namespace CardCollector.Commands.CallbackQuery
     public class BuySticker : CallbackQueryCommand
     {
         protected override string CommandText => Command.buy_sticker;
+        protected override bool ClearMenu => false;
+        protected override bool AddToStack => false;
 
         public override async Task Execute()
         {
@@ -18,7 +20,7 @@ namespace CardCollector.Commands.CallbackQuery
             if (auctionModule.Count > auctionModule.MaxCount)
             {
                 await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.not_enougth_stickers);
-                await new BackToFiltersMenu(User, Update).Execute();
+                await new Back(User, Update).PrepareAndExecute();
             }
             else if (auctionModule.Price * auctionModule.Count > User.Cash.Gems)
                 await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.not_enougth_gems);

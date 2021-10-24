@@ -10,7 +10,9 @@ namespace CardCollector.Commands.ChosenInlineResult
     public class SendPrivateSticker : ChosenInlineResultCommand
     {
         protected override string CommandText => Command.send_private_sticker;
-        
+        protected override bool ClearMenu => false;
+        protected override bool AddToStack => false;
+
         public override async Task Execute()
         {
             var dailyTask = DailyTask.List[DailyTaskKeys.SendStickersToUsers];

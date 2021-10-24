@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
@@ -23,21 +22,20 @@ namespace CardCollector.Resources
         public static readonly InlineKeyboardMarkup PackMenu = new(new[]
         {
             new[] {InlineKeyboardButton.WithCallbackData(Text.open_random, $"{Command.open_pack}=1")},
-            new[] {InlineKeyboardButton.WithCallbackData(Text.open_author, $"{Command.author_menu}=1")},
-            new[] {InlineKeyboardButton.WithCallbackData(Text.open_specific, $"{Command.open_specific}=1")},
-            new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.cancel)},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.open_author, $"{Command.open_author_pack_menu}=1")},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
         });
 
         public static readonly InlineKeyboardMarkup BuyCoinsKeyboard = new(new[]
         {
             new[] {InlineKeyboardButton.WithCallbackData(Text.confirm_exchange, Command.confirm_exchange)},
-            new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.cancel)},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
         });
 
         public static readonly InlineKeyboardMarkup EndStickerUpload = new(new[]
         {
             new[] {InlineKeyboardButton.WithCallbackData(Text.end_sticker_upload, Command.end_sticker_upload)},
-            new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.cancel)},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
         });
 
         public static InlineKeyboardMarkup BackToFilters(string stickerTitle)
@@ -45,7 +43,7 @@ namespace CardCollector.Resources
             return new InlineKeyboardMarkup(new[]
             {
                 new[] {InlineKeyboardButton.WithSwitchInlineQuery(Text.send_sticker, stickerTitle)},
-                new[] {InlineKeyboardButton.WithCallbackData(Text.back, $"{Command.back}={Command.clear_chat}")}
+                new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)}
             });
         }
 
@@ -53,13 +51,13 @@ namespace CardCollector.Resources
         {
             var keyboard = new List<InlineKeyboardButton[]>
             {
-                new[] {InlineKeyboardButton.WithCallbackData(Text.author, $"{Command.author}=1")},
+                new[] {InlineKeyboardButton.WithCallbackData(Text.author, $"{Command.authors_menu}=1")},
                 new[] {InlineKeyboardButton.WithCallbackData(Text.tier, Command.tier)},
                 new[] {InlineKeyboardButton.WithCallbackData(Text.emoji, Command.emoji)}
             };
-            if (state != UserState.CollectionMenu) keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.price, Command.price)});
+            if (state != UserState.CollectionMenu) keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.price, Command.select_price)});
             keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.sort, Command.sort)});
-            keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.cancel)});
+            keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)});
             keyboard.Add(new[] {InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.show_stickers)});
             return new InlineKeyboardMarkup(keyboard);
         }
@@ -71,7 +69,7 @@ namespace CardCollector.Resources
             new[] {InlineKeyboardButton.WithCallbackData(SortingTypes.ByTierDecrease, $"{Command.set}={Command.sort}={SortingTypes.ByTierDecrease}")},
             new[] {InlineKeyboardButton.WithCallbackData(SortingTypes.ByAuthor, $"{Command.set}={Command.sort}={SortingTypes.ByAuthor}")},
             new[] {InlineKeyboardButton.WithCallbackData(SortingTypes.ByTitle, $"{Command.set}={Command.sort}={SortingTypes.ByTitle}")},
-            new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.back)},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
         });
 
         /* Клавиатура меню выбора тира */
@@ -82,27 +80,27 @@ namespace CardCollector.Resources
             new[] {InlineKeyboardButton.WithCallbackData("2", $"{Command.set}={Command.tier}=2")},
             new[] {InlineKeyboardButton.WithCallbackData("3", $"{Command.set}={Command.tier}=3")},
             new[] {InlineKeyboardButton.WithCallbackData("4", $"{Command.set}={Command.tier}=4")},
-            new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.back)},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
         });
 
         /* Клавиатура меню ввода эмоджи */
         public static readonly InlineKeyboardMarkup EmojiOptions = new (new[]
         {
             new[] {InlineKeyboardButton.WithCallbackData(Text.all, $"{Command.set}={Command.emoji}=")},
-            new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.back)},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
         });
 
         /* Клавиатура с одной кнопкой отмены */
-        public static readonly InlineKeyboardMarkup CancelKeyboard = new (new[]
+        public static readonly InlineKeyboardMarkup BackKeyboard = new (new[]
         {
-            new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.cancel)},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
         });
 
         /* Клавиатура с отменой и выставлением */
         public static readonly InlineKeyboardMarkup AuctionPutCancelKeyboard = new (new[]
         {
             new[] {InlineKeyboardButton.WithCallbackData(Text.sell_on_auction, Command.confirm_selling)},
-            new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.cancel)},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
         });
 
         /* Клавиатура меню выбора цен */
@@ -124,7 +122,7 @@ namespace CardCollector.Resources
                 InlineKeyboardButton.WithCallbackData($"💰 {Text.from} 1000", $"{Command.set}={Command.price_coins_from}=1000"),
                 InlineKeyboardButton.WithCallbackData($"💰 {Text.to} ∞", $"{Command.set}={Command.price_coins_to}=0"),
             },
-            new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.back)},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
         });
 
         /* Клавиатура меню выбора цен */
@@ -146,129 +144,74 @@ namespace CardCollector.Resources
                 InlineKeyboardButton.WithCallbackData($"💎 {Text.from} 100", $"{Command.set}={Command.price_gems_from}=100"),
                 InlineKeyboardButton.WithCallbackData($"💎 {Text.to} ∞", $"{Command.set}={Command.price_gems_to}=0"),
             },
-            new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.back)},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
         });
 
-        /* Возвращает клавиатуру со списоком авторов */
-        public static InlineKeyboardMarkup GetAuthorsKeyboard(List<string> list, int page = 1)
+        public static InlineKeyboardMarkup GetAuthorsKeyboard(List<string> list, InlineKeyboardButton[] pagePanel)
         {
-            /* Список авторов, отображаемый на текущей странице */
-            var sublist = list.GetRange((page - 1) * 10,
-                list.Count >= page * 10 ? 10 : list.Count % 10);
-            /* Список кнопок на клавиатуре */
-            var keyboardList = new List<InlineKeyboardButton[]>
-            {
-                new[]
-                {
-                    /* Добавляем в список кнопку "Все" */
-                    InlineKeyboardButton.WithCallbackData(Text.all, 
-                        $"{Command.set}={Command.author}=")
-                }
+            var keyboardList = new List<InlineKeyboardButton[]> {
+                /* Добавляем в список кнопку "Все" */
+                new[] {InlineKeyboardButton.WithCallbackData(Text.all, $"{Command.set}={Command.authors_menu}=")}
             };
-            /* Копируем список */
-            var copyList = sublist.ToList();
-            while (copyList.Count > 0)
-            {
-                /* Берем первый элемент и запихиваем его в строку */
-                var author = copyList[0];
-                copyList.RemoveAt(0);
-                var keyRow = new List<InlineKeyboardButton>
-                {
-                    InlineKeyboardButton.WithCallbackData(author,
-                            $"{Command.set}={Command.author}={author}")
-                };
-                /* Если есть еще элементы, то добавляем в строку вторую кнопку */
-                if (copyList.Count > 0)
-                {
-                    author = copyList[0];
-                    copyList.RemoveAt(0);
-                    keyRow.Add(InlineKeyboardButton.WithCallbackData(author,
-                            $"{Command.set}={Command.author}={author}"));
-                }
-                /* Добавляем строку кнопок в клавиатуру */
-                keyboardList.Add(keyRow.ToArray());
-            }
-
-            /* Если всего авторов больше 10, то добавляем стрелочки */
-            if (list.Count > 10)
-                keyboardList.Add(
-                    sublist.Count switch
-                    {
-                        <10 => new[]
-                        {
-                            InlineKeyboardButton.WithCallbackData(Text.previous, $"{Command.author}={page - 1}")
-                        },
-                        >=10 when page == 1 => new[]
-                        {
-                            InlineKeyboardButton.WithCallbackData(Text.next, $"{Command.author}={page + 1}")
-                        },
-                        _ => new[]
-                        {
-                            InlineKeyboardButton.WithCallbackData(Text.previous, $"{Command.author}={page - 1}"),
-                            InlineKeyboardButton.WithCallbackData(Text.next, $"{Command.author}={page + 1}")
-                        }
-                    }
-                );
-            /* Добавляем кнопку отмены */
-            keyboardList.Add(new[] {
-                InlineKeyboardButton.WithCallbackData(Text.cancel, Command.back)
-            });
-            /* Вовзращаем клавиатуру */
-            return new InlineKeyboardMarkup(keyboardList);
-        }
-
-        /* Возвращает клавиатуру со списоком авторов */
-        public static InlineKeyboardMarkup GetAuthorsKeyboard(List<PackEntity> infoList, int page)
-        {
-            /* Список кнопок на клавиатуре */
-            var keyboardList = new List<InlineKeyboardButton[]>();
-            /* Копируем список */
-            foreach (var (item, i) in infoList.WithIndex())
+            foreach (var (author, i) in list.WithIndex())
             {
                 if (i % 2 == 0) keyboardList.Add(new [] {
-                    InlineKeyboardButton.WithCallbackData(item.Author, $"{Command.open_pack}={item.Id}")
+                    InlineKeyboardButton.WithCallbackData(author, $"{Command.set}={Command.authors_menu}={author}")
                 });
                 else keyboardList[keyboardList.Count - 1] = new [] {
                     keyboardList[keyboardList.Count - 1][0],
-                    InlineKeyboardButton.WithCallbackData(item.Author, $"{Command.open_pack}={item.Id}")
+                    InlineKeyboardButton.WithCallbackData(author, $"{Command.set}={Command.authors_menu}={author}")
                 };
             }
-            keyboardList.Add(new[] {
-                InlineKeyboardButton.WithCallbackData(Text.previous, $"{Command.author_menu}={page - 1}"),
-                InlineKeyboardButton.WithCallbackData(Text.next, $"{Command.author_menu}={page + 1}")
-            });
-            keyboardList.Add(new[] {
-                InlineKeyboardButton.WithCallbackData(Text.cancel, Command.cancel)
-            });
-            /* Вовзращаем клавиатуру */
+            keyboardList.Add(pagePanel);
             return new InlineKeyboardMarkup(keyboardList);
         }
 
-        /* Возвращает клавиатуру со списоком авторов */
-        public static async Task<InlineKeyboardMarkup> GetAuthorsKeyboard(List<SpecificPacksEntity> infoList, int page)
+        public static InlineKeyboardButton[] GetPagePanel(int page, int totalCount, string callback)
         {
-            /* Список кнопок на клавиатуре */
+            var arrows = new List<InlineKeyboardButton>();
+            if (page > 1) arrows.Add(InlineKeyboardButton
+                .WithCallbackData(Text.previous, $"{callback}={page - 1}"));
+            arrows.Add(InlineKeyboardButton.WithCallbackData(Text.back, Command.back));
+            if (totalCount > page * 10) arrows.Add(InlineKeyboardButton
+                .WithCallbackData(Text.next, $"{callback}={page + 1}"));
+            return arrows.ToArray();
+        }
+
+        public static InlineKeyboardMarkup GetShopPacksKeyboard(List<PackEntity> infoList, InlineKeyboardButton[] pagePanel)
+        {
             var keyboardList = new List<InlineKeyboardButton[]>();
-            /* Копируем список */
+            foreach (var (item, i) in infoList.WithIndex())
+            {
+                if (i % 2 == 0) keyboardList.Add(new [] {
+                    InlineKeyboardButton.WithCallbackData(item.Author, $"{Command.select_shop_pack}={item.Id}")
+                });
+                else keyboardList[keyboardList.Count - 1] = new [] {
+                    keyboardList[keyboardList.Count - 1][0],
+                    InlineKeyboardButton.WithCallbackData(item.Author, $"{Command.select_shop_pack}={item.Id}")
+                };
+            }
+            keyboardList.Add(pagePanel);
+            return new InlineKeyboardMarkup(keyboardList);
+        }
+
+        public static async Task<InlineKeyboardMarkup> GetUserPacksKeyboard(List<UserPacks> infoList, InlineKeyboardButton[] pagePanel)
+        {
+            var keyboardList = new List<InlineKeyboardButton[]>();
             foreach (var (item, i) in infoList.WithIndex())
             {
                 var author = await PacksDao.GetById(item.PackId);
                 if (i % 2 == 0) keyboardList.Add(new [] {
-                    InlineKeyboardButton.WithCallbackData($"{author.Author} {item.Count}", $"{Command.open_pack}={item.PackId}")
+                    InlineKeyboardButton.WithCallbackData($"{author.Author} ({item.Count}{Text.items})", 
+                        $"{Command.open_pack}={item.PackId}")
                 });
                 else keyboardList[keyboardList.Count - 1] = new [] {
                     keyboardList[keyboardList.Count - 1][0],
-                    InlineKeyboardButton.WithCallbackData($"{author.Author} {item.Count}", $"{Command.open_pack}={item.PackId}")
+                    InlineKeyboardButton.WithCallbackData($"{author.Author} ({item.Count}{Text.items})",
+                        $"{Command.open_pack}={item.PackId}")
                 };
             }
-            keyboardList.Add(new[] {
-                InlineKeyboardButton.WithCallbackData(Text.previous, $"{Command.open_specific}={page - 1}"),
-                InlineKeyboardButton.WithCallbackData(Text.next, $"{Command.open_specific}={page + 1}")
-            });
-            keyboardList.Add(new[] {
-                InlineKeyboardButton.WithCallbackData(Text.cancel, Command.cancel)
-            });
-            /* Вовзращаем клавиатуру */
+            keyboardList.Add(pagePanel);
             return new InlineKeyboardMarkup(keyboardList);
         }
 
@@ -287,7 +230,7 @@ namespace CardCollector.Resources
                 }
             };
             if (sticker.Tier != 4) keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData($"{Text.combine} ({count})", Command.combine)});
-            keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.back, $"{Command.back}={Command.clear_chat}")});
+            keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)});
             return new InlineKeyboardMarkup(keyboard);
         }
 
@@ -295,7 +238,7 @@ namespace CardCollector.Resources
         {
             return new InlineKeyboardMarkup(new[] {
                 new[] {InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.show_traders)},
-                new[] {InlineKeyboardButton.WithCallbackData(Text.back, $"{Command.back}={Command.clear_chat}")},
+                new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
             });
         }
 
@@ -309,7 +252,7 @@ namespace CardCollector.Resources
                     InlineKeyboardButton.WithCallbackData(Text.minus, $"{Command.count}={Text.minus}"),
                     InlineKeyboardButton.WithCallbackData(Text.plus, $"{Command.count}={Text.plus}"),
                 },
-                new[] {InlineKeyboardButton.WithCallbackData(Text.back, $"{Command.back}={Command.clear_chat}")},
+                new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
             });
         }
 
@@ -317,7 +260,7 @@ namespace CardCollector.Resources
         {
             return new InlineKeyboardMarkup(new[] {
                 new[] {InlineKeyboardButton.WithSwitchInlineQuery(Text.send_sticker, stickerInfo.Title)},
-                new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.clear_chat)},
+                new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
             });
         }
 
@@ -353,7 +296,7 @@ namespace CardCollector.Resources
                     InlineKeyboardButton.WithCallbackData(Text.minus, $"{Command.count}={Text.minus}"),
                     InlineKeyboardButton.WithCallbackData(Text.plus, $"{Command.count}={Text.plus}"),
                 },
-                new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.back_to_combine)},
+                new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
                 new[] {InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.select_another)},
             });
         }
@@ -366,12 +309,12 @@ namespace CardCollector.Resources
                 keyboard.Add(new []{InlineKeyboardButton.WithCallbackData($"{Text.delete} {Text.sticker} {keyboard.Count + 1}",
                     $"{Command.delete_combine}={sticker.Md5Hash}")});
             }
-            keyboard.Add(new []{InlineKeyboardButton.WithCallbackData(Text.cancel, Command.back)});
+            keyboard.Add(new []{InlineKeyboardButton.WithCallbackData(Text.back, Command.back)});
             if (module.GetCombineCount() == Constants.COMBINE_COUNT)
                 keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(
-                    $"{Text.combine} {module.CalculateCombinePrice()}{Text.coin}",
-                    Command.combine_stickers)});
+                    $"{Text.combine} {module.CalculateCombinePrice()}{Text.coin}", Command.combine_stickers)});
             else keyboard.Add(new[] {InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.add_sticker)});
+            keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)});
             return new InlineKeyboardMarkup(keyboard);
         }
 
@@ -385,6 +328,7 @@ namespace CardCollector.Resources
             };
             if (privilegeLevel > 2) keyboard.Add(
                 new[] {InlineKeyboardButton.WithCallbackData(Text.control_panel, Command.control_panel)});
+            keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)});
             return new InlineKeyboardMarkup(keyboard);
         }
 
@@ -395,7 +339,7 @@ namespace CardCollector.Resources
                 new[] {InlineKeyboardButton.WithCallbackData(Text.buy_pack, Command.buy_pack)},
                 new[] {InlineKeyboardButton.WithCallbackData(Text.buy_coins, Command.buy_coins)},
                 new[] {InlineKeyboardButton.WithCallbackData(Text.buy_gems, Command.buy_gems)},
-                new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.cancel)},
+                new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
             });
         }
 
@@ -406,34 +350,40 @@ namespace CardCollector.Resources
                 keyboard.Add(new []{InlineKeyboardButton.WithCallbackData(offer.Title,
                         $"{Command.select_offer}={offer.Id}")
                 });
-            keyboard.Add(new []{InlineKeyboardButton.WithCallbackData(Text.cancel, Command.cancel)});
+            keyboard.Add(new []{InlineKeyboardButton.WithCallbackData(Text.back, Command.back)});
             return new InlineKeyboardMarkup(keyboard);
         }
 
         public static InlineKeyboardMarkup ShopPacksKeyboard = new (new[]
         {
-            new[] {InlineKeyboardButton.WithCallbackData(Text.buy_random, $"{Command.select_offer}=1")},
-            new[] {InlineKeyboardButton.WithCallbackData(Text.buy_author, $"{Command.select_offer}=2")},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.buy_random, $"{Command.select_shop_pack}=1")},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.buy_author, $"{Command.buy_author_pack_menu}=1")},
             new[] {InlineKeyboardButton.WithCallbackData(Text.info, Command.pack_info)},
-            new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.cancel)},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
         });
 
-        public static InlineKeyboardMarkup OfferKeyboard(ShopEntity offerInfo)
+        public static InlineKeyboardMarkup OfferKeyboard(ShopModule module)
         {
-            var keyboard = new List<InlineKeyboardButton[]> ();
-            if (offerInfo.PriceCoins >= 0)
+            var resultPriceCoins = module.SelectedPosition?.ResultPriceCoins 
+                                   ?? module.SelectedPack?.PriceCoins * module.Count ?? -1; 
+            var resultPriceGems = module.SelectedPosition?.ResultPriceGems 
+                                  ?? module.SelectedPack?.PriceGems * module.Count ?? -1; 
+            var keyboard = new List<InlineKeyboardButton[]>();
+            if (resultPriceCoins >= 0)
                 keyboard.Add(new [] {InlineKeyboardButton.WithCallbackData(
-                    $"{offerInfo.ResultPriceCoins}{Text.coin}", Command.buy_by_coins)
+                    $"{resultPriceCoins}{Text.coin}", $"{Command.buy_shop_item}=coins")
                 });
-            if (offerInfo.PriceGems >= 0)
-                if (keyboard.Count > 0) keyboard[0] = new [] {keyboard[0][0], InlineKeyboardButton.WithCallbackData(
-                    $"{offerInfo.ResultPriceGems}{Text.gem}", Command.buy_by_gems)
+            if (resultPriceGems >= 0)
+                if (keyboard.Count > 0) keyboard[0] = new [] {
+                    keyboard[0][0], 
+                    InlineKeyboardButton.WithCallbackData($"{resultPriceGems}{Text.gem}",
+                        $"{Command.buy_shop_item}=gems")
                 };
-                else keyboard.Add(new [] {InlineKeyboardButton.WithCallbackData(
-                    $"{offerInfo.ResultPriceGems}{Text.gem}", Command.buy_by_gems)
+                else keyboard.Add(new [] {InlineKeyboardButton.WithCallbackData($"{resultPriceGems}{Text.gem}",
+                    $"{Command.buy_shop_item}=gems")
                 });
             keyboard.Add(new [] {InlineKeyboardButton.WithCallbackData(Text.info, Command.show_offer_info)});
-            keyboard.Add(new []{InlineKeyboardButton.WithCallbackData(Text.cancel, Command.cancel)});
+            keyboard.Add(new []{InlineKeyboardButton.WithCallbackData(Text.back, Command.back)});
             return new InlineKeyboardMarkup(keyboard);
         }
 

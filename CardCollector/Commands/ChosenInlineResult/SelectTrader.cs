@@ -11,6 +11,9 @@ namespace CardCollector.Commands.ChosenInlineResult
     public class SelectTrader : ChosenInlineResultCommand
     {
         protected override string CommandText => Command.buy_sticker;
+        protected override bool ClearMenu => false;
+        protected override bool AddToStack => false;
+
         public override async Task Execute()
         {
             await User.ClearChat();

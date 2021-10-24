@@ -22,10 +22,9 @@ namespace CardCollector.DataBase.EntityDao
 
         public static async Task<List<string>> GetAuthorsList()
         {
-            return await Table
-                .Select(item => item.Author)
-                .Distinct()
-                .ToListAsync();
+            var list = (await Table.ToListAsync()).Select(item => item.Author).Distinct().ToList();
+            list.Sort();
+            return list;
         }
 
         public static async Task<List<StickerEntity>> GetAll(string filter = "")

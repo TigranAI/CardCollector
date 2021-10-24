@@ -38,7 +38,7 @@ namespace CardCollector.DataBase.Entity
         [NotMapped] public Dictionary<string, UserStickerRelationEntity> Stickers { get; set; }
         
         /* Данные, хранящиеся в рамках одной сессии */
-        [NotMapped] public readonly UserSession Session;
+        [NotMapped] public UserSession Session;
 
         /* Удаляет из чата все сообщения, добавленные в список выше */
         public async Task ClearChat()

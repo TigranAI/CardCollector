@@ -11,15 +11,22 @@ namespace CardCollector.Commands.CallbackQuery
     public class SpecialOffers : CallbackQueryCommand
     {
         protected override string CommandText => Command.special_offers;
+        protected override bool ClearMenu => false;
+        protected override bool AddToStack => true;
+
         public override async Task Execute()
         {
             var specialOffers = await (await ShopDao.GetSpecialPositions())
                 .WhereAsync(async offer => offer.IsInfinite || !await SpecialOfferUsersDao.NowUsed(User.Id, offer.Id));
-            if (specialOffers.Count() < 1)
+            var shopEntities = specialOffers.ToList();
+            if (shopEntities.Count < 1)
+            {
+                User.Session.PopLast();
                 await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.offers_not_found, true);
+            }
             else
                 await MessageController.EditMessage(User, CallbackMessageId, Messages.available_offers,
-                    Keyboard.SpecialOffersKeyboard(specialOffers));
+                    Keyboard.SpecialOffersKeyboard(shopEntities));
         }
 
         public SpecialOffers() { }

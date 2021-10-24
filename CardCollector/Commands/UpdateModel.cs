@@ -14,10 +14,20 @@ namespace CardCollector.Commands
     public abstract class UpdateModel
     {
         protected abstract string CommandText { get; }
+        protected abstract bool ClearMenu { get; }
+        protected abstract bool AddToStack { get; }
         protected UserEntity User;
         protected Update Update;
 
         public abstract Task Execute();
+
+        public async Task PrepareAndExecute()
+        {
+            User.Session.SetCurrentCommand(GetType());
+            if (ClearMenu) User.Session.ClearMenuStack();
+            if (AddToStack) User.Session.AddMenuToStack(this);
+            await Execute();
+        }
 
         protected internal abstract bool IsMatches(UserEntity user, Update update);
 

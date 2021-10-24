@@ -12,11 +12,12 @@ namespace CardCollector.Commands.CallbackQuery
     public class PutForAuction : CallbackQueryCommand
     {
         protected override string CommandText => Command.sell_on_auction;
+        protected override bool ClearMenu => false;
+        protected override bool AddToStack => false;
 
         public override async Task Execute()
         {
-            await MessageController.AnswerCallbackQuery(User, CallbackQueryId,
-                Messages.comission_warning, true);
+            await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.comission_warning, true);
             await User.ClearChat();
             var module = User.Session.GetModule<CollectionModule>();
             var priceList = (await AuctionController.GetPriceList(module.SelectedSticker.Id)).ToList();

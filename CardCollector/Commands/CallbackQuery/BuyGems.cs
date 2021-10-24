@@ -10,6 +10,9 @@ namespace CardCollector.Commands.CallbackQuery
     public class BuyGems : CallbackQueryCommand
     {
         protected override string CommandText => Command.buy_gems;
+        protected override bool ClearMenu => false;
+        protected override bool AddToStack => false;
+        
         public override async Task Execute()
         {
             await User.ClearChat();

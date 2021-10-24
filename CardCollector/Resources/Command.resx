@@ -21,7 +21,7 @@
     <data name="collect_income" xml:space="preserve">
         <value>AAI</value>
     </data>
-    <data name="author" xml:space="preserve">
+    <data name="authors_menu" xml:space="preserve">
         <value>AAA</value>
     </data>
     <data name="tier" xml:space="preserve">
@@ -32,9 +32,6 @@
     </data>
     <data name="sort" xml:space="preserve">
         <value>ABA</value>
-    </data>
-    <data name="cancel" xml:space="preserve">
-        <value>AAG</value>
     </data>
     <data name="set" xml:space="preserve">
         <value>AAZ</value>
@@ -63,14 +60,11 @@
     <data name="price_gems_to" xml:space="preserve">
         <value>AAY</value>
     </data>
-    <data name="price" xml:space="preserve">
+    <data name="select_price" xml:space="preserve">
         <value>AAU</value>
     </data>
     <data name="buy_sticker" xml:space="preserve">
         <value>AAF</value>
-    </data>
-    <data name="clear_chat" xml:space="preserve">
-        <value>AAH</value>
     </data>
     <data name="combine" xml:space="preserve">
         <value>AAJ</value>
@@ -86,9 +80,6 @@
     </data>
     <data name="confirm_selling" xml:space="preserve">
         <value>AAM</value>
-    </data>
-    <data name="back_to_combine" xml:space="preserve">
-        <value>AAD</value>
     </data>
     <data name="delete_combine" xml:space="preserve">
         <value>AAQ</value>
@@ -108,7 +99,7 @@
     <data name="send_private_sticker" xml:space="preserve">
         <value>AAX</value>
     </data>
-    <data name="author_menu" xml:space="preserve">
+    <data name="buy_author_pack_menu" xml:space="preserve">
         <value>AAB</value>
     </data>
     <data name="open_pack" xml:space="preserve">
@@ -123,17 +114,8 @@
     <data name="buy_gems" xml:space="preserve">
         <value>ABH</value>
     </data>
-    <data name="buy_by_coins" xml:space="preserve">
+    <data name="buy_shop_item" xml:space="preserve">
         <value>ABI</value>
-    </data>
-    <data name="buy_by_gems" xml:space="preserve">
-        <value>ABJ</value>
-    </data>
-    <data name="buy_offer" xml:space="preserve">
-        <value>ABK</value>
-    </data>
-    <data name="shop_authors" xml:space="preserve">
-        <value>ABL</value>
     </data>
     <data name="pack_info" xml:space="preserve">
         <value>ABM</value>
@@ -141,7 +123,7 @@
     <data name="buy_gems_item" xml:space="preserve">
         <value>ABN</value>
     </data>
-    <data name="open_specific" xml:space="preserve">
+    <data name="open_author_pack_menu" xml:space="preserve">
         <value>ABO</value>
     </data>
     <data name="special_offers" xml:space="preserve">
@@ -158,5 +140,8 @@
     </data>
     <data name="end_sticker_upload" xml:space="preserve">
         <value>ABT</value>
+    </data>
+    <data name="select_shop_pack" xml:space="preserve">
+        <value>ABU</value>
     </data>
 </root>

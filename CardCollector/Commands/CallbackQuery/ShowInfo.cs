@@ -12,18 +12,23 @@ namespace CardCollector.Commands.CallbackQuery
     public class ShowInfo : CallbackQueryCommand
     {
         protected override string CommandText => Command.show_offer_info;
+        protected override bool ClearMenu => false;
+        protected override bool AddToStack => false;
+
         public override async Task Execute()
         {
-            var offerInfo = User.Session.GetModule<ShopModule>().SelectedPosition;
-            var message = $"{offerInfo.Title}";
-            if (offerInfo.Discount > 0) message += $"\n{Text.discount}: {offerInfo.Discount}%";
-            if (offerInfo.AdditionalPrize != "") 
-                message += $"\n{Text.prize}: {await PrizeToString(offerInfo.AdditionalPrize)}";
-            var dateText = offerInfo.TimeLimited
-                ? offerInfo.TimeLimit.ToString(CultureInfo.CurrentCulture).Split(' ')[0]
+            var module = User.Session.GetModule<ShopModule>();
+            var description = module.SelectedPosition?.Description ?? module.SelectedPack?.Description ?? "";
+            var message = module.SelectedPosition?.Title ?? $"{Messages.author_pack}: {module.SelectedPack?.Author}";
+            if (module.SelectedPosition?.Discount > 0) message += $"\n{Text.discount}: {module.SelectedPosition?.Discount}%";
+            if (module.SelectedPosition != null && module.SelectedPosition?.AdditionalPrize != "") 
+                message += $"\n{Text.prize}: {await PrizeToString(module.SelectedPosition?.AdditionalPrize)}";
+            var dateText = module.SelectedPosition?.TimeLimited ?? false
+                ? module.SelectedPosition?.TimeLimit.ToString(CultureInfo.CurrentCulture).Split(' ')[0]
                 : Text.unexpired;
-            message += $"\n{Text.time_limit} {dateText}";
-            if (offerInfo.Description != "") message += $"\n{Text.description}: {offerInfo.Description}";
+            if (module.SelectedPosition != null) message += $"\n{Text.time_limit} {dateText}";
+            if (module.SelectedPack != null) message += $"\n{Text.opened_count} {module.SelectedPack.OpenedCount}";
+            if (description != "") message += $"\n{Text.description}: {description}";
             await MessageController.AnswerCallbackQuery(User, CallbackQueryId, message, true);
         }
         private async Task<string> PrizeToString(string prize)

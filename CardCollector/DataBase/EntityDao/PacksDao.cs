@@ -29,7 +29,7 @@ namespace CardCollector.DataBase.EntityDao
 
         public static async Task<List<PackEntity>> GetAll()
         {
-            return (await Table.WhereAsync(item => item.Id is not 1 or 2)).ToList();
+            return (await Table.WhereAsync(item => item.Id is not 1)).ToList();
         }
     }
 }

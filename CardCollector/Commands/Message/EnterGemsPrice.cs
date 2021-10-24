@@ -12,7 +12,9 @@ namespace CardCollector.Commands.Message
     public class EnterGemsPrice : MessageCommand
     {
         protected override string CommandText => "";
-        
+        protected override bool ClearMenu => false;
+        protected override bool AddToStack => false;
+
         private static readonly Dictionary<long, int> Queue = new ();
         public override async Task Execute()
         {

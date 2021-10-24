@@ -11,6 +11,9 @@ namespace CardCollector.Commands.ChosenInlineResult
     public class SelectStickerInline : ChosenInlineResultCommand
     {
         protected override string CommandText => Command.select_sticker;
+        protected override bool ClearMenu => false;
+        protected override bool AddToStack => false;
+
         public override async Task Execute()
         {
             await User.ClearChat();

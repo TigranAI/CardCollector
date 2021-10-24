@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CardCollector.Commands;
+using CardCollector.Commands.CallbackQuery;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
@@ -11,7 +13,7 @@ namespace CardCollector.Session
     public class UserSession
     {
         /* Ссылка на пользователя */
-        private readonly UserEntity user;
+        public readonly UserEntity user;
         /* Дата и время последней актвности пользователя */
         private DateTime _lastAccess = DateTime.Now;
         /* Текущее состояние пользователя */
@@ -20,6 +22,9 @@ namespace CardCollector.Session
         private readonly Dictionary<Type, Module> Modules = new();
         /* Сообщения в чате пользователя */
         public readonly List<int> Messages = new();
+        /* Последовательность вызова списка меню */
+        private readonly Stack<MenuInformation> MenuStack = new();
+        private Type CurrentCommandType;
 
         public UserSession(UserEntity user)
         {
@@ -75,6 +80,35 @@ namespace CardCollector.Session
             State = UserState.Default;
             foreach (var module in Modules.Values) module.Reset();
             Modules.Clear();
+            MenuStack.Clear();
+        }
+
+        public bool TryGetPreviousMenu(out MenuInformation menu)
+        {
+            if (MenuStack.TryPeek(out menu) && CurrentCommandType != menu.GetMenuType()) return true;
+            PopLast();
+            return MenuStack.TryPeek(out menu);
+        }
+
+        public void PopLast()
+        {
+            MenuStack.TryPop(out _);
+        }
+
+        public void AddMenuToStack(UpdateModel menu)
+        {
+            if (!MenuStack.TryPeek(out var current) || current.GetType() != menu.GetType())
+                MenuStack.Push(new MenuInformation(menu, State));
+        }
+
+        public void SetCurrentCommand(Type commandType)
+        {
+            if(commandType != typeof(Back)) CurrentCommandType = commandType;
+        }
+
+        public void ClearMenuStack()
+        {
+            MenuStack.Clear();
         }
     }
 }

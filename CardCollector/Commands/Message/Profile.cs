@@ -11,8 +11,12 @@ namespace CardCollector.Commands.Message
     {
         /* Для данной команды ключевое слово "Профиль" */
         protected override string CommandText => Text.profile;
+        protected override bool ClearMenu => true;
+        protected override bool AddToStack => true;
+
         public override async Task Execute()
         {
+            await User.ClearChat();
             /* Подсчитываем прибыль */
             var income = await User.Cash.CalculateIncome(User.Stickers);
             /* Отправляем сообщение */

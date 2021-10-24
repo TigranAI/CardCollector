@@ -156,7 +156,7 @@
     <data name="random_packs" xml:space="preserve">
         <value>Случайный пак</value>
     </data>
-    <data name="author_packs" xml:space="preserve">
+    <data name="author_pack" xml:space="preserve">
         <value>Пак художника</value>
     </data>
     <data name="comission_warning" xml:space="preserve">
@@ -186,7 +186,7 @@
     <data name="pack_info" xml:space="preserve">
         <value>При покупке "Случайного пака" Вам может выпасть ЛЮБОЙ стикер от ЛЮБОГО художника
 
-        При покупке "Пака художника" Вам может выпасть ЛЮБОЙ стикер от выбранного Вами художника художника
+        При покупке "Пака художника" Вам может выпасть ЛЮБОЙ стикер от выбранного Вами художника
 
         Вероятности выпадения стикера с тиром:
         1 - 80%

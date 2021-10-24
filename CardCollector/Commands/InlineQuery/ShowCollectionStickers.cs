@@ -11,6 +11,9 @@ namespace CardCollector.Commands.InlineQuery
     public class ShowCollectionStickers : InlineQueryCommand
     {
         protected override string CommandText => "";
+        protected override bool ClearMenu => false;
+        protected override bool AddToStack => false;
+
         public override async Task Execute()
         {
             // Получаем список стикеров

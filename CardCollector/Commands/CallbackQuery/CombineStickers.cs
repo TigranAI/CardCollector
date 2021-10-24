@@ -13,6 +13,9 @@ namespace CardCollector.Commands.CallbackQuery
     public class CombineStickers : CallbackQueryCommand
     {
         protected override string CommandText => Command.combine_stickers;
+        protected override bool ClearMenu => false;
+        protected override bool AddToStack => false;
+
         public override async Task Execute()
         {
             var combineModule = User.Session.GetModule<CombineModule>();

@@ -64,10 +64,9 @@ namespace CardCollector.DataBase
         public DbSet<AuctionEntity> Auction { get; set; }
         public DbSet<ShopEntity> Shop { get; set; }
         public DbSet<DailyTaskEntity> DailyTasks { get; set; }
-        public DbSet<UsersPacksEntity> UsersPacks { get; set; }
+        public DbSet<UserPacks> UsersPacks { get; set; }
         public DbSet<PackEntity> Packs { get; set; }
         public DbSet<SpecialOfferUsers> SpecialOfferUsers { get; set; }
-        public DbSet<SpecificPacksEntity> SpecificPacks { get; set; }
         public DbSet<SessionToken> SessionTokens { get; set; }
 
 

@@ -10,6 +10,9 @@ namespace CardCollector.Commands.PreCheckoutQuery
     public class BuyGems : PreCheckoutQueryCommand
     {
         protected override string CommandText => Command.buy_gems_item;
+        protected override bool ClearMenu => false;
+        protected override bool AddToStack => false;
+
         public override async Task Execute()
         {
             await Bot.Client.AnswerPreCheckoutQueryAsync(PreCheckoutQueryId);

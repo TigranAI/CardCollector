@@ -9,6 +9,9 @@ namespace CardCollector.Commands
     public class CommandNotFound : UpdateModel
     {
         protected override string CommandText => "";
+        protected override bool ClearMenu => false;
+        protected override bool AddToStack => false;
+
         private readonly string _command;
 
         public override async Task Execute()

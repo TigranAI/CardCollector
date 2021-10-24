@@ -90,9 +90,9 @@ namespace CardCollector.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Пак художника.
         /// </summary>
-        internal static string author_packs {
+        internal static string author_pack {
             get {
-                return ResourceManager.GetString("author_packs", resourceCulture);
+                return ResourceManager.GetString("author_pack", resourceCulture);
             }
         }
         
@@ -495,7 +495,7 @@ namespace CardCollector.Resources {
         /// <summary>
         ///   Looks up a localized string similar to При покупке &quot;Случайного пака&quot; Вам может выпасть ЛЮБОЙ стикер от ЛЮБОГО художника
         ///
-        ///        При покупке &quot;Пака художника&quot; Вам может выпасть ЛЮБОЙ стикер от выбранного Вами художника художника
+        ///        При покупке &quot;Пака художника&quot; Вам может выпасть ЛЮБОЙ стикер от выбранного Вами художника
         ///
         ///        Вероятности выпадения стикера с тиром:
         ///        1 - 80%

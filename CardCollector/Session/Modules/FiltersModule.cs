@@ -11,7 +11,7 @@ namespace CardCollector.Session.Modules
         /* Фильтры, примененные пользователем в меню коллекции/магазина/аукциона */
         public readonly Dictionary<string, object> Filters = new()
         {
-            {Command.author, ""},
+            {Command.authors_menu, ""},
             {Command.tier, -1},
             {Command.emoji, ""},
             {Command.price_coins_from, 0},
@@ -24,7 +24,7 @@ namespace CardCollector.Session.Modules
         public string ToString(UserState state)
         {
             var text = $"{Messages.current_filters}\n" +
-                       $"{Messages.author} {(Filters[Command.author] is string author and not "" ? author : Messages.all)}\n" +
+                       $"{Messages.author} {(Filters[Command.authors_menu] is string author and not "" ? author : Messages.all)}\n" +
                        $"{Messages.tier} {(Filters[Command.tier] is int tier and not -1 ? new string('⭐', tier) : Messages.all)}\n" +
                        $"{Messages.emoji} {(Filters[Command.emoji] is string emoji and not "" ? emoji : Messages.all)}\n";
             switch (state)
@@ -46,7 +46,7 @@ namespace CardCollector.Session.Modules
         public IEnumerable<StickerEntity> ApplyTo(IEnumerable<StickerEntity> list)
         {
             /* Фильтруем по автору */
-            if (Filters[Command.author] is string author && author != "")
+            if (Filters[Command.authors_menu] is string author && author != "")
                 list = list.Where(item => item.Author.Contains(author));
             /* Фильтруем по тиру */
             if (Filters[Command.tier] is int tier && tier != -1)
@@ -97,7 +97,7 @@ namespace CardCollector.Session.Modules
         
         public void Reset()
         {
-            Filters[Command.author] = "";
+            Filters[Command.authors_menu] = "";
             Filters[Command.tier] = -1;
             Filters[Command.emoji] = "";
             Filters[Command.price_coins_from] = 0;

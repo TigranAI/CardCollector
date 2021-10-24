@@ -10,6 +10,9 @@ namespace CardCollector.Commands.CallbackQuery
     public class ConfirmBuying : CallbackQueryCommand
     {
         protected override string CommandText => Command.confirm_buying;
+        protected override bool ClearMenu => false;
+        protected override bool AddToStack => false;
+
         public override async Task Execute()
         {
             var auctionModule = User.Session.GetModule<AuctionModule>();

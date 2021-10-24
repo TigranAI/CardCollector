@@ -12,6 +12,9 @@ namespace CardCollector.Commands.Message
     public class Shop : MessageCommand
     {
         protected override string CommandText => Text.shop;
+        protected override bool ClearMenu => true;
+        protected override bool AddToStack => true;
+
         public override async Task Execute()
         {
             /* Очищаем чат с пользователем */

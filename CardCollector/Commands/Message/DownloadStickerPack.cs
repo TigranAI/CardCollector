@@ -10,11 +10,14 @@ namespace CardCollector.Commands.Message
     public class DownloadStickerPack : MessageCommand
     {
         protected override string CommandText => Text.download_stickerpack;
+        protected override bool ClearMenu => true;
+        protected override bool AddToStack => true;
+
         public override async Task Execute()
         {
             await User.ClearChat();
             User.Session.State = UserState.UploadSticker;
-            var result = await MessageController.SendMessage(User, Messages.upload_your_stickers, Keyboard.CancelKeyboard);
+            var result = await MessageController.SendMessage(User, Messages.upload_your_stickers, Keyboard.BackKeyboard);
             User.Session.Messages.Add(result.MessageId);
             User.Session.GetModule<UploadedStickersModule>().MessageId = result.MessageId;
         }

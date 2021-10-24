@@ -11,6 +11,9 @@ namespace CardCollector.Commands.Message
     public class UploadSticker : MessageCommand
     {
         protected override string CommandText => "";
+        protected override bool ClearMenu => false;
+        protected override bool AddToStack => false;
+
         public override async Task Execute()
         {
             var stickerId = Update.Message?.Sticker?.FileId;

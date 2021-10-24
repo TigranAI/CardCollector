@@ -9,6 +9,9 @@ namespace CardCollector.Commands.Message
     public class Menu : MessageCommand
     {
         protected override string CommandText => Text.menu;
+        protected override bool ClearMenu => false;
+        protected override bool AddToStack => false;
+
         public override async Task Execute()
         {
             /* Отправляем пользователю сообщение со стандартной клавиатурой */

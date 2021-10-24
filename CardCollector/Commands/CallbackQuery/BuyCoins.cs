@@ -11,6 +11,8 @@ namespace CardCollector.Commands.CallbackQuery
     public class BuyCoins : CallbackQueryCommand
     {
         protected override string CommandText => Command.buy_coins;
+        protected override bool ClearMenu => false;
+        protected override bool AddToStack => false;
 
         public override async Task Execute()
         {

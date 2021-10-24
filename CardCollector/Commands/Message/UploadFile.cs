@@ -18,6 +18,9 @@ namespace CardCollector.Commands.Message
     public class UploadFile : MessageCommand
     {
         protected override string CommandText => "";
+        protected override bool ClearMenu => false;
+        protected override bool AddToStack => false;
+
         public override async Task Execute()
         {
             User.Session.State = UserState.Default;

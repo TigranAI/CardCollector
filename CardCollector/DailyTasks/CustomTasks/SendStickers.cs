@@ -20,8 +20,8 @@ namespace CardCollector.DailyTasks.CustomTasks
 
         public override async Task GiveReward(long userId, object[] args = null)
         {
-            var userPacks = await UsersPacksDao.GetUserPacks(userId);
-            userPacks.RandomCount++;
+            var userPacks = await UserPacksDao.GetOne(userId, 1);
+            userPacks.Count++;
         }
     }
 }

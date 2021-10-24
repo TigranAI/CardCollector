@@ -10,6 +10,9 @@ namespace CardCollector.Commands.Message
     public class Collection : MessageCommand
     {
         protected override string CommandText => Text.collection;
+        protected override bool ClearMenu => true;
+        protected override bool AddToStack => true;
+
         public override async Task Execute()
         {
             /* Очищаем чат с пользователем */
@@ -18,7 +21,7 @@ namespace CardCollector.Commands.Message
             User.Session.State = UserState.CollectionMenu;
             User.Session.InitNewModule<CollectionModule>();
             /* Отображаем сообщение с фильтрами */
-            await new ShowFiltersMenu(User, Update).Execute();
+            await new ShowFiltersMenu(User, Update).PrepareAndExecute();
         }
         
         public Collection() { }

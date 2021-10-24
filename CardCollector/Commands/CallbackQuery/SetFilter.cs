@@ -12,6 +12,9 @@ namespace CardCollector.Commands.CallbackQuery
     public class SetFilter : CallbackQueryCommand
     {
         protected override string CommandText => Command.set;
+        protected override bool ClearMenu => false;
+        protected override bool AddToStack => false;
+
         public override async Task Execute()
         {
             EnterEmoji.RemoveFromQueue(User.Id);
@@ -25,7 +28,7 @@ namespace CardCollector.Commands.CallbackQuery
             if (filters[Command.price_gems_to] is int g && g <= (int) filters[Command.price_gems_from])
                 filters[Command.price_gems_to] = 0;
             /* Возвращаемся в меню фильтров */
-            await new BackToFiltersMenu(User, Update).Execute();
+            await new Back(User, Update).PrepareAndExecute();
         }
         
         public SetFilter() { }

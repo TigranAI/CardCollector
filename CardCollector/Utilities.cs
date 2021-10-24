@@ -43,7 +43,7 @@ namespace CardCollector
             return file.FileName ?? "file";
         }
         
-        public static void SetUpTimer(TimeSpan timeToRun, ElapsedEventHandler callback)
+        public static void SetUpTimer(TimeSpan timeToRun, ElapsedEventHandler callback, bool cycled = true)
         {
             var elapsedInterval = timeToRun - DateTime.Now.TimeOfDay;
             if (elapsedInterval < TimeSpan.Zero) elapsedInterval += new TimeSpan(1, 0, 0, 0);
@@ -54,6 +54,7 @@ namespace CardCollector
                 Interval = elapsedInterval.TotalMilliseconds
             };
             timer.Elapsed += callback;
+            if (cycled) timer.Elapsed += (_, _) => SetUpTimer(timeToRun, callback);
             timer.Elapsed += (_, _) => timer.Dispose();
         }
     }

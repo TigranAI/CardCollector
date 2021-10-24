@@ -22,28 +22,22 @@ namespace CardCollector.Commands
     {
         /* Данные, поступившие после нажатия на кнокпку */
         protected string CallbackData;
-        
         /* Id сообщения, под которым нажали на кнопку */
         protected int CallbackMessageId;
-        
         /* Id запроса */
         protected string CallbackQueryId;
-        
+
         /* Список команд, распознаваемых ботом */
         private static readonly List<CallbackQueryCommand> List = new()
         {
-            new SelectAuthor(),
-            new AuthorMenu(),
-            new BackToCombine(),
-            new BackToFiltersMenu(),
-            new BuyByCoins(),
-            new BuyByGems(),
+            new AuthorsMenu(),
+            new BuyAuthorPackMenu(),
+            new Back(),
+            new BuyShopItem(),
             new BuyCoins(),
             new BuyGems(),
             new BuyPack(),
             new BuySticker(),
-            new Cancel(),
-            new ClearChat(),
             new CollectIncome(),
             new Combine(),
             new CombineStickers(),
@@ -57,7 +51,7 @@ namespace CardCollector.Commands
             new SelectEmoji(),
             new MyPacks(),
             new OpenPack(),
-            new OpenSpecific(),
+            new OpenAuthorPackMenu(),
             new PackInfo(),
             new SelectPrice(),
             new PutForAuction(),
@@ -67,6 +61,7 @@ namespace CardCollector.Commands
             new ShowInfo(),
             new SpecialOffers(),
             new SelectTier(),
+            new SelectShopPack(),
         };
 
         /* Метод, создающий объекты команд исходя из полученного обновления */
@@ -94,7 +89,7 @@ namespace CardCollector.Commands
         protected CallbackQueryCommand(UserEntity user, Update update) : base(user, update)
         {
             CallbackData = update.CallbackQuery!.Data;
-            CallbackMessageId = update.CallbackQuery!.Message!.MessageId;
+            CallbackMessageId = user.Session.Messages.LastOrDefault();
             CallbackQueryId = update.CallbackQuery!.Id;
         }
     }

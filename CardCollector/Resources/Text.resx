@@ -249,4 +249,7 @@
     <data name="end_sticker_upload" xml:space="preserve">
         <value>Завершить загрузку стикеров</value>
     </data>
+    <data name="opened_count" xml:space="preserve">
+        <value>Количество открытых:</value>
+    </data>
 </root>

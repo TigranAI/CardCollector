@@ -502,6 +502,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Количество открытых:.
+        /// </summary>
+        internal static string opened_count {
+            get {
+                return ResourceManager.GetString("opened_count", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to за.
         /// </summary>
         internal static string per {

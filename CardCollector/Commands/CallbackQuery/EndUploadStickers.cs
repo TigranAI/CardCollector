@@ -10,12 +10,15 @@ namespace CardCollector.Commands.CallbackQuery
     public class EndUploadStickers : CallbackQueryCommand
     {
         protected override string CommandText => Command.end_sticker_upload;
+        protected override bool ClearMenu => false;
+        protected override bool AddToStack => false;
+
         public override async Task Execute()
         {
             User.Session.State = UserState.UploadFile;
             var module = User.Session.GetModule<UploadedStickersModule>();
             await MessageController.EditMessage(User, module.MessageId, Messages.upload_your_file, 
-                Keyboard.CancelKeyboard);
+                Keyboard.BackKeyboard);
         }
 
         public EndUploadStickers() { }

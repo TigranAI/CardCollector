@@ -9,6 +9,9 @@ namespace CardCollector.Commands.CallbackQuery
     public class PackInfo : CallbackQueryCommand
     {
         protected override string CommandText => Command.pack_info;
+        protected override bool ClearMenu => false;
+        protected override bool AddToStack => false;
+
         public override async Task Execute()
         {
             await MessageController.EditMessage(User, CallbackMessageId, Messages.pack_info);

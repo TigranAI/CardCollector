@@ -10,6 +10,9 @@ namespace CardCollector.Commands.Message
     public class Auction : MessageCommand
     {
         protected override string CommandText => Text.auction;
+        protected override bool ClearMenu => true;
+        protected override bool AddToStack => true;
+
         public override async Task Execute()
         {
             /* Очищаем чат с пользователем */
@@ -18,7 +21,7 @@ namespace CardCollector.Commands.Message
             User.Session.State = UserState.AuctionMenu;
             User.Session.InitNewModule<AuctionModule>();
             /* Отображаем сообщение с фильтрами */
-            await new ShowFiltersMenu(User, Update).Execute();
+            await new ShowFiltersMenu(User, Update).PrepareAndExecute();
         }
         
         public Auction() { }

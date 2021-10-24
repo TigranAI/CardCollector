@@ -11,7 +11,9 @@ namespace CardCollector.Commands.Message
     {
         /* */
         protected override string CommandText => Text.start;
-        
+        protected override bool ClearMenu => false;
+        protected override bool AddToStack => false;
+
         public override async Task Execute()
         {
             /* Отправляем пользователю сообщение со стандартной клавиатурой */

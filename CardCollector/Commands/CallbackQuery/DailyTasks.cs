@@ -11,7 +11,9 @@ namespace CardCollector.Commands.CallbackQuery
     public class DailyTasks : CallbackQueryCommand
     {
         protected override string CommandText => Command.daily_tasks;
-        
+        protected override bool ClearMenu => false;
+        protected override bool AddToStack => false;
+
         public override async Task Execute()
         {
             await User.ClearChat();
