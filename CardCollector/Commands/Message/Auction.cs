@@ -4,7 +4,7 @@ using CardCollector.Resources;
 using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
 
-namespace CardCollector.Commands.Message.TextMessage
+namespace CardCollector.Commands.Message
 {
     /* Реалищует команду "Аукцион" */
     public class Auction : MessageCommand

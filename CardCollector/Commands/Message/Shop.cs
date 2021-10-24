@@ -6,7 +6,7 @@ using CardCollector.Resources;
 using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
 
-namespace CardCollector.Commands.Message.TextMessage
+namespace CardCollector.Commands.Message
 {
     /* Реализует команду "Магазин" */
     public class Shop : MessageCommand

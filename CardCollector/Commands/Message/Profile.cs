@@ -4,7 +4,7 @@ using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using Telegram.Bot.Types;
 
-namespace CardCollector.Commands.Message.TextMessage
+namespace CardCollector.Commands.Message
 {
     /* Команда "Профиль" Отображает профиль пользователя и его баланс */
     public class Profile : MessageCommand

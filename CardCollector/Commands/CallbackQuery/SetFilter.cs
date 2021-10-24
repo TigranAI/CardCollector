@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using CardCollector.Commands.Message.TextMessage;
+using CardCollector.Commands.Message;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using CardCollector.Session.Modules;

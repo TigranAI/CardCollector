@@ -8,7 +8,7 @@ using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
-namespace CardCollector.Commands.Message.TextMessage
+namespace CardCollector.Commands.Message
 {
     public class EnterEmoji : MessageCommand
     {

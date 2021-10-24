@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Commands.Message;
-using CardCollector.Commands.Message.TextMessage;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;

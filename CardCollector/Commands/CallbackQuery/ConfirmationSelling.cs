@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Commands.Message.TextMessage;
+using CardCollector.Commands.Message;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
