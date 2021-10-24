@@ -66,14 +66,8 @@
     <data name="choose_sort" xml:space="preserve">
         <value>Выберите сортировку из списка ниже:</value>
     </data>
-    <data name="upload_file" xml:space="preserve">
-        <value>Загрузите архив со стикерами и таблицей в формате zip</value>
-    </data>
     <data name="downloading_file" xml:space="preserve">
         <value>Загружаю файл...</value>
-    </data>
-    <data name="unzipping_file" xml:space="preserve">
-        <value>Распаковываю архив....</value>
     </data>
     <data name="reading_document" xml:space="preserve">
         <value>Читаю документ...</value>
@@ -81,8 +75,8 @@
     <data name="deleting_files" xml:space="preserve">
         <value>Удаляю файлы...</value>
     </data>
-    <data name="stickers_will_be_updated" xml:space="preserve">
-        <value>Стикеры будут обновлены через 15 минут</value>
+    <data name="stickers_succesfully_uploaded" xml:space="preserve">
+        <value>Стикеры успешно загружены!</value>
     </data>
     <data name="unexpected_exception" xml:space="preserve">
         <value>Произошла неожиданная ошибка, попробуйте еще раз.</value>
@@ -192,13 +186,13 @@
     <data name="pack_info" xml:space="preserve">
         <value>При покупке "Случайного пака" Вам может выпасть ЛЮБОЙ стикер от ЛЮБОГО художника
 
-При покупке "Пака художника" Вам может выпасть ЛЮБОЙ стикер от выбранного Вами художника художника
+        При покупке "Пака художника" Вам может выпасть ЛЮБОЙ стикер от выбранного Вами художника художника
 
-Вероятности выпадения стикера с тиром:
-1 - 80%
-2 - 16%
-3 - 3.3%
-4 - 0.7%</value>
+        Вероятности выпадения стикера с тиром:
+        1 - 80%
+        2 - 16%
+        3 - 3.3%
+        4 - 0.7%</value>
     </data>
     <data name="pack_prize" xml:space="preserve">
         <value>Поздравляем! Вы получили случайный пак! Открыть его можно во вкладке профиля.</value>
@@ -253,5 +247,30 @@
     </data>
     <data name="you_got" xml:space="preserve">
         <value>Вы получили</value>
+    </data>
+    <data name="your_login_link" xml:space="preserve">
+        <value>Ваша ссылка для входа</value>
+    </data>
+    <data name="upload_your_stickers" xml:space="preserve">
+        <value>Загрузите свои стикеры в формате .webp или .tgs в том порядке, в котором вы описываете их в таблице Excel. Когда завершите загрузку, нажмите на "Завершить загрузку стикеров"</value>
+    </data>
+    <data name="uploaded_count" xml:space="preserve">
+        <value>Количество загруженных стикеров:</value>
+    </data>
+    <data name="uploading_stickers" xml:space="preserve">
+        <value>Загружаю стикеры...</value>
+    </data>
+    <data name="upload_your_file" xml:space="preserve">
+        <value>Пожалуйста, загрузите ваш xlsx файл с описанием стикеров, по одной строке на стикер. Соблюдайте порядок, в котором вы загружали стикеры.
+        Структура таблицы должна сожержать столбцы в следующем порядке: Название, Автор, Тир, Эмоции, Эффект, Описание.
+        Оставьте первую строку пустой или заполните ее этими заголовками, значения начинайте вписывать со !второй! строки.
+        Поле "Эффект" Может содержать целочисленное значение. Вот описания этих значений:
+        0 - Нет эффекта
+        1 - Увеличивает копилку на 200 монет
+        2 - Пользователь получает 25% алмазов к своему кошельку
+        3 - Скидка на аукционе 5%
+        4 - Случайный пак раз в 5 дней
+        5 - Случайный стикер 2 тира раз в 3 дня
+        6 - Случайный стикер 1 тира раз в 3 дня</value>
     </data>
 </root>

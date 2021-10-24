@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.Commands.Message.DocumentMessage;
+using CardCollector.Commands.Message;
 using CardCollector.Commands.Message.TextMessage;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
@@ -26,36 +26,35 @@ namespace CardCollector.Commands
     public abstract class MessageCommand : UpdateModel
     {
         /* Список команд */
-        private static readonly List<MessageCommand>
-            TextCommandsList = new() {
-                // Команда "Профиль"
-                new Profile(),
-                // Команда "/start"
-                new Start(),
-                // Команда "/menu"
-                new Menu(),
-                // Команда "Коллекция"
-                new Collection(),
-                // Команда "Магазин"
-                new Shop(),
-                // Команда "Аукцион"
-                new Auction(),
-                // Ожидание ввода эмоджи
-                new EnterEmoji(),
-                new EnterGemsExchange(),
-                // Загрузка стикерпака
-                new DownloadStickerPack(),
-                //команда ввода цены
-                new EnterGemsPrice(),
-                // Команда "Показать пример"
-                new ShowSample(),
-                // Команда "Остановить"
-                new StopBot()
-            },
-            FileCommandsList = new() {
-                /* Выгрузка файлов к боту */
-                new UploadFileMessageCommand(),
-            };
+        private static readonly List<MessageCommand> List = new() {
+            // Команда "Профиль"
+            new Profile(),
+            // Команда "/start"
+            new Start(),
+            // Команда "/menu"
+            new Menu(),
+            // Команда "Коллекция"
+            new Collection(),
+            // Команда "Магазин"
+            new Shop(),
+            // Команда "Аукцион"
+            new Auction(),
+            // Ожидание ввода эмоджи
+            new EnterEmoji(),
+            new EnterGemsExchange(),
+            // Загрузка стикерпака
+            new DownloadStickerPack(),
+            //команда ввода цены
+            new EnterGemsPrice(),
+            new CreateToken(),
+            // Команда "Показать пример"
+            new ShowSample(),
+            // Команда "Остановить"
+            new StopBot(),
+            /* Выгрузка файлов к боту */
+            new UploadFile(),
+            new UploadSticker(),
+        };
 
         /* Метод, создающий объекты команд исходя из полученного обновления */
         public static async Task<UpdateModel> Factory(Update update)
@@ -71,14 +70,6 @@ namespace CardCollector.Commands
                     await Bot.Client.DeleteMessageAsync(update.Message.Chat.Id, update.Message.MessageId);
                 return new IgnoreUpdate();
             }
-
-            /* Список команд определяем исходя из типа сообщения */
-            var list = update.Message.Type switch
-            {
-                MessageType.Text => TextCommandsList,
-                MessageType.Document => FileCommandsList,
-                _ => new List<MessageCommand>()
-            };
             
             // Объект пользователя
             var user = await UserDao.GetUser(update.Message!.From);
@@ -94,21 +85,19 @@ namespace CardCollector.Commands
             
             // Возвращаем объект, если команда совпала
             /* Возвращаем первую подходящую команду */
-            return list.FirstOrDefault(item => item.IsMatches(user, update)) is { } executor
+            return List.FirstOrDefault(item => item.IsMatches(user, update)) is { } executor
                 ? (UpdateModel) Activator.CreateInstance(executor.GetType(), user, update)
-                : new CommandNotFound(user, update, update.Message.Type switch {
-                    MessageType.Text => update.Message.Text,
-                    MessageType.Document => update.Message.Document!.FileId,
-                    _ => Utilities.ToJson(update.Message)
-                });
+                : new CommandNotFound(user, update, update.Message.Type == MessageType.Text 
+                    ? update.Message.Text 
+                    : Utilities.ToJson(update.Message));
         }
 
         protected internal override bool IsMatches(UserEntity user, Update update)
         {
-            return update.Message!.Text == CommandText;
+            return update.Message?.Type == MessageType.Text && update.Message?.Text == CommandText;
         }
 
-        protected MessageCommand(UserEntity user, Update update) : base(user, update) { }
         protected MessageCommand() { }
+        protected MessageCommand(UserEntity user, Update update) : base(user, update) { }
     }
 }

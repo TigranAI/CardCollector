@@ -38,6 +38,16 @@ namespace CardCollector.DataBase.EntityDao
         public static async Task AddNew(StickerEntity sticker)
         {
             await Table.AddAsync(sticker);
+            await Instance.SaveChangesAsync();
+        }
+
+        public static async Task AddRange(IEnumerable<StickerEntity> stickers, int packId)
+        {
+            await Table.AddRangeAsync(stickers.Select(item => {
+                item.PackId = packId;
+                return item;
+            }));
+            await Instance.SaveChangesAsync();
         }
 
         public static async Task<List<StickerEntity>> GetListWhere(Func<StickerEntity, bool> func)

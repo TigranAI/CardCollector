@@ -495,13 +495,13 @@ namespace CardCollector.Resources {
         /// <summary>
         ///   Looks up a localized string similar to При покупке &quot;Случайного пака&quot; Вам может выпасть ЛЮБОЙ стикер от ЛЮБОГО художника
         ///
-        ///При покупке &quot;Пака художника&quot; Вам может выпасть ЛЮБОЙ стикер от выбранного Вами художника художника
+        ///        При покупке &quot;Пака художника&quot; Вам может выпасть ЛЮБОЙ стикер от выбранного Вами художника художника
         ///
-        ///Вероятности выпадения стикера с тиром:
-        ///1 - 80%
-        ///2 - 16%
-        ///3 - 3.3%
-        ///4 - 0.7%.
+        ///        Вероятности выпадения стикера с тиром:
+        ///        1 - 80%
+        ///        2 - 16%
+        ///        3 - 3.3%
+        ///        4 - 0.7%.
         /// </summary>
         internal static string pack_info {
             get {
@@ -627,11 +627,11 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Стикеры будут обновлены через 15 минут.
+        ///   Looks up a localized string similar to Стикеры успешно загружены!.
         /// </summary>
-        internal static string stickers_will_be_updated {
+        internal static string stickers_succesfully_uploaded {
             get {
-                return ResourceManager.GetString("stickers_will_be_updated", resourceCulture);
+                return ResourceManager.GetString("stickers_succesfully_uploaded", resourceCulture);
             }
         }
         
@@ -672,20 +672,43 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Распаковываю архив.....
+        ///   Looks up a localized string similar to Пожалуйста, загрузите ваш xlsx файл с описанием стикеров, по одной строке на стикер. Соблюдайте порядок, в котором вы загружали стикеры.
+        ///        Структура таблицы должна сожержать столбцы в следующем порядке: Название, Автор, Тир, Эмоции, Эффект, Описание.
+        ///        Оставьте первую строку пустой или заполните ее этими заголовками, значения начинайте вписывать со !второй! строки.
+        ///        Поле &quot;Эффект&quot; Может содержать целочисленное значение. Вот описания этих значений:
+        ///        0 - Нет эффекта
+        ///        1 - У [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string unzipping_file {
+        internal static string upload_your_file {
             get {
-                return ResourceManager.GetString("unzipping_file", resourceCulture);
+                return ResourceManager.GetString("upload_your_file", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Загрузите архив со стикерами и таблицей в формате zip.
+        ///   Looks up a localized string similar to Загрузите свои стикеры в формате .webp или .tgs в том порядке, в котором вы описываете их в таблице Excel. Когда завершите загрузку, нажмите на &quot;Завершить загрузку стикеров&quot;.
         /// </summary>
-        internal static string upload_file {
+        internal static string upload_your_stickers {
             get {
-                return ResourceManager.GetString("upload_file", resourceCulture);
+                return ResourceManager.GetString("upload_your_stickers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Количество загруженных стикеров:.
+        /// </summary>
+        internal static string uploaded_count {
+            get {
+                return ResourceManager.GetString("uploaded_count", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Загружаю стикеры....
+        /// </summary>
+        internal static string uploading_stickers {
+            get {
+                return ResourceManager.GetString("uploading_stickers", resourceCulture);
             }
         }
         
@@ -740,6 +763,15 @@ namespace CardCollector.Resources {
         internal static string your_daily_tasks {
             get {
                 return ResourceManager.GetString("your_daily_tasks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ваша ссылка для входа.
+        /// </summary>
+        internal static string your_login_link {
+            get {
+                return ResourceManager.GetString("your_login_link", resourceCulture);
             }
         }
         

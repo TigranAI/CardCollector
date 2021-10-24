@@ -68,6 +68,7 @@ namespace CardCollector.DataBase
         public DbSet<PackEntity> Packs { get; set; }
         public DbSet<SpecialOfferUsers> SpecialOfferUsers { get; set; }
         public DbSet<SpecificPacksEntity> SpecificPacks { get; set; }
+        public DbSet<SessionToken> SessionTokens { get; set; }
 
 
         /* Конфигурация подключения к БД */

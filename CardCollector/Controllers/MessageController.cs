@@ -147,7 +147,12 @@ namespace CardCollector.Controllers
             }
             catch (ApiRequestException e)
             {
-                if (e.ErrorCode != 400) return await SendMessage(user, message, keyboard);
+                if (e.ErrorCode != 400)
+                {
+                    var msg = await SendMessage(user, message, keyboard);
+                    user.Session.Messages.Add(msg.MessageId);
+                    return msg;
+                }
             }
             return new Message();
         }

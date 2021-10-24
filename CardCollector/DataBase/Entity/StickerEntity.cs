@@ -43,6 +43,8 @@ namespace CardCollector.DataBase.Entity
         [Column("md5hash"), MaxLength(40)] public string Md5Hash { get; set; }
         
         [Column("effect"), MaxLength(32)] public int Effect { get; set; }
+        
+        [Column("pack_id"), MaxLength(32)] public int PackId { get; set; }
 
         public override string ToString()
         {

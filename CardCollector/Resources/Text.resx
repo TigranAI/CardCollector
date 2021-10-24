@@ -243,4 +243,10 @@
     <data name="gift" xml:space="preserve">
         <value>🎁</value>
     </data>
+    <data name="login" xml:space="preserve">
+        <value>Вход на сайт</value>
+    </data>
+    <data name="end_sticker_upload" xml:space="preserve">
+        <value>Завершить загрузку стикеров</value>
+    </data>
 </root>

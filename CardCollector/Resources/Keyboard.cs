@@ -28,9 +28,15 @@ namespace CardCollector.Resources
             new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.cancel)},
         });
 
-        public static InlineKeyboardMarkup BuyCoinsKeyboard = new(new[]
+        public static readonly InlineKeyboardMarkup BuyCoinsKeyboard = new(new[]
         {
             new[] {InlineKeyboardButton.WithCallbackData(Text.confirm_exchange, Command.confirm_exchange)},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.cancel)},
+        });
+
+        public static readonly InlineKeyboardMarkup EndStickerUpload = new(new[]
+        {
+            new[] {InlineKeyboardButton.WithCallbackData(Text.end_sticker_upload, Command.end_sticker_upload)},
             new[] {InlineKeyboardButton.WithCallbackData(Text.cancel, Command.cancel)},
         });
 
@@ -429,6 +435,11 @@ namespace CardCollector.Resources
             keyboard.Add(new [] {InlineKeyboardButton.WithCallbackData(Text.info, Command.show_offer_info)});
             keyboard.Add(new []{InlineKeyboardButton.WithCallbackData(Text.cancel, Command.cancel)});
             return new InlineKeyboardMarkup(keyboard);
+        }
+
+        public static InlineKeyboardMarkup LoginKeyboard(string loginLink)
+        {
+            return new InlineKeyboardMarkup(InlineKeyboardButton.WithUrl(Text.login, loginLink));
         }
     }
 }

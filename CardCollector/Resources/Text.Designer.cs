@@ -313,6 +313,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Завершить загрузку стикеров.
+        /// </summary>
+        internal static string end_sticker_upload {
+            get {
+                return ResourceManager.GetString("end_sticker_upload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /error.
         /// </summary>
         internal static string error {
@@ -399,6 +408,15 @@ namespace CardCollector.Resources {
         internal static string items {
             get {
                 return ResourceManager.GetString("items", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вход на сайт.
+        /// </summary>
+        internal static string login {
+            get {
+                return ResourceManager.GetString("login", resourceCulture);
             }
         }
         

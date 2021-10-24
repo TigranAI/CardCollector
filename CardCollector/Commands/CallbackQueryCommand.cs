@@ -53,6 +53,7 @@ namespace CardCollector.Commands
             new Count(),
             new CallbackQuery.DailyTasks(),
             new DeleteCombine(),
+            new EndUploadStickers(),
             new SelectEmoji(),
             new MyPacks(),
             new OpenPack(),

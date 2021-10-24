@@ -60,12 +60,11 @@ namespace CardCollector.Commands
                 : new CommandNotFound(user, update, $"{update.InlineQuery!.ChatType}={update.InlineQuery!.Query}");
         }
 
+        protected InlineQueryCommand() { }
         protected InlineQueryCommand(UserEntity user, Update update) : base(user, update)
         {
             InlineQueryId = update.InlineQuery!.Id;
             Query = update.InlineQuery!.Query;
         }
-        
-        protected InlineQueryCommand() { }
     }
 }

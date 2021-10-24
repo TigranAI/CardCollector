@@ -286,6 +286,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ABT.
+        /// </summary>
+        internal static string end_sticker_upload {
+            get {
+                return ResourceManager.GetString("end_sticker_upload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AAS.
         /// </summary>
         internal static string my_packs {

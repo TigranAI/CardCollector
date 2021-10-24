@@ -156,4 +156,7 @@
     <data name="show_offer_info" xml:space="preserve">
         <value>ABS</value>
     </data>
+    <data name="end_sticker_upload" xml:space="preserve">
+        <value>ABT</value>
+    </data>
 </root>

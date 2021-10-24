@@ -5,11 +5,14 @@ using System.Threading.Tasks;
 using System.Timers;
 using CardCollector.Resources;
 using Telegram.Bot;
+using Telegram.Bot.Types;
 
 namespace CardCollector
 {
     public static class Utilities
     {
+        public static readonly Random rnd = new Random();
+        
         public static string ToJson(object obj)
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(obj);
@@ -28,18 +31,16 @@ namespace CardCollector
             return sb.ToString();
         }
 
-        public static async Task DownloadFile(string fileId)
+        public static async Task<string> DownloadFile(Document file)
         {
-            await Task.Run(async () =>
-            {
-                /* Получаем информацию о файле */
-                var fileInfo = await Bot.Client.GetFileAsync(fileId);
-                /* Собираем ссылку на файл */
-                var fileUri = $"https://api.telegram.org/file/bot{AppSettings.TOKEN}/{fileInfo.FilePath}";
-                /* Загружаем файл */
-                var client = new WebClient();
-                client.DownloadFile(new Uri(fileUri), "pack.zip");
-            });
+            /* Получаем информацию о файле */
+            var fileInfo = await Bot.Client.GetFileAsync(file.FileId);
+            /* Собираем ссылку на файл */
+            var fileUri = $"https://api.telegram.org/file/bot{AppSettings.TOKEN}/{fileInfo.FilePath}";
+            /* Загружаем файл */
+            var client = new WebClient();
+            client.DownloadFile(new Uri(fileUri), file.FileName ?? "file");
+            return file.FileName ?? "file";
         }
         
         public static void SetUpTimer(TimeSpan timeToRun, ElapsedEventHandler callback)
