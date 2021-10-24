@@ -309,7 +309,6 @@ namespace CardCollector.Resources
                 keyboard.Add(new []{InlineKeyboardButton.WithCallbackData($"{Text.delete} {Text.sticker} {keyboard.Count + 1}",
                     $"{Command.delete_combine}={sticker.Md5Hash}")});
             }
-            keyboard.Add(new []{InlineKeyboardButton.WithCallbackData(Text.back, Command.back)});
             if (module.GetCombineCount() == Constants.COMBINE_COUNT)
                 keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(
                     $"{Text.combine} {module.CalculateCombinePrice()}{Text.coin}", Command.combine_stickers)});

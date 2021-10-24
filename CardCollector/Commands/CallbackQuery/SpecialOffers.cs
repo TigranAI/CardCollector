@@ -20,10 +20,7 @@ namespace CardCollector.Commands.CallbackQuery
                 .WhereAsync(async offer => offer.IsInfinite || !await SpecialOfferUsersDao.NowUsed(User.Id, offer.Id));
             var shopEntities = specialOffers.ToList();
             if (shopEntities.Count < 1)
-            {
-                User.Session.PopLast();
                 await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.offers_not_found, true);
-            }
             else
                 await MessageController.EditMessage(User, CallbackMessageId, Messages.available_offers,
                     Keyboard.SpecialOffersKeyboard(shopEntities));

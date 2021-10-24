@@ -15,8 +15,10 @@ namespace CardCollector.Commands.CallbackQuery
 
         public override async Task Execute()
         {
-            User.Session.State = UserState.CombineMenu;
             var combineModule = User.Session.GetModule<CombineModule>();
+            if (User.Session.State != UserState.CombineMenu)
+                combineModule.CombineList.Clear();
+            User.Session.State = UserState.CombineMenu;
             if (combineModule.SelectedSticker == null)
             {
                 var collectionModule = User.Session.GetModule<CollectionModule>();

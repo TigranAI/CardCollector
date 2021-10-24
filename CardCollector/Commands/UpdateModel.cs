@@ -21,7 +21,7 @@ namespace CardCollector.Commands
 
         public abstract Task Execute();
 
-        public async Task PrepareAndExecute()
+        public virtual async Task PrepareAndExecute()
         {
             User.Session.SetCurrentCommand(GetType());
             if (ClearMenu) User.Session.ClearMenuStack();

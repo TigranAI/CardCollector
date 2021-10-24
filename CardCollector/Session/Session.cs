@@ -85,20 +85,15 @@ namespace CardCollector.Session
 
         public bool TryGetPreviousMenu(out MenuInformation menu)
         {
-            if (MenuStack.TryPeek(out menu) && CurrentCommandType != menu.GetMenuType()) return true;
-            PopLast();
+            while (MenuStack.TryPeek(out menu) && CurrentCommandType == menu.GetMenuType()) {
+                MenuStack.TryPop(out _);
+            }
             return MenuStack.TryPeek(out menu);
-        }
-
-        public void PopLast()
-        {
-            MenuStack.TryPop(out _);
         }
 
         public void AddMenuToStack(UpdateModel menu)
         {
-            if (!MenuStack.TryPeek(out var current) || current.GetType() != menu.GetType())
-                MenuStack.Push(new MenuInformation(menu, State));
+            MenuStack.Push(new MenuInformation(menu, State));
         }
 
         public void SetCurrentCommand(Type commandType)

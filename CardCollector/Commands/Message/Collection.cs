@@ -21,7 +21,7 @@ namespace CardCollector.Commands.Message
             User.Session.State = UserState.CollectionMenu;
             User.Session.InitNewModule<CollectionModule>();
             /* Отображаем сообщение с фильтрами */
-            await new ShowFiltersMenu(User, Update).PrepareAndExecute();
+            await new ShowFiltersMenu(User, Update).Execute();
         }
         
         public Collection() { }

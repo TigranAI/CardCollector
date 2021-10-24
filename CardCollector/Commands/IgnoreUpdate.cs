@@ -11,7 +11,9 @@ namespace CardCollector.Commands
         protected override bool ClearMenu => false;
         protected override bool AddToStack => false;
 
-        public override Task Execute() { return  Task.CompletedTask; }
+        public override Task PrepareAndExecute() => Task.CompletedTask;
+        public override Task Execute() => Task.CompletedTask;
+        
         protected internal override bool IsMatches(UserEntity user, Update update) => true;
     }
 }

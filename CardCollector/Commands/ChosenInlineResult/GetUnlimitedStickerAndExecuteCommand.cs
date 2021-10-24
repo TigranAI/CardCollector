@@ -24,7 +24,7 @@ namespace CardCollector.Commands.ChosenInlineResult
             /* Выдаем пользователю 1 стикер */
             await UserStickerRelationDao.AddNew(User, sticker, 1);
             /* Выполняем стандартный сценарий команды */
-            await PrivateFactory(Update, User).Execute();
+            await PrivateFactory(Update, User).PrepareAndExecute();
         }
         
         public GetUnlimitedStickerAndExecuteCommand() { }
