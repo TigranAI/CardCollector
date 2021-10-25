@@ -51,6 +51,7 @@ namespace CardCollector.Commands.CallbackQuery
                 userPack.Count += module.SelectedPosition?.Count ?? module.Count;
                 if (module.SelectedPosition?.AdditionalPrize != "") await GivePrize(module.SelectedPosition?.AdditionalPrize);
                 var message = await MessageController.SendMessage(User, Messages.thanks_for_buying);
+                User.Session.ResetModule<ShopModule>();
                 User.Session.Messages.Add(message.MessageId);
             }
         }

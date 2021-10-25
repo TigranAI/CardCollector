@@ -11,6 +11,9 @@ namespace CardCollector.Session.Modules
         public void Reset()
         {
             SelectedPosition = null;
+            SelectedPack = null;
+            Count = 1;
+            EnteredExchangeSum = 1;
         }
     }
 }

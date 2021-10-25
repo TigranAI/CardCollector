@@ -43,8 +43,12 @@ namespace CardCollector.Commands
             new ShowStickersInBotChat(),
             new ShowStickersInPrivate(),
         };
-        
-        
+
+        public override async Task PrepareAndExecute()
+        {
+            await Execute();
+        }
+
         /* Метод, создающий объекты команд исходя из полученного обновления */
         public static async Task<UpdateModel> Factory(Update update)
         {

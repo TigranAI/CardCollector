@@ -25,8 +25,11 @@ namespace CardCollector
             if (Constants.DEBUG) Console.WriteLine(message);
             else
             {
-                using(var sw = File.AppendText($@"{path}\{today.Day}-{today.Month}-{today.Year}.log"))
+                using(var sw = File.AppendText($"{path}/{today.Day}-{today.Month}-{today.Year}.log"))
+                {
                     await sw.WriteLineAsync(message);
+                    sw.Close();
+                }
             }
         }
         
