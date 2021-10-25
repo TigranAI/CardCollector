@@ -21,18 +21,16 @@ namespace CardCollector.Commands.Message
         private const string onlyEmojiPattern =
             "\\u00a9|\\u00ae|[\\u2000-\\u3300]|\\ud83c[\\ud000-\\udfff]|\\ud83d[\\ud000-\\udfff]|\\ud83e[\\ud000-\\udfff]";
         
-        /* Список пользователей, от которых ожидается ввод эмоджи ключ - id пользователя, значение - сообщение с меню */
-        private static readonly Dictionary<long, int> Queue = new ();
+        private static readonly List<long> Queue = new ();
         public override async Task Execute()
         {
             var input = Update.Message!.Text;
             /* если пользователь ввел что-то кроме эмодзи */
             if (!Regex.IsMatch(input!, onlyEmojiPattern))
-                await MessageController.EditMessage(User, Queue[User.Id], Messages.please_enter_emoji,
-                    Keyboard.EmojiOptions);
+                await MessageController.EditMessage(User, Messages.please_enter_emoji, Keyboard.EmojiOptions);
             /* если пользователь ввел несколько эмодзи или эмодзи и текст */
             else if (!Regex.IsMatch(input, oneEmojiPattern))
-                await MessageController.EditMessage(User, Queue[User.Id], Messages.enter_only_one_emoji,
+                await MessageController.EditMessage(User, Messages.enter_only_one_emoji,
                     Keyboard.EmojiOptions);
             else
             {
@@ -41,15 +39,15 @@ namespace CardCollector.Commands.Message
                 /* Формируем сообщение с имеющимися фильтрами у пользователя */
                 var text = filtersModule.ToString(User.Session.State);
                 /* Редактируем сообщение */
-                await MessageController.EditMessage(User, Queue[User.Id], text, Keyboard.GetSortingMenu(User.Session.State));
+                await MessageController.EditMessage(User, text, Keyboard.GetSortingMenu(User.Session.State));
                 Queue.Remove(User.Id);
             }
         }
 
         /* Добавляем пользователя в очередь */
-        public static void AddToQueue(long userId, int messageId)
+        public static void AddToQueue(long userId)
         {
-            Queue.TryAdd(userId, messageId);
+            if (!Queue.Contains(userId)) Queue.Add(userId);
         }
 
         /* Удаляем пользователя из очереди */
@@ -60,7 +58,7 @@ namespace CardCollector.Commands.Message
 
         protected internal override bool IsMatches(UserEntity user, Update update)
         {
-            return Queue.ContainsKey(user.Id) && update.Message!.Type == MessageType.Text;
+            return Queue.Contains(user.Id) && update.Message!.Type == MessageType.Text;
         }
 
         public EnterEmoji() { }

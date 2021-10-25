@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
-using CardCollector.Session;
 using Microsoft.EntityFrameworkCore;
 using Telegram.Bot.Types.InlineQueryResults;
 
@@ -59,7 +58,7 @@ namespace CardCollector
             var result = new List<StickerEntity>();
             foreach (var relation in dict.Values.Where(i => i.Count > 0))
             {
-                var sticker = await StickerDao.GetStickerByHash(relation.StickerId);
+                var sticker = await StickerDao.GetByHash(relation.StickerId);
                 if (sticker.Title.Contains(filter, StringComparison.CurrentCultureIgnoreCase)) result.Add(sticker);
             }
             return result;

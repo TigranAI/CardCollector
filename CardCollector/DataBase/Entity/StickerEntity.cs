@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using CardCollector.Resources;
@@ -67,6 +68,15 @@ namespace CardCollector.DataBase.Entity
             if (Effect != 0) str += $"\n{Text.effect}: {EffectTranslations.ResourceManager.GetString(Effect.ToString())}";
             if (Description != "") str += $"\n\n{Text.description}: {Description}";
             return str;
+        }
+
+        public bool Contains(string value)
+        {
+            return value != ""
+                ? Title.Contains(value, StringComparison.CurrentCultureIgnoreCase) ||
+                  Author.Contains(value, StringComparison.CurrentCultureIgnoreCase) ||
+                  Emoji.Equals(value)
+                : true;
         }
     }
 }

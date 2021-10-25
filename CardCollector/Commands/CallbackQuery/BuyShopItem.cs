@@ -12,7 +12,7 @@ namespace CardCollector.Commands.CallbackQuery
     public class BuyShopItem : CallbackQueryCommand
     {
         protected override string CommandText => Command.buy_shop_item;
-        protected override bool ClearMenu => false;
+        protected override bool ClearMenu => true;
         protected override bool AddToStack => false;
 
         public override async Task Execute()
@@ -70,7 +70,7 @@ namespace CardCollector.Commands.CallbackQuery
                     sticker = stickers[rnd.Next(stickers.Count)];
                     break;
                 case "sticker":
-                    sticker = await StickerDao.GetStickerByHash(data[1]);
+                    sticker = await StickerDao.GetByHash(data[1]);
                     break;
             }
             if (sticker != null)

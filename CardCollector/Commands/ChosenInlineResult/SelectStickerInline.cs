@@ -18,7 +18,7 @@ namespace CardCollector.Commands.ChosenInlineResult
         {
             await User.ClearChat();
             var hash = InlineResult.Split('=')[1];
-            var sticker = await StickerDao.GetStickerByHash(hash);
+            var sticker = await StickerDao.GetByHash(hash);
             var stickerCount = User.Session.State switch
             {
                 UserState.AuctionMenu => await AuctionController.GetStickerCount(sticker.Id, User.Session.GetModule<FiltersModule>()),

@@ -15,8 +15,8 @@ namespace CardCollector.Commands.CallbackQuery
 
         public override async Task Execute()
         {
-            EnterEmoji.AddToQueue(User.Id, CallbackMessageId);
-            await MessageController.EditMessage(User, CallbackMessageId, Messages.enter_emoji, Keyboard.EmojiOptions);
+            EnterEmoji.AddToQueue(User.Id);
+            await MessageController.EditMessage(User, Messages.enter_emoji, Keyboard.EmojiOptions);
         }
 
         public SelectEmoji() { }

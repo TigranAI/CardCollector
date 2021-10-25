@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CardCollector.Commands;
@@ -89,7 +90,12 @@ namespace CardCollector.Controllers
             try
             {
                 if (!user.IsBlocked)
-                    return await Bot.Client.SendTextMessageAsync(user.ChatId, message, replyMarkup: keyboard, disableNotification: true);
+                {
+                    if (user.Session.Messages.Count > 0 && keyboard is InlineKeyboardMarkup k)
+                        return await EditMessage(user, message, k, user.Session.Messages.Last());
+                    return await Bot.Client.SendTextMessageAsync(user.ChatId, message, replyMarkup: keyboard,
+                        disableNotification: true);
+                }
             }
             catch (Exception e)
             {
@@ -138,12 +144,15 @@ namespace CardCollector.Controllers
          messageId - id сообщения
          message - текст сообщения
          keyboard - клавиатура, которую надо добавить к сообщению */
-        public static async Task<Message> EditMessage(UserEntity user, int messageId, string message, InlineKeyboardMarkup keyboard = null)
+        public static async Task<Message> EditMessage(UserEntity user, string message, InlineKeyboardMarkup keyboard = null, int messageId = -1)
         {
             try
             {
                 if (!user.IsBlocked)
-                    return await Bot.Client.EditMessageTextAsync(user.ChatId, messageId, message, replyMarkup: keyboard);
+                {
+                    var msgId = messageId != -1 ? messageId : user.Session.Messages.Last();
+                    return await Bot.Client.EditMessageTextAsync(user.ChatId, msgId, message, replyMarkup: keyboard);
+                }
             }
             catch (Exception)
             {
@@ -177,6 +186,7 @@ namespace CardCollector.Controllers
         {
             try
             {
+                user.Session.UndoCurrentCommand();
                 if (!user.IsBlocked)
                     await Bot.Client.AnswerCallbackQueryAsync(callbackQueryId, text, showAlert);
             }

@@ -16,9 +16,7 @@ namespace CardCollector.Commands.CallbackQuery
         public override async Task Execute()
         {
             User.Session.State = UserState.UploadFile;
-            var module = User.Session.GetModule<UploadedStickersModule>();
-            await MessageController.EditMessage(User, module.MessageId, Messages.upload_your_file, 
-                Keyboard.BackKeyboard);
+            await MessageController.EditMessage(User, Messages.upload_your_file, Keyboard.BackKeyboard);
         }
 
         public EndUploadStickers() { }

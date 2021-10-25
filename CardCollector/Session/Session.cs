@@ -49,7 +49,8 @@ namespace CardCollector.Session
 
         public void ResetModule<T>() where T : Module
         {
-            Modules[typeof(T)].Reset();
+            try { Modules[typeof(T)].Reset(); }
+            catch (Exception) { /**/ }
         }
 
         public void DeleteModule<T>() where T : Module

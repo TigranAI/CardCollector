@@ -12,7 +12,7 @@ namespace CardCollector.Commands.CallbackQuery
     {
         protected override string CommandText => Command.select_shop_pack;
         protected override bool ClearMenu => false;
-        protected override bool AddToStack => false;
+        protected override bool AddToStack => true;
 
         public override async  Task Execute()
         {

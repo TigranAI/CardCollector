@@ -20,6 +20,7 @@ namespace CardCollector.DataBase.EntityDao
         {
             var newPack = new UserPacks() { UserId = userId, PackId = packId };
             var result = await Table.AddAsync(newPack);
+            await Instance.SaveChangesAsync();
             return result.Entity;
         }
 

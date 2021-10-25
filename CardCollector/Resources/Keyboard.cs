@@ -96,6 +96,14 @@ namespace CardCollector.Resources
             new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
         });
 
+
+        /* Клавиатура с одной кнопкой отмены */
+        public static readonly InlineKeyboardMarkup StickerInfoKeyboard = new (new[]
+        {
+            new[] {InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.show_stickers)},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
+        });
+
         /* Клавиатура для покупок */
         public static readonly InlineKeyboardMarkup BuyGemsKeyboard = new (new[]
         {
@@ -360,13 +368,13 @@ namespace CardCollector.Resources
             return new InlineKeyboardMarkup(keyboard);
         }
 
-        public static InlineKeyboardMarkup ShopPacksKeyboard = new (new[]
-        {
-            new[] {InlineKeyboardButton.WithCallbackData(Text.buy_random, $"{Command.select_shop_pack}=1")},
-            new[] {InlineKeyboardButton.WithCallbackData(Text.buy_author, $"{Command.buy_author_pack_menu}=1")},
-            new[] {InlineKeyboardButton.WithCallbackData(Text.info, Command.pack_info)},
-            new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
-        });
+        public static InlineKeyboardMarkup ShopPacksKeyboard = new( new[]
+            {
+                new[] {InlineKeyboardButton.WithCallbackData(Text.buy_random, $"{Command.select_shop_pack}=1")},
+                new[] {InlineKeyboardButton.WithCallbackData(Text.buy_author, $"{Command.buy_author_pack_menu}=1")},
+                new[] {InlineKeyboardButton.WithCallbackData(Text.info, Command.pack_info)},
+                new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
+            });
 
         public static InlineKeyboardMarkup OfferKeyboard(ShopModule module)
         {
@@ -390,6 +398,9 @@ namespace CardCollector.Resources
                 });
             keyboard.Add(new [] {InlineKeyboardButton.WithCallbackData(Text.info, Command.show_offer_info)});
             keyboard.Add(new []{InlineKeyboardButton.WithCallbackData(Text.back, Command.back)});
+            if (module.SelectedPack is { } a && a.Id != 1) keyboard.Insert(0, new [] {
+                InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.show_stickers)
+            });
             return new InlineKeyboardMarkup(keyboard);
         }
 

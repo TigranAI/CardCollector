@@ -26,7 +26,7 @@ namespace CardCollector.Commands.CallbackQuery
                 $"{Messages.current_price} {module.SellPrice}{Text.gem}" +
                 $"\n{Messages.lower_price} {lowerPrice}{Text.gem}" +
                 $"\n{Messages.enter_your_gems_price} {Text.gem}:", Keyboard.AuctionPutCancelKeyboard);
-            EnterGemsPrice.AddToQueue(User.Id, message.MessageId);
+            EnterGemsPrice.AddToQueue(User.Id);
             User.Session.Messages.Add(message.MessageId);
         }
 

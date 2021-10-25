@@ -30,12 +30,12 @@ namespace CardCollector.DataBase.EntityDao
 
         public static async Task<IEnumerable<StickerEntity>> GetStickers(string filter)
         {
-            var entityList = Table
-                .Select(e => e.StickerId)
-                .Distinct()
-                .ToHashSet();
-            var stickersList = await StickerDao.GetAll(filter);
-            return stickersList.Where(e => entityList.Contains(e.Id));
+            var entityList = (await Table.ToListAsync()).Select(async e => await StickerDao.GetById(e.StickerId));
+            var stickersList = await Task.WhenAll(entityList);
+            return stickersList
+                .Where(item => item.Contains(filter))
+                .GroupBy(item => item.Id)
+                .Select(item => item.First());
         }
         //добавляем объект в аукцион
         public static async void AddNew(AuctionEntity product)

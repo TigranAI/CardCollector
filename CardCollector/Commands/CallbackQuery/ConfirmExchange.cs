@@ -22,7 +22,7 @@ namespace CardCollector.Commands.CallbackQuery
             {
                 User.Cash.Gems -= module.EnteredExchangeSum;
                 User.Cash.Coins += module.EnteredExchangeSum * 150;
-                await MessageController.EditMessage(User, CallbackMessageId,
+                await MessageController.EditMessage(User,
                     $"{Messages.you_got} {module.EnteredExchangeSum * 150}{Text.coin} {Text.per} {module.EnteredExchangeSum}{Text.gem}");
             }
         }

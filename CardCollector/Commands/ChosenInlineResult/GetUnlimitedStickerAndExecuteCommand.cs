@@ -20,7 +20,7 @@ namespace CardCollector.Commands.ChosenInlineResult
             /* Получаем хеш стикера */
             var hash = InlineResult.Split('=')[1];
             /* Получаем объект стикера */
-            var sticker = await StickerDao.GetStickerByHash(hash);
+            var sticker = await StickerDao.GetByHash(hash);
             /* Выдаем пользователю 1 стикер */
             await UserStickerRelationDao.AddNew(User, sticker, 1);
             /* Выполняем стандартный сценарий команды */

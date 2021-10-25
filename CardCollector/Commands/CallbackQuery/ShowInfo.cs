@@ -37,7 +37,7 @@ namespace CardCollector.Commands.CallbackQuery
             return data[0] switch
             {
                 "tier" => $"{Text.sticker} {data[1]} {Text.tier2}",
-                "sticker" => $"{Text.sticker} {(await StickerDao.GetStickerByHash(data[1])).Title}",
+                "sticker" => $"{Text.sticker} {(await StickerDao.GetByHash(data[1])).Title}",
                 _ => ""
             };
         }

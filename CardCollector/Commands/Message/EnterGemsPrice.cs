@@ -14,47 +14,45 @@ namespace CardCollector.Commands.Message
         protected override string CommandText => "";
         protected override bool ClearMenu => false;
         protected override bool AddToStack => false;
-
-        private static readonly Dictionary<long, int> Queue = new ();
+        
+        private static readonly List<long> Queue = new ();
         public override async Task Execute()
         {
             /* если пользователь ввел что-то кроме эмодзи */
             var module = User.Session.GetModule<CollectionModule>();
             if (!int.TryParse(Update.Message!.Text, out var price) || price < 0)
             {
-                await MessageController.EditMessage(User, Queue[User.Id],
+                await MessageController.EditMessage(User,
                     $"{Messages.current_price} {module.SellPrice}{Text.gem}\n{Messages.please_enter_integer}",
                     Keyboard.AuctionPutCancelKeyboard);
             }
             else
             {
                 module.SellPrice = price;
-                await MessageController.EditMessage(User, Queue[User.Id],
+                await MessageController.EditMessage(User,
                     $"{Messages.confirm_selling} {module.SellPrice}{Text.gem}:", Keyboard.AuctionPutCancelKeyboard);
                 Queue.Remove(User.Id);
             }
         }
 
-        //Добавляем пользователя в очередь #1#
-        public static void AddToQueue(long userId, int messageId)
+        /* Добавляем пользователя в очередь */
+        public static void AddToQueue(long userId)
         {
-            Queue.TryAdd(userId, messageId);
+            if (!Queue.Contains(userId)) Queue.Add(userId);
         }
 
-        //Удаляем пользователя из очереди #1#
+        /* Удаляем пользователя из очереди */
         public static void RemoveFromQueue(long userId)
         {
             Queue.Remove(userId);
         }
 
-        // Переопределяем метод, так как команда удовлетворяет условию, если пользователь находится в очереди #1#
         protected internal override bool IsMatches(UserEntity user, Update update)
         {
-            return Queue.ContainsKey(user.Id) && update.Message!.Type == MessageType.Text;
+            return Queue.Contains(user.Id) && update.Message!.Type == MessageType.Text;
         }
 
         public EnterGemsPrice() { }
-
         public EnterGemsPrice(UserEntity user, Update update) : base(user, update) { }
     }
 }

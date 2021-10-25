@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -50,12 +49,10 @@ namespace CardCollector.DataBase.Entity
         public async Task<IEnumerable<StickerEntity>> GetStickersList(string filter, int tier = -1)
         {
             if (Constants.UNLIMITED_ALL_STICKERS) return await StickerDao.GetAll(filter);
-            var result = Stickers.Values
-                .Where(relation => relation.Count > 0)
-                .Select(rel => StickerDao.GetStickerByHash(rel.ShortHash).Result)
-                .Where(sticker => sticker.Title.Contains(filter, StringComparison.CurrentCultureIgnoreCase));
-            if (tier != -1) result = result.Where(sticker => sticker.Tier == tier);
-            return result;
+            var relationStickers = Stickers.Values.Where(relation => relation.Count > 0);
+            var stickerList = await Task.WhenAll(relationStickers
+                .Select(async rel => await StickerDao.GetByHash(rel.ShortHash)));
+            return stickerList.Where(sticker => sticker.Contains(filter) && (tier == -1 || sticker.Tier == tier));
         }
 
         public async Task<int> AuctionDiscount()

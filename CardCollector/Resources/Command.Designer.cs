@@ -421,6 +421,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ABV.
+        /// </summary>
+        internal static string sticker_info {
+            get {
+                return ResourceManager.GetString("sticker_info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ABC.
         /// </summary>
         internal static string tier {

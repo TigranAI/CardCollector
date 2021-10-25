@@ -25,7 +25,7 @@ namespace CardCollector.Commands.CallbackQuery
                 User.Stickers[collectionModule.SelectedSticker.Md5Hash].Count -= collectionModule.Count;
                 AuctionController.SellCard(User.Id, collectionModule.SelectedSticker.Id, collectionModule.SellPrice,
                     collectionModule.Count);
-                await MessageController.EditMessage(User, CallbackMessageId, Messages.successfully_selling);
+                await MessageController.EditMessage(User, Messages.successfully_selling);
             }
         }
         

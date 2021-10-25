@@ -16,12 +16,12 @@ namespace CardCollector.Commands.CallbackQuery
 
         public override async Task Execute()
         {
-            var sticker = await StickerDao.GetStickerByHash(CallbackData.Split('=')[1]);
+            var sticker = await StickerDao.GetByHash(CallbackData.Split('=')[1]);
             var module = User.Session.GetModule<CombineModule>();
             module.CombineList.Remove(sticker);
             if (module.CombineList.Count == 0)
                 await new Back(User, Update).PrepareAndExecute();
-            else await MessageController.EditMessage(User, CallbackMessageId, module.ToString(), Keyboard.GetCombineKeyboard(module));
+            else await MessageController.EditMessage(User, module.ToString(), Keyboard.GetCombineKeyboard(module));
         }
 
         public DeleteCombine() { }

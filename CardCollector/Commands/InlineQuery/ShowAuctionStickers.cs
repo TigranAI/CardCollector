@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
@@ -18,12 +17,9 @@ namespace CardCollector.Commands.InlineQuery
         public override async Task Execute()
         {
             // Получаем список стикеров
-            var stickersList = (await AuctionController.GetStickers(Query)).AsEnumerable();
-            stickersList = User.Session.GetModule<FiltersModule>()
-                .ApplyTo(stickersList);
-            var results = User.Session.GetModule<FiltersModule>()
-                .ApplyPriceTo(stickersList)
-                .ToTelegramResults(Command.select_sticker);
+            var stickersList = await AuctionController.GetStickers(Query);
+            var filters = User.Session.GetModule<FiltersModule>();
+            var results = filters.ApplyTo(stickersList, true).ToTelegramResults(Command.select_sticker);
             // Посылаем пользователю ответ на его запрос
             await MessageController.AnswerInlineQuery(InlineQueryId, results);
         }

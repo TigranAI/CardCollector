@@ -40,6 +40,7 @@ namespace CardCollector.Commands
             new SendPrivateSticker(),
             // Обработка результата при выборе продавца
             new SelectTrader(),
+            new StickerInfo(),
             
             new SelectStickerInline(),
         };

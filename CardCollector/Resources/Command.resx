@@ -144,4 +144,7 @@
     <data name="select_shop_pack" xml:space="preserve">
         <value>ABU</value>
     </data>
+    <data name="sticker_info" xml:space="preserve">
+        <value>ABV</value>
+    </data>
 </root>

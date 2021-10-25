@@ -16,6 +16,7 @@ namespace CardCollector.Commands.CallbackQuery
 
         public override async Task Execute()
         {
+            Logs.LogOut("here");
             await User.ClearChat();
             var offerId = int.Parse(CallbackData.Split('=')[1]);
             var offerInfo = await ShopDao.GetById(offerId);

@@ -20,12 +20,9 @@ namespace CardCollector.Commands.CallbackQuery
             var totalCount = packs.Count;
             packs = packs.GetRange((page - 1) * 10, packs.Count >= page * 10 ? 10 : packs.Count % 10);
             if (packs.Count == 0)
-            {
-                User.Session.UndoCurrentCommand();
                 await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.page_not_found);
-            }
             else
-                await MessageController.EditMessage(User, CallbackMessageId, Messages.choose_author,
+                await MessageController.EditMessage(User, Messages.choose_author,
                     Keyboard.GetShopPacksKeyboard(packs, Keyboard.GetPagePanel(page, totalCount, CommandText)));
         }
 

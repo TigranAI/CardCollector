@@ -15,7 +15,7 @@ namespace CardCollector.DataBase.EntityDao
         private static readonly DbSet<StickerEntity> Table = Instance.Stickers;
         
         /* Получение информации о стикере по его хешу, возвращает Null, если стикера не существует */
-        public static async Task<StickerEntity> GetStickerByHash(string hash)
+        public static async Task<StickerEntity> GetByHash(string hash)
         {
             return await Table.FirstOrDefaultAsync(item => item.Md5Hash == hash);
         }
@@ -29,9 +29,7 @@ namespace CardCollector.DataBase.EntityDao
 
         public static async Task<List<StickerEntity>> GetAll(string filter = "")
         {
-            var list = await Table.ToListAsync();
-            return filter == "" ? list : list.Where
-                (item => item.Title.Contains(filter, StringComparison.CurrentCultureIgnoreCase)).ToList();
+            return (await Table.WhereAsync(item => item.Contains(filter))).ToList();
         }
 
         public static async Task AddNew(StickerEntity sticker)

@@ -33,9 +33,9 @@ namespace CardCollector.Controllers
             return await AuctionDao.GetTotalQuantity(stickerId);
         }
 
-        public static async Task<List<StickerEntity>> GetStickers(string filter)
+        public static async Task<IEnumerable<StickerEntity>> GetStickers(string filter)
         {
-            return (await AuctionDao.GetStickers(filter)).ToList();
+            return await AuctionDao.GetStickers(filter);
         }
 
         public static async Task<IEnumerable<AuctionEntity>> GetTradersList(string filter, string stickerId)

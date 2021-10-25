@@ -15,12 +15,12 @@ namespace CardCollector.Commands.Message
         protected override bool ClearMenu => false;
         protected override bool AddToStack => false;
 
-        private static readonly Dictionary<long, int> Queue = new ();
+        private static readonly List<long> Queue = new ();
         public override async Task Execute()
         {
             var module = User.Session.GetModule<ShopModule>();
             if (!int.TryParse(Update.Message!.Text, out var sum) || sum < 0)
-                await MessageController.EditMessage(User, Queue[User.Id],
+                await MessageController.EditMessage(User,
                     $"{Messages.exchange_mesage}" +
                     $"\n{Messages.gems_exchange_count} {module.EnteredExchangeSum}{Text.gem}" +
                     $"\n{Messages.coins_exchange_count} {module.EnteredExchangeSum * 150}{Text.coin}" +
@@ -29,7 +29,7 @@ namespace CardCollector.Commands.Message
             else
             {
                 module.EnteredExchangeSum = sum; 
-                await MessageController.EditMessage(User, Queue[User.Id], 
+                await MessageController.EditMessage(User,
                     $"{Messages.exchange_mesage}" +
                     $"\n{Messages.gems_exchange_count} {module.EnteredExchangeSum}{Text.gem}" +
                     $"\n{Messages.coins_exchange_count} {module.EnteredExchangeSum * 150}{Text.coin}" +
@@ -39,22 +39,21 @@ namespace CardCollector.Commands.Message
             }
         }
 
-        //Добавляем пользователя в очередь #1#
-        public static void AddToQueue(long userId, int messageId)
+        /* Добавляем пользователя в очередь */
+        public static void AddToQueue(long userId)
         {
-            Queue.TryAdd(userId, messageId);
+            if (!Queue.Contains(userId)) Queue.Add(userId);
         }
 
-        //Удаляем пользователя из очереди #1#
+        /* Удаляем пользователя из очереди */
         public static void RemoveFromQueue(long userId)
         {
             Queue.Remove(userId);
         }
 
-        // Переопределяем метод, так как команда удовлетворяет условию, если пользователь находится в очереди #1#
         protected internal override bool IsMatches(UserEntity user, Update update)
         {
-            return Queue.ContainsKey(user.Id) && update.Message!.Type == MessageType.Text;
+            return Queue.Contains(user.Id) && update.Message!.Type == MessageType.Text;
         }
 
         public EnterGemsExchange() { }

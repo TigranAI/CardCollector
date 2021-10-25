@@ -19,7 +19,6 @@ namespace CardCollector.Commands.Message
             User.Session.State = UserState.UploadSticker;
             var result = await MessageController.SendMessage(User, Messages.upload_your_stickers, Keyboard.BackKeyboard);
             User.Session.Messages.Add(result.MessageId);
-            User.Session.GetModule<UploadedStickersModule>().MessageId = result.MessageId;
         }
 
         protected internal override bool IsMatches(UserEntity user, Update update)

@@ -39,6 +39,7 @@ namespace CardCollector.Commands
             new ShowCombineStickers(),
             // Показать список продавцов
             new ShowTradersInBotChat(),
+            new ShowStickersInShopPack(),
             // Показать стикеры в личных сообщениях с ботом для выбора или просмотра информации
             new ShowStickersInBotChat(),
             new ShowStickersInPrivate(),

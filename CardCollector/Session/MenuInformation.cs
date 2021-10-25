@@ -19,6 +19,10 @@ namespace CardCollector.Session
                 case UserState.ShopMenu:
                     session.ResetModule<ShopModule>();
                     break;
+                case UserState.CollectionMenu:
+                    session.ResetModule<CollectionModule>();
+                    session.ResetModule<CombineModule>();
+                    break;
             }
             await Parent.PrepareAndExecute();
         }

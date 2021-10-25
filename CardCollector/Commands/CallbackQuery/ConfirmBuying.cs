@@ -22,7 +22,7 @@ namespace CardCollector.Commands.CallbackQuery
             else
             {
                 var text = $"{Messages.confirm_buying}\n{auctionModule.Count}{Text.items} {Text.per} {price}{Text.gem}\n{Messages.are_you_sure}";
-                await MessageController.EditMessage(User, CallbackMessageId, text, Keyboard.GetConfirmationKeyboard(Command.buy_sticker));
+                await MessageController.EditMessage(User, text, Keyboard.GetConfirmationKeyboard(Command.buy_sticker));
             }
         }
 

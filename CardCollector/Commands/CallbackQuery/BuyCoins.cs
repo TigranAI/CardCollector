@@ -16,9 +16,9 @@ namespace CardCollector.Commands.CallbackQuery
 
         public override async Task Execute()
         {
-            EnterGemsExchange.AddToQueue(User.Id, CallbackMessageId);
+            EnterGemsExchange.AddToQueue(User.Id);
             var module = User.Session.GetModule<ShopModule>();
-            await MessageController.EditMessage(User, CallbackMessageId,
+            await MessageController.EditMessage(User,
                 $"{Messages.exchange_mesage}" +
                 $"\n{Messages.gems_exchange_count} {module.EnteredExchangeSum}{Text.gem}" +
                 $"\n{Messages.coins_exchange_count} {module.EnteredExchangeSum * 150}{Text.coin}" +

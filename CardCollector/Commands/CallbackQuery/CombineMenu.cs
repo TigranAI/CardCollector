@@ -17,8 +17,7 @@ namespace CardCollector.Commands.CallbackQuery
         {
             var combineModule = User.Session.GetModule<CombineModule>();
             await User.ClearChat();
-            await MessageController.EditMessage(User, CallbackMessageId, combineModule.ToString(), 
-                Keyboard.GetCombineKeyboard(combineModule));
+            await MessageController.EditMessage(User, combineModule.ToString(), Keyboard.GetCombineKeyboard(combineModule));
         }
 
         protected internal override bool IsMatches(UserEntity user, Update update) => false;

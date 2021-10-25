@@ -43,7 +43,7 @@ namespace CardCollector.Session.Modules
             return text;
         }
         
-        public IEnumerable<StickerEntity> ApplyTo(IEnumerable<StickerEntity> list)
+        public IEnumerable<StickerEntity> ApplyTo(IEnumerable<StickerEntity> list, bool applyPrice = false)
         {
             /* Фильтруем по автору */
             if (Filters[Command.authors_menu] is string author && author != "")
@@ -70,7 +70,9 @@ namespace CardCollector.Session.Modules
                 if (sort == SortingTypes.ByTierDecrease)
                     list = list.OrderByDescending(item => item.Tier);
             }
-            return list;
+            return applyPrice 
+                ? ApplyPriceTo(list)
+                : list;
         }
         
         public IEnumerable<StickerEntity> ApplyPriceTo(IEnumerable<StickerEntity> list)
