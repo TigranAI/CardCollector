@@ -6,7 +6,7 @@ namespace CardCollector.DailyTasks.CustomTasks
     public class SendStickers : DailyTask
     {
         public override int Id => (int)DailyTaskKeys.SendStickersToUsers;
-        public override int Goal => 10;
+        public override int Goal => 5;
         public override string Title => Titles.send_stickers;
         public override string Description => Descriptions.send_stickers;
 
