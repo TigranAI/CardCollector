@@ -96,6 +96,13 @@ namespace CardCollector.Resources
             new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
         });
 
+        /* Клавиатура для покупок */
+        public static readonly InlineKeyboardMarkup BuyGemsKeyboard = new (new[]
+        {
+            new[] {InlineKeyboardButton.WithPayment(Text.buy_gems_button)},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
+        });
+
         /* Клавиатура с отменой и выставлением */
         public static readonly InlineKeyboardMarkup AuctionPutCancelKeyboard = new (new[]
         {

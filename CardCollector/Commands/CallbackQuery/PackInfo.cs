@@ -14,7 +14,7 @@ namespace CardCollector.Commands.CallbackQuery
 
         public override async Task Execute()
         {
-            await MessageController.EditMessage(User, CallbackMessageId, Messages.pack_info);
+            await MessageController.EditMessage(User, CallbackMessageId, Messages.pack_info, Keyboard.BackKeyboard);
         }
 
         public PackInfo() { }

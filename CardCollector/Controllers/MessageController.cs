@@ -231,13 +231,15 @@ namespace CardCollector.Controllers
         }
 
         public static async Task<Message> SendInvoice(UserEntity user, string title, string description, 
-            string payload, IEnumerable<LabeledPrice> prices, int maxTip = 0, IEnumerable<int> tips = null, Currency currency = Currency.USD)
+            string payload, IEnumerable<LabeledPrice> prices, int maxTip = 0, IEnumerable<int> tips = null,
+            InlineKeyboardMarkup keyboard = null, Currency currency = Currency.USD)
         {
             try
             {
                 if (!user.IsBlocked)
                     return await Bot.Client.SendInvoiceAsync(user.ChatId, title, description, payload, 
-                        AppSettings.PAYMENT_PROVIDER, currency.ToString(), prices, maxTip, tips, disableNotification: true);
+                        AppSettings.PAYMENT_PROVIDER, currency.ToString(), prices, maxTip, tips, 
+                        replyMarkup: keyboard, disableNotification: true);
             }
             catch (Exception e)
             {

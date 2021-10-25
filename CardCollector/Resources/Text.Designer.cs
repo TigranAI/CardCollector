@@ -160,6 +160,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 💎 Купить алмазы 💎.
+        /// </summary>
+        internal static string buy_gems_button {
+            get {
+                return ResourceManager.GetString("buy_gems_button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Купить пак.
         /// </summary>
         internal static string buy_pack {
@@ -502,7 +511,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Количество открытых:.
+        ///   Looks up a localized string similar to Пользователи открыли этот пак за все время:.
         /// </summary>
         internal static string opened_count {
             get {

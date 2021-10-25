@@ -22,7 +22,10 @@ namespace CardCollector.Commands.CallbackQuery
             var totalCount = list.Count;
             list = list.GetRange((page - 1) * 10, list.Count >= page * 10 ? 10 : list.Count % 10);
             if (list.Count == 0)
+            {
+                User.Session.UndoCurrentCommand();
                 await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.page_not_found);
+            }
             /* Заменяем сообщение меню на сообщение со списком */
             else
                 await MessageController.EditMessage(User, CallbackMessageId, Messages.choose_author,

@@ -27,7 +27,7 @@ namespace CardCollector.Commands.CallbackQuery
                 ? module.SelectedPosition?.TimeLimit.ToString(CultureInfo.CurrentCulture).Split(' ')[0]
                 : Text.unexpired;
             if (module.SelectedPosition != null) message += $"\n{Text.time_limit} {dateText}";
-            if (module.SelectedPack != null) message += $"\n{Text.opened_count} {module.SelectedPack.OpenedCount}";
+            if (module.SelectedPack != null) message += $"\n{Text.opened_count} {module.SelectedPack.OpenedCount}{Text.items}";
             if (description != "") message += $"\n{Text.description}: {description}";
             await MessageController.AnswerCallbackQuery(User, CallbackQueryId, message, true);
         }

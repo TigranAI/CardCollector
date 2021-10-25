@@ -25,7 +25,7 @@ namespace CardCollector.Commands.CallbackQuery
                     userTasks.Add((int)key, await DailyTaskDao.AddNew(User.Id, (int)key));
                 text += $"\n{task.Title} ({task.Goal - userTasks[(int) key].Progress}/{task.Goal})";
             }
-            var message = await MessageController.SendMessage(User, text);
+            var message = await MessageController.SendMessage(User, text, Keyboard.BackKeyboard);
             User.Session.Messages.Add(message.MessageId);
         }
 

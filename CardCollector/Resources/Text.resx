@@ -250,6 +250,9 @@
         <value>Завершить загрузку стикеров</value>
     </data>
     <data name="opened_count" xml:space="preserve">
-        <value>Количество открытых:</value>
+        <value>Пользователи открыли этот пак за все время:</value>
+    </data>
+    <data name="buy_gems_button" xml:space="preserve">
+        <value>💎 Купить алмазы 💎</value>
     </data>
 </root>
