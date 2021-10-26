@@ -13,8 +13,6 @@ namespace CardCollector.Commands.InlineQuery
         /* Команда - пустая строка, поскольку пользователь может вводить любые слова
          после @имя_бота, введенная фраза будет использоваться для фильтрации стикеров */
         protected override string CommandText => "";
-        protected override bool ClearMenu => false;
-        protected override bool AddToStack => false;
 
         public override async Task Execute()
         {

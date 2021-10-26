@@ -10,8 +10,6 @@ namespace CardCollector.Commands.ChosenInlineResult
     {
         /* Ключевое слово для данной команды send_sticker */
         protected override string CommandText => Command.send_sticker;
-        protected override bool ClearMenu => false;
-        protected override bool AddToStack => false;
 
         public override Task Execute()
         {

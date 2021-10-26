@@ -11,7 +11,7 @@ namespace CardCollector.Session.Modules
         public void Reset()
         {
             SelectedSticker = null;
-            Count = 0;
+            Count = 1;
             SellPrice = 0;
         }
     }

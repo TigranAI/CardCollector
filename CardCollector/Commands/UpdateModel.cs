@@ -14,8 +14,9 @@ namespace CardCollector.Commands
     public abstract class UpdateModel
     {
         protected abstract string CommandText { get; }
-        protected abstract bool ClearMenu { get; }
-        protected abstract bool AddToStack { get; }
+        protected virtual bool ClearMenu => false;
+        protected virtual bool AddToStack => false;
+        protected virtual bool ClearStickers => false;
         protected UserEntity User;
         protected Update Update;
 
@@ -26,6 +27,7 @@ namespace CardCollector.Commands
             User.Session.SetCurrentCommand(GetType());
             if (ClearMenu) User.Session.ClearMenuStack();
             if (AddToStack) User.Session.AddMenuToStack(this);
+            if (ClearStickers) await User.Session.ClearStickers();
             await Execute();
         }
 

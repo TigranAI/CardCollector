@@ -11,8 +11,7 @@ namespace CardCollector.Commands.CallbackQuery
     public class ConfirmationSelling : CallbackQueryCommand
     {
         protected override string CommandText => Command.confirm_selling;
-        protected override bool ClearMenu => false;
-        protected override bool AddToStack => false;
+        protected override bool ClearStickers => true;
 
         public override async Task Execute()
         {

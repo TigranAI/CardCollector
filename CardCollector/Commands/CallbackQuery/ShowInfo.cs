@@ -12,8 +12,6 @@ namespace CardCollector.Commands.CallbackQuery
     public class ShowInfo : CallbackQueryCommand
     {
         protected override string CommandText => Command.show_offer_info;
-        protected override bool ClearMenu => false;
-        protected override bool AddToStack => false;
 
         public override async Task Execute()
         {

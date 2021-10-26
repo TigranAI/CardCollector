@@ -13,8 +13,6 @@ namespace CardCollector.Commands.Message
     public class ShowSample : MessageCommand
     {
         protected override string CommandText => Text.show_sample;
-        protected override bool ClearMenu => false;
-        protected override bool AddToStack => false;
 
         public override async Task Execute()
         {

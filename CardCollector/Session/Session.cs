@@ -21,6 +21,7 @@ namespace CardCollector.Session
         /* Подключаемые модули */
         private readonly Dictionary<Type, Module> Modules = new();
         /* Сообщения в чате пользователя */
+        public readonly List<int> StickerMessages = new();
         public readonly List<int> Messages = new();
         /* Последовательность вызова списка меню */
         private readonly Stack<MenuInformation> MenuStack = new();
@@ -68,12 +69,21 @@ namespace CardCollector.Session
             return (int) (DateTime.Now - _lastAccess).TotalMinutes;
         }
 
-
         public async Task ClearMessages()
         {
             foreach (var messageId in Messages.ToList())
                 await MessageController.DeleteMessage(user, messageId, false);
+            foreach (var messageId in StickerMessages.ToList())
+                await MessageController.DeleteMessage(user, messageId, false);
+            StickerMessages.Clear();
             Messages.Clear();
+        }
+
+        public async Task ClearStickers()
+        {
+            foreach (var messageId in StickerMessages.ToList())
+                await MessageController.DeleteMessage(user, messageId, false);
+            StickerMessages.Clear();
         }
 
         public async Task EndSession()
@@ -113,6 +123,7 @@ namespace CardCollector.Session
         public void ClearMenuStack()
         {
             MenuStack.Clear();
+            foreach (var module in Modules.Values) module.Reset();
         }
     }
 

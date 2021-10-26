@@ -15,10 +15,7 @@ namespace CardCollector.Commands.Message
 
         public override async Task Execute()
         {
-            await User.ClearChat();
-            User.Session.State = UserState.UploadSticker;
-            var result = await MessageController.SendMessage(User, Messages.upload_your_stickers, Keyboard.BackKeyboard);
-            User.Session.Messages.Add(result.MessageId);
+            await MessageController.SendMessage(User, Messages.upload_your_stickers, Keyboard.BackKeyboard);
         }
 
         protected internal override bool IsMatches(UserEntity user, Update update)
@@ -27,6 +24,9 @@ namespace CardCollector.Commands.Message
         }
 
         public DownloadStickerPack() { }
-        public DownloadStickerPack(UserEntity user, Update update) : base(user, update) { }
+        public DownloadStickerPack(UserEntity user, Update update) : base(user, update) 
+        {
+            User.Session.State = UserState.UploadSticker;
+        }
     }
 }

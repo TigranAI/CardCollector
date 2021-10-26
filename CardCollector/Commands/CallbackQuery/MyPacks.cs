@@ -11,20 +11,17 @@ namespace CardCollector.Commands.CallbackQuery
     public class MyPacks : CallbackQueryCommand
     {
         protected override string CommandText => Command.my_packs;
-        protected override bool ClearMenu => false;
         protected override bool AddToStack => true;
 
         public override async Task Execute()
         {
-            await User.ClearChat();
             var random = await UserPacksDao.GetOne(User.Id, 1);
             var authorCount = (await UserPacksDao.GetUserPacks(User.Id)).Sum(item => item.PackId != 1 ? item.Count : 0);
-            var message = await MessageController.SendMessage(User, 
+            await MessageController.SendMessage(User, 
                 $"{Messages.your_packs}" +
                 $"\n{Messages.random_packs}: {random.Count}{Text.items}" +
                 $"\n{Messages.author_pack}: {authorCount}{Text.items}",
                 Keyboard.PackMenu);
-            User.Session.Messages.Add(message.MessageId);
         }
 
         public MyPacks() { }

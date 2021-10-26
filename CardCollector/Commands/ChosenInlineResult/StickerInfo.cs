@@ -10,8 +10,6 @@ namespace CardCollector.Commands.ChosenInlineResult
     public class StickerInfo : ChosenInlineResultCommand
     {
         protected override string CommandText => Command.sticker_info;
-        protected override bool ClearMenu => false;
-        protected override bool AddToStack => false;
         
         public override async Task Execute()
         {

@@ -10,8 +10,6 @@ namespace CardCollector.Commands.CallbackQuery
     public class ConfirmBuying : CallbackQueryCommand
     {
         protected override string CommandText => Command.confirm_buying;
-        protected override bool ClearMenu => false;
-        protected override bool AddToStack => false;
 
         public override async Task Execute()
         {
@@ -21,7 +19,9 @@ namespace CardCollector.Commands.CallbackQuery
                 await MessageController.AnswerCallbackQuery(User, Update.CallbackQuery!.Id, Messages.not_enougth_gems);
             else
             {
-                var text = $"{Messages.confirm_buying}\n{auctionModule.Count}{Text.items} {Text.per} {price}{Text.gem}\n{Messages.are_you_sure}";
+                var text = $"{Messages.confirm_buying}" +
+                           $"\n{auctionModule.Count}{Text.items} {Text.per} {price}{Text.gem}" +
+                           $"\n{Messages.are_you_sure}";
                 await MessageController.EditMessage(User, text, Keyboard.GetConfirmationKeyboard(Command.buy_sticker));
             }
         }

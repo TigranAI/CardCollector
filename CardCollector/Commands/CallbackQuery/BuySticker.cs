@@ -11,8 +11,7 @@ namespace CardCollector.Commands.CallbackQuery
     public class BuySticker : CallbackQueryCommand
     {
         protected override string CommandText => Command.buy_sticker;
-        protected override bool ClearMenu => false;
-        protected override bool AddToStack => false;
+        protected override bool ClearStickers => true;
 
         public override async Task Execute()
         {
@@ -34,7 +33,6 @@ namespace CardCollector.Commands.CallbackQuery
                 else
                     User.Stickers[auctionModule.SelectedSticker.Md5Hash].Count += auctionModule.Count;
                 User.Session.ResetModule<AuctionModule>();
-                await User.ClearChat();
             }
         }
 

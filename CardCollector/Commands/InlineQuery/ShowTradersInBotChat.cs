@@ -11,8 +11,6 @@ namespace CardCollector.Commands.InlineQuery
     public class ShowTradersInBotChat : InlineQueryCommand
     {
         protected override string CommandText => "";
-        protected override bool ClearMenu => false;
-        protected override bool AddToStack => false;
 
         public override async Task Execute()
         {

@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using CardCollector.Commands.Message;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using Telegram.Bot.Types;
@@ -8,12 +9,12 @@ namespace CardCollector.Commands.CallbackQuery
     public class Back : CallbackQueryCommand
     {
         protected override string CommandText => Command.back;
-        protected override bool ClearMenu => false;
-        protected override bool AddToStack => false;
         
         public override async Task Execute()
         {
-            await User.ClearChat();
+            EnterEmoji.RemoveFromQueue(User.Id);
+            EnterGemsExchange.RemoveFromQueue(User.Id);
+            EnterGemsPrice.RemoveFromQueue(User.Id);
             if (User.Session.TryGetPreviousMenu(out var menu))
                 await menu.BackToThis(User.Session);
             else await User.Session.EndSession();

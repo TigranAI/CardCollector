@@ -12,8 +12,6 @@ namespace CardCollector.Commands.Message
     public class CreateToken : MessageCommand
     {
         protected override string CommandText => "create_token";
-        protected override bool ClearMenu => false;
-        protected override bool AddToStack => false;
 
         private const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-_";
         private const string site = "http://127.0.0.1:8080/";
@@ -23,9 +21,8 @@ namespace CardCollector.Commands.Message
             var token = GenerateNewToken();
             await SessionTokenDao.AddNew(User.Id, token);
             var loginLink = $"{site}login?token={token}";
-            var message = await MessageController.SendTextWithHtml(User,
+            await MessageController.SendTextWithHtml(User,
                 $"<a href=\"{loginLink}\">{Messages.your_login_link}</a>", Keyboard.LoginKeyboard(loginLink));
-            User.Session.Messages.Add(message.MessageId);
         }
 
         private string GenerateNewToken()

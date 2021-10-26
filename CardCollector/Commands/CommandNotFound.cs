@@ -9,15 +9,12 @@ namespace CardCollector.Commands
     public class CommandNotFound : UpdateModel
     {
         protected override string CommandText => "";
-        protected override bool ClearMenu => false;
-        protected override bool AddToStack => false;
 
         private readonly string _command;
 
         public override async Task Execute()
         {
-            var message = await MessageController.SendMessage(User, "Команда не найдена " + _command);
-            User.Session.Messages.Add(message.MessageId);
+            await MessageController.SendMessage(User, "Команда не найдена " + _command);
         }
 
         protected internal override bool IsMatches(UserEntity user, Update update) => true;

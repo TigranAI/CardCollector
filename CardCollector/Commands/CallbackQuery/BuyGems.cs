@@ -10,16 +10,12 @@ namespace CardCollector.Commands.CallbackQuery
     public class BuyGems : CallbackQueryCommand
     {
         protected override string CommandText => Command.buy_gems;
-        protected override bool ClearMenu => false;
-        protected override bool AddToStack => false;
         
         public override async Task Execute()
         {
-            await User.ClearChat();
-            var messages = await MessageController.SendInvoice(User, Text.gems_title, Text.gems_description, 
+            await MessageController.SendInvoice(User, Text.gems_title, Text.gems_description, 
                 Command.buy_gems_item, new[] {new LabeledPrice(Text.gems_label50, 100)},
                 1000000, new [] {500, 1000, 2500, 5000}, Keyboard.BuyGemsKeyboard);
-            User.Session.Messages.Add(messages.MessageId);
         }
 
         public BuyGems() { }

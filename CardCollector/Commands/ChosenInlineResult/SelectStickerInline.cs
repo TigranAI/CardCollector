@@ -11,12 +11,9 @@ namespace CardCollector.Commands.ChosenInlineResult
     public class SelectStickerInline : ChosenInlineResultCommand
     {
         protected override string CommandText => Command.select_sticker;
-        protected override bool ClearMenu => false;
-        protected override bool AddToStack => false;
 
         public override async Task Execute()
         {
-            await User.ClearChat();
             var hash = InlineResult.Split('=')[1];
             var sticker = await StickerDao.GetByHash(hash);
             var stickerCount = User.Session.State switch
@@ -42,11 +39,9 @@ namespace CardCollector.Commands.ChosenInlineResult
                     User.Session.GetModule<DefaultModule>().SelectedSticker = sticker;
                     break;
             }
-            var stickerMessage = await MessageController.SendSticker(User, sticker.Id);
-            var infoMessage = await MessageController.SendMessage(User, sticker.ToString(stickerCount), Keyboard.GetStickerKeyboard(User.Session));
+            await MessageController.SendSticker(User, sticker.Id);
+            await MessageController.SendMessage(User, sticker.ToString(stickerCount), Keyboard.GetStickerKeyboard(User.Session));
             if (User.Session.State == UserState.AuctionMenu) User.Session.State = UserState.ProductMenu;
-            User.Session.Messages.Add(stickerMessage.MessageId);
-            User.Session.Messages.Add(infoMessage.MessageId);
         }
 
         protected internal override bool IsMatches(UserEntity user, Update update)

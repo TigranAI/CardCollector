@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using System.Timers;
 using CardCollector.DailyTasks.CustomTasks;
 using CardCollector.DataBase.EntityDao;
-using CardCollector.Resources;
 
 namespace CardCollector.DailyTasks
 {

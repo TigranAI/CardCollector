@@ -11,11 +11,10 @@ namespace CardCollector.Commands.CallbackQuery
     public class DeleteCombine : CallbackQueryCommand
     {
         protected override string CommandText => Command.delete_combine;
-        protected override bool ClearMenu => false;
-        protected override bool AddToStack => false;
 
         public override async Task Execute()
         {
+            User.Session.UndoCurrentCommand();
             var sticker = await StickerDao.GetByHash(CallbackData.Split('=')[1]);
             var module = User.Session.GetModule<CombineModule>();
             module.CombineList.Remove(sticker);

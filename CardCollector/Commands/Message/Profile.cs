@@ -13,14 +13,14 @@ namespace CardCollector.Commands.Message
         protected override string CommandText => Text.profile;
         protected override bool ClearMenu => true;
         protected override bool AddToStack => true;
+        protected override bool ClearStickers => true;
 
         public override async Task Execute()
         {
-            await User.ClearChat();
             /* Подсчитываем прибыль */
             var income = await User.Cash.CalculateIncome(User.Stickers);
             /* Отправляем сообщение */
-            var message = await MessageController.SendMessage(User, 
+            await MessageController.SendMessage(User, 
                 /* Имя пользователя */
                 $"{User.Username}\n" +
                 /* Количество монет */
@@ -29,8 +29,6 @@ namespace CardCollector.Commands.Message
                 $"{Messages.gems}: {User.Cash.Gems}{Text.gem}",
                 /* Клавиатура профиля */
                 Keyboard.GetProfileKeyboard(income, User.PrivilegeLevel));
-            /* Записываем id нового сообщения */
-            User.Session.Messages.Add(message.MessageId);
         }
         
         public Profile() { }

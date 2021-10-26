@@ -13,8 +13,6 @@ namespace CardCollector.Commands.Message
     public class EnterEmoji : MessageCommand
     {
         protected override string CommandText => "";
-        protected override bool ClearMenu => false;
-        protected override bool AddToStack => false;
 
         private const string oneEmojiPattern =
             "^\\u00a9$|^\\u00ae$|^[\\u2000-\\u3300]$|^\\ud83c[\\ud000-\\udfff]$|^\\ud83d[\\ud000-\\udfff]$|^\\ud83e[\\ud000-\\udfff]$";

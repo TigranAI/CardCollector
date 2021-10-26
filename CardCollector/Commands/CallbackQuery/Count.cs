@@ -10,8 +10,6 @@ namespace CardCollector.Commands.CallbackQuery
     public class Count : CallbackQueryCommand
     {
         protected override string CommandText => Command.count;
-        protected override bool ClearMenu => false;
-        protected override bool AddToStack => false;
 
         public override async Task Execute()
         {
@@ -48,7 +46,7 @@ namespace CardCollector.Commands.CallbackQuery
                     User.Session.GetModule<CombineModule>().Count = stickerCount;
                     break;
             }
-            if (changed) await MessageController.EditReplyMarkup(User, CallbackMessageId, Keyboard.GetStickerKeyboard(User.Session));
+            if (changed) await MessageController.EditReplyMarkup(User, Keyboard.GetStickerKeyboard(User.Session));
             else await MessageController.AnswerCallbackQuery(User, Update.CallbackQuery!.Id, Messages.cant_change_count);
         }
 

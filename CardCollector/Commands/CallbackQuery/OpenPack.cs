@@ -10,8 +10,6 @@ namespace CardCollector.Commands.CallbackQuery
     public class OpenPack : CallbackQueryCommand
     {
         protected override string CommandText => Command.open_pack;
-        protected override bool ClearMenu => false;
-        protected override bool AddToStack => false;
 
         public override async Task Execute()
         {
@@ -21,7 +19,6 @@ namespace CardCollector.Commands.CallbackQuery
                 await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.packs_count_zero, true);
             else
             {
-                await User.ClearChat();
                 var packInfo = await PacksDao.GetById(packId);
                 packInfo.OpenedCount++;
                 userPack.Count--;
@@ -33,10 +30,8 @@ namespace CardCollector.Commands.CallbackQuery
                     User.Stickers[sticker.Md5Hash].Count++;
                 else
                     await UserStickerRelationDao.AddNew(User, sticker, 1);
-                var stickerMessage = await MessageController.SendSticker(User, sticker.Id);
-                var message = await MessageController.SendMessage(User, $"{Messages.congratulation}\n{sticker}");
-                User.Session.Messages.Add(stickerMessage.MessageId);
-                User.Session.Messages.Add(message.MessageId);
+                await MessageController.SendSticker(User, sticker.Id);
+                await MessageController.SendMessage(User, $"{Messages.congratulation}\n{sticker}");
             }
         }
 

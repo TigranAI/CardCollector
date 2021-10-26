@@ -11,17 +11,13 @@ namespace CardCollector.Commands.Message
     public class ShowFiltersMenu : MessageCommand
     {
         protected override string CommandText => "";
-        protected override bool ClearMenu => false;
-        protected override bool AddToStack => false;
 
         public override async Task Execute()
         {
             /* Формируем сообщение с имеющимися фильтрами у пользователя */
             var text = User.Session.GetModule<FiltersModule>().ToString(User.Session.State);
             /* Отправляем сообщение */
-            var message = await MessageController.SendMessage(User, text, Keyboard.GetSortingMenu(User.Session.State));
-            /* Добавляем это сообщение в список для удаления */
-            User.Session.Messages.Add(message.MessageId);
+            await MessageController.SendMessage(User, text, Keyboard.GetSortingMenu(User.Session.State));
         }
         
         public ShowFiltersMenu(UserEntity user, Update update) : base(user, update) { }

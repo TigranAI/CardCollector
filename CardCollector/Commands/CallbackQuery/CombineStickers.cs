@@ -13,8 +13,6 @@ namespace CardCollector.Commands.CallbackQuery
     public class CombineStickers : CallbackQueryCommand
     {
         protected override string CommandText => Command.combine_stickers;
-        protected override bool ClearMenu => false;
-        protected override bool AddToStack => false;
 
         public override async Task Execute()
         {
@@ -24,7 +22,6 @@ namespace CardCollector.Commands.CallbackQuery
                 await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.not_enougth_coins);
             else
             {
-                await User.ClearChat();
                 User.Cash.Coins -= price;
                 foreach (var (item, count) in combineModule.CombineList)
                     User.Stickers[item.Md5Hash].Count -= count;
@@ -36,11 +33,9 @@ namespace CardCollector.Commands.CallbackQuery
                 var sticker = stickers[rnd.Next(stickers.Count)];
                 await UserStickerRelationDao.AddNew(User, sticker, 1);
                 var text = $"{Messages.combined_sticker}:\n" + sticker;
-                var stickerMessage = await MessageController.SendSticker(User, sticker.Id);
-                var message = await MessageController.SendMessage(User, text, Keyboard.BackToFilters(sticker.Title));
+                await MessageController.SendSticker(User, sticker.Id);
+                await MessageController.SendMessage(User, text, Keyboard.BackToFilters(sticker.Title));
                 User.Session.DeleteModule<CombineModule>();
-                User.Session.Messages.Add(stickerMessage.MessageId);
-                User.Session.Messages.Add(message.MessageId);
             }
         }
 

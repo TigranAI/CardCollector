@@ -8,8 +8,6 @@ namespace CardCollector.Commands.PreCheckoutQuery
     public class Test : PreCheckoutQueryCommand
     {
         protected override string CommandText => "test";
-        protected override bool ClearMenu => false;
-        protected override bool AddToStack => false;
 
         public override async Task Execute()
         {

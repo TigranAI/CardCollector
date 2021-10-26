@@ -13,7 +13,7 @@ namespace CardCollector.Commands.CallbackQuery
     {
         protected override string CommandText => Command.buy_shop_item;
         protected override bool ClearMenu => true;
-        protected override bool AddToStack => false;
+        protected override bool ClearStickers => true;
 
         public override async Task Execute()
         {
@@ -40,7 +40,6 @@ namespace CardCollector.Commands.CallbackQuery
                 await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.you_already_use_this_offer);
             else
             {
-                await User.ClearChat();
                 if (currency == "coins") User.Cash.Coins -= resultPriceCoins;
                 else if (currency == "gems") User.Cash.Gems -= resultPriceGems;
                 
@@ -50,9 +49,8 @@ namespace CardCollector.Commands.CallbackQuery
                 var userPack = await UserPacksDao.GetOne(User.Id, packId);
                 userPack.Count += module.SelectedPosition?.Count ?? module.Count;
                 if (module.SelectedPosition?.AdditionalPrize != "") await GivePrize(module.SelectedPosition?.AdditionalPrize);
-                var message = await MessageController.SendMessage(User, Messages.thanks_for_buying);
+                await MessageController.SendMessage(User, Messages.thanks_for_buying);
                 User.Session.ResetModule<ShopModule>();
-                User.Session.Messages.Add(message.MessageId);
             }
         }
 
@@ -79,10 +77,8 @@ namespace CardCollector.Commands.CallbackQuery
                     await UserStickerRelationDao.AddNew(User, sticker, 1);
                 else
                     User.Stickers[sticker.Md5Hash].Count ++;
-                var stickerMessage = await MessageController.SendSticker(User, sticker.Id);
-                var message = await MessageController.SendMessage(User, $"{Messages.congratulation}\n{sticker}");
-                User.Session.Messages.Add(stickerMessage.MessageId);
-                User.Session.Messages.Add(message.MessageId);
+                await MessageController.SendSticker(User, sticker.Id);
+                await MessageController.SendMessage(User, $"{Messages.congratulation}\n{sticker}");
             }
         }
 

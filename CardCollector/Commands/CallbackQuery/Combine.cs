@@ -10,15 +10,11 @@ namespace CardCollector.Commands.CallbackQuery
     public class Combine : CallbackQueryCommand
     {
         protected override string CommandText => Command.combine;
-        protected override bool ClearMenu => false;
-        protected override bool AddToStack => false;
+        protected override bool ClearStickers => true;
 
         public override async Task Execute()
         {
             var combineModule = User.Session.GetModule<CombineModule>();
-            if (User.Session.State != UserState.CombineMenu)
-                combineModule.CombineList.Clear();
-            User.Session.State = UserState.CombineMenu;
             if (combineModule.SelectedSticker == null)
             {
                 var collectionModule = User.Session.GetModule<CollectionModule>();
@@ -51,6 +47,9 @@ namespace CardCollector.Commands.CallbackQuery
         }
 
         public Combine() { }
-        public Combine(UserEntity user, Update update) : base(user, update) { }
+        public Combine(UserEntity user, Update update) : base(user, update)
+        {
+            User.Session.State = UserState.CombineMenu;
+        }
     }
 }

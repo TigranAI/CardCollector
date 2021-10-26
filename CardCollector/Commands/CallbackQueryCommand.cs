@@ -22,8 +22,6 @@ namespace CardCollector.Commands
     {
         /* Данные, поступившие после нажатия на кнокпку */
         protected string CallbackData;
-        /* Id сообщения, под которым нажали на кнопку */
-        protected int CallbackMessageId;
         /* Id запроса */
         protected string CallbackQueryId;
 
@@ -89,7 +87,6 @@ namespace CardCollector.Commands
         protected CallbackQueryCommand(UserEntity user, Update update) : base(user, update)
         {
             CallbackData = update.CallbackQuery!.Data;
-            CallbackMessageId = user.Session.Messages.LastOrDefault();
             CallbackQueryId = update.CallbackQuery!.Id;
         }
     }

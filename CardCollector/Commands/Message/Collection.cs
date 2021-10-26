@@ -12,19 +12,20 @@ namespace CardCollector.Commands.Message
         protected override string CommandText => Text.collection;
         protected override bool ClearMenu => true;
         protected override bool AddToStack => true;
+        protected override bool ClearStickers => true;
 
         public override async Task Execute()
         {
-            /* Очищаем чат с пользователем */
-            await User.ClearChat();
-            /* Переводим состояние пользователя в меню коллекции */
-            User.Session.State = UserState.CollectionMenu;
             User.Session.InitNewModule<CollectionModule>();
             /* Отображаем сообщение с фильтрами */
             await new ShowFiltersMenu(User, Update).Execute();
         }
         
         public Collection() { }
-        public Collection(UserEntity user, Update update) : base(user, update) { }
+        public Collection(UserEntity user, Update update) : base(user, update) 
+        {
+            /* Переводим состояние пользователя в меню коллекции */
+            User.Session.State = UserState.CollectionMenu;
+         }
     }
 }

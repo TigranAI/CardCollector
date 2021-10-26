@@ -11,7 +11,6 @@ namespace CardCollector.Commands.CallbackQuery
     public class OpenAuthorPackMenu : CallbackQueryCommand
     {
         protected override string CommandText => Command.open_author_pack_menu;
-        protected override bool ClearMenu => false;
         protected override bool AddToStack => true;
 
         public override async Task Execute()

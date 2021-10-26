@@ -10,8 +10,6 @@ namespace CardCollector.Commands.CallbackQuery
     public class ConfirmExchange : CallbackQueryCommand
     {
         protected override string CommandText => Command.confirm_exchange;
-        protected override bool ClearMenu => false;
-        protected override bool AddToStack => false;
 
         public override async Task Execute()
         {

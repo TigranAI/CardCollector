@@ -10,7 +10,6 @@ namespace CardCollector.Commands.CallbackQuery
     public class BuyAuthorPackMenu : CallbackQueryCommand
     {
         protected override string CommandText => Command.buy_author_pack_menu;
-        protected override bool ClearMenu => false;
         protected override bool AddToStack => true;
         
         public override async Task Execute()

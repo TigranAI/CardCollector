@@ -9,14 +9,11 @@ namespace CardCollector.Commands.Message
     public class StopBot : MessageCommand
     {
         protected override string CommandText => Text.stop_bot;
-        protected override bool ClearMenu => false;
-        protected override bool AddToStack => false;
 
         public override async Task Execute()
         {
-            var message = await MessageController.SendMessage(User, "Stopping bot");
-            User.Session.Messages.Add(message.MessageId);
-            Bot.StopProgram();
+            await MessageController.SendMessage(User, "Stopping bot");
+            await Bot.StopProgram();
         }
 
         protected internal override bool IsMatches(UserEntity user, Update update)

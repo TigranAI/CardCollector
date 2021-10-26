@@ -91,10 +91,13 @@ namespace CardCollector.Controllers
             {
                 if (!user.IsBlocked)
                 {
-                    if (user.Session.Messages.Count > 0 && keyboard is InlineKeyboardMarkup k)
-                        return await EditMessage(user, message, k, user.Session.Messages.Last());
-                    return await Bot.Client.SendTextMessageAsync(user.ChatId, message, replyMarkup: keyboard,
+                    if (user.Session.Messages.Count > 0 && (keyboard is null || keyboard is InlineKeyboardMarkup))
+                        return await EditMessage(user, message, (InlineKeyboardMarkup)keyboard, 
+                            user.Session.Messages.Last());
+                    var result = await Bot.Client.SendTextMessageAsync(user.ChatId, message, replyMarkup: keyboard,
                         disableNotification: true);
+                    user.Session?.Messages.Add(result.MessageId);
+                    return result;
                 }
             }
             catch (Exception e)
@@ -113,7 +116,15 @@ namespace CardCollector.Controllers
             try
             {
                 if (!user.IsBlocked)
-                    return await Bot.Client.SendTextMessageAsync(user.ChatId, message, ParseMode.Html, replyMarkup: keyboard, disableNotification: true);
+                {
+                    if (user.Session.Messages.Count > 0 && (keyboard is null || keyboard is InlineKeyboardMarkup))
+                        return await EditMessage(user, message, (InlineKeyboardMarkup)keyboard, 
+                            user.Session.Messages.Last(), ParseMode.Html);
+                    var result = await Bot.Client.SendTextMessageAsync(user.ChatId, message, ParseMode.Html,
+                        replyMarkup: keyboard, disableNotification: true);
+                    user.Session?.Messages.Add(result.MessageId);
+                    return result;
+                }
             }
             catch (Exception e)
             {
@@ -130,7 +141,12 @@ namespace CardCollector.Controllers
             try
             {
                 if (!user.IsBlocked)
-                    return await Bot.Client.SendStickerAsync(user.ChatId, fileId, true, replyMarkup: keyboard);
+                {
+                    await user.ClearChat();
+                    var result = await Bot.Client.SendStickerAsync(user.ChatId, fileId, true, replyMarkup: keyboard);
+                    user.Session.StickerMessages.Add(result.MessageId);
+                    return result;
+                }
             }
             catch (Exception e)
             {
@@ -144,22 +160,35 @@ namespace CardCollector.Controllers
          messageId - id сообщения
          message - текст сообщения
          keyboard - клавиатура, которую надо добавить к сообщению */
-        public static async Task<Message> EditMessage(UserEntity user, string message, InlineKeyboardMarkup keyboard = null, int messageId = -1)
+        public static async Task<Message> EditMessage(UserEntity user, string message,
+            InlineKeyboardMarkup keyboard = null, int messageId = -1, ParseMode? parseMode = null)
         {
             try
             {
                 if (!user.IsBlocked)
                 {
                     var msgId = messageId != -1 ? messageId : user.Session.Messages.Last();
-                    return await Bot.Client.EditMessageTextAsync(user.ChatId, msgId, message, replyMarkup: keyboard);
+                    return await Bot.Client.EditMessageTextAsync(user.ChatId, msgId, message, replyMarkup: keyboard,
+                        parseMode: parseMode);
                 }
             }
             catch (Exception)
             {
                 await user.ClearChat();
-                var msg = await SendMessage(user, message, keyboard);
-                user.Session.Messages.Add(msg.MessageId);
-                return msg;
+                try
+                {
+                    if (!user.IsBlocked)
+                    {
+                        var msg = await Bot.Client.SendTextMessageAsync(user.ChatId, message, parseMode, 
+                            replyMarkup: keyboard, disableNotification: true);
+                        user.Session.Messages.Add(msg.MessageId);
+                        return msg;
+                    }
+                }
+                catch (Exception e1)
+                {
+                    LogOut("Cant edit message: " + e1.Message);
+                }
             }
             return new Message();
         }
@@ -168,12 +197,15 @@ namespace CardCollector.Controllers
          user - пользователь, которому необходимо отредактировать сообщение
          messageId - Id сообщения
          keyboard - новая клавиатура, которую надо добавить к сообщению */
-        public static async Task<Message> EditReplyMarkup(UserEntity user, int messageId, InlineKeyboardMarkup keyboard)
+        public static async Task<Message> EditReplyMarkup(UserEntity user, InlineKeyboardMarkup keyboard, int messageId = -1)
         {
             try
             {
                 if (!user.IsBlocked)
-                    return await Bot.Client.EditMessageReplyMarkupAsync(user.ChatId, messageId, keyboard);
+                {
+                    var msgId = messageId != -1 ? messageId : user.Session.Messages.Last();
+                    return await Bot.Client.EditMessageReplyMarkupAsync(user.ChatId, msgId, keyboard);
+                }
             }
             catch (Exception e)
             {
@@ -218,7 +250,8 @@ namespace CardCollector.Controllers
          inputOnlineFile - фото, которое необходимо отправить
          message - текст сообщения
          keyboard - клавиатура, которую надо добавить к сообщению */
-        public static async Task<Message> SendImage(UserEntity user, string fileId, string message = null, InlineKeyboardMarkup keyboard = null)
+        public static async Task<Message> SendImage(UserEntity user, string fileId, string message = null, 
+            InlineKeyboardMarkup keyboard = null)
         {
             try
             {
@@ -235,9 +268,11 @@ namespace CardCollector.Controllers
         /* Метод для ответа на запрос @имя_бота
          queryId - Id запроса
          results - массив объектов InlineQueryResult */
-        public static async Task AnswerInlineQuery(string queryId, IEnumerable<InlineQueryResult> results, string offset = null)
+        public static async Task AnswerInlineQuery(string queryId, IEnumerable<InlineQueryResult> results, 
+            string offset = null)
         {
-            await Bot.Client.AnswerInlineQueryAsync(queryId, results, isPersonal: true, nextOffset: offset, cacheTime: Constants.INLINE_RESULTS_CACHE_TIME);
+            await Bot.Client.AnswerInlineQueryAsync(queryId, results, isPersonal: true, nextOffset: offset, 
+                cacheTime: Constants.INLINE_RESULTS_CACHE_TIME);
         }
 
         public static async Task<Message> SendInvoice(UserEntity user, string title, string description, 
@@ -247,9 +282,14 @@ namespace CardCollector.Controllers
             try
             {
                 if (!user.IsBlocked)
-                    return await Bot.Client.SendInvoiceAsync(user.ChatId, title, description, payload, 
-                        AppSettings.PAYMENT_PROVIDER, currency.ToString(), prices, maxTip, tips, 
+                {
+                    await user.ClearChat();
+                    var result = await Bot.Client.SendInvoiceAsync(user.ChatId, title, description, payload,
+                        AppSettings.PAYMENT_PROVIDER, currency.ToString(), prices, maxTip, tips,
                         replyMarkup: keyboard, disableNotification: true);
+                    user.Session.Messages.Add(result.MessageId);
+                    return result;
+                }
             }
             catch (Exception e)
             {

@@ -9,8 +9,6 @@ namespace CardCollector.Commands.CallbackQuery
     public class CollectIncome : CallbackQueryCommand
     {
         protected override string CommandText => Command.collect_income;
-        protected override bool ClearMenu => false;
-        protected override bool AddToStack => false;
 
         public override async Task Execute()
         {

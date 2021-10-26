@@ -58,15 +58,11 @@ namespace CardCollector
             cts.Cancel();
         }
 
-        public static void StopProgram()
+        public static async Task StopProgram()
         {
-            _timer.Elapsed += OnTimerOnElapsed;
-            static async void OnTimerOnElapsed(object o, ElapsedEventArgs elapsedEventArgs)
-            {
-                _timer.Stop();
-                await UserDao.ClearMemory();
-                _end.Set();
-            }
+            await CardCollectorDatabase.SaveAllChangesAsync();
+            await UserDao.ClearMemory();
+            _end.Set();
         }
 
         private static async void SavingChanges(object o, ElapsedEventArgs e)

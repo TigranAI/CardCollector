@@ -11,12 +11,9 @@ namespace CardCollector.Commands.CallbackQuery
     public class DailyTasks : CallbackQueryCommand
     {
         protected override string CommandText => Command.daily_tasks;
-        protected override bool ClearMenu => false;
-        protected override bool AddToStack => false;
 
         public override async Task Execute()
         {
-            await User.ClearChat();
             var text = Messages.your_daily_tasks;
             var userTasks = await DailyTaskDao.GetUserTasks(User.Id);
             foreach (var (key, task) in DailyTask.List)
@@ -25,8 +22,7 @@ namespace CardCollector.Commands.CallbackQuery
                     userTasks.Add((int)key, await DailyTaskDao.AddNew(User.Id, (int)key));
                 text += $"\n{task.Title} ({task.Goal - userTasks[(int) key].Progress}/{task.Goal})";
             }
-            var message = await MessageController.SendMessage(User, text, Keyboard.BackKeyboard);
-            User.Session.Messages.Add(message.MessageId);
+            await MessageController.SendMessage(User, text, Keyboard.BackKeyboard);
         }
 
         public DailyTasks() { }

@@ -10,8 +10,6 @@ namespace CardCollector.Commands.ChosenInlineResult
     public class SendPrivateSticker : ChosenInlineResultCommand
     {
         protected override string CommandText => Command.send_private_sticker;
-        protected override bool ClearMenu => false;
-        protected override bool AddToStack => false;
 
         public override async Task Execute()
         {
@@ -19,8 +17,7 @@ namespace CardCollector.Commands.ChosenInlineResult
             if (await dailyTask.Execute(User.Id))
             {
                 await dailyTask.GiveReward(User.Id);
-                var message = await MessageController.SendMessage(User, Messages.pack_prize);
-                User.Session.Messages.Add(message.MessageId);
+                await MessageController.SendMessage(User, Messages.pack_prize);
             }
         }
 
