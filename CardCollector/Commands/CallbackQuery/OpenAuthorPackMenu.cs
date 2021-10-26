@@ -12,13 +12,21 @@ namespace CardCollector.Commands.CallbackQuery
     {
         protected override string CommandText => Command.open_author_pack_menu;
         protected override bool AddToStack => true;
+        protected override bool ClearStickers => true;
 
         public override async Task Execute()
         {
             var packs = (await UserPacksDao.GetUserPacks(User.Id))
                 .Where(item => item.Count > 0 && item.PackId != 1).ToList();
             if (packs.Count == 0)
-                await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.packs_count_zero, true);
+            {
+                if (User.Session.PreviousCommandType == typeof(OpenPack))
+                {
+                    User.Session.PopLast();
+                    await new Back(User, Update).Execute();
+                }
+                else await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.packs_count_zero, true);
+            }
             else
             {
                 var page = int.Parse(CallbackData.Split('=')[1]);

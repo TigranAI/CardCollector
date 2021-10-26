@@ -12,6 +12,7 @@ namespace CardCollector.Commands.CallbackQuery
     {
         protected override string CommandText => Command.my_packs;
         protected override bool AddToStack => true;
+        protected override bool ClearStickers => true;
 
         public override async Task Execute()
         {

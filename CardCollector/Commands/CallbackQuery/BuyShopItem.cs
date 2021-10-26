@@ -12,7 +12,6 @@ namespace CardCollector.Commands.CallbackQuery
     public class BuyShopItem : CallbackQueryCommand
     {
         protected override string CommandText => Command.buy_shop_item;
-        protected override bool ClearMenu => true;
         protected override bool ClearStickers => true;
 
         public override async Task Execute()
@@ -42,15 +41,18 @@ namespace CardCollector.Commands.CallbackQuery
             {
                 if (currency == "coins") User.Cash.Coins -= resultPriceCoins;
                 else if (currency == "gems") User.Cash.Gems -= resultPriceGems;
-                
+                var canBuy = currency == "coins" && User.Cash.Coins >= resultPriceCoins ||
+                             currency == "gems" && User.Cash.Gems >= resultPriceGems;
                 if (offerSpecial && !offerInfinite)
                     await SpecialOfferUsersDao.AddNew(User.Id, module.SelectedPosition.Id);
                 var packId = module.SelectedPosition?.PackId ?? module.SelectedPack?.Id ?? 1;
                 var userPack = await UserPacksDao.GetOne(User.Id, packId);
                 userPack.Count += module.SelectedPosition?.Count ?? module.Count;
                 if (module.SelectedPosition?.AdditionalPrize != "") await GivePrize(module.SelectedPosition?.AdditionalPrize);
-                await MessageController.SendMessage(User, Messages.thanks_for_buying);
-                User.Session.ResetModule<ShopModule>();
+                await MessageController.SendMessage(User, $"{Messages.thanks_for_buying} {userPack.Count}", 
+                    offerSpecial && !offerInfinite || (module.SelectedPosition?.Expired ?? false) || !canBuy
+                    ? Keyboard.BackKeyboard
+                    : Keyboard.RepeatCommand(Text.buy_more, CallbackData));
             }
         }
 

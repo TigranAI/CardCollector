@@ -255,4 +255,10 @@
     <data name="buy_gems_button" xml:space="preserve">
         <value>💎 Купить алмазы 💎</value>
     </data>
+    <data name="buy_more" xml:space="preserve">
+        <value>Купить ещё</value>
+    </data>
+    <data name="open_more" xml:space="preserve">
+        <value>Открыть ещё</value>
+    </data>
 </root>

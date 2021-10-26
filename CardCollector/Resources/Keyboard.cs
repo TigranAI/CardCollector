@@ -408,5 +408,14 @@ namespace CardCollector.Resources
         {
             return new InlineKeyboardMarkup(InlineKeyboardButton.WithUrl(Text.login, loginLink));
         }
+
+        public static InlineKeyboardMarkup RepeatCommand(string buttonText, string callbackData)
+        {
+            return new InlineKeyboardMarkup(new[]
+            {
+                new []{InlineKeyboardButton.WithCallbackData(buttonText, callbackData)},
+                new []{InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
+            });
+        }
     }
 }

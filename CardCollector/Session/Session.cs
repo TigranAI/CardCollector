@@ -25,7 +25,7 @@ namespace CardCollector.Session
         public readonly List<int> Messages = new();
         /* Последовательность вызова списка меню */
         private readonly Stack<MenuInformation> MenuStack = new();
-        private Type PreviousCommandType;
+        public Type PreviousCommandType;
         private Type CurrentCommandType;
 
         public UserSession(UserEntity user)
@@ -98,9 +98,14 @@ namespace CardCollector.Session
         public bool TryGetPreviousMenu(out MenuInformation menu)
         {
             while (MenuStack.TryPeek(out menu) && CurrentCommandType == menu.GetMenuType()) {
-                MenuStack.TryPop(out _);
+                PopLast();
             }
             return MenuStack.TryPeek(out menu);
+        }
+
+        public void PopLast()
+        {
+            MenuStack.TryPop(out _);
         }
 
         public void AddMenuToStack(UpdateModel menu)
@@ -117,6 +122,7 @@ namespace CardCollector.Session
 
         public void UndoCurrentCommand()
         {
+            if (MenuStack.TryPeek(out var menu) && menu.GetType() == CurrentCommandType) MenuStack.Pop();
             CurrentCommandType = PreviousCommandType;
         }
 

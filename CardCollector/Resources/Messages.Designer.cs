@@ -493,6 +493,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Или введите другую сумму:.
+        /// </summary>
+        internal static string or_enter_another_sum {
+            get {
+                return ResourceManager.GetString("or_enter_another_sum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to При покупке &quot;Случайного пака&quot; Вам может выпасть ЛЮБОЙ стикер от ЛЮБОГО художника
         ///
         ///При покупке &quot;Пака художника&quot; Вам может выпасть ЛЮБОЙ стикер от выбранного Вами художника
@@ -645,7 +654,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Спасибо за покупку!.
+        ///   Looks up a localized string similar to Спасибо за покупку! У вас в наличии:.
         /// </summary>
         internal static string thanks_for_buying {
             get {

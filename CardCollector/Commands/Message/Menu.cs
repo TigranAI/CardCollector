@@ -13,7 +13,8 @@ namespace CardCollector.Commands.Message
         public override async Task Execute()
         {
             /* Отправляем пользователю сообщение со стандартной клавиатурой */
-            await MessageController.SendMessage(User, Messages.menu_message, Keyboard.Menu);
+            var message = await MessageController.SendMessage(User, Messages.menu_message, Keyboard.Menu);
+            User.Session.Messages.Remove(message.MessageId);
         }
 
         public Menu() { }

@@ -174,6 +174,7 @@ namespace CardCollector.Controllers
             }
             catch (Exception)
             {
+                //if (e is ApiRequestException && e.Message.Contains("message is not modified")) return new Message();
                 await user.ClearChat();
                 try
                 {

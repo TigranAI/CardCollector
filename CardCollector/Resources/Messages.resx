@@ -181,7 +181,7 @@
         <value>Выберите одну из опций ниже</value>
     </data>
     <data name="thanks_for_buying" xml:space="preserve">
-        <value>Спасибо за покупку!</value>
+        <value>Спасибо за покупку! У вас в наличии:</value>
     </data>
     <data name="pack_info" xml:space="preserve">
         <value>При покупке "Случайного пака" Вам может выпасть ЛЮБОЙ стикер от ЛЮБОГО художника
@@ -272,5 +272,8 @@
 4 - Случайный пак раз в 5 дней
 5 - Случайный стикер 2 тира раз в 3 дня
 6 - Случайный стикер 1 тира раз в 3 дня</value>
+    </data>
+    <data name="or_enter_another_sum" xml:space="preserve">
+        <value>Или введите другую сумму:</value>
     </data>
 </root>

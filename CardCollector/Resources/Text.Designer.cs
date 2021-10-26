@@ -169,6 +169,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Купить ещё.
+        /// </summary>
+        internal static string buy_more {
+            get {
+                return ResourceManager.GetString("buy_more", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Купить пак.
         /// </summary>
         internal static string buy_pack {
@@ -489,6 +498,15 @@ namespace CardCollector.Resources {
         internal static string open_author {
             get {
                 return ResourceManager.GetString("open_author", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Открыть ещё.
+        /// </summary>
+        internal static string open_more {
+            get {
+                return ResourceManager.GetString("open_more", resourceCulture);
             }
         }
         

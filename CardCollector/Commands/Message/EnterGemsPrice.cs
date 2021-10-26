@@ -27,9 +27,8 @@ namespace CardCollector.Commands.Message
             else
             {
                 module.SellPrice = price;
-                await MessageController.EditMessage(User,
-                    $"{Messages.confirm_selling} {module.SellPrice}{Text.gem}:", Keyboard.AuctionPutCancelKeyboard);
-                Queue.Remove(User.Id);
+                await MessageController.EditMessage(User, $"{Messages.confirm_selling} {module.SellPrice}{Text.gem}:" +
+                                                          $"\n{Messages.or_enter_another_sum}", Keyboard.AuctionPutCancelKeyboard);
             }
         }
 

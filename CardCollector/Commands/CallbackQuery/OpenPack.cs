@@ -31,7 +31,10 @@ namespace CardCollector.Commands.CallbackQuery
                 else
                     await UserStickerRelationDao.AddNew(User, sticker, 1);
                 await MessageController.SendSticker(User, sticker.Id);
-                await MessageController.SendMessage(User, $"{Messages.congratulation}\n{sticker}");
+                await MessageController.SendMessage(User, $"{Messages.congratulation}\n{sticker}",
+                    userPack.Count > 0
+                        ? Keyboard.RepeatCommand(Text.open_more, CallbackData)
+                        : Keyboard.BackKeyboard);
             }
         }
 
