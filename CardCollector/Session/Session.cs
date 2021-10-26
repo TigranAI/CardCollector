@@ -122,7 +122,7 @@ namespace CardCollector.Session
 
         public void UndoCurrentCommand()
         {
-            if (MenuStack.TryPeek(out var menu) && menu.GetType() == CurrentCommandType) MenuStack.Pop();
+            if (MenuStack.TryPeek(out var menu) && menu.GetMenuType() == CurrentCommandType) MenuStack.Pop();
             CurrentCommandType = PreviousCommandType;
         }
 
