@@ -16,7 +16,6 @@ namespace CardCollector.Commands.Message
 
         public override async Task Execute()
         {
-            User.Session.InitNewModule<CollectionModule>();
             /* Отображаем сообщение с фильтрами */
             await new ShowFiltersMenu(User, Update).Execute();
         }

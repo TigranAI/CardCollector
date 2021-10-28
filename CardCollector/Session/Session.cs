@@ -7,6 +7,7 @@ using CardCollector.Commands.CallbackQuery;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
+using CardCollector.Session.Modules;
 
 namespace CardCollector.Session
 {
@@ -129,7 +130,11 @@ namespace CardCollector.Session
         public void ClearMenuStack()
         {
             MenuStack.Clear();
-            foreach (var module in Modules.Values) module.Reset();
+            foreach (var module in Modules.Values)
+            {
+                if (module.GetType() == typeof(FiltersModule)) continue;
+                module.Reset();
+            }
         }
     }
 

@@ -15,6 +15,7 @@ namespace CardCollector.Commands.CallbackQuery
 
         public override async Task Execute()
         {
+            User.Session.UndoCurrentCommand();
             EnterEmoji.RemoveFromQueue(User.Id);
             var result = CallbackData.Split('=');
             var filters = User.Session.GetModule<FiltersModule>().Filters;
@@ -26,7 +27,7 @@ namespace CardCollector.Commands.CallbackQuery
             if (filters[Command.price_gems_to] is int g && g <= (int) filters[Command.price_gems_from])
                 filters[Command.price_gems_to] = 0;
             /* Возвращаемся в меню фильтров */
-            await new Back(User, Update).PrepareAndExecute();
+            await new Back(User, Update).Execute();
         }
         
         public SetFilter() { }
