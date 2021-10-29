@@ -85,42 +85,18 @@ namespace CardCollector.Controllers
          user - пользователь, которому необходимо отправить сообщение
          message - текст сообщения
          keyboard - клавиатура, которую надо добавить к сообщению */
-        public static async Task<Message> SendMessage(UserEntity user, string message, IReplyMarkup keyboard = null)
+        public static async Task<Message> SendMessage(UserEntity user, string message, IReplyMarkup keyboard = null,
+            ParseMode? parseMode = null)
         {
             try
             {
                 if (!user.IsBlocked)
                 {
-                    if (user.Session.Messages.Count > 0 && (keyboard is null || keyboard is InlineKeyboardMarkup))
-                        return await EditMessage(user, message, (InlineKeyboardMarkup)keyboard, 
-                            user.Session.Messages.Last());
-                    var result = await Bot.Client.SendTextMessageAsync(user.ChatId, message, replyMarkup: keyboard,
-                        disableNotification: true);
-                    user.Session?.Messages.Add(result.MessageId);
-                    return result;
-                }
-            }
-            catch (Exception e)
-            {
-                LogOutWarning("Can't send text message " + e.Message);
-            }
-            return new Message();
-        }
-        
-        /* Метод для отправки сообщения с разметкой html
-         user - пользователь, которому необходимо отправить сообщение
-         message - текст сообщения
-         keyboard - клавиатура, которую надо добавить к сообщению */
-        public static async Task<Message> SendTextWithHtml(UserEntity user, string message, IReplyMarkup keyboard = null)
-        {
-            try
-            {
-                if (!user.IsBlocked)
-                {
-                    if (user.Session.Messages.Count > 0 && (keyboard is null || keyboard is InlineKeyboardMarkup))
-                        return await EditMessage(user, message, (InlineKeyboardMarkup)keyboard, 
-                            user.Session.Messages.Last(), ParseMode.Html);
-                    var result = await Bot.Client.SendTextMessageAsync(user.ChatId, message, ParseMode.Html,
+                    if (user.Session.Messages.Count > 0)
+                        return await Bot.Client.EditMessageTextAsync(user.ChatId, user.Session.Messages.Last(),
+                            message, parseMode, 
+                            replyMarkup: (InlineKeyboardMarkup)keyboard ?? InlineKeyboardMarkup.Empty());
+                    var result = await Bot.Client.SendTextMessageAsync(user.ChatId, message, parseMode,
                         replyMarkup: keyboard, disableNotification: true);
                     user.Session?.Messages.Add(result.MessageId);
                     return result;
@@ -128,7 +104,15 @@ namespace CardCollector.Controllers
             }
             catch (Exception e)
             {
-                LogOutWarning("Can't send text message with html " + e.Message);
+                LogOutWarning("Can't send text message " + e.Message);
+                if (!user.IsBlocked)
+                {
+                    await user.ClearChat();
+                    var result = await Bot.Client.SendTextMessageAsync(user.ChatId, message, parseMode,
+                        replyMarkup: keyboard, disableNotification: true);
+                    user.Session?.Messages.Add(result.MessageId);
+                    return result;
+                }
             }
             return new Message();
         }
@@ -151,45 +135,6 @@ namespace CardCollector.Controllers
             catch (Exception e)
             {
                 LogOutWarning("Can't send sticker " + e.Message);
-            }
-            return new Message();
-        }
-        
-        /* Метод для редактирования сообщения
-         user - пользователь, которому необходимо отредактировать сообщение
-         messageId - id сообщения
-         message - текст сообщения
-         keyboard - клавиатура, которую надо добавить к сообщению */
-        public static async Task<Message> EditMessage(UserEntity user, string message,
-            InlineKeyboardMarkup keyboard = null, int messageId = -1, ParseMode? parseMode = null)
-        {
-            try
-            {
-                if (!user.IsBlocked)
-                {
-                    var msgId = messageId != -1 ? messageId : user.Session.Messages.Last();
-                    return await Bot.Client.EditMessageTextAsync(user.ChatId, msgId, message, replyMarkup: keyboard,
-                        parseMode: parseMode);
-                }
-            }
-            catch (Exception)
-            {
-                //if (e is ApiRequestException && e.Message.Contains("message is not modified")) return new Message();
-                await user.ClearChat();
-                try
-                {
-                    if (!user.IsBlocked)
-                    {
-                        var msg = await Bot.Client.SendTextMessageAsync(user.ChatId, message, parseMode, 
-                            replyMarkup: keyboard, disableNotification: true);
-                        user.Session.Messages.Add(msg.MessageId);
-                        return msg;
-                    }
-                }
-                catch (Exception e1)
-                {
-                    LogOut("Cant edit message: " + e1.Message);
-                }
             }
             return new Message();
         }

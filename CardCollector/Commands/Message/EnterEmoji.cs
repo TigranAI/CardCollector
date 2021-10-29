@@ -25,10 +25,10 @@ namespace CardCollector.Commands.Message
             var input = Update.Message!.Text;
             /* если пользователь ввел что-то кроме эмодзи */
             if (!Regex.IsMatch(input!, onlyEmojiPattern))
-                await MessageController.EditMessage(User, Messages.please_enter_emoji, Keyboard.EmojiOptions);
+                await MessageController.SendMessage(User, Messages.please_enter_emoji, Keyboard.EmojiOptions);
             /* если пользователь ввел несколько эмодзи или эмодзи и текст */
             else if (!Regex.IsMatch(input, oneEmojiPattern))
-                await MessageController.EditMessage(User, Messages.enter_only_one_emoji,
+                await MessageController.SendMessage(User, Messages.enter_only_one_emoji,
                     Keyboard.EmojiOptions);
             else
             {
@@ -37,7 +37,7 @@ namespace CardCollector.Commands.Message
                 /* Формируем сообщение с имеющимися фильтрами у пользователя */
                 var text = filtersModule.ToString(User.Session.State);
                 /* Редактируем сообщение */
-                await MessageController.EditMessage(User, text, Keyboard.GetSortingMenu(User.Session.State));
+                await MessageController.SendMessage(User, text, Keyboard.GetSortingMenu(User.Session.State));
                 Queue.Remove(User.Id);
             }
         }

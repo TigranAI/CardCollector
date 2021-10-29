@@ -20,14 +20,14 @@ namespace CardCollector.Commands.Message
             var module = User.Session.GetModule<CollectionModule>();
             if (!int.TryParse(Update.Message!.Text, out var price) || price < 0)
             {
-                await MessageController.EditMessage(User,
+                await MessageController.SendMessage(User,
                     $"{Messages.current_price} {module.SellPrice}{Text.gem}\n{Messages.please_enter_integer}",
                     Keyboard.AuctionPutCancelKeyboard);
             }
             else
             {
                 module.SellPrice = price;
-                await MessageController.EditMessage(User, $"{Messages.confirm_selling} {module.SellPrice}{Text.gem}:" +
+                await MessageController.SendMessage(User, $"{Messages.confirm_selling} {module.SellPrice}{Text.gem}:" +
                                                           $"\n{Messages.or_enter_another_sum}", Keyboard.AuctionPutCancelKeyboard);
             }
         }

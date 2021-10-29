@@ -11,11 +11,15 @@ namespace CardCollector.Commands.CallbackQuery
     {
         protected override string CommandText => "";
         protected override bool AddToStack => true;
+        protected override bool ClearStickers => true;
 
         public override async Task Execute()
         {
             var combineModule = User.Session.GetModule<CombineModule>();
-            await MessageController.EditMessage(User, combineModule.ToString(), Keyboard.GetCombineKeyboard(combineModule));
+            if (combineModule.CombineCount == 0)
+                await new Back(User, Update).Execute();
+            else 
+                await MessageController.SendMessage(User, combineModule.ToString(), Keyboard.GetCombineKeyboard(combineModule));
         }
 
         protected internal override bool IsMatches(UserEntity user, Update update) => false;

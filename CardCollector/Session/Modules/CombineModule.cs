@@ -19,10 +19,7 @@ namespace CardCollector.Session.Modules
             return (int)(coinsSum * multiplier);
         }
         
-        public int GetCombineCount()
-        {
-            return CombineList.Values.Sum();
-        }
+        public int CombineCount => CombineList.Values.Sum();
         
         public void Reset()
         {
@@ -33,7 +30,7 @@ namespace CardCollector.Session.Modules
         
         public override string ToString()
         {
-            var message = $"{Text.added_stickers} {GetCombineCount()}/{Constants.COMBINE_COUNT}:";
+            var message = $"{Text.added_stickers} {CombineCount}/{Constants.COMBINE_COUNT}:";
             foreach (var ((sticker, count), index) in CombineList.WithIndex())
                 message += $"\n{Text.sticker} {index + 1}: {sticker.Title} {count}{Text.items}";
             return message;

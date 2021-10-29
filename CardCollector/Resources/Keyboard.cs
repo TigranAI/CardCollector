@@ -324,7 +324,7 @@ namespace CardCollector.Resources
                 keyboard.Add(new []{InlineKeyboardButton.WithCallbackData($"{Text.delete} {Text.sticker} {keyboard.Count + 1}",
                     $"{Command.delete_combine}={sticker.Md5Hash}")});
             }
-            if (module.GetCombineCount() == Constants.COMBINE_COUNT)
+            if (module.CombineCount == Constants.COMBINE_COUNT)
                 keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(
                     $"{Text.combine} {module.CalculateCombinePrice()}{Text.coin}", Command.combine_stickers)});
             else keyboard.Add(new[] {InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.add_sticker)});

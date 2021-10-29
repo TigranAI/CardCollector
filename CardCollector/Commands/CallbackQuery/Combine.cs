@@ -10,7 +10,6 @@ namespace CardCollector.Commands.CallbackQuery
     public class Combine : CallbackQueryCommand
     {
         protected override string CommandText => Command.combine;
-        protected override bool ClearStickers => true;
 
         public override async Task Execute()
         {
@@ -22,7 +21,7 @@ namespace CardCollector.Commands.CallbackQuery
                 combineModule.Count = collectionModule.Count;
             }
             var selectedSticker = combineModule.SelectedSticker;
-            var combineCount = combineModule.GetCombineCount();
+            var combineCount = combineModule.CombineCount;
             if (combineCount == Constants.COMBINE_COUNT)
                 await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.cant_combine, true);
             else

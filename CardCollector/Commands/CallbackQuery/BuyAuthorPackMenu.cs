@@ -11,6 +11,7 @@ namespace CardCollector.Commands.CallbackQuery
     {
         protected override string CommandText => Command.buy_author_pack_menu;
         protected override bool AddToStack => true;
+        protected override bool ClearStickers => true;
         
         public override async Task Execute()
         {
@@ -21,7 +22,7 @@ namespace CardCollector.Commands.CallbackQuery
             if (packs.Count == 0)
                 await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.page_not_found);
             else
-                await MessageController.EditMessage(User, Messages.choose_author,
+                await MessageController.SendMessage(User, Messages.choose_author,
                     Keyboard.GetShopPacksKeyboard(packs, Keyboard.GetPagePanel(page, totalCount, CommandText)));
         }
 

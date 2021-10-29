@@ -20,7 +20,7 @@ namespace CardCollector.Commands.CallbackQuery
             module.CombineList.Remove(sticker);
             if (module.CombineList.Count == 0)
                 await new Back(User, Update).PrepareAndExecute();
-            else await MessageController.EditMessage(User, module.ToString(), Keyboard.GetCombineKeyboard(module));
+            else await MessageController.SendMessage(User, module.ToString(), Keyboard.GetCombineKeyboard(module));
         }
 
         public DeleteCombine() { }

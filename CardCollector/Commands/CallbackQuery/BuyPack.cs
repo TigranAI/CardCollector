@@ -13,7 +13,7 @@ namespace CardCollector.Commands.CallbackQuery
         
         public override async Task Execute()
         {
-            await MessageController.EditMessage(User, Messages.choose_option, Keyboard.ShopPacksKeyboard);
+            await MessageController.SendMessage(User, Messages.choose_option, Keyboard.ShopPacksKeyboard);
         }
 
         public BuyPack() { }
