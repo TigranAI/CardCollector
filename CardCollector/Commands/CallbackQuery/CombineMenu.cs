@@ -19,7 +19,7 @@ namespace CardCollector.Commands.CallbackQuery
             if (combineModule.CombineCount == 0)
                 await new Back(User, Update).Execute();
             else 
-                await MessageController.SendMessage(User, combineModule.ToString(), Keyboard.GetCombineKeyboard(combineModule));
+                await MessageController.EditMessage(User, combineModule.ToString(), Keyboard.GetCombineKeyboard(combineModule));
         }
 
         protected internal override bool IsMatches(UserEntity user, Update update) => false;

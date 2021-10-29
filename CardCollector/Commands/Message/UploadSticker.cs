@@ -21,7 +21,7 @@ namespace CardCollector.Commands.Message
                           $"\n{Messages.uploaded_count} {module.Count}";
             foreach (var (stickerEntity, i) in module.StickersList.WithIndex())
                 message += $"\n{Text.sticker} {i + 1}: {stickerEntity.Id}";
-            await MessageController.SendMessage(User, message, Keyboard.EndStickerUpload);
+            await MessageController.EditMessage(User, message, Keyboard.EndStickerUpload);
         }
 
         protected internal override bool IsMatches(UserEntity user, Update update)

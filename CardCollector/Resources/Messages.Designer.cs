@@ -79,7 +79,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Автор:.
+        ///   Looks up a localized string similar to Автор.
         /// </summary>
         internal static string author {
             get {
@@ -115,6 +115,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to за покупку алмазов в магазине.
+        /// </summary>
+        internal static string buy_gems {
+            get {
+                return ResourceManager.GetString("buy_gems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Невозможно изменить количество!.
         /// </summary>
         internal static string cant_change_count {
@@ -138,6 +147,15 @@ namespace CardCollector.Resources {
         internal static string cant_sell_zero {
             get {
                 return ResourceManager.GetString("cant_sell_zero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Размер копилки.
+        /// </summary>
+        internal static string cash_capacity {
+            get {
+                return ResourceManager.GetString("cash_capacity", resourceCulture);
             }
         }
         
@@ -268,7 +286,34 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Текущие примененные фильтры:.
+        ///   Looks up a localized string similar to Поздравляем! Вы достигли уровня.
+        /// </summary>
+        internal static string congratulation_new_level {
+            get {
+                return ResourceManager.GetString("congratulation_new_level", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Количество отправлений за этот день в беседу.
+        /// </summary>
+        internal static string count_sends_per_day {
+            get {
+                return ResourceManager.GetString("count_sends_per_day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Опыт.
+        /// </summary>
+        internal static string current_exp {
+            get {
+                return ResourceManager.GetString("current_exp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Текущие примененные фильтры.
         /// </summary>
         internal static string current_filters {
             get {
@@ -358,7 +403,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Эмоция:.
+        ///   Looks up a localized string similar to Эмоция.
         /// </summary>
         internal static string emoji {
             get {
@@ -426,6 +471,15 @@ namespace CardCollector.Resources {
         internal static string gems_exchange_count {
             get {
                 return ResourceManager.GetString("gems_exchange_count", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Уровень.
+        /// </summary>
+        internal static string level {
+            get {
+                return ResourceManager.GetString("level", resourceCulture);
             }
         }
         
@@ -564,7 +618,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Стоимость:.
+        ///   Looks up a localized string similar to Стоимость.
         /// </summary>
         internal static string price {
             get {
@@ -591,11 +645,20 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Установите фильтры кнопками ниже:.
+        ///   Looks up a localized string similar to Установите фильтры кнопками ниже.
         /// </summary>
         internal static string select_filter {
             get {
                 return ResourceManager.GetString("select_filter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to за отправку стикера в беседу..
+        /// </summary>
+        internal static string send_sticker {
+            get {
+                return ResourceManager.GetString("send_sticker", resourceCulture);
             }
         }
         
@@ -609,7 +672,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Сортировка:.
+        ///   Looks up a localized string similar to Сортировка.
         /// </summary>
         internal static string sorting {
             get {
@@ -663,7 +726,16 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Тир:.
+        ///   Looks up a localized string similar to Спасибо за покупку алмазов!.
+        /// </summary>
+        internal static string thanks_for_buying_gems {
+            get {
+                return ResourceManager.GetString("thanks_for_buying_gems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Тир.
         /// </summary>
         internal static string tier {
             get {
@@ -732,11 +804,29 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Чтобы увеличить получаемый опыт, Вы можете добавить бота в беседу..
+        /// </summary>
+        internal static string you_can_add_bot_to_conversation {
+            get {
+                return ResourceManager.GetString("you_can_add_bot_to_conversation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Получено прибыли со стикеров:.
         /// </summary>
         internal static string you_collected {
             get {
                 return ResourceManager.GetString("you_collected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы получили.
+        /// </summary>
+        internal static string you_gained {
+            get {
+                return ResourceManager.GetString("you_gained", resourceCulture);
             }
         }
         

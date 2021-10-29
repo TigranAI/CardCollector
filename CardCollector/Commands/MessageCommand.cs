@@ -53,6 +53,7 @@ namespace CardCollector.Commands
             /* Выгрузка файлов к боту */
             new UploadFile(),
             new UploadSticker(),
+            new GiveExp(),
         };
 
         /* Метод, создающий объекты команд исходя из полученного обновления */
@@ -72,23 +73,22 @@ namespace CardCollector.Commands
             
             // Объект пользователя
             var user = await UserDao.GetUser(update.Message!.From);
-        
+            
             // Удаляем сообщение пользователя в лс, оно нам больше не нужно
-            await MessageController.DeleteMessage(user, update.Message.MessageId);
+            if (update.Message.Chat.Type is ChatType.Private)
+                await MessageController.DeleteMessage(user, update.Message.MessageId);
             
-            // Если сообщение - это команда, полученная от бота, то мы игнорируем, так как получим ее через ChosenInlineResult
-            if (update.Message.ViaBot is { }) return new IgnoreUpdate();
-            
-            // Если пользователь заблокирован или сообщение где-то в другом канале, привате - игонрируем
-            if (user.IsBlocked || update.Message.Chat.Id != user.ChatId) return new IgnoreUpdate();
+            // Если пользователь заблокирован
+            if (user.IsBlocked) return new IgnoreUpdate();
             
             // Возвращаем объект, если команда совпала
             /* Возвращаем первую подходящую команду */
             return List.FirstOrDefault(item => item.IsMatches(user, update)) is { } executor
                 ? (UpdateModel) Activator.CreateInstance(executor.GetType(), user, update)
-                : new CommandNotFound(user, update, update.Message.Type == MessageType.Text 
-                    ? update.Message.Text 
-                    : Utilities.ToJson(update.Message));
+                : new IgnoreUpdate();
+            /*CommandNotFound(user, update, update.Message.Type == MessageType.Text 
+            ? update.Message.Text 
+            : Utilities.ToJson(update.Message));*/
         }
 
         protected internal override bool IsMatches(UserEntity user, Update update)

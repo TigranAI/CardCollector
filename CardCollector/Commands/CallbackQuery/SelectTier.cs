@@ -12,7 +12,7 @@ namespace CardCollector.Commands.CallbackQuery
 
         public override async Task Execute()
         {
-            await MessageController.SendMessage(User, Messages.choose_tier, Keyboard.TierOptions);
+            await MessageController.EditMessage(User, Messages.choose_tier, Keyboard.TierOptions);
         }
         
         public SelectTier() { }

@@ -17,7 +17,7 @@ namespace CardCollector.Commands.Message
             /* Формируем сообщение с имеющимися фильтрами у пользователя */
             var text = User.Session.GetModule<FiltersModule>().ToString(User.Session.State);
             /* Отправляем сообщение */
-            await MessageController.SendMessage(User, text, Keyboard.GetSortingMenu(User.Session.State));
+            await MessageController.EditMessage(User, text, Keyboard.GetSortingMenu(User.Session.State));
         }
         
         public ShowFiltersMenu(UserEntity user, Update update) : base(user, update) { }

@@ -31,10 +31,10 @@ namespace CardCollector.Commands.CallbackQuery
                 var author = authors[rnd.Next(authors.Count)];
                 var stickers = await StickerDao.GetListWhere(i => i.Author == author && i.Tier == tier + 1);
                 var sticker = stickers[rnd.Next(stickers.Count)];
-                await UserStickerRelationDao.AddNew(User, sticker, 1);
+                await UserStickerRelationDao.AddSticker(User, sticker);
                 var text = $"{Messages.combined_sticker}:\n" + sticker;
                 await MessageController.SendSticker(User, sticker.Id);
-                await MessageController.SendMessage(User, text, Keyboard.BackToFilters(sticker.Title));
+                await MessageController.EditMessage(User, text, Keyboard.BackToFilters(sticker.Title));
                 User.Session.DeleteModule<CombineModule>();
             }
         }

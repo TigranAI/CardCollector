@@ -14,7 +14,7 @@ namespace CardCollector.Commands
 
         public override async Task Execute()
         {
-            await MessageController.SendMessage(User, "Команда не найдена " + _command);
+            await MessageController.EditMessage(User, "Команда не найдена " + _command);
         }
 
         protected internal override bool IsMatches(UserEntity user, Update update) => true;

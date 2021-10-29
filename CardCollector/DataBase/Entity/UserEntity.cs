@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using CardCollector.Controllers;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
 using CardCollector.Session;
@@ -32,6 +33,8 @@ namespace CardCollector.DataBase.Entity
         
         /* Счет пользователя */
         [NotMapped] public CashEntity Cash { get; set; }
+        /*Уровень пользователя*/
+        [NotMapped] public UserLevel CurrentLevel { get; set; }
         
         /* Стикеры пользователя */
         [NotMapped] public Dictionary<string, UserStickerRelationEntity> Stickers { get; set; }
@@ -58,6 +61,24 @@ namespace CardCollector.DataBase.Entity
         public async Task<int> AuctionDiscount()
         {
             return await AuctionDiscount5.IsApplied(Stickers) ? 5 : 0;
+        }
+
+        public async Task GiveExp(long count)
+        {
+            CurrentLevel.CurrentExp += count;
+            CurrentLevel.TotalExp += count;
+            var levelInfo = await LevelDao.GetLevel(CurrentLevel.Level + 1);
+            if (levelInfo?.LevelExpGoal <= CurrentLevel.CurrentExp) await ClearChat();
+            while (levelInfo?.LevelExpGoal <= CurrentLevel.CurrentExp)
+            {
+                CurrentLevel.CurrentExp -= levelInfo.LevelExpGoal;
+                CurrentLevel.Level++;
+                var levelReward = levelInfo.GetRewardInstance();
+                var message = $"{Messages.congratulation_new_level} {CurrentLevel.Level}" +
+                              $"\n{await levelReward.GetReward(this)}";
+                await MessageController.SendMessage(this, message);
+                levelInfo = await LevelDao.GetLevel(CurrentLevel.Level + 1);
+            }
         }
 
         public UserEntity()

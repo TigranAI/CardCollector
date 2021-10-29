@@ -18,7 +18,7 @@ namespace CardCollector.Commands.CallbackQuery
         {
             var random = await UserPacksDao.GetOne(User.Id, 1);
             var authorCount = (await UserPacksDao.GetUserPacks(User.Id)).Sum(item => item.PackId != 1 ? item.Count : 0);
-            await MessageController.SendMessage(User, 
+            await MessageController.EditMessage(User, 
                 $"{Messages.your_packs}" +
                 $"\n{Messages.random_packs}: {random.Count}{Text.items}" +
                 $"\n{Messages.author_pack}: {authorCount}{Text.items}",

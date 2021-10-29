@@ -12,7 +12,7 @@ namespace CardCollector.Commands.CallbackQuery
 
         public override async Task Execute()
         {
-            await MessageController.SendMessage(User, Messages.upload_your_file, Keyboard.BackKeyboard);
+            await MessageController.EditMessage(User, Messages.upload_your_file, Keyboard.BackKeyboard);
         }
 
         public EndUploadStickers() { }

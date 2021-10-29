@@ -36,7 +36,7 @@ namespace CardCollector.Commands
             new GetUnlimitedStickerAndExecuteCommand(),
 
             // Обработка результата при отправке стикера
-            new SendSticker(),
+            new GiveExp(),
             new SendPrivateSticker(),
             // Обработка результата при выборе продавца
             new SelectTrader(),

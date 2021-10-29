@@ -25,27 +25,27 @@ namespace CardCollector.Commands.Message
             try
             {
                 /* Соообщаем, что начали загрузку файла */
-                await MessageController.SendMessage(User, Messages.downloading_file);
+                await MessageController.EditMessage(User, Messages.downloading_file);
                 /* Загружаем файл */
                 var fileName = await Utilities.DownloadFile(Update.Message?.Document);
                 /* Сообщаем пользователю, что читаем документ */
-                await MessageController.SendMessage(User, Messages.reading_document);
+                await MessageController.EditMessage(User, Messages.reading_document);
                 /* Парсим файл */
                 var stickersList = await ParseExcelFile(fileName, module.StickersList);
                 /* Сообщаем пользователю, что удаляем файлы */
-                await MessageController.SendMessage(User, Messages.deleting_files);
+                await MessageController.EditMessage(User, Messages.deleting_files);
                 File.Delete(fileName);
                 /* Сообщаем пользователю, что загружаем стикеры */
-                await MessageController.SendMessage(User, Messages.uploading_stickers);
+                await MessageController.EditMessage(User, Messages.uploading_stickers);
                 var packInfo = await PacksDao.AddNew(stickersList.First().Author);
                 await StickerDao.AddRange(stickersList, packInfo.Id);
                 /* Сообщаем пользователю, что стикеры загружены */
-                await MessageController.SendMessage(User, Messages.stickers_succesfully_uploaded);
+                await MessageController.EditMessage(User, Messages.stickers_succesfully_uploaded);
             }
             catch (Exception e)
             {
                 /* Сообщаем пользователю, что произошла ошибка */
-                await MessageController.SendMessage(User, $"{Messages.unexpected_exception}: {e.Message}");
+                await MessageController.EditMessage(User, $"{Messages.unexpected_exception}: {e.Message}");
             }
         }
         

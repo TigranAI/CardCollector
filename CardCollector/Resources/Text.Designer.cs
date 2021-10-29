@@ -205,6 +205,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Размер копилки увеличен:.
+        /// </summary>
+        internal static string cash_capacity_increased {
+            get {
+                return ResourceManager.GetString("cash_capacity_increased", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 💰.
         /// </summary>
         internal static string coin {
@@ -345,6 +354,15 @@ namespace CardCollector.Resources {
         internal static string error {
             get {
                 return ResourceManager.GetString("error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to опыта.
+        /// </summary>
+        internal static string exp {
+            get {
+                return ResourceManager.GetString("exp", resourceCulture);
             }
         }
         
@@ -588,6 +606,24 @@ namespace CardCollector.Resources {
         internal static string profile {
             get {
                 return ResourceManager.GetString("profile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Получено случайных паков:.
+        /// </summary>
+        internal static string random_packs_added {
+            get {
+                return ResourceManager.GetString("random_packs_added", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Получен стикер:.
+        /// </summary>
+        internal static string random_sticker_added {
+            get {
+                return ResourceManager.GetString("random_sticker_added", resourceCulture);
             }
         }
         

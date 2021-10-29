@@ -20,7 +20,7 @@ namespace CardCollector.Commands.ChosenInlineResult
             /* Получаем объект стикера */
             var sticker = await StickerDao.GetByHash(hash);
             /* Выдаем пользователю 1 стикер */
-            await UserStickerRelationDao.AddNew(User, sticker, 1);
+            await UserStickerRelationDao.AddSticker(User, sticker);
             /* Выполняем стандартный сценарий команды */
             await PrivateFactory(Update, User).PrepareAndExecute();
         }

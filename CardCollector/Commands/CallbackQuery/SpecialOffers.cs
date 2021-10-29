@@ -21,7 +21,7 @@ namespace CardCollector.Commands.CallbackQuery
             if (shopEntities.Count < 1)
                 await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.offers_not_found, true);
             else
-                await MessageController.SendMessage(User, Messages.available_offers, Keyboard.SpecialOffersKeyboard(shopEntities));
+                await MessageController.EditMessage(User, Messages.available_offers, Keyboard.SpecialOffersKeyboard(shopEntities));
         }
 
         public SpecialOffers() { }

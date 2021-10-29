@@ -17,6 +17,10 @@ namespace CardCollector
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(obj);
         }
+        public static T FromJson<T>(string json)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(json);
+        }
         
         public static string CreateMd5(string input)
         {

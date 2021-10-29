@@ -22,7 +22,7 @@ namespace CardCollector.Commands.CallbackQuery
                     userTasks.Add((int)key, await DailyTaskDao.AddNew(User.Id, (int)key));
                 text += $"\n{task.Title} ({task.Goal - userTasks[(int) key].Progress}/{task.Goal})";
             }
-            await MessageController.SendMessage(User, text, Keyboard.BackKeyboard);
+            await MessageController.EditMessage(User, text, Keyboard.BackKeyboard);
         }
 
         public DailyTasks() { }

@@ -49,7 +49,7 @@ namespace CardCollector.Commands.CallbackQuery
                 var userPack = await UserPacksDao.GetOne(User.Id, packId);
                 userPack.Count += module.SelectedPosition?.Count ?? module.Count;
                 if (module.SelectedPosition?.AdditionalPrize != "") await GivePrize(module.SelectedPosition?.AdditionalPrize);
-                await MessageController.SendMessage(User, $"{Messages.thanks_for_buying} {userPack.Count}", 
+                await MessageController.EditMessage(User, $"{Messages.thanks_for_buying} {userPack.Count}", 
                     offerSpecial && !offerInfinite || (module.SelectedPosition?.Expired ?? false) || !canBuy
                     ? Keyboard.BackKeyboard
                     : Keyboard.RepeatCommand(Text.buy_more, CallbackData));
@@ -75,12 +75,9 @@ namespace CardCollector.Commands.CallbackQuery
             }
             if (sticker != null)
             {
-                if (!User.Stickers.ContainsKey(sticker.Md5Hash))
-                    await UserStickerRelationDao.AddNew(User, sticker, 1);
-                else
-                    User.Stickers[sticker.Md5Hash].Count ++;
+                await UserStickerRelationDao.AddSticker(User, sticker);
                 await MessageController.SendSticker(User, sticker.Id);
-                await MessageController.SendMessage(User, $"{Messages.congratulation}\n{sticker}");
+                await MessageController.EditMessage(User, $"{Messages.congratulation}\n{sticker}");
             }
         }
 

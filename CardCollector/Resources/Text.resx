@@ -261,4 +261,16 @@
     <data name="open_more" xml:space="preserve">
         <value>Открыть ещё</value>
     </data>
+    <data name="cash_capacity_increased" xml:space="preserve">
+        <value>Размер копилки увеличен:</value>
+    </data>
+    <data name="random_packs_added" xml:space="preserve">
+        <value>Получено случайных паков:</value>
+    </data>
+    <data name="random_sticker_added" xml:space="preserve">
+        <value>Получен стикер:</value>
+    </data>
+    <data name="exp" xml:space="preserve">
+        <value>опыта</value>
+    </data>
 </root>

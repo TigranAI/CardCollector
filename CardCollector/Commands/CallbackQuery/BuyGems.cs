@@ -15,7 +15,7 @@ namespace CardCollector.Commands.CallbackQuery
         {
             await MessageController.SendInvoice(User, Text.gems_title, Text.gems_description, 
                 Command.buy_gems_item, new[] {new LabeledPrice(Text.gems_label50, 100)},
-                1000000, new [] {500, 1000, 2500, 5000}, Keyboard.BuyGemsKeyboard);
+                900000, new [] {400, 900, 2400, 4900}, Keyboard.BuyGemsKeyboard);
         }
 
         public BuyGems() { }

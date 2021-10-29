@@ -26,12 +26,9 @@ namespace CardCollector.Commands.CallbackQuery
                 var stickers = await StickerDao.GetListWhere(item =>
                     item.Tier == tier && (packId == 1 || item.PackId == packId));
                 var sticker = stickers[Utilities.rnd.Next(stickers.Count)];
-                if (User.Stickers.ContainsKey(sticker.Md5Hash))
-                    User.Stickers[sticker.Md5Hash].Count++;
-                else
-                    await UserStickerRelationDao.AddNew(User, sticker, 1);
+                await UserStickerRelationDao.AddSticker(User, sticker);
                 await MessageController.SendSticker(User, sticker.Id);
-                await MessageController.SendMessage(User, $"{Messages.congratulation}\n{sticker}",
+                await MessageController.EditMessage(User, $"{Messages.congratulation}\n{sticker}",
                     userPack.Count > 0
                         ? Keyboard.RepeatCommand(Text.open_more, CallbackData)
                         : Keyboard.BackKeyboard);

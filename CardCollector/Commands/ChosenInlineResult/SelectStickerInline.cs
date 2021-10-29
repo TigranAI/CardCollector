@@ -40,7 +40,7 @@ namespace CardCollector.Commands.ChosenInlineResult
                     break;
             }
             await MessageController.SendSticker(User, sticker.Id);
-            await MessageController.SendMessage(User, sticker.ToString(stickerCount), Keyboard.GetStickerKeyboard(User.Session));
+            await MessageController.EditMessage(User, sticker.ToString(stickerCount), Keyboard.GetStickerKeyboard(User.Session));
             if (User.Session.State == UserState.AuctionMenu) User.Session.State = UserState.ProductMenu;
         }
 

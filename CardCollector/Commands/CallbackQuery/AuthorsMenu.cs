@@ -24,7 +24,7 @@ namespace CardCollector.Commands.CallbackQuery
                 await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.page_not_found);
             /* Заменяем сообщение меню на сообщение со списком */
             else
-                await MessageController.SendMessage(User, Messages.choose_author,
+                await MessageController.EditMessage(User, Messages.choose_author,
                     Keyboard.GetAuthorsKeyboard(list, Keyboard.GetPagePanel(page, totalCount, CommandText)));
         }
 

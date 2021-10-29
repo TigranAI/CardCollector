@@ -19,7 +19,7 @@ namespace CardCollector.Commands.CallbackQuery
             var module = User.Session.GetModule<CollectionModule>();
             var priceList = (await AuctionController.GetPriceList(module.SelectedSticker.Id)).ToList();
             var lowerPrice = priceList.Count > 0 ? priceList.Min() : 0;
-            await MessageController.SendMessage(User,
+            await MessageController.EditMessage(User,
                 $"{Messages.current_price} {module.SellPrice}{Text.gem}" +
                 $"\n{Messages.lower_price} {lowerPrice}{Text.gem}" +
                 $"\n{Messages.enter_your_gems_price} {Text.gem}:", Keyboard.BackKeyboard);

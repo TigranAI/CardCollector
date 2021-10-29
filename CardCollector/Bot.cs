@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
+using CardCollector.Commands;
+using CardCollector.Commands.Message;
 using CardCollector.DailyTasks;
 using CardCollector.DataBase;
 using CardCollector.DataBase.EntityDao;
@@ -51,6 +53,8 @@ namespace CardCollector
             Utilities.SetUpTimer(Constants.DailyTaskReset, DailyTask.ResetTasks);
             /* Запускаем таймер с эффектами стикеров */
             Utilities.SetUpTimer(Constants.DailyStickerRewardCheck, EffectFunctions.RunAll);
+            /* Запускаем таймер сброса отправленных стикеров */
+            Utilities.SetUpTimer(Constants.ResetGroupStickersExp, GiveExp.ResetStickersExp);
             
             _end.WaitOne();
             Logs.LogOut("Stopping program");

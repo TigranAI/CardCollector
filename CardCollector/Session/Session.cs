@@ -34,6 +34,8 @@ namespace CardCollector.Session
             this.user = user;
         }
 
+        public bool ChosenResultWithMessage = false;
+
         public T InitNewModule<T>() where T : Module
         {
             if (!Modules.ContainsKey(typeof(T))) Modules.Add(typeof(T), Activator.CreateInstance<T>());
@@ -73,18 +75,15 @@ namespace CardCollector.Session
         public async Task ClearMessages()
         {
             foreach (var messageId in Messages.ToList())
-                await MessageController.DeleteMessage(user, messageId, false);
+                await MessageController.DeleteMessage(user, messageId);
             foreach (var messageId in StickerMessages.ToList())
-                await MessageController.DeleteMessage(user, messageId, false);
-            StickerMessages.Clear();
-            Messages.Clear();
+                await MessageController.DeleteMessage(user, messageId);
         }
 
         public async Task ClearStickers()
         {
             foreach (var messageId in StickerMessages.ToList())
-                await MessageController.DeleteMessage(user, messageId, false);
-            StickerMessages.Clear();
+                await MessageController.DeleteMessage(user, messageId);
         }
 
         public async Task EndSession()

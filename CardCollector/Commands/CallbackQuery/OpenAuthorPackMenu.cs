@@ -35,7 +35,7 @@ namespace CardCollector.Commands.CallbackQuery
                 if (packs.Count == 0)
                     await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.page_not_found);
                 else
-                    await MessageController.SendMessage(User, Messages.choose_author,
+                    await MessageController.EditMessage(User, Messages.choose_author,
                         await Keyboard.GetUserPacksKeyboard(packs, Keyboard.GetPagePanel(page, totalCount, CommandText)));
             }
         }

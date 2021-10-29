@@ -21,7 +21,7 @@ namespace CardCollector.Commands.Message
             var token = GenerateNewToken();
             await SessionTokenDao.AddNew(User.Id, token);
             var loginLink = $"{site}login?token={token}";
-            await MessageController.SendMessage(User, $"<a href=\"{loginLink}\">{Messages.your_login_link}</a>",
+            await MessageController.EditMessage(User, $"<a href=\"{loginLink}\">{Messages.your_login_link}</a>",
                 Keyboard.LoginKeyboard(loginLink), ParseMode.Html);
         }
 

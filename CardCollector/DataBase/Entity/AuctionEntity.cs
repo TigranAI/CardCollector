@@ -31,7 +31,7 @@ namespace CardCollector.DataBase.Entity
             var user = await UserDao.GetById(Trader);
             var sticker = await StickerDao.GetById(StickerId);
             var gemsSum = (int)(Price * count * 0.7);
-            await MessageController.SendMessage(user, $"{Messages.you_sold} {sticker.Title} {count}{Text.items}" +
+            await MessageController.EditMessage(user, $"{Messages.you_sold} {sticker.Title} {count}{Text.items}" +
                                                       $"\n{Messages.you_collected} {gemsSum}{Text.gem}");
             user.Cash.Gems += gemsSum;
             await CashDao.Save();

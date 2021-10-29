@@ -14,8 +14,12 @@ namespace CardCollector.Commands.PreCheckoutQuery
         public override async Task Execute()
         {
             await Bot.Client.AnswerPreCheckoutQueryAsync(PreCheckoutQueryId);
-            User.Cash.Gems += 50 * Amount / 100;
-            await MessageController.SendMessage(User, Messages.thanks_for_buying);
+            var gemsCount = 50 * Amount / 100;
+            User.Cash.Gems += gemsCount;
+            await MessageController.EditMessage(User, Messages.thanks_for_buying_gems);
+            await MessageController.SendMessage(User, 
+                $"{Messages.you_gained} {gemsCount * 2} {Text.exp} {Messages.buy_gems}", addToList: true);
+            await User.GiveExp(gemsCount * 2);
         }
 
         public BuyGems() { }

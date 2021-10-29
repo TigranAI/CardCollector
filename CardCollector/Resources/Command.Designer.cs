@@ -250,6 +250,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AAY.
+        /// </summary>
+        internal static string give_exp {
+            get {
+                return ResourceManager.GetString("give_exp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AAS.
         /// </summary>
         internal static string my_packs {
@@ -372,15 +381,6 @@ namespace CardCollector.Resources {
         internal static string send_private_sticker {
             get {
                 return ResourceManager.GetString("send_private_sticker", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to AAY.
-        /// </summary>
-        internal static string send_sticker {
-            get {
-                return ResourceManager.GetString("send_sticker", resourceCulture);
             }
         }
         

@@ -39,6 +39,7 @@ namespace CardCollector.DataBase.EntityDao
                 /* Собираем объект пользователя */
                 result.Cash = await CashDao.GetById(user.Id);
                 result.Stickers = await UserStickerRelationDao.GetListById(user.Id);
+                result.CurrentLevel = await UserLevelDao.GetById(user.Id);
                 result.Session.InitNewModule<FiltersModule>();
                 result.Session.InitNewModule<DefaultModule>();
                 
@@ -95,7 +96,7 @@ namespace CardCollector.DataBase.EntityDao
             {
                 await user.Session.EndSession();
                 ActiveUsers.Remove(id);
-                await MessageController.SendMessage(user, Messages.bot_turning_off);
+                await MessageController.EditMessage(user, Messages.bot_turning_off);
             }
         }
 

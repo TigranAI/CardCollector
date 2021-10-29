@@ -15,7 +15,7 @@ namespace CardCollector.Commands.Message
 
         public override async Task Execute()
         {
-            await MessageController.SendMessage(User, Messages.upload_your_stickers, Keyboard.BackKeyboard);
+            await MessageController.EditMessage(User, Messages.upload_your_stickers, Keyboard.BackKeyboard);
         }
 
         protected internal override bool IsMatches(UserEntity user, Update update)

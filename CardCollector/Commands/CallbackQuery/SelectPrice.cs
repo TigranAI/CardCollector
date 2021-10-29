@@ -12,7 +12,7 @@ namespace CardCollector.Commands.CallbackQuery
 
         public override async Task Execute()
         {
-            await MessageController.SendMessage(User, Messages.choose_price, 
+            await MessageController.EditMessage(User, Messages.choose_price, 
                 User.Session.State == UserState.AuctionMenu ? Keyboard.GemsPriceOptions : Keyboard.CoinsPriceOptions);
         }
 

@@ -28,7 +28,7 @@ namespace CardCollector.DataBase.EntityDao
         }
 
         /* Добавляет новое отношение в таблицу */
-        public static async Task<UserStickerRelationEntity> AddNew(UserEntity user, StickerEntity sticker, int count)
+        public static async Task<UserStickerRelationEntity> AddSticker(UserEntity user, StickerEntity sticker, int count = 1)
         {
             if (user.Stickers.ContainsKey(sticker.Md5Hash))
             {
@@ -46,11 +46,11 @@ namespace CardCollector.DataBase.EntityDao
             {
                 case Effect.PiggyBank200:
                     user.Cash.MaxCapacity += 200;
-                    await MessageController.SendMessage(user, Messages.effect_PiggyBank200);
+                    await MessageController.EditMessage(user, Messages.effect_PiggyBank200);
                     break;
                 case Effect.Diamonds25Percent:
                     user.Cash.Gems += (int)(user.Cash.Gems * 0.25);
-                    await MessageController.SendMessage(user, Messages.effect_Diamonds25Percent);
+                    await MessageController.EditMessage(user, Messages.effect_Diamonds25Percent);
                     break;
                 case Effect.Random1Pack5Day:
                     relation.AdditionalData = DateTime.Today.ToString(CultureInfo.CurrentCulture);

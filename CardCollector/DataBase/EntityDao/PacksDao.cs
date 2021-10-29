@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#nullable enable
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
@@ -29,7 +31,18 @@ namespace CardCollector.DataBase.EntityDao
 
         public static async Task<List<PackEntity>> GetAll()
         {
-            return (await Table.WhereAsync(item => item.Id is not 1)).ToList();
+            var list = (await Table.WhereAsync(item => item.Id is not 1)).ToList();
+            list.Sort(new AuthorComparer());
+            return list;
+        }
+
+        private class AuthorComparer : IComparer<PackEntity>
+        {
+            public int Compare(PackEntity? x, PackEntity? y)
+            {
+                if (x is null || y is null) return 0;
+                return string.Compare(x.Author, y.Author, StringComparison.CurrentCultureIgnoreCase);
+            }
         }
     }
 }

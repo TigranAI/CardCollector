@@ -23,23 +23,23 @@ namespace CardCollector.Session.Modules
 
         public string ToString(UserState state)
         {
-            var text = $"{Messages.current_filters}\n" +
-                       $"{Messages.author} {(Filters[Command.authors_menu] is string author and not "" ? author : Messages.all)}\n" +
-                       $"{Messages.tier} {(Filters[Command.tier] is int tier and not -1 ? new string('⭐', tier) : Messages.all)}\n" +
-                       $"{Messages.emoji} {(Filters[Command.emoji] is string emoji and not "" ? emoji : Messages.all)}\n";
+            var text = $"{Messages.current_filters}:\n" +
+                       $"{Messages.author}: {(Filters[Command.authors_menu] is string author and not "" ? author : Messages.all)}\n" +
+                       $"{Messages.tier}: {(Filters[Command.tier] is int tier and not -1 ? new string('⭐', tier) : Messages.all)}\n" +
+                       $"{Messages.emoji}: {(Filters[Command.emoji] is string emoji and not "" ? emoji : Messages.all)}\n";
             switch (state)
             {
                 case UserState.AuctionMenu:
-                    text += $"{Messages.price} 💎 {Filters[Command.price_gems_from]} -" +
+                    text += $"{Messages.price}: 💎 {Filters[Command.price_gems_from]} -" +
                             $" {(Filters[Command.price_gems_to] is int g and not 0 ? g : "∞")}\n";
                     break;
                 case UserState.ShopMenu:
-                    text += $"{Messages.price} 💰 {Filters[Command.price_coins_from]} -" +
+                    text += $"{Messages.price}: 💰 {Filters[Command.price_coins_from]} -" +
                             $" {(Filters[Command.price_coins_to] is int c and not 0 ? c : "∞")}\n";
                     break;
             }
 
-            text += $"{Messages.sorting} {Filters[Command.sort]}\n\n{Messages.select_filter}";
+            text += $"{Messages.sorting} {Filters[Command.sort]}\n\n{Messages.select_filter}:";
             return text;
         }
         

@@ -32,5 +32,7 @@ namespace CardCollector.Resources
         public static readonly TimeSpan DailyTaskReset = DEBUG ? new TimeSpan(20, 30, 0) : new TimeSpan(10, 0, 0);
         /* Время выдачи наград за пассивные эффекты стикеров */
         public static readonly TimeSpan DailyStickerRewardCheck = DEBUG ? new TimeSpan(20, 35, 0) : new TimeSpan(11, 0, 0);
+        /* Сброс отправленных в беседы стикеров */
+        public static readonly TimeSpan ResetGroupStickersExp = DEBUG ? new TimeSpan(20, 35, 0) : new TimeSpan(10, 0, 0);
     }
 }

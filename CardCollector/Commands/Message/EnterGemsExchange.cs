@@ -18,7 +18,7 @@ namespace CardCollector.Commands.Message
         {
             var module = User.Session.GetModule<ShopModule>();
             if (!int.TryParse(Update.Message!.Text, out var sum) || sum < 0)
-                await MessageController.SendMessage(User,
+                await MessageController.EditMessage(User,
                     $"{Messages.exchange_mesage}" +
                     $"\n{Messages.gems_exchange_count} {module.EnteredExchangeSum}{Text.gem}" +
                     $"\n{Messages.coins_exchange_count} {module.EnteredExchangeSum * 150}{Text.coin}" +
@@ -27,7 +27,7 @@ namespace CardCollector.Commands.Message
             else
             {
                 module.EnteredExchangeSum = sum; 
-                await MessageController.SendMessage(User,
+                await MessageController.EditMessage(User,
                     $"{Messages.exchange_mesage}" +
                     $"\n{Messages.gems_exchange_count} {module.EnteredExchangeSum}{Text.gem}" +
                     $"\n{Messages.coins_exchange_count} {module.EnteredExchangeSum * 150}{Text.coin}" +

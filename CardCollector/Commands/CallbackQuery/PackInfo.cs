@@ -12,7 +12,7 @@ namespace CardCollector.Commands.CallbackQuery
 
         public override async Task Execute()
         {
-            await MessageController.SendMessage(User, Messages.pack_info, Keyboard.BackKeyboard);
+            await MessageController.EditMessage(User, Messages.pack_info, Keyboard.BackKeyboard);
         }
 
         public PackInfo() { }

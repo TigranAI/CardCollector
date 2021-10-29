@@ -46,7 +46,7 @@ namespace CardCollector.StickerEffects
                     foreach (var (sticker, count) in stickerList)
                     {
                         generatedMessage += $"\n{sticker.Title} {count}{Text.items}";
-                        await UserStickerRelationDao.AddNew(user, sticker, count);
+                        await UserStickerRelationDao.AddSticker(user, sticker, count);
                     }
                     await MessageController.SendMessage(user,
                         $"{Messages.effect_RandomSticker2Tier3Day}{generatedMessage}");
@@ -68,7 +68,7 @@ namespace CardCollector.StickerEffects
                     foreach (var (sticker, count) in stickerList)
                     {
                         generatedMessage += $"\n{sticker.Title} {count}{Text.items}";
-                        await UserStickerRelationDao.AddNew(user, sticker, count);
+                        await UserStickerRelationDao.AddSticker(user, sticker, count);
                     }
                     await MessageController.SendMessage(user,
                         $"{Messages.effect_RandomSticker1Tier3Day}{generatedMessage}");

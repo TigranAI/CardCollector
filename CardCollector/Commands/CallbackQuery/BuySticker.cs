@@ -28,10 +28,7 @@ namespace CardCollector.Commands.CallbackQuery
                 await auctionModule.SelectedPosition.BuyCard(auctionModule.Count);
                 var discount = 1.0 - await User.AuctionDiscount() / 100.0;
                 User.Cash.Gems -= (int)(auctionModule.Price * auctionModule.Count * discount);
-                if (!User.Stickers.ContainsKey(auctionModule.SelectedSticker.Md5Hash))
-                    await UserStickerRelationDao.AddNew(User, auctionModule.SelectedSticker, auctionModule.Count);
-                else
-                    User.Stickers[auctionModule.SelectedSticker.Md5Hash].Count += auctionModule.Count;
+                await UserStickerRelationDao.AddSticker(User, auctionModule.SelectedSticker, auctionModule.Count);
                 User.Session.ResetModule<AuctionModule>();
             }
         }

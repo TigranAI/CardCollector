@@ -21,7 +21,7 @@ namespace CardCollector.Commands.Message
             User.Session.InitNewModule<ShopModule>();
             var haveSpecialOffers = await (await ShopDao.GetSpecialPositions())
                 .AnyAsync(async offer => offer.IsInfinite || !await SpecialOfferUsersDao.NowUsed(User.Id, offer.Id));
-            await MessageController.SendMessage(User, Messages.shop_message, Keyboard.ShopKeyboard(haveSpecialOffers));
+            await MessageController.EditMessage(User, Messages.shop_message, Keyboard.ShopKeyboard(haveSpecialOffers));
         }
         
         public Shop() { }
