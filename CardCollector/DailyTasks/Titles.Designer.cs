@@ -61,7 +61,7 @@ namespace CardCollector.DailyTasks {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Отправка стикеров 10-и пользователям.
+        ///   Looks up a localized string similar to Отправка стикеров 5-и пользователям.
         /// </summary>
         internal static string send_stickers {
             get {

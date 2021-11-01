@@ -9,8 +9,8 @@ namespace CardCollector.TimerTasks
 {
     public class PiggyBankAlert : TimerTask
     {
-        protected override TimeSpan RunAt => Constants.DEBUG 
-                ? new TimeSpan(DateTime.Now.TimeOfDay.Hours, DateTime.Now.TimeOfDay.Minutes + 1, 0)
+        protected override TimeSpan RunAt => Constants.DEBUG
+                ? new TimeSpan(DateTime.Now.TimeOfDay.Hours, DateTime.Now.TimeOfDay.Minutes, DateTime.Now.TimeOfDay.Seconds + 1000)
                 : new TimeSpan((DateTime.Now.TimeOfDay.Hours / 4 + 1) * 4, 0, 0);
         
         protected override async void TimerCallback(object o, ElapsedEventArgs e)

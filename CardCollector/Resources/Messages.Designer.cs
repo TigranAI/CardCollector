@@ -475,7 +475,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вы платите алмазов:.
+        ///   Looks up a localized string similar to Вы заплатите алмазов:.
         /// </summary>
         internal static string gems_exchange_count {
             get {

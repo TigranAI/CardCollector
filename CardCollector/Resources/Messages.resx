@@ -240,7 +240,7 @@
         <value>Введите количество алмазов для обмена:</value>
     </data>
     <data name="gems_exchange_count" xml:space="preserve">
-        <value>Вы платите алмазов:</value>
+        <value>Вы заплатите алмазов:</value>
     </data>
     <data name="coins_exchange_count" xml:space="preserve">
         <value>Вы получите монет:</value>

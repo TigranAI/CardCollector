@@ -94,11 +94,11 @@ namespace CardCollector.DataBase.EntityDao
             }
         }
 
-        public static async Task<List<StickerEntity>> GetListWhere(Expression<Func<StickerEntity, bool>> func)
+        public static async Task<List<StickerEntity>> GetListWhere(Func<StickerEntity, bool> func)
         {
             try
             {
-                return await Table.Where(func).ToListAsync();
+                return (await Table.ToListAsync()).Where(func).ToList();
             }
             catch (InvalidOperationException)
             {
