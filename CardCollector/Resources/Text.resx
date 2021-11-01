@@ -300,4 +300,7 @@
     <data name="daily_exp_top" xml:space="preserve">
         <value>Топ игроков по опыту</value>
     </data>
+    <data name="packs" xml:space="preserve">
+        <value>паков</value>
+    </data>
 </root>

@@ -610,6 +610,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to паков.
+        /// </summary>
+        internal static string packs {
+            get {
+                return ResourceManager.GetString("packs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to за.
         /// </summary>
         internal static string per {
