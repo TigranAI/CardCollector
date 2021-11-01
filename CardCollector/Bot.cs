@@ -36,7 +36,6 @@ namespace CardCollector
         public static void Main(string[] args)
         {
             Logs.LogOut("Bot started");
-            
             _timer.Elapsed += SavingChanges;
             _timer.Elapsed += UserDao.ClearMemory;
             TimerTask.SetupAll();

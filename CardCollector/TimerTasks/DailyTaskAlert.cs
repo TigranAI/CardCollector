@@ -9,7 +9,7 @@ namespace CardCollector.TimerTasks
 {
     public class DailyTaskAlert : TimerTask
     {
-        protected override TimeSpan RunAt => Constants.DEBUG ? new TimeSpan(12, 14, 20) : new TimeSpan(10, 0, 0);
+        protected override TimeSpan RunAt => Constants.DEBUG ? new TimeSpan(12, 24, 0) : new TimeSpan(10, 0, 0);
         
         protected override async void TimerCallback(object o, ElapsedEventArgs e)
         {
