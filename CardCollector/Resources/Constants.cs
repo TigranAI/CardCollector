@@ -5,7 +5,7 @@ namespace CardCollector.Resources
     public static class Constants
     {
         /* Переключить данный флаг при сборке на сервер */
-        public const bool DEBUG = true;
+        public const bool DEBUG = false;
 
         /* Интервал сохранения изменений */
         public const double SAVING_CHANGES_INTERVAL = DEBUG ? 10 * 1000 : 5 * 60 * 1000;

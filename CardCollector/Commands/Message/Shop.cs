@@ -5,6 +5,7 @@ using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
 using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.Message
 {
@@ -21,7 +22,8 @@ namespace CardCollector.Commands.Message
             User.Session.InitNewModule<ShopModule>();
             var haveSpecialOffers = await (await ShopDao.GetSpecialPositions())
                 .AnyAsync(async offer => offer.IsInfinite || !await SpecialOfferUsersDao.NowUsed(User.Id, offer.Id));
-            await MessageController.EditMessage(User, Messages.shop_message, Keyboard.ShopKeyboard(haveSpecialOffers));
+            await MessageController.EditMessage(User, Messages.shop_message, Keyboard.ShopKeyboard(haveSpecialOffers),
+                ParseMode.Html);
         }
         
         public Shop() { }

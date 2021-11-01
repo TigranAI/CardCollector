@@ -9,8 +9,15 @@ namespace CardCollector.TimerTasks
 {
     public class PiggyBankAlert : TimerTask
     {
-        protected override TimeSpan RunAt => Constants.DEBUG ? new TimeSpan(10, 34, 0) : new TimeSpan((DateTime.Now.TimeOfDay.Hours % 4 + 1) * 4, 0, 0);
-
+        protected override TimeSpan RunAt => Get();
+        public TimeSpan Get()
+        {
+            Logs.LogOut("Get PiggyBankAlert RunAt");
+            return Constants.DEBUG 
+                ? new TimeSpan(10, 34, 0) 
+                : new TimeSpan((DateTime.Now.TimeOfDay.Hours % 4 + 1) * 4, 0, 0);
+        }
+        
         protected override async void TimerCallback(object o, ElapsedEventArgs e)
         {
             var users = await UserDao.GetAllWhere(user => !user.IsBlocked);
