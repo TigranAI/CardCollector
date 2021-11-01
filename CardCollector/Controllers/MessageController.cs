@@ -151,9 +151,9 @@ namespace CardCollector.Controllers
         {
             try
             {
-                user.Session.UndoCurrentCommand();
                 if (!user.IsBlocked)
                     await Bot.Client.AnswerCallbackQueryAsync(callbackQueryId, text, showAlert);
+                user.Session.UndoCurrentCommand();
             }
             catch (Exception e)
             {

@@ -15,7 +15,7 @@ namespace CardCollector.Commands.CallbackQuery
         {
             var module = User.Session.GetModule<ShopModule>();
             if (module.EnteredExchangeSum > User.Cash.Gems)
-                await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.not_enougth_gems);
+                await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.not_enougth_gems, true);
             else
             {
                 User.Cash.Gems -= module.EnteredExchangeSum;

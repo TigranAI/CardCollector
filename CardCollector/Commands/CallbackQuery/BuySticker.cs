@@ -18,11 +18,11 @@ namespace CardCollector.Commands.CallbackQuery
             var auctionModule = User.Session.GetModule<AuctionModule>();
             if (auctionModule.Count > auctionModule.MaxCount)
             {
-                await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.not_enougth_stickers);
+                await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.not_enougth_stickers, true);
                 await new Back(User, Update).PrepareAndExecute();
             }
             else if (auctionModule.Price * auctionModule.Count > User.Cash.Gems)
-                await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.not_enougth_gems);
+                await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.not_enougth_gems, true);
             else
             {
                 await auctionModule.SelectedPosition.BuyCard(auctionModule.Count);

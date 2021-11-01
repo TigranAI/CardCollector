@@ -16,7 +16,7 @@ namespace CardCollector.Commands.CallbackQuery
             var auctionModule = User.Session.GetModule<AuctionModule>();
             var price = auctionModule.Price * auctionModule.Count ;
             if (price > User.Cash.Gems)
-                await MessageController.AnswerCallbackQuery(User, Update.CallbackQuery!.Id, Messages.not_enougth_gems);
+                await MessageController.AnswerCallbackQuery(User, Update.CallbackQuery!.Id, Messages.not_enougth_gems, true);
             else
             {
                 var text = $"{Messages.confirm_buying}" +

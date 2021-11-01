@@ -12,7 +12,6 @@ namespace CardCollector.Commands.CallbackQuery
     public class BuyShopItem : CallbackQueryCommand
     {
         protected override string CommandText => Command.buy_shop_item;
-        protected override bool ClearStickers => true;
 
         public override async Task Execute()
         {
@@ -28,15 +27,14 @@ namespace CardCollector.Commands.CallbackQuery
                 ? await SpecialOfferUsersDao.NowUsed(User.Id, module.SelectedPosition.Id)
                 : false;
             var currency = CallbackData.Split('=')[1];
-            
             if (currency == "coins" && User.Cash.Coins < resultPriceCoins)
-                await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.not_enougth_coins);
+                await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.not_enougth_coins, true);
             else if (currency == "gems" && User.Cash.Gems < resultPriceGems)
-                await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.not_enougth_gems);
+                await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.not_enougth_gems, true);
             else if (offerExpired)
-                await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.offer_expired);
+                await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.offer_expired, true);
             else if (offerSpecial && !offerInfinite && offerUsed)
-                await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.you_already_use_this_offer);
+                await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.you_already_use_this_offer, true);
             else
             {
                 if (currency == "coins") User.Cash.Coins -= resultPriceCoins;
