@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
 using Microsoft.EntityFrameworkCore;
@@ -8,28 +10,58 @@ namespace CardCollector.DataBase.EntityDao
 {
     public class UserLevelDao
     {
+        public static BotDatabase Instance;
+        public static DbSet<UserLevel> Table;
+
+        static UserLevelDao()
+        {
+            Instance = BotDatabase.GetClassInstance(typeof(UserLevelDao));
+            Table = Instance.UserLevel;
+        }
+        
         /* Получение объекта по Id */
         public static async Task<UserLevel> GetById(long userId)
         {
-            var Table = BotDatabase.Instance.UserLevel;
-            var user = await Table.FirstOrDefaultAsync(item => item.UserId == userId);
-            return user ?? await AddNew(userId);
+            try
+            {
+                var user = await Table.FirstOrDefaultAsync(item => item.UserId == userId);
+                return user ?? await AddNew(userId);
+            }
+            catch (InvalidOperationException)
+            {
+                Thread.Sleep(Utilities.rnd.Next(30));
+                return await GetById(userId);
+            }
         }
 
         /* Добавление нового объекта в систему */
         private static async Task<UserLevel> AddNew(long userId)
         {
-            var Table = BotDatabase.Instance.UserLevel;
-            var userLevel = new UserLevel { UserId = userId };
-            var result = await Table.AddAsync(userLevel);
-            await BotDatabase.SaveData();
-            return result.Entity;
+            try
+            {
+                var userLevel = new UserLevel { UserId = userId };
+                var result = await Table.AddAsync(userLevel);
+                await BotDatabase.SaveData();
+                return result.Entity;
+            }
+            catch (InvalidOperationException)
+            {
+                Thread.Sleep(Utilities.rnd.Next(30));
+                return await AddNew(userId);
+            }
         }
 
-        public static Task<List<UserLevel>> GetTop(int top)
+        public static async Task<List<UserLevel>> GetTop(int top)
         {
-            var Table = BotDatabase.Instance.UserLevel;
-            return Table.OrderByDescending(item => item.TotalExp).Take(top).ToListAsync();
+            try
+            {
+                return await Table.OrderByDescending(item => item.TotalExp).Take(top).ToListAsync();
+            }
+            catch (InvalidOperationException)
+            {
+                Thread.Sleep(Utilities.rnd.Next(30));
+                return await GetTop(top);
+            }
         }
     }
 }

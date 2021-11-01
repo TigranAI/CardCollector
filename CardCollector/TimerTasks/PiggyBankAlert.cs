@@ -12,9 +12,8 @@ namespace CardCollector.TimerTasks
         protected override TimeSpan RunAt => Get();
         public TimeSpan Get()
         {
-            Logs.LogOut("Get PiggyBankAlert RunAt");
             return Constants.DEBUG 
-                ? new TimeSpan(10, 34, 0) 
+                ? new TimeSpan(12, 14, 20) 
                 : new TimeSpan((DateTime.Now.TimeOfDay.Hours % 4 + 1) * 4, 0, 0);
         }
         

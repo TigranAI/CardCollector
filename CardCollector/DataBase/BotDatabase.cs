@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
@@ -20,17 +19,13 @@ namespace CardCollector.DataBase
         protected DateTime _lastSave = DateTime.Now;
         
         /* Объект базы данных */
-        private static List<BotDatabase> _instances = new();
-        
-        /* Предоставляет доступ к объекту */
-        public static BotDatabase Instance
+        private static Dictionary<Type, BotDatabase> ClassInstances = new();
+
+        public static BotDatabase GetClassInstance(Type t)
         {
-            get
-            {
-                var instance = new BotDatabase();
-                _instances.Add(instance);
-                return instance;
-            }
+            if (!ClassInstances.ContainsKey(t))
+                ClassInstances.Add(t, new BotDatabase());
+            return ClassInstances[t];
         }
 
         /* Таблицы базы данных, представленные Entity объектами */
@@ -63,16 +58,8 @@ namespace CardCollector.DataBase
 
         public static async Task SaveData()
         {
-            foreach (var instance in _instances.ToList())
-            {
+            foreach (var instance in ClassInstances.Values)
                 await instance.SaveChangesAsync();
-                var activityInterval = instance._lastSave - DateTime.Now;
-                if (activityInterval.TotalMinutes > 120)
-                {
-                    _instances.Remove(instance);
-                    await instance.DisposeAsync();
-                }
-            }
         }
 
         public override void Dispose()
@@ -94,11 +81,19 @@ namespace CardCollector.DataBase
             return count;
         }
 
-        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
         {
-            var count = await base.SaveChangesAsync(cancellationToken);
-            if (count > 0) _lastSave = DateTime.Now;
-            return count;
+            try
+            {
+                var count = await base.SaveChangesAsync(cancellationToken);
+                if (count > 0) _lastSave = DateTime.Now;
+                return count;
+            }
+            catch (InvalidOperationException)
+            {
+                Thread.Sleep(Utilities.rnd.Next(30));
+                return await SaveChangesAsync(cancellationToken);
+            }
         }
     }
 }

@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
-using CardCollector.Session.Modules;
 using Microsoft.EntityFrameworkCore;
 using Telegram.Bot.Types;
 
@@ -16,6 +16,15 @@ namespace CardCollector.DataBase.EntityDao
     /* Класс, предоставляющий доступ к объектам пользователей таблицы Users */
     public static class UserDao
     {
+        public static BotDatabase Instance;
+        public static DbSet<UserEntity> Table;
+
+        static UserDao()
+        {
+            Instance = BotDatabase.GetClassInstance(typeof(UserDao));
+            Table = Instance.Users;
+        }
+
         /* Активные пользователи в системе */
         private static readonly Dictionary<long, UserEntity> ActiveUsers = new();
 
@@ -23,25 +32,24 @@ namespace CardCollector.DataBase.EntityDao
         public static async Task<UserEntity> GetUser(User user)
         {
             UserEntity result;
-            try
-            {
-                /* Пытаемся получить пользователя из списка активных */
+            if (ActiveUsers.ContainsKey(user.Id))
                 result = ActiveUsers[user.Id];
-            }
-            catch
+            else
             {
-                var Table = BotDatabase.Instance.Users;
-                /* Ищем пользователя в базе данных или добавляем нового, если не найден*/
-                result = await Table.FindAsync(user.Id) ?? await AddNew(user);
-                
+                try
+                {
+                    result = await Table.FirstOrDefaultAsync(item => item.Id == user.Id) ?? await AddNew(user);
+                }
+                catch (InvalidOperationException)
+                {
+                    Thread.Sleep(Utilities.rnd.Next(30));
+                    return await GetUser(user);
+                }
                 /* Собираем объект пользователя */
                 result.Cash = await CashDao.GetById(user.Id);
                 result.Stickers = await UserStickerRelationDao.GetListById(user.Id);
                 result.Settings = await SettingsDao.GetById(user.Id);
                 result.CurrentLevel = await UserLevelDao.GetById(user.Id);
-                result.Session.InitNewModule<FiltersModule>();
-                result.Session.InitNewModule<DefaultModule>();
-                
                 /* Добавляем пользователя в список активных, чтобы не обращаться к бд лишний раз */
                 ActiveUsers.Add(user.Id, result);
             }
@@ -52,34 +60,52 @@ namespace CardCollector.DataBase.EntityDao
 
         public static async Task<UserEntity> GetById(long userId)
         {
-            var Table = BotDatabase.Instance.Users;
-            var user = await Table.FirstAsync(item => item.Id == userId);
-            user.Cash = await CashDao.GetById(user.Id);
-            //user.Stickers = await UserStickerRelationDao.GetListById(user.Id);
-            return user;
+            try
+            {
+                return await Table.FirstOrDefaultAsync(item => item.Id == userId);
+            }
+            catch (InvalidOperationException)
+            {
+                Thread.Sleep(Utilities.rnd.Next(30));
+                return await GetById(userId);
+            }
         }
 
         /* Получение пользователя по представлению user из Базы данных */
         public static async Task<List<UserEntity>> GetUsersList(string filter)
         {
-            var Table = BotDatabase.Instance.Users;
-            return await Table.Where(user => user.Username.Contains(filter)).ToListAsync();
+            try
+            {
+                return await Table.Where(user => user.Username.Contains(filter)).ToListAsync();
+            }
+            catch (InvalidOperationException)
+            {
+                Thread.Sleep(Utilities.rnd.Next(30));
+                return await GetUsersList(filter);
+            }
         }
 
         /* Добавление новго пользователя в систему */
         private static async Task<UserEntity> AddNew(User user)
         {
-            var Table = BotDatabase.Instance.Users;
-            var userEntity = new UserEntity
+            try
             {
-                Id = user.Id,
-                ChatId = user.Id,
-                Username = user.Username != "" ? user.Username : "user"+user.Id,
-                IsBlocked = false
-            };
-            var result = await Table.AddAsync(userEntity);
-            await BotDatabase.SaveData();
-            return result.Entity;
+                var userEntity = new UserEntity
+                {
+                    Id = user.Id,
+                    ChatId = user.Id,
+                    Username = user.Username != "" ? user.Username : "user"+user.Id,
+                    IsBlocked = false
+                };
+                var result = await Table.AddAsync(userEntity);
+                await BotDatabase.SaveData();
+                return result.Entity;
+            }
+            catch (InvalidOperationException)
+            {
+                Thread.Sleep(Utilities.rnd.Next(30));
+                return await AddNew(user);
+            }
         }
 
         public static async void ClearMemory(object sender, ElapsedEventArgs e)
@@ -102,16 +128,31 @@ namespace CardCollector.DataBase.EntityDao
             }
         }
 
-        public static Task<List<UserEntity>> GetAllWhere(Expression<Func<UserEntity, bool>> callback)
+        public static async Task<List<UserEntity>> GetAllWhere(Expression<Func<UserEntity, bool>> callback)
         {
-            var Table = BotDatabase.Instance.Users;
-            return Table.Where(callback).ToListAsync();
+            try
+            {
+                return await Table.Where(callback).ToListAsync();
+            }
+            catch (InvalidOperationException)
+            {
+                Thread.Sleep(Utilities.rnd.Next(30));
+                return await GetAllWhere(callback);
+            }
         }
 
         public static async Task<IEnumerable<UserEntity>> GetAll()
         {
-            var Table = BotDatabase.Instance.Users;
-            return await Table.ToListAsync();
+            
+            try
+            {
+                return await Table.ToListAsync();
+            }
+            catch (InvalidOperationException)
+            {
+                Thread.Sleep(Utilities.rnd.Next(30));
+                return await GetAll();
+            }
         }
     }
 }
