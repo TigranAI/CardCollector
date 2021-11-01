@@ -12,7 +12,6 @@ namespace CardCollector.Commands.Message
 
         public override async Task Execute()
         {
-            await MessageController.EditMessage(User, "Stopping bot");
             await Bot.StopProgram();
         }
 
