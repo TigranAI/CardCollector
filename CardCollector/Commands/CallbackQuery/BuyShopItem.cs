@@ -37,6 +37,7 @@ namespace CardCollector.Commands.CallbackQuery
                 await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.you_already_use_this_offer, true);
             else
             {
+                await User.Session.ClearStickers();
                 if (currency == "coins") User.Cash.Coins -= resultPriceCoins;
                 else if (currency == "gems") User.Cash.Gems -= resultPriceGems;
                 var canBuy = currency == "coins" && User.Cash.Coins >= resultPriceCoins ||
