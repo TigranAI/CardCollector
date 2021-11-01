@@ -3,16 +3,12 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
-using CardCollector.Commands;
-using CardCollector.Commands.Message;
-using CardCollector.DailyTasks;
 using CardCollector.DataBase;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
-using CardCollector.StickerEffects;
+using CardCollector.TimerTasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
-using CancellationTokenSource = System.Threading.CancellationTokenSource;
 using Timer = System.Timers.Timer;
 
 namespace CardCollector
@@ -40,22 +36,15 @@ namespace CardCollector
         public static void Main(string[] args)
         {
             Logs.LogOut("Bot started");
-            var cts = new CancellationTokenSource();
-            Client.StartReceiving(HandleUpdateAsync, HandleErrorAsync, cancellationToken: cts.Token);
-            Client.SetMyCommandsAsync(_commands, BotCommandScope.AllPrivateChats(), cancellationToken: cts.Token);
             
             _timer.Elapsed += SavingChanges;
             _timer.Elapsed += UserDao.ClearMemory;
+            TimerTask.SetupAll();
             
-            /* Запускаем механизм уведомления */
-            Utilities.SetUpTimer(Constants.DailyTaskAlert, DailyTaskAlert);
-            /* Запускаем сброс ежедневных заданий */
-            Utilities.SetUpTimer(Constants.DailyTaskReset, DailyTask.ResetTasks);
-            /* Запускаем таймер с эффектами стикеров */
-            Utilities.SetUpTimer(Constants.DailyStickerRewardCheck, EffectFunctions.RunAll);
-            /* Запускаем таймер сброса отправленных стикеров */
-            Utilities.SetUpTimer(Constants.ResetGroupStickersExp, GiveExp.ResetStickersExp);
-            
+            var cts = new CancellationTokenSource();
+            Client.StartReceiving(HandleUpdateAsync, HandleErrorAsync, cancellationToken: cts.Token);
+            Client.SetMyCommandsAsync(_commands, BotCommandScope.AllPrivateChats(), cancellationToken: cts.Token);
+
             _end.WaitOne();
             Logs.LogOut("Stopping program");
             
@@ -64,7 +53,7 @@ namespace CardCollector
 
         public static async Task StopProgram()
         {
-            await CardCollectorDatabase.SaveAllChangesAsync();
+            await BotDatabase.SaveData();
             await UserDao.ClearMemory();
             _end.Set();
         }
@@ -72,15 +61,8 @@ namespace CardCollector
         private static async void SavingChanges(object o, ElapsedEventArgs e)
         {
             try {
-                await CardCollectorDatabase.SaveAllChangesAsync();
-            } catch (Exception) { /*ignored*/ }
-        }
-
-        private static async void DailyTaskAlert(object o, ElapsedEventArgs e)
-        {
-            var users = await UserDao.GetAllWhere(user => Task.FromResult(!user.IsBlocked));
-            foreach (var user in users)
-                await SendMessage(user, Messages.daily_task_alertation);
+                await BotDatabase.SaveData();
+            } catch (Exception) { /**/ }
         }
     }
 }

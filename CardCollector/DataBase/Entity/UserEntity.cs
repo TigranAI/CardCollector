@@ -35,10 +35,11 @@ namespace CardCollector.DataBase.Entity
         [NotMapped] public CashEntity Cash { get; set; }
         /*Уровень пользователя*/
         [NotMapped] public UserLevel CurrentLevel { get; set; }
+        [NotMapped] public UserSettings Settings { get; set; }
         
         /* Стикеры пользователя */
         [NotMapped] public Dictionary<string, UserStickerRelationEntity> Stickers { get; set; }
-        
+
         /* Данные, хранящиеся в рамках одной сессии */
         [NotMapped] public UserSession Session;
 
@@ -76,7 +77,7 @@ namespace CardCollector.DataBase.Entity
                 var levelReward = levelInfo.GetRewardInstance();
                 var message = $"{Messages.congratulation_new_level} {CurrentLevel.Level}" +
                               $"\n{await levelReward.GetReward(this)}";
-                await MessageController.SendMessage(this, message);
+                await MessageController.SendMessage(this, message, addToList: false);
                 levelInfo = await LevelDao.GetLevel(CurrentLevel.Level + 1);
             }
         }

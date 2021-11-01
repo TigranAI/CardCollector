@@ -88,6 +88,33 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 🔕.
+        /// </summary>
+        internal static string alert_off {
+            get {
+                return ResourceManager.GetString("alert_off", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🔔.
+        /// </summary>
+        internal static string alert_on {
+            get {
+                return ResourceManager.GetString("alert_on", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Уведомления 🔔.
+        /// </summary>
+        internal static string alerts {
+            get {
+                return ResourceManager.GetString("alerts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Все.
         /// </summary>
         internal static string all {
@@ -277,6 +304,24 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Топ игроков по опыту.
+        /// </summary>
+        internal static string daily_exp_top {
+            get {
+                return ResourceManager.GetString("daily_exp_top", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Прогресс еж. заданий.
+        /// </summary>
+        internal static string daily_task_progress {
+            get {
+                return ResourceManager.GetString("daily_task_progress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ежедневные задания.
         /// </summary>
         internal static string daily_tasks {
@@ -363,6 +408,15 @@ namespace CardCollector.Resources {
         internal static string exp {
             get {
                 return ResourceManager.GetString("exp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Получение опыта.
+        /// </summary>
+        internal static string exp_gain {
+            get {
+                return ResourceManager.GetString("exp_gain", resourceCulture);
             }
         }
         
@@ -565,6 +619,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Наполнение копилки.
+        /// </summary>
+        internal static string piggy_bank_capacity {
+            get {
+                return ResourceManager.GetString("piggy_bank_capacity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to +.
         /// </summary>
         internal static string plus {
@@ -664,6 +727,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Настройки.
+        /// </summary>
+        internal static string settings {
+            get {
+                return ResourceManager.GetString("settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Магазин.
         /// </summary>
         internal static string shop {
@@ -741,6 +813,15 @@ namespace CardCollector.Resources {
         internal static string sticker {
             get {
                 return ResourceManager.GetString("sticker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Эффекты стикеров.
+        /// </summary>
+        internal static string sticker_effects {
+            get {
+                return ResourceManager.GetString("sticker_effects", resourceCulture);
             }
         }
         

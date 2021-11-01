@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Timers;
 using CardCollector.Controllers;
@@ -15,10 +16,6 @@ namespace CardCollector.DataBase.EntityDao
     /* Класс, предоставляющий доступ к объектам пользователей таблицы Users */
     public static class UserDao
     {
-        private static readonly CardCollectorDatabase Instance = CardCollectorDatabase.GetSpecificInstance(typeof(UserDao));
-        /* Таблица Users в представлении EntityFramework */
-        private static readonly DbSet<UserEntity> Table = Instance.Users;
-        
         /* Активные пользователи в системе */
         private static readonly Dictionary<long, UserEntity> ActiveUsers = new();
 
@@ -33,12 +30,14 @@ namespace CardCollector.DataBase.EntityDao
             }
             catch
             {
+                var Table = BotDatabase.Instance.Users;
                 /* Ищем пользователя в базе данных или добавляем нового, если не найден*/
                 result = await Table.FindAsync(user.Id) ?? await AddNew(user);
                 
                 /* Собираем объект пользователя */
                 result.Cash = await CashDao.GetById(user.Id);
                 result.Stickers = await UserStickerRelationDao.GetListById(user.Id);
+                result.Settings = await SettingsDao.GetById(user.Id);
                 result.CurrentLevel = await UserLevelDao.GetById(user.Id);
                 result.Session.InitNewModule<FiltersModule>();
                 result.Session.InitNewModule<DefaultModule>();
@@ -53,6 +52,7 @@ namespace CardCollector.DataBase.EntityDao
 
         public static async Task<UserEntity> GetById(long userId)
         {
+            var Table = BotDatabase.Instance.Users;
             var user = await Table.FirstAsync(item => item.Id == userId);
             user.Cash = await CashDao.GetById(user.Id);
             //user.Stickers = await UserStickerRelationDao.GetListById(user.Id);
@@ -62,12 +62,14 @@ namespace CardCollector.DataBase.EntityDao
         /* Получение пользователя по представлению user из Базы данных */
         public static async Task<List<UserEntity>> GetUsersList(string filter)
         {
+            var Table = BotDatabase.Instance.Users;
             return await Table.Where(user => user.Username.Contains(filter)).ToListAsync();
         }
 
         /* Добавление новго пользователя в систему */
         private static async Task<UserEntity> AddNew(User user)
         {
+            var Table = BotDatabase.Instance.Users;
             var userEntity = new UserEntity
             {
                 Id = user.Id,
@@ -76,7 +78,7 @@ namespace CardCollector.DataBase.EntityDao
                 IsBlocked = false
             };
             var result = await Table.AddAsync(userEntity);
-            await Instance.SaveChangesAsync();
+            await BotDatabase.SaveData();
             return result.Entity;
         }
 
@@ -100,13 +102,15 @@ namespace CardCollector.DataBase.EntityDao
             }
         }
 
-        public static async Task<IEnumerable<UserEntity>> GetAllWhere(Func<UserEntity, Task<bool>> callback)
+        public static Task<List<UserEntity>> GetAllWhere(Expression<Func<UserEntity, bool>> callback)
         {
-            return await Table.WhereAsync(callback);
+            var Table = BotDatabase.Instance.Users;
+            return Table.Where(callback).ToListAsync();
         }
 
         public static async Task<IEnumerable<UserEntity>> GetAll()
         {
+            var Table = BotDatabase.Instance.Users;
             return await Table.ToListAsync();
         }
     }

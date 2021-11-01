@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
-using Microsoft.EntityFrameworkCore;
 using Telegram.Bot.Types.InlineQueryResults;
 
 namespace CardCollector
@@ -50,19 +47,6 @@ namespace CardCollector
             }
             return result;
         }
-        
-        /* Возвращает все стикеры системы */
-        public static async Task<IEnumerable<StickerEntity>> ToStickers
-            (this Dictionary<string, UserStickerRelationEntity> dict, string filter)
-        {
-            var result = new List<StickerEntity>();
-            foreach (var relation in dict.Values.Where(i => i.Count > 0))
-            {
-                var sticker = await StickerDao.GetByHash(relation.StickerId);
-                if (sticker.Title.Contains(filter, StringComparison.CurrentCultureIgnoreCase)) result.Add(sticker);
-            }
-            return result;
-        }
 
         public static async Task<IEnumerable<T>> WhereAsync<T>(
             this IEnumerable<T> source, Func<T, Task<bool>> predicate)
@@ -85,19 +69,6 @@ namespace CardCollector
                 if (await predicate(element)) return true;
             return false;
         }
-
-        public static async Task<IEnumerable<TSource>> WhereAsync<TSource>(
-            [NotNull] this IQueryable<TSource> source, 
-            [NotNull] Func<TSource, bool> predicate,
-            CancellationToken cancellationToken = default)
-        {
-            var results = new ConcurrentQueue<TSource>();
-            await foreach (var element in source.AsAsyncEnumerable().WithCancellation(cancellationToken))
-            {
-                if (predicate(element)) results.Enqueue(element);
-            }
-            return results;
-        }
         
         public static IEnumerable<(T item, int index)> WithIndex<T>(this IEnumerable<T> source)
         {
@@ -107,10 +78,7 @@ namespace CardCollector
         public static async Task<int> SumAsync<TSource>(this IEnumerable<TSource> source, Func<TSource, Task<int>> selector)
         {
             var sum = 0;
-            checked
-            {
-                foreach (var item in source) sum += await selector(item);
-            }
+            foreach (var item in source) sum += await selector(item);
             return sum;
         }
     }

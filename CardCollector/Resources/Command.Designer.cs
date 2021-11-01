@@ -61,6 +61,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ABX.
+        /// </summary>
+        internal static string alerts {
+            get {
+                return ResourceManager.GetString("alerts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AAA.
         /// </summary>
         internal static string authors_menu {
@@ -390,6 +399,15 @@ namespace CardCollector.Resources {
         internal static string set {
             get {
                 return ResourceManager.GetString("set", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ABW.
+        /// </summary>
+        internal static string settings {
+            get {
+                return ResourceManager.GetString("settings", resourceCulture);
             }
         }
         

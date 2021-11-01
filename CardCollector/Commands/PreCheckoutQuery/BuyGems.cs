@@ -18,7 +18,7 @@ namespace CardCollector.Commands.PreCheckoutQuery
             User.Cash.Gems += gemsCount;
             await MessageController.EditMessage(User, Messages.thanks_for_buying_gems);
             await MessageController.SendMessage(User, 
-                $"{Messages.you_gained} {gemsCount * 2} {Text.exp} {Messages.buy_gems}", addToList: true);
+                $"{Messages.you_gained} {gemsCount * 2} {Text.exp} {Messages.buy_gems}");
             await User.GiveExp(gemsCount * 2);
         }
 

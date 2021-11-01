@@ -90,8 +90,8 @@
     <data name="you_collected" xml:space="preserve">
         <value>Получено прибыли со стикеров:</value>
     </data>
-    <data name="menu_message" xml:space="preserve">
-        <value>Вы можете выбрать одну из опций ниже</value>
+    <data name="main_menu" xml:space="preserve">
+        <value>⬇️&lt;b&gt;Главное меню&lt;/b&gt;⬇️</value>
     </data>
     <data name="your_cash" xml:space="preserve">
         <value>Баланс</value>
@@ -175,7 +175,7 @@
         <value>Страница не найдена</value>
     </data>
     <data name="shop_message" xml:space="preserve">
-        <value>Выберите одну из опций ниже:</value>
+        <value>💎&lt;b&gt;Магазин&lt;/b&gt;💎</value>
     </data>
     <data name="choose_option" xml:space="preserve">
         <value>Выберите одну из опций ниже</value>
@@ -305,5 +305,20 @@
     </data>
     <data name="thanks_for_buying_gems" xml:space="preserve">
         <value>Спасибо за покупку алмазов!</value>
+    </data>
+    <data name="settings" xml:space="preserve">
+        <value>⚙&lt;b&gt;Настройки&lt;/b&gt;⚙</value>
+    </data>
+    <data name="alerts" xml:space="preserve">
+        <value>🔔&lt;b&gt;Уведомления&lt;/b&gt;🔔</value>
+    </data>
+    <data name="send_sticker_progress" xml:space="preserve">
+        <value>"Отправка стикеров в личные сообщения" прогресс</value>
+    </data>
+    <data name="uncollected_income" xml:space="preserve">
+        <value>Не забывайте собирать прибыль во вкладке профиля. Несобранная прибыль составляет</value>
+    </data>
+    <data name="users_top_exp" xml:space="preserve">
+        <value>🧪&lt;b&gt;Топ пользователей по опыту&lt;/b&gt;🧪</value>
     </data>
 </root>

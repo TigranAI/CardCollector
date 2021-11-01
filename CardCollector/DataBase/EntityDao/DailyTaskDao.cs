@@ -9,17 +9,16 @@ namespace CardCollector.DataBase.EntityDao
 {
     public static class DailyTaskDao
     {
-        private static readonly CardCollectorDatabase Instance = CardCollectorDatabase.GetSpecificInstance(typeof(DailyTaskDao));
-        private static readonly DbSet<DailyTaskEntity> Table = Instance.DailyTasks;
-        
-        public static IAsyncEnumerable<DailyTaskEntity> GetAll()
+        public static async Task<List<DailyTaskEntity>> GetAll()
         {
-            return Table;
+            var Table = BotDatabase.Instance.DailyTasks;
+            return await Table.ToListAsync();
         }
 
         /* Добавляет новое отношение в таблицу */
         public static async Task<DailyTaskEntity> AddNew(long userId, int taskId)
         {
+            var Table = BotDatabase.Instance.DailyTasks;
             if (await Table.FirstOrDefaultAsync(item => item.UserId == userId && item.TaskId == taskId) is { } obj)
                 return obj;
             var newTask = new DailyTaskEntity()
@@ -29,20 +28,21 @@ namespace CardCollector.DataBase.EntityDao
                 Progress = DailyTask.List[(DailyTaskKeys)taskId].Goal
             };
             var result = await Table.AddAsync(newTask);
-            await Instance.SaveChangesAsync();
+            await BotDatabase.SaveData();
             return result.Entity;
         }
 
         public static async Task<DailyTaskEntity> GetTaskInfo(long userId, int taskId)
         {
-            return await Table.FirstOrDefaultAsync(item => item.UserId == userId && item.TaskId == taskId) 
+            var Table = BotDatabase.Instance.DailyTasks;
+            return await Table.FirstOrDefaultAsync(item => item.UserId == userId && item.TaskId == taskId)
                    ?? await AddNew(userId, taskId);
         }
 
         public static async Task<Dictionary<int, DailyTaskEntity>> GetUserTasks(long userId)
         {
-            return (await Table.WhereAsync(item => Task.FromResult(item.UserId == userId)))
-                .ToDictionary(p => p.TaskId, p => p);
+            var Table = BotDatabase.Instance.DailyTasks;
+            return await Table.Where(item => item.UserId == userId).ToDictionaryAsync(p => p.TaskId, p => p);
         }
     }
 }

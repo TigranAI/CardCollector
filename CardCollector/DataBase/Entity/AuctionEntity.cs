@@ -34,7 +34,7 @@ namespace CardCollector.DataBase.Entity
             await MessageController.EditMessage(user, $"{Messages.you_sold} {sticker.Title} {count}{Text.items}" +
                                                       $"\n{Messages.you_collected} {gemsSum}{Text.gem}");
             user.Cash.Gems += gemsSum;
-            await CashDao.Save();
+            await BotDatabase.SaveData();
             if (Count == 0) await AuctionDao.DeleteRow(Id);
         }
     }

@@ -1,23 +1,29 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Timers;
 using CardCollector.Controllers;
+using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
+using CardCollector.StickerEffects;
 
-namespace CardCollector.StickerEffects
+namespace CardCollector.TimerTasks
 {
-    public static class EffectFunctions
+    public class ExecuteStickerEffects : TimerTask
     {
-        public static async void RunAll(object o, ElapsedEventArgs e)
+        protected override TimeSpan RunAt => Constants.DEBUG ? new TimeSpan(10, 17, 20) : new TimeSpan(11, 0, 0);
+        
+        protected override async void TimerCallback(object o, ElapsedEventArgs e)
         {
             await GivePacks();
             await GiveTier1();
             await GiveTier2();
         }
-
-        public static async Task GivePacks()
+        
+        public async Task GivePacks()
         {
-            var users = await UserDao.GetAll();
+            var users = await UserDao.GetAllWhere(user => !user.IsBlocked);
+            var settings = await SettingsDao.GetAll();
             foreach (var user in users)
             {
                 var stickers = await UserStickerRelationDao.GetListById(user.Id);
@@ -26,8 +32,15 @@ namespace CardCollector.StickerEffects
                 {
                     var userPacks = await UserPacksDao.GetOne(user.Id, 1);
                     userPacks.Count += packsCount;
-                    await MessageController.SendMessage(user,
-                        $"{Messages.effect_Random1Pack5Day} {packsCount}{Text.items}");
+                    try {
+                        if (settings[user.Id][UserSettingsEnum.StickerEffects])
+                            await MessageController.SendMessage(user,
+                                $"{Messages.effect_Random1Pack5Day} {packsCount}{Text.items}", addToList: false);
+                    }
+                    catch {
+                        await MessageController.SendMessage(user,
+                            $"{Messages.effect_Random1Pack5Day} {packsCount}{Text.items}", addToList: false);
+                    }
                 }
             }
         }
@@ -35,6 +48,7 @@ namespace CardCollector.StickerEffects
         public static async Task GiveTier2()
         {
             var users = await UserDao.GetAll();
+            var settings = await SettingsDao.GetAll();
             foreach (var user in users)
             {
                 var stickers = await UserStickerRelationDao.GetListById(user.Id);
@@ -48,8 +62,15 @@ namespace CardCollector.StickerEffects
                         generatedMessage += $"\n{sticker.Title} {count}{Text.items}";
                         await UserStickerRelationDao.AddSticker(user, sticker, count);
                     }
-                    await MessageController.SendMessage(user,
-                        $"{Messages.effect_RandomSticker2Tier3Day}{generatedMessage}");
+                    try {
+                        if (settings[user.Id][UserSettingsEnum.StickerEffects])
+                            await MessageController.SendMessage(user,
+                                $"{Messages.effect_RandomSticker2Tier3Day}{generatedMessage}", addToList: false);
+                    }
+                    catch {
+                        await MessageController.SendMessage(user,
+                            $"{Messages.effect_RandomSticker2Tier3Day}{generatedMessage}", addToList: false);
+                    }
                 }
             }
         }
@@ -57,6 +78,7 @@ namespace CardCollector.StickerEffects
         public static async Task GiveTier1()
         {
             var users = await UserDao.GetAll();
+            var settings = await SettingsDao.GetAll();
             foreach (var user in users)
             {
                 var stickers = await UserStickerRelationDao.GetListById(user.Id);
@@ -70,8 +92,15 @@ namespace CardCollector.StickerEffects
                         generatedMessage += $"\n{sticker.Title} {count}{Text.items}";
                         await UserStickerRelationDao.AddSticker(user, sticker, count);
                     }
-                    await MessageController.SendMessage(user,
-                        $"{Messages.effect_RandomSticker1Tier3Day}{generatedMessage}");
+                    try {
+                        if (settings[user.Id][UserSettingsEnum.StickerEffects])
+                            await MessageController.SendMessage(user,
+                                $"{Messages.effect_RandomSticker1Tier3Day}{generatedMessage}", addToList: false);
+                    }
+                    catch {
+                        await MessageController.SendMessage(user,
+                            $"{Messages.effect_RandomSticker1Tier3Day}{generatedMessage}", addToList: false);
+                    }
                 }
             }
         }

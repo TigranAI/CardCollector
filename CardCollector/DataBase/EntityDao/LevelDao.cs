@@ -7,13 +7,11 @@ namespace CardCollector.DataBase.EntityDao
 {
     public class LevelDao
     {
-        private static readonly CardCollectorDatabase Instance = CardCollectorDatabase.GetSpecificInstance(typeof(UserLevelDao));
-        /* Таблица cash в представлении EntityFramework */
-        private static readonly DbSet<Level> Table = Instance.Levels;
         
         /* Получение объекта по Id */
         public static async Task<Level?> GetLevel(int level)
         {
+            var Table = BotDatabase.Instance.Levels;
             return await Table.FirstOrDefaultAsync(item => item.LevelValue == level);
         }
 
@@ -25,10 +23,5 @@ namespace CardCollector.DataBase.EntityDao
             await Instance.SaveChangesAsync();
             return result.Entity;
         }*/
-
-        public static async Task Save()
-        {
-            await Instance.SaveChangesAsync();
-        }
     }
 }

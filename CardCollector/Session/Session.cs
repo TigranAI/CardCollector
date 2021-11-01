@@ -77,13 +77,13 @@ namespace CardCollector.Session
             foreach (var messageId in Messages.ToList())
                 await MessageController.DeleteMessage(user, messageId);
             foreach (var messageId in StickerMessages.ToList())
-                await MessageController.DeleteMessage(user, messageId);
+                await MessageController.DeleteMessage(user, messageId, true);
         }
 
         public async Task ClearStickers()
         {
             foreach (var messageId in StickerMessages.ToList())
-                await MessageController.DeleteMessage(user, messageId);
+                await MessageController.DeleteMessage(user, messageId, true);
         }
 
         public async Task EndSession()

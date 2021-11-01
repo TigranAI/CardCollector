@@ -16,8 +16,10 @@ namespace CardCollector.Commands.ChosenInlineResult
         {
             if (!User.Session.ChosenResultWithMessage)
             {
-                await MessageController.SendMessage(User, $"{Messages.you_gained} 1 {Text.exp} {Messages.send_sticker}" +
-                                                          $"\n{Messages.you_can_add_bot_to_conversation}", addToList: true);
+                if (User.Settings[UserSettingsEnum.ExpGain])
+                    await MessageController.SendMessage(User, 
+                        $"{Messages.you_gained} 1 {Text.exp} {Messages.send_sticker}" +
+                        $"\n{Messages.you_can_add_bot_to_conversation}");
                 await User.GiveExp(1);
             }
             User.Session.ChosenResultWithMessage = false;

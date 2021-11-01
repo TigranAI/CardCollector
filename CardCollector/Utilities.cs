@@ -2,7 +2,6 @@
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using System.Timers;
 using CardCollector.Resources;
 using Telegram.Bot;
 using Telegram.Bot.Types;
@@ -45,21 +44,6 @@ namespace CardCollector
             var client = new WebClient();
             client.DownloadFile(new Uri(fileUri), file.FileName ?? "file");
             return file.FileName ?? "file";
-        }
-        
-        public static void SetUpTimer(TimeSpan timeToRun, ElapsedEventHandler callback, bool cycled = true)
-        {
-            var elapsedInterval = timeToRun - DateTime.Now.TimeOfDay;
-            if (elapsedInterval < TimeSpan.Zero) elapsedInterval += new TimeSpan(1, 0, 0, 0);
-            var timer = new Timer
-            {
-                AutoReset = false,
-                Enabled = true,
-                Interval = elapsedInterval.TotalMilliseconds
-            };
-            timer.Elapsed += callback;
-            if (cycled) timer.Elapsed += (_, _) => SetUpTimer(timeToRun, callback);
-            timer.Elapsed += (_, _) => timer.Dispose();
         }
     }
 }

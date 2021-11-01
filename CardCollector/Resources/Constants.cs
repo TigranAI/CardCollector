@@ -1,6 +1,4 @@
-using System;
 // ReSharper disable ConditionIsAlwaysTrueOrFalse
-#pragma warning disable 162
 
 namespace CardCollector.Resources
 {
@@ -26,13 +24,21 @@ namespace CardCollector.Resources
         
         /* Количество стикеров для создания комбинации */
         public const int COMBINE_COUNT = 5;
-        
-        /* Время оповещения и сброса ежедневных заданий */
-        public static readonly TimeSpan DailyTaskAlert = DEBUG ? new TimeSpan(20, 30, 0) : new TimeSpan(10, 0, 0);
-        public static readonly TimeSpan DailyTaskReset = DEBUG ? new TimeSpan(20, 30, 0) : new TimeSpan(10, 0, 0);
-        /* Время выдачи наград за пассивные эффекты стикеров */
-        public static readonly TimeSpan DailyStickerRewardCheck = DEBUG ? new TimeSpan(20, 35, 0) : new TimeSpan(11, 0, 0);
-        /* Сброс отправленных в беседы стикеров */
-        public static readonly TimeSpan ResetGroupStickersExp = DEBUG ? new TimeSpan(20, 35, 0) : new TimeSpan(10, 0, 0);
+
+
+        public const int AuctionDao = 1;
+        public const int CashDao = 2;
+        public const int DailyTaskDao = 3;
+        public const int LevelDao = 4;
+        public const int PacksDao = 5;
+        public const int SessionTokenDao = 6;
+        public const int SettingsDao = 7;
+        public const int ShopDao = 8;
+        public const int SpecialOfferUsersDao = 9;
+        public const int StickerDao = 10;
+        public const int UserDao = 11;
+        public const int UserLevelDao = 12;
+        public const int UserPacksDao = 13;
+        public const int UserStickerRelationDao = 14;
     }
 }

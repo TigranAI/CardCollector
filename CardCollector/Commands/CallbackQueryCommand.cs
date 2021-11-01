@@ -60,6 +60,8 @@ namespace CardCollector.Commands
             new SpecialOffers(),
             new SelectTier(),
             new SelectShopPack(),
+            new Alerts(),
+            new Settings(),
         };
 
         /* Метод, создающий объекты команд исходя из полученного обновления */

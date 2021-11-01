@@ -10,15 +10,10 @@ namespace CardCollector.DataBase.EntityDao
 {
     public static class AuctionDao
     {
-        private static readonly CardCollectorDatabase Instance = CardCollectorDatabase.GetSpecificInstance(typeof(AuctionDao));
-        /* Таблица auction в представлении Entity Framework */
-        private static readonly DbSet<AuctionEntity> Table = Instance.Auction;
-        
         public static async Task<List<AuctionEntity>> GetProducts(string stickerId)
         {
-            /* Заменил цикл на LINQ выражение и тип возвращаемого значения - список позиций,
-             так как один и тот же стикер может продавать несколько людей */
-            return (await Table.WhereAsync(e => Task.FromResult(e.StickerId == stickerId))).ToList();
+            var Table = BotDatabase.Instance.Auction;
+            return await Table.Where(e => e.StickerId == stickerId).ToListAsync();
         }
 
         public static async Task<int> GetTotalQuantity(string stickerId)
@@ -30,7 +25,9 @@ namespace CardCollector.DataBase.EntityDao
 
         public static async Task<IEnumerable<StickerEntity>> GetStickers(string filter)
         {
-            var entityList = (await Table.ToListAsync()).Select(async e => await StickerDao.GetById(e.StickerId));
+            var Table = BotDatabase.Instance.Auction;
+            var entityList = (await Table.ToListAsync())
+                .Select(async e => await StickerDao.GetById(e.StickerId));
             var stickersList = await Task.WhenAll(entityList);
             return stickersList
                 .Where(item => item.Contains(filter))
@@ -40,30 +37,35 @@ namespace CardCollector.DataBase.EntityDao
         //добавляем объект в аукцион
         public static async void AddNew(AuctionEntity product)
         {
+            var Table = BotDatabase.Instance.Auction;
             await Table.AddAsync(product);
-            await Instance.SaveChangesAsync();
+            await BotDatabase.SaveData();
         }
         //удаляем проданный объект
         public static async Task DeleteRow(int productId)
         {
+            var Table = BotDatabase.Instance.Auction;
             if (await Table.FirstOrDefaultAsync(c => c.Id == productId) is not { } item) return;
             Table.Attach(item);
             Table.Remove(item);
-            await Instance.SaveChangesAsync();
+            await BotDatabase.SaveData();
         }
 
-        public static bool HaveAny(string stickerId, Expression<Func<AuctionEntity, bool>> source)
+        public static async Task<bool> HaveAny(string stickerId, Expression<Func<AuctionEntity, bool>> source)
         {
-            return Table.Where(i => i.StickerId == stickerId).AnyAsync(source).Result;
+            var Table = BotDatabase.Instance.Auction;
+            return await Table.Where(i => i.StickerId == stickerId).AnyAsync(source);
         }
 
-        public static async Task<int> GetQuantity(int productId)
+        public static async Task<int> GetCount(int productId)
         {
+            var Table = BotDatabase.Instance.Auction;
             return (await Table.FirstAsync(item => item.Id == productId)).Count;
         }
 
         public static async Task<AuctionEntity> GetProduct(int productId)
         {
+            var Table = BotDatabase.Instance.Auction;
             return await Table.FirstAsync(item => item.Id == productId);
         }
     }

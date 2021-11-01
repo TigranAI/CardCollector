@@ -10,28 +10,28 @@ namespace CardCollector.DataBase.EntityDao
 {
     public static class PacksDao
     {
-        private static readonly CardCollectorDatabase Instance = CardCollectorDatabase.GetSpecificInstance(typeof(PacksDao));
-        private static readonly DbSet<PackEntity> Table = Instance.Packs;
-
         public static async Task<PackEntity> GetById(int id)
         {
+            var Table = BotDatabase.Instance.Packs;
             return await Table.FirstOrDefaultAsync(item => item.Id == id);
         }
         
         public static async Task<PackEntity> AddNew(string author, string description = "")
         {
+            var Table = BotDatabase.Instance.Packs;
             var result = await Table.AddAsync(new PackEntity
             {
                 Author = author,
                 Description = description
             });
-            await Instance.SaveChangesAsync();
+            await BotDatabase.SaveData();
             return result.Entity;
         }
 
         public static async Task<List<PackEntity>> GetAll()
         {
-            var list = (await Table.WhereAsync(item => item.Id is not 1)).ToList();
+            var Table = BotDatabase.Instance.Packs;
+            var list = await Table.Where(item => item.Id != 1).ToListAsync();
             list.Sort(new AuthorComparer());
             return list;
         }

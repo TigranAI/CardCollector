@@ -1,7 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
+using CardCollector.Controllers;
 using CardCollector.Resources;
 using CardCollector.StickerEffects;
 
@@ -77,6 +80,30 @@ namespace CardCollector.DataBase.Entity
                   Author.Contains(value, StringComparison.CurrentCultureIgnoreCase) ||
                   Emoji.Equals(value)
                 : true;
+        }
+
+        public async Task ApplyEffect(UserEntity user, UserStickerRelationEntity relation)
+        {
+            switch ((Effect)Effect)
+            {
+                case StickerEffects.Effect.PiggyBank200:
+                    user.Cash.MaxCapacity += 200;
+                    await MessageController.EditMessage(user, Messages.effect_PiggyBank200);
+                    break;
+                case StickerEffects.Effect.Diamonds25Percent:
+                    user.Cash.Gems += (int)(user.Cash.Gems * 0.25);
+                    await MessageController.EditMessage(user, Messages.effect_Diamonds25Percent);
+                    break;
+                case StickerEffects.Effect.Random1Pack5Day:
+                    relation.AdditionalData = DateTime.Today.ToString(CultureInfo.CurrentCulture);
+                    break;
+                case StickerEffects.Effect.RandomSticker1Tier3Day:
+                    relation.AdditionalData = DateTime.Today.ToString(CultureInfo.CurrentCulture);
+                    break;
+                case StickerEffects.Effect.RandomSticker2Tier3Day:
+                    relation.AdditionalData = DateTime.Today.ToString(CultureInfo.CurrentCulture);
+                    break;
+            }
         }
     }
 }

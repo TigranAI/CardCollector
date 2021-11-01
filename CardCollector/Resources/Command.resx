@@ -147,4 +147,10 @@
     <data name="sticker_info" xml:space="preserve">
         <value>ABV</value>
     </data>
+    <data name="settings" xml:space="preserve">
+        <value>ABW</value>
+    </data>
+    <data name="alerts" xml:space="preserve">
+        <value>ABX</value>
+    </data>
 </root>

@@ -50,7 +50,7 @@ namespace CardCollector.Controllers
 
         public static async Task<int> GetStickerCount(int productId)
         {
-            return await AuctionDao.GetQuantity(productId);
+            return await AuctionDao.GetCount(productId);
         }
 
         public static async Task<int> GetStickerCount(string stickerId, FiltersModule sessionFilters)

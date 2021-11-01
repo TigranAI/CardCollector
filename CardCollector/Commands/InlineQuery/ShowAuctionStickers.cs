@@ -17,7 +17,7 @@ namespace CardCollector.Commands.InlineQuery
             // Получаем список стикеров
             var stickersList = await AuctionController.GetStickers(Query);
             var filters = User.Session.GetModule<FiltersModule>();
-            var results = filters.ApplyTo(stickersList, true).ToTelegramResults(Command.select_sticker);
+            var results = (await filters.ApplyTo(stickersList, true)).ToTelegramResults(Command.select_sticker);
             // Посылаем пользователю ответ на его запрос
             await MessageController.AnswerInlineQuery(InlineQueryId, results);
         }

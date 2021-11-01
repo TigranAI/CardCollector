@@ -14,9 +14,9 @@ namespace CardCollector.Commands.ChosenInlineResult
         public override async Task Execute()
         {
             var dailyTask = DailyTask.List[DailyTaskKeys.SendStickersToUsers];
-            if (await dailyTask.Execute(User.Id))
+            if (await dailyTask.Execute(User))
             {
-                await dailyTask.GiveReward(User.Id);
+                await dailyTask.GiveReward(User);
                 await MessageController.EditMessage(User, Messages.pack_prize);
             }
         }

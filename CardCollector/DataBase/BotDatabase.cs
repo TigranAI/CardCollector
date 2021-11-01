@@ -1,64 +1,41 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
 using Microsoft.EntityFrameworkCore;
+
+// ReSharper disable UnusedAutoPropertyAccessor.Global
 
 namespace CardCollector.DataBase
 {
     using static Resources.AppSettings;
     
     /* Предоставляет доступ к базе данных */
-    public class CardCollectorDatabase : DbContext
+    public class BotDatabase : DbContext
     {
         /* Скрываем конструктор, чтобы его нельзя было использовать извне */
-        private CardCollectorDatabase() { }
+        private BotDatabase() { }
+        protected DateTime _lastSave = DateTime.Now;
         
         /* Объект базы данных */
-        private static CardCollectorDatabase _instance;
+        private static List<BotDatabase> _instances = new();
         
         /* Предоставляет доступ к объекту */
-        public static CardCollectorDatabase Instance
+        public static BotDatabase Instance
         {
             get
             {
-                if (_instance != null) return _instance;
-                _instance = new CardCollectorDatabase();
-                _instance.Database.EnsureCreated();
-                return _instance;
+                var instance = new BotDatabase();
+                _instances.Add(instance);
+                return instance;
             }
-        }
-
-        private static readonly Dictionary<Type, CardCollectorDatabase> _specificInstances = new ();
-
-        public static CardCollectorDatabase GetSpecificInstance(Type type)
-        {
-            try
-            {
-                return _specificInstances[type];
-            }
-            catch (Exception)
-            {
-                var newInstance = new CardCollectorDatabase();
-                _specificInstances.Add(type, newInstance);
-                newInstance.Database.EnsureCreated();
-                return newInstance;
-            }
-        }
-
-        public static async Task SaveAllChangesAsync()
-        {
-            try
-            {
-                await Instance.SaveChangesAsync();
-                foreach (var instance in _specificInstances.Values)
-                    await instance.SaveChangesAsync();
-            } catch (Exception) { /* Ignored */ }
         }
 
         /* Таблицы базы данных, представленные Entity объектами */
         public DbSet<UserEntity> Users { get; set; }
-        public DbSet<CashEntity> CashTable { get; set; }
+        public DbSet<CashEntity> Cash { get; set; }
         public DbSet<UserStickerRelationEntity> UserStickerRelations { get; set; }
         public DbSet<StickerEntity> Stickers { get; set; }
         public DbSet<AuctionEntity> Auction { get; set; }
@@ -70,7 +47,7 @@ namespace CardCollector.DataBase
         public DbSet<SessionToken> SessionTokens { get; set; }
         public DbSet<UserLevel> UserLevel { get; set; }
         public DbSet<Level> Levels { get; set; }
-
+        public DbSet<UserSettings> Settings { get; set; }
 
         /* Конфигурация подключения к БД */
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -82,6 +59,46 @@ namespace CardCollector.DataBase
                 $"uid={DB_UID};" +
                 $"pwd={DB_PWD}"
             );
+        }
+
+        public static async Task SaveData()
+        {
+            foreach (var instance in _instances.ToList())
+            {
+                await instance.SaveChangesAsync();
+                var activityInterval = instance._lastSave - DateTime.Now;
+                if (activityInterval.TotalMinutes > 120)
+                {
+                    _instances.Remove(instance);
+                    await instance.DisposeAsync();
+                }
+            }
+        }
+
+        public override void Dispose()
+        {
+            SaveChanges();
+            base.Dispose();
+        }
+
+        public override async ValueTask DisposeAsync()
+        {
+            await SaveChangesAsync();
+            await base.DisposeAsync();
+        }
+
+        public override int SaveChanges()
+        { 
+            var count = base.SaveChanges();
+            if (count > 0) _lastSave = DateTime.Now;
+            return count;
+        }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        {
+            var count = await base.SaveChangesAsync(cancellationToken);
+            if (count > 0) _lastSave = DateTime.Now;
+            return count;
         }
     }
 }

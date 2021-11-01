@@ -61,6 +61,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 🔔&lt;b&gt;Уведомления&lt;/b&gt;🔔.
+        /// </summary>
+        internal static string alerts {
+            get {
+                return ResourceManager.GetString("alerts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (все).
         /// </summary>
         internal static string all {
@@ -493,11 +502,11 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вы можете выбрать одну из опций ниже.
+        ///   Looks up a localized string similar to ⬇️&lt;b&gt;Главное меню&lt;/b&gt;⬇️.
         /// </summary>
-        internal static string menu_message {
+        internal static string main_menu {
             get {
-                return ResourceManager.GetString("menu_message", resourceCulture);
+                return ResourceManager.GetString("main_menu", resourceCulture);
             }
         }
         
@@ -663,7 +672,25 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Выберите одну из опций ниже:.
+        ///   Looks up a localized string similar to &quot;Отправка стикеров в личные сообщения&quot; прогресс.
+        /// </summary>
+        internal static string send_sticker_progress {
+            get {
+                return ResourceManager.GetString("send_sticker_progress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ⚙&lt;b&gt;Настройки&lt;/b&gt;⚙.
+        /// </summary>
+        internal static string settings {
+            get {
+                return ResourceManager.GetString("settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 💎&lt;b&gt;Магазин&lt;/b&gt;💎.
         /// </summary>
         internal static string shop_message {
             get {
@@ -744,6 +771,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Не забывайте собирать прибыль во вкладке профиля. Несобранная прибыль составляет.
+        /// </summary>
+        internal static string uncollected_income {
+            get {
+                return ResourceManager.GetString("uncollected_income", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Произошла неожиданная ошибка, попробуйте еще раз..
         /// </summary>
         internal static string unexpected_exception {
@@ -791,6 +827,15 @@ namespace CardCollector.Resources {
         internal static string uploading_stickers {
             get {
                 return ResourceManager.GetString("uploading_stickers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🧪&lt;b&gt;Топ пользователей по опыту&lt;/b&gt;🧪.
+        /// </summary>
+        internal static string users_top_exp {
+            get {
+                return ResourceManager.GetString("users_top_exp", resourceCulture);
             }
         }
         

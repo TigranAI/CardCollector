@@ -273,4 +273,31 @@
     <data name="exp" xml:space="preserve">
         <value>опыта</value>
     </data>
+    <data name="settings" xml:space="preserve">
+        <value>Настройки</value>
+    </data>
+    <data name="alerts" xml:space="preserve">
+        <value>Уведомления 🔔</value>
+    </data>
+    <data name="alert_on" xml:space="preserve">
+        <value>🔔</value>
+    </data>
+    <data name="alert_off" xml:space="preserve">
+        <value>🔕</value>
+    </data>
+    <data name="sticker_effects" xml:space="preserve">
+        <value>Эффекты стикеров</value>
+    </data>
+    <data name="exp_gain" xml:space="preserve">
+        <value>Получение опыта</value>
+    </data>
+    <data name="daily_task_progress" xml:space="preserve">
+        <value>Прогресс еж. заданий</value>
+    </data>
+    <data name="piggy_bank_capacity" xml:space="preserve">
+        <value>Наполнение копилки</value>
+    </data>
+    <data name="daily_exp_top" xml:space="preserve">
+        <value>Топ игроков по опыту</value>
+    </data>
 </root>

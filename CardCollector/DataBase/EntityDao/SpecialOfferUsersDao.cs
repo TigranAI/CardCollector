@@ -6,22 +6,21 @@ namespace CardCollector.DataBase.EntityDao
 {
     public class SpecialOfferUsersDao
     {
-        private static readonly CardCollectorDatabase Instance = CardCollectorDatabase.GetSpecificInstance(typeof(SpecialOfferUsersDao));
-        private static readonly DbSet<SpecialOfferUsers> Table = Instance.SpecialOfferUsers;
-
         public static async Task<bool> NowUsed(long userId, int offerId)
         {
+            var Table = BotDatabase.Instance.SpecialOfferUsers;
             return await Table.AnyAsync(e => e.UserId == userId && e.OfferId == offerId);
         }
 
         public static async Task AddNew(long userId, int offerId)
         {
+            var Table = BotDatabase.Instance.SpecialOfferUsers;
             await Table.AddAsync(new SpecialOfferUsers
             {
                 UserId = userId,
                 OfferId = offerId
             });
-            await Instance.SaveChangesAsync();
+            await BotDatabase.SaveData();
         }
     }
 }

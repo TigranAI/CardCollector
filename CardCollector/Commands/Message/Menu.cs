@@ -3,6 +3,7 @@ using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.Message
 {
@@ -13,7 +14,7 @@ namespace CardCollector.Commands.Message
         public override async Task Execute()
         {
             /* Отправляем пользователю сообщение со стандартной клавиатурой */
-            await MessageController.SendMessage(User, Messages.menu_message, Keyboard.Menu);
+            await MessageController.SendMessage(User, Messages.main_menu, Keyboard.Menu, ParseMode.Html, false);
         }
 
         public Menu() { }

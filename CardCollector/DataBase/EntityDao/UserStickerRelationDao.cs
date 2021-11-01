@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
-using CardCollector.Resources;
-using CardCollector.StickerEffects;
 using Microsoft.EntityFrameworkCore;
 
 namespace CardCollector.DataBase.EntityDao
@@ -14,22 +9,18 @@ namespace CardCollector.DataBase.EntityDao
     /* Предоставляет доступ к соотношениям таблицы user_to_sticker_relation */
     public static class UserStickerRelationDao
     {
-        private static readonly CardCollectorDatabase Instance = CardCollectorDatabase.GetSpecificInstance(typeof(UserStickerRelationDao));
-        /* Таблица user_to_sticker_relation в представлении Entity Framework */
-        private static readonly DbSet<UserStickerRelationEntity> Table = Instance.UserStickerRelations;
-        
         /* Возвращает словарь стикеров по Id пользователя */
         public static async Task<Dictionary<string, UserStickerRelationEntity>> GetListById(long userId)
         {
-            var result = await Table
-                .Where(i => i.UserId == userId)
-                .ToDictionaryAsync(p=> p.ShortHash, p=> p);
+            var Table = BotDatabase.Instance.UserStickerRelations;
+            var result = await Table.Where(i => i.UserId == userId).ToDictionaryAsync(p=> p.ShortHash, p=> p);
             return result;
         }
 
         /* Добавляет новое отношение в таблицу */
         public static async Task<UserStickerRelationEntity> AddSticker(UserEntity user, StickerEntity sticker, int count = 1)
         {
+            var Table = BotDatabase.Instance.UserStickerRelations;
             if (user.Stickers.ContainsKey(sticker.Md5Hash))
             {
                 user.Stickers[sticker.Md5Hash].Count += count;
@@ -42,29 +33,10 @@ namespace CardCollector.DataBase.EntityDao
                 Count = count,
                 ShortHash = sticker.Md5Hash
             };
-            switch ((Effect)sticker.Effect)
-            {
-                case Effect.PiggyBank200:
-                    user.Cash.MaxCapacity += 200;
-                    await MessageController.EditMessage(user, Messages.effect_PiggyBank200);
-                    break;
-                case Effect.Diamonds25Percent:
-                    user.Cash.Gems += (int)(user.Cash.Gems * 0.25);
-                    await MessageController.EditMessage(user, Messages.effect_Diamonds25Percent);
-                    break;
-                case Effect.Random1Pack5Day:
-                    relation.AdditionalData = DateTime.Today.ToString(CultureInfo.CurrentCulture);
-                    break;
-                case Effect.RandomSticker1Tier3Day:
-                    relation.AdditionalData = DateTime.Today.ToString(CultureInfo.CurrentCulture);
-                    break;
-                case Effect.RandomSticker2Tier3Day:
-                    relation.AdditionalData = DateTime.Today.ToString(CultureInfo.CurrentCulture);
-                    break;
-            }
+            await sticker.ApplyEffect(user, relation);
             var result = await Table.AddAsync(relation);
             user.Stickers.Add(sticker.Md5Hash, result.Entity);
-            await Instance.SaveChangesAsync();
+            await BotDatabase.SaveData();
             return result.Entity;
         }
     }

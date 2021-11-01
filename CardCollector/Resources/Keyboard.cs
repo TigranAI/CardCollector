@@ -38,6 +38,45 @@ namespace CardCollector.Resources
             new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
         });
 
+        public static InlineKeyboardMarkup Settings = new(new[]
+        {
+            new[] {InlineKeyboardButton.WithCallbackData(Text.alerts, Command.alerts)},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
+        });
+
+        public static InlineKeyboardMarkup Alerts(UserSettings settings)
+        {
+            var keyboard = new List<InlineKeyboardButton[]>
+            {
+                new[] {
+                    InlineKeyboardButton.WithCallbackData(
+                        $"{Text.daily_tasks} {(settings[UserSettingsEnum.DailyTasks] ? Text.alert_on : Text.alert_off)}", 
+                        $"{Command.alerts}={(int)UserSettingsEnum.DailyTasks}"),
+                    InlineKeyboardButton.WithCallbackData(
+                        $"{Text.sticker_effects} {(settings[UserSettingsEnum.StickerEffects] ? Text.alert_on : Text.alert_off)}", 
+                        $"{Command.alerts}={(int)UserSettingsEnum.StickerEffects}")
+                },
+                new[] {
+                    InlineKeyboardButton.WithCallbackData(
+                        $"{Text.exp_gain} {(settings[UserSettingsEnum.ExpGain] ? Text.alert_on : Text.alert_off)}", 
+                        $"{Command.alerts}={(int)UserSettingsEnum.ExpGain}"),
+                    InlineKeyboardButton.WithCallbackData(
+                        $"{Text.daily_task_progress} {(settings[UserSettingsEnum.DailyTaskProgress] ? Text.alert_on : Text.alert_off)}", 
+                        $"{Command.alerts}={(int)UserSettingsEnum.DailyTaskProgress}")
+                },
+                new[] {
+                    InlineKeyboardButton.WithCallbackData(
+                        $"{Text.piggy_bank_capacity} {(settings[UserSettingsEnum.PiggyBankCapacity] ? Text.alert_on : Text.alert_off)}", 
+                        $"{Command.alerts}={(int)UserSettingsEnum.PiggyBankCapacity}"),
+                    InlineKeyboardButton.WithCallbackData(
+                        $"{Text.daily_exp_top} {(settings[UserSettingsEnum.DailyExpTop] ? Text.alert_on : Text.alert_off)}", 
+                        $"{Command.alerts}={(int)UserSettingsEnum.DailyExpTop}")
+                },
+                new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
+            };
+            return new InlineKeyboardMarkup(keyboard);
+        }
+
         public static InlineKeyboardMarkup BackToFilters(string stickerTitle)
         {
             return new InlineKeyboardMarkup(new[]
@@ -338,7 +377,10 @@ namespace CardCollector.Resources
             var keyboard = new List<InlineKeyboardButton[]> {
                 new[] {InlineKeyboardButton.WithCallbackData($"{Text.collect} {income}{Text.coin}", Command.collect_income)},
                 new[] {InlineKeyboardButton.WithCallbackData(Text.daily_tasks, Command.daily_tasks)},
-                new[] {InlineKeyboardButton.WithCallbackData(Text.my_packs, Command.my_packs)},
+                new[] {
+                    InlineKeyboardButton.WithCallbackData(Text.settings, Command.settings),
+                    InlineKeyboardButton.WithCallbackData(Text.my_packs, Command.my_packs),
+                },
             };
             if (privilegeLevel > 2) keyboard.Add(
                 new[] {InlineKeyboardButton.WithCallbackData(Text.control_panel, Command.control_panel)});

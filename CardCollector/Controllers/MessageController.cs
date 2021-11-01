@@ -85,50 +85,29 @@ namespace CardCollector.Controllers
          user - пользователь, которому необходимо отправить сообщение
          message - текст сообщения
          keyboard - клавиатура, которую надо добавить к сообщению */
-        public static async Task<Message> EditMessage(UserEntity user, string message, IReplyMarkup keyboard = null,
+        public static async Task EditMessage(UserEntity user, string message, IReplyMarkup keyboard = null,
             ParseMode? parseMode = null)
         {
-        
-            if (!user.IsBlocked)
-                try
-                {
-                        if (user.Session.Messages.Count > 0)
-                            return await Bot.Client.EditMessageTextAsync(user.ChatId, user.Session.Messages.Last(),
-                                message, parseMode, 
-                                replyMarkup: (InlineKeyboardMarkup)keyboard ?? InlineKeyboardMarkup.Empty());
-                        var result = await Bot.Client.SendTextMessageAsync(user.ChatId, message, parseMode,
-                            replyMarkup: keyboard, disableNotification: true);
-                        user.Session?.Messages.Add(result.MessageId);
-                        return result;
-                }
-                catch (Exception e)
-                {
-                    try
-                    {
-                        await user.ClearChat();
-                        var result = await Bot.Client.SendTextMessageAsync(user.ChatId, message, parseMode,
-                            replyMarkup: keyboard, disableNotification: true);
-                        user.Session?.Messages.Add(result.MessageId);
-                        return result;
-                    }
-                    catch (Exception)
-                    {
-                        LogOutWarning("Can't edit text message " + e.Message);
-                    }
-                }
-            return new Message();
+            if (!user.IsBlocked) try {
+                if (user.Session.Messages.Count > 0 && keyboard is InlineKeyboardMarkup or null)
+                    await Bot.Client.EditMessageTextAsync(user.ChatId, user.Session.Messages.Last(),
+                        message, parseMode, replyMarkup: keyboard != null ? (InlineKeyboardMarkup)keyboard : null);
+                else await SendMessage(user, message, keyboard, parseMode);
+            } catch {
+                await user.ClearChat();
+                await SendMessage(user, message, keyboard, parseMode);
+            }
         }
 
         public static async Task SendMessage(UserEntity user, string message, IReplyMarkup keyboard = null,
-            ParseMode? parseMode = null, bool addToList = false)
+            ParseMode? parseMode = null, bool addToList = true)
         {
-            if (!user.IsBlocked)
-                try
-                {
-                    var result = await Bot.Client.SendTextMessageAsync(user.ChatId, message, parseMode,
-                        replyMarkup: keyboard, disableNotification: true);
-                    if (addToList) user.Session.Messages.Add(result.MessageId);
-                } catch (Exception) { /**/ }
+            if (!user.IsBlocked) try {
+                var result = await Bot.Client.SendTextMessageAsync(user.ChatId, message, parseMode,
+                    replyMarkup: keyboard, disableNotification: true);
+                if (addToList)
+                    user.Session.Messages.Add(result.MessageId);
+            } catch (Exception e) { LogOut(e); }
         }
         
         /* Метод для отправки стикера
@@ -136,18 +115,16 @@ namespace CardCollector.Controllers
          fileId - id стикера, расположенного на серверах телеграм */
         public static async Task<Message> SendSticker(UserEntity user, string fileId, IReplyMarkup keyboard = null)
         {
-            if (!user.IsBlocked)
-                try
-                {
-                        await user.ClearChat();
-                        var result = await Bot.Client.SendStickerAsync(user.ChatId, fileId, true, replyMarkup: keyboard);
-                        user.Session.StickerMessages.Add(result.MessageId);
-                        return result;
-                }
-                catch (Exception e)
-                {
-                    LogOutWarning("Can't send sticker " + e.Message);
-                }
+            if (!user.IsBlocked) try {
+                await user.ClearChat();
+                var result = await Bot.Client.SendStickerAsync(user.ChatId, fileId, true, replyMarkup: keyboard);
+                user.Session.StickerMessages.Add(result.MessageId);
+                return result;
+            }
+            catch (Exception e)
+            {
+                LogOutWarning("Can't send sticker " + e.Message);
+            }
             return new Message();
         }
 
@@ -187,11 +164,12 @@ namespace CardCollector.Controllers
         /* Метод для удаления сообщения
          user - пользователь, которому необходимо удалить сообщение
          messageId - Id сообщения */
-        public static async Task DeleteMessage(UserEntity user, int messageId)
+        public static async Task DeleteMessage(UserEntity user, int messageId, bool sticker = false)
         {
             try
             {
-                user.Session.Messages.Remove(messageId);
+                if (sticker) user.Session.StickerMessages.Remove(messageId);
+                else user.Session.Messages.Remove(messageId);
                 if (!user.IsBlocked)
                     await Bot.Client.DeleteMessageAsync(user.ChatId, messageId);
             }

@@ -8,24 +8,24 @@ namespace CardCollector.DataBase.EntityDao
 {
     public static class UserPacksDao
     {
-        private static readonly CardCollectorDatabase Instance = CardCollectorDatabase.GetSpecificInstance(typeof(UserPacksDao));
-        private static readonly DbSet<UserPacks> Table = Instance.UsersPacks;
-
         public static async Task<List<UserPacks>> GetUserPacks(long userId)
         {
-            return (await Table.WhereAsync(item => item.UserId == userId)).ToList();
+            var Table = BotDatabase.Instance.UsersPacks;
+            return await Table.Where(item => item.UserId == userId).ToListAsync();
         }
 
         public static async Task<UserPacks> AddNew(long userId, int packId)
         {
+            var Table = BotDatabase.Instance.UsersPacks;
             var newPack = new UserPacks() { UserId = userId, PackId = packId };
             var result = await Table.AddAsync(newPack);
-            await Instance.SaveChangesAsync();
+            await BotDatabase.SaveData();
             return result.Entity;
         }
 
         public static async Task<UserPacks> GetOne(long userId, int packId)
         {
+            var Table = BotDatabase.Instance.UsersPacks;
             return await Table.FirstOrDefaultAsync(item => item.UserId == userId && item.PackId == packId)
                    ?? await AddNew(userId, packId);
         }
