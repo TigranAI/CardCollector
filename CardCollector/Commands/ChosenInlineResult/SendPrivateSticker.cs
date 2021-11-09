@@ -17,7 +17,7 @@ namespace CardCollector.Commands.ChosenInlineResult
             if (await dailyTask.Execute(User))
             {
                 await dailyTask.GiveReward(User);
-                await MessageController.EditMessage(User, Messages.pack_prize);
+                await MessageController.EditMessage(User, Messages.pack_prize, Keyboard.MyPacks);
             }
         }
 

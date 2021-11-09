@@ -30,9 +30,6 @@
     <data name="sort" xml:space="preserve">
         <value>Сортировка</value>
     </data>
-    <data name="cancel" xml:space="preserve">
-        <value>Отмена</value>
-    </data>
     <data name="show_stickers" xml:space="preserve">
         <value>Показать стикеры</value>
     </data>
@@ -172,13 +169,13 @@
         <value>Панель управления</value>
     </data>
     <data name="daily_tasks" xml:space="preserve">
-        <value>Ежедневные задания</value>
+        <value>Еж. задания</value>
     </data>
     <data name="my_packs" xml:space="preserve">
         <value>Мои паки</value>
     </data>
     <data name="open_random" xml:space="preserve">
-        <value>Открыть случайный пак</value>
+        <value>Открыть обычный пак</value>
     </data>
     <data name="open_author" xml:space="preserve">
         <value>Открыть пак художника</value>
@@ -205,7 +202,7 @@
         <value>В подарок вы получите</value>
     </data>
     <data name="buy_random" xml:space="preserve">
-        <value>Случайный пак</value>
+        <value>Обычный пак</value>
     </data>
     <data name="buy_author" xml:space="preserve">
         <value>Пак художника</value>
@@ -214,13 +211,10 @@
         <value>Информация</value>
     </data>
     <data name="gems_title" xml:space="preserve">
-        <value>50💎 за $1</value>
+        <value>{0}💎 за ${1}</value>
     </data>
     <data name="gems_description" xml:space="preserve">
-        <value>После покупки вы получите 50 алмазов на свой счет. Вы также можете оставить чаевые. Вы получите алмазы в рассчете 50💎 за $1</value>
-    </data>
-    <data name="gems_label50" xml:space="preserve">
-        <value>50💎 за $1</value>
+        <value>После покупки вы получите {0} алмазов на свой счет.</value>
     </data>
     <data name="open_specific" xml:space="preserve">
         <value>Открыть авторский пак</value>
@@ -286,21 +280,27 @@
         <value>🔕</value>
     </data>
     <data name="sticker_effects" xml:space="preserve">
-        <value>Эффекты стикеров</value>
+        <value>Эфф. стикеров</value>
     </data>
     <data name="exp_gain" xml:space="preserve">
-        <value>Получение опыта</value>
+        <value>Пол. опыта</value>
     </data>
     <data name="daily_task_progress" xml:space="preserve">
-        <value>Прогресс еж. заданий</value>
+        <value>Прогр. еж. задания</value>
     </data>
     <data name="piggy_bank_capacity" xml:space="preserve">
-        <value>Наполнение копилки</value>
+        <value>Наполн. копилки</value>
     </data>
     <data name="daily_exp_top" xml:space="preserve">
-        <value>Топ игроков по опыту</value>
+        <value>Топ-5 по опыту</value>
     </data>
     <data name="packs" xml:space="preserve">
         <value>паков</value>
+    </data>
+    <data name="open_packs" xml:space="preserve">
+        <value>Открыть паки</value>
+    </data>
+    <data name="return_from_auction" xml:space="preserve">
+        <value>Вернуть с аукциона</value>
     </data>
 </root>

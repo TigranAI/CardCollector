@@ -32,6 +32,7 @@ namespace CardCollector.Commands
             new Start(),
             // Команда "/menu"
             new Menu(),
+            new Help(),
             // Команда "Коллекция"
             new Collection(),
             // Команда "Магазин"

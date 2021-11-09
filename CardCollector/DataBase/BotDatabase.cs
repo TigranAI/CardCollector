@@ -24,7 +24,10 @@ namespace CardCollector.DataBase
         public static BotDatabase GetClassInstance(Type t)
         {
             if (!ClassInstances.ContainsKey(t))
+            {
                 ClassInstances.Add(t, new BotDatabase());
+                ClassInstances[t].Database.EnsureCreated();
+            }
             return ClassInstances[t];
         }
 

@@ -21,6 +21,7 @@ namespace CardCollector.Commands.Message
             /* Подсчитываем прибыль */
             var income = await User.Cash.CalculateIncome(User.Stickers);
             var expGoal = (await LevelDao.GetLevel(User.CurrentLevel.Level + 1))?.LevelExpGoal.ToString() ?? "∞";
+            var packsCount = await UserPacksDao.GetCount(User.Id);
             /* Отправляем сообщение */
             await MessageController.EditMessage(User, 
                 $"{User.Username}" +
@@ -29,7 +30,7 @@ namespace CardCollector.Commands.Message
                 $"\n{Messages.level}: {User.CurrentLevel.Level}" +
                 $"\n{Messages.current_exp}: {User.CurrentLevel.CurrentExp} / {expGoal}" +
                 $"\n{Messages.cash_capacity}: {User.Cash.MaxCapacity}{Text.coin}",
-                Keyboard.GetProfileKeyboard(income, User.PrivilegeLevel));
+                Keyboard.GetProfileKeyboard(User.PrivilegeLevel, packsCount, income));
         }
         
         public Profile() { }

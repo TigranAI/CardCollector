@@ -28,12 +28,13 @@ namespace CardCollector
 
         private static readonly IEnumerable<BotCommand> _commands = new[]
         {
-            new BotCommand {Command = "/menu", Description = "Показать меню"},/*
-            new BotCommand {Command = "/help", Description = "Показать информацию"},
-            new BotCommand {Command = "/error", Description = "Сообщить об ошибке"},*/
+            new BotCommand {Command = Text.start, Description = "Запуск бота"},
+            new BotCommand {Command = Text.menu, Description = "Показать меню"},
+            new BotCommand {Command = Text.help, Description = "Показать информацию"},
+            /*new BotCommand {Command = "/error", Description = "Сообщить об ошибке"},*/
         };
 
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             Logs.LogOut("Bot started");
             
@@ -42,8 +43,8 @@ namespace CardCollector
             TimerTask.SetupAll();
             
             var cts = new CancellationTokenSource();
+            await Client.SetMyCommandsAsync(_commands, BotCommandScope.AllPrivateChats(), cancellationToken: cts.Token);
             Client.StartReceiving(HandleUpdateAsync, HandleErrorAsync, cancellationToken: cts.Token);
-            Client.SetMyCommandsAsync(_commands, BotCommandScope.AllPrivateChats(), cancellationToken: cts.Token);
 
             _end.WaitOne();
             Logs.LogOut("Stopping program");

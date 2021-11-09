@@ -10,7 +10,8 @@ namespace CardCollector.Commands.CallbackQuery
     {
         protected override string CommandText => Command.buy_pack;
         protected override bool AddToStack => true;
-        
+        protected override bool ClearStickers => true;
+
         public override async Task Execute()
         {
             await MessageController.EditMessage(User, Messages.choose_option, Keyboard.ShopPacksKeyboard);

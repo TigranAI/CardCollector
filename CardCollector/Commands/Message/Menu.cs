@@ -13,8 +13,9 @@ namespace CardCollector.Commands.Message
 
         public override async Task Execute()
         {
+            await User.ClearChat();
             /* Отправляем пользователю сообщение со стандартной клавиатурой */
-            await MessageController.SendMessage(User, Messages.main_menu, Keyboard.Menu, ParseMode.Html, false);
+            await MessageController.SendMessage(User, Messages.main_menu, Keyboard.Menu, ParseMode.Html);
         }
 
         public Menu() { }

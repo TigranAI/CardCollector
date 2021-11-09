@@ -124,7 +124,9 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to за покупку алмазов в магазине.
+        ///   Looks up a localized string similar to Покупка алмазов производится по курсу $1 = 50💎
+        ///
+        ///Выберите одну из опций ниже:.
         /// </summary>
         internal static string buy_gems {
             get {
@@ -174,6 +176,15 @@ namespace CardCollector.Resources {
         internal static string choose_author {
             get {
                 return ResourceManager.GetString("choose_author", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выберите желаемое количество монет:.
+        /// </summary>
+        internal static string choose_exchange_sum {
+            get {
+                return ResourceManager.GetString("choose_exchange_sum", resourceCulture);
             }
         }
         
@@ -466,6 +477,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to за покупку алмазов в магазине.
+        /// </summary>
+        internal static string for_buy_gems {
+            get {
+                return ResourceManager.GetString("for_buy_gems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Алмазы.
         /// </summary>
         internal static string gems {
@@ -480,6 +500,16 @@ namespace CardCollector.Resources {
         internal static string gems_exchange_count {
             get {
                 return ResourceManager.GetString("gems_exchange_count", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Подробное руководство по использованию бота ниже:
+        ///https://telegra.ph/help-11-04-4.
+        /// </summary>
+        internal static string help {
+            get {
+                return ResourceManager.GetString("help", resourceCulture);
             }
         }
         
@@ -582,7 +612,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Поздравляем! Вы получили случайный пак! Открыть его можно во вкладке профиля..
+        ///   Looks up a localized string similar to Поздравляем! Вы получили обычный пак! Открыть его можно во вкладке профиля..
         /// </summary>
         internal static string pack_prize {
             get {
@@ -591,7 +621,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to У вас недостаточно паков.
+        ///   Looks up a localized string similar to У вас нет паков.
         /// </summary>
         internal static string packs_count_zero {
             get {
@@ -636,7 +666,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Случайный пак.
+        ///   Looks up a localized string similar to Обычный пак.
         /// </summary>
         internal static string random_packs {
             get {
@@ -717,7 +747,13 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Добро пожаловать! Этот бот позволяет вам коллекционировать стикеры. Вы можете выбрать одну из опций ниже. Напишите /help, чтобы получить подробную справку..
+        ///   Looks up a localized string similar to Добро пожаловать! Этот бот позволяет вам коллекционировать стикеры. Вы можете выбрать одну из опций ниже.
+        ///
+        ///Для того, чтобы получить стартовый набор стикеров, нажмите &quot;Магазин&quot; -&gt; &quot;0💰&quot;
+        ///После этого их можно открыть, нажав:
+        ///&quot;Профиль&quot; -&gt; &quot;Мои паки&quot; -&gt; &quot;Открыть обычный пак&quot;
+        ///            
+        ///Напишите /help, чтобы получить подробную справку..
         /// </summary>
         internal static string start_message {
             get {
@@ -731,6 +767,15 @@ namespace CardCollector.Resources {
         internal static string stickers_succesfully_uploaded {
             get {
                 return ResourceManager.GetString("stickers_succesfully_uploaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы успешно вернули {0} стикеров {1} с аукциона!.
+        /// </summary>
+        internal static string successfully_returned {
+            get {
+                return ResourceManager.GetString("successfully_returned", resourceCulture);
             }
         }
         

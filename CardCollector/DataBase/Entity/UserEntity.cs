@@ -77,7 +77,7 @@ namespace CardCollector.DataBase.Entity
                 var levelReward = levelInfo.GetRewardInstance();
                 var message = $"{Messages.congratulation_new_level} {CurrentLevel.Level}" +
                               $"\n{await levelReward.GetReward(this)}";
-                await MessageController.SendMessage(this, message, addToList: false);
+                await MessageController.SendMessage(this, message, levelReward.RandomPacks > 0 ? Keyboard.MyPacks : null);
                 levelInfo = await LevelDao.GetLevel(CurrentLevel.Level + 1);
             }
         }

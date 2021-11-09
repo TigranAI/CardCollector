@@ -340,6 +340,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ACA.
+        /// </summary>
+        internal static string return_from_auction {
+            get {
+                return ResourceManager.GetString("return_from_auction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ABF.
         /// </summary>
         internal static string select_offer {
@@ -399,6 +408,24 @@ namespace CardCollector.Resources {
         internal static string set {
             get {
                 return ResourceManager.GetString("set", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ABY.
+        /// </summary>
+        internal static string set_exchange_sum {
+            get {
+                return ResourceManager.GetString("set_exchange_sum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ABZ.
+        /// </summary>
+        internal static string set_gems_sum {
+            get {
+                return ResourceManager.GetString("set_gems_sum", resourceCulture);
             }
         }
         

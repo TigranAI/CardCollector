@@ -21,7 +21,7 @@ namespace CardCollector.Commands.ChosenInlineResult
             module.SelectedPosition = product;
             var discount = 1.0 - await User.AuctionDiscount() / 100.0;
             await MessageController.EditMessage(User, sticker.ToString(module.MaxCount), 
-                Keyboard.GetStickerKeyboard(User.Session, discount));
+                Keyboard.GetAuctionProductKeyboard(module, discount, User.Id == product.Trader));
         }
 
         public SelectTrader() { }

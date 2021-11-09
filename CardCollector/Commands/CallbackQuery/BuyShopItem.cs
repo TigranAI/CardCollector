@@ -52,7 +52,7 @@ namespace CardCollector.Commands.CallbackQuery
                 await MessageController.EditMessage(User, $"{Messages.thanks_for_buying} {userPack.Count} {Text.packs} {packInfo.Author}", 
                     offerSpecial && !offerInfinite || (module.SelectedPosition?.Expired ?? false) || !canBuy
                     ? Keyboard.BackKeyboard
-                    : Keyboard.RepeatCommand(Text.buy_more, CallbackData));
+                    : Keyboard.BuyShopItem(CallbackData));
             }
         }
 

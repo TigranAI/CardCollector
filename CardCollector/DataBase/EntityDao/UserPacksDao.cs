@@ -61,5 +61,18 @@ namespace CardCollector.DataBase.EntityDao
                 return await GetOne(userId, packId);
             }
         }
+
+        public static async Task<int> GetCount(long userId)
+        {
+            try
+            {
+                return await Table.Where(item => item.UserId == userId).SumAsync(item => item.Count);
+            }
+            catch (InvalidOperationException)
+            {
+                Thread.Sleep(Utilities.rnd.Next(30));
+                return await GetCount(userId);
+            }
+        }
     }
 }

@@ -153,4 +153,13 @@
     <data name="alerts" xml:space="preserve">
         <value>ABX</value>
     </data>
+    <data name="set_exchange_sum" xml:space="preserve">
+        <value>ABY</value>
+    </data>
+    <data name="set_gems_sum" xml:space="preserve">
+        <value>ABZ</value>
+    </data>
+    <data name="return_from_auction" xml:space="preserve">
+        <value>ACA</value>
+    </data>
 </root>

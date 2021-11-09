@@ -19,7 +19,7 @@ namespace CardCollector.Commands.PreCheckoutQuery
             await MessageController.EditMessage(User, Messages.thanks_for_buying_gems);
             if (User.Settings[UserSettingsEnum.ExpGain])
                 await MessageController.SendMessage(User, 
-                    $"{Messages.you_gained} {gemsCount * 2} {Text.exp} {Messages.buy_gems}");
+                    $"{Messages.you_gained} {gemsCount * 2} {Text.exp} {Messages.for_buy_gems}");
             await User.GiveExp(gemsCount * 2);
         }
 

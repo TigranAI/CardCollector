@@ -14,15 +14,21 @@ namespace CardCollector.Commands.CallbackQuery
         protected override bool AddToStack => true;
         protected override bool ClearStickers => true;
 
+        private const string PackStickerId = "CAACAgIAAxkBAAIWs2DuY4vB50ARmyRwsgABs_7o5weDaAAC-g4AAmq4cUtH6M1FoN4bxSAE";
+
         public override async  Task Execute()
         {
             var packId = int.Parse(CallbackData.Split('=')[1]);
             var packInfo = await PacksDao.GetById(packId);
             var module = User.Session.GetModule<ShopModule>();
             module.SelectedPack = packInfo;
-            var stickers = await StickerDao.GetListWhere(item => packId == 1 || item.PackId == packId);
-            var sticker = stickers[Utilities.rnd.Next(stickers.Count)];
-            await MessageController.SendSticker(User, sticker.Id, Keyboard.OfferKeyboard(module));
+            var stickerId = PackStickerId;
+            if (packId != 1)
+            {
+                var stickers = await StickerDao.GetListWhere(item => item.PackId == packId);
+                stickerId = stickers[Utilities.rnd.Next(stickers.Count)].Id;
+            }
+            await MessageController.SendSticker(User, stickerId, Keyboard.OfferKeyboard(module));
         }
 
         public SelectShopPack() { }

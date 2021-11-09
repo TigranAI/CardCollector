@@ -23,7 +23,7 @@ namespace CardCollector.Commands.Message
                     $"\n{Messages.gems_exchange_count} {module.EnteredExchangeSum}{Text.gem}" +
                     $"\n{Messages.coins_exchange_count} {module.EnteredExchangeSum * 150}{Text.coin}" +
                     $"\n\n{Messages.please_enter_integer}",
-                    Keyboard.BuyCoinsKeyboard);
+                    Keyboard.BuyCoinsKeyboard());
             else
             {
                 module.EnteredExchangeSum = sum; 
@@ -32,7 +32,7 @@ namespace CardCollector.Commands.Message
                     $"\n{Messages.gems_exchange_count} {module.EnteredExchangeSum}{Text.gem}" +
                     $"\n{Messages.coins_exchange_count} {module.EnteredExchangeSum * 150}{Text.coin}" +
                     $"\n\n{Messages.confirm_exchange}",
-                    Keyboard.BuyCoinsKeyboard);
+                    Keyboard.BuyCoinsKeyboard());
                 Queue.Remove(User.Id);
             }
         }

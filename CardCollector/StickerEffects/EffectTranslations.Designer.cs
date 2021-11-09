@@ -88,7 +88,7 @@ namespace CardCollector.StickerEffects {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to За каждый такой стикер в коллекции, вы будете получать 1 случайный пак раз в 5 дней!.
+        ///   Looks up a localized string similar to За каждый такой стикер в коллекции, вы будете получать 1 обычный пак раз в 5 дней!.
         /// </summary>
         internal static string _4 {
             get {

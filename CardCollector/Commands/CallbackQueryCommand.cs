@@ -62,6 +62,9 @@ namespace CardCollector.Commands
             new SelectShopPack(),
             new Alerts(),
             new Settings(),
+            new SetExchangeSum(),
+            new SetGemsSum(),
+            new ReturnFromAuction(),
         };
 
         /* Метод, создающий объекты команд исходя из полученного обновления */
