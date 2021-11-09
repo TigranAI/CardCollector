@@ -162,4 +162,7 @@
     <data name="return_from_auction" xml:space="preserve">
         <value>ACA</value>
     </data>
+    <data name="logs_menu" xml:space="preserve">
+        <value>ACB</value>
+    </data>
 </root>

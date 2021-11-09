@@ -65,6 +65,8 @@ namespace CardCollector.Commands
             new SetExchangeSum(),
             new SetGemsSum(),
             new ReturnFromAuction(),
+            new ControlPanel(),
+            new LogsMenu(),
         };
 
         /* Метод, создающий объекты команд исходя из полученного обновления */

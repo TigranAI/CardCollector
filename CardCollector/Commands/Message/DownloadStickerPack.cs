@@ -19,7 +19,7 @@ namespace CardCollector.Commands.Message
 
         protected internal override bool IsMatches(UserEntity user, Update update)
         {
-            return base.IsMatches(user, update) && user.PrivilegeLevel >= Constants.ARTIST_PRIVILEGE_LEVEL;
+            return base.IsMatches(user, update) && user.PrivilegeLevel >= PrivilegeLevel.Artist;
         }
 
         public DownloadStickerPack() { }

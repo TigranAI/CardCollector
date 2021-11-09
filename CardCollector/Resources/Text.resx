@@ -303,4 +303,13 @@
     <data name="return_from_auction" xml:space="preserve">
         <value>Вернуть с аукциона</value>
     </data>
+    <data name="logs_menu" xml:space="preserve">
+        <value>🗓Логи пользователей🗓</value>
+    </data>
+    <data name="arrow_left" xml:space="preserve">
+        <value>◀</value>
+    </data>
+    <data name="arrow_right" xml:space="preserve">
+        <value>▶</value>
+    </data>
 </root>

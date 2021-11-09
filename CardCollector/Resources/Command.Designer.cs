@@ -268,6 +268,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ACB.
+        /// </summary>
+        internal static string logs_menu {
+            get {
+                return ResourceManager.GetString("logs_menu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AAS.
         /// </summary>
         internal static string my_packs {

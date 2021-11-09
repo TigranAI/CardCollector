@@ -30,7 +30,7 @@ namespace CardCollector.Commands.Message
         /* Нужно помимо совпадения текста проверить пользователя на уровень привилегий */
         protected internal override bool IsMatches(UserEntity user, Update update)
         {
-            return base.IsMatches(user, update) && user.PrivilegeLevel >= Constants.PROGRAMMER_PRIVILEGE_LEVEL;
+            return base.IsMatches(user, update) && user.PrivilegeLevel >= PrivilegeLevel.Programmer;
         }
         
         public ShowSample(UserEntity user, Update update) : base(user, update) { }

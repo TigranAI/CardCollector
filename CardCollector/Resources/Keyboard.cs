@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
@@ -411,7 +412,7 @@ namespace CardCollector.Resources
         }
 
         /* Клавиатура, отображаемая вместе с сообщением профиля */
-        public static InlineKeyboardMarkup GetProfileKeyboard(int privilegeLevel, int packsCount, int income = 0)
+        public static InlineKeyboardMarkup GetProfileKeyboard(PrivilegeLevel level, int packsCount, int income = 0)
         {
             var keyboard = new List<InlineKeyboardButton[]>();
             if (income > 0)
@@ -426,7 +427,7 @@ namespace CardCollector.Resources
                         Command.my_packs)
                 }
             });
-            if (privilegeLevel > 2) keyboard.Add(
+            if (level > PrivilegeLevel.Vip) keyboard.Add(
                 new[] {InlineKeyboardButton.WithCallbackData(Text.control_panel, Command.control_panel)});
             return new InlineKeyboardMarkup(keyboard);
         }
@@ -510,6 +511,28 @@ namespace CardCollector.Resources
                 new []{InlineKeyboardButton.WithCallbackData(Text.buy_more, callbackData)},
                 new []{InlineKeyboardButton.WithCallbackData(Text.open_packs, Command.my_packs)},
                 new []{InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
+            });
+        }
+
+        public static InlineKeyboardMarkup ControlPanel(PrivilegeLevel level)
+        {
+            var keyboard = new List<InlineKeyboardButton[]>();
+            if (level >= PrivilegeLevel.Programmer)
+                keyboard.AddRange(new []
+                {
+                    new []{InlineKeyboardButton.WithCallbackData(Text.logs_menu, $"{Command.logs_menu}={DateTime.Today}")}
+                });
+            keyboard.Add(new []{InlineKeyboardButton.WithCallbackData(Text.back, Command.back)});
+            return new InlineKeyboardMarkup(keyboard);
+        }
+
+        public static InlineKeyboardMarkup LogsMenu(DateTime date)
+        {
+            return new InlineKeyboardMarkup(new []
+            {
+                InlineKeyboardButton.WithCallbackData(Text.arrow_left, $"{Command.logs_menu}={date.AddDays(1)}"), 
+                InlineKeyboardButton.WithCallbackData(Text.back, Command.back), 
+                InlineKeyboardButton.WithCallbackData(Text.arrow_right, $"{Command.logs_menu}={date.AddDays(-1)}"), 
             });
         }
     }

@@ -315,6 +315,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 👑&lt;b&gt;Панель управления&lt;/b&gt;👑.
+        /// </summary>
+        internal static string control_panel {
+            get {
+                return ResourceManager.GetString("control_panel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Количество отправлений за этот день в беседу.
         /// </summary>
         internal static string count_sends_per_day {
@@ -519,6 +528,15 @@ namespace CardCollector.Resources {
         internal static string level {
             get {
                 return ResourceManager.GetString("level", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Логи на &lt;b&gt;{0}&lt;/b&gt;:.
+        /// </summary>
+        internal static string logs_on_date {
+            get {
+                return ResourceManager.GetString("logs_on_date", resourceCulture);
             }
         }
         

@@ -342,4 +342,10 @@ https://telegra.ph/help-11-04-4</value>
     <data name="successfully_returned" xml:space="preserve">
         <value>Вы успешно вернули {0} стикеров {1} с аукциона!</value>
     </data>
+    <data name="control_panel" xml:space="preserve">
+        <value>👑&lt;b&gt;Панель управления&lt;/b&gt;👑</value>
+    </data>
+    <data name="logs_on_date" xml:space="preserve">
+        <value>Логи на &lt;b&gt;{0}&lt;/b&gt;:</value>
+    </data>
 </root>

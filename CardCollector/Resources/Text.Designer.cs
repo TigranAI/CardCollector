@@ -124,6 +124,24 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ◀.
+        /// </summary>
+        internal static string arrow_left {
+            get {
+                return ResourceManager.GetString("arrow_left", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ▶.
+        /// </summary>
+        internal static string arrow_right {
+            get {
+                return ResourceManager.GetString("arrow_right", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Аукцион.
         /// </summary>
         internal static string auction {
@@ -489,6 +507,15 @@ namespace CardCollector.Resources {
         internal static string login {
             get {
                 return ResourceManager.GetString("login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🗓Логи пользователей🗓.
+        /// </summary>
+        internal static string logs_menu {
+            get {
+                return ResourceManager.GetString("logs_menu", resourceCulture);
             }
         }
         
