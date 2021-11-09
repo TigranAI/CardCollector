@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
@@ -17,6 +18,7 @@ namespace CardCollector.Commands.InlineQuery
             var module = User.Session.GetModule<CombineModule>();
             // Получаем список стикеров
             var stickersList = await User.GetStickersList(Query, module.Tier);
+            stickersList = stickersList.Except(module.CombineList.Keys);
             var results = stickersList.ToTelegramResults(Command.select_sticker);
             // Посылаем пользователю ответ на его запрос
             await MessageController.AnswerInlineQuery(InlineQueryId, results);

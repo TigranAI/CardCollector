@@ -14,9 +14,16 @@ namespace CardCollector.Session.Modules
         
         public int CalculateCombinePrice()
         {
-            var coinsSum = CombineList.Sum(pair => 1440 / pair.Key.IncomeTime * pair.Key.Income * pair.Value);
+            /*var coinsSum = CombineList.Sum(pair => 1440 / pair.Key.IncomeTime * pair.Key.Income * pair.Value);
             var multiplier = SelectedSticker.Tier * 0.25 + 1;
-            return (int)(coinsSum * multiplier);
+            return (int)(coinsSum * multiplier);*/
+            return Tier switch
+            {
+                1 => 200,
+                2 => 500,
+                3 => 1200,
+                _ => 0
+            };
         }
         
         public int CombineCount => CombineList.Values.Sum();
