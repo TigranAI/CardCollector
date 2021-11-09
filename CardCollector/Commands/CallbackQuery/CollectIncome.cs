@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
@@ -10,6 +13,7 @@ namespace CardCollector.Commands.CallbackQuery
     public class CollectIncome : CallbackQueryCommand
     {
         protected override string CommandText => Command.collect_income;
+        private static PeopleCollectedIncomeInfo _info = PeopleCollectedIncomeInfo.Build().Result;
 
         public override async Task Execute()
         {
@@ -30,7 +34,56 @@ namespace CardCollector.Commands.CallbackQuery
                 Keyboard.GetProfileKeyboard(User.PrivilegeLevel, packsCount));
         }
 
+        public override async Task AfterExecute()
+        {
+            if (!_info.Actual())
+            {
+                _info.WriteResults();
+                _info = await PeopleCollectedIncomeInfo.Build();
+            }
+            _info.Add(User.Id);
+        }
+
         public CollectIncome() { }
         public CollectIncome(UserEntity user, Update update) : base(user, update) { }
+        
+        private class PeopleCollectedIncomeInfo
+        {
+            private DateTime infoDate;
+            private CountLogs logsEntity;
+            private Dictionary<long, int> UserCollectCount = new ();
+
+            public static async Task<PeopleCollectedIncomeInfo> Build()
+            {
+                var result = new PeopleCollectedIncomeInfo();
+                result.infoDate = DateTime.Today;
+                result.logsEntity = await CountLogsDao.Get(result.infoDate);
+                return result;
+            }
+
+            public bool Actual()
+            {
+                return infoDate.Equals(DateTime.Today);
+            }
+
+            public void Add(long userId)
+            {
+                if (!UserCollectCount.ContainsKey(userId))
+                    UserCollectCount.Add(userId, 1);
+                else UserCollectCount[userId]++;
+            }
+
+            public void WriteResults()
+            {
+                var oneToThreeTimes = UserCollectCount.Values.Count(item => item < 4);
+                logsEntity.PeopleCollectedIncomeOneToThreeTimes += oneToThreeTimes;
+                logsEntity.PeopleCollectedIncomeMoreTimes += UserCollectCount.Count - oneToThreeTimes;
+            }
+        }
+
+        public static void WriteLogs()
+        {
+            _info.WriteResults();
+        }
     }
 }

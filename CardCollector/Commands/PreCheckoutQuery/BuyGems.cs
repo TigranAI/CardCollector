@@ -1,6 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
+using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
 using Telegram.Bot;
 using Telegram.Bot.Types;
@@ -25,5 +28,52 @@ namespace CardCollector.Commands.PreCheckoutQuery
 
         public BuyGems() { }
         public BuyGems(UserEntity user, Update update) : base(user, update) { }
+        
+        private static PeopleDonated info = PeopleDonated.Build().Result;
+        
+        public override async Task AfterExecute()
+        {
+            if (!info.Actual())
+            {
+                info.WriteResults();
+                info = await PeopleDonated.Build();
+            }
+            info.Add(User.Id);
+        }
+        
+        private class PeopleDonated
+        {
+            private DateTime infoDate;
+            private CountLogs logsEntity;
+            private HashSet<long> People = new();
+
+            public static async Task<PeopleDonated> Build()
+            {
+                var result = new PeopleDonated();
+                result.infoDate = DateTime.Today;
+                result.logsEntity = await CountLogsDao.Get(result.infoDate);
+                return result;
+            }
+
+            public bool Actual()
+            {
+                return infoDate.Equals(DateTime.Today);
+            }
+
+            public void Add(long userId)
+            {
+                People.Add(userId);
+            }
+
+            public void WriteResults()
+            {
+                logsEntity.PeopleDonated += People.Count;
+            }
+        }
+
+        public static void WriteLogs()
+        {
+            info.WriteResults();
+        }
     }
 }

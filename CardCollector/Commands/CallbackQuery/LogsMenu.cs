@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
+using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -16,7 +17,13 @@ namespace CardCollector.Commands.CallbackQuery
         {
             var date = Convert.ToDateTime(CallbackData.Split('=')[1]);
             var message = string.Format(Messages.logs_on_date, date.ToString("dd.MM.yyyy"));
-            //TODO add logs rows
+            var logsPage = await CountLogsDao.Get(date);
+            message += $"\n{LogsTranslations.PCIOTTT}: {logsPage.PeopleCollectedIncomeOneToThreeTimes}" +
+                       $"\n{LogsTranslations.PCIMT}: {logsPage.PeopleCollectedIncomeMoreTimes}" +
+                       $"\n{LogsTranslations.PCDT}: {logsPage.PeopleCompletedDailyTask}" +
+                       $"\n{LogsTranslations.PSSOOMT}: {logsPage.PeopleSendsStickerOneOrMoreTimes}" +
+                       $"\n{LogsTranslations.PD}: {logsPage.PeopleDonated}" +
+                       $"\n{LogsTranslations.PPSTA}: {logsPage.PeoplePutsStickerToAuction}";
             await MessageController.EditMessage(User, message, Keyboard.LogsMenu(date), ParseMode.Html);
         }
 

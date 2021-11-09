@@ -32,10 +32,10 @@ namespace CardCollector.Resources
             var keyboard = new List<InlineKeyboardButton[]>
             {
                 new[]
-                {//TODO исправить суммы монет
-                    InlineKeyboardButton.WithCallbackData($"100{Text.coin}", $"{Command.set_exchange_sum}=100"),
-                    InlineKeyboardButton.WithCallbackData($"300{Text.coin}", $"{Command.set_exchange_sum}=300"),
-                    InlineKeyboardButton.WithCallbackData($"700{Text.coin}", $"{Command.set_exchange_sum}=700")
+                {
+                    InlineKeyboardButton.WithCallbackData($"300{Text.coin}", $"{Command.set_exchange_sum}=2"),
+                    InlineKeyboardButton.WithCallbackData($"600{Text.coin}", $"{Command.set_exchange_sum}=4"),
+                    InlineKeyboardButton.WithCallbackData($"900{Text.coin}", $"{Command.set_exchange_sum}=6")
                 }
             };
             if (confirmButton) keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.confirm_exchange,

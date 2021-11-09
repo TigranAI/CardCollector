@@ -7,7 +7,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.ChosenInlineResult
 {
-    public class SendPrivateSticker : ChosenInlineResultCommand
+    public class SendPrivateSticker : SendStickerCommand
     {
         protected override string CommandText => Command.send_private_sticker;
 

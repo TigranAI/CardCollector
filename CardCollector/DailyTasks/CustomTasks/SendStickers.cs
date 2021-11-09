@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
@@ -12,6 +13,7 @@ namespace CardCollector.DailyTasks.CustomTasks
         public override int Goal => 5;
         public override string Title => Titles.send_stickers;
         public override string Description => Descriptions.send_stickers;
+        private static PeopleCompletedTask info = PeopleCompletedTask.Build().Result;
 
         public override async Task<bool> Execute(UserEntity user, object[] args = null)
         {
@@ -21,13 +23,58 @@ namespace CardCollector.DailyTasks.CustomTasks
             if (user.Settings[UserSettingsEnum.DailyTaskProgress])
                 await MessageController.EditMessage(user,
                     $"{Messages.send_sticker_progress}: {Goal - task.Progress} / {Goal}");
-            return task.Progress == 0;
+            if (task.Progress == 0)
+            {
+                if (!info.Actual())
+                {
+                    info.WriteResults();
+                    info = await PeopleCompletedTask.Build();
+                }
+                info.Increase();
+                return true;
+            }
+            return false;
         }
 
         public override async Task GiveReward(UserEntity user, object[] args = null)
         {
             var userPacks = await UserPacksDao.GetOne(user.Id, 1);
             userPacks.Count++;
+        }
+
+        private class PeopleCompletedTask
+        {
+            private DateTime infoDate;
+            private CountLogs logsEntity;
+            private int count = 0;
+
+            public static async Task<PeopleCompletedTask> Build()
+            {
+                var result = new PeopleCompletedTask();
+                result.infoDate = DateTime.Today;
+                result.logsEntity = await CountLogsDao.Get(result.infoDate);
+                return result;
+            }
+
+            public bool Actual()
+            {
+                return infoDate.Equals(DateTime.Today);
+            }
+
+            public void Increase()
+            {
+                count++;
+            }
+
+            public void WriteResults()
+            {
+                logsEntity.PeopleCompletedDailyTask += count;
+            }
+        }
+
+        public static void WriteLogs()
+        {
+            info.WriteResults();
         }
     }
 }

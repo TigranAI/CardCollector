@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
+using CardCollector.Commands.CallbackQuery;
+using CardCollector.Commands.ChosenInlineResult;
+using CardCollector.DailyTasks.CustomTasks;
 using CardCollector.DataBase;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
 using CardCollector.TimerTasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
+using BuyGems = CardCollector.Commands.PreCheckoutQuery.BuyGems;
 using Timer = System.Timers.Timer;
 
 namespace CardCollector
@@ -54,6 +58,11 @@ namespace CardCollector
 
         public static async Task StopProgram()
         {
+            SendStickers.WriteLogs();
+            CollectIncome.WriteLogs();
+            SendStickerCommand.WriteLogs();
+            BuyGems.WriteLogs();
+            ConfirmSelling.WriteLogs();
             await BotDatabase.SaveData();
             await UserDao.ClearMemory();
             _end.Set();

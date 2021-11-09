@@ -29,7 +29,10 @@ namespace CardCollector.Commands
             if (AddToStack) User.Session.AddMenuToStack(this);
             if (ClearStickers) await User.Session.ClearStickers();
             await Execute();
+            await AfterExecute();
         }
+
+        public virtual Task AfterExecute() => Task.CompletedTask;
 
         protected internal abstract bool IsMatches(UserEntity user, Update update);
 

@@ -209,9 +209,6 @@
     <data name="offer_expired" xml:space="preserve">
         <value>Время акции истекло!</value>
     </data>
-    <data name="specific_packs" xml:space="preserve">
-        <value>Авторских паков:</value>
-    </data>
     <data name="effect_PiggyBank200" xml:space="preserve">
         <value>Поздравляем! Ваша копилка увеличена на 200!</value>
     </data>
@@ -346,6 +343,9 @@ https://telegra.ph/help-11-04-4</value>
         <value>👑&lt;b&gt;Панель управления&lt;/b&gt;👑</value>
     </data>
     <data name="logs_on_date" xml:space="preserve">
-        <value>Логи на &lt;b&gt;{0}&lt;/b&gt;:</value>
+        <value>Статистика за &lt;b&gt;{0}&lt;/b&gt;:</value>
+    </data>
+    <data name="confirm_stopping" xml:space="preserve">
+        <value>Подтвердите остановку (повторите команду)</value>
     </data>
 </root>

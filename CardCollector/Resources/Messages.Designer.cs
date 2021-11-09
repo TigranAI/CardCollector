@@ -297,6 +297,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Подтвердите остановку (повторите команду).
+        /// </summary>
+        internal static string confirm_stopping {
+            get {
+                return ResourceManager.GetString("confirm_stopping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Поздравляем! Вы получили стикер:.
         /// </summary>
         internal static string congratulation {
@@ -532,7 +541,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Логи на &lt;b&gt;{0}&lt;/b&gt;:.
+        ///   Looks up a localized string similar to Статистика за &lt;b&gt;{0}&lt;/b&gt;:.
         /// </summary>
         internal static string logs_on_date {
             get {
@@ -752,15 +761,6 @@ namespace CardCollector.Resources {
         internal static string sorting {
             get {
                 return ResourceManager.GetString("sorting", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Авторских паков:.
-        /// </summary>
-        internal static string specific_packs {
-            get {
-                return ResourceManager.GetString("specific_packs", resourceCulture);
             }
         }
         

@@ -46,6 +46,7 @@ namespace CardCollector.DataBase
         public DbSet<UserLevel> UserLevel { get; set; }
         public DbSet<Level> Levels { get; set; }
         public DbSet<UserSettings> Settings { get; set; }
+        public DbSet<CountLogs> CountLogs { get; set; }
 
         /* Конфигурация подключения к БД */
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

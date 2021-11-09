@@ -39,7 +39,7 @@ namespace CardCollector.Commands
             new CollectIncome(),
             new Combine(),
             new CombineStickers(),
-            new ConfirmationSelling(),
+            new ConfirmSelling(),
             new ConfirmBuying(),
             new ConfirmExchange(),
             new Count(),

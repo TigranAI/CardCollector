@@ -7,7 +7,7 @@ using Telegram.Bot.Types;
 namespace CardCollector.Commands.ChosenInlineResult
 {
     /* Данная команда выполняется при отправке пользователем стикера */
-    public class GiveExp : ChosenInlineResultCommand
+    public class GiveExp : SendStickerCommand
     {
         /* Ключевое слово для данной команды send_sticker */
         protected override string CommandText => Command.give_exp;

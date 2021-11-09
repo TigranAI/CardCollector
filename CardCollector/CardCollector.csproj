@@ -47,6 +47,10 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>EffectTranslations.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\LogsTranslations.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>LogsTranslations.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -89,6 +93,11 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>EffectTranslations.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\LogsTranslations.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>LogsStranslations.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 
