@@ -31,7 +31,9 @@ namespace CardCollector.DataBase.EntityDao
         private static async Task<CountLogs> Create(DateTime date)
         {
             try {
-                return (await Table.AddAsync(new CountLogs{Date = date})).Entity;
+                var result = (await Table.AddAsync(new CountLogs{Date = date})).Entity;
+                await BotDatabase.SaveData();
+                return result;
             }
             catch (InvalidOperationException) {
                 Thread.Sleep(Utilities.rnd.Next(30));
