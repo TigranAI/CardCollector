@@ -30,6 +30,7 @@ namespace CardCollector.DataBase.Entity
 
         /* Уровень привилегий пользователя */
         [Column("privilege_level"), MaxLength(32)] public int _privilegeLevel { get; set; } = 0;
+        [Column("first_reward"), MaxLength(11)] public bool FirstReward { get; set; } = false;
 
         [NotMapped] public PrivilegeLevel PrivilegeLevel
         {
@@ -45,6 +46,7 @@ namespace CardCollector.DataBase.Entity
         
         /* Стикеры пользователя */
         [NotMapped] public Dictionary<string, UserStickerRelationEntity> Stickers { get; set; }
+        [NotMapped] public UserMessages MessagesId { get; set; }
 
         /* Данные, хранящиеся в рамках одной сессии */
         [NotMapped] public UserSession Session;

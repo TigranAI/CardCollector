@@ -11,13 +11,14 @@ namespace CardCollector.Commands.ChosenInlineResult
     {
         /* Ключевое слово для данной команды send_sticker */
         protected override string CommandText => Command.give_exp;
+        protected override bool ClearStickers => true;
 
         public override async Task Execute()
         {
             if (!User.Session.ChosenResultWithMessage)
             {
                 if (User.Settings[UserSettingsEnum.ExpGain])
-                    await MessageController.SendMessage(User, 
+                    await MessageController.EditMessage(User, 
                         $"{Messages.you_gained} 1 {Text.exp} {Messages.send_sticker}" +
                         $"\n{Messages.you_can_add_bot_to_conversation}");
                 await User.GiveExp(1);

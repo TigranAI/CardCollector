@@ -50,6 +50,7 @@ namespace CardCollector.DataBase.EntityDao
                 result.Stickers = await UserStickerRelationDao.GetListById(user.Id);
                 result.Settings = await SettingsDao.GetById(user.Id);
                 result.CurrentLevel = await UserLevelDao.GetById(user.Id);
+                result.MessagesId = await UserMessagesDao.GetById(user.Id);
                 /* Добавляем пользователя в список активных, чтобы не обращаться к бд лишний раз */
                 ActiveUsers.Add(user.Id, result);
             }

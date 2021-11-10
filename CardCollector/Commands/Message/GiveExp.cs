@@ -12,6 +12,7 @@ namespace CardCollector.Commands.Message
     public class GiveExp : MessageCommand
     {
         protected override string CommandText => "";
+        protected override bool ClearStickers => true;
 
         public static readonly Dictionary<long, Dictionary<long, int>> GroupStickersExp = new();
 
@@ -30,7 +31,7 @@ namespace CardCollector.Commands.Message
                 var membersCount = await Bot.Client.GetChatMemberCountAsync(chatId) - 1;
                 await User.GiveExp(membersCount < 21 ? membersCount : 20);
                 if (User.Settings[UserSettingsEnum.ExpGain])
-                    await MessageController.SendMessage(User, 
+                    await MessageController.EditMessage(User, 
                         $"{Messages.you_gained} {(membersCount < 21 ? membersCount : 20)} {Text.exp} {Messages.send_sticker}" +
                         $"\n{Messages.count_sends_per_day} \"{Update.Message.Chat.Title}\" {GroupStickersExp[chatId][User.Id]} / 5");
             }

@@ -97,7 +97,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Людей выставилос стикер на аукцион.
+        ///   Looks up a localized string similar to Людей выставило стикер на аукцион.
         /// </summary>
         internal static string PPSTA {
             get {

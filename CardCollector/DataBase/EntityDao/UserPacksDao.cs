@@ -66,7 +66,9 @@ namespace CardCollector.DataBase.EntityDao
         {
             try
             {
-                return await Table.Where(item => item.UserId == userId).SumAsync(item => item.Count);
+                var packs = await Table.Where(item => item.UserId == userId).ToListAsync();
+                return packs.Sum(item => item.Count);
+                
             }
             catch (InvalidOperationException)
             {

@@ -1,9 +1,7 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using Telegram.Bot.Types;
-using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.Message
 {
@@ -14,8 +12,9 @@ namespace CardCollector.Commands.Message
         public override async Task Execute()
         {
             await User.ClearChat();
-            /* Отправляем пользователю сообщение со стандартной клавиатурой */
-            await MessageController.SendMessage(User, Messages.main_menu, Keyboard.Menu, ParseMode.Html);
+            await User.MessagesId.SendMenu();/*
+            /* Отправляем пользователю сообщение со стандартной клавиатурой #1#
+            await MessageController.SendMessage(User, Messages.main_menu, Keyboard.Menu, ParseMode.Html);*/
         }
 
         public Menu() { }
