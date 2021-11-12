@@ -55,7 +55,7 @@ namespace CardCollector.Commands.Message
             {
                 using var xlPackage = new ExcelPackage(new FileInfo(fileName));
                 var myWorksheet = xlPackage.Workbook.Worksheets.First(); //select sheet here
-                for (var rowNum = 2; myWorksheet.Cells[rowNum, 1].Value is not null; rowNum++) //select starting row here
+                for (var rowNum = 2; rowNum < stickers.Count + 2; rowNum++) //select starting row here
                 {
                     var fields = ParseRow(myWorksheet.Cells, rowNum);
                     stickers[rowNum - 2].Title = fields["Title"];
@@ -66,7 +66,7 @@ namespace CardCollector.Commands.Message
                     stickers[rowNum - 2].Description = fields["Description"];
                     stickers[rowNum - 2].IncomeTime = 60;
                     stickers[rowNum - 2].Income = (int) Math.Pow(5, stickers[rowNum - 2].Tier - 1);
-                    stickers[rowNum - 2].Md5Hash = Utilities.CreateMd5(stickers[rowNum - 2].Title);
+                    stickers[rowNum - 2].Md5Hash = Utilities.CreateMd5(stickers[rowNum - 2].Id);
                 }
                 return stickers;
             });
@@ -80,7 +80,7 @@ namespace CardCollector.Commands.Message
                 {"Author", cells[rowNum, 2].Value.ToString()},
                 {"Tier", cells[rowNum, 3].Value.ToString()},
                 {"Emoji", cells[rowNum, 4].Value.ToString()},
-                {"Effect", cells[rowNum, 5].Value is int e ? e.ToString() : "0"},
+                {"Effect", cells[rowNum, 5].Value is { } e && int.TryParse(e.ToString(), out var effect) ? effect.ToString() : "0"},
                 {"Description", cells[rowNum, 6].Value is string s ? s : ""}
             };
         }
