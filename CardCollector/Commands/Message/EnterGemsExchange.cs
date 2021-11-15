@@ -21,7 +21,7 @@ namespace CardCollector.Commands.Message
                 await MessageController.EditMessage(User,
                     $"{Messages.exchange_mesage}" +
                     $"\n{Messages.gems_exchange_count} {module.EnteredExchangeSum}{Text.gem}" +
-                    $"\n{Messages.coins_exchange_count} {module.EnteredExchangeSum * 150}{Text.coin}" +
+                    $"\n{Messages.coins_exchange_count} {module.EnteredExchangeSum * 10}{Text.coin}" +
                     $"\n\n{Messages.please_enter_integer}",
                     Keyboard.BuyCoinsKeyboard());
             else
@@ -30,7 +30,7 @@ namespace CardCollector.Commands.Message
                 await MessageController.EditMessage(User,
                     $"{Messages.exchange_mesage}" +
                     $"\n{Messages.gems_exchange_count} {module.EnteredExchangeSum}{Text.gem}" +
-                    $"\n{Messages.coins_exchange_count} {module.EnteredExchangeSum * 150}{Text.coin}" +
+                    $"\n{Messages.coins_exchange_count} {module.EnteredExchangeSum * 10}{Text.coin}" +
                     $"\n\n{Messages.confirm_exchange}",
                     Keyboard.BuyCoinsKeyboard());
                 Queue.Remove(User.Id);

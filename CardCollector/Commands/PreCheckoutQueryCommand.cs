@@ -18,7 +18,7 @@ namespace CardCollector.Commands
             {
                 // Тестовая покупка
                 new Test(),
-                // Покупка 50 алмазов
+                // Покупка алмазов
                 new BuyGems(),
             };
 

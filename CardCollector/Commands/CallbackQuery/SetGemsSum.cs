@@ -14,10 +14,10 @@ namespace CardCollector.Commands.CallbackQuery
         public override async Task Execute()
         {
             var count = int.Parse(CallbackData.Split('=')[1]);
-            var label = string.Format(Text.gems_title, count, count/50);
+            var label = string.Format(Text.gems_title, count, count / 100 * 69);
             var description = string.Format(Text.gems_description, count);
             await MessageController.SendInvoice(User, label, description, Command.buy_gems_item, 
-                new[] {new LabeledPrice(label, count*2)}, Keyboard.BuyGemsKeyboard(count));
+                new[] {new LabeledPrice(label, count*69)}, Keyboard.BuyGemsKeyboard(count), Currency.RUB);
         }
 
         public SetGemsSum() { }

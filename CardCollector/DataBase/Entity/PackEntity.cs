@@ -19,6 +19,6 @@ namespace CardCollector.DataBase.Entity
         [Column("opened_count"), MaxLength(127)] public long OpenedCount { get; set; } = 0;
 
         [NotMapped] public int PriceCoins => Id == 1 ? 1000 : -1;
-        [NotMapped] public int PriceGems => Id == 1 ? 80 : 100;
+        [NotMapped] public int PriceGems => 100/*Id == 1 ? 100 : 100*/;
     }
 }

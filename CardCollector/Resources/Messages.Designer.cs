@@ -124,7 +124,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Покупка алмазов производится по курсу $1 = 50💎
+        ///   Looks up a localized string similar to Покупка алмазов производится по курсу ₽69 = 100💎
         ///
         ///Выберите одну из опций ниже:.
         /// </summary>
@@ -486,7 +486,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Покупка монет производится за алмазы, 1💎 = 150💰..
+        ///   Looks up a localized string similar to Покупка монет производится за алмазы, 1💎 = 10💰..
         /// </summary>
         internal static string exchange_mesage {
             get {

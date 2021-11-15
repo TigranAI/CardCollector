@@ -33,9 +33,9 @@ namespace CardCollector.Resources
             {
                 new[]
                 {
-                    InlineKeyboardButton.WithCallbackData($"300{Text.coin}", $"{Command.set_exchange_sum}=2"),
-                    InlineKeyboardButton.WithCallbackData($"600{Text.coin}", $"{Command.set_exchange_sum}=4"),
-                    InlineKeyboardButton.WithCallbackData($"900{Text.coin}", $"{Command.set_exchange_sum}=6")
+                    InlineKeyboardButton.WithCallbackData($"300{Text.coin}", $"{Command.set_exchange_sum}=30"),
+                    InlineKeyboardButton.WithCallbackData($"600{Text.coin}", $"{Command.set_exchange_sum}=60"),
+                    InlineKeyboardButton.WithCallbackData($"900{Text.coin}", $"{Command.set_exchange_sum}=90")
                 }
             };
             if (confirmButton) keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.confirm_exchange,
@@ -176,7 +176,7 @@ namespace CardCollector.Resources
         {
             return new InlineKeyboardMarkup(new[]
             {
-                new[] {InlineKeyboardButton.WithPayment($"{Text.buy} {count}{Text.gem} {Text.per} ${count/50}")},
+                new[] {InlineKeyboardButton.WithPayment($"{Text.buy} {count}{Text.gem} {Text.per} ₽{count * 69 / 100}")},
                 new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
             });
         }

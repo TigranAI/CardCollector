@@ -10,7 +10,7 @@ namespace CardCollector.StickerEffects
 {
     public class RandomSticker1Tier3Day
     {
-        public static int Interval = 3;
+        public static int Interval = 2;
 
         public static async Task<int> GetStickersCount(Dictionary<string, UserStickerRelationEntity> stickers)
         {

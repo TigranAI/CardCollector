@@ -17,7 +17,7 @@ namespace CardCollector.Commands.PreCheckoutQuery
         public override async Task Execute()
         {
             await Bot.Client.AnswerPreCheckoutQueryAsync(PreCheckoutQueryId);
-            var gemsCount = 50 * Amount / 100;
+            var gemsCount = Amount / 69;
             User.Cash.Gems += gemsCount;
             await MessageController.EditMessage(User, Messages.thanks_for_buying_gems);
             if (User.Settings[UserSettingsEnum.ExpGain])

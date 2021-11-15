@@ -19,9 +19,9 @@ namespace CardCollector.Commands.CallbackQuery
             else
             {
                 User.Cash.Gems -= module.EnteredExchangeSum;
-                User.Cash.Coins += module.EnteredExchangeSum * 150;
+                User.Cash.Coins += module.EnteredExchangeSum * 10;
                 await MessageController.EditMessage(User,
-                    $"{Messages.you_got} {module.EnteredExchangeSum * 150}{Text.coin} {Text.per} {module.EnteredExchangeSum}{Text.gem}");
+                    $"{Messages.you_got} {module.EnteredExchangeSum * 10}{Text.coin} {Text.per} {module.EnteredExchangeSum}{Text.gem}");
             }
         }
 
