@@ -14,13 +14,13 @@ namespace CardCollector.Commands.Message
         protected override string CommandText => "create_token";
 
         private const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-_";
-        private const string site = "http://127.0.0.1:8080/";
         
         public override async Task Execute()
         {
-            var token = GenerateNewToken();
-            await SessionTokenDao.AddNew(User.Id, token);
-            var loginLink = $"{site}login?token={token}";
+            var token = await SessionTokenDao.AddNew(User.Id, GenerateNewToken());
+            var data = Update.Message!.Text!.Split(' ')[1].Split('=');
+            var host = data[1].Replace('-', '.').Replace('_', ':');
+            var loginLink = $"http://{host}/login?token={token}";
             await MessageController.EditMessage(User, $"<a href=\"{loginLink}\">{Messages.your_login_link}</a>",
                 Keyboard.LoginKeyboard(loginLink), ParseMode.Html);
         }
@@ -34,7 +34,9 @@ namespace CardCollector.Commands.Message
         {
             if (update.Message!.Type != MessageType.Text) return false;
             var data = update.Message.Text!.Split(' ');
-            return data.Length > 1 && data[1] == CommandText;
+            if (data.Length < 2) return false;
+            var command = data[1].Split('=')[0];
+            return command == CommandText;
         }
 
         public CreateToken() { }
