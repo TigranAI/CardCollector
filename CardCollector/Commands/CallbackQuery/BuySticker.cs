@@ -26,10 +26,14 @@ namespace CardCollector.Commands.CallbackQuery
             else
             {
                 await auctionModule.SelectedPosition.BuyCard(auctionModule.Count);
+                var trader = await UserDao.GetById(auctionModule.SelectedPosition.Trader);
+                var traderName = trader.Username != "" ? trader.Username : Text.trader;
                 var discount = 1.0 - await User.AuctionDiscount() / 100.0;
                 User.Cash.Gems -= (int)(auctionModule.Price * auctionModule.Count * discount);
                 await UserStickerRelationDao.AddSticker(User, auctionModule.SelectedSticker, auctionModule.Count);
                 User.Session.ResetModule<AuctionModule>();
+                await MessageController.EditMessage(User, 
+                    string.Format(Messages.thanks_for_buying_sticker, traderName), Keyboard.BackKeyboard);
             }
         }
 

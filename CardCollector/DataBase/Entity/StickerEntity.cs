@@ -22,6 +22,9 @@ namespace CardCollector.DataBase.Entity
         /* Id стикера на сервере Телеграм */
         [Column("id"), MaxLength(127)] public string Id { get; set; }
         
+        /* Id стикера с вотермаркой */
+        [Column("for_sale_id"), MaxLength(127)] public string ForSaleId { get; set; }
+        
         /* Название стикера */
         [Column("title"), MaxLength(256)] public string Title { get; set; }
         
@@ -49,6 +52,8 @@ namespace CardCollector.DataBase.Entity
         [Column("effect"), MaxLength(32)] public int Effect { get; set; }
         
         [Column("pack_id"), MaxLength(32)] public int PackId { get; set; }
+
+        [NotMapped] public string IdWithWatermark => ForSaleId ?? Id;
 
         public override string ToString()
         {

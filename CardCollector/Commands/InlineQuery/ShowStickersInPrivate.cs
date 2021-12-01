@@ -9,10 +9,6 @@ namespace CardCollector.Commands.InlineQuery
 {
     public class ShowStickersInPrivate : InlineQueryCommand
     {
-        /* Команда - пустая строка, поскольку пользователь может вводить любые слова
-         после @имя_бота, введенная фраза будет использоваться для фильтрации стикеров */
-        protected override string CommandText => "";
-
         public override async Task Execute()
         {
             // Получаем список стикеров

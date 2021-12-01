@@ -31,7 +31,7 @@ namespace CardCollector.Commands.CallbackQuery
                 $"\n{Messages.level}: {User.CurrentLevel.Level}" +
                 $"\n{Messages.current_exp}: {User.CurrentLevel.CurrentExp} / {expGoal}" +
                 $"\n{Messages.cash_capacity}: {User.Cash.MaxCapacity}{Text.coin}",
-                Keyboard.GetProfileKeyboard(User.PrivilegeLevel, packsCount));
+                Keyboard.GetProfileKeyboard(packsCount));
         }
 
         public override async Task AfterExecute()

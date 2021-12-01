@@ -11,8 +11,6 @@ namespace CardCollector.Commands.InlineQuery
 {
     public class ShowCombineStickers : InlineQueryCommand
     {
-        protected override string CommandText => "";
-
         public override async Task Execute()
         {
             var module = User.Session.GetModule<CombineModule>();

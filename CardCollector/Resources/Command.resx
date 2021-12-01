@@ -165,4 +165,22 @@
     <data name="logs_menu" xml:space="preserve">
         <value>ACB</value>
     </data>
+    <data name="stop_bot" xml:space="preserve">
+        <value>ACC</value>
+    </data>
+    <data name="show_sample" xml:space="preserve">
+        <value>ACD</value>
+    </data>
+    <data name="add_for_sale_sticker" xml:space="preserve">
+        <value>ACE</value>
+    </data>
+    <data name="select_for_sale_pack" xml:space="preserve">
+        <value>ACF</value>
+    </data>
+    <data name="select_for_sale_sticker" xml:space="preserve">
+        <value>ACG</value>
+    </data>
+    <data name="upload_stickerpack" xml:space="preserve">
+        <value>ACH</value>
+    </data>
 </root>

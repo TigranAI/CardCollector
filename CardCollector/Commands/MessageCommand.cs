@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CardCollector.Commands.CallbackQuery;
 using CardCollector.Commands.Message;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
@@ -42,21 +43,16 @@ namespace CardCollector.Commands
             // Ожидание ввода эмоджи
             new EnterEmoji(),
             new EnterGemsExchange(),
-            // Загрузка стикерпака
-            new DownloadStickerPack(),
             //команда ввода цены
             new EnterGemsPrice(),
             new CreateToken(),
-            // Команда "Показать пример"
-            new ShowSample(),
-            // Команда "Остановить"
-            new StopBot(),
             /* Выгрузка файлов к боту */
             new UploadFile(),
             new UploadSticker(),
             new GiveExp(),
+            new UploadForSaleSticker(),
         };
-
+        
         /* Метод, создающий объекты команд исходя из полученного обновления */
         public static async Task<UpdateModel> Factory(Update update)
         {

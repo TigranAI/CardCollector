@@ -5,11 +5,11 @@ using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using Telegram.Bot.Types;
 
-namespace CardCollector.Commands.Message
+namespace CardCollector.Commands.CallbackQuery
 {
-    public class StopBot : MessageCommand
+    public class StopBot : CallbackQueryCommand
     {
-        protected override string CommandText => Text.stop_bot;
+        protected override string CommandText => Command.stop_bot;
         public static bool ConfirmStop = false;
 
         public override async Task Execute()
@@ -17,7 +17,7 @@ namespace CardCollector.Commands.Message
             if (ConfirmStop) await Bot.StopProgram();
             else
             {
-                await MessageController.EditMessage(User, Messages.confirm_stopping);
+                await MessageController.EditMessage(User, Messages.confirm_stopping, Keyboard.StopKeyboard);
                 ConfirmStop = true;
                 var timer = new Timer
                 {

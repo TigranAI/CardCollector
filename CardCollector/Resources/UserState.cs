@@ -17,6 +17,7 @@
         /* Пользователь в базовом состоянии (по умолчанию) */
         Default,
 
-        UploadSticker
+        UploadSticker,
+        LoadForSaleSticker
     }
 }

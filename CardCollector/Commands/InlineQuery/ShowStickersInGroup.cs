@@ -10,10 +10,6 @@ namespace CardCollector.Commands.InlineQuery
     /* Отображение стикеров в чатах, кроме личной беседы с ботом */
     public class ShowStickersInGroup : InlineQueryCommand
     {
-        /* Команда - пустая строка, поскольку пользователь может вводить любые слова
-         после @имя_бота, введенная фраза будет использоваться для фильтрации стикеров */
-        protected override string CommandText => "";
-
         public override async Task Execute()
         {
             // Получаем список стикеров

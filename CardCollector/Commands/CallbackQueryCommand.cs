@@ -20,12 +20,6 @@ namespace CardCollector.Commands
      Update - обновление, полученное от сервера Телеграм */
     public abstract class CallbackQueryCommand : UpdateModel
     {
-        /* Данные, поступившие после нажатия на кнокпку */
-        protected string CallbackData;
-        /* Id запроса */
-        protected string CallbackQueryId;
-
-        /* Список команд, распознаваемых ботом */
         private static readonly List<CallbackQueryCommand> List = new()
         {
             new AuthorsMenu(),
@@ -67,7 +61,22 @@ namespace CardCollector.Commands
             new ReturnFromAuction(),
             new ControlPanel(),
             new LogsMenu(),
+            new ShowSample(),
+            new StopBot(),
+            new AddForSaleSticker(),
+            new SelectForSalePack(),
+            new UploadStickerPack(),
         };
+
+        /* Данные, поступившие после нажатия на кнокпку */
+
+        protected string CallbackData;
+
+        /* Id запроса */
+
+        protected string CallbackQueryId;
+
+        /* Список команд, распознаваемых ботом */
 
         /* Метод, создающий объекты команд исходя из полученного обновления */
         public static async Task<UpdateModel> Factory(Update update)

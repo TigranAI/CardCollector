@@ -25,7 +25,9 @@ namespace CardCollector.Commands
         protected readonly string InlineQueryId;
         /* Запрос */
         protected readonly string Query;
-        
+
+        protected override string CommandText => "";
+
         /* Список команд */
         private static readonly List<InlineQueryCommand> List = new()
         {
@@ -43,6 +45,7 @@ namespace CardCollector.Commands
             // Показать стикеры в личных сообщениях с ботом для выбора или просмотра информации
             new ShowStickersInBotChat(),
             new ShowStickersInPrivate(),
+            new ShowPackStickers()
         };
 
         public override async Task PrepareAndExecute()

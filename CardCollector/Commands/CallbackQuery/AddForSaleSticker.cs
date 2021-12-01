@@ -7,14 +7,12 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class BuyAuthorPackMenu : CallbackQueryCommand
+    public class AddForSaleSticker : CallbackQueryCommand
     {
-        protected override string CommandText => Command.buy_author_pack_menu;
-        protected override bool AddToStack => true;
-        protected override bool ClearStickers => true;
-        
+        protected override string CommandText => Command.add_for_sale_sticker;
         public override async Task Execute()
         {
+            User.Session.State = UserState.LoadForSaleSticker;
             var page = int.Parse(CallbackData.Split('=')[1]);
             var packs = await PacksDao.GetAll();
             var totalCount = packs.Count;
@@ -22,12 +20,12 @@ namespace CardCollector.Commands.CallbackQuery
             if (packs.Count == 0)
                 await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.page_not_found);
             else
-                await MessageController.EditMessage(User, Messages.choose_author,
-                    Keyboard.GetPacksKeyboard(packs, Command.select_shop_pack,
+                await MessageController.EditMessage(User, Messages.select_pack,
+                    Keyboard.GetPacksKeyboard(packs, Command.select_for_sale_pack, 
                         Keyboard.GetPagePanel(page, totalCount, CommandText)));
         }
 
-        public BuyAuthorPackMenu() { }
-        public BuyAuthorPackMenu(UserEntity user, Update update) : base(user, update) { }
+        public AddForSaleSticker() { }
+        public AddForSaleSticker(UserEntity user, Update update) : base(user, update) { }
     }
 }

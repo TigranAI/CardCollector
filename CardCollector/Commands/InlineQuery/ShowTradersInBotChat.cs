@@ -10,8 +10,6 @@ namespace CardCollector.Commands.InlineQuery
 {
     public class ShowTradersInBotChat : InlineQueryCommand
     {
-        protected override string CommandText => "";
-
         public override async Task Execute()
         {
             var module = User.Session.GetModule<AuctionModule>();

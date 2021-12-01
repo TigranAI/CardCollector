@@ -4,11 +4,11 @@ using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using Telegram.Bot.Types;
 
-namespace CardCollector.Commands.Message
+namespace CardCollector.Commands.CallbackQuery
 {
-    public class DownloadStickerPack : MessageCommand
+    public class UploadStickerPack : CallbackQueryCommand
     {
-        protected override string CommandText => Text.download_stickerpack;
+        protected override string CommandText => Command.upload_stickerpack;
         protected override bool ClearMenu => true;
         protected override bool AddToStack => true;
 
@@ -22,8 +22,8 @@ namespace CardCollector.Commands.Message
             return base.IsMatches(user, update) && user.PrivilegeLevel >= PrivilegeLevel.Artist;
         }
 
-        public DownloadStickerPack() { }
-        public DownloadStickerPack(UserEntity user, Update update) : base(user, update) 
+        public UploadStickerPack() { }
+        public UploadStickerPack(UserEntity user, Update update) : base(user, update) 
         {
             User.Session.State = UserState.UploadSticker;
         }

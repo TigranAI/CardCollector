@@ -5,14 +5,14 @@ using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;
 
-namespace CardCollector.Commands.Message
+namespace CardCollector.Commands.CallbackQuery
 {
     /* Этот класс можно использовать для тестирования или наброски эскизов
      Команда "Показать пример" доступна только пользователям с уровнем доступа "Разработчик" и выше
      PrivilegeLevel = 7 */
-    public class ShowSample : MessageCommand
+    public class ShowSample : CallbackQueryCommand
     {
-        protected override string CommandText => Text.show_sample;
+        protected override string CommandText => Command.show_sample;
 
         public override async Task Execute()
         {
@@ -32,8 +32,8 @@ namespace CardCollector.Commands.Message
         {
             return base.IsMatches(user, update) && user.PrivilegeLevel >= PrivilegeLevel.Programmer;
         }
-        
-        public ShowSample(UserEntity user, Update update) : base(user, update) { }
+
         public ShowSample() { }
+        public ShowSample(UserEntity user, Update update) : base(user, update) { }
     }
 }

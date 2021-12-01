@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Commands.ChosenInlineResult;
+using CardCollector.Commands.Message;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
 using Telegram.Bot.Types;
+using GiveExp = CardCollector.Commands.ChosenInlineResult.GiveExp;
 
 namespace CardCollector.Commands
 {
@@ -41,8 +43,8 @@ namespace CardCollector.Commands
             // Обработка результата при выборе продавца
             new SelectTrader(),
             new StickerInfo(),
-            
-            new SelectStickerInline(),
+            new SelectSticker(),
+            new SelectForSaleSticker(),
         };
 
         /* Метод, создающий объекты команд исходя из полученного обновления */

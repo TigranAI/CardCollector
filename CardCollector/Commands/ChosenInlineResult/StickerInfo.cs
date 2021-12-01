@@ -15,7 +15,10 @@ namespace CardCollector.Commands.ChosenInlineResult
         {
             var hash = InlineResult.Split('=')[1];
             var sticker = await StickerDao.GetByHash(hash);
-            await MessageController.SendSticker(User, sticker.Id);
+            var stickerId = User.Session.State is UserState.AuctionMenu or UserState.ShopMenu
+                ? sticker.IdWithWatermark
+                : sticker.Id;
+            await MessageController.SendSticker(User, stickerId);
             await MessageController.EditMessage(User, sticker.ToString(), Keyboard.StickerInfoKeyboard);
         }
 

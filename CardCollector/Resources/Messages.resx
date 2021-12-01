@@ -351,4 +351,19 @@ https://telegra.ph/help-11-04-4</value>
     <data name="first_reward" xml:space="preserve">
         <value>Спасибо за регистрацию! Вы получили 7 паков, используйте эту кнопку, чтобы открыть их.</value>
     </data>
+    <data name="select_pack" xml:space="preserve">
+        <value>Выберите пак:</value>
+    </data>
+    <data name="choose_sticker" xml:space="preserve">
+        <value>Выберите стикер:</value>
+    </data>
+    <data name="upload_file_with_watermark" xml:space="preserve">
+        <value>Загрузите файл с вотермаркой для этого стикера:</value>
+    </data>
+    <data name="add_watermark_success" xml:space="preserve">
+        <value>Стикер с вотеркой добавлен успешно!</value>
+    </data>
+    <data name="thanks_for_buying_sticker" xml:space="preserve">
+        <value>{0}: спасибо, что купил у меня стикер!</value>
+    </data>
 </root>

@@ -32,7 +32,7 @@ namespace CardCollector
 
         private static readonly IEnumerable<BotCommand> _commands = new[]
         {
-            new BotCommand {Command = Text.start, Description = "Запуск бота"},
+            /*new BotCommand {Command = Text.start, Description = "Запуск бота"},*/
             new BotCommand {Command = Text.menu, Description = "Показать меню"},
             new BotCommand {Command = Text.help, Description = "Показать информацию"},
             /*new BotCommand {Command = "/error", Description = "Сообщить об ошибке"},*/

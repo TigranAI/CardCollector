@@ -61,6 +61,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Стикер с вотеркой добавлен успешно!.
+        /// </summary>
+        internal static string add_watermark_success {
+            get {
+                return ResourceManager.GetString("add_watermark_success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 🔔&lt;b&gt;Уведомления&lt;/b&gt;🔔.
         /// </summary>
         internal static string alerts {
@@ -212,6 +221,15 @@ namespace CardCollector.Resources {
         internal static string choose_sort {
             get {
                 return ResourceManager.GetString("choose_sort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выберите стикер:.
+        /// </summary>
+        internal static string choose_sticker {
+            get {
+                return ResourceManager.GetString("choose_sticker", resourceCulture);
             }
         }
         
@@ -729,6 +747,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выберите пак:.
+        /// </summary>
+        internal static string select_pack {
+            get {
+                return ResourceManager.GetString("select_pack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to за отправку стикера в беседу..
         /// </summary>
         internal static string send_sticker {
@@ -834,6 +861,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}: спасибо, что купил у меня стикер!.
+        /// </summary>
+        internal static string thanks_for_buying_sticker {
+            get {
+                return ResourceManager.GetString("thanks_for_buying_sticker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Тир.
         /// </summary>
         internal static string tier {
@@ -857,6 +893,15 @@ namespace CardCollector.Resources {
         internal static string unexpected_exception {
             get {
                 return ResourceManager.GetString("unexpected_exception", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Загрузите файл с вотермаркой для этого стикера:.
+        /// </summary>
+        internal static string upload_file_with_watermark {
+            get {
+                return ResourceManager.GetString("upload_file_with_watermark", resourceCulture);
             }
         }
         

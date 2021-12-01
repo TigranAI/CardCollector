@@ -30,7 +30,7 @@ namespace CardCollector.Commands.Message
                 $"\n{Messages.level}: {User.CurrentLevel.Level}" +
                 $"\n{Messages.current_exp}: {User.CurrentLevel.CurrentExp} / {expGoal}" +
                 $"\n{Messages.cash_capacity}: {User.Cash.MaxCapacity}{Text.coin}",
-                Keyboard.GetProfileKeyboard(User.PrivilegeLevel, packsCount, income));
+                Keyboard.GetProfileKeyboard(packsCount, income));
         }
         
         public Profile() { }

@@ -17,7 +17,11 @@ namespace CardCollector.Commands.CallbackQuery
             EnterGemsPrice.RemoveFromQueue(User.Id);
             if (User.Session.TryGetPreviousMenu(out var menu))
                 await menu.BackToThis(User.Session);
-            else await User.Session.EndSession();
+            else
+            {
+                await User.Session.EndSession();
+                await new Menu(User, Update).Execute();
+            }
         }
         
         public Back() { }

@@ -1,5 +1,4 @@
-﻿#nullable enable
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
@@ -11,14 +10,14 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.InlineQuery
 {
-    public class ShowStickersInShopPack : InlineQueryCommand
+    public class ShowPackStickers : InlineQueryCommand
     {
         public override async Task Execute()
         {
-            var packId = User.Session.GetModule<ShopModule>().SelectedPack.Id;
+            var packId = User.Session.GetModule<AdminModule>().SelectedPack.Id;
             var stickers = await StickerDao.GetListWhere(item => item.PackId == packId && item.Contains(Query));
             stickers.Sort(new TierComparer());
-            await MessageController.AnswerInlineQuery(InlineQueryId, stickers.ToTelegramResults(Command.sticker_info));
+            await MessageController.AnswerInlineQuery(InlineQueryId, stickers.ToTelegramResults(Command.select_for_sale_sticker));
         }
 
         private class TierComparer : IComparer<StickerEntity>
@@ -31,14 +30,13 @@ namespace CardCollector.Commands.InlineQuery
 
         protected internal override bool IsMatches(UserEntity user, Update update)
         {
-            var shopModule = user.Session.GetModule<ShopModule>();
-            return user.Session.State == UserState.ShopMenu &&
+            var adminModule = user.Session.GetModule<AdminModule>();
+            return user.Session.State == UserState.LoadForSaleSticker &&
                    update.InlineQuery?.ChatType is ChatType.Sender && 
-                   shopModule.SelectedPack != null && 
-                   shopModule.SelectedPack.Id != 1;
+                   adminModule.SelectedPack != null;
         }
 
-        public ShowStickersInShopPack() { }
-        public ShowStickersInShopPack(UserEntity user, Update update) : base(user, update) { }
+        public ShowPackStickers() { }
+        public ShowPackStickers(UserEntity user, Update update) : base(user, update) { }
     }
 }

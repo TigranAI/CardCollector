@@ -55,7 +55,7 @@
         <value>Аукцион</value>
     </data>
     <data name="show_sample" xml:space="preserve">
-        <value>Пример</value>
+        <value>Показать пример</value>
     </data>
     <data name="start" xml:space="preserve">
         <value>/start</value>
@@ -72,7 +72,7 @@
     <data name="no" xml:space="preserve">
         <value>Нет</value>
     </data>
-    <data name="download_stickerpack" xml:space="preserve">
+    <data name="upload_stickerpack" xml:space="preserve">
         <value>Загрузить стикерпак</value>
     </data>
     <data name="star" xml:space="preserve">
@@ -311,5 +311,11 @@
     </data>
     <data name="arrow_right" xml:space="preserve">
         <value>▶</value>
+    </data>
+    <data name="add_for_sale_sticker" xml:space="preserve">
+        <value>Добавить стикер с вотеркой</value>
+    </data>
+    <data name="trader" xml:space="preserve">
+        <value>Продавец</value>
     </data>
 </root>

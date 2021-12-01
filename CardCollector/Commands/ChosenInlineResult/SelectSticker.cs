@@ -8,7 +8,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.ChosenInlineResult
 {
-    public class SelectStickerInline : ChosenInlineResultCommand
+    public class SelectSticker : ChosenInlineResultCommand
     {
         protected override string CommandText => Command.select_sticker;
 
@@ -39,7 +39,10 @@ namespace CardCollector.Commands.ChosenInlineResult
                     User.Session.GetModule<DefaultModule>().SelectedSticker = sticker;
                     break;
             }
-            await MessageController.SendSticker(User, sticker.Id);
+            var stickerId = User.Session.State is UserState.AuctionMenu or UserState.ShopMenu
+                ? sticker.IdWithWatermark
+                : sticker.Id;
+            await MessageController.SendSticker(User, stickerId);
             await MessageController.EditMessage(User, sticker.ToString(stickerCount), Keyboard.GetStickerKeyboard(User.Session));
             if (User.Session.State == UserState.AuctionMenu) User.Session.State = UserState.ProductMenu;
         }
@@ -50,7 +53,7 @@ namespace CardCollector.Commands.ChosenInlineResult
                    user.Session.State is UserState.CollectionMenu or UserState.AuctionMenu or UserState.CombineMenu or UserState.Default;
         }
 
-        public SelectStickerInline() { }
-        public SelectStickerInline(UserEntity user, Update update) : base(user, update) { }
+        public SelectSticker() { }
+        public SelectSticker(UserEntity user, Update update) : base(user, update) { }
     }
 }

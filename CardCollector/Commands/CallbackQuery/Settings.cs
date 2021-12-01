@@ -14,7 +14,8 @@ namespace CardCollector.Commands.CallbackQuery
 
         public override async Task Execute()
         {
-            await MessageController.EditMessage(User, Messages.settings, Keyboard.Settings, ParseMode.Html);
+            await MessageController.EditMessage(User, Messages.settings,
+                Keyboard.Settings(User.PrivilegeLevel), ParseMode.Html);
         }
 
         public Settings() { }

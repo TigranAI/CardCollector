@@ -26,7 +26,9 @@ namespace CardCollector.Commands.CallbackQuery
             if (packId != 1)
             {
                 var stickers = await StickerDao.GetListWhere(item => item.PackId == packId);
-                stickerId = stickers[Utilities.rnd.Next(stickers.Count)].Id;
+                stickerId = User.Session.State is UserState.AuctionMenu or UserState.ShopMenu
+                    ? stickers[Utilities.rnd.Next(stickers.Count)].IdWithWatermark
+                    : stickers[Utilities.rnd.Next(stickers.Count)].Id;
             }
             await MessageController.SendSticker(User, stickerId, Keyboard.OfferKeyboard(module));
         }

@@ -70,6 +70,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Добавить стикер с вотеркой.
+        /// </summary>
+        internal static string add_for_sale_sticker {
+            get {
+                return ResourceManager.GetString("add_for_sale_sticker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Добавить стикер.
         /// </summary>
         internal static string add_sticker {
@@ -363,15 +372,6 @@ namespace CardCollector.Resources {
         internal static string discount {
             get {
                 return ResourceManager.GetString("discount", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Загрузить стикерпак.
-        /// </summary>
-        internal static string download_stickerpack {
-            get {
-                return ResourceManager.GetString("download_stickerpack", resourceCulture);
             }
         }
         
@@ -781,7 +781,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Пример.
+        ///   Looks up a localized string similar to Показать пример.
         /// </summary>
         internal static string show_sample {
             get {
@@ -925,11 +925,29 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Продавец.
+        /// </summary>
+        internal static string trader {
+            get {
+                return ResourceManager.GetString("trader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Бессрочно.
         /// </summary>
         internal static string unexpired {
             get {
                 return ResourceManager.GetString("unexpired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Загрузить стикерпак.
+        /// </summary>
+        internal static string upload_stickerpack {
+            get {
+                return ResourceManager.GetString("upload_stickerpack", resourceCulture);
             }
         }
         
