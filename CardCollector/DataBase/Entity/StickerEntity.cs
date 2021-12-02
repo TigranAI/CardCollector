@@ -87,7 +87,7 @@ namespace CardCollector.DataBase.Entity
                 : true;
         }
 
-        public async Task ApplyEffect(UserEntity user, UserStickerRelationEntity relation)
+        public async Task ApplyEffect(UserEntity user, UserStickerRelation relation)
         {
             switch ((Effect)Effect)
             {

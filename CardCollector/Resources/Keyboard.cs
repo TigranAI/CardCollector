@@ -686,5 +686,15 @@ namespace CardCollector.Resources
                 InlineKeyboardButton.WithCallbackData(Text.arrow_right, $"{Command.logs_menu}={date.AddDays(-1)}"),
             });
         }
+
+        public static InlineKeyboardMarkup GetTopButton(TopBy topBy)
+        {
+            return new InlineKeyboardMarkup(new[]
+            {
+                InlineKeyboardButton.WithCallbackData(
+                    TopByTexts.ResourceManager.GetString(((int) topBy).ToString()) ?? string.Empty,
+                    $"{Command.show_top_by}={(int) topBy}")
+            });
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace CardCollector.StickerEffects
     {
         public static int Interval = 3;
 
-        public static async Task<int> GetStickersCount(Dictionary<string, UserStickerRelationEntity> stickers)
+        public static async Task<int> GetStickersCount(Dictionary<string, UserStickerRelation> stickers)
         {
             var today = DateTime.Today.ToString(CultureInfo.CurrentCulture);
             var stickersWithEffect = (await StickerDao.GetListWhere(

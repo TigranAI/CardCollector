@@ -66,6 +66,7 @@ namespace CardCollector.Commands
             new AddForSaleSticker(),
             new SelectForSalePack(),
             new UploadStickerPack(),
+            new ShowTopBy(),
         };
 
         /* Данные, поступившие после нажатия на кнокпку */

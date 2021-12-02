@@ -34,7 +34,7 @@ namespace CardCollector.DataBase
         /* Таблицы базы данных, представленные Entity объектами */
         public DbSet<UserEntity> Users { get; set; }
         public DbSet<CashEntity> Cash { get; set; }
-        public DbSet<UserStickerRelationEntity> UserStickerRelations { get; set; }
+        public DbSet<UserStickerRelation> UserStickerRelations { get; set; }
         public DbSet<StickerEntity> Stickers { get; set; }
         public DbSet<AuctionEntity> Auction { get; set; }
         public DbSet<ShopEntity> Shop { get; set; }

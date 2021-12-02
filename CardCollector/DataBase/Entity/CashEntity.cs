@@ -27,14 +27,14 @@ namespace CardCollector.DataBase.Entity
         
         [NotMapped] private DateTime LastPayout = DateTime.Now;
         
-        public async Task<int> CalculateIncome(Dictionary<string, UserStickerRelationEntity> stickers)
+        public async Task<int> CalculateIncome(Dictionary<string, UserStickerRelation> stickers)
         {
             LastPayout = DateTime.Now;
             var result = await stickers.Values.SumAsync(async sticker => await Payout(sticker));
             return result > MaxCapacity ? MaxCapacity : result;
         }
         
-        public async Task<int> Payout(Dictionary<string, UserStickerRelationEntity> stickers)
+        public async Task<int> Payout(Dictionary<string, UserStickerRelation> stickers)
         {
             var result = await stickers.Values.SumAsync(async sticker => await Payout(sticker, true));
             result = result > MaxCapacity ? MaxCapacity : result;
@@ -42,7 +42,7 @@ namespace CardCollector.DataBase.Entity
             return result;
         }
         
-        private async Task<int> Payout(UserStickerRelationEntity relation, bool updatePayout = false)
+        private async Task<int> Payout(UserStickerRelation relation, bool updatePayout = false)
         {
             var stickerInfo = await StickerDao.GetById(relation.StickerId);
             var payoutInterval = LastPayout - relation.Payout;

@@ -318,4 +318,7 @@
     <data name="trader" xml:space="preserve">
         <value>Продавец</value>
     </data>
+    <data name="stickers" xml:space="preserve">
+        <value>Стикеров</value>
+    </data>
 </root>

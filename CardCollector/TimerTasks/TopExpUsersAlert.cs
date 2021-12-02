@@ -10,13 +10,16 @@ namespace CardCollector.TimerTasks
 {
     public class TopExpUsersAlert : TimerTask
     {
-        protected override TimeSpan RunAt => Constants.DEBUG ? new TimeSpan(13, 41, 20) : new TimeSpan(10, 30, 0);
+        protected override TimeSpan RunAt => Constants.DEBUG 
+            ? new TimeSpan(DateTime.Now.TimeOfDay.Hours, DateTime.Now.TimeOfDay.Minutes + 1, 0)
+            : new TimeSpan(10, 30, 0);
         
         protected override async void TimerCallback(object o, ElapsedEventArgs e)
         {
             var usersExp = await UserLevelDao.GetTop(5);
             var users = await UserDao.GetAllWhere(item => !item.IsBlocked);
             var settings = await SettingsDao.GetAll();
+            var messages = await UserMessagesDao.GetAll();
             var message = Messages.users_top_exp;
             foreach (var (userLevel, index) in usersExp.WithIndex())
             {
@@ -27,10 +30,14 @@ namespace CardCollector.TimerTasks
             {
                 try {
                     if (settings[user.Id][UserSettingsEnum.DailyExpTop])
-                        await MessageController.SendMessage(user, message, parseMode: ParseMode.Html, addToList: false);
+                        messages[user.Id].TopUsersId = 
+                            await MessageController.DeleteAndSend(user, messages[user.Id].TopUsersId,
+                                message, Keyboard.GetTopButton(TopBy.Tier4Stickers), ParseMode.Html);
                 }
                 catch {
-                    await MessageController.SendMessage(user, message, parseMode: ParseMode.Html, addToList: false);
+                    messages[user.Id].TopUsersId = 
+                        await MessageController.DeleteAndSend(user, messages[user.Id].TopUsersId,
+                            message, Keyboard.GetTopButton(TopBy.Tier4Stickers), ParseMode.Html);
                 }
             }
         }

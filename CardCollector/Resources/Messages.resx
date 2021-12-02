@@ -366,4 +366,7 @@ https://telegra.ph/help-11-04-4</value>
     <data name="thanks_for_buying_sticker" xml:space="preserve">
         <value>{0}: спасибо, что купил у меня стикер!</value>
     </data>
+    <data name="users_top_tier_4_stickers_count" xml:space="preserve">
+        <value>⭐&lt;b&gt;Топ пользователей по количеству 4⭐ стикеров&lt;/b&gt;⭐</value>
+    </data>
 </root>

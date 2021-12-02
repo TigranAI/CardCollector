@@ -957,6 +957,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ⭐&lt;b&gt;Топ пользователей по количеству 4⭐ стикеров&lt;/b&gt;⭐.
+        /// </summary>
+        internal static string users_top_tier_4_stickers_count {
+            get {
+                return ResourceManager.GetString("users_top_tier_4_stickers_count", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Вы уже воспользовались данным предложением!.
         /// </summary>
         internal static string you_already_use_this_offer {

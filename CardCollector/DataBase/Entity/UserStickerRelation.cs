@@ -6,7 +6,7 @@ namespace CardCollector.DataBase.Entity
 {
     /* Явялется расширенной связью многий ко многим между таблицами пользователей и стикеров */
     [Table("user_to_stickers_relations")]
-    public class UserStickerRelationEntity
+    public class UserStickerRelation
     {
         /* Id записи в таблице, роли не играет */
         [Column("id"), MaxLength(127)] public long Id { get; set; }

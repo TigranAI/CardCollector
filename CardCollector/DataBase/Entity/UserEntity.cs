@@ -45,7 +45,7 @@ namespace CardCollector.DataBase.Entity
         [NotMapped] public UserSettings Settings { get; set; }
         
         /* Стикеры пользователя */
-        [NotMapped] public Dictionary<string, UserStickerRelationEntity> Stickers { get; set; }
+        [NotMapped] public Dictionary<string, UserStickerRelation> Stickers { get; set; }
         [NotMapped] public UserMessages MessagesId { get; set; }
 
         /* Данные, хранящиеся в рамках одной сессии */

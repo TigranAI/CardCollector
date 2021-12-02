@@ -21,7 +21,8 @@ namespace CardCollector.DailyTasks.CustomTasks
             if (task.Progress == 0) return false;
             task.Progress--;
             if (user.Settings[UserSettingsEnum.DailyTaskProgress])
-                await MessageController.EditMessage(user,
+                user.MessagesId.DailyTaskProgressId = 
+                await MessageController.DeleteAndSend(user, user.MessagesId.DailyTaskProgressId,
                     $"{Messages.send_sticker_progress}: {Goal - task.Progress} / {Goal}");
             if (task.Progress == 0)
             {

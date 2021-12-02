@@ -10,13 +10,14 @@ namespace CardCollector.TimerTasks
     public class PiggyBankAlert : TimerTask
     {
         protected override TimeSpan RunAt => Constants.DEBUG
-                ? new TimeSpan(DateTime.Now.TimeOfDay.Hours, DateTime.Now.TimeOfDay.Minutes + 10, 0)
+                ? new TimeSpan(DateTime.Now.TimeOfDay.Hours, DateTime.Now.TimeOfDay.Minutes + 1, 0)
                 : new TimeSpan((DateTime.Now.TimeOfDay.Hours / 4 + 1) * 4, 0, 0);
         
         protected override async void TimerCallback(object o, ElapsedEventArgs e)
         {
             var users = await UserDao.GetAllWhere(user => !user.IsBlocked);
             var settings = await SettingsDao.GetAll();
+            var messages = await UserMessagesDao.GetAll();
             foreach (var user in users)
             {
                 var cash = await CashDao.GetById(user.Id);
@@ -24,12 +25,14 @@ namespace CardCollector.TimerTasks
                 var income = await cash.CalculateIncome(stickers);
                 try {
                     if (settings[user.Id][UserSettingsEnum.PiggyBankCapacity])
-                        await MessageController.SendMessage(user, 
-                            $"{Messages.uncollected_income}: {income} / {cash.MaxCapacity} {Text.coin}", addToList: false);
+                        messages[user.Id].CollectIncomeId = 
+                        await MessageController.DeleteAndSend(user, messages[user.Id].CollectIncomeId,
+                            $"{Messages.uncollected_income}: {income} / {cash.MaxCapacity} {Text.coin}");
                 }
                 catch {
-                    await MessageController.SendMessage(user, 
-                        $"{Messages.uncollected_income}: {income} / {cash.MaxCapacity} {Text.coin}", addToList: false);
+                    messages[user.Id].CollectIncomeId = 
+                        await MessageController.DeleteAndSend(user, messages[user.Id].CollectIncomeId,
+                            $"{Messages.uncollected_income}: {income} / {cash.MaxCapacity} {Text.coin}");
                 }
             }
         }

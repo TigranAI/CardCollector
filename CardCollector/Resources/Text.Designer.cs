@@ -862,6 +862,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Стикеров.
+        /// </summary>
+        internal static string stickers {
+            get {
+                return ResourceManager.GetString("stickers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Остановить.
         /// </summary>
         internal static string stop_bot {

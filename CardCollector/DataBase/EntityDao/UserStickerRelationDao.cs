@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
@@ -12,20 +13,20 @@ namespace CardCollector.DataBase.EntityDao
     public static class UserStickerRelationDao
     {
         public static BotDatabase Instance;
-        public static DbSet<UserStickerRelationEntity> Table;
+        public static DbSet<UserStickerRelation> Table;
 
         static UserStickerRelationDao()
         {
             Instance = BotDatabase.GetClassInstance(typeof(UserStickerRelationDao));
             Table = Instance.UserStickerRelations;
         }
-        
+
         /* Возвращает словарь стикеров по Id пользователя */
-        public static async Task<Dictionary<string, UserStickerRelationEntity>> GetListById(long userId)
+        public static async Task<Dictionary<string, UserStickerRelation>> GetListById(long userId)
         {
             try
             {
-                return await Table.Where(i => i.UserId == userId).ToDictionaryAsync(p=> p.ShortHash, p=> p);
+                return await Table.Where(i => i.UserId == userId).ToDictionaryAsync(p => p.ShortHash, p => p);
             }
             catch (InvalidOperationException)
             {
@@ -35,7 +36,7 @@ namespace CardCollector.DataBase.EntityDao
         }
 
         /* Добавляет новое отношение в таблицу */
-        public static async Task<UserStickerRelationEntity> AddSticker(UserEntity user, StickerEntity sticker, int count = 1)
+        public static async Task<UserStickerRelation> AddSticker(UserEntity user, StickerEntity sticker, int count = 1)
         {
             try
             {
@@ -44,7 +45,8 @@ namespace CardCollector.DataBase.EntityDao
                     user.Stickers[sticker.Md5Hash].Count += count;
                     return user.Stickers[sticker.Md5Hash];
                 }
-                var relation = new UserStickerRelationEntity
+
+                var relation = new UserStickerRelation
                 {
                     UserId = user.Id,
                     StickerId = sticker.Id,
@@ -61,6 +63,20 @@ namespace CardCollector.DataBase.EntityDao
             {
                 Thread.Sleep(Utilities.rnd.Next(30));
                 return await AddSticker(user, sticker, count);
+            }
+        }
+
+        public static async Task<List<UserStickerRelation>> GetListWhere(
+            Expression<Func<UserStickerRelation, bool>> predicate)
+        {
+            try
+            {
+                return await Table.Where(predicate).ToListAsync();
+            }
+            catch (InvalidOperationException)
+            {
+                Thread.Sleep(Utilities.rnd.Next(30));
+                return await GetListWhere(predicate);
             }
         }
     }

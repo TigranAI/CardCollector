@@ -183,4 +183,7 @@
     <data name="upload_stickerpack" xml:space="preserve">
         <value>ACH</value>
     </data>
+    <data name="show_top_by" xml:space="preserve">
+        <value>ACI</value>
+    </data>
 </root>

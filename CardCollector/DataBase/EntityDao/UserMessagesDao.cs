@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
@@ -16,14 +17,17 @@ namespace CardCollector.DataBase.EntityDao
             Instance = BotDatabase.GetClassInstance(typeof(UserLevelDao));
             Table = Instance.UserMessages;
         }
-        
+
         /* Получение объекта по Id */
         public static async Task<UserMessages> GetById(long userId)
         {
-            try {
+            try
+            {
                 var user = await Table.FirstOrDefaultAsync(item => item.UserId == userId);
                 return user ?? await AddNew(userId);
-            } catch (InvalidOperationException) {
+            }
+            catch (InvalidOperationException)
+            {
                 Thread.Sleep(Utilities.rnd.Next(30));
                 return await GetById(userId);
             }
@@ -32,13 +36,29 @@ namespace CardCollector.DataBase.EntityDao
         /* Добавление нового объекта в систему */
         private static async Task<UserMessages> AddNew(long userId)
         {
-            try {
-                var userLevel = new UserMessages { UserId = userId };
+            try
+            {
+                var userLevel = new UserMessages {UserId = userId};
                 var result = await Table.AddAsync(userLevel);
                 return result.Entity;
-            } catch (InvalidOperationException) {
+            }
+            catch (InvalidOperationException)
+            {
                 Thread.Sleep(Utilities.rnd.Next(30));
                 return await AddNew(userId);
+            }
+        }
+
+        public static async Task<Dictionary<long, UserMessages>> GetAll()
+        {
+            try
+            {
+                return await Table.ToDictionaryAsync(um => um.UserId, um => um);
+            }
+            catch (InvalidOperationException)
+            {
+                Thread.Sleep(Utilities.rnd.Next(30));
+                return await GetAll();
             }
         }
     }

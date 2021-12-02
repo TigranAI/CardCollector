@@ -17,11 +17,18 @@ namespace CardCollector.Commands.ChosenInlineResult
             if (await dailyTask.Execute(User))
             {
                 await dailyTask.GiveReward(User);
-                await MessageController.EditMessage(User, Messages.pack_prize, Keyboard.MyPacks);
+                User.MessagesId.DailyTaskProgressId =
+                    await MessageController.DeleteAndSend(User, User.MessagesId.DailyTaskProgressId,
+                        Messages.pack_prize, Keyboard.MyPacks);
             }
         }
 
-        public SendPrivateSticker() { }
-        public SendPrivateSticker(UserEntity user, Update update) : base(user, update) { }
+        public SendPrivateSticker()
+        {
+        }
+
+        public SendPrivateSticker(UserEntity user, Update update) : base(user, update)
+        {
+        }
     }
 }

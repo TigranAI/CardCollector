@@ -493,6 +493,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ACI.
+        /// </summary>
+        internal static string show_top_by {
+            get {
+                return ResourceManager.GetString("show_top_by", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ABA.
         /// </summary>
         internal static string sort {

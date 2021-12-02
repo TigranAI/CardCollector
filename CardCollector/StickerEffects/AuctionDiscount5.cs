@@ -7,7 +7,7 @@ namespace CardCollector.StickerEffects
 {
     public static class AuctionDiscount5
     {
-        public static async Task<bool> IsApplied(Dictionary<string, UserStickerRelationEntity> stickers)
+        public static async Task<bool> IsApplied(Dictionary<string, UserStickerRelation> stickers)
         {
             return await stickers.AnyAsync(async item =>
             {
