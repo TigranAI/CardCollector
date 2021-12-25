@@ -40,6 +40,7 @@ namespace CardCollector.DataBase.EntityDao
             {
                 var userLevel = new UserMessages {UserId = userId};
                 var result = await Table.AddAsync(userLevel);
+                await Instance.SaveChangesAsync();
                 return result.Entity;
             }
             catch (InvalidOperationException)
@@ -55,7 +56,7 @@ namespace CardCollector.DataBase.EntityDao
             {
                 return await Table.ToDictionaryAsync(um => um.UserId, um => um);
             }
-            catch (InvalidOperationException)
+            catch (Exception)
             {
                 Thread.Sleep(Utilities.rnd.Next(30));
                 return await GetAll();

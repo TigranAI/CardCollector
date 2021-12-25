@@ -211,7 +211,7 @@
         <value>Информация</value>
     </data>
     <data name="gems_title" xml:space="preserve">
-        <value>{0}💎 за ${1}</value>
+        <value>{0}💎 за ₽{1}</value>
     </data>
     <data name="gems_description" xml:space="preserve">
         <value>После покупки вы получите {0} алмазов на свой счет.</value>
@@ -320,5 +320,8 @@
     </data>
     <data name="stickers" xml:space="preserve">
         <value>Стикеров</value>
+    </data>
+    <data name="confirm_login" xml:space="preserve">
+        <value>Подтвердить вход</value>
     </data>
 </root>

@@ -9,7 +9,6 @@ namespace CardCollector.Commands.CallbackQuery
     public class UploadStickerPack : CallbackQueryCommand
     {
         protected override string CommandText => Command.upload_stickerpack;
-        protected override bool ClearMenu => true;
         protected override bool AddToStack => true;
 
         public override async Task Execute()

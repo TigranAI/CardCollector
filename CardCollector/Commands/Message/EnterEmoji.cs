@@ -13,9 +13,6 @@ namespace CardCollector.Commands.Message
     public class EnterEmoji : MessageCommand
     {
         protected override string CommandText => "";
-
-        private const string oneEmojiPattern =
-            "^\\u00a9$|^\\u00ae$|^[\\u2000-\\u3300]$|^\\ud83c[\\ud000-\\udfff]$|^\\ud83d[\\ud000-\\udfff]$|^\\ud83e[\\ud000-\\udfff]$";
         private const string onlyEmojiPattern =
             "\\u00a9|\\u00ae|[\\u2000-\\u3300]|\\ud83c[\\ud000-\\udfff]|\\ud83d[\\ud000-\\udfff]|\\ud83e[\\ud000-\\udfff]";
         
@@ -26,10 +23,6 @@ namespace CardCollector.Commands.Message
             /* если пользователь ввел что-то кроме эмодзи */
             if (!Regex.IsMatch(input!, onlyEmojiPattern))
                 await MessageController.EditMessage(User, Messages.please_enter_emoji, Keyboard.EmojiOptions);
-            /* если пользователь ввел несколько эмодзи или эмодзи и текст */
-            else if (!Regex.IsMatch(input, oneEmojiPattern))
-                await MessageController.EditMessage(User, Messages.enter_only_one_emoji,
-                    Keyboard.EmojiOptions);
             else
             {
                 var filtersModule = User.Session.GetModule<FiltersModule>();

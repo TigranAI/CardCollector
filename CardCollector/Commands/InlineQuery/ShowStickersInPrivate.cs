@@ -13,7 +13,7 @@ namespace CardCollector.Commands.InlineQuery
         {
             // Получаем список стикеров
             var stickersList = await User.GetStickersList(Query);
-            var results = stickersList.ToTelegramResults(Command.send_private_sticker, false);
+            var results = stickersList.ToTelegramResults(Command.send_private_sticker, asMessage:false);
             // Посылаем пользователю ответ на его запрос
             await MessageController.AnswerInlineQuery(InlineQueryId, results);
         }

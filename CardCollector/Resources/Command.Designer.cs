@@ -205,6 +205,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ACJ.
+        /// </summary>
+        internal static string confirm_login {
+            get {
+                return ResourceManager.GetString("confirm_login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AAM.
         /// </summary>
         internal static string confirm_selling {

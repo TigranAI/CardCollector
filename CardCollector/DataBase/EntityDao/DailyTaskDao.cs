@@ -47,7 +47,7 @@ namespace CardCollector.DataBase.EntityDao
                     Progress = DailyTask.List[(DailyTaskKeys) taskId].Goal
                 };
                 var result = await Table.AddAsync(newTask);
-                await BotDatabase.SaveData();
+                await Instance.SaveChangesAsync();
                 return result.Entity;
             }
             catch (InvalidOperationException)

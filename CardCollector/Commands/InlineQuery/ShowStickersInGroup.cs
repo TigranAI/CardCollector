@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
@@ -14,9 +15,11 @@ namespace CardCollector.Commands.InlineQuery
         {
             // Получаем список стикеров
             var stickersList = await User.GetStickersList(Query);
-            var results = stickersList.ToTelegramResults(Command.give_exp, false);
+            var offset = int.Parse(Update.InlineQuery.Offset == "" ? "0" : Update.InlineQuery.Offset);
+            var newOffset = offset + 50 > stickersList.Count() ? "" : (offset + 50).ToString();
+            var results = stickersList.ToTelegramResults(Command.give_exp, offset, false);
             // Посылаем пользователю ответ на его запрос
-            await MessageController.AnswerInlineQuery(InlineQueryId, results);
+            await MessageController.AnswerInlineQuery(InlineQueryId, results, newOffset);
         }
         
         protected internal override bool IsMatches(UserEntity user, Update update)

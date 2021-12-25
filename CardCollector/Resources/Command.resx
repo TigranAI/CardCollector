@@ -186,4 +186,7 @@
     <data name="show_top_by" xml:space="preserve">
         <value>ACI</value>
     </data>
+    <data name="confirm_login" xml:space="preserve">
+        <value>ACJ</value>
+    </data>
 </root>

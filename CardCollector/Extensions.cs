@@ -14,9 +14,19 @@ namespace CardCollector
     {
         /* Преобразует список стикеров в список результатов для телеграм */
         public static IEnumerable<InlineQueryResult> ToTelegramResults
-            (this IEnumerable<StickerEntity> list, string command, bool asMessage = true)
+            (this IEnumerable<StickerEntity> list, string command, int offset = 0, bool asMessage = true)
         {
             var result = new List<InlineQueryResult>();
+            foreach (var sticker in list.Skip(offset).Take(50))
+            {
+                result.Add( asMessage 
+                    ? new InlineQueryResultCachedSticker($"{(Constants.UNLIMITED_ALL_STICKERS ? Command.unlimited_stickers : "")}" +
+                                                         $"{command}={sticker.Md5Hash}={Utilities.rnd.Next(500)}", sticker.Id) 
+                        {InputMessageContent = new InputTextMessageContent(Text.select)}
+                    : new InlineQueryResultCachedSticker($"{(Constants.UNLIMITED_ALL_STICKERS ? Command.unlimited_stickers : "")}" +
+                                                         $"{command}={sticker.Md5Hash}={Utilities.rnd.Next(500)}", sticker.Id));
+            }
+            /*
             foreach (var item in list)
             {
                 result.Add( asMessage 
@@ -25,9 +35,9 @@ namespace CardCollector
                                                         {InputMessageContent = new InputTextMessageContent(Text.select)}
                     : new InlineQueryResultCachedSticker($"{(Constants.UNLIMITED_ALL_STICKERS ? Command.unlimited_stickers : "")}" +
                                                          $"{command}={item.Md5Hash}", item.Id));
-                /* Ограничение Telegram API по количеству результатов в 50 шт. */
+                /* Ограничение Telegram API по количеству результатов в 50 шт. #1#
                 if (result.Count > 49) return result;
-            }
+            }*/
             return result;
         }
         /* Преобразует список продавцов в список результатов для телеграм */

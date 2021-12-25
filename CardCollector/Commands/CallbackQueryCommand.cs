@@ -43,6 +43,7 @@ namespace CardCollector.Commands
             new SelectEmoji(),
             new MyPacks(),
             new OpenPack(),
+            new ConfirmLogin(),
             new OpenAuthorPackMenu(),
             new PackInfo(),
             new SelectPrice(),

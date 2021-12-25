@@ -56,7 +56,7 @@ namespace CardCollector.DataBase.EntityDao
                 await sticker.ApplyEffect(user, relation);
                 var result = await Table.AddAsync(relation);
                 user.Stickers.Add(sticker.Md5Hash, result.Entity);
-                await BotDatabase.SaveData();
+                await Instance.SaveChangesAsync();
                 return result.Entity;
             }
             catch (InvalidOperationException)

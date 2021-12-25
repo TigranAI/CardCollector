@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
@@ -23,14 +24,14 @@ namespace CardCollector
         private static TelegramBotClient _client;
         public static TelegramBotClient Client => _client ??= new TelegramBotClient(AppSettings.TOKEN);
 
-        private static readonly ManualResetEvent _end = new(false);
-        private static readonly Timer _timer = new () {
+        private static readonly ManualResetEvent End = new(false);
+        private static readonly Timer Timer = new () {
             AutoReset = true,
             Enabled = true,
             Interval = Constants.SAVING_CHANGES_INTERVAL
         };
 
-        private static readonly IEnumerable<BotCommand> _commands = new[]
+        private static readonly IEnumerable<BotCommand> Commands = new[]
         {
             /*new BotCommand {Command = Text.start, Description = "Запуск бота"},*/
             new BotCommand {Command = Text.menu, Description = "Показать меню"},
@@ -42,15 +43,15 @@ namespace CardCollector
         {
             Logs.LogOut("Bot started");
             
-            _timer.Elapsed += SavingChanges;
-            _timer.Elapsed += UserDao.ClearMemory;
+            Timer.Elapsed += SavingChanges;
+            Timer.Elapsed += UserDao.ClearMemory;
             TimerTask.SetupAll();
             
             var cts = new CancellationTokenSource();
-            await Client.SetMyCommandsAsync(_commands, BotCommandScope.AllPrivateChats(), cancellationToken: cts.Token);
+            await Client.SetMyCommandsAsync(Commands, BotCommandScope.AllPrivateChats(), cancellationToken: cts.Token);
             Client.StartReceiving(HandleUpdateAsync, HandleErrorAsync, cancellationToken: cts.Token);
 
-            _end.WaitOne();
+            End.WaitOne();
             Logs.LogOut("Stopping program");
             
             cts.Cancel();
@@ -65,7 +66,7 @@ namespace CardCollector
             ConfirmSelling.WriteLogs();
             await BotDatabase.SaveData();
             await UserDao.ClearMemory();
-            _end.Set();
+            End.Set();
         }
 
         private static async void SavingChanges(object o, ElapsedEventArgs e)

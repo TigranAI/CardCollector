@@ -38,7 +38,7 @@ namespace CardCollector.DataBase.EntityDao
             {
                 var newPack = new UserPacks() { UserId = userId, PackId = packId };
                 var result = await Table.AddAsync(newPack);
-                await BotDatabase.SaveData();
+                await Instance.SaveChangesAsync();
                 return result.Entity;
             }
             catch (InvalidOperationException)

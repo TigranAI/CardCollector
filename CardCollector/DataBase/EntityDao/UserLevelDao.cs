@@ -41,7 +41,7 @@ namespace CardCollector.DataBase.EntityDao
             {
                 var userLevel = new UserLevel { UserId = userId };
                 var result = await Table.AddAsync(userLevel);
-                await BotDatabase.SaveData();
+                await Instance.SaveChangesAsync();
                 return result.Entity;
             }
             catch (InvalidOperationException)

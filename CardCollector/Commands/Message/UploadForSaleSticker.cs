@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using CardCollector.Controllers;
+using CardCollector.DataBase;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using CardCollector.Session.Modules;
@@ -17,7 +18,8 @@ namespace CardCollector.Commands.Message
         {
             var stickerId = Update.Message!.Sticker!.FileId;
             User.Session.GetModule<AdminModule>().SelectedSticker.ForSaleId = stickerId;
-            await MessageController.EditMessage(User, Messages.add_watermark_success, Keyboard.BackKeyboard);
+            await BotDatabase.SaveData();
+            await MessageController.EditMessage(User, Messages.add_watermark_success, Keyboard.BackAndMoreKeyboard);
         }
 
         protected internal override bool IsMatches(UserEntity user, Update update)

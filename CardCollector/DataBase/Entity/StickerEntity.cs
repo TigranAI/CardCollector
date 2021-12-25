@@ -2,7 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.Resources;
@@ -83,7 +85,7 @@ namespace CardCollector.DataBase.Entity
             return value != ""
                 ? Title.Contains(value, StringComparison.CurrentCultureIgnoreCase) ||
                   Author.Contains(value, StringComparison.CurrentCultureIgnoreCase) ||
-                  Emoji.Equals(value)
+                  Emoji.Contains(value)
                 : true;
         }
 

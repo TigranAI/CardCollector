@@ -51,7 +51,7 @@ namespace CardCollector.Commands.CallbackQuery
                 if (module.SelectedPosition?.AdditionalPrize != "") await GivePrize(module.SelectedPosition?.AdditionalPrize);
                 await MessageController.EditMessage(User, $"{Messages.thanks_for_buying} {userPack.Count} {Text.packs} {packInfo.Author}", 
                     offerSpecial && !offerInfinite || (module.SelectedPosition?.Expired ?? false) || !canBuy
-                    ? Keyboard.BackKeyboard
+                    ? Keyboard.BackShopKeyboard
                     : Keyboard.BuyShopItem(CallbackData));
             }
         }

@@ -40,7 +40,7 @@ namespace CardCollector.DataBase.EntityDao
             {
                 var cash = new CashEntity {UserId = userId};
                 var result = await Table.AddAsync(cash);
-                await BotDatabase.SaveData();
+                await Instance.SaveChangesAsync();
                 return result.Entity;
             }
             catch (InvalidOperationException)

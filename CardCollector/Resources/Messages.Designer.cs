@@ -306,6 +306,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Подтвердите свой вход на сайте.
+        /// </summary>
+        internal static string confirm_login {
+            get {
+                return ResourceManager.GetString("confirm_login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Подтвердите выставление за.
         /// </summary>
         internal static string confirm_selling {
@@ -803,11 +812,27 @@ namespace CardCollector.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Добро пожаловать! Этот бот позволяет вам коллекционировать стикеры. Вы можете выбрать одну из опций ниже.
         ///
-        ///Для того, чтобы получить стартовый набор стикеров, нажмите &quot;Магазин&quot; -&gt; &quot;Специальные предложения&quot; -&gt; &quot;3 стартовых пака бесплатно&quot; -&gt; &quot;0💰&quot;
-        ///После этого их можно открыть, нажав:
-        ///&quot;Профиль&quot; -&gt; &quot;Мои паки&quot; -&gt; &quot;Открыть обычный пак&quot;
-        ///            
-        ///Напишите /help, чтобы получить подробную справку..
+        ///Чтобы получить начальные стикеры Вам нужно открыть:
+        ///
+        ///        Магазин
+        ///           ⬇
+        ///Специальные предложения
+        ///           ⬇
+        ///3 стартовых пака бесплатно
+        ///           ⬇
+        ///          0 💰
+        ///
+        ///Открыть свои наборы:
+        ///
+        ///    Профиль
+        ///       ⬇
+        ///    Мои паки
+        ///       ⬇
+        ///Открыть обычный пак
+        ///
+        ///Подробная инструкция и 🎁 доступны на нашем сайте: http://92.63.192.64:8080/
+        ///
+        ///Руководство пользования: /help.
         /// </summary>
         internal static string start_message {
             get {
@@ -821,6 +846,15 @@ namespace CardCollector.Resources {
         internal static string stickers_succesfully_uploaded {
             get {
                 return ResourceManager.GetString("stickers_succesfully_uploaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы успешно авторизованы на сайте!.
+        /// </summary>
+        internal static string successfully_authorized {
+            get {
+                return ResourceManager.GetString("successfully_authorized", resourceCulture);
             }
         }
         

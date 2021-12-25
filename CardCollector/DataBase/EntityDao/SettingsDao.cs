@@ -38,6 +38,7 @@ namespace CardCollector.DataBase.EntityDao
                 var entry = new UserSettings {UserId = userId};
                 entry.InitProperties();
                 var result = await Table.AddAsync(entry);
+                await Instance.SaveChangesAsync();
                 return result.Entity;
             }
             catch (InvalidOperationException)

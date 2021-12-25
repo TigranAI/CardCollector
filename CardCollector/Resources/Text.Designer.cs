@@ -304,6 +304,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Подтвердить вход.
+        /// </summary>
+        internal static string confirm_login {
+            get {
+                return ResourceManager.GetString("confirm_login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Панель управления.
         /// </summary>
         internal static string control_panel {
@@ -457,7 +466,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}💎 за ${1}.
+        ///   Looks up a localized string similar to {0}💎 за ₽{1}.
         /// </summary>
         internal static string gems_title {
             get {

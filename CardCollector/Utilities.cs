@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using CardCollector.DataBase;
+using CardCollector.DataBase.Entity;
+using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
 using Telegram.Bot;
 using Telegram.Bot.Types;
@@ -44,6 +48,32 @@ namespace CardCollector
             var client = new WebClient();
             client.DownloadFile(new Uri(fileUri), file.FileName ?? "file");
             return file.FileName ?? "file";
+        }
+        
+        public static void ReplaceOldEmoji(List<StickerEntity> stickers)
+        {
+            string ToUnicode(string hex)
+            {
+                var sb = new StringBuilder();
+                for (var i = 0; i < hex.Length; i+=4)
+                {
+                    var temp = hex.Substring(i, 4);
+                    var character = (char)Convert.ToInt16(temp, 16);
+                    sb.Append(character);
+                }
+                return sb.ToString();
+            }
+            string ToHex(string unicode)
+            {
+                return BitConverter.ToString(Encoding.BigEndianUnicode.GetBytes(unicode))
+                    .Replace("-", "");
+            }
+            foreach (var sticker in stickers)
+            {
+                var hex = ToHex(sticker.Emoji);
+                if (hex.Length < 5)
+                    sticker.Emoji = ToUnicode(hex + "FE0F");
+            }
         }
     }
 }

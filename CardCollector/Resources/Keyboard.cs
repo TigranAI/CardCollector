@@ -38,6 +38,18 @@ namespace CardCollector.Resources
             new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)}
         });
 
+        public static InlineKeyboardMarkup BackShopKeyboard = new(new[]
+        {
+            new[] {InlineKeyboardButton.WithCallbackData(Text.open_packs, Command.my_packs)},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)}
+        });
+
+        public static InlineKeyboardMarkup BackAndMoreKeyboard = new(new[]
+        {
+            new[] {InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.show_stickers)},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)}
+        });
+
         public static InlineKeyboardMarkup BuyCoinsKeyboard(bool confirmButton = false)
         {
             var keyboard = new List<InlineKeyboardButton[]>
@@ -670,7 +682,8 @@ namespace CardCollector.Resources
                     },
                     new[]
                     {
-                        InlineKeyboardButton.WithCallbackData(Text.add_for_sale_sticker, $"{Command.add_for_sale_sticker}=1")
+                        InlineKeyboardButton.WithCallbackData(Text.add_for_sale_sticker,
+                            $"{Command.add_for_sale_sticker}=1")
                     },
                 });
             keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)});
@@ -694,6 +707,15 @@ namespace CardCollector.Resources
                 InlineKeyboardButton.WithCallbackData(
                     TopByTexts.ResourceManager.GetString(((int) topBy).ToString()) ?? string.Empty,
                     $"{Command.show_top_by}={(int) topBy}")
+            });
+        }
+
+        public static InlineKeyboardMarkup ConfirmLogin(string data)
+        {
+            return new InlineKeyboardMarkup(new[]
+            {
+                new[] {InlineKeyboardButton.WithCallbackData(Text.confirm_login, $"{Command.confirm_login}={data}")},
+                new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)}
             });
         }
     }

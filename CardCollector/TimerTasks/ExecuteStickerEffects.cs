@@ -51,8 +51,8 @@ namespace CardCollector.TimerTasks
             var settings = await SettingsDao.GetAll();
             foreach (var user in users)
             {
-                var stickers = await UserStickerRelationDao.GetListById(user.Id);
-                var stickerCount = await RandomSticker2Tier3Day.GetStickersCount(stickers);
+                user.Stickers = await UserStickerRelationDao.GetListById(user.Id);
+                var stickerCount = await RandomSticker2Tier3Day.GetStickersCount(user.Stickers);
                 if (stickerCount > 0)
                 {
                     var stickerList = await RandomSticker2Tier3Day.GenerateList(stickerCount);
@@ -81,8 +81,8 @@ namespace CardCollector.TimerTasks
             var settings = await SettingsDao.GetAll();
             foreach (var user in users)
             {
-                var stickers = await UserStickerRelationDao.GetListById(user.Id);
-                var stickerCount = await RandomSticker1Tier3Day.GetStickersCount(stickers);
+                user.Stickers = await UserStickerRelationDao.GetListById(user.Id);
+                var stickerCount = await RandomSticker1Tier3Day.GetStickersCount(user.Stickers);
                 if (stickerCount > 0)
                 {
                     var stickerList = await RandomSticker1Tier3Day.GenerateList(stickerCount);

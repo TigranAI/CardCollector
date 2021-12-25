@@ -45,7 +45,7 @@ namespace CardCollector.Commands
             new EnterGemsExchange(),
             //команда ввода цены
             new EnterGemsPrice(),
-            new CreateToken(),
+            new Login(),
             /* Выгрузка файлов к боту */
             new UploadFile(),
             new UploadSticker(),

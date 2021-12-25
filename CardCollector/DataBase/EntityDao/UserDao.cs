@@ -99,7 +99,7 @@ namespace CardCollector.DataBase.EntityDao
                     IsBlocked = false
                 };
                 var result = await Table.AddAsync(userEntity);
-                await BotDatabase.SaveData();
+                await Instance.SaveChangesAsync();
                 return result.Entity;
             }
             catch (InvalidOperationException)

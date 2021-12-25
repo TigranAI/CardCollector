@@ -32,6 +32,7 @@ namespace CardCollector.Commands.Message
                 await MessageController.EditMessage(User, Messages.reading_document);
                 /* Парсим файл */
                 var stickersList = await ParseExcelFile(fileName, module.StickersList);
+                Utilities.ReplaceOldEmoji(stickersList);
                 /* Сообщаем пользователю, что удаляем файлы */
                 await MessageController.EditMessage(User, Messages.deleting_files);
                 File.Delete(fileName);

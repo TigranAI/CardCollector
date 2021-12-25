@@ -9,20 +9,17 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.Message
 {
-    public class CreateToken : MessageCommand
+    public class Login : MessageCommand
     {
-        protected override string CommandText => "create_token";
+        protected override string CommandText => "login";
 
         private const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-_";
-        
+
         public override async Task Execute()
         {
-            var token = await SessionTokenDao.AddNew(User.Id, GenerateNewToken());
-            var data = Update.Message!.Text!.Split(' ')[1].Split('=');
-            var host = data[1].Replace('-', '.').Replace('_', ':');
-            var loginLink = $"http://{host}/login?token={token}";
-            await MessageController.EditMessage(User, $"<a href=\"{loginLink}\">{Messages.your_login_link}</a>",
-                Keyboard.LoginKeyboard(loginLink), ParseMode.Html);
+            var data = Update.Message!.Text!.Split(' ')[1].Split('=')[1];
+            await MessageController.EditMessage(User, $"{Messages.confirm_login} {AppSettings.SITE_URL}",
+                Keyboard.ConfirmLogin(data));
         }
 
         private string GenerateNewToken()
@@ -39,7 +36,12 @@ namespace CardCollector.Commands.Message
             return command == CommandText;
         }
 
-        public CreateToken() { }
-        public CreateToken(UserEntity user, Update update) : base(user, update) { }
+        public Login()
+        {
+        }
+
+        public Login(UserEntity user, Update update) : base(user, update)
+        {
+        }
     }
 }

@@ -54,9 +54,9 @@ namespace CardCollector.DataBase.EntityDao
         {
             try
             {
-                return await Table.Where(item => item.Contains(filter)).ToListAsync();
+                return (await Table.ToListAsync()).Where(item => item.Contains(filter)).ToList();
             }
-            catch (InvalidOperationException)
+            catch (InvalidOperationException e)
             {
                 Thread.Sleep(Utilities.rnd.Next(30));
                 return await GetAll(filter);

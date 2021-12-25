@@ -32,7 +32,7 @@ namespace CardCollector.DataBase.EntityDao
         {
             try {
                 var result = (await Table.AddAsync(new CountLogs{Date = date})).Entity;
-                await BotDatabase.SaveData();
+                await Instance.SaveChangesAsync();
                 return result;
             }
             catch (InvalidOperationException) {

@@ -71,7 +71,7 @@ namespace CardCollector.DataBase.EntityDao
             try
             {
                 await Table.AddAsync(product);
-                await BotDatabase.SaveData();
+                await Instance.SaveChangesAsync();
             }
             catch (InvalidOperationException)
             {

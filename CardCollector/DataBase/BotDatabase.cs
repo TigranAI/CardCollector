@@ -42,7 +42,6 @@ namespace CardCollector.DataBase
         public DbSet<UserPacks> UsersPacks { get; set; }
         public DbSet<PackEntity> Packs { get; set; }
         public DbSet<SpecialOfferUsers> SpecialOfferUsers { get; set; }
-        public DbSet<SessionToken> SessionTokens { get; set; }
         public DbSet<UserLevel> UserLevel { get; set; }
         public DbSet<Level> Levels { get; set; }
         public DbSet<UserSettings> Settings { get; set; }
