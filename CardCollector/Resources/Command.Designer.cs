@@ -70,6 +70,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ACK.
+        /// </summary>
+        internal static string add_sticker_preview {
+            get {
+                return ResourceManager.GetString("add_sticker_preview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ABX.
         /// </summary>
         internal static string alerts {
@@ -160,6 +169,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ACL.
+        /// </summary>
+        internal static string choose_pack {
+            get {
+                return ResourceManager.GetString("choose_pack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AAI.
         /// </summary>
         internal static string collect_income {
@@ -210,6 +228,15 @@ namespace CardCollector.Resources {
         internal static string confirm_login {
             get {
                 return ResourceManager.GetString("confirm_login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ACM.
+        /// </summary>
+        internal static string confirm_preview {
+            get {
+                return ResourceManager.GetString("confirm_preview", resourceCulture);
             }
         }
         

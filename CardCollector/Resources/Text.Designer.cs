@@ -88,6 +88,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Добавить обложку набора.
+        /// </summary>
+        internal static string add_sticker_preview {
+            get {
+                return ResourceManager.GetString("add_sticker_preview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Добавлено стикеров.
         /// </summary>
         internal static string added_stickers {
@@ -309,6 +318,15 @@ namespace CardCollector.Resources {
         internal static string confirm_login {
             get {
                 return ResourceManager.GetString("confirm_login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Подтвердить обложку.
+        /// </summary>
+        internal static string confirm_preview {
+            get {
+                return ResourceManager.GetString("confirm_preview", resourceCulture);
             }
         }
         

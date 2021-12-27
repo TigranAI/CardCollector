@@ -29,14 +29,14 @@ namespace CardCollector.Commands.CallbackQuery
             }
             else
             {
-                var page = int.Parse(CallbackData.Split('=')[1]);
+                var offset = int.Parse(CallbackData.Split('=')[1]);
                 var totalCount = packs.Count;
-                packs = packs.GetRange((page - 1) * 10, packs.Count >= page * 10 ? 10 : packs.Count % 10);
+                packs = packs.Skip(offset).Take(10).ToList();
                 if (packs.Count == 0)
                     await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.page_not_found);
                 else
                     await MessageController.EditMessage(User, Messages.choose_author,
-                        await Keyboard.GetUserPacksKeyboard(packs, Keyboard.GetPagePanel(page, totalCount, CommandText)));
+                        await Keyboard.GetUserPacksKeyboard(packs, offset, totalCount));
             }
         }
 

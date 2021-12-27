@@ -11,7 +11,10 @@ namespace CardCollector.TimerTasks
 {
     public class ExecuteStickerEffects : TimerTask
     {
-        protected override TimeSpan RunAt => Constants.DEBUG ? new TimeSpan(12, 24, 0) : new TimeSpan(11, 0, 0);
+        protected override TimeSpan RunAt => Constants.DEBUG 
+            ? new TimeSpan(DateTime.Now.TimeOfDay.Hours,
+                DateTime.Now.TimeOfDay.Minutes + Constants.TEST_ALERTS_INTERVAL, 0) 
+            : new TimeSpan(11, 0, 0);
         
         protected override async void TimerCallback(object o, ElapsedEventArgs e)
         {

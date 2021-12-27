@@ -35,21 +35,6 @@ namespace CardCollector.DataBase.EntityDao
             }
         }
 
-        public static async Task<List<string>> GetAuthorsList()
-        {
-            try
-            {
-                var list = await Table.Select(item => item.Author).Distinct().ToListAsync();
-                list.Sort();
-                return list;
-            }
-            catch (InvalidOperationException)
-            {
-                Thread.Sleep(Utilities.rnd.Next(30));
-                return await GetAuthorsList();
-            }
-        }
-
         public static async Task<List<StickerEntity>> GetAll(string filter = "")
         {
             try

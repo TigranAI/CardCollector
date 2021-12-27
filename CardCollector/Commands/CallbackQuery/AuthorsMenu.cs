@@ -15,17 +15,15 @@ namespace CardCollector.Commands.CallbackQuery
 
         public override async Task Execute()
         {
-            var page = int.Parse(CallbackData.Split('=')[1]);
+            var offset = int.Parse(CallbackData.Split('=')[1]);
             /* Получаем из бд список всех авторов */
-            var list = await StickerDao.GetAuthorsList();
-            var totalCount = list.Count;
-            list = list.GetRange((page - 1) * 10, list.Count >= page * 10 ? 10 : list.Count % 10);
-            if (list.Count == 0)
+            var packs = await PacksDao.GetNext(offset, 10);
+            if (packs.Count == 0)
                 await MessageController.AnswerCallbackQuery(User, CallbackQueryId, Messages.page_not_found);
             /* Заменяем сообщение меню на сообщение со списком */
             else
                 await MessageController.EditMessage(User, Messages.choose_author,
-                    Keyboard.GetAuthorsKeyboard(list, Keyboard.GetPagePanel(page, totalCount, CommandText)));
+                    Keyboard.GetAuthorsKeyboard(packs, offset, await PacksDao.GetCount()));
         }
 
         public AuthorsMenu() { }

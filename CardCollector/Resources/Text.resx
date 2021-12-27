@@ -324,4 +324,10 @@
     <data name="confirm_login" xml:space="preserve">
         <value>Подтвердить вход</value>
     </data>
+    <data name="add_sticker_preview" xml:space="preserve">
+        <value>Добавить обложку набора</value>
+    </data>
+    <data name="confirm_preview" xml:space="preserve">
+        <value>Подтвердить обложку</value>
+    </data>
 </root>

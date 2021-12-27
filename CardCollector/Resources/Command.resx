@@ -189,4 +189,13 @@
     <data name="confirm_login" xml:space="preserve">
         <value>ACJ</value>
     </data>
+    <data name="add_sticker_preview" xml:space="preserve">
+        <value>ACK</value>
+    </data>
+    <data name="choose_pack" xml:space="preserve">
+        <value>ACL</value>
+    </data>
+    <data name="confirm_preview" xml:space="preserve">
+        <value>ACM</value>
+    </data>
 </root>

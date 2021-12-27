@@ -18,6 +18,7 @@
         Default,
 
         UploadSticker,
-        LoadForSaleSticker
+        LoadForSaleSticker,
+        UploadPackPreview
     }
 }

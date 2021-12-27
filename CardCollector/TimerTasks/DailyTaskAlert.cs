@@ -9,10 +9,11 @@ namespace CardCollector.TimerTasks
 {
     public class DailyTaskAlert : TimerTask
     {
-        protected override TimeSpan RunAt => Constants.DEBUG 
-            ? new TimeSpan(DateTime.Now.TimeOfDay.Hours, DateTime.Now.TimeOfDay.Minutes + 1, 0)
+        protected override TimeSpan RunAt => Constants.DEBUG
+            ? new TimeSpan(DateTime.Now.TimeOfDay.Hours,
+                DateTime.Now.TimeOfDay.Minutes + Constants.TEST_ALERTS_INTERVAL, 0)
             : new TimeSpan(10, 0, 0);
-        
+
         protected override async void TimerCallback(object o, ElapsedEventArgs e)
         {
             var users = await UserDao.GetAllWhere(user => !user.IsBlocked);
@@ -20,14 +21,16 @@ namespace CardCollector.TimerTasks
             var messages = await UserMessagesDao.GetAll();
             foreach (var user in users)
             {
-                try {
+                try
+                {
                     if (settings[user.Id][UserSettingsEnum.DailyTasks])
-                        messages[user.Id].DailyTaskId = 
+                        messages[user.Id].DailyTaskId =
                             await MessageController.DeleteAndSend(user, messages[user.Id].DailyTaskId,
                                 Messages.daily_task_alertation);
                 }
-                catch {
-                    messages[user.Id].DailyTaskId = 
+                catch
+                {
+                    messages[user.Id].DailyTaskId =
                         await MessageController.DeleteAndSend(user, messages[user.Id].DailyTaskId,
                             Messages.daily_task_alertation);
                 }

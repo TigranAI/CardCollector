@@ -53,18 +53,31 @@ namespace CardCollector.DataBase.EntityDao
             
         }
 
-        public static async Task<List<PackEntity>> GetAll()
+        public static async Task<List<PackEntity>> GetNext(int offset, int count)
         {
             try
             {
                 var list = await Table.Where(item => item.Id != 1).ToListAsync();
                 list.Sort(new AuthorComparer());
-                return list;
+                return list.Skip(offset).Take(count).ToList();
             }
             catch (InvalidOperationException)
             {
                 Thread.Sleep(Utilities.rnd.Next(30));
-                return await GetAll();
+                return await GetNext(offset, count);
+            }
+        }
+
+        public static async Task<int> GetCount()
+        {
+            try
+            {
+                return await Table.CountAsync() - 1;
+            }
+            catch (InvalidOperationException)
+            {
+                Thread.Sleep(Utilities.rnd.Next(30));
+                return await GetCount();
             }
             
         }

@@ -15,11 +15,17 @@ namespace CardCollector.Commands.CallbackQuery
         protected override bool ClearStickers => true;
         public override async Task Execute()
         {
+            User.Session.State = UserState.LoadForSaleSticker;
             var packId = int.Parse(CallbackData.Split('=')[1]);
             var packInfo = await PacksDao.GetById(packId);
             var module = User.Session.GetModule<AdminModule>();
             module.SelectedPack = packInfo;
             await MessageController.EditMessage(User, Messages.choose_sticker, Keyboard.ShowStickers);
+        }
+
+        protected internal override bool IsMatches(UserEntity user, Update update)
+        {
+            return base.IsMatches(user, update) && User.PrivilegeLevel >= PrivilegeLevel.Programmer;
         }
 
         public SelectForSalePack() { }

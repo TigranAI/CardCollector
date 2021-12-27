@@ -720,6 +720,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Пожалуйста, загрузите превью стикерпака.
+        /// </summary>
+        internal static string please_upload_preview {
+            get {
+                return ResourceManager.GetString("please_upload_preview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Стоимость.
         /// </summary>
         internal static string price {
@@ -779,6 +788,15 @@ namespace CardCollector.Resources {
         internal static string send_sticker_progress {
             get {
                 return ResourceManager.GetString("send_sticker_progress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Обложка успешно установлена.
+        /// </summary>
+        internal static string set_preview_success {
+            get {
+                return ResourceManager.GetString("set_preview_success", resourceCulture);
             }
         }
         

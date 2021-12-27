@@ -23,7 +23,10 @@ namespace CardCollector.Commands
         private static readonly List<CallbackQueryCommand> List = new()
         {
             new AuthorsMenu(),
-            new BuyAuthorPackMenu(),
+            new ChoosePack(),
+            new AddStickerPreview(),
+            new ConfirmPreview(),
+            new OpenAuthorPackMenu(),
             new Back(),
             new BuyShopItem(),
             new BuyCoins(),
@@ -44,7 +47,6 @@ namespace CardCollector.Commands
             new MyPacks(),
             new OpenPack(),
             new ConfirmLogin(),
-            new OpenAuthorPackMenu(),
             new PackInfo(),
             new SelectPrice(),
             new PutForAuction(),
@@ -64,7 +66,6 @@ namespace CardCollector.Commands
             new LogsMenu(),
             new ShowSample(),
             new StopBot(),
-            new AddForSaleSticker(),
             new SelectForSalePack(),
             new UploadStickerPack(),
             new ShowTopBy(),

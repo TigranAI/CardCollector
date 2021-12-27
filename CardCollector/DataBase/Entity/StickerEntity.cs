@@ -47,13 +47,14 @@ namespace CardCollector.DataBase.Entity
         
         /* Описание стикера */
         [Column("description"), MaxLength(1024)] public string Description { get; set; } = "";
-        
+
         /* Хеш id стикера для определения его в системе */
         [Column("md5hash"), MaxLength(40)] public string Md5Hash { get; set; }
         
         [Column("effect"), MaxLength(32)] public int Effect { get; set; }
         
         [Column("pack_id"), MaxLength(32)] public int PackId { get; set; }
+        [Column("animated"), MaxLength(11)] public bool Animated { get; set; }
 
         [NotMapped] public string IdWithWatermark => ForSaleId ?? Id;
 

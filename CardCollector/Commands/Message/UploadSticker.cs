@@ -15,8 +15,9 @@ namespace CardCollector.Commands.Message
         public override async Task Execute()
         {
             var stickerId = Update.Message?.Sticker?.FileId;
+            var animated = Update.Message?.Sticker?.IsAnimated ?? false;
             var module = User.Session.GetModule<UploadedStickersModule>();
-            module.StickersList.Add(new StickerEntity {Id = stickerId});
+            module.StickersList.Add(new StickerEntity {Id = stickerId, Animated = animated});
             var message = $"{Messages.upload_your_stickers}" +
                           $"\n{Messages.uploaded_count} {module.Count}";
             foreach (var (stickerEntity, i) in module.StickersList.WithIndex())

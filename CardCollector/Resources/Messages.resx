@@ -391,4 +391,10 @@ https://telegra.ph/help-11-04-4</value>
     <data name="successfully_authorized" xml:space="preserve">
         <value>Вы успешно авторизованы на сайте!</value>
     </data>
+    <data name="please_upload_preview" xml:space="preserve">
+        <value>Пожалуйста, загрузите превью стикерпака</value>
+    </data>
+    <data name="set_preview_success" xml:space="preserve">
+        <value>Обложка успешно установлена</value>
+    </data>
 </root>
