@@ -30,6 +30,8 @@ namespace CardCollector.Commands.CallbackQuery
                             topByExp, Keyboard.GetTopButton(TopBy.Tier4Stickers), ParseMode.Html);
                     break;
                 case TopBy.Tier4Stickers:
+                    var admins = await UserDao
+                        .GetAllWhere(user => user._privilegeLevel >= (int)PrivilegeLevel.Programmer);
                     var tier4Stickers = (await StickerDao.GetListWhere(i => i.Tier == 4))
                         .Select(s => s.Md5Hash);
                     var userTier4Stickers = await UserStickerRelationDao
@@ -38,6 +40,7 @@ namespace CardCollector.Commands.CallbackQuery
                         .GroupBy(i => i.UserId)
                         .Select(i => new {userId = i.Key, count = i.Sum(j=>j.Count)})
                         .OrderByDescending(i => i.count)
+                        .Where(item => !admins.Any(user => user.Id == item.userId))
                         .Take(5);
                     var topByTier4 = Messages.users_top_tier_4_stickers_count;
                     foreach (var (idAndCount, index) in usersTier4StickersCount.WithIndex())

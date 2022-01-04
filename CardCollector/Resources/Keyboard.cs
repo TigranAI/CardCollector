@@ -576,9 +576,9 @@ namespace CardCollector.Resources
             return new InlineKeyboardMarkup(keyboard);
         }
 
-        public static InlineKeyboardMarkup ShopKeyboard(bool haveOffers)
+        public static InlineKeyboardMarkup ShopKeyboard(bool haveOffers, PrivilegeLevel privilegeLevel)
         {
-            return new InlineKeyboardMarkup(new[]
+            var keyboard = new List<InlineKeyboardButton[]>
             {
                 new[]
                 {
@@ -587,9 +587,11 @@ namespace CardCollector.Resources
                 },
                 new[] {InlineKeyboardButton.WithCallbackData(Text.buy_pack, Command.buy_pack)},
                 new[] {InlineKeyboardButton.WithCallbackData(Text.buy_coins, Command.buy_coins)},
-                new[] {InlineKeyboardButton.WithCallbackData(Text.buy_gems, Command.buy_gems)},
-                new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
-            });
+            };
+            if (privilegeLevel >= PrivilegeLevel.Programmer)
+                keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.buy_gems, Command.buy_gems)});
+            keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)});
+            return new InlineKeyboardMarkup(keyboard);
         }
 
         public static InlineKeyboardMarkup SpecialOffersKeyboard(IEnumerable<ShopEntity> specialOffers)

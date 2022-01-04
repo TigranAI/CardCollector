@@ -397,4 +397,7 @@ https://telegra.ph/help-11-04-4</value>
     <data name="set_preview_success" xml:space="preserve">
         <value>Обложка успешно установлена</value>
     </data>
+    <data name="see_your_stickers" xml:space="preserve">
+        <value>Ваши стикеры можно посмотреть, нажав на Коллекция.</value>
+    </data>
 </root>

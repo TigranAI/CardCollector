@@ -756,6 +756,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ваши стикеры можно посмотреть, нажав на Коллекция..
+        /// </summary>
+        internal static string see_your_stickers {
+            get {
+                return ResourceManager.GetString("see_your_stickers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Установите фильтры кнопками ниже.
         /// </summary>
         internal static string select_filter {

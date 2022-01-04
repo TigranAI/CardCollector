@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
+using CardCollector.Resources;
 using Microsoft.EntityFrameworkCore;
 
 namespace CardCollector.DataBase.EntityDao
@@ -18,7 +19,7 @@ namespace CardCollector.DataBase.EntityDao
             Instance = BotDatabase.GetClassInstance(typeof(UserLevelDao));
             Table = Instance.UserLevel;
         }
-        
+
         /* Получение объекта по Id */
         public static async Task<UserLevel> GetById(long userId)
         {
@@ -39,7 +40,7 @@ namespace CardCollector.DataBase.EntityDao
         {
             try
             {
-                var userLevel = new UserLevel { UserId = userId };
+                var userLevel = new UserLevel {UserId = userId};
                 var result = await Table.AddAsync(userLevel);
                 await Instance.SaveChangesAsync();
                 return result.Entity;
@@ -55,9 +56,15 @@ namespace CardCollector.DataBase.EntityDao
         {
             try
             {
-                return await Table.OrderByDescending(item => item.TotalExp).Take(top).ToListAsync();
+                var admins = await UserDao
+                    .GetAllWhere(user => user._privilegeLevel >= (int)PrivilegeLevel.Programmer);
+                return (await Table.ToListAsync())
+                    .Where(item => !admins.Any(user => user.Id == item.UserId))
+                    .OrderByDescending(item => item.TotalExp)
+                    .Take(top)
+                    .ToList();
             }
-            catch (InvalidOperationException)
+            catch (InvalidOperationException e)
             {
                 Thread.Sleep(Utilities.rnd.Next(30));
                 return await GetTop(top);

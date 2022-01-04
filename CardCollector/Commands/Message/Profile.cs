@@ -29,7 +29,8 @@ namespace CardCollector.Commands.Message
                 $"\n{Messages.gems}: {User.Cash.Gems}{Text.gem}" +
                 $"\n{Messages.level}: {User.CurrentLevel.Level}" +
                 $"\n{Messages.current_exp}: {User.CurrentLevel.CurrentExp} / {expGoal}" +
-                $"\n{Messages.cash_capacity}: {User.Cash.MaxCapacity}{Text.coin}",
+                $"\n{Messages.cash_capacity}: {User.Cash.MaxCapacity}{Text.coin}" +
+                $"\n{Messages.see_your_stickers}",
                 Keyboard.GetProfileKeyboard(packsCount, income));
         }
         

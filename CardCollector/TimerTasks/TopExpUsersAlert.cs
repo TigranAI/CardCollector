@@ -18,6 +18,7 @@ namespace CardCollector.TimerTasks
         protected override async void TimerCallback(object o, ElapsedEventArgs e)
         {
             var usersExp = await UserLevelDao.GetTop(5);
+            if (usersExp.Count < 1) return;
             var users = await UserDao.GetAllWhere(item => !item.IsBlocked);
             var settings = await SettingsDao.GetAll();
             var messages = await UserMessagesDao.GetAll();

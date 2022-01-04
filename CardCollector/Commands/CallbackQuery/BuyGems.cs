@@ -16,6 +16,11 @@ namespace CardCollector.Commands.CallbackQuery
             await MessageController.EditMessage(User, Messages.buy_gems, Keyboard.BuyGems);
         }
 
+        protected internal override bool IsMatches(UserEntity user, Update update)
+        {
+            return base.IsMatches(user, update) && user.PrivilegeLevel >= PrivilegeLevel.Programmer;
+        }
+
         public BuyGems() { }
         public BuyGems(UserEntity user, Update update) : base(user, update) { }
     }

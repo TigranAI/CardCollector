@@ -19,6 +19,6 @@ namespace CardCollector.Resources
         /* Количество стикеров для создания комбинации */
         public const int COMBINE_COUNT = 5;
 
-        public const int TEST_ALERTS_INTERVAL = 60;
+        public const int TEST_ALERTS_INTERVAL = 1;
     }
 }
