@@ -52,6 +52,7 @@ namespace CardCollector.Commands
             new GiveExp(),
             new UploadForSaleSticker(),
             new UploadPreview(),
+            new UploadNewSticker(),
         };
         
         /* Метод, создающий объекты команд исходя из полученного обновления */

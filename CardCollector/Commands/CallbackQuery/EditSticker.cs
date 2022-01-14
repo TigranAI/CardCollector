@@ -8,19 +8,18 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class SelectForSalePack : CallbackQueryCommand
+    public class EditSticker : CallbackQueryCommand
     {
-        protected override string CommandText => Command.select_for_sale_pack;
+        protected override string CommandText => Command.edit_sticker;
         protected override bool AddToStack => true;
         protected override bool ClearStickers => true;
         public override async Task Execute()
         {
-            User.Session.State = UserState.LoadForSaleSticker;
-            var packId = int.Parse(CallbackData.Split('=')[1]);
-            var packInfo = await PacksDao.GetById(packId);
+            User.Session.State = UserState.EditSticker;
             var module = User.Session.GetModule<AdminModule>();
-            module.SelectedPack = packInfo;
-            await MessageController.EditMessage(User, Messages.choose_sticker, Keyboard.ShowStickers);
+            var packId = int.Parse(CallbackData.Split('=')[1]);
+            module.SelectedPack = await PacksDao.GetById(packId);
+            await MessageController.EditMessage(User, Messages.select_sticker, Keyboard.ShowStickers);
         }
 
         protected internal override bool IsMatches(UserEntity user, Update update)
@@ -28,7 +27,12 @@ namespace CardCollector.Commands.CallbackQuery
             return base.IsMatches(user, update) && user.PrivilegeLevel >= PrivilegeLevel.Programmer;
         }
 
-        public SelectForSalePack() { }
-        public SelectForSalePack(UserEntity user, Update update) : base(user, update) { }
+        public EditSticker()
+        {
+        }
+
+        public EditSticker(UserEntity user, Update update) : base(user, update)
+        {
+        }
     }
 }

@@ -198,4 +198,13 @@
     <data name="confirm_preview" xml:space="preserve">
         <value>ACM</value>
     </data>
+    <data name="edit_sticker" xml:space="preserve">
+        <value>ACN</value>
+    </data>
+    <data name="select_edit_sticker" xml:space="preserve">
+        <value>ACO</value>
+    </data>
+    <data name="give_sticker" xml:space="preserve">
+        <value>ACP</value>
+    </data>
 </root>

@@ -24,7 +24,7 @@ namespace CardCollector.Commands.InlineQuery
         
         protected internal override bool IsMatches(UserEntity user, Update update)
         {
-            return update.InlineQuery?.ChatType is ChatType.Group or ChatType.Supergroup;
+            return update.InlineQuery?.ChatType is ChatType.Group or ChatType.Supergroup or ChatType.Channel;
         }
 
         public ShowStickersInGroup() { }

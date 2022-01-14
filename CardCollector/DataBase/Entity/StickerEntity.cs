@@ -113,5 +113,26 @@ namespace CardCollector.DataBase.Entity
                     break;
             }
         }
+
+        public StickerEntity(StickerEntity sticker, string newId, bool animated)
+        {
+            Id = newId;
+            ForSaleId = sticker.ForSaleId;
+            Title = sticker.Title;
+            Author = sticker.Author;
+            Income = sticker.Income;
+            IncomeTime = sticker.IncomeTime;
+            Tier = sticker.Tier;
+            Emoji = sticker.Emoji;
+            Description = sticker.Description;
+            Md5Hash = Utilities.CreateMd5(newId);
+            Effect = sticker.Effect;
+            PackId = sticker.PackId;
+            Animated = animated;
+        }
+
+        public StickerEntity()
+        {
+        }
     }
 }

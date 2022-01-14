@@ -15,14 +15,21 @@ namespace CardCollector.Commands.CallbackQuery
         
         public override async Task Execute()
         {
-            var httpClient = new HttpClient();
+            HttpClient httpClient;
+            if (Constants.DEBUG)
+            {
+                var clientHandler = new HttpClientHandler();
+                clientHandler.ServerCertificateCustomValidationCallback = delegate { return true; };
+                httpClient = new HttpClient(clientHandler);
+            }
+            else httpClient = new HttpClient();
             var values = new Dictionary<string, string>
             {
                 { "userId", User.Id.ToString() },
                 { "secretKey",  CallbackData.Split('=')[1]}
             };
             var content = new FormUrlEncodedContent(values);
-            var siteUrl = $"http://{AppSettings.SITE_URL}/events/login";
+            var siteUrl = $"https://{AppSettings.SITE_URL}/events/login";
             var response = await httpClient.PostAsync(siteUrl, content);
             if (response.StatusCode == HttpStatusCode.OK)
                 await MessageController.EditMessage(User, Messages.successfully_authorized, Keyboard.BackKeyboard);

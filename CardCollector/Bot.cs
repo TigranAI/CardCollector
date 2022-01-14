@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
@@ -41,6 +40,16 @@ namespace CardCollector
 
         public static async Task Main(string[] args)
         {
+            foreach (var s in args)
+            {
+                var data = s.Split('=');
+                switch (data[0])
+                {
+                    case "-debug":
+                        Constants.DEBUG = bool.Parse(data[1]);
+                        break;
+                }
+            }
             Logs.LogOut("Bot started");
             
             Timer.Elapsed += SavingChanges;

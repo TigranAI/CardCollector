@@ -330,4 +330,10 @@
     <data name="confirm_preview" xml:space="preserve">
         <value>Подтвердить обложку</value>
     </data>
+    <data name="edit_sticker" xml:space="preserve">
+        <value>Заменить стикер</value>
+    </data>
+    <data name="show_users" xml:space="preserve">
+        <value>Показать пользователей</value>
+    </data>
 </root>

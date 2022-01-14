@@ -286,6 +286,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ACN.
+        /// </summary>
+        internal static string edit_sticker {
+            get {
+                return ResourceManager.GetString("edit_sticker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AAR.
         /// </summary>
         internal static string emoji {
@@ -309,6 +318,15 @@ namespace CardCollector.Resources {
         internal static string give_exp {
             get {
                 return ResourceManager.GetString("give_exp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ACP.
+        /// </summary>
+        internal static string give_sticker {
+            get {
+                return ResourceManager.GetString("give_sticker", resourceCulture);
             }
         }
         
@@ -399,6 +417,15 @@ namespace CardCollector.Resources {
         internal static string return_from_auction {
             get {
                 return ResourceManager.GetString("return_from_auction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ACO.
+        /// </summary>
+        internal static string select_edit_sticker {
+            get {
+                return ResourceManager.GetString("select_edit_sticker", resourceCulture);
             }
         }
         

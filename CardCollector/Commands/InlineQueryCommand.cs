@@ -35,6 +35,7 @@ namespace CardCollector.Commands
             new ShowStickersInGroup(),
             // Показать стикеры на аукционе
             new ShowAuctionStickers(),
+            new ShowEditStickers(),
             // Показать стикеры в коллекции
             new ShowCollectionStickers(),
             // Показать стикеры для комбинации

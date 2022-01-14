@@ -403,6 +403,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Заменить стикер.
+        /// </summary>
+        internal static string edit_sticker {
+            get {
+                return ResourceManager.GetString("edit_sticker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Эффект.
         /// </summary>
         internal static string effect {
@@ -831,6 +840,15 @@ namespace CardCollector.Resources {
         internal static string show_traders {
             get {
                 return ResourceManager.GetString("show_traders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Показать пользователей.
+        /// </summary>
+        internal static string show_users {
+            get {
+                return ResourceManager.GetString("show_users", resourceCulture);
             }
         }
         

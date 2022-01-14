@@ -93,8 +93,9 @@ namespace CardCollector.DataBase
                 if (count > 0) _lastSave = DateTime.Now;
                 return count;
             }
-            catch (InvalidOperationException)
+            catch (InvalidOperationException e)
             {
+                Logs.LogOut(e.Message);
                 Thread.Sleep(Utilities.rnd.Next(30));
                 return await SaveChangesAsync(cancellationToken);
             }

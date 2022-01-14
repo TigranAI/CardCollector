@@ -48,17 +48,18 @@ namespace CardCollector.DataBase.EntityDao
             }
         }
 
-        public static async Task AddNew(StickerEntity sticker)
+        public static async Task<StickerEntity> AddNew(StickerEntity sticker)
         {
             try
             {
-                await Table.AddAsync(sticker);
+                var result = await Table.AddAsync(sticker);
                 await BotDatabase.SaveData();
+                return result.Entity;
             }
             catch (InvalidOperationException)
             {
                 Thread.Sleep(Utilities.rnd.Next(30));
-                await AddNew(sticker);
+                return await AddNew(sticker);
             }
         }
 
@@ -102,6 +103,20 @@ namespace CardCollector.DataBase.EntityDao
             {
                 Thread.Sleep(Utilities.rnd.Next(30));
                 return await GetById(id);
+            }
+        }
+
+        public static async Task DeleteSticker(StickerEntity sticker)
+        {
+            try
+            {
+                Table.Attach(sticker);
+                Table.Remove(sticker);
+            }
+            catch (InvalidOperationException)
+            {
+                Thread.Sleep(Utilities.rnd.Next(30));
+                await DeleteSticker(sticker);
             }
         }
     }

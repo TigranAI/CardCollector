@@ -243,6 +243,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выберите пользователя.
+        /// </summary>
+        internal static string choose_user {
+            get {
+                return ResourceManager.GetString("choose_user", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Монеты.
         /// </summary>
         internal static string coins {
@@ -783,6 +792,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выберите стикер.
+        /// </summary>
+        internal static string select_sticker {
+            get {
+                return ResourceManager.GetString("select_sticker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to за отправку стикера в беседу..
         /// </summary>
         internal static string send_sticker {
@@ -841,23 +859,23 @@ namespace CardCollector.Resources {
         ///
         ///Чтобы получить начальные стикеры Вам нужно открыть:
         ///
-        ///        Магазин
-        ///           ⬇
+        ///Магазин
+        ///⬇
         ///Специальные предложения
-        ///           ⬇
+        ///⬇
         ///3 стартовых пака бесплатно
-        ///           ⬇
-        ///          0 💰
+        ///⬇
+        ///0 💰
         ///
         ///Открыть свои наборы:
         ///
-        ///    Профиль
-        ///       ⬇
-        ///    Мои паки
-        ///       ⬇
+        ///Профиль
+        ///⬇
+        ///Мои паки
+        ///⬇
         ///Открыть обычный пак
         ///
-        ///Подробная инструкция и 🎁 доступны на нашем сайте: http://92.63.192.64:8080/
+        ///Подробная инструкция и 🎁 доступны на нашем сайте: wyrmstore.com
         ///
         ///Руководство пользования: /help.
         /// </summary>
@@ -958,11 +976,29 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Стикер заменен успешно!.
+        /// </summary>
+        internal static string update_sticker_success {
+            get {
+                return ResourceManager.GetString("update_sticker_success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Загрузите файл с вотермаркой для этого стикера:.
         /// </summary>
         internal static string upload_file_with_watermark {
             get {
                 return ResourceManager.GetString("upload_file_with_watermark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Загрузите новый файл.
+        /// </summary>
+        internal static string upload_new_file {
+            get {
+                return ResourceManager.GetString("upload_new_file", resourceCulture);
             }
         }
         

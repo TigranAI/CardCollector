@@ -19,6 +19,8 @@
 
         UploadSticker,
         LoadForSaleSticker,
-        UploadPackPreview
+        UploadPackPreview,
+        EditSticker,
+        GiveSticker
     }
 }

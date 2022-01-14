@@ -60,6 +60,12 @@ namespace CardCollector.Resources
             new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
         });
 
+        public static InlineKeyboardMarkup SelectUser = new(new[]
+        {
+            new []{InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.show_users)},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)}
+        });
+
         public static InlineKeyboardMarkup BuyCoinsKeyboard(bool confirmButton = false)
         {
             var keyboard = new List<InlineKeyboardButton[]>
@@ -715,6 +721,11 @@ namespace CardCollector.Resources
                     {
                         InlineKeyboardButton.WithCallbackData(Text.add_sticker_preview,
                             $"{Command.choose_pack}={Command.add_sticker_preview}=0")
+                    },
+                    new[]
+                    {
+                        InlineKeyboardButton.WithCallbackData(Text.edit_sticker,
+                            $"{Command.choose_pack}={Command.edit_sticker}=0")
                     },
                 });
             keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)});

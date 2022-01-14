@@ -40,6 +40,7 @@ namespace CardCollector.Commands
             // Обработка результата при отправке стикера
             new GiveExp(),
             new SendPrivateSticker(),
+            new SelectEditSticker(),
             // Обработка результата при выборе продавца
             new SelectTrader(),
             new StickerInfo(),

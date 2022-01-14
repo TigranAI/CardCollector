@@ -23,6 +23,7 @@ namespace CardCollector.Commands
         private static readonly List<CallbackQueryCommand> List = new()
         {
             new AuthorsMenu(),
+            new EditSticker(),
             new ChoosePack(),
             new AddStickerPreview(),
             new ConfirmPreview(),

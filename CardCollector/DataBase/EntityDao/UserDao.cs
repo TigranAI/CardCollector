@@ -55,7 +55,7 @@ namespace CardCollector.DataBase.EntityDao
                 ActiveUsers.Add(user.Id, result);
             }
             /* Обновляем имя пользователя, если он его сменил */
-            if (result.Username != user.Username && user.Username != "") result.Username = user.Username;
+            if (user.Username != null && result.Username != user.Username) result.Username = user.Username;
             return result;
         }
 
@@ -91,11 +91,13 @@ namespace CardCollector.DataBase.EntityDao
         {
             try
             {
+                Logs.LogOut(user.Username == null);
+                Logs.LogOut(user.Username == "");
                 var userEntity = new UserEntity
                 {
                     Id = user.Id,
                     ChatId = user.Id,
-                    Username = user.Username != "" ? user.Username : "user"+user.Id,
+                    Username = user.Username == null ? "user"+user.Id : user.Username,
                     IsBlocked = false
                 };
                 var result = await Table.AddAsync(userEntity);
