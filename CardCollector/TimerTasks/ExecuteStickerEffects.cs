@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Timers;
 using CardCollector.Controllers;
+using CardCollector.DataBase;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
@@ -21,6 +22,7 @@ namespace CardCollector.TimerTasks
             await GivePacks();
             await GiveTier1();
             await GiveTier2();
+            await BotDatabase.SaveData();
         }
         
         public async Task GivePacks()

@@ -91,8 +91,6 @@ namespace CardCollector.DataBase.EntityDao
         {
             try
             {
-                Logs.LogOut(user.Username == null);
-                Logs.LogOut(user.Username == "");
                 var userEntity = new UserEntity
                 {
                     Id = user.Id,

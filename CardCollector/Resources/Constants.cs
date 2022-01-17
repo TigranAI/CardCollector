@@ -1,5 +1,7 @@
 // ReSharper disable ConditionIsAlwaysTrueOrFalse
 
+using System.Globalization;
+
 namespace CardCollector.Resources
 {
     public static class Constants
@@ -20,5 +22,7 @@ namespace CardCollector.Resources
         public const int COMBINE_COUNT = 5;
 
         public const int TEST_ALERTS_INTERVAL = 100;
+
+        public static DateTimeFormatInfo TimeCulture = new CultureInfo("ru-RU", false).DateTimeFormat;
     }
 }

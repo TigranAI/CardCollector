@@ -103,13 +103,13 @@ namespace CardCollector.DataBase.Entity
                     await MessageController.EditMessage(user, Messages.effect_Diamonds25Percent);
                     break;
                 case StickerEffects.Effect.Random1Pack5Day:
-                    relation.AdditionalData = DateTime.Today.ToString(CultureInfo.CurrentCulture);
+                    relation.AdditionalData = DateTime.Today.ToString(Constants.TimeCulture.ShortDatePattern);
                     break;
                 case StickerEffects.Effect.RandomSticker1Tier3Day:
-                    relation.AdditionalData = DateTime.Today.ToString(CultureInfo.CurrentCulture);
+                    relation.AdditionalData = DateTime.Today.ToString(Constants.TimeCulture.ShortDatePattern);
                     break;
                 case StickerEffects.Effect.RandomSticker2Tier3Day:
-                    relation.AdditionalData = DateTime.Today.ToString(CultureInfo.CurrentCulture);
+                    relation.AdditionalData = DateTime.Today.ToString(Constants.TimeCulture.ShortDatePattern);
                     break;
             }
         }
