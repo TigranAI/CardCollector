@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using CardCollector.Commands.CallbackQuery;
 using CardCollector.Commands.ChosenInlineResult;
+using CardCollector.Commands.Message;
 using CardCollector.DailyTasks.CustomTasks;
 using CardCollector.DataBase;
 using CardCollector.DataBase.EntityDao;
@@ -13,7 +13,6 @@ using CardCollector.Resources;
 using CardCollector.TimerTasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
-using BuyGems = CardCollector.Commands.PreCheckoutQuery.BuyGems;
 using Timer = System.Timers.Timer;
 
 namespace CardCollector
@@ -72,7 +71,7 @@ namespace CardCollector
             SendStickers.WriteLogs();
             CollectIncome.WriteLogs();
             SendStickerCommand.WriteLogs();
-            BuyGems.WriteLogs();
+            BuyGemsItem.WriteLogs();
             ConfirmSelling.WriteLogs();
             await BotDatabase.SaveData();
             await UserDao.ClearMemory();

@@ -53,19 +53,17 @@ namespace CardCollector.Commands
             new UploadForSaleSticker(),
             new UploadPreview(),
             new UploadNewSticker(),
+            new BuyGemsItem()
         };
         
         /* Метод, создающий объекты команд исходя из полученного обновления */
         public static async Task<UpdateModel> Factory(Update update)
         {
             // Если сообщение от бота - игнорируем, нам не нужны боты
-            if (update.Message!.From!.IsBot || update.Message.SuccessfulPayment is not null)
+            if (update.Message!.From!.IsBot)
             {
                 // Если это вдруг написал наш бот (сообщенияуведомления о закрпеах и пр.), то удаляем
                 if (update.Message!.From!.Username == AppSettings.NAME)
-                    await Bot.Client.DeleteMessageAsync(update.Message.Chat.Id, update.Message.MessageId);
-                // Если это сообщение о платеже
-                if (update.Message.SuccessfulPayment is not null)
                     await Bot.Client.DeleteMessageAsync(update.Message.Chat.Id, update.Message.MessageId);
                 return new IgnoreUpdate();
             }

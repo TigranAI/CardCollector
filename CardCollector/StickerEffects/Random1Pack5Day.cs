@@ -21,6 +21,7 @@ namespace CardCollector.StickerEffects
             var userStickers = stickers.Values.Where(item => stickersWithEffect.Contains(item.ShortHash));
             return userStickers.Sum(item =>
             {
+                if (item.AdditionalData == "") item.AdditionalData = today;
                 var interval = DateTime.Today - Convert.ToDateTime(item.AdditionalData, Constants.TimeCulture);
                 if (interval.Days < Interval) return 0;
                 item.AdditionalData = today;

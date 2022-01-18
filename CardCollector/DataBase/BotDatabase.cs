@@ -47,6 +47,7 @@ namespace CardCollector.DataBase
         public DbSet<UserSettings> Settings { get; set; }
         public DbSet<CountLogs> CountLogs { get; set; }
         public DbSet<UserMessages> UserMessages { get; set; }
+        public DbSet<Payment> Payments { get; set; }
 
         /* Конфигурация подключения к БД */
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

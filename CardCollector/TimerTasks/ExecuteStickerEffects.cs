@@ -37,6 +37,7 @@ namespace CardCollector.TimerTasks
                 {
                     var userPacks = await UserPacksDao.GetOne(user.Id, 1);
                     userPacks.Count += packsCount;
+                    Logs.LogOut($"{userPacks.Id} - {userPacks.UserId} - {userPacks.Count}");
                     try {
                         if (settings[user.Id][UserSettingsEnum.StickerEffects])
                             await MessageController.SendMessage(user,
