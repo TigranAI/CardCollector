@@ -49,7 +49,7 @@ namespace CardCollector.Commands.MessageHandler.Admin
                 var newPack = new Pack()
                 {
                     Author = stickersList.First().Author,
-                    Stickers = new List<Sticker>(),
+                    Stickers = new LinkedList<Sticker>(),
                     PriceGems = 100,
                     PriceCoins = -1
                 };

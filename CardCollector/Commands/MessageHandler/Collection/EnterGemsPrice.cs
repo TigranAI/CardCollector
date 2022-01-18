@@ -13,7 +13,7 @@ namespace CardCollector.Commands.MessageHandler.Collection
     {
         protected override string CommandText => "";
         
-        private static readonly List<long> Queue = new ();
+        private static readonly LinkedList<long> Queue = new ();
         
         protected override async Task Execute()
         {
@@ -35,7 +35,7 @@ namespace CardCollector.Commands.MessageHandler.Collection
         /* Добавляем пользователя в очередь */
         public static void AddToQueue(long userId)
         {
-            if (!Queue.Contains(userId)) Queue.Add(userId);
+            if (!Queue.Contains(userId)) Queue.AddLast(userId);
         }
 
         /* Удаляем пользователя из очереди */

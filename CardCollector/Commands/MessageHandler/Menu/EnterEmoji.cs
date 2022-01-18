@@ -16,7 +16,7 @@ namespace CardCollector.Commands.MessageHandler.Menu
         private const string ONLY_EMOJI_PATTERN =
             "\\u00a9|\\u00ae|[\\u2000-\\u3300]|\\ud83c[\\ud000-\\udfff]|\\ud83d[\\ud000-\\udfff]|\\ud83e[\\ud000-\\udfff]";
         
-        private static readonly List<long> Queue = new ();
+        private static readonly LinkedList<long> Queue = new ();
         protected override async Task Execute()
         {
             var input = Message.Text;
@@ -34,7 +34,7 @@ namespace CardCollector.Commands.MessageHandler.Menu
 
         public static void AddToQueue(long userId)
         {
-            if (!Queue.Contains(userId)) Queue.Add(userId);
+            if (!Queue.Contains(userId)) Queue.AddLast(userId);
         }
 
         public static void RemoveFromQueue(long userId)

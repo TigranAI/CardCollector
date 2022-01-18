@@ -57,14 +57,15 @@ namespace CardCollector.DataBase
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-                .UseLazyLoadingProxies()
                 .UseMySQL(
                     $"server={DB_IP};" +
                     $"port={DB_PORT};" +
                     $"database={DB_SCHEMA};" +
                     $"uid={DB_UID};" +
                     $"pwd={DB_PWD}"
-                );
+                )
+                .UseLazyLoadingProxies()
+                .UseSnakeCaseNamingConvention();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

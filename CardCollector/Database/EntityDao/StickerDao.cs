@@ -20,5 +20,10 @@ namespace CardCollector.DataBase.EntityDao
         {
             return await table.SingleAsync(item => item.Id == stickerId);
         }
+
+        public static async Task<Sticker> FindByFileId(this DbSet<Sticker> table, string fileId)
+        {
+            return await table.SingleAsync(item => item.FileId == fileId);
+        }
     }
 }

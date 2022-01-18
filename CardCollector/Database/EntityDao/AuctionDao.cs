@@ -31,14 +31,16 @@ namespace CardCollector.DataBase.EntityDao
         public static async Task<List<Sticker>> FindAll(this DbSet<Auction> table, FiltersModule filters,
             string query = "")
         {
-            var list = await table
+            var list = (await table
                 .Include(item => item.Sticker)
                 .Where(item =>
                     item.Count > 0 &&
                     item.Sticker.Author.Contains(query)
                     || item.Sticker.Emoji.Contains(query)
                     || item.Sticker.Title.Contains(query))
-                .ToListAsync();
+                .ToListAsync())
+                .DistinctBy(item => item.Sticker.Id)
+                .ToList();
             filters.ApplyPriceTo(list);
             var stickers = list.Select(item => item.Sticker).ToList();
             filters.ApplyTo(stickers);

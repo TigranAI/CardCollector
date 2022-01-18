@@ -4,6 +4,8 @@ namespace CardCollector.DataBase.Entity
 {
     public class UserSettings
     {
+        public Dictionary<UserSettingsEnum, bool> Settings { get; set; }
+        
         public UserSettings()
         {
             Settings = new Dictionary<UserSettingsEnum, bool>();
@@ -14,8 +16,6 @@ namespace CardCollector.DataBase.Entity
             Settings.Add(UserSettingsEnum.PiggyBankCapacity, true);
             Settings.Add(UserSettingsEnum.DailyExpTop, true);
         }
-        
-        public Dictionary<UserSettingsEnum, bool> Settings { get; set; }
 
         public void SwitchProperty(UserSettingsEnum property)
         {
