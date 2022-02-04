@@ -8,7 +8,7 @@ using Telegram.Bot.Types;
 namespace CardCollector.Commands.Message
 {
     /* Команда "Профиль" Отображает профиль пользователя и его баланс */
-    public class Profile : MessageCommand
+    public class Profile : MessageHandler
     {
         /* Для данной команды ключевое слово "Профиль" */
         protected override string CommandText => Text.profile;
@@ -34,7 +34,6 @@ namespace CardCollector.Commands.Message
                 Keyboard.GetProfileKeyboard(packsCount, income));
         }
         
-        public Profile() { }
         public Profile(UserEntity user, Update update) : base(user, update) { }
     }
 }

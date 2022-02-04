@@ -8,7 +8,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class SelectShopPack : CallbackQueryCommand
+    public class SelectShopPack : CallbackQueryHandler
     {
         protected override string CommandText => Command.select_shop_pack;
         protected override bool AddToStack => true;
@@ -23,7 +23,6 @@ namespace CardCollector.Commands.CallbackQuery
             await MessageController.SendSticker(User, packInfo.StickerPreview, Keyboard.OfferKeyboard(module));
         }
 
-        public SelectShopPack() { }
         public SelectShopPack(UserEntity user, Update update) : base(user, update) { }
     }
 }

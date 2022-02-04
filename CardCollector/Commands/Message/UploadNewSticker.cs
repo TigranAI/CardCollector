@@ -10,7 +10,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.Message
 {
-    public class UploadNewSticker : MessageCommand
+    public class UploadNewSticker : MessageHandler
 
     {
         protected override string CommandText => "";
@@ -33,16 +33,12 @@ namespace CardCollector.Commands.Message
             await MessageController.EditMessage(User, Messages.update_sticker_success, Keyboard.BackAndMoreKeyboard);
         }
 
-        protected internal override bool IsMatches(UserEntity user, Update update)
+        protected internal override bool Match(UserEntity user, Update update)
         {
             if (update.Message!.Type is not MessageType.Sticker) return false;
             if (user.Session.State is not UserState.EditSticker) return false;
             if (user.Session.GetModule<AdminModule>().SelectedSticker == null) return false;
             return true;
-        }
-
-        public UploadNewSticker()
-        {
         }
 
         public UploadNewSticker(UserEntity user, Update update) : base(user, update)

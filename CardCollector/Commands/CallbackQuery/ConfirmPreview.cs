@@ -9,7 +9,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class ConfirmPreview : CallbackQueryCommand
+    public class ConfirmPreview : CallbackQueryHandler
     {
         protected override string CommandText => Command.confirm_preview;
         protected override bool ClearStickers => true;
@@ -26,14 +26,10 @@ namespace CardCollector.Commands.CallbackQuery
             await MessageController.EditMessage(User, Messages.set_preview_success, Keyboard.BackKeyboard);
         }
 
-        protected internal override bool IsMatches(UserEntity user, Update update)
+        protected internal override bool Match(UserEntity user, Update update)
         {
-            return base.IsMatches(user, update) && user.PrivilegeLevel >= PrivilegeLevel.Programmer &&
+            return base.Match(user, update) && user.PrivilegeLevel >= PrivilegeLevel.Programmer &&
                    user.Session.State == UserState.UploadPackPreview;
-        }
-
-        public ConfirmPreview()
-        {
         }
 
         public ConfirmPreview(UserEntity user, Update update) : base(user, update)

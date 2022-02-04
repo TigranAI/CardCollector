@@ -20,11 +20,9 @@ namespace CardCollector
             foreach (var sticker in list.Skip(offset).Take(50))
             {
                 result.Add( asMessage 
-                    ? new InlineQueryResultCachedSticker($"{(Constants.UNLIMITED_ALL_STICKERS ? Command.unlimited_stickers : "")}" +
-                                                         $"{command}={sticker.Md5Hash}={Utilities.rnd.Next(500)}", sticker.Id) 
+                    ? new InlineQueryResultCachedSticker($"{command}={sticker.Md5Hash}={Utilities.rnd.Next(500)}", sticker.Id) 
                         {InputMessageContent = new InputTextMessageContent(Text.select)}
-                    : new InlineQueryResultCachedSticker($"{(Constants.UNLIMITED_ALL_STICKERS ? Command.unlimited_stickers : "")}" +
-                                                         $"{command}={sticker.Md5Hash}={Utilities.rnd.Next(500)}", sticker.Id));
+                    : new InlineQueryResultCachedSticker($"{command}={sticker.Md5Hash}={Utilities.rnd.Next(500)}", sticker.Id));
             }
             /*
             foreach (var item in list)

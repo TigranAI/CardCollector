@@ -10,7 +10,7 @@ using Telegram.Bot.Types.Enums;
 namespace CardCollector.Commands.Message
 {
     /* Реализует команду "Магазин" */
-    public class Shop : MessageCommand
+    public class Shop : MessageHandler
     {
         protected override string CommandText => Text.shop;
         protected override bool ClearMenu => true;
@@ -26,7 +26,6 @@ namespace CardCollector.Commands.Message
                 ParseMode.Html);
         }
         
-        public Shop() { }
         public Shop(UserEntity user, Update update) : base(user, update) 
         {
             /* Переводим состояние пользователя в меню магазина */

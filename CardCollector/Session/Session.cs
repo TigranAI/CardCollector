@@ -108,7 +108,7 @@ namespace CardCollector.Session
             MenuStack.TryPop(out _);
         }
 
-        public void AddMenuToStack(UpdateModel menu)
+        public void AddMenuToStack(HandlerModel menu)
         {
             var menuInfo = new MenuInformation(menu, State);
             if (!MenuStack.Contains(menuInfo, new MenuComparer())) MenuStack.Push(menuInfo);

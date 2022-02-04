@@ -6,7 +6,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class BuyCoins : CallbackQueryCommand
+    public class BuyCoins : CallbackQueryHandler
     {
         protected override string CommandText => Command.buy_coins;
 
@@ -20,7 +20,6 @@ namespace CardCollector.Commands.CallbackQuery
                 Keyboard.BuyCoinsKeyboard());
         }
 
-        public BuyCoins() { }
         public BuyCoins(UserEntity user, Update update) : base(user, update) { }
     }
 }

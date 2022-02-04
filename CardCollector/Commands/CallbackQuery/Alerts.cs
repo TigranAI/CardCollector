@@ -7,7 +7,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class Alerts : CallbackQueryCommand
+    public class Alerts : CallbackQueryHandler
     {
         protected override string CommandText => Command.alerts;
         
@@ -18,7 +18,6 @@ namespace CardCollector.Commands.CallbackQuery
             await MessageController.EditMessage(User, Messages.alerts, Keyboard.Alerts(User.Settings), ParseMode.Html);
         }
 
-        public Alerts() { }
         public Alerts(UserEntity user, Update update) : base(user, update) { }
     }
 }

@@ -8,7 +8,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class EditSticker : CallbackQueryCommand
+    public class EditSticker : CallbackQueryHandler
     {
         protected override string CommandText => Command.edit_sticker;
         protected override bool AddToStack => true;
@@ -22,13 +22,9 @@ namespace CardCollector.Commands.CallbackQuery
             await MessageController.EditMessage(User, Messages.select_sticker, Keyboard.ShowStickers);
         }
 
-        protected internal override bool IsMatches(UserEntity user, Update update)
+        protected internal override bool Match(UserEntity user, Update update)
         {
-            return base.IsMatches(user, update) && user.PrivilegeLevel >= PrivilegeLevel.Programmer;
-        }
-
-        public EditSticker()
-        {
+            return base.Match(user, update) && user.PrivilegeLevel >= PrivilegeLevel.Programmer;
         }
 
         public EditSticker(UserEntity user, Update update) : base(user, update)

@@ -9,7 +9,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class ShowTopBy : CallbackQueryCommand
+    public class ShowTopBy : CallbackQueryHandler
     {
         protected override string CommandText => Command.show_top_by;
         public override async Task Execute()
@@ -53,10 +53,6 @@ namespace CardCollector.Commands.CallbackQuery
                             topByTier4, Keyboard.GetTopButton(TopBy.Exp), ParseMode.Html);
                     break;
             }
-        }
-
-        public ShowTopBy()
-        {
         }
 
         public ShowTopBy(UserEntity user, Update update) : base(user, update)

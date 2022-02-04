@@ -8,7 +8,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.InlineQuery
 {
-    public class ShowTradersInBotChat : InlineQueryCommand
+    public class ShowTradersInBotChat : InlineQueryHandler
     {
         public override async Task Execute()
         {
@@ -22,12 +22,11 @@ namespace CardCollector.Commands.InlineQuery
             await MessageController.AnswerInlineQuery(InlineQueryId, await results);
         }
         
-        protected internal override bool IsMatches(UserEntity user, Update update)
+        protected internal override bool Match(UserEntity user, Update update)
         {
             return update.InlineQuery?.ChatType is ChatType.Sender && user.Session.State == UserState.ProductMenu;
         }
 
-        public ShowTradersInBotChat() { }
         public ShowTradersInBotChat(UserEntity user, Update update) : base(user, update) { }
     }
 }

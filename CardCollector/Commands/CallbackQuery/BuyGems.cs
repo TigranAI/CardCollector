@@ -7,7 +7,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class BuyGems : CallbackQueryCommand
+    public class BuyGems : CallbackQueryHandler
     {
         protected override string CommandText => Command.buy_gems;
         protected override bool AddToStack => true;
@@ -19,12 +19,11 @@ namespace CardCollector.Commands.CallbackQuery
             await MessageController.EditMessage(User, Messages.buy_gems, Keyboard.BuyGems);
         }
 
-        protected internal override bool IsMatches(UserEntity user, Update update)
+        protected internal override bool Match(UserEntity user, Update update)
         {
-            return base.IsMatches(user, update) && user.PrivilegeLevel >= PrivilegeLevel.Programmer;
+            return base.Match(user, update) && user.PrivilegeLevel >= PrivilegeLevel.Programmer;
         }
 
-        public BuyGems() { }
         public BuyGems(UserEntity user, Update update) : base(user, update) { }
     }
 }

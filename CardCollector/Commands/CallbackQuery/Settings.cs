@@ -7,7 +7,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class Settings : CallbackQueryCommand
+    public class Settings : CallbackQueryHandler
     {
         protected override string CommandText => Command.settings;
         protected override bool AddToStack => true;
@@ -18,7 +18,6 @@ namespace CardCollector.Commands.CallbackQuery
                 Keyboard.Settings(User.PrivilegeLevel), ParseMode.Html);
         }
 
-        public Settings() { }
         public Settings(UserEntity user, Update update) : base(user, update) { }
     }
 }

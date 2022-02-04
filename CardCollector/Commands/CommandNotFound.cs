@@ -5,8 +5,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands
 {
-    /* Данный класс реализует операцию "Команда не найдена" */
-    public class CommandNotFound : UpdateModel
+    public class CommandNotFound : HandlerModel
     {
         protected override string CommandText => "";
 
@@ -17,7 +16,7 @@ namespace CardCollector.Commands
             await MessageController.EditMessage(User, "Команда не найдена " + _command);
         }
 
-        protected internal override bool IsMatches(UserEntity user, Update update) => true;
+        protected internal override bool Match(UserEntity user, Update update) => true;
 
         public CommandNotFound(UserEntity user, Update update, string command) : base(user, update)
         {

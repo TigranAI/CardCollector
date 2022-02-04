@@ -8,7 +8,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class DailyTasks : CallbackQueryCommand
+    public class DailyTasks : CallbackQueryHandler
     {
         protected override string CommandText => Command.daily_tasks;
 
@@ -25,7 +25,6 @@ namespace CardCollector.Commands.CallbackQuery
             await MessageController.EditMessage(User, text, Keyboard.BackKeyboard);
         }
 
-        public DailyTasks() { }
         public DailyTasks(UserEntity user, Update update) : base(user, update) { }
     }
 }

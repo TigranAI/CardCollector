@@ -10,7 +10,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.Message
 {
-    public class EnterEmoji : MessageCommand
+    public class EnterEmoji : MessageHandler
     {
         protected override string CommandText => "";
         private const string onlyEmojiPattern =
@@ -47,12 +47,11 @@ namespace CardCollector.Commands.Message
             Queue.Remove(userId);
         }
 
-        protected internal override bool IsMatches(UserEntity user, Update update)
+        protected internal override bool Match(UserEntity user, Update update)
         {
             return Queue.Contains(user.Id) && update.Message!.Type == MessageType.Text;
         }
-
-        public EnterEmoji() { }
+        
         public EnterEmoji(UserEntity user, Update update) : base(user, update) { }
     }
 }

@@ -7,7 +7,7 @@ using Telegram.Bot.Types;
 namespace CardCollector.Commands.Message
 {
     /* Реалищует команду "Аукцион" */
-    public class Auction : MessageCommand
+    public class Auction : MessageHandler
     {
         protected override string CommandText => Text.auction;
         protected override bool ClearMenu => true;
@@ -19,8 +19,6 @@ namespace CardCollector.Commands.Message
             /* Отображаем сообщение с фильтрами */
             await new ShowFiltersMenu(User, Update).Execute();
         }
-        
-        public Auction() { }
 
         public Auction(UserEntity user, Update update) : base(user, update)
         {

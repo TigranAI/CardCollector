@@ -9,7 +9,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.Message
 {
-    public class UploadForSaleSticker : MessageCommand
+    public class UploadForSaleSticker : MessageHandler
     {
         protected override string CommandText => "";
         protected override bool ClearStickers => true;
@@ -22,7 +22,7 @@ namespace CardCollector.Commands.Message
             await MessageController.EditMessage(User, Messages.add_watermark_success, Keyboard.BackAndMoreKeyboard);
         }
 
-        protected internal override bool IsMatches(UserEntity user, Update update)
+        protected internal override bool Match(UserEntity user, Update update)
         {
             if (update.Message!.Type is not MessageType.Sticker) return false;
             if (user.Session.State is not UserState.LoadForSaleSticker) return false;
@@ -30,7 +30,6 @@ namespace CardCollector.Commands.Message
             return true;
         }
 
-        public UploadForSaleSticker() { }
         public UploadForSaleSticker(UserEntity user, Update update) : base(user, update) { }
     }
 }

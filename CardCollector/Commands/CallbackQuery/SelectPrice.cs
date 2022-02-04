@@ -6,7 +6,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class SelectPrice : CallbackQueryCommand
+    public class SelectPrice : CallbackQueryHandler
     {
         protected override string CommandText => Command.select_price;
 
@@ -16,7 +16,6 @@ namespace CardCollector.Commands.CallbackQuery
                 User.Session.State == UserState.AuctionMenu ? Keyboard.GemsPriceOptions : Keyboard.CoinsPriceOptions);
         }
 
-        public SelectPrice() { }
         public SelectPrice(UserEntity user, Update update) : base(user, update) { }
     }
 }

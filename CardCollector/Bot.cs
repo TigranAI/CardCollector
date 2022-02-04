@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
+using CardCollector.Commands;
 using CardCollector.Commands.CallbackQuery;
 using CardCollector.Commands.ChosenInlineResult;
 using CardCollector.Commands.Message;
@@ -40,16 +42,8 @@ namespace CardCollector
 
         public static async Task Main(string[] args)
         {
-            foreach (var s in args)
-            {
-                var data = s.Split('=');
-                switch (data[0])
-                {
-                    case "-debug":
-                        Constants.DEBUG = bool.Parse(data[1]);
-                        break;
-                }
-            }
+            checkArgs(args);
+            initCommands();
             Logs.LogOut("Bot started");
             
             Timer.Elapsed += SavingChanges;
@@ -66,11 +60,45 @@ namespace CardCollector
             cts.Cancel();
         }
 
+        private static void initCommands()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+
+            foreach (var type in assembly.GetTypes())
+            {
+                if (Attribute.IsDefined(type, typeof(Attributes.Abstract))) continue;
+                if (Attribute.IsDefined(type, typeof(Attributes.CallbackQuery)))
+                    CallbackQueryHandler.Commands.Add(type);
+                else if (Attribute.IsDefined(type, typeof(Attributes.ChosenInlineResult)))
+                    ChosenInlineResultHandler.Commands.Add(type);
+                else if (Attribute.IsDefined(type, typeof(Attributes.InlineQuery)))
+                    InlineQueryHandler.Commands.Add(type);
+                else if (Attribute.IsDefined(type, typeof(Attributes.Message)))
+                    MessageHandler.Commands.Add(type);
+                else if (Attribute.IsDefined(type, typeof(Attributes.PreCheckoutQuery)))
+                    PreCheckoutQueryHandler.Commands.Add(type);
+            }
+        }
+
+        private static void checkArgs(string[] args)
+        {
+            foreach (var s in args)
+            {
+                var data = s.Split('=');
+                switch (data[0])
+                {
+                    case "-debug":
+                        Constants.DEBUG = bool.Parse(data[1]);
+                        break;
+                }
+            }
+        }
+
         public static async Task StopProgram()
         {
             SendStickers.WriteLogs();
             CollectIncome.WriteLogs();
-            SendStickerCommand.WriteLogs();
+            SendStickerHandler.WriteLogs();
             BuyGemsItem.WriteLogs();
             ConfirmSelling.WriteLogs();
             await BotDatabase.SaveData();

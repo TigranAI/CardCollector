@@ -9,7 +9,7 @@ namespace CardCollector.Commands.MyChatMember
     /* Родительский класс для входящих обновлений типа MyChatMember
      (Добавление/Добавление в чаты/Добавление в каналы/Блокировки/Исключения бота)
      Данный класс полностью реализован и не нуждается в наследовании */
-    public class MyChatMemberCommand : UpdateModel
+    public class MyChatMemberCommand : HandlerModel
     {
         protected override string CommandText => "";
 
@@ -30,12 +30,12 @@ namespace CardCollector.Commands.MyChatMember
             return Task.CompletedTask;
         }
 
-        protected internal override bool IsMatches(UserEntity user, Update update)
+        protected internal override bool Match(UserEntity user, Update update)
         {
             return true;
         }
 
-        public static async Task<UpdateModel> Factory(Update update)
+        public static async Task<HandlerModel> Factory(Update update)
         {
             // Объект пользователя
             var user = await UserDao.GetUser(update.MyChatMember!.From);

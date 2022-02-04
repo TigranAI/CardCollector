@@ -11,7 +11,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.Message
 {
-    public class BuyGemsItem : MessageCommand
+    public class BuyGemsItem : MessageHandler
     {
         protected override string CommandText => Command.buy_gems_item;
 
@@ -28,14 +28,10 @@ namespace CardCollector.Commands.Message
             PaymentDao.AddPayment(Update.Message.SuccessfulPayment, User, Update.Id);
         }
 
-        protected internal override bool IsMatches(UserEntity user, Update update)
+        protected internal override bool Match(UserEntity user, Update update)
         {
             return update.Message?.Type == MessageType.SuccessfulPayment &&
                    update.Message.SuccessfulPayment!.InvoicePayload.Equals(CommandText);
-        }
-
-        public BuyGemsItem()
-        {
         }
 
         public BuyGemsItem(UserEntity user, Update update) : base(user, update)

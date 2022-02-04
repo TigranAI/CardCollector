@@ -7,7 +7,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class AddStickerPreview : CallbackQueryCommand
+    public class AddStickerPreview : CallbackQueryHandler
     {
         protected override string CommandText => Command.add_sticker_preview;
         protected override bool ClearStickers => true;
@@ -20,13 +20,9 @@ namespace CardCollector.Commands.CallbackQuery
             await MessageController.EditMessage(User, Messages.please_upload_preview, Keyboard.BackKeyboard);
         }
 
-        protected internal override bool IsMatches(UserEntity user, Update update)
+        protected internal override bool Match(UserEntity user, Update update)
         {
-            return base.IsMatches(user, update) && user.PrivilegeLevel >= PrivilegeLevel.Programmer;
-        }
-
-        public AddStickerPreview()
-        {
+            return base.Match(user, update) && user.PrivilegeLevel >= PrivilegeLevel.Programmer;
         }
 
         public AddStickerPreview(UserEntity user, Update update) : base(user, update)

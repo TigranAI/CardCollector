@@ -7,7 +7,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class OpenPack : CallbackQueryCommand
+    public class OpenPack : CallbackQueryHandler
     {
         protected override string CommandText => Command.open_pack;
 
@@ -46,7 +46,6 @@ namespace CardCollector.Commands.CallbackQuery
             };
         }
 
-        public OpenPack() { }
         public OpenPack(UserEntity user, Update update) : base(user, update) { }
     }
 }

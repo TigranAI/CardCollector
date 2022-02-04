@@ -6,7 +6,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class UploadStickerPack : CallbackQueryCommand
+    public class UploadStickerPack : CallbackQueryHandler
     {
         protected override string CommandText => Command.upload_stickerpack;
         protected override bool AddToStack => true;
@@ -16,12 +16,11 @@ namespace CardCollector.Commands.CallbackQuery
             await MessageController.EditMessage(User, Messages.upload_your_stickers, Keyboard.BackKeyboard);
         }
 
-        protected internal override bool IsMatches(UserEntity user, Update update)
+        protected internal override bool Match(UserEntity user, Update update)
         {
-            return base.IsMatches(user, update) && user.PrivilegeLevel >= PrivilegeLevel.Artist;
+            return base.Match(user, update) && user.PrivilegeLevel >= PrivilegeLevel.Artist;
         }
 
-        public UploadStickerPack() { }
         public UploadStickerPack(UserEntity user, Update update) : base(user, update) 
         {
             User.Session.State = UserState.UploadSticker;

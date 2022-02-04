@@ -7,7 +7,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class ChoosePack : CallbackQueryCommand
+    public class ChoosePack : CallbackQueryHandler
     {
         /* Command syntax select_pack=<target command>=<offset> */
         protected override string CommandText => Command.choose_pack;
@@ -25,10 +25,6 @@ namespace CardCollector.Commands.CallbackQuery
             else
                 await MessageController.EditMessage(User, Messages.choose_author,
                     Keyboard.GetPacksKeyboard(packs, offset, await PacksDao.GetCount(), targetCommand));
-        }
-
-        public ChoosePack()
-        {
         }
 
         public ChoosePack(UserEntity user, Update update) : base(user, update)

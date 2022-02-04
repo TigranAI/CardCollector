@@ -7,7 +7,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.ChosenInlineResult
 {
-    public abstract class SendStickerCommand : ChosenInlineResultCommand
+    public abstract class SendStickerHandler : ChosenInlineResultHandler
     {
         private static PeopleSendsSticker info = PeopleSendsSticker.Build().Result;
         
@@ -56,7 +56,6 @@ namespace CardCollector.Commands.ChosenInlineResult
             info.WriteResults();
         }
 
-        protected SendStickerCommand() { }
-        protected SendStickerCommand(UserEntity user, Update update) : base(user, update) { }
+        protected SendStickerHandler(UserEntity user, Update update) : base(user, update) { }
     }
 }

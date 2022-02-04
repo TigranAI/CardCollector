@@ -7,7 +7,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.InlineQuery
 {
-    public class ShowStickersInPrivate : InlineQueryCommand
+    public class ShowStickersInPrivate : InlineQueryHandler
     {
         public override async Task Execute()
         {
@@ -18,12 +18,11 @@ namespace CardCollector.Commands.InlineQuery
             await MessageController.AnswerInlineQuery(InlineQueryId, results);
         }
         
-        protected internal override bool IsMatches(UserEntity user, Update update)
+        protected internal override bool Match(UserEntity user, Update update)
         {
             return update.InlineQuery?.ChatType is ChatType.Private;
         }
         
-        public ShowStickersInPrivate() { }
         public ShowStickersInPrivate(UserEntity user, Update update) : base(user, update) { }
     }
 }

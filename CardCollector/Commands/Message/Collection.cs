@@ -6,7 +6,7 @@ using Telegram.Bot.Types;
 namespace CardCollector.Commands.Message
 {
     /* Реализует команду "Коллекция" */
-    public class Collection : MessageCommand
+    public class Collection : MessageHandler
     {
         protected override string CommandText => Text.collection;
         protected override bool ClearMenu => true;
@@ -19,7 +19,6 @@ namespace CardCollector.Commands.Message
             await new ShowFiltersMenu(User, Update).Execute();
         }
         
-        public Collection() { }
         public Collection(UserEntity user, Update update) : base(user, update) 
         {
             /* Переводим состояние пользователя в меню коллекции */

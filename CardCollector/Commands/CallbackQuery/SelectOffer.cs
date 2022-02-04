@@ -8,7 +8,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class SelectOffer : CallbackQueryCommand
+    public class SelectOffer : CallbackQueryHandler
     {
         protected override string CommandText => Command.select_offer;
 
@@ -21,7 +21,6 @@ namespace CardCollector.Commands.CallbackQuery
             await MessageController.SendSticker(User, offerInfo.ImageId, Keyboard.OfferKeyboard(module));
         }
 
-        public SelectOffer() { }
         public SelectOffer(UserEntity user, Update update) : base(user, update) { }
     }
 }

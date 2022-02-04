@@ -9,7 +9,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class BuyShopItem : CallbackQueryCommand
+    public class BuyShopItem : CallbackQueryHandler
     {
         protected override string CommandText => Command.buy_shop_item;
 
@@ -81,7 +81,6 @@ namespace CardCollector.Commands.CallbackQuery
             }
         }
 
-        public BuyShopItem() { }
         public BuyShopItem(UserEntity user, Update update) : base(user, update) { }
     }
 }

@@ -7,7 +7,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class CombineMenu : CallbackQueryCommand
+    public class CombineMenu : CallbackQueryHandler
     {
         protected override string CommandText => "";
         protected override bool AddToStack => true;
@@ -22,7 +22,7 @@ namespace CardCollector.Commands.CallbackQuery
                 await MessageController.EditMessage(User, combineModule.ToString(), Keyboard.GetCombineKeyboard(combineModule));
         }
 
-        protected internal override bool IsMatches(UserEntity user, Update update) => false;
+        protected internal override bool Match(UserEntity user, Update update) => false;
 
         public CombineMenu(UserEntity user, Update update) : base(user, update) { }
     }

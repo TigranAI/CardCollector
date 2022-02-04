@@ -8,7 +8,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class DeleteCombine : CallbackQueryCommand
+    public class DeleteCombine : CallbackQueryHandler
     {
         protected override string CommandText => Command.delete_combine;
 
@@ -23,7 +23,6 @@ namespace CardCollector.Commands.CallbackQuery
             else await MessageController.EditMessage(User, module.ToString(), Keyboard.GetCombineKeyboard(module));
         }
 
-        public DeleteCombine() { }
         public DeleteCombine(UserEntity user, Update update) : base(user, update) { }
     }
 }

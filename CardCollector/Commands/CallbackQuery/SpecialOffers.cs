@@ -8,7 +8,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class SpecialOffers : CallbackQueryCommand
+    public class SpecialOffers : CallbackQueryHandler
     {
         protected override string CommandText => Command.special_offers;
         protected override bool AddToStack => true;
@@ -25,7 +25,6 @@ namespace CardCollector.Commands.CallbackQuery
                 await MessageController.EditMessage(User, Messages.available_offers, Keyboard.SpecialOffersKeyboard(shopEntities));
         }
 
-        public SpecialOffers() { }
         public SpecialOffers(UserEntity user, Update update) : base(user, update) { }
     }
 }

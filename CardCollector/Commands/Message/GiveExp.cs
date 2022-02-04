@@ -9,7 +9,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.Message
 {
-    public class GiveExp : MessageCommand
+    public class GiveExp : MessageHandler
     {
         protected override string CommandText => "";
         protected override bool ClearStickers => true;
@@ -37,14 +37,13 @@ namespace CardCollector.Commands.Message
             }
         }
 
-        protected internal override bool IsMatches(UserEntity user, Update update)
+        protected internal override bool Match(UserEntity user, Update update)
         {
             return update.Message?.ViaBot is { } bot && bot.Username == AppSettings.NAME &&
                    update.Message.Type is MessageType.Sticker &&
                    update.Message.Chat.Type is ChatType.Group or ChatType.Supergroup;
         }
 
-        public GiveExp() { }
         public GiveExp(UserEntity user, Update update) : base(user, update) { }
     }
 }

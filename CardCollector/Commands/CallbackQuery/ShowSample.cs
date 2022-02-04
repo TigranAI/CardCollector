@@ -10,7 +10,7 @@ namespace CardCollector.Commands.CallbackQuery
     /* Этот класс можно использовать для тестирования или наброски эскизов
      Команда "Показать пример" доступна только пользователям с уровнем доступа "Разработчик" и выше
      PrivilegeLevel = 7 */
-    public class ShowSample : CallbackQueryCommand
+    public class ShowSample : CallbackQueryHandler
     {
         protected override string CommandText => Command.show_sample;
 
@@ -28,12 +28,11 @@ namespace CardCollector.Commands.CallbackQuery
         }
 
         /* Нужно помимо совпадения текста проверить пользователя на уровень привилегий */
-        protected internal override bool IsMatches(UserEntity user, Update update)
+        protected internal override bool Match(UserEntity user, Update update)
         {
-            return base.IsMatches(user, update) && user.PrivilegeLevel >= PrivilegeLevel.Programmer;
+            return base.Match(user, update) && user.PrivilegeLevel >= PrivilegeLevel.Programmer;
         }
 
-        public ShowSample() { }
         public ShowSample(UserEntity user, Update update) : base(user, update) { }
     }
 }

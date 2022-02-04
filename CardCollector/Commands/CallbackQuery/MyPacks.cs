@@ -8,7 +8,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class MyPacks : CallbackQueryCommand
+    public class MyPacks : CallbackQueryHandler
     {
         protected override string CommandText => Command.my_packs;
         protected override bool AddToStack => true;
@@ -25,7 +25,6 @@ namespace CardCollector.Commands.CallbackQuery
                 Keyboard.PackMenu);
         }
 
-        public MyPacks() { }
         public MyPacks(UserEntity user, Update update) : base(user, update) { }
     }
 }

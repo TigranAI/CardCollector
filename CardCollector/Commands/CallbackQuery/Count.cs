@@ -7,7 +7,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class Count : CallbackQueryCommand
+    public class Count : CallbackQueryHandler
     {
         protected override string CommandText => Command.count;
 
@@ -50,7 +50,6 @@ namespace CardCollector.Commands.CallbackQuery
             else await MessageController.AnswerCallbackQuery(User, Update.CallbackQuery!.Id, Messages.cant_change_count);
         }
 
-        public Count() { }
         public Count(UserEntity user, Update update) : base(user, update) { }
     }
 }

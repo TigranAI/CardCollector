@@ -6,7 +6,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class SelectSort : CallbackQueryCommand
+    public class SelectSort : CallbackQueryHandler
     {
         protected override string CommandText => Command.sort;
 
@@ -15,7 +15,6 @@ namespace CardCollector.Commands.CallbackQuery
             await MessageController.EditMessage(User, Messages.choose_sort, Keyboard.SortOptions);
         }
 
-        public SelectSort() { }
         public SelectSort(UserEntity user, Update update) : base(user, update) { }
     }
 }

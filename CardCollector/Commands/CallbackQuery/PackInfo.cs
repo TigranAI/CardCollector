@@ -6,7 +6,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class PackInfo : CallbackQueryCommand
+    public class PackInfo : CallbackQueryHandler
     {
         protected override string CommandText => Command.pack_info;
 
@@ -15,7 +15,6 @@ namespace CardCollector.Commands.CallbackQuery
             await MessageController.EditMessage(User, Messages.pack_info, Keyboard.BackKeyboard);
         }
 
-        public PackInfo() { }
         public PackInfo(UserEntity user, Update update) : base(user, update) { }
     }
 }

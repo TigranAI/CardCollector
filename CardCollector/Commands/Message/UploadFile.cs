@@ -15,7 +15,7 @@ using File = System.IO.File;
 
 namespace CardCollector.Commands.Message
 {
-    public class UploadFile : MessageCommand
+    public class UploadFile : MessageHandler
     {
         protected override string CommandText => "";
 
@@ -86,12 +86,11 @@ namespace CardCollector.Commands.Message
             };
         }
 
-        protected internal override bool IsMatches(UserEntity user, Update update)
+        protected internal override bool Match(UserEntity user, Update update)
         {
             return user.Session.State == UserState.UploadFile && update.Message?.Type == MessageType.Document;
         }
 
-        public UploadFile() { }
         public UploadFile(UserEntity user, Update update) : base(user, update)
         {
             User.Session.State = UserState.Default;

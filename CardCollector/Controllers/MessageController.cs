@@ -31,17 +31,17 @@ namespace CardCollector.Controllers
                 var executor = update.Type switch
                 {
                     // Тип обновления - сообщение
-                    UpdateType.Message => await MessageCommand.Factory(update),
+                    UpdateType.Message => await MessageHandler.Factory(update),
                     // Тип обновления - нажатие на инлайн кнопку
-                    UpdateType.CallbackQuery => await CallbackQueryCommand.Factory(update),
+                    UpdateType.CallbackQuery => await CallbackQueryHandler.Factory(update),
                     // Тип обновления - блокировка/добавление бота
                     UpdateType.MyChatMember => await MyChatMemberCommand.Factory(update),
                     // Тип обновления - вызов бота через @имя_бота
-                    UpdateType.InlineQuery => await InlineQueryCommand.Factory(update),
+                    UpdateType.InlineQuery => await InlineQueryHandler.Factory(update),
                     // Тип обновления - выбор результата в инлайн меню
-                    UpdateType.ChosenInlineResult => await ChosenInlineResultCommand.Factory(update),
+                    UpdateType.ChosenInlineResult => await ChosenInlineResultHandler.Factory(update),
                     // Тип обновления - платеж
-                    UpdateType.PreCheckoutQuery => await PreCheckoutQueryCommand.Factory(update),
+                    UpdateType.PreCheckoutQuery => await PreCheckoutQueryHandler.Factory(update),
                     _ => throw new ArgumentOutOfRangeException()
                 };
                 // Обработать команду

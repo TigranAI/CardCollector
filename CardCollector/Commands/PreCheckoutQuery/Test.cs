@@ -5,7 +5,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.PreCheckoutQuery
 {
-    public class Test : PreCheckoutQueryCommand
+    public class Test : PreCheckoutQueryHandler
     {
         protected override string CommandText => "test";
 
@@ -14,7 +14,6 @@ namespace CardCollector.Commands.PreCheckoutQuery
             await Bot.Client.AnswerPreCheckoutQueryAsync(PreCheckoutQueryId);
         }
 
-        public Test() { }
         public Test(UserEntity user, Update update) : base(user, update) { }
     }
 }

@@ -9,7 +9,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class ConfirmLogin : CallbackQueryCommand
+    public class ConfirmLogin : CallbackQueryHandler
     {
         protected override string CommandText => Command.confirm_login;
         
@@ -37,7 +37,6 @@ namespace CardCollector.Commands.CallbackQuery
                 await MessageController.EditMessage(User, Messages.unexpected_exception, Keyboard.BackKeyboard);
         }
 
-        public ConfirmLogin() { }
         public ConfirmLogin(UserEntity user, Update update) : base(user, update) { }
     }
 }

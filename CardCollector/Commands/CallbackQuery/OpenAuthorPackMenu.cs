@@ -8,7 +8,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class OpenAuthorPackMenu : CallbackQueryCommand
+    public class OpenAuthorPackMenu : CallbackQueryHandler
     {
         protected override string CommandText => Command.open_author_pack_menu;
         protected override bool AddToStack => true;
@@ -40,7 +40,6 @@ namespace CardCollector.Commands.CallbackQuery
             }
         }
 
-        public OpenAuthorPackMenu() { }
         public OpenAuthorPackMenu(UserEntity user, Update update) : base(user, update) { }
     }
 }

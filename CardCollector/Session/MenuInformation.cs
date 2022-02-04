@@ -8,7 +8,7 @@ namespace CardCollector.Session
 {
     public class MenuInformation
     {
-        private UpdateModel Parent;
+        private HandlerModel Parent;
         private UserState State;
 
         public async Task BackToThis(UserSession session)
@@ -32,7 +32,7 @@ namespace CardCollector.Session
             return Parent.GetType();
         }
 
-        public MenuInformation(UpdateModel parent, UserState state)
+        public MenuInformation(HandlerModel parent, UserState state)
         {
             Parent = parent;
             State = state;

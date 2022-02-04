@@ -7,7 +7,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class SelectEmoji : CallbackQueryCommand
+    public class SelectEmoji : CallbackQueryHandler
     {
         protected override string CommandText => Command.emoji;
 
@@ -17,7 +17,6 @@ namespace CardCollector.Commands.CallbackQuery
             await MessageController.EditMessage(User, Messages.enter_emoji, Keyboard.EmojiOptions);
         }
 
-        public SelectEmoji() { }
         public SelectEmoji(UserEntity user, Update update) : base(user, update) { }
     }
 }

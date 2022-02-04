@@ -7,7 +7,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.ChosenInlineResult
 {
-    public class StickerInfo : ChosenInlineResultCommand
+    public class StickerInfo : ChosenInlineResultHandler
     {
         protected override string CommandText => Command.sticker_info;
         
@@ -22,7 +22,6 @@ namespace CardCollector.Commands.ChosenInlineResult
             await MessageController.EditMessage(User, sticker.ToString(), Keyboard.StickerInfoKeyboard);
         }
 
-        public StickerInfo() { }
         public StickerInfo(UserEntity user, Update update) : base(user, update) { }
     }
 }

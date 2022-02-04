@@ -9,7 +9,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.Message
 {
-    public class Login : MessageCommand
+    public class Login : MessageHandler
     {
         protected override string CommandText => "login";
 
@@ -27,17 +27,13 @@ namespace CardCollector.Commands.Message
             return new string(Enumerable.Repeat(chars, 64).Select(s => s[Utilities.rnd.Next(s.Length)]).ToArray());
         }
 
-        protected internal override bool IsMatches(UserEntity user, Update update)
+        protected internal override bool Match(UserEntity user, Update update)
         {
             if (update.Message!.Type != MessageType.Text) return false;
             var data = update.Message.Text!.Split(' ');
             if (data.Length < 2) return false;
             var command = data[1].Split('=')[0];
             return command == CommandText;
-        }
-
-        public Login()
-        {
         }
 
         public Login(UserEntity user, Update update) : base(user, update)

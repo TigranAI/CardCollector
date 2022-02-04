@@ -8,7 +8,7 @@ using Telegram.Bot.Types;
 namespace CardCollector.Commands.CallbackQuery
 {
     /* Реализует нажатие на кнопку "Автор" (открывается меню с выбором автора) */
-    public class AuthorsMenu : CallbackQueryCommand
+    public class AuthorsMenu : CallbackQueryHandler
     {
         protected override string CommandText => Command.authors_menu;
         protected override bool AddToStack => true;
@@ -26,7 +26,6 @@ namespace CardCollector.Commands.CallbackQuery
                     Keyboard.GetAuthorsKeyboard(packs, offset, await PacksDao.GetCount()));
         }
 
-        public AuthorsMenu() { }
         public AuthorsMenu(UserEntity user, Update update) : base(user, update) { }
     }
 }

@@ -8,7 +8,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.Message
 {
-    public class UploadPreview : MessageCommand
+    public class UploadPreview : MessageHandler
     {
         protected override string CommandText => "";
         protected override bool ClearStickers => true;
@@ -21,15 +21,11 @@ namespace CardCollector.Commands.Message
             await MessageController.SendSticker(User, module.StickerId, Keyboard.ConfirmPreview);
         }
 
-        protected internal override bool IsMatches(UserEntity user, Update update)
+        protected internal override bool Match(UserEntity user, Update update)
         {
             return user.PrivilegeLevel >= PrivilegeLevel.Programmer
                    && user.Session.State == UserState.UploadPackPreview
                    && update.Message.Type == MessageType.Sticker;
-        }
-
-        public UploadPreview()
-        {
         }
 
         public UploadPreview(UserEntity user, Update update) : base(user, update)

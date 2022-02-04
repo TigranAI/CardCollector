@@ -9,7 +9,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class ShowInfo : CallbackQueryCommand
+    public class ShowInfo : CallbackQueryHandler
     {
         protected override string CommandText => Command.show_offer_info;
 
@@ -40,7 +40,6 @@ namespace CardCollector.Commands.CallbackQuery
             };
         }
 
-        public ShowInfo() { }
         public ShowInfo(UserEntity user, Update update) : base(user, update) { }
     }
 }

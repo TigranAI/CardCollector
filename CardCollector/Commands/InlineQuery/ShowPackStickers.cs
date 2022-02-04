@@ -10,7 +10,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.InlineQuery
 {
-    public class ShowPackStickers : InlineQueryCommand
+    public class ShowPackStickers : InlineQueryHandler
     {
         public override async Task Execute()
         {
@@ -28,7 +28,7 @@ namespace CardCollector.Commands.InlineQuery
             }
         }
 
-        protected internal override bool IsMatches(UserEntity user, Update update)
+        protected internal override bool Match(UserEntity user, Update update)
         {
             var adminModule = user.Session.GetModule<AdminModule>();
             return user.Session.State == UserState.LoadForSaleSticker &&
@@ -36,7 +36,6 @@ namespace CardCollector.Commands.InlineQuery
                    adminModule.SelectedPack != null;
         }
 
-        public ShowPackStickers() { }
         public ShowPackStickers(UserEntity user, Update update) : base(user, update) { }
     }
 }

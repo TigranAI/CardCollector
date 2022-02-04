@@ -7,7 +7,7 @@ using Telegram.Bot.Types.Payments;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class SetGemsSum : CallbackQueryCommand
+    public class SetGemsSum : CallbackQueryHandler
     {
         protected override string CommandText => Command.set_gems_sum;
         
@@ -20,7 +20,6 @@ namespace CardCollector.Commands.CallbackQuery
                 new[] {new LabeledPrice(label, count*69)}, Keyboard.BuyGemsKeyboard(count), Currency.RUB);
         }
 
-        public SetGemsSum() { }
         public SetGemsSum(UserEntity user, Update update) : base(user, update) { }
     }
 }

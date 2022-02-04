@@ -4,14 +4,17 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands
 {
-    /* Данный класс позволяет проигнорировать входящее обновление */
-    public class IgnoreUpdate : UpdateModel
+    public class IgnoreHandler : HandlerModel
     {
         protected override string CommandText => "";
 
         public override Task PrepareAndExecute() => Task.CompletedTask;
         public override Task Execute() => Task.CompletedTask;
-        
-        protected internal override bool IsMatches(UserEntity user, Update update) => true;
+
+        protected internal override bool Match(UserEntity user, Update update) => true;
+
+        public IgnoreHandler() : base(null, null)
+        {
+        }
     }
 }

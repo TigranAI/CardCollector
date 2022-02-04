@@ -8,7 +8,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.ChosenInlineResult
 {
-    public class SelectForSaleSticker : ChosenInlineResultCommand
+    public class SelectForSaleSticker : ChosenInlineResultHandler
     {
         protected override string CommandText => Command.select_for_sale_sticker;
         public override async Task Execute()
@@ -21,7 +21,6 @@ namespace CardCollector.Commands.ChosenInlineResult
             await MessageController.EditMessage(User, Messages.upload_file_with_watermark, Keyboard.BackKeyboard);
         }
 
-        public SelectForSaleSticker() { }
         public SelectForSaleSticker(UserEntity user, Update update) : base(user, update) { }
     }
 }

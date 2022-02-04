@@ -9,7 +9,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.Message
 {
-    public class EnterGemsPrice : MessageCommand
+    public class EnterGemsPrice : MessageHandler
     {
         protected override string CommandText => "";
         
@@ -44,12 +44,11 @@ namespace CardCollector.Commands.Message
             Queue.Remove(userId);
         }
 
-        protected internal override bool IsMatches(UserEntity user, Update update)
+        protected internal override bool Match(UserEntity user, Update update)
         {
             return Queue.Contains(user.Id) && update.Message!.Type == MessageType.Text;
         }
-
-        public EnterGemsPrice() { }
+        
         public EnterGemsPrice(UserEntity user, Update update) : base(user, update) { }
     }
 }

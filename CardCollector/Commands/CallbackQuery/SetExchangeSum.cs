@@ -7,7 +7,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class SetExchangeSum : CallbackQueryCommand
+    public class SetExchangeSum : CallbackQueryHandler
     {
         protected override string CommandText => Command.set_exchange_sum;
 
@@ -22,8 +22,7 @@ namespace CardCollector.Commands.CallbackQuery
                 $"\n\n{Messages.confirm_exchange}",
                 Keyboard.BuyCoinsKeyboard(true));
         }
-
-        public SetExchangeSum() { }
+        
         public SetExchangeSum(UserEntity user, Update update) : base(user, update) { }
     }
 }

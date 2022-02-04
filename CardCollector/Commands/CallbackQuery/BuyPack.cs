@@ -6,7 +6,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class BuyPack : CallbackQueryCommand
+    public class BuyPack : CallbackQueryHandler
     {
         protected override string CommandText => Command.buy_pack;
         protected override bool AddToStack => true;
@@ -17,7 +17,6 @@ namespace CardCollector.Commands.CallbackQuery
             await MessageController.EditMessage(User, Messages.choose_option, Keyboard.ShopPacksKeyboard);
         }
 
-        public BuyPack() { }
         public BuyPack(UserEntity user, Update update) : base(user, update) { }
     }
 }

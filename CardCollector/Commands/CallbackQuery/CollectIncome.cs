@@ -10,7 +10,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class CollectIncome : CallbackQueryCommand
+    public class CollectIncome : CallbackQueryHandler
     {
         protected override string CommandText => Command.collect_income;
         private static PeopleCollectedIncomeInfo _info = PeopleCollectedIncomeInfo.Build().Result;
@@ -44,7 +44,6 @@ namespace CardCollector.Commands.CallbackQuery
             _info.Add(User.Id);
         }
 
-        public CollectIncome() { }
         public CollectIncome(UserEntity user, Update update) : base(user, update) { }
         
         private class PeopleCollectedIncomeInfo

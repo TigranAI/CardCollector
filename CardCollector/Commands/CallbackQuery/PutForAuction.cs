@@ -9,7 +9,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class PutForAuction : CallbackQueryCommand
+    public class PutForAuction : CallbackQueryHandler
     {
         protected override string CommandText => Command.sell_on_auction;
 
@@ -26,7 +26,6 @@ namespace CardCollector.Commands.CallbackQuery
             EnterGemsPrice.AddToQueue(User.Id);
         }
 
-        public PutForAuction() { }
         public PutForAuction(UserEntity user, Update update) : base(user, update) { }
     }
 }

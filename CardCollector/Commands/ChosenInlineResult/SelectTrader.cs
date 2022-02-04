@@ -8,7 +8,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.ChosenInlineResult
 {
-    public class SelectTrader : ChosenInlineResultCommand
+    public class SelectTrader : ChosenInlineResultHandler
     {
         protected override string CommandText => Command.buy_sticker;
 
@@ -24,7 +24,6 @@ namespace CardCollector.Commands.ChosenInlineResult
                 Keyboard.GetAuctionProductKeyboard(module, discount, User.Id == product.Trader));
         }
 
-        public SelectTrader() { }
         public SelectTrader(UserEntity user, Update update) : base(user, update) { }
     }
 }

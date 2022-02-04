@@ -6,7 +6,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class Back : CallbackQueryCommand
+    public class Back : CallbackQueryHandler
     {
         protected override string CommandText => Command.back;
         
@@ -24,7 +24,6 @@ namespace CardCollector.Commands.CallbackQuery
             }
         }
         
-        public Back() { }
         public Back(UserEntity user, Update update) : base(user, update) { }
     }
 }

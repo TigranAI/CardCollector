@@ -6,7 +6,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.Message
 {
-    public class Help : MessageCommand
+    public class Help : MessageHandler
     {
         protected override string CommandText => Text.help;
         public override async Task Execute()
@@ -14,7 +14,6 @@ namespace CardCollector.Commands.Message
             await MessageController.EditMessage(User, Messages.help);
         }
 
-        public Help() { }
         public Help(UserEntity user, Update update) : base(user, update) { }
     }
 }

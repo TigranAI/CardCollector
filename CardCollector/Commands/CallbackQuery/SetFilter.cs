@@ -9,7 +9,7 @@ using Telegram.Bot.Types;
 namespace CardCollector.Commands.CallbackQuery
 {
     /* Реализует установку фильтров */
-    public class SetFilter : CallbackQueryCommand
+    public class SetFilter : CallbackQueryHandler
     {
         protected override string CommandText => Command.set;
 
@@ -30,7 +30,6 @@ namespace CardCollector.Commands.CallbackQuery
             await new Back(User, Update).Execute();
         }
         
-        public SetFilter() { }
         public SetFilter(UserEntity user, Update update) : base (user, update) { }
     }
 }

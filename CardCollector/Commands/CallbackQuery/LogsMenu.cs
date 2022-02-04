@@ -9,7 +9,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class LogsMenu : CallbackQueryCommand
+    public class LogsMenu : CallbackQueryHandler
     {
         protected override string CommandText => Command.logs_menu;
         
@@ -27,7 +27,6 @@ namespace CardCollector.Commands.CallbackQuery
             await MessageController.EditMessage(User, message, Keyboard.LogsMenu(date), ParseMode.Html);
         }
 
-        public LogsMenu() { }
         public LogsMenu(UserEntity user, Update update) : base(user, update) { }
     }
 }

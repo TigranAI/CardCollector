@@ -9,7 +9,7 @@ using Telegram.Bot.Types.Enums;
 namespace CardCollector.Commands.InlineQuery
 {
     /* Отображение стикеров в чатах, кроме личной беседы с ботом */
-    public class ShowStickersInGroup : InlineQueryCommand
+    public class ShowStickersInGroup : InlineQueryHandler
     {
         public override async Task Execute()
         {
@@ -22,12 +22,11 @@ namespace CardCollector.Commands.InlineQuery
             await MessageController.AnswerInlineQuery(InlineQueryId, results, newOffset);
         }
         
-        protected internal override bool IsMatches(UserEntity user, Update update)
+        protected internal override bool Match(UserEntity user, Update update)
         {
             return update.InlineQuery?.ChatType is ChatType.Group or ChatType.Supergroup or ChatType.Channel;
         }
 
-        public ShowStickersInGroup() { }
         public ShowStickersInGroup(UserEntity user, Update update) : base(user, update) { }
     }
 }

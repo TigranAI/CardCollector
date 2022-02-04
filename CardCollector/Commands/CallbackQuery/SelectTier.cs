@@ -6,7 +6,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class SelectTier : CallbackQueryCommand
+    public class SelectTier : CallbackQueryHandler
     {
         protected override string CommandText => Command.tier;
 
@@ -15,7 +15,6 @@ namespace CardCollector.Commands.CallbackQuery
             await MessageController.EditMessage(User, Messages.choose_tier, Keyboard.TierOptions);
         }
         
-        public SelectTier() { }
         public SelectTier(UserEntity user, Update update) : base(user, update) { }
     }
 }

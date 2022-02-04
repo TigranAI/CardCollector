@@ -7,7 +7,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class ConfirmExchange : CallbackQueryCommand
+    public class ConfirmExchange : CallbackQueryHandler
     {
         protected override string CommandText => Command.confirm_exchange;
 
@@ -25,7 +25,6 @@ namespace CardCollector.Commands.CallbackQuery
             }
         }
 
-        public ConfirmExchange() { }
         public ConfirmExchange(UserEntity user, Update update) : base(user, update) { }
     }
 }

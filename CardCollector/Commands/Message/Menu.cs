@@ -7,7 +7,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.Message
 {
-    public class Menu : MessageCommand
+    public class Menu : MessageHandler
     {
         protected override string CommandText => Text.menu;
 
@@ -17,8 +17,7 @@ namespace CardCollector.Commands.Message
             User.MessagesId.MenuId = await MessageController.DeleteAndSend(User, User.MessagesId.MenuId,
                 Messages.main_menu, Keyboard.Menu, ParseMode.Html);
         }
-
-        public Menu() { }
+        
         public Menu(UserEntity user, Update update) : base(user, update) { }
     }
 }

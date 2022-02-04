@@ -7,7 +7,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class Combine : CallbackQueryCommand
+    public class Combine : CallbackQueryHandler
     {
         protected override string CommandText => Command.combine;
 
@@ -45,7 +45,6 @@ namespace CardCollector.Commands.CallbackQuery
             await new CombineMenu(User, Update).PrepareAndExecute();
         }
 
-        public Combine() { }
         public Combine(UserEntity user, Update update) : base(user, update)
         {
             User.Session.State = UserState.CombineMenu;

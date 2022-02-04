@@ -11,7 +11,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class ConfirmSelling : CallbackQueryCommand
+    public class ConfirmSelling : CallbackQueryHandler
     {
         protected override string CommandText => Command.confirm_selling;
         protected override bool ClearStickers => true;
@@ -31,7 +31,6 @@ namespace CardCollector.Commands.CallbackQuery
             }
         }
         
-        public ConfirmSelling(){}
         public ConfirmSelling(UserEntity user, Update update) : base(user, update){}
         
         private static PeoplePutsStickerOnAuction info = PeoplePutsStickerOnAuction.Build().Result;

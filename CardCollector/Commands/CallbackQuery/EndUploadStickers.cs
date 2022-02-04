@@ -6,7 +6,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class EndUploadStickers : CallbackQueryCommand
+    public class EndUploadStickers : CallbackQueryHandler
     {
         protected override string CommandText => Command.end_sticker_upload;
 
@@ -15,7 +15,6 @@ namespace CardCollector.Commands.CallbackQuery
             await MessageController.EditMessage(User, Messages.upload_your_file, Keyboard.BackKeyboard);
         }
 
-        public EndUploadStickers() { }
         public EndUploadStickers(UserEntity user, Update update) : base(user, update)
         {
             User.Session.State = UserState.UploadFile;

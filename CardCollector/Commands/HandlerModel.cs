@@ -4,14 +4,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands
 {
-    /* Реализация базового класса для обработки получаемых
-     с сервера Телеграм обновлений.
-     Поле User - пользователь, вызвавший команду 
-     Поле Update - полученное обновление
-     Поле Command - команда или же ключевое слово, по которому идентифицируется команда
-     Метод Execute - реализация логики команды во время ее выполнения 
-     Метод IsMatches - проверяет команду на сопадение по ключу */
-    public abstract class UpdateModel
+    public abstract class HandlerModel
     {
         protected abstract string CommandText { get; }
         protected virtual bool ClearMenu => false;
@@ -34,15 +27,12 @@ namespace CardCollector.Commands
 
         public virtual Task AfterExecute() => Task.CompletedTask;
 
-        protected internal abstract bool IsMatches(UserEntity user, Update update);
+        protected internal abstract bool Match(UserEntity user, Update update);
 
-        protected UpdateModel()
+        protected HandlerModel(UserEntity user, Update update)
         {
-            User = null;
-        }
-
-        protected UpdateModel(UserEntity user, Update update)
-        {
+            if (user == null) return;
+            if (update == null) return;
             User = user;
             user.Session.UpdateLastAccess();
             Update = update;

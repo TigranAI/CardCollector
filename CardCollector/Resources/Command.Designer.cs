@@ -619,15 +619,6 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ABD.
-        /// </summary>
-        internal static string unlimited_stickers {
-            get {
-                return ResourceManager.GetString("unlimited_stickers", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to ACH.
         /// </summary>
         internal static string upload_stickerpack {

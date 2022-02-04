@@ -8,7 +8,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class ReturnFromAuction : CallbackQueryCommand
+    public class ReturnFromAuction : CallbackQueryHandler
     {
         protected override string CommandText => Command.return_from_auction;
         protected override bool ClearStickers => true;
@@ -24,7 +24,6 @@ namespace CardCollector.Commands.CallbackQuery
                 Keyboard.BackKeyboard);
         }
 
-        public ReturnFromAuction() { }
         public ReturnFromAuction(UserEntity user, Update update) : base(user, update) { }
     }
 }

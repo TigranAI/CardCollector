@@ -7,7 +7,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class StopBot : CallbackQueryCommand
+    public class StopBot : CallbackQueryHandler
     {
         protected override string CommandText => Command.stop_bot;
         public static bool ConfirmStop = false;
@@ -29,12 +29,11 @@ namespace CardCollector.Commands.CallbackQuery
             }
         }
 
-        protected internal override bool IsMatches(UserEntity user, Update update)
+        protected internal override bool Match(UserEntity user, Update update)
         {
-            return base.IsMatches(user, update) && user.PrivilegeLevel >= PrivilegeLevel.Programmer;
+            return base.Match(user, update) && user.PrivilegeLevel >= PrivilegeLevel.Programmer;
         }
 
-        public StopBot() { }
         public StopBot(UserEntity user, Update update) : base(user, update) { }
     }
 }

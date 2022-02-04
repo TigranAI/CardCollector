@@ -8,7 +8,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
 {
-    public class BuySticker : CallbackQueryCommand
+    public class BuySticker : CallbackQueryHandler
     {
         protected override string CommandText => Command.buy_sticker;
         protected override bool ClearStickers => true;
@@ -37,7 +37,6 @@ namespace CardCollector.Commands.CallbackQuery
             }
         }
 
-        public BuySticker() { }
         public BuySticker(UserEntity user, Update update) : base(user, update) { }
     }
 }

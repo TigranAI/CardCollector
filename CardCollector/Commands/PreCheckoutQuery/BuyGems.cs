@@ -6,7 +6,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.PreCheckoutQuery
 {
-    public class BuyGems : PreCheckoutQueryCommand
+    public class BuyGems : PreCheckoutQueryHandler
     {
         protected override string CommandText => Command.buy_gems_item;
 
@@ -15,7 +15,6 @@ namespace CardCollector.Commands.PreCheckoutQuery
             await Bot.Client.AnswerPreCheckoutQueryAsync(PreCheckoutQueryId);
         }
 
-        public BuyGems() { }
         public BuyGems(UserEntity user, Update update) : base(user, update) { }
     }
 }
