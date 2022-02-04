@@ -66,6 +66,13 @@ namespace CardCollector.Resources
             new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)}
         });
 
+        public static InlineKeyboardMarkup ProviderKeyboard = new(new[]
+        {
+            new []{InlineKeyboardButton.WithCallbackData("Сбербанк", $"{Command.buy_gems}=Сбербанк")},
+            new []{InlineKeyboardButton.WithCallbackData("ЮКасса", $"{Command.buy_gems}=ЮКасса")},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)}
+        });
+
         public static InlineKeyboardMarkup BuyCoinsKeyboard(bool confirmButton = false)
         {
             var keyboard = new List<InlineKeyboardButton[]>
@@ -595,7 +602,7 @@ namespace CardCollector.Resources
                 new[] {InlineKeyboardButton.WithCallbackData(Text.buy_coins, Command.buy_coins)},
             };
             if (privilegeLevel >= PrivilegeLevel.Programmer)
-                keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.buy_gems, Command.buy_gems)});
+                keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.buy_gems, Command.select_provider)});
             keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)});
             return new InlineKeyboardMarkup(keyboard);
         }

@@ -466,6 +466,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ACQ.
+        /// </summary>
+        internal static string select_provider {
+            get {
+                return ResourceManager.GetString("select_provider", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ABU.
         /// </summary>
         internal static string select_shop_pack {

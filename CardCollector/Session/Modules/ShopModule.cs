@@ -8,12 +8,16 @@ namespace CardCollector.Session.Modules
         public PackEntity SelectedPack;
         public int Count = 1;
         public int EnteredExchangeSum = 1;
+
+        public string SelectedProvider;
+        
         public void Reset()
         {
             SelectedPosition = null;
             SelectedPack = null;
             Count = 1;
             EnteredExchangeSum = 1;
+            SelectedProvider = null;
         }
     }
 }

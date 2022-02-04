@@ -7,6 +7,7 @@ using CardCollector.Commands;
 using CardCollector.Commands.MyChatMember;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
+using CardCollector.Session.Modules;
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Types;
@@ -240,12 +241,18 @@ namespace CardCollector.Controllers
             string payload, IEnumerable<LabeledPrice> prices, InlineKeyboardMarkup keyboard = null,
             Currency currency = Currency.USD)
         {
+            var module = user.Session.GetModule<ShopModule>();
+            var token = module.SelectedProvider switch
+            {
+                "Сбербанк" => AppSettings.SberbankToken,
+                "ЮКасса" => AppSettings.YouKassaToken,
+            };
             if (!user.IsBlocked)
                 try
                 {
                     await user.ClearChat();
                     var result = await Bot.Client.SendInvoiceAsync(user.ChatId, title, description, payload,
-                        AppSettings.PAYMENT_PROVIDER, currency.ToString(), prices, replyMarkup: keyboard,
+                        token, currency.ToString(), prices, replyMarkup: keyboard,
                         disableNotification: true);
                     user.Session.Messages.Add(result.MessageId);
                     return result;

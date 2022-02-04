@@ -207,4 +207,7 @@
     <data name="give_sticker" xml:space="preserve">
         <value>ACP</value>
     </data>
+    <data name="select_provider" xml:space="preserve">
+        <value>ACQ</value>
+    </data>
 </root>

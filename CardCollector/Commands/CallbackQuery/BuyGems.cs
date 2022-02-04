@@ -2,6 +2,7 @@
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
+using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQuery
@@ -13,6 +14,8 @@ namespace CardCollector.Commands.CallbackQuery
 
         public override async Task Execute()
         {
+            var module = User.Session.GetModule<ShopModule>();
+            module.SelectedProvider = CallbackData.Split("=")[1];
             await MessageController.EditMessage(User, Messages.buy_gems, Keyboard.BuyGems);
         }
 

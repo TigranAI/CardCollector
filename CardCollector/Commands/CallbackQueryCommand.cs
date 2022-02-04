@@ -70,6 +70,7 @@ namespace CardCollector.Commands
             new SelectForSalePack(),
             new UploadStickerPack(),
             new ShowTopBy(),
+            new SelectProvider()
         };
 
         /* Данные, поступившие после нажатия на кнокпку */
