@@ -28,10 +28,16 @@ namespace CardCollector.Commands.MessageHandler.Start
                     var packInfo = await Context.Packs.FindPack(1);
                     User.Packs.Add(new UserPacks(User, packInfo, 7));
                 }
-                await MessageController.SendSticker(User, PACK_STICKER_ID);
-                await MessageController.SendMessage(User, Messages.first_reward, Keyboard.MyPacks, ParseMode.Html);
+                await User.Messages.SendSticker(User, PACK_STICKER_ID);
+                await User.Messages.SendMessage(User, Messages.first_reward, Keyboard.MyPacks, ParseMode.Html);
             }
-            await MessageController.SendMessage(User, Messages.start_message, Keyboard.Menu);
+            await User.Messages.SendMessage(User, Messages.start_message, Keyboard.Menu);
+        }
+
+        protected override async Task AfterExecute()
+        {
+            await MessageController.DeleteMessage(User, Message.MessageId);
+            await base.AfterExecute();
         }
 
         public override bool Match()

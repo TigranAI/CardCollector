@@ -1,9 +1,9 @@
-
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Threading.Tasks;
+using CardCollector.Controllers;
 using CardCollector.DailyTasks;
-using CardCollector.DailyTasks.CustomTasks;
 using CardCollector.Resources;
 using CardCollector.Session;
 
@@ -28,31 +28,10 @@ namespace CardCollector.DataBase.Entity
         public ICollection<SpecialOrderUser> SpecialOrdersUser { get; set; }
 
         [NotMapped] public UserSession Session;
-        
-
-        /*public async Task GiveExp(long count)
-        {
-            CurrentExp += count;
-            TotalExp += count;
-            var levelInfo = await LevelDao.GetLevel(CurrentLevel.Level + 1);
-            if (levelInfo?.LevelExpGoal <= CurrentLevel.CurrentExp) await ClearChat();
-            while (levelInfo?.LevelExpGoal <= CurrentLevel.CurrentExp)
-            {
-                CurrentLevel.CurrentExp -= levelInfo.LevelExpGoal;
-                CurrentLevel.Level++;
-                var levelReward = levelInfo.GetRewardInstance();
-                var message = $"{Messages.congratulation_new_level} {CurrentLevel.Level}" +
-                              $"\n{await levelReward.GetReward(this)}";
-                await MessageController.SendMessage(this, message, levelReward.RandomPacks > 0 ? Keyboard.MyPacks : null);
-                levelInfo = await LevelDao.GetLevel(CurrentLevel.Level + 1);
-            }
-        }*/
 
         public User()
         {
-            Session = new UserSession(this);
             DailyTasks = new LinkedList<DailyTask>();
-
             Stickers = new LinkedList<UserSticker>();
             Packs = new LinkedList<UserPacks>();
             SpecialOrdersUser = new LinkedList<SpecialOrderUser>();

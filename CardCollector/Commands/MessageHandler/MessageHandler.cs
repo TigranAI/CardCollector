@@ -35,7 +35,7 @@ namespace CardCollector.Commands.MessageHandler
         public static async Task<HandlerModel> Factory(Update update)
         {
             var context = new BotDatabaseContext();
-            var user = await context.Users.FindUser(update.Message!.From!);
+            var user = await context.Users.FindUserWithSession(update.Message!.From!);
             if (user.IsBlocked) return new IgnoreHandler(user, context);
             
             if (update.Message?.From?.Username == AppSettings.NAME)
@@ -45,7 +45,7 @@ namespace CardCollector.Commands.MessageHandler
             }
 
             
-            if (update.Message!.Chat.Type is ChatType.Private)
+            if (update.Message!.Chat.Type is ChatType.Private && update.Message.Text != Text.start)
                 await MessageController.DeleteMessage(user, update.Message.MessageId);
 
             foreach (var handlerType in Commands)

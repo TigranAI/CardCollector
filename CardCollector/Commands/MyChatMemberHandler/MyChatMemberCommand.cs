@@ -38,7 +38,7 @@ namespace CardCollector.Commands.MyChatMember
         public static async Task<HandlerModel> Factory(Update update)
         {
             var context = new BotDatabaseContext();
-            var user = await context.Users.FindUser(update.MyChatMember!.From);
+            var user = await context.Users.FindUserWithSession(update.MyChatMember!.From);
             
             return new MyChatMemberCommand(user, context, update.MyChatMember);
         }

@@ -33,7 +33,7 @@ namespace CardCollector.Commands.PreCheckoutQueryHandler
         {
             
             var context = new BotDatabaseContext();
-            var user = await context.Users.FindUser(update.PreCheckoutQuery!.From);
+            var user = await context.Users.FindUserWithSession(update.PreCheckoutQuery!.From);
             if (user.IsBlocked) return new IgnoreHandler(user, context);
             
             foreach (var handlerType in Commands)

@@ -31,7 +31,7 @@ namespace CardCollector.Commands.CallbackQueryHandler
         public static async Task<HandlerModel> Factory(Update update)
         {
             var context = new BotDatabaseContext();
-            var user = await context.Users.FindUser(update.CallbackQuery!.From);
+            var user = await context.Users.FindUserWithSession(update.CallbackQuery!.From);
             if (user.IsBlocked) return new IgnoreHandler(user, context);
 
             foreach (var handlerType in Commands)

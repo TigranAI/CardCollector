@@ -68,6 +68,16 @@ namespace CardCollector.DataBase.Entity
             if (messageId != -1) ChatMessages.Add(messageId);
         }
 
+        public async Task SendMessage(
+            User user,
+            string message,
+            IReplyMarkup? keyboard = null,
+            ParseMode? parseMode = null)
+        {
+            var messageId = await MessageController.SendMessage(user, message, keyboard, parseMode);
+            if (messageId != -1) ChatMessages.Add(messageId);
+        }
+
         public async Task SendMenu(User user)
         {
             await ClearChat(user);

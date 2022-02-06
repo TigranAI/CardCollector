@@ -976,6 +976,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Обновление обложки успешно!.
+        /// </summary>
+        internal static string update_preview_success {
+            get {
+                return ResourceManager.GetString("update_preview_success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Стикер заменен успешно!.
         /// </summary>
         internal static string update_sticker_success {

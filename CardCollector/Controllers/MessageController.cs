@@ -102,6 +102,8 @@ namespace CardCollector.Controllers
             }
             catch (Exception)
             {
+                user.Messages.ChatMessages.Remove(messageId);
+                user.Messages.ChatStickers.Remove(messageId);
                 await DeleteMessage(user, messageId);
                 return await SendMessage(user, message, keyboard, parseMode);
             }
@@ -169,8 +171,6 @@ namespace CardCollector.Controllers
             int messageId)
         {
             if (user.IsBlocked) return;
-            user.Messages.ChatMessages.Remove(messageId);
-            user.Messages.ChatStickers.Remove(messageId);
             try
             {
                await Bot.Client.DeleteMessageAsync(user.ChatId, messageId);

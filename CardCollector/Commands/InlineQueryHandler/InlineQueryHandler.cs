@@ -32,7 +32,7 @@ namespace CardCollector.Commands.InlineQueryHandler
         public static async Task<HandlerModel> Factory(Update update)
         {
             var context = new BotDatabaseContext();
-            var user = await context.Users.FindUser(update.InlineQuery!.From);
+            var user = await context.Users.FindUserWithSession(update.InlineQuery!.From);
             if (user.IsBlocked) return new IgnoreHandler(user, context);
             
             foreach (var handlerType in Commands)

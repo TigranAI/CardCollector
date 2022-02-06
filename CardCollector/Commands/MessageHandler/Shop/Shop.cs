@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.Controllers;
 using CardCollector.DataBase;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
@@ -22,7 +21,7 @@ namespace CardCollector.Commands.MessageHandler.Shop
             var availableSpecialOrders = await Context.SpecialOrders.FindAll();
             var haveSpecialOffers = availableSpecialOrders.Any(item => item.IsInfinite 
                 || !User.SpecialOrdersUser.Any(usedOrders => usedOrders.Order.Id == item.Id));
-            await MessageController.EditMessage(User, Messages.shop_message,
+            await User.Messages.EditMessage(User, Messages.shop_message,
                 Keyboard.ShopKeyboard(haveSpecialOffers, User.PrivilegeLevel), ParseMode.Html);
         }
 

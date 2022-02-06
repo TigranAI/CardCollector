@@ -412,4 +412,7 @@ https://telegra.ph/help-11-04-4</value>
     <data name="choose_user" xml:space="preserve">
         <value>Выберите пользователя</value>
     </data>
+    <data name="update_preview_success" xml:space="preserve">
+        <value>Обновление обложки успешно!</value>
+    </data>
 </root>

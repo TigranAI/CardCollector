@@ -13,7 +13,7 @@ namespace CardCollector.Session
     public class UserSession
     {
         /* Ссылка на пользователя */
-        public readonly User user;
+        public User user;
         /* Дата и время последней актвности пользователя */
         private DateTime _lastAccess = DateTime.Now;
         /* Текущее состояние пользователя */
