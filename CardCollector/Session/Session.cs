@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Commands;
-using CardCollector.Commands.CallbackQuery;
 using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
@@ -14,7 +13,7 @@ namespace CardCollector.Session
     public class UserSession
     {
         /* Ссылка на пользователя */
-        public readonly UserEntity user;
+        public readonly User user;
         /* Дата и время последней актвности пользователя */
         private DateTime _lastAccess = DateTime.Now;
         /* Текущее состояние пользователя */
@@ -29,7 +28,7 @@ namespace CardCollector.Session
         public Type PreviousCommandType;
         private Type CurrentCommandType;
 
-        public UserSession(UserEntity user)
+        public UserSession(User user)
         {
             this.user = user;
         }
@@ -77,13 +76,13 @@ namespace CardCollector.Session
             foreach (var messageId in Messages.ToList())
                 await MessageController.DeleteMessage(user, messageId);
             foreach (var messageId in StickerMessages.ToList())
-                await MessageController.DeleteMessage(user, messageId, true);
+                await MessageController.DeleteMessage(user, messageId);
         }
 
         public async Task ClearStickers()
         {
             foreach (var messageId in StickerMessages.ToList())
-                await MessageController.DeleteMessage(user, messageId, true);
+                await MessageController.DeleteMessage(user, messageId);
         }
 
         public async Task EndSession()
@@ -117,7 +116,7 @@ namespace CardCollector.Session
         public void SetCurrentCommand(Type commandType)
         {
             PreviousCommandType = CurrentCommandType;
-            if(commandType != typeof(Back)) CurrentCommandType = commandType;
+            /*if(commandType != typeof(Back)) CurrentCommandType = commandType;*/
         }
 
         public void UndoCurrentCommand()

@@ -22,7 +22,7 @@ namespace CardCollector.DailyTasks
         public abstract string Title { get; }
         public abstract string Description { get; }
 
-        public abstract Task<bool> Execute(UserEntity user, object[] args = null);
-        public abstract Task GiveReward(UserEntity user, object[] args = null);
+        public abstract Task<bool> Execute(User user, object[] args = null);
+        public abstract Task GiveReward(User user, object[] args = null);
     }
 }

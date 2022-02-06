@@ -5,7 +5,7 @@ namespace CardCollector.Session.Modules
 {
     public class UploadedStickersModule : Module
     {
-        public List<StickerEntity> StickersList = new();
+        public List<Sticker> StickersList = new();
         public int Count => StickersList.Count;
         
         public void Reset()

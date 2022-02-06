@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Timers;
-using CardCollector.Commands.Message;
 using CardCollector.Resources;
 
 namespace CardCollector.TimerTasks
@@ -14,7 +13,7 @@ namespace CardCollector.TimerTasks
         
         protected override void TimerCallback(object o, ElapsedEventArgs e)
         {
-            GiveExp.GroupStickersExp.Clear();
+            /*GiveExp.GroupStickersExp.Clear();*/
         }
     }
 }

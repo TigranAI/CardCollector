@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
-using CardCollector.DataBase.EntityDao;
-using CardCollector.Resources;
 
 namespace CardCollector.DailyTasks.CustomTasks
 {
@@ -15,9 +12,9 @@ namespace CardCollector.DailyTasks.CustomTasks
         public override string Description => Descriptions.send_stickers;
         private static PeopleCompletedTask info = PeopleCompletedTask.Build().Result;
 
-        public override async Task<bool> Execute(UserEntity user, object[] args = null)
+        public override async Task<bool> Execute(User user, object[] args = null)
         {
-            var task = await DailyTaskDao.GetTaskInfo(user.Id, Id);
+            /*var task = await DailyTaskDao.GetTaskInfo(user.Id, Id);
             if (task.Progress == 0) return false;
             task.Progress--;
             if (user.Settings[UserSettingsEnum.DailyTaskProgress])
@@ -33,14 +30,14 @@ namespace CardCollector.DailyTasks.CustomTasks
                 }
                 info.Increase();
                 return true;
-            }
+            }*/
             return false;
         }
 
-        public override async Task GiveReward(UserEntity user, object[] args = null)
+        public override async Task GiveReward(User user, object[] args = null)
         {
-            var userPacks = await UserPacksDao.GetOne(user.Id, 1);
-            userPacks.Count++;
+            /*var userPacks = await UserPacksDao.GetOne(user.Id, 1);
+            userPacks.Count++;*/
         }
 
         private class PeopleCompletedTask
@@ -53,7 +50,7 @@ namespace CardCollector.DailyTasks.CustomTasks
             {
                 var result = new PeopleCompletedTask();
                 result.infoDate = DateTime.Today;
-                result.logsEntity = await CountLogsDao.Get(result.infoDate);
+                /*result.logsEntity = await CountLogsDao.Get(result.infoDate);*/
                 return result;
             }
 

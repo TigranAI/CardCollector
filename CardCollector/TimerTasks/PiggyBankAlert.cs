@@ -16,7 +16,7 @@ namespace CardCollector.TimerTasks
         
         protected override async void TimerCallback(object o, ElapsedEventArgs e)
         {
-            var users = await UserDao.GetAllWhere(user => !user.IsBlocked);
+            /*var users = await UserDao.GetAllWhere(user => !user.IsBlocked);
             var settings = await SettingsDao.GetAll();
             var messages = await UserMessagesDao.GetAll();
             foreach (var user in users)
@@ -26,16 +26,16 @@ namespace CardCollector.TimerTasks
                 var income = await cash.CalculateIncome(stickers);
                 try {
                     if (settings[user.Id][UserSettingsEnum.PiggyBankCapacity])
-                        messages[user.Id].CollectIncomeId = 
-                        await MessageController.DeleteAndSend(user, messages[user.Id].CollectIncomeId,
+                        messages[user.Id].CollectIncomeMessageId = 
+                        await MessageController.DeleteAndSend(user, messages[user.Id].CollectIncomeMessageId,
                             $"{Messages.uncollected_income}: {income} / {cash.MaxCapacity} {Text.coin}");
                 }
                 catch {
-                    messages[user.Id].CollectIncomeId = 
-                        await MessageController.DeleteAndSend(user, messages[user.Id].CollectIncomeId,
+                    messages[user.Id].CollectIncomeMessageId = 
+                        await MessageController.DeleteAndSend(user, messages[user.Id].CollectIncomeMessageId,
                             $"{Messages.uncollected_income}: {income} / {cash.MaxCapacity} {Text.coin}");
                 }
-            }
+            }*/
         }
     }
 }

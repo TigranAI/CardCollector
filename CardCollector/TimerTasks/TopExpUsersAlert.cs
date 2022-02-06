@@ -17,7 +17,7 @@ namespace CardCollector.TimerTasks
         
         protected override async void TimerCallback(object o, ElapsedEventArgs e)
         {
-            var usersExp = await UserLevelDao.GetTop(5);
+            /*var usersExp = await UserLevelDao.GetTop(5);
             if (usersExp.Count < 1) return;
             var users = await UserDao.GetAllWhere(item => !item.IsBlocked);
             var settings = await SettingsDao.GetAll();
@@ -32,16 +32,16 @@ namespace CardCollector.TimerTasks
             {
                 try {
                     if (settings[user.Id][UserSettingsEnum.DailyExpTop])
-                        messages[user.Id].TopUsersId = 
-                            await MessageController.DeleteAndSend(user, messages[user.Id].TopUsersId,
+                        messages[user.Id].TopUsersMessageId = 
+                            await MessageController.DeleteAndSend(user, messages[user.Id].TopUsersMessageId,
                                 message, Keyboard.GetTopButton(TopBy.Tier4Stickers), ParseMode.Html);
                 }
                 catch {
-                    messages[user.Id].TopUsersId = 
-                        await MessageController.DeleteAndSend(user, messages[user.Id].TopUsersId,
+                    messages[user.Id].TopUsersMessageId = 
+                        await MessageController.DeleteAndSend(user, messages[user.Id].TopUsersMessageId,
                             message, Keyboard.GetTopButton(TopBy.Tier4Stickers), ParseMode.Html);
                 }
-            }
+            }*/
         }
     }
 }

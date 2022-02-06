@@ -4,7 +4,7 @@ namespace CardCollector.Session.Modules
 {
     public class CollectionModule : Module
     {
-        public StickerEntity SelectedSticker;
+        public Sticker SelectedSticker;
         public int Count = 1;
         public int SellPrice = 0;
         

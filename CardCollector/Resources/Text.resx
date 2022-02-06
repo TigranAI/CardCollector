@@ -336,4 +336,10 @@
     <data name="show_users" xml:space="preserve">
         <value>Показать пользователей</value>
     </data>
+    <data name="random_author" xml:space="preserve">
+        <value>Случайный</value>
+    </data>
+    <data name="random_author_description" xml:space="preserve">
+        <value>Из данного пака есть шанс получить абсолютно любой стикер любого автора!</value>
+    </data>
 </root>

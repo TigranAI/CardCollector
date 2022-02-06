@@ -16,9 +16,9 @@ namespace CardCollector.Controllers
         stickerShortHashCode - MD5 хеш представляющий собой сумму id стикера и id пользователя, используется в словаре как ключ
         price - цена за штуку
         count - количество продаваемых стикеров*/
-        public static void SellCard(long userId, string stickerId, int price, int count)
+        /*public static void SellCard(long userId, string stickerId, int price, int count)
         {
-            var product = new AuctionEntity
+            var product = new Auction
             {
                 Trader = userId,
                 StickerId = stickerId,
@@ -33,12 +33,12 @@ namespace CardCollector.Controllers
             return await AuctionDao.GetTotalQuantity(stickerId);
         }
 
-        public static async Task<IEnumerable<StickerEntity>> GetStickers(string filter)
+        public static async Task<IEnumerable<Sticker>> GetStickers(string filter)
         {
             return await AuctionDao.GetStickers(filter);
         }
 
-        public static async Task<IEnumerable<AuctionEntity>> GetTradersList(string filter, string stickerId)
+        public static async Task<IEnumerable<Auction>> GetTradersList(string filter, string stickerId)
         {
             return await AuctionDao.GetProducts(stickerId);
         }
@@ -57,6 +57,6 @@ namespace CardCollector.Controllers
         {
             var traders = await GetTradersList("", stickerId);
             return sessionFilters.ApplyPriceTo(traders).Sum(i => i.Count);
-        }
+        }*/
     }
 }

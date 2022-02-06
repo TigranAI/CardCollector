@@ -22,12 +22,11 @@ namespace CardCollector.TimerTasks
             await GivePacks();
             await GiveTier1();
             await GiveTier2();
-            await BotDatabase.SaveData();
         }
         
         public async Task GivePacks()
         {
-            var users = await UserDao.GetAllWhere(user => !user.IsBlocked);
+            /*var users = await UserDao.GetAllWhere(user => !user.IsBlocked);
             var settings = await SettingsDao.GetAll();
             foreach (var user in users)
             {
@@ -48,12 +47,12 @@ namespace CardCollector.TimerTasks
                             $"{Messages.effect_Random1Pack5Day} {packsCount}{Text.items}", addToList: false);
                     }
                 }
-            }
+            }*/
         }
 
         public static async Task GiveTier2()
         {
-            var users = await UserDao.GetAll();
+            /*var users = await UserDao.GetAll();
             var settings = await SettingsDao.GetAll();
             foreach (var user in users)
             {
@@ -78,12 +77,12 @@ namespace CardCollector.TimerTasks
                             $"{Messages.effect_RandomSticker2Tier3Day}{generatedMessage}", addToList: false);
                     }
                 }
-            }
+            }*/
         }
 
         public static async Task GiveTier1()
         {
-            var users = await UserDao.GetAll();
+            /*var users = await UserDao.GetAll();
             var settings = await SettingsDao.GetAll();
             foreach (var user in users)
             {
@@ -108,7 +107,7 @@ namespace CardCollector.TimerTasks
                             $"{Messages.effect_RandomSticker1Tier3Day}{generatedMessage}", addToList: false);
                     }
                 }
-            }
+            }*/
         }
     }
 }

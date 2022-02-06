@@ -4,8 +4,8 @@ namespace CardCollector.Session.Modules
 {
     public class ShopModule : Module
     {
-        public ShopEntity SelectedPosition;
-        public PackEntity SelectedPack;
+        /*public ShopEntity SelectedPosition;*/
+        public Pack SelectedPack;
         public int Count = 1;
         public int EnteredExchangeSum = 1;
 
@@ -13,7 +13,7 @@ namespace CardCollector.Session.Modules
         
         public void Reset()
         {
-            SelectedPosition = null;
+            /*SelectedPosition = null;*/
             SelectedPack = null;
             Count = 1;
             EnteredExchangeSum = 1;

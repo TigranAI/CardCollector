@@ -14,15 +14,15 @@ namespace CardCollector
     {
         /* Преобразует список стикеров в список результатов для телеграм */
         public static IEnumerable<InlineQueryResult> ToTelegramResults
-            (this IEnumerable<StickerEntity> list, string command, int offset = 0, bool asMessage = true)
+            (this IEnumerable<Sticker> list, string command, int offset = 0, bool asMessage = true)
         {
             var result = new List<InlineQueryResult>();
             foreach (var sticker in list.Skip(offset).Take(50))
             {
                 result.Add( asMessage 
-                    ? new InlineQueryResultCachedSticker($"{command}={sticker.Md5Hash}={Utilities.rnd.Next(500)}", sticker.Id) 
+                    ? new InlineQueryResultCachedSticker($"{command}={sticker.Id}={Utilities.rnd.Next(500)}", sticker.FileId) 
                         {InputMessageContent = new InputTextMessageContent(Text.select)}
-                    : new InlineQueryResultCachedSticker($"{command}={sticker.Md5Hash}={Utilities.rnd.Next(500)}", sticker.Id));
+                    : new InlineQueryResultCachedSticker($"{command}={sticker.Id}={Utilities.rnd.Next(500)}", sticker.FileId));
             }
             /*
             foreach (var item in list)
@@ -40,15 +40,14 @@ namespace CardCollector
         }
         /* Преобразует список продавцов в список результатов для телеграм */
         public static async Task<IEnumerable<InlineQueryResult>> ToTelegramResults
-            (this IEnumerable<AuctionEntity> list, string command, double discount)
+            (this IEnumerable<Auction> list, string command, double discount)
         {
             var result = new List<InlineQueryResult>();
             foreach (var item in list)
             {
                 var price = (int)(item.Price * discount);
-                var user = await UserDao.GetById(item.Trader);
                 result.Add(new InlineQueryResultArticle($"{command}={item.Id}",
-                    $"{user.Username} {item.Count}{Text.items}", new InputTextMessageContent(Text.buy))
+                    $"{item.Trader.Username} {item.Count}{Text.items}", new InputTextMessageContent(Text.buy))
                 { Description = $"{price}{Text.gem} {Text.per} 1{Text.items}" });
                 /* Ограничение Telegram API по количеству результатов в 50 шт. */
                 if (result.Count > 49) return result;
