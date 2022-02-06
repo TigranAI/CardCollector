@@ -7,10 +7,10 @@ namespace CardCollector.Session.Modules
 {
     public class CombineModule : Module
     {
-        public StickerEntity SelectedSticker;
+        public Sticker SelectedSticker;
         public int Count = 1;
         public int Tier => SelectedSticker.Tier;
-        public Dictionary<StickerEntity, int> CombineList { get; } = new();
+        public Dictionary<Sticker, int> CombineList { get; } = new();
         
         public int CalculateCombinePrice()
         {

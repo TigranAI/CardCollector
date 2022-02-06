@@ -16,7 +16,7 @@ namespace CardCollector.TimerTasks
 
         protected override async void TimerCallback(object o, ElapsedEventArgs e)
         {
-            var users = await UserDao.GetAllWhere(user => !user.IsBlocked);
+            /*var users = await UserDao.GetAllWhere(user => !user.IsBlocked);
             var settings = await SettingsDao.GetAll();
             var messages = await UserMessagesDao.GetAll();
             foreach (var user in users)
@@ -24,17 +24,17 @@ namespace CardCollector.TimerTasks
                 try
                 {
                     if (settings[user.Id][UserSettingsEnum.DailyTasks])
-                        messages[user.Id].DailyTaskId =
-                            await MessageController.DeleteAndSend(user, messages[user.Id].DailyTaskId,
+                        messages[user.Id].DailyTaskMessageId =
+                            await MessageController.DeleteAndSend(user, messages[user.Id].DailyTaskMessageId,
                                 Messages.daily_task_alertation);
                 }
                 catch
                 {
-                    messages[user.Id].DailyTaskId =
-                        await MessageController.DeleteAndSend(user, messages[user.Id].DailyTaskId,
+                    messages[user.Id].DailyTaskMessageId =
+                        await MessageController.DeleteAndSend(user, messages[user.Id].DailyTaskMessageId,
                             Messages.daily_task_alertation);
                 }
-            }
+            }*/
         }
     }
 }

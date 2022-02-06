@@ -13,7 +13,7 @@ namespace CardCollector.StickerEffects
     {
         public static int Interval = 3;
 
-        public static async Task<int> GetStickersCount(Dictionary<string, UserStickerRelation> stickers)
+        /*public static async Task<int> GetStickersCount(Dictionary<string, UserSticker> stickers)
         {
             var today = DateTime.Today.ToString(Constants.TimeCulture.ShortDatePattern);
             var stickersWithEffect = (await StickerDao.GetListWhere(
@@ -28,14 +28,14 @@ namespace CardCollector.StickerEffects
             });
         }
 
-        public static async Task<Dictionary<StickerEntity, int>> GenerateList(int count)
+        public static async Task<Dictionary<Sticker, int>> GenerateList(int count)
         {
             var stickers = await StickerDao.GetListWhere(item => item.Tier == 2);
             var rnd = new Random();
-            var result = new List<StickerEntity>();
+            var result = new List<Sticker>();
             for (var i = 0; i < count; i++)
                 result.Add(stickers[rnd.Next(stickers.Count)]);
             return result.GroupBy(item => item).ToDictionary(item => item.Key, item => item.Count());
-        }
+        }*/
     }
 }

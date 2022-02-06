@@ -13,7 +13,7 @@ namespace CardCollector.StickerEffects
     {
         public static int Interval = 5;
 
-        public static async Task<int> GetPacksCount(Dictionary<string, UserStickerRelation> stickers)
+        /*public static async Task<int> GetPacksCount(Dictionary<string, UserSticker> stickers)
         {
             var today = DateTime.Today.ToString(Constants.TimeCulture.ShortDatePattern);
             var stickersWithEffect = (await StickerDao.GetListWhere(
@@ -27,6 +27,6 @@ namespace CardCollector.StickerEffects
                 item.AdditionalData = today;
                 return item.Count;
             });
-        }
+        }*/
     }
 }

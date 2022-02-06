@@ -4,8 +4,8 @@ namespace CardCollector.Session.Modules
 {
     public class AdminModule : Module
     {
-        public PackEntity SelectedPack;
-        public StickerEntity SelectedSticker;
+        public Pack SelectedPack;
+        public Sticker SelectedSticker;
 
         public void Reset()
         {

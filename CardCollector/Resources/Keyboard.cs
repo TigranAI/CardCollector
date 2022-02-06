@@ -333,7 +333,7 @@ namespace CardCollector.Resources
             new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
         });
 
-        public static InlineKeyboardMarkup GetAuthorsKeyboard(List<PackEntity> list, int offset, int totalCount)
+        public static InlineKeyboardMarkup GetAuthorsKeyboard(List<Pack> list, int offset, int totalCount)
         {
             var keyboardList = new List<InlineKeyboardButton[]>
             {
@@ -368,7 +368,7 @@ namespace CardCollector.Resources
             return new InlineKeyboardMarkup(keyboardList);
         }
 
-        public static InlineKeyboardMarkup GetPacksKeyboard(List<PackEntity> list,
+        public static InlineKeyboardMarkup GetPacksKeyboard(List<Pack> list,
             int offset, int totalCount, string command)
         {
             var keyboardList = new List<InlineKeyboardButton[]>();
@@ -402,7 +402,7 @@ namespace CardCollector.Resources
             int offset, int totalCount)
         {
             var keyboardList = new List<InlineKeyboardButton[]>();
-            foreach (var (item, i) in list.WithIndex())
+            /*foreach (var (item, i) in list.WithIndex())
             {
                 var author = await PacksDao.GetById(item.PackId);
                 if (i % 2 == 0)
@@ -418,7 +418,7 @@ namespace CardCollector.Resources
                         InlineKeyboardButton.WithCallbackData($"{author.Author} ({item.Count}{Text.items})",
                             $"{Command.open_pack}={item.PackId}")
                     };
-            }
+            }*/
             var arrows = new List<InlineKeyboardButton>();
             if (offset > 9)
                 arrows.Add(InlineKeyboardButton
@@ -495,7 +495,7 @@ namespace CardCollector.Resources
             return new InlineKeyboardMarkup(keyboard);
         }
 
-        public static InlineKeyboardMarkup GetStickerKeyboard(StickerEntity stickerInfo)
+        public static InlineKeyboardMarkup GetStickerKeyboard(Sticker stickerInfo)
         {
             return new InlineKeyboardMarkup(new[]
             {
@@ -545,14 +545,14 @@ namespace CardCollector.Resources
         public static InlineKeyboardMarkup GetCombineKeyboard(CombineModule module)
         {
             var keyboard = new List<InlineKeyboardButton[]>();
-            foreach (var (sticker, _) in module.CombineList)
+            /*foreach (var (sticker, _) in module.CombineList)
             {
                 keyboard.Add(new[]
                 {
                     InlineKeyboardButton.WithCallbackData($"{Text.delete} {Text.sticker} {keyboard.Count + 1}",
                         $"{Command.delete_combine}={sticker.Md5Hash}")
                 });
-            }
+            }*/
 
             if (module.CombineCount == Constants.COMBINE_COUNT)
                 keyboard.Add(new[]
@@ -601,13 +601,13 @@ namespace CardCollector.Resources
                 new[] {InlineKeyboardButton.WithCallbackData(Text.buy_pack, Command.buy_pack)},
                 new[] {InlineKeyboardButton.WithCallbackData(Text.buy_coins, Command.buy_coins)},
             };
-            if (privilegeLevel >= PrivilegeLevel.Programmer)
+            /*if (privilegeLevel >= PrivilegeLevel.Programmer)*/
                 keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.buy_gems, Command.select_provider)});
             keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)});
             return new InlineKeyboardMarkup(keyboard);
         }
 
-        public static InlineKeyboardMarkup SpecialOffersKeyboard(IEnumerable<ShopEntity> specialOffers)
+        /*public static InlineKeyboardMarkup SpecialOffersKeyboard(IEnumerable<ShopEntity> specialOffers)
         {
             var keyboard = new List<InlineKeyboardButton[]>();
             foreach (var offer in specialOffers)
@@ -618,7 +618,7 @@ namespace CardCollector.Resources
                 });
             keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)});
             return new InlineKeyboardMarkup(keyboard);
-        }
+        }*/
 
         public static InlineKeyboardMarkup ShopPacksKeyboard = new(new[]
         {
@@ -632,7 +632,7 @@ namespace CardCollector.Resources
             new[] {InlineKeyboardButton.WithCallbackData(Text.back, Command.back)},
         });
 
-        public static InlineKeyboardMarkup OfferKeyboard(ShopModule module)
+        /*public static InlineKeyboardMarkup OfferKeyboard(ShopModule module)
         {
             var resultPriceCoins = module.SelectedPosition?.ResultPriceCoins
                                    ?? module.SelectedPack?.PriceCoins * module.Count ?? -1;
@@ -667,7 +667,7 @@ namespace CardCollector.Resources
                     InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.show_stickers)
                 });
             return new InlineKeyboardMarkup(keyboard);
-        }
+        }*/
 
         public static InlineKeyboardMarkup LoginKeyboard(string loginLink)
         {

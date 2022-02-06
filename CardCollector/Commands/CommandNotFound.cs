@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using CardCollector.Controllers;
-using CardCollector.DataBase.Entity;
-using Telegram.Bot.Types;
+using CardCollector.DataBase;
+using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands
 {
@@ -11,14 +11,14 @@ namespace CardCollector.Commands
 
         private readonly string _command;
 
-        public override async Task Execute()
+        protected override async Task Execute()
         {
             await MessageController.EditMessage(User, "Команда не найдена " + _command);
         }
 
-        protected internal override bool Match(UserEntity user, Update update) => true;
+        public override bool Match() => true;
 
-        public CommandNotFound(UserEntity user, Update update, string command) : base(user, update)
+        public CommandNotFound(User user, BotDatabaseContext context, string command) : base(user, context)
         {
             _command = command;
         }

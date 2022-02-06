@@ -15,8 +15,8 @@ namespace CardCollector.TimerTasks
 
         protected override async void TimerCallback(object o, ElapsedEventArgs e)
         {
-            foreach (var item in await DailyTaskDao.GetAll())
-                item.Progress = DailyTask.List[(DailyTaskKeys) item.TaskId].Goal;
+            /*foreach (var item in await DailyTaskDao.GetAll())
+                item.Progress = DailyTask.List[(DailyTaskKeys) item.TaskId].Goal;*/
         }
     }
 }

@@ -736,6 +736,24 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Случайный.
+        /// </summary>
+        internal static string random_author {
+            get {
+                return ResourceManager.GetString("random_author", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Из данного пака есть шанс получить абсолютно любой стикер любого автора!.
+        /// </summary>
+        internal static string random_author_description {
+            get {
+                return ResourceManager.GetString("random_author_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Получено случайных паков:.
         /// </summary>
         internal static string random_packs_added {

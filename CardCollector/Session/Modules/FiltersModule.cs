@@ -44,7 +44,7 @@ namespace CardCollector.Session.Modules
             return text;
         }
         
-        public async Task<IEnumerable<StickerEntity>> ApplyTo(IEnumerable<StickerEntity> list, bool applyPrice = false)
+        public async Task<IEnumerable<Sticker>> ApplyTo(IEnumerable<Sticker> list, bool applyPrice = false)
         {
             /* Фильтруем по автору */
             if (Filters[Command.authors_menu] is string author && author != "")
@@ -76,18 +76,18 @@ namespace CardCollector.Session.Modules
                 : list;
         }
         
-        public async Task<IEnumerable<StickerEntity>> ApplyPriceTo(IEnumerable<StickerEntity> list)
+        public async Task<IEnumerable<Sticker>> ApplyPriceTo(IEnumerable<Sticker> list)
         {
             /* Фильтруем по цене алмазов ОТ */
-            if (Filters[Command.price_gems_from] is int PGF && PGF != 0)
+            /*if (Filters[Command.price_gems_from] is int PGF && PGF != 0)
                 list = await list.WhereAsync(item => AuctionDao.HaveAny(item.Id, i => i.Price >= PGF));
-            /* Фильтруем по цене адмазов ДО */
+            /* Фильтруем по цене адмазов ДО #1#
             if (Filters[Command.price_gems_to] is int PGT && PGT != 0)
-                list = await list.WhereAsync(item => AuctionDao.HaveAny(item.Id, i => i.Price <= PGT));
+                list = await list.WhereAsync(item => AuctionDao.HaveAny(item.Id, i => i.Price <= PGT));*/
             return list;
         }
         
-        public IEnumerable<AuctionEntity> ApplyPriceTo(IEnumerable<AuctionEntity> list)
+        public IEnumerable<Auction> ApplyPriceTo(IEnumerable<Auction> list)
         {
             /* Фильтруем по цене алмазов ОТ */
             if (Filters[Command.price_gems_from] is int PGF && PGF != 0)
