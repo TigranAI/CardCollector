@@ -18,10 +18,10 @@ namespace CardCollector.Commands.MessageHandler.Admin
         protected override async Task Execute()
         {
             var packId = User.Session.GetModule<AdminModule>().SelectedPackId;
-            var pack = await Context.Packs.FindPack(packId);
+            var pack = await Context.Packs.FindById(packId);
             pack.PreviewFileId = Message.Sticker!.FileId;
             pack.IsPreviewAnimated = Message.Sticker.IsAnimated;
-            await MessageController.EditMessage(User, Messages.update_preview_success, Keyboard.BackAndMoreKeyboard);
+            await User.Messages.EditMessage(User, Messages.update_preview_success, Keyboard.BackAndMoreKeyboard);
         }
 
         public override bool Match()

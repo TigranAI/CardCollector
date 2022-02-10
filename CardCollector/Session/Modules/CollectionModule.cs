@@ -1,16 +1,14 @@
-﻿using CardCollector.DataBase.Entity;
-
-namespace CardCollector.Session.Modules
+﻿namespace CardCollector.Session.Modules
 {
     public class CollectionModule : Module
     {
-        public Sticker SelectedSticker;
+        public long? SelectedStickerId;
         public int Count = 1;
-        public int SellPrice = 0;
+        public int SellPrice;
         
         public void Reset()
         {
-            SelectedSticker = null;
+            SelectedStickerId = null;
             Count = 1;
             SellPrice = 0;
         }

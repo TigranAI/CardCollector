@@ -10,7 +10,7 @@ namespace CardCollector.Commands.MessageHandler.Profile
 {
     public class Profile : MessageHandler
     {
-        protected override string CommandText => Text.profile;
+        protected override string CommandText => MessageCommands.profile;
         protected override bool ClearMenu => true;
         protected override bool AddToStack => true;
         protected override bool ClearStickers => true;

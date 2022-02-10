@@ -6,7 +6,7 @@ namespace CardCollector.DataBase.Entity
     public class Auction
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public long Id { get; set; }
         public User Trader { get; set; }
         public Sticker Sticker { get; set; }
         public int Price { get; set; }

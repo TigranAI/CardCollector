@@ -85,5 +85,23 @@ namespace CardCollector.DataBase.Entity
             MenuMessageId =
                 await MessageController.SendMessage(user, Messages.main_menu, Keyboard.Menu, ParseMode.Html);
         }
+
+        public async Task SendDailyTaskProgress(User user, string message)
+        {
+            if (DailyTaskProgressMessageId != -1) await MessageController.DeleteMessage(user, DailyTaskProgressMessageId);
+            DailyTaskProgressMessageId = await MessageController.SendMessage(user, Messages.main_menu);
+        }
+
+        public async Task SendDailyTaskComplete(User user)
+        {
+            if (DailyTaskMessageId != -1) await MessageController.DeleteMessage(user, DailyTaskMessageId);
+            DailyTaskMessageId = await MessageController.SendMessage(user, Messages.pack_prize, Keyboard.MyPacks);
+        }
+
+        public async Task SendTopUsers(User user, string message, InlineKeyboardMarkup keyboard)
+        {
+            if (TopUsersMessageId != -1) await MessageController.DeleteMessage(user, TopUsersMessageId);
+            TopUsersMessageId = await MessageController.SendMessage(user, message, keyboard, ParseMode.Html);
+        }
     }
 }

@@ -1,13 +1,11 @@
-﻿using CardCollector.DataBase.Entity;
-
-namespace CardCollector.Session.Modules
+﻿namespace CardCollector.Session.Modules
 {
     public class DefaultModule : Module
     {
-        public Sticker SelectedSticker;
+        public long? SelectedStickerId;
         public void Reset()
         {
-            SelectedSticker = null;
+            SelectedStickerId = null;
         }
     }
 }

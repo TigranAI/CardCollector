@@ -1,113 +1,134 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CardCollector.DataBase;
 using CardCollector.DataBase.Entity;
-using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
+using Microsoft.EntityFrameworkCore;
 
 namespace CardCollector.Session.Modules
 {
     public class FiltersModule : Module
     {
-        /* Фильтры, примененные пользователем в меню коллекции/магазина/аукциона */
-        public readonly Dictionary<string, object> Filters = new()
-        {
-            {Command.authors_menu, ""},
-            {Command.tier, -1},
-            {Command.emoji, ""},
-            {Command.price_coins_from, 0},
-            {Command.price_coins_to, 0},
-            {Command.price_gems_from, 0},
-            {Command.price_gems_to, 0},
-            {Command.sort, SortingTypes.None},
-        };
+        public string? Author;
+        public int? Tier;
+        public string? Emoji;
+        public int? PriceCoinsFrom;
+        public int? PriceCoinsTo;
+        public int? PriceGemsFrom;
+        public int? PriceGemsTo;
+        public SortingTypes Sorting;
 
         public string ToString(UserState state)
         {
             var text = $"{Messages.current_filters}:\n" +
-                       $"{Messages.author}: {(Filters[Command.authors_menu] is string author and not "" ? author : Messages.all)}\n" +
-                       $"{Messages.tier}: {(Filters[Command.tier] is int tier and not -1 ? new string('⭐', tier) : Messages.all)}\n" +
-                       $"{Messages.emoji}: {(Filters[Command.emoji] is string emoji and not "" ? emoji : Messages.all)}\n";
+                       $"{Messages.author}: {Author ?? Messages.all}\n" +
+                       $"{Messages.tier}: {Tier?.ToString() ?? Messages.all}\n" +
+                       $"{Messages.emoji}: {Emoji ?? Messages.all}\n";
             switch (state)
             {
                 case UserState.AuctionMenu:
-                    text += $"{Messages.price}: 💎 {Filters[Command.price_gems_from]} -" +
-                            $" {(Filters[Command.price_gems_to] is int g and not 0 ? g : "∞")}\n";
+                    text += $"{Messages.price}: 💎 {PriceGemsFrom ?? 0} - {PriceGemsTo?.ToString() ?? "∞"}\n";
                     break;
                 case UserState.ShopMenu:
-                    text += $"{Messages.price}: 💰 {Filters[Command.price_coins_from]} -" +
-                            $" {(Filters[Command.price_coins_to] is int c and not 0 ? c : "∞")}\n";
+                    text += $"{Messages.price}: 💰 {PriceCoinsFrom ?? 0} - {PriceCoinsTo?.ToString() ?? "∞"}\n";
                     break;
             }
 
-            text += $"{Messages.sorting} {Filters[Command.sort]}\n\n{Messages.select_filter}:";
+            text += $"{Messages.sorting} {Resources.SortingTypes.ResourceManager.GetString(Sorting.ToString())}" +
+                    $"\n\n{Messages.select_filter}:";
             return text;
         }
-        
-        public async Task<IEnumerable<Sticker>> ApplyTo(IEnumerable<Sticker> list, bool applyPrice = false)
+
+        public List<Sticker> ApplyTo(List<Sticker> list)
         {
-            /* Фильтруем по автору */
-            if (Filters[Command.authors_menu] is string author && author != "")
-                list = list.Where(item => item.Author.Contains(author));
-            /* Фильтруем по тиру */
-            if (Filters[Command.tier] is int tier && tier != -1)
-                list = list.Where(item => item.Tier.Equals(tier));
-            /* Фильтруем по эмоции */
-            if (Filters[Command.emoji] is string emoji && emoji != "")
-                list = list.Where(item => item.Emoji.Contains(emoji));
-            /* Сортируем список, если тип сортировки установлен */
-            if (Filters[Command.sort] is not string sort || sort == SortingTypes.None) return list;
+            if (Author is { } author)
+                list.RemoveAll(item => !item.Author.Contains(author));
+            if (Tier is { } tier)
+                list.RemoveAll(item => !item.Tier.Equals(tier));
+            if (Emoji is { } emoji)
+                list.RemoveAll(item => !item.Emoji.Contains(emoji));
+            return Sorting switch
             {
-                /* Сортируем по автору */
-                if (sort== SortingTypes.ByAuthor)
-                    list = list.OrderBy(item => item.Author);
-                /* Сортируем по названию */
-                if (sort == SortingTypes.ByTitle)
-                    list = list.OrderBy(item => item.Title);
-                /* Сортируем по увеличению тира */
-                if (sort == SortingTypes.ByTierIncrease)
-                    list = list.OrderBy(item => item.Tier);
-                /* Сортируем по уменьшению тира */
-                if (sort == SortingTypes.ByTierDecrease)
-                    list = list.OrderByDescending(item => item.Tier);
+                SortingTypes.None => list,
+                SortingTypes.ByAuthor => list.OrderBy(item => item.Author).ToList(),
+                SortingTypes.ByTitle => list.OrderBy(item => item.Title).ToList(),
+                SortingTypes.ByTierIncrease => list.OrderBy(item => item.Tier).ToList(),
+                SortingTypes.ByTierDecrease => list.OrderByDescending(item => item.Tier).ToList(),
+                _ => list
+            };
+        }
+
+        public async Task ApplyPriceTo(BotDatabaseContext context, List<Sticker> list)
+        {
+            if (PriceGemsFrom == null && PriceGemsTo == null) return;
+            if (PriceGemsFrom is { } && PriceGemsTo is { })
+            {
+                var stickers = await context.Auctions
+                    .Where(item => item.Price >= PriceGemsFrom && item.Price <= PriceGemsTo)
+                    .DistinctBy(item => item.Sticker.Id)
+                    .ToListAsync();
+                list.RemoveAll(item => !stickers.Any(auction => auction.Sticker.Id == item.Id));
             }
-            return applyPrice 
-                ? await ApplyPriceTo(list)
-                : list;
+            else if (PriceGemsFrom is { })
+            {
+                var stickers = await context.Auctions
+                    .Where(item => item.Price >= PriceGemsFrom)
+                    .DistinctBy(item => item.Sticker.Id)
+                    .ToListAsync();
+                list.RemoveAll(item => !stickers.Any(auction => auction.Sticker.Id == item.Id));
+            }
+            else if (PriceGemsTo is { })
+            {
+                var stickers = await context.Auctions
+                    .Where(item => item.Price <= PriceGemsTo)
+                    .DistinctBy(item => item.Sticker.Id)
+                    .ToListAsync();
+                list.RemoveAll(item => !stickers.Any(auction => auction.Sticker.Id == item.Id));
+            }
         }
-        
-        public async Task<IEnumerable<Sticker>> ApplyPriceTo(IEnumerable<Sticker> list)
+
+        public void ApplyPriceTo(List<Auction> list)
         {
-            /* Фильтруем по цене алмазов ОТ */
-            /*if (Filters[Command.price_gems_from] is int PGF && PGF != 0)
-                list = await list.WhereAsync(item => AuctionDao.HaveAny(item.Id, i => i.Price >= PGF));
-            /* Фильтруем по цене адмазов ДО #1#
-            if (Filters[Command.price_gems_to] is int PGT && PGT != 0)
-                list = await list.WhereAsync(item => AuctionDao.HaveAny(item.Id, i => i.Price <= PGT));*/
-            return list;
+            if (PriceGemsFrom is { } && PriceGemsTo is { })
+                list.RemoveAll(item => item.Price <= PriceCoinsFrom || item.Price >= PriceGemsTo);
+            else if (PriceGemsFrom is { })
+                list.RemoveAll(item => item.Price <= PriceCoinsFrom);
+            else if (PriceGemsTo is { })
+                list.RemoveAll(item => item.Price >= PriceGemsTo);
         }
-        
-        public IEnumerable<Auction> ApplyPriceTo(IEnumerable<Auction> list)
-        {
-            /* Фильтруем по цене алмазов ОТ */
-            if (Filters[Command.price_gems_from] is int PGF && PGF != 0)
-                list = list.Where(item => item.Price >= PGF);
-            /* Фильтруем по цене адмазов ДО */
-            if (Filters[Command.price_gems_to] is int PGT && PGT != 0)
-                list = list.Where(item => item.Price <= PGT);
-            return list;
-        }
-        
+
         public void Reset()
         {
-            Filters[Command.authors_menu] = "";
-            Filters[Command.tier] = -1;
-            Filters[Command.emoji] = "";
-            Filters[Command.price_coins_from] = 0;
-            Filters[Command.price_coins_to] = 0;
-            Filters[Command.price_gems_from] = 0;
-            Filters[Command.price_gems_to] = 0;
-            Filters[Command.sort] = SortingTypes.None;
+            Author = null;
+            Tier = null;
+            Emoji = null;
+            PriceCoinsFrom = null;
+            PriceCoinsTo = null;
+            PriceGemsFrom = null;
+            PriceGemsTo = null;
+            Sorting = SortingTypes.None;
+        }
+
+        public enum SortingTypes
+        {
+            None = 1,
+            ByAuthor = 2,
+            ByTitle = 3,
+            ByTierIncrease = 4,
+            ByTierDecrease = 5
+        }
+
+        public enum FilterKeys
+        {
+            Author = 1,
+            Tier = 2,
+            Emoji = 3,
+            PriceCoinsFrom = 4,
+            PriceCoinsTo = 5,
+            PriceGemsFrom = 6,
+            PriceGemsTo = 7,
+            Sorting = 8,
         }
     }
 }

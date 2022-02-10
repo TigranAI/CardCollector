@@ -13,7 +13,7 @@ namespace CardCollector.Commands
 
         protected override async Task Execute()
         {
-            await MessageController.EditMessage(User, "Команда не найдена " + _command);
+            await User.Messages.EditMessage(User, "Команда не найдена " + _command);
         }
 
         public override bool Match() => true;

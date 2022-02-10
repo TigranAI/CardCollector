@@ -32,10 +32,6 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Text.Designer.cs</LastGenOutput>
       </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Command.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Command.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
       <EmbeddedResource Update="DailyTasks\Titles.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Titles.Designer.cs</LastGenOutput>
@@ -55,6 +51,22 @@
       <EmbeddedResource Update="Resources\TopByTexts.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>TopByTexts.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Commands\ChosenInlineResultHandler\ChosenInlineResultCommands.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>ChosenInlineResultCommands.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Commands\MessageHandler\MessageCommands.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>MessageCommands.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Commands\CallbackQueryHandler\CallbackQueryCommands.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>CallbackQueryCommands.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Commands\PreCheckoutQueryHandler\PreCheckoutQueryCommands.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>PreCheckoutQueryCommands.Designer.cs</LastGenOutput>
       </EmbeddedResource>
     </ItemGroup>
 
@@ -78,11 +90,6 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>Text.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\Command.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>Command.resx</DependentUpon>
       </Compile>
       <Compile Update="DailyTasks\Titles.Designer.cs">
         <DesignTime>True</DesignTime>
@@ -108,6 +115,26 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>TopByTexts.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Commands\ChosenInlineResultHandler\ChosenInlineResultCommands.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ChosenInlineResultCommands.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Commands\MessageHandler\MessageCommands.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>MessageCommands.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Commands\CallbackQueryHandler\CallbackQueryCommands.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>CallbackQueryCommands.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Commands\PreCheckoutQueryHandler\PreCheckoutQueryCommands.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>PreCheckoutQueryCommands.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

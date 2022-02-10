@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="add_sticker_preview" xml:space="preserve">
+        <value>AAA</value>
+    </data>
+    <data name="select_for_sale_pack" xml:space="preserve">
+        <value>ABE</value>
+    </data>
+    <data name="select_order" xml:space="preserve">
+        <value>ABF</value>
+    </data>
+    <data name="select_provider" xml:space="preserve">
+        <value>ABH</value>
+    </data>
+    <data name="select_shop_pack" xml:space="preserve">
+        <value>ABI</value>
+    </data>
+    <data name="authors_menu" xml:space="preserve">
+        <value>AAC</value>
+    </data>
+    <data name="alerts" xml:space="preserve">
+        <value>AAB</value>
+    </data>
+    <data name="buy_coins" xml:space="preserve">
+        <value>AAE</value>
+    </data>
+    <data name="back" xml:space="preserve">
+        <value>AAD</value>
+    </data>
+    <data name="buy_sticker" xml:space="preserve">
+        <value>AAI</value>
+    </data>
+    <data name="sort" xml:space="preserve">
+        <value>ABR</value>
+    </data>
+    <data name="set" xml:space="preserve">
+        <value>ABK</value>
+    </data>
+    <data name="buy_pack" xml:space="preserve">
+        <value>AAG</value>
+    </data>
+    <data name="buy_special_order" xml:space="preserve">
+        <value>AAH</value>
+    </data>
+    <data name="control_panel" xml:space="preserve">
+        <value>AAR</value>
+    </data>
+    <data name="edit_sticker" xml:space="preserve">
+        <value>AAV</value>
+    </data>
+    <data name="end_sticker_upload" xml:space="preserve">
+        <value>AAX</value>
+    </data>
+    <data name="logs_menu" xml:space="preserve">
+        <value>AAY</value>
+    </data>
+    <data name="show_sample" xml:space="preserve">
+        <value>ABP</value>
+    </data>
+    <data name="stop_bot" xml:space="preserve">
+        <value>ABT</value>
+    </data>
+    <data name="upload_stickerpack" xml:space="preserve">
+        <value>ABV</value>
+    </data>
+    <data name="confirm_buying" xml:space="preserve">
+        <value>AAN</value>
+    </data>
+    <data name="return_from_auction" xml:space="preserve">
+        <value>ABD</value>
+    </data>
+    <data name="sell_sticker" xml:space="preserve">
+        <value>ABJ</value>
+    </data>
+    <data name="combine" xml:space="preserve">
+        <value>AAL</value>
+    </data>
+    <data name="combine_stickers" xml:space="preserve">
+        <value>AAM</value>
+    </data>
+    <data name="confirm_selling" xml:space="preserve">
+        <value>AAQ</value>
+    </data>
+    <data name="delete_combine" xml:space="preserve">
+        <value>AAU</value>
+    </data>
+    <data name="set_gems_sum" xml:space="preserve">
+        <value>ABN</value>
+    </data>
+    <data name="emoji" xml:space="preserve">
+        <value>AAW</value>
+    </data>
+    <data name="select_price" xml:space="preserve">
+        <value>ABG</value>
+    </data>
+    <data name="tier" xml:space="preserve">
+        <value>ABU</value>
+    </data>
+    <data name="confirm_login" xml:space="preserve">
+        <value>AAP</value>
+    </data>
+    <data name="choose_pack" xml:space="preserve">
+        <value>AAJ</value>
+    </data>
+    <data name="count" xml:space="preserve">
+        <value>AAS</value>
+    </data>
+    <data name="show_top_by" xml:space="preserve">
+        <value>ABQ</value>
+    </data>
+    <data name="collect_income" xml:space="preserve">
+        <value>AAK</value>
+    </data>
+    <data name="daily_tasks" xml:space="preserve">
+        <value>AAT</value>
+    </data>
+    <data name="my_packs" xml:space="preserve">
+        <value>AAZ</value>
+    </data>
+    <data name="open_pack" xml:space="preserve">
+        <value>ABB</value>
+    </data>
+    <data name="settings" xml:space="preserve">
+        <value>ABL</value>
+    </data>
+    <data name="buy_gems" xml:space="preserve">
+        <value>AAF</value>
+    </data>
+    <data name="confirm_exchange" xml:space="preserve">
+        <value>AAO</value>
+    </data>
+    <data name="open_author_pack_menu" xml:space="preserve">
+        <value>ABA</value>
+    </data>
+    <data name="pack_info" xml:space="preserve">
+        <value>ABC</value>
+    </data>
+    <data name="set_exchange_sum" xml:space="preserve">
+        <value>ABM</value>
+    </data>
+    <data name="show_order_info" xml:space="preserve">
+        <value>ABO</value>
+    </data>
+    <data name="special_offers" xml:space="preserve">
+        <value>ABS</value>
+    </data>
+</root>

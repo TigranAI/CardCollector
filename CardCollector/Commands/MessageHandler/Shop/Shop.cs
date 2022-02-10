@@ -11,7 +11,7 @@ namespace CardCollector.Commands.MessageHandler.Shop
 {
     public class Shop : MessageHandler
     {
-        protected override string CommandText => Text.shop;
+        protected override string CommandText => MessageCommands.shop;
         protected override bool ClearMenu => true;
         protected override bool AddToStack => true;
         protected override bool ClearStickers => true;

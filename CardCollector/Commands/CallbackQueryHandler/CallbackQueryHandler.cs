@@ -49,7 +49,7 @@ namespace CardCollector.Commands.CallbackQueryHandler
             return query == CommandText;
         }
 
-        protected CallbackQueryHandler(User user, CallbackQuery callbackQuery, BotDatabaseContext context) : base(user, context)
+        protected CallbackQueryHandler(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context)
         {
             CallbackQuery = callbackQuery;
         }

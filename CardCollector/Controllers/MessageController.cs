@@ -118,7 +118,7 @@ namespace CardCollector.Controllers
             if (user.IsBlocked) return -1;
             try
             {
-                var msg = await Bot.Client.SendTextMessageAsync(user.ChatId, message, parseMode, 
+                var msg = await Bot.Client.SendTextMessageAsync(user.ChatId, message, parseMode,
                     replyMarkup: keyboard, disableNotification: true);
                 return msg.MessageId;
             }
@@ -137,7 +137,7 @@ namespace CardCollector.Controllers
             if (user.IsBlocked) return -1;
             try
             {
-                var msg = await Bot.Client.SendStickerAsync(user.ChatId, fileId, 
+                var msg = await Bot.Client.SendStickerAsync(user.ChatId, fileId,
                     replyMarkup: keyboard, disableNotification: true);
                 return msg.MessageId;
             }
@@ -165,7 +165,7 @@ namespace CardCollector.Controllers
                 LogOutWarning("Can't answer CallbackQuery " + e.Message);
             }
         }
-        
+
         public static async Task DeleteMessage(
             User user,
             int messageId)
@@ -173,19 +173,19 @@ namespace CardCollector.Controllers
             if (user.IsBlocked) return;
             try
             {
-               await Bot.Client.DeleteMessageAsync(user.ChatId, messageId);
+                await Bot.Client.DeleteMessageAsync(user.ChatId, messageId);
             }
             catch (Exception e)
             {
                 LogOutWarning("Can't delete message " + e.Message);
             }
         }
-        
+
         public static async Task AnswerInlineQuery(
             User user,
             string queryId,
             IEnumerable<InlineQueryResult> results,
-            string? offset = null)
+            string offset)
         {
             if (user.IsBlocked) return;
             try
@@ -216,18 +216,31 @@ namespace CardCollector.Controllers
                 "ЮКасса" => AppSettings.YouKassaToken,
                 _ => ""
             };
-            
+
             try
             {
                 var result = await Bot.Client.SendInvoiceAsync(user.ChatId, title, description, payload,
                     token, currency.ToString(), prices, replyMarkup: keyboard, disableNotification: true);
-                user.Session.Messages.Add(result.MessageId);
+                user.Messages.ChatMessages.Add(result.MessageId);
                 return result.MessageId;
             }
             catch (Exception e)
             {
                 LogOutWarning("Can't send invoice " + e.Message);
                 return -1;
+            }
+        }
+
+        public static async Task EditReplyMarkup(User user, int messageId, InlineKeyboardMarkup keyboard)
+        {
+            if (user.IsBlocked) return;
+            try
+            {
+                await Bot.Client.EditMessageReplyMarkupAsync(user.ChatId, messageId, keyboard);
+            }
+            catch
+            {
+                /**/
             }
         }
     }

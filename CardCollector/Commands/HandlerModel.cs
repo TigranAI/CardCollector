@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using CardCollector.DataBase;
+using CardCollector.DataBase.EntityDao;
 using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands
@@ -14,6 +15,12 @@ namespace CardCollector.Commands
         protected User User;
         protected BotDatabaseContext Context;
 
+        public async Task InitNewContext(long userId)
+        {
+            Context = new BotDatabaseContext();
+            User = await Context.Users.FindByIdWithSession(userId);
+        }
+        
         public virtual async Task PrepareAndExecute()
         {
             await BeforeExecute();

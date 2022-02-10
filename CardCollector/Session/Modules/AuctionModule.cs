@@ -1,21 +1,17 @@
-﻿using CardCollector.DataBase.Entity;
-
-namespace CardCollector.Session.Modules
+﻿namespace CardCollector.Session.Modules
 {
     public class AuctionModule : Module
     {
-        public Sticker SelectedSticker;
-        public Auction SelectedPosition;
+        public long? SelectedStickerId;
+        public long? SelectedAuctionId;
         public int Count = 1;
-        public int MaxCount => SelectedPosition.Count;
-        public int Price => SelectedPosition.Price;
 
 
         public void Reset()
         {
-            SelectedSticker = null;
-            SelectedPosition = null;
-            Count = 0;
+            SelectedStickerId = null;
+            SelectedAuctionId = null;
+            Count = 1;
         }
     }
 }

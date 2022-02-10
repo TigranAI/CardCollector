@@ -1,20 +1,18 @@
-﻿using CardCollector.DataBase.Entity;
-
-namespace CardCollector.Session.Modules
+﻿namespace CardCollector.Session.Modules
 {
     public class ShopModule : Module
     {
-        /*public ShopEntity SelectedPosition;*/
-        public Pack SelectedPack;
+        
+        public int? SelectedPackId;
+        public int? SelectedOrderId;
         public int Count = 1;
         public int EnteredExchangeSum = 1;
-
-        public string SelectedProvider;
+        public string? SelectedProvider;
         
         public void Reset()
         {
-            /*SelectedPosition = null;*/
-            SelectedPack = null;
+            SelectedPackId = null;
+            SelectedOrderId = null;
             Count = 1;
             EnteredExchangeSum = 1;
             SelectedProvider = null;

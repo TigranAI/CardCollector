@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using CardCollector.Commands.MessageHandler;
 using CardCollector.DataBase;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.Entity.NotMapped;
@@ -23,8 +24,8 @@ namespace CardCollector
         private static readonly IEnumerable<BotCommand> Commands = new[]
         {
             /*new BotCommand {Command = Text.start, Description = "Запуск бота"},*/
-            new BotCommand {Command = Text.menu, Description = "Показать меню"},
-            new BotCommand {Command = Text.help, Description = "Показать информацию"},
+            new BotCommand {Command = MessageCommands.menu, Description = "Показать меню"},
+            new BotCommand {Command = MessageCommands.help, Description = "Показать информацию"},
             /*new BotCommand {Command = "/error", Description = "Сообщить об ошибке"},*/
         };
 

@@ -1,16 +1,15 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Controllers;
 using CardCollector.DataBase;
 using CardCollector.Resources;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using User = CardCollector.DataBase.Entity.User;
 
-namespace CardCollector.Commands.MessageHandler.Start
+namespace CardCollector.Commands.MessageHandler.TextCommands
 {
     public class Login : MessageHandler
     {
-        protected override string CommandText => "login";
+        protected override string CommandText => MessageCommands.login;
 
         protected override async Task Execute()
         {

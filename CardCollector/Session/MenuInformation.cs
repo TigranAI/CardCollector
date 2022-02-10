@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using CardCollector.Commands;
+using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using CardCollector.Session.Modules;
 
@@ -10,6 +11,7 @@ namespace CardCollector.Session
     {
         private HandlerModel Parent;
         private UserState State;
+        protected long UserId;
 
         public async Task BackToThis(UserSession session)
         {
@@ -24,6 +26,7 @@ namespace CardCollector.Session
                     session.ResetModule<CombineModule>();
                     break;
             }
+            await Parent.InitNewContext(UserId);
             await Parent.PrepareAndExecute();
         }
 
@@ -32,10 +35,11 @@ namespace CardCollector.Session
             return Parent.GetType();
         }
 
-        public MenuInformation(HandlerModel parent, UserState state)
+        public MenuInformation(HandlerModel parent, User user)
         {
             Parent = parent;
-            State = state;
+            State = user.Session.State;
+            UserId = user.Id;
         }
     }
 }

@@ -9,11 +9,11 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using User = CardCollector.DataBase.Entity.User;
 
-namespace CardCollector.Commands.MessageHandler.Start
+namespace CardCollector.Commands.MessageHandler.TextCommands
 {
     public class Start : MessageHandler
     {
-        protected override string CommandText => Text.start;
+        protected override string CommandText => MessageCommands.start;
         private const string PACK_STICKER_ID = "CAACAgIAAxkBAAIWs2DuY4vB50ARmyRwsgABs_7o5weDaAAC-g4AAmq4cUtH6M1FoN4bxSAE";
         
         protected override async Task Execute()
@@ -21,13 +21,8 @@ namespace CardCollector.Commands.MessageHandler.Start
             if (!User.FirstReward)
             {
                 User.FirstReward = true;
-                var randomPack = User.Packs.SingleOrDefault(pack => pack.Id == 1);
-                if (randomPack != null) randomPack.Count += 7;
-                else
-                {
-                    var packInfo = await Context.Packs.FindPack(1);
-                    User.Packs.Add(new UserPacks(User, packInfo, 7));
-                }
+                var packInfo = await Context.Packs.FindById(1);
+                User.AddPack(packInfo, 7);
                 await User.Messages.SendSticker(User, PACK_STICKER_ID);
                 await User.Messages.SendMessage(User, Messages.first_reward, Keyboard.MyPacks, ParseMode.Html);
             }

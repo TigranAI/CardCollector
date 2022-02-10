@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using CardCollector.DailyTasks;
+using CardCollector.UserDailyTask;
 
 namespace CardCollector.DataBase.Entity
 {
@@ -9,7 +9,7 @@ namespace CardCollector.DataBase.Entity
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
         public User User { get; set; }
-        public DailyTaskKeys TaskId { get; set; }
+        public TaskKeys TaskId { get; set; }
         public int Progress { get; set; }
     }
 }

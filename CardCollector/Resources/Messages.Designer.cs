@@ -216,6 +216,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выберите платежную систему.
+        /// </summary>
+        internal static string choose_provider {
+            get {
+                return ResourceManager.GetString("choose_provider", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Выберите сортировку из списка ниже:.
         /// </summary>
         internal static string choose_sort {
@@ -640,15 +649,6 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Время акции истекло!.
-        /// </summary>
-        internal static string offer_expired {
-            get {
-                return ResourceManager.GetString("offer_expired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Нет доступных специальных предложений! Возвращайтесь позже..
         /// </summary>
         internal static string offers_not_found {
@@ -663,6 +663,15 @@ namespace CardCollector.Resources {
         internal static string or_enter_another_sum {
             get {
                 return ResourceManager.GetString("or_enter_another_sum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Время акции истекло!.
+        /// </summary>
+        internal static string order_expired {
+            get {
+                return ResourceManager.GetString("order_expired", resourceCulture);
             }
         }
         
@@ -949,6 +958,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}: спасибо, что продал мне стикер {1} в количестве {2}, вот твоя оплата {3}💎.
+        /// </summary>
+        internal static string thanks_for_selling_sticker {
+            get {
+                return ResourceManager.GetString("thanks_for_selling_sticker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Тир.
         /// </summary>
         internal static string tier {
@@ -1074,9 +1092,9 @@ namespace CardCollector.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Вы уже воспользовались данным предложением!.
         /// </summary>
-        internal static string you_already_use_this_offer {
+        internal static string you_already_use_this_order {
             get {
-                return ResourceManager.GetString("you_already_use_this_offer", resourceCulture);
+                return ResourceManager.GetString("you_already_use_this_order", resourceCulture);
             }
         }
         

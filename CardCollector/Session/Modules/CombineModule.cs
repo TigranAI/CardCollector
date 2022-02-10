@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
@@ -7,32 +8,38 @@ namespace CardCollector.Session.Modules
 {
     public class CombineModule : Module
     {
-        public Sticker SelectedSticker;
+        public long? SelectedStickerId;
         public int Count = 1;
-        public int Tier => SelectedSticker.Tier;
-        public Dictionary<Sticker, int> CombineList { get; } = new();
+
+        public List<Tuple<Sticker, int>> CombineList { get; } = new();
+
+        public int CombineCount => CombineList.Sum(item => item.Item2);
+        public int? CombineTier => CombineList.FirstOrDefault()?.Item1.Tier;
         
-        public int CalculateCombinePrice()
+        public int? CombinePrice
         {
-            /*var coinsSum = CombineList.Sum(pair => 1440 / pair.Key.IncomeTime * pair.Key.Income * pair.Value);
-            var multiplier = SelectedSticker.Tier * 0.25 + 1;
-            return (int)(coinsSum * multiplier);*/
-            return Tier switch
+            get
             {
-                1 => 200,
-                2 => 500,
-                3 => 1200,
-                _ => 0
-            };
+                return CombineList.FirstOrDefault()?.Item1.Tier switch
+                {
+                    1 => 200,
+                    2 => 500,
+                    3 => 1200,
+                    _ => null
+                };
+            }
         }
-        
-        public int CombineCount => CombineList.Values.Sum();
-        
+
         public void Reset()
         {
-            SelectedSticker = null;
-            Count = 0;
+            SelectedStickerId = null;
+            Count = 1;
             CombineList.Clear();
+        }
+
+        public void AddSticker(Sticker sticker, int count)
+        {
+            CombineList.Add(new Tuple<Sticker, int>(sticker, count));
         }
         
         public override string ToString()

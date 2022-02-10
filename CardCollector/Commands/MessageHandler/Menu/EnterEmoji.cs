@@ -25,7 +25,7 @@ namespace CardCollector.Commands.MessageHandler.Menu
             else
             {
                 var filtersModule = User.Session.GetModule<FiltersModule>();
-                filtersModule.Filters[Command.emoji] = input;
+                filtersModule.Emoji = input;
                 var text = filtersModule.ToString(User.Session.State);
                 await User.Messages.EditMessage(User, text, Keyboard.GetSortingMenu(User.Session.State));
                 Queue.Remove(User.Id);

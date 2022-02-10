@@ -9,7 +9,7 @@ namespace CardCollector.Commands.MessageHandler.Collection
 {
     public class Collection : MessageHandler
     {
-        protected override string CommandText => Text.collection;
+        protected override string CommandText => MessageCommands.collection;
         protected override bool ClearMenu => true;
         protected override bool AddToStack => true;
         protected override bool ClearStickers => true;

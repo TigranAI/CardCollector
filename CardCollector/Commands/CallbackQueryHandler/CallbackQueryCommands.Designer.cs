@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CardCollector.Resources {
+namespace CardCollector.Commands.CallbackQueryHandler {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace CardCollector.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Command {
+    internal class CallbackQueryCommands {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Command() {
+        internal CallbackQueryCommands() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace CardCollector.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CardCollector.Resources.Command", typeof(Command).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CardCollector.Commands.CallbackQueryHandler.CallbackQueryCommands", typeof(CallbackQueryCommands).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,16 +61,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ACE.
-        /// </summary>
-        internal static string add_for_sale_sticker {
-            get {
-                return ResourceManager.GetString("add_for_sale_sticker", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ACK.
+        ///   Looks up a localized string similar to AAA.
         /// </summary>
         internal static string add_sticker_preview {
             get {
@@ -79,7 +70,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ABX.
+        ///   Looks up a localized string similar to AAB.
         /// </summary>
         internal static string alerts {
             get {
@@ -88,7 +79,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAA.
+        ///   Looks up a localized string similar to AAC.
         /// </summary>
         internal static string authors_menu {
             get {
@@ -97,7 +88,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAC.
+        ///   Looks up a localized string similar to AAD.
         /// </summary>
         internal static string back {
             get {
@@ -106,16 +97,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAB.
-        /// </summary>
-        internal static string buy_author_pack_menu {
-            get {
-                return ResourceManager.GetString("buy_author_pack_menu", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ABQ.
+        ///   Looks up a localized string similar to AAE.
         /// </summary>
         internal static string buy_coins {
             get {
@@ -124,7 +106,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ABH.
+        ///   Looks up a localized string similar to AAF.
         /// </summary>
         internal static string buy_gems {
             get {
@@ -133,16 +115,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ABN.
-        /// </summary>
-        internal static string buy_gems_item {
-            get {
-                return ResourceManager.GetString("buy_gems_item", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ABG.
+        ///   Looks up a localized string similar to AAG.
         /// </summary>
         internal static string buy_pack {
             get {
@@ -151,16 +124,16 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ABI.
+        ///   Looks up a localized string similar to AAH.
         /// </summary>
-        internal static string buy_shop_item {
+        internal static string buy_special_order {
             get {
-                return ResourceManager.GetString("buy_shop_item", resourceCulture);
+                return ResourceManager.GetString("buy_special_order", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAF.
+        ///   Looks up a localized string similar to AAI.
         /// </summary>
         internal static string buy_sticker {
             get {
@@ -169,7 +142,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ACL.
+        ///   Looks up a localized string similar to AAJ.
         /// </summary>
         internal static string choose_pack {
             get {
@@ -178,7 +151,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAI.
+        ///   Looks up a localized string similar to AAK.
         /// </summary>
         internal static string collect_income {
             get {
@@ -187,7 +160,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAJ.
+        ///   Looks up a localized string similar to AAL.
         /// </summary>
         internal static string combine {
             get {
@@ -196,7 +169,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAK.
+        ///   Looks up a localized string similar to AAM.
         /// </summary>
         internal static string combine_stickers {
             get {
@@ -205,7 +178,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAL.
+        ///   Looks up a localized string similar to AAN.
         /// </summary>
         internal static string confirm_buying {
             get {
@@ -214,7 +187,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ABR.
+        ///   Looks up a localized string similar to AAO.
         /// </summary>
         internal static string confirm_exchange {
             get {
@@ -223,7 +196,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ACJ.
+        ///   Looks up a localized string similar to AAP.
         /// </summary>
         internal static string confirm_login {
             get {
@@ -232,16 +205,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ACM.
-        /// </summary>
-        internal static string confirm_preview {
-            get {
-                return ResourceManager.GetString("confirm_preview", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to AAM.
+        ///   Looks up a localized string similar to AAQ.
         /// </summary>
         internal static string confirm_selling {
             get {
@@ -250,7 +214,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAN.
+        ///   Looks up a localized string similar to AAR.
         /// </summary>
         internal static string control_panel {
             get {
@@ -259,7 +223,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAO.
+        ///   Looks up a localized string similar to AAS.
         /// </summary>
         internal static string count {
             get {
@@ -268,7 +232,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAP.
+        ///   Looks up a localized string similar to AAT.
         /// </summary>
         internal static string daily_tasks {
             get {
@@ -277,7 +241,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAQ.
+        ///   Looks up a localized string similar to AAU.
         /// </summary>
         internal static string delete_combine {
             get {
@@ -286,7 +250,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ACN.
+        ///   Looks up a localized string similar to AAV.
         /// </summary>
         internal static string edit_sticker {
             get {
@@ -295,7 +259,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAR.
+        ///   Looks up a localized string similar to AAW.
         /// </summary>
         internal static string emoji {
             get {
@@ -304,7 +268,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ABT.
+        ///   Looks up a localized string similar to AAX.
         /// </summary>
         internal static string end_sticker_upload {
             get {
@@ -315,24 +279,6 @@ namespace CardCollector.Resources {
         /// <summary>
         ///   Looks up a localized string similar to AAY.
         /// </summary>
-        internal static string give_exp {
-            get {
-                return ResourceManager.GetString("give_exp", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ACP.
-        /// </summary>
-        internal static string give_sticker {
-            get {
-                return ResourceManager.GetString("give_sticker", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ACB.
-        /// </summary>
         internal static string logs_menu {
             get {
                 return ResourceManager.GetString("logs_menu", resourceCulture);
@@ -340,7 +286,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAS.
+        ///   Looks up a localized string similar to AAZ.
         /// </summary>
         internal static string my_packs {
             get {
@@ -349,7 +295,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ABO.
+        ///   Looks up a localized string similar to ABA.
         /// </summary>
         internal static string open_author_pack_menu {
             get {
@@ -358,7 +304,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ABE.
+        ///   Looks up a localized string similar to ABB.
         /// </summary>
         internal static string open_pack {
             get {
@@ -367,7 +313,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ABM.
+        ///   Looks up a localized string similar to ABC.
         /// </summary>
         internal static string pack_info {
             get {
@@ -376,43 +322,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAV.
-        /// </summary>
-        internal static string price_coins_from {
-            get {
-                return ResourceManager.GetString("price_coins_from", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to AAW.
-        /// </summary>
-        internal static string price_coins_to {
-            get {
-                return ResourceManager.GetString("price_coins_to", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to AAX.
-        /// </summary>
-        internal static string price_gems_from {
-            get {
-                return ResourceManager.GetString("price_gems_from", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to AAY.
-        /// </summary>
-        internal static string price_gems_to {
-            get {
-                return ResourceManager.GetString("price_gems_to", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ACA.
+        ///   Looks up a localized string similar to ABD.
         /// </summary>
         internal static string return_from_auction {
             get {
@@ -421,16 +331,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ACO.
-        /// </summary>
-        internal static string select_edit_sticker {
-            get {
-                return ResourceManager.GetString("select_edit_sticker", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ACF.
+        ///   Looks up a localized string similar to ABE.
         /// </summary>
         internal static string select_for_sale_pack {
             get {
@@ -439,25 +340,16 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ACG.
-        /// </summary>
-        internal static string select_for_sale_sticker {
-            get {
-                return ResourceManager.GetString("select_for_sale_sticker", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to ABF.
         /// </summary>
-        internal static string select_offer {
+        internal static string select_order {
             get {
-                return ResourceManager.GetString("select_offer", resourceCulture);
+                return ResourceManager.GetString("select_order", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAU.
+        ///   Looks up a localized string similar to ABG.
         /// </summary>
         internal static string select_price {
             get {
@@ -466,7 +358,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ACQ.
+        ///   Looks up a localized string similar to ABH.
         /// </summary>
         internal static string select_provider {
             get {
@@ -475,7 +367,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ABU.
+        ///   Looks up a localized string similar to ABI.
         /// </summary>
         internal static string select_shop_pack {
             get {
@@ -484,34 +376,16 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAV.
+        ///   Looks up a localized string similar to ABJ.
         /// </summary>
-        internal static string select_sticker {
+        internal static string sell_sticker {
             get {
-                return ResourceManager.GetString("select_sticker", resourceCulture);
+                return ResourceManager.GetString("sell_sticker", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAW.
-        /// </summary>
-        internal static string sell_on_auction {
-            get {
-                return ResourceManager.GetString("sell_on_auction", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to AAX.
-        /// </summary>
-        internal static string send_private_sticker {
-            get {
-                return ResourceManager.GetString("send_private_sticker", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to AAZ.
+        ///   Looks up a localized string similar to ABK.
         /// </summary>
         internal static string set {
             get {
@@ -520,7 +394,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ABY.
+        ///   Looks up a localized string similar to ABM.
         /// </summary>
         internal static string set_exchange_sum {
             get {
@@ -529,7 +403,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ABZ.
+        ///   Looks up a localized string similar to ABN.
         /// </summary>
         internal static string set_gems_sum {
             get {
@@ -538,7 +412,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ABW.
+        ///   Looks up a localized string similar to ABL.
         /// </summary>
         internal static string settings {
             get {
@@ -547,16 +421,16 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ABS.
+        ///   Looks up a localized string similar to ABO.
         /// </summary>
-        internal static string show_offer_info {
+        internal static string show_order_info {
             get {
-                return ResourceManager.GetString("show_offer_info", resourceCulture);
+                return ResourceManager.GetString("show_order_info", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ACD.
+        ///   Looks up a localized string similar to ABP.
         /// </summary>
         internal static string show_sample {
             get {
@@ -565,7 +439,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ACI.
+        ///   Looks up a localized string similar to ABQ.
         /// </summary>
         internal static string show_top_by {
             get {
@@ -574,7 +448,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ABA.
+        ///   Looks up a localized string similar to ABR.
         /// </summary>
         internal static string sort {
             get {
@@ -583,7 +457,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ABP.
+        ///   Looks up a localized string similar to ABS.
         /// </summary>
         internal static string special_offers {
             get {
@@ -592,16 +466,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ABV.
-        /// </summary>
-        internal static string sticker_info {
-            get {
-                return ResourceManager.GetString("sticker_info", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ACC.
+        ///   Looks up a localized string similar to ABT.
         /// </summary>
         internal static string stop_bot {
             get {
@@ -610,7 +475,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ABC.
+        ///   Looks up a localized string similar to ABU.
         /// </summary>
         internal static string tier {
             get {
@@ -619,7 +484,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ACH.
+        ///   Looks up a localized string similar to ABV.
         /// </summary>
         internal static string upload_stickerpack {
             get {

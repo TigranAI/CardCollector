@@ -7,6 +7,7 @@ using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.Entity.NotMapped;
 using CardCollector.Resources;
 using CardCollector.StickerEffects;
+using CardCollector.UserDailyTask;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using DailyTask = CardCollector.DataBase.Entity.DailyTask;
@@ -130,7 +131,7 @@ namespace CardCollector.DataBase
                 .Property(entity => entity.TaskId)
                 .HasConversion(
                     to => (int) to,
-                    from => (DailyTaskKeys) from);
+                    from => (TaskKeys) from);
         }
 
         private void ConfigureLevelLevelReward(ModelBuilder modelBuilder)
@@ -152,7 +153,12 @@ namespace CardCollector.DataBase
                 .HasConversion(
                     to => Utilities.ToJson(to.ToDictionary(pair => (int) pair.Key, pair => pair.Value)),
                     from => Utilities.FromJson<Dictionary<int, bool>>(from)
-                        .ToDictionary(pair => (UserSettingsEnum) pair.Key, pair => pair.Value));
+                        .ToDictionary(pair => (UserSettingsEnum) pair.Key, pair => pair.Value),
+                    new ValueComparer<Dictionary<UserSettingsEnum, bool>>(
+                        (l1, l2) => l2 != null && l1 != null && l1.Values.SequenceEqual(l2.Values),
+                        l => l.Aggregate(0, (a, v) =>
+                            HashCode.Combine(a, HashCode.Combine(v.Key.GetHashCode(), v.Value.GetHashCode()))),
+                        l => l.ToDictionary(p => p.Key, p => p.Value)));
         }
 
         private void ConfigureUserPrivilegeLevel(ModelBuilder modelBuilder)

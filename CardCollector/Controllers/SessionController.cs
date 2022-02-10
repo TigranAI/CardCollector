@@ -11,7 +11,7 @@ namespace CardCollector.Controllers
         public static UserSession FindSession(User user)
         {
             if (_openedSessions.TryGetValue(user.Id, out var session))
-                session.user = user;
+                session.User = user;
             return _openedSessions.GetOrAdd(user.Id, new UserSession(user));
         }
     }

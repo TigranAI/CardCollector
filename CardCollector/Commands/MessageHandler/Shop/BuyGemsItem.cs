@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using CardCollector.Commands.PreCheckoutQueryHandler;
 using CardCollector.DataBase;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
@@ -11,7 +12,7 @@ namespace CardCollector.Commands.MessageHandler.Shop
 {
     public class BuyGemsItem : MessageHandler
     {
-        protected override string CommandText => Command.buy_gems_item;
+        protected override string CommandText => PreCheckoutQueryCommands.buy_gems_item;
 
         protected override async Task Execute()
         {

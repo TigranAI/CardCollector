@@ -61,23 +61,23 @@ namespace CardCollector.DataBase.Entity
 
         public async Task ApplyEffect(User user, UserSticker userSticker)
         {
-            switch ((Effect)Effect)
+            switch (Effect)
             {
-                case StickerEffects.Effect.PiggyBank200:
+                case Effect.PiggyBank200:
                     user.Cash.MaxCapacity += 200;
-                    await MessageController.EditMessage(user, Messages.effect_PiggyBank200);
+                    await user.Messages.SendMessage(user, Messages.effect_PiggyBank200);
                     break;
-                case StickerEffects.Effect.Diamonds25Percent:
+                case Effect.Diamonds25Percent:
                     user.Cash.Gems += (int)(user.Cash.Gems * 0.25);
-                    await MessageController.EditMessage(user, Messages.effect_Diamonds25Percent);
+                    await user.Messages.SendMessage(user, Messages.effect_Diamonds25Percent);
                     break;
-                case StickerEffects.Effect.Random1Pack5Day:
+                case Effect.Random1Pack5Day:
                     userSticker.GivePrizeDate = DateTime.Today;
                     break;
-                case StickerEffects.Effect.RandomSticker1Tier3Day:
+                case Effect.RandomSticker1Tier3Day:
                     userSticker.GivePrizeDate = DateTime.Today;
                     break;
-                case StickerEffects.Effect.RandomSticker2Tier3Day:
+                case Effect.RandomSticker2Tier3Day:
                     userSticker.GivePrizeDate = DateTime.Today;
                     break;
             }

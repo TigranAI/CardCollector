@@ -8,7 +8,7 @@ namespace CardCollector.Commands.MessageHandler.Menu
 {
     public class Menu : MessageHandler
     {
-        protected override string CommandText => Text.menu;
+        protected override string CommandText => MessageCommands.menu;
 
         protected override async Task Execute()
         {

@@ -18,7 +18,7 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="send_stickers" xml:space="preserve">
+    <data name="SendStickersToUsers" xml:space="preserve">
         <value>Необходимо отправить стикеры в личные сообщения десяти пользователей используя бота.</value>
     </data>
 </root>

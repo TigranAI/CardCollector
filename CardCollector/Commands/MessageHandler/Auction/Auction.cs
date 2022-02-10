@@ -9,7 +9,7 @@ namespace CardCollector.Commands.MessageHandler.Auction
 {
     public class Auction : MessageHandler
     {
-        protected override string CommandText => Text.auction;
+        protected override string CommandText => MessageCommands.auction;
         protected override bool ClearMenu => true;
         protected override bool AddToStack => true;
         protected override bool ClearStickers => true;

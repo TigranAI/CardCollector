@@ -219,10 +219,10 @@
     <data name="pack_prize" xml:space="preserve">
         <value>Поздравляем! Вы получили обычный пак! Открыть его можно во вкладке профиля.</value>
     </data>
-    <data name="you_already_use_this_offer" xml:space="preserve">
+    <data name="you_already_use_this_order" xml:space="preserve">
         <value>Вы уже воспользовались данным предложением!</value>
     </data>
-    <data name="offer_expired" xml:space="preserve">
+    <data name="order_expired" xml:space="preserve">
         <value>Время акции истекло!</value>
     </data>
     <data name="effect_PiggyBank200" xml:space="preserve">
@@ -414,5 +414,11 @@ https://telegra.ph/help-11-04-4</value>
     </data>
     <data name="update_preview_success" xml:space="preserve">
         <value>Обновление обложки успешно!</value>
+    </data>
+    <data name="choose_provider" xml:space="preserve">
+        <value>Выберите платежную систему</value>
+    </data>
+    <data name="thanks_for_selling_sticker" xml:space="preserve">
+        <value>{0}: спасибо, что продал мне стикер {1} в количестве {2}, вот твоя оплата {3}💎</value>
     </data>
 </root>

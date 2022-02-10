@@ -18,7 +18,22 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="send_stickers" xml:space="preserve">
-        <value>Отправка стикеров 5-и пользователям</value>
+    <data name="select_edit_sticker" xml:space="preserve">
+        <value>AAB</value>
+    </data>
+    <data name="select_sticker" xml:space="preserve">
+        <value>AAC</value>
+    </data>
+    <data name="select_trader" xml:space="preserve">
+        <value>AAD</value>
+    </data>
+    <data name="sticker_info" xml:space="preserve">
+        <value>AAF</value>
+    </data>
+    <data name="chat_send_sticker" xml:space="preserve">
+        <value>AAA</value>
+    </data>
+    <data name="send_private_sticker" xml:space="preserve">
+        <value>AAE</value>
     </data>
 </root>
