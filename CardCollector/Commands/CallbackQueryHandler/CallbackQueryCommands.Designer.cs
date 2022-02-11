@@ -126,9 +126,9 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         /// <summary>
         ///   Looks up a localized string similar to AAH.
         /// </summary>
-        internal static string buy_special_order {
+        internal static string buy_shop_item {
             get {
-                return ResourceManager.GetString("buy_special_order", resourceCulture);
+                return ResourceManager.GetString("buy_shop_item", resourceCulture);
             }
         }
         

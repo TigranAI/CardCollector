@@ -9,7 +9,7 @@ using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands.InlineQueryHandler
 {
-    [Attributes.InlineQueryHandler]
+    [Attributes.Handlers.InlineQueryHandler]
     public abstract class InlineQueryHandler : HandlerModel
     {
         protected readonly InlineQuery InlineQuery;
@@ -24,7 +24,7 @@ namespace CardCollector.Commands.InlineQueryHandler
             foreach (var type in assembly.GetTypes())
             {
                 if (type == typeof(InlineQueryHandler)) continue;
-                if (Attribute.IsDefined(type, typeof(Attributes.InlineQueryHandler)))
+                if (Attribute.IsDefined(type, typeof(Attributes.Handlers.InlineQueryHandler)))
                     Commands.Add(type);
             }
         }
@@ -32,9 +32,11 @@ namespace CardCollector.Commands.InlineQueryHandler
         public static async Task<HandlerModel> Factory(Update update)
         {
             var context = new BotDatabaseContext();
-            var user = await context.Users.FindUserWithSession(update.InlineQuery!.From);
+            var user = await context.Users.FindUser(update.InlineQuery!.From);
             if (user.IsBlocked) return new IgnoreHandler(user, context);
             
+            user.InitSession();
+
             foreach (var handlerType in Commands)
             {
                 var handler = (HandlerModel?) Activator.CreateInstance(handlerType, user, context, update.InlineQuery);

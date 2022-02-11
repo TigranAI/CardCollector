@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using CardCollector.Attributes.Menu;
 using CardCollector.DataBase;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
@@ -8,11 +9,11 @@ using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands.MessageHandler.Profile
 {
+    [MenuPoint]
     public class Profile : MessageHandler
     {
         protected override string CommandText => MessageCommands.profile;
         protected override bool ClearMenu => true;
-        protected override bool AddToStack => true;
         protected override bool ClearStickers => true;
 
         protected override async Task Execute()

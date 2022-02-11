@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using CardCollector.Attributes.Menu;
 using CardCollector.Commands.ChosenInlineResultHandler;
 using CardCollector.Controllers;
 using CardCollector.DataBase;
@@ -11,6 +12,7 @@ using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands.InlineQueryHandler.Collection
 {
+    [DontAddToCommandStack]
     public class ShowCombineStickers : InlineQueryHandler
     {
         protected override async Task Execute()
@@ -18,6 +20,7 @@ namespace CardCollector.Commands.InlineQueryHandler.Collection
             var module = User.Session.GetModule<CombineModule>();
             var sticker = module.CombineList.FirstOrDefault()?.Item1;
             var stickersList = User.Stickers
+                .Where(item => item.Count > 0)
                 .Select(item => item.Sticker)
                 .Where(item => item.Contains(InlineQuery.Query) 
                                       && (sticker == null || sticker.Tier == item.Tier))

@@ -15,15 +15,16 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.UserToChat
             if (!User.Session.ChosenResultWithMessage)
             {
                 if (User.Settings[UserSettingsEnum.ExpGain])
-                    await User.Messages.EditMessage(User, 
+                    await User.Messages.EditMessage(User,
                         $"{Messages.you_gained} 1 {Text.exp} {Messages.send_sticker}" +
                         $"\n{Messages.you_can_add_bot_to_conversation}");
                 User.Level.GiveExp(1);
                 await User.Level.CheckLevelUp(Context, User);
             }
+            else User.Session.ChosenResultWithMessage = false;
         }
 
-        protected ChatSendSticker(User user, BotDatabaseContext context, ChosenInlineResult chosenInlineResult) :
+        public ChatSendSticker(User user, BotDatabaseContext context, ChosenInlineResult chosenInlineResult) :
             base(user, context, chosenInlineResult)
         {
         }

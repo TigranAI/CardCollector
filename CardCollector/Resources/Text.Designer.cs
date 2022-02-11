@@ -259,6 +259,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to от.
+        /// </summary>
+        internal static string by {
+            get {
+                return ResourceManager.GetString("by", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Размер копилки увеличен:.
         /// </summary>
         internal static string cash_capacity_increased {

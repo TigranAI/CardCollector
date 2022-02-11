@@ -18,7 +18,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Collection
         {
             await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.comission_warning, true);
             var module = User.Session.GetModule<CollectionModule>();
-            var lowerPrice = Context.Auctions.FindMinPriceByStickerId(module.SelectedStickerId);
+            var lowerPrice = await Context.Auctions.FindMinPriceByStickerId(module.SelectedStickerId);
             await User.Messages.EditMessage(User,
                 $"{Messages.current_price} {module.SellPrice}{Text.gem}" +
                 $"\n{Messages.lower_price} {lowerPrice}{Text.gem}" +

@@ -15,7 +15,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
 {
     public class BuySpecialOrder : CallbackQueryHandler
     {
-        protected override string CommandText => CallbackQueryCommands.buy_special_order;
+        protected override string CommandText => CallbackQueryCommands.buy_shop_item;
 
         protected override async Task Execute()
         {
@@ -79,6 +79,11 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
                 await User.Messages.SendSticker(User, sticker.FileId);
                 await User.Messages.EditMessage(User, $"{Messages.congratulation}\n{sticker}");
             }
+        }
+
+        public override bool Match()
+        {
+            return base.Match() && User.Session.GetModule<ShopModule>().SelectedOrderId != null;
         }
 
         public BuySpecialOrder(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context, callbackQuery)

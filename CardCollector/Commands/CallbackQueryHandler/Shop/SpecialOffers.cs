@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using CardCollector.Attributes.Menu;
 using CardCollector.Controllers;
 using CardCollector.DataBase;
 using CardCollector.DataBase.EntityDao;
@@ -9,10 +10,10 @@ using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Shop
 {
+    [MenuPoint]
     public class SpecialOffers : CallbackQueryHandler
     {
         protected override string CommandText => CallbackQueryCommands.special_offers;
-        protected override bool AddToStack => true;
         protected override bool ClearStickers => true;
 
         protected override async Task Execute()

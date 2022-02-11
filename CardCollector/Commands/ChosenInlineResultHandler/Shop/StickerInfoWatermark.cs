@@ -10,6 +10,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Shop
     public class StickerInfoWatermark : ChosenInlineResultHandler
     {
         protected override string CommandText => ChosenInlineResultCommands.sticker_info;
+        protected override bool ClearStickers => true;
 
         protected override async Task Execute()
         {

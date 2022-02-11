@@ -57,7 +57,7 @@
     <data name="buy_pack" xml:space="preserve">
         <value>AAG</value>
     </data>
-    <data name="buy_special_order" xml:space="preserve">
+    <data name="buy_shop_item" xml:space="preserve">
         <value>AAH</value>
     </data>
     <data name="control_panel" xml:space="preserve">

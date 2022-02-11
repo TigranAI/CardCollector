@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using CardCollector.Attributes.Menu;
 using CardCollector.DataBase;
 using CardCollector.Resources;
 using CardCollector.Session.Modules;
@@ -7,10 +8,10 @@ using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Shop
 {
+    [MenuPoint]
     public class BuyGems : CallbackQueryHandler
     {
         protected override string CommandText => CallbackQueryCommands.buy_gems;
-        protected override bool AddToStack => true;
 
         protected override async Task Execute()
         {

@@ -1,22 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Timers;
+using CardCollector.Attributes.TimerTask;
 
 namespace CardCollector.TimerTasks
 {
+    [TimerTask]
     public abstract class TimerTask
     {
         protected Timer Timer = new ();
         protected abstract TimeSpan RunAt { get; }
-        
-        private static List<TimerTask> TasksList = new() {
-            new DailyTaskAlert(),
-            new DailyTaskReset(),
-            new ResetChatGiveExp(),
-            new ExecuteStickerEffects(),
-            new PiggyBankAlert(),
-            new TopExpUsersAlert()
-        };
+
+        private static ICollection<TimerTask> TasksList;
+
+        static TimerTask()
+        {
+            TasksList = new LinkedList<TimerTask>();
+            var assembly = Assembly.GetExecutingAssembly();
+            foreach (var type in assembly.GetTypes())
+            {
+                if (type == typeof(TimerTask)) continue;
+                if (Attribute.IsDefined(type, typeof(TimerTaskAttribute)))
+                {
+                    var timerTask = (TimerTask?) Activator.CreateInstance(type);
+                    if (timerTask != null) TasksList.Add(timerTask);
+                }
+            }
+        }
 
         public static void SetupAll()
         {
@@ -45,7 +56,7 @@ namespace CardCollector.TimerTasks
             Setup();
         }
 
-        protected TimerTask()
+        public TimerTask()
         {
             Timer.Elapsed += TimerCallback;
             Timer.Elapsed += Setup;

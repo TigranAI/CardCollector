@@ -1,4 +1,6 @@
 ﻿using System.Threading.Tasks;
+using CardCollector.Attributes;
+using CardCollector.Attributes.Menu;
 using CardCollector.DataBase;
 using CardCollector.Resources;
 using CardCollector.Session.Modules;
@@ -7,10 +9,10 @@ using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Admin
 {
+    [MenuPoint]
     public class SelectForSalePack : CallbackQueryHandler
     {
         protected override string CommandText => CallbackQueryCommands.select_for_sale_pack;
-        protected override bool AddToStack => true;
         protected override bool ClearStickers => true;
 
         protected override async Task Execute()

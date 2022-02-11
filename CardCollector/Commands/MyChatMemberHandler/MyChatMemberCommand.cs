@@ -1,12 +1,11 @@
 ﻿using System.Threading.Tasks;
 using CardCollector.DataBase;
-using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using User = CardCollector.DataBase.Entity.User;
 
-namespace CardCollector.Commands.MyChatMember
+namespace CardCollector.Commands.MyChatMemberHandler
 {
     /* Родительский класс для входящих обновлений типа MyChatMember
      (Добавление/Добавление в чаты/Добавление в каналы/Блокировки/Исключения бота)
@@ -38,8 +37,10 @@ namespace CardCollector.Commands.MyChatMember
         public static async Task<HandlerModel> Factory(Update update)
         {
             var context = new BotDatabaseContext();
-            var user = await context.Users.FindUserWithSession(update.MyChatMember!.From);
+            var user = await context.Users.FindUser(update.MyChatMember!.From);
             
+            user.InitSession();
+
             return new MyChatMemberCommand(user, context, update.MyChatMember);
         }
 

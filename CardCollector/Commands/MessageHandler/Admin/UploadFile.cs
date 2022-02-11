@@ -12,6 +12,7 @@ using OfficeOpenXml;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using File = System.IO.File;
+using Sticker = CardCollector.DataBase.Entity.Sticker;
 using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands.MessageHandler.Admin
@@ -22,35 +23,43 @@ namespace CardCollector.Commands.MessageHandler.Admin
 
         protected override async Task Execute()
         {
+            User.Session.State = UserState.Default;
             var module = User.Session.GetModule<AdminModule>();
             try
             {
                 /* Соообщаем, что начали загрузку файла */
                 await User.Messages.EditMessage(User, Messages.downloading_file);
-                
+
                 /* Загружаем файл */
                 var fileName = await Utilities.DownloadFile(Message.Document!);
-                
+
                 /* Сообщаем пользователю, что читаем документ */
                 await User.Messages.EditMessage(User, Messages.reading_document);
-                
+
                 /* Парсим файл */
                 var stickersList = await ParseExcelFile(fileName, module.StickersList);
                 Utilities.ReplaceOldEmoji(stickersList);
-                
+
                 /* Сообщаем пользователю, что удаляем файлы */
                 await User.Messages.EditMessage(User, Messages.deleting_files);
                 File.Delete(fileName);
-                
+
                 /* Сообщаем пользователю, что загружаем стикеры */
                 await User.Messages.EditMessage(User, Messages.uploading_stickers);
-                var newPack = new Pack(){Author = stickersList.First().Author};
+                var newPack = new Pack()
+                {
+                    Author = stickersList.First().Author,
+                    Stickers = new List<Sticker>(),
+                    PriceGems = 100,
+                    PriceCoins = -1
+                };
                 foreach (var sticker in stickersList)
                 {
                     newPack.Stickers.Add(sticker);
                     sticker.Pack = newPack;
                 }
-                
+
+                await Context.Packs.AddAsync(newPack);
                 /* Сообщаем пользователю, что стикеры загружены */
                 await User.Messages.EditMessage(User, Messages.stickers_succesfully_uploaded);
             }
@@ -58,10 +67,12 @@ namespace CardCollector.Commands.MessageHandler.Admin
             {
                 /* Сообщаем пользователю, что произошла ошибка */
                 await User.Messages.EditMessage(User, $"{Messages.unexpected_exception}: {e.Message}");
+                Logs.LogOutError(e.ToString());
             }
         }
-        
-        private async Task<List<DataBase.Entity.Sticker>> ParseExcelFile(string fileName, List<DataBase.Entity.Sticker> stickers)
+
+        private async Task<List<Sticker>> ParseExcelFile(string fileName,
+            List<Sticker> stickers)
         {
             return await Task.Run(() =>
             {
@@ -79,6 +90,7 @@ namespace CardCollector.Commands.MessageHandler.Admin
                     stickers[rowNum - 2].IncomeTime = 60;
                     stickers[rowNum - 2].Income = (int) Math.Pow(5, stickers[rowNum - 2].Tier - 1);
                 }
+
                 return stickers;
             });
         }
@@ -91,7 +103,12 @@ namespace CardCollector.Commands.MessageHandler.Admin
                 {"Author", cells[rowNum, 2].Value?.ToString() ?? ""},
                 {"Tier", cells[rowNum, 3].Value?.ToString() ?? ""},
                 {"Emoji", cells[rowNum, 4].Value?.ToString() ?? ""},
-                {"Effect", cells[rowNum, 5].Value is { } e && int.TryParse(e.ToString(), out var effect) ? effect.ToString() : "0"},
+                {
+                    "Effect",
+                    cells[rowNum, 5].Value is { } e && int.TryParse(e.ToString(), out var effect)
+                        ? effect.ToString()
+                        : "0"
+                },
                 {"Description", cells[rowNum, 6].Value is string s ? s : ""}
             };
         }
@@ -103,7 +120,6 @@ namespace CardCollector.Commands.MessageHandler.Admin
 
         public UploadFile(User user, BotDatabaseContext context, Message message) : base(user, context, message)
         {
-            User.Session.State = UserState.Default;
         }
     }
 }

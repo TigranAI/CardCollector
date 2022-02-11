@@ -7,8 +7,8 @@ namespace CardCollector.DataBase.Entity
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
-        public User User { get; set; }
-        public Pack Pack { get; set; }
+        public virtual User User { get; set; }
+        public virtual Pack Pack { get; set; }
         public int Count { get; set; }
 
         public UserPacks(User user, Pack pack, int count = 0)

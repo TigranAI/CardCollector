@@ -10,7 +10,7 @@ using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands.PreCheckoutQueryHandler
 {
-    [Attributes.PreCheckoutQueryHandler]
+    [Attributes.Handlers.PreCheckoutQueryHandler]
     public abstract class PreCheckoutQueryHandler : HandlerModel
     {
         protected readonly PreCheckoutQuery PreCheckoutQuery;
@@ -24,7 +24,7 @@ namespace CardCollector.Commands.PreCheckoutQueryHandler
             foreach (var type in assembly.GetTypes())
             {
                 if (type == typeof(PreCheckoutQueryHandler)) continue;
-                if (Attribute.IsDefined(type, typeof(Attributes.PreCheckoutQueryHandler)))
+                if (Attribute.IsDefined(type, typeof(Attributes.Handlers.PreCheckoutQueryHandler)))
                     Commands.Add(type);
             }
         }
@@ -33,8 +33,10 @@ namespace CardCollector.Commands.PreCheckoutQueryHandler
         {
             
             var context = new BotDatabaseContext();
-            var user = await context.Users.FindUserWithSession(update.PreCheckoutQuery!.From);
+            var user = await context.Users.FindUser(update.PreCheckoutQuery!.From);
             if (user.IsBlocked) return new IgnoreHandler(user, context);
+            
+            user.InitSession();
             
             foreach (var handlerType in Commands)
             {

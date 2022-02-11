@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using CardCollector.Attributes.Menu;
 using CardCollector.Commands.ChosenInlineResultHandler;
 using CardCollector.Controllers;
 using CardCollector.DataBase;
@@ -13,6 +14,7 @@ using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands.InlineQueryHandler.Admin
 {
+    [DontAddToCommandStack]
     public class ShowStickersToEdit : InlineQueryHandler
     {
         protected override async Task Execute()
@@ -30,9 +32,9 @@ namespace CardCollector.Commands.InlineQueryHandler.Admin
 
         public override bool Match()
         {
-            if (InlineQuery.ChatType is ChatType.Sender) return false;
+            if (InlineQuery.ChatType is not ChatType.Sender) return false;
             if (User.PrivilegeLevel < PrivilegeLevel.Programmer) return false;
-            if (User.Session.State is not UserState.EditSticker or UserState.LoadForSaleSticker) return false;
+            if (User.Session.State is not (UserState.EditSticker or UserState.LoadForSaleSticker)) return false;
             return User.Session.GetModule<AdminModule>().SelectedPackId is not null;
         }
 

@@ -32,9 +32,11 @@ namespace CardCollector.Commands.CallbackQueryHandler.Collection
                     if (userSticker == null) continue;
                     userSticker.Count -= count;
                 }
+
                 var authors = combineModule.CombineList.Select(i => i.Item1.Author).Distinct().ToList();
                 var randomAuthor = authors.Random();
-                var stickers = await Context.Stickers.FindAllByTierAndAuthor(combineModule.CombineTier!.Value, randomAuthor);
+                var stickers =
+                    await Context.Stickers.FindAllByTierAndAuthor(combineModule.CombineTier!.Value + 1, randomAuthor);
                 var randSticker = stickers.Random();
                 await User.AddSticker(randSticker, 1);
                 await User.Messages.SendSticker(User, randSticker.FileId);

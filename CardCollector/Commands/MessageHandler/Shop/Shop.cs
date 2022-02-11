@@ -9,15 +9,16 @@ using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands.MessageHandler.Shop
 {
+    [Attributes.Menu.MenuPoint]
     public class Shop : MessageHandler
     {
         protected override string CommandText => MessageCommands.shop;
         protected override bool ClearMenu => true;
-        protected override bool AddToStack => true;
         protected override bool ClearStickers => true;
 
         protected override async Task Execute()
         {
+            User.Session.State = UserState.ShopMenu;
             var availableSpecialOrders = await Context.SpecialOrders.FindAll();
             var haveSpecialOffers = availableSpecialOrders.Any(item => item.IsInfinite 
                 || !User.SpecialOrdersUser.Any(usedOrders => usedOrders.Order.Id == item.Id));
@@ -27,7 +28,6 @@ namespace CardCollector.Commands.MessageHandler.Shop
 
         public Shop(User user, BotDatabaseContext context, Message message) : base(user, context, message)
         {
-            User.Session.State = UserState.ShopMenu;
         }
     }
 }

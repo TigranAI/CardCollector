@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Controllers;
-using CardCollector.DailyTasks;
 using CardCollector.Resources;
 using CardCollector.Session;
 using CardCollector.StickerEffects;
@@ -22,13 +21,13 @@ namespace CardCollector.DataBase.Entity
         public bool IsBlocked { get; set; }
         public PrivilegeLevel PrivilegeLevel { get; set; }
         public bool FirstReward { get; set; }
-        public UserLevel Level { get; set; }
-        public Cash Cash { get; set; }
-        public UserSettings Settings { get; set; }
-        public UserMessages Messages { get; set; }
+        public virtual UserLevel Level { get; set; }
+        public virtual Cash Cash { get; set; }
+        public virtual UserSettings Settings { get; set; }
+        public virtual UserMessages Messages { get; set; }
+        public virtual ICollection<UserSticker> Stickers { get; set; }
+        public virtual ICollection<UserPacks> Packs { get; set; }
         public virtual ICollection<DailyTask> DailyTasks { get; set; }
-        public ICollection<UserSticker> Stickers { get; set; }
-        public ICollection<UserPacks> Packs { get; set; }
         public virtual ICollection<SpecialOrderUser> SpecialOrdersUser { get; set; }
 
         [NotMapped] public UserSession Session;
@@ -87,6 +86,17 @@ namespace CardCollector.DataBase.Entity
                 TaskId = TaskKeys.SendStickersToUsers,
                 Progress = TaskGoals.Goals[TaskKeys.SendStickersToUsers]
             });
+        }
+
+        public void InitSession()
+        {
+            var session = SessionController.FindSession(this);
+            if (session != null) Session = session;
+            else
+            {
+                Session = new UserSession();
+                SessionController.AddSession(this);
+            }
         }
     }
 }

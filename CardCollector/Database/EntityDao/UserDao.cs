@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using Microsoft.EntityFrameworkCore;
@@ -12,22 +11,15 @@ namespace CardCollector.DataBase.EntityDao
     {
         public static async Task<User> FindUser(this DbSet<User> users, Telegram.Bot.Types.User telegramUser)
         {
-            return await users.SingleOrDefaultAsync(user => user.ChatId == telegramUser.Id) 
-                         ?? (await users.AddAsync(new User(telegramUser))).Entity;
+            return await users
+                       .SingleOrDefaultAsync(user => user.ChatId == telegramUser.Id)
+                   ?? (await users.AddAsync(new User(telegramUser))).Entity;
         }
-        
-        public static async Task<User> FindByIdWithSession(this DbSet<User> users, long userId)
+
+        public static async Task<User> FindById(this DbSet<User> users, long userId)
         {
-            var result = await users.SingleAsync(user => user.Id == userId);
-            result.Session = SessionController.FindSession(result);
-            return result;
-        }
-        
-        public static async Task<User> FindUserWithSession(this DbSet<User> users, Telegram.Bot.Types.User telegramUser)
-        {
-            var result = await users.FindUser(telegramUser);
-            result.Session = SessionController.FindSession(result);
-            return result;
+            return await users
+                .SingleAsync(user => user.Id == userId);
         }
 
         public static async Task<List<User>> FindTopByExp(this DbSet<User> users, int top = 5)

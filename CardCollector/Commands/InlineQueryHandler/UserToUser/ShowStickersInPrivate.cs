@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using CardCollector.Attributes.Menu;
 using CardCollector.Commands.ChosenInlineResultHandler;
 using CardCollector.Controllers;
 using CardCollector.DataBase;
@@ -9,11 +10,13 @@ using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands.InlineQueryHandler.UserToUser
 {
+    [DontAddToCommandStack]
     public class ShowStickersInPrivate : InlineQueryHandler
     {
         protected override async Task Execute()
         {
             var stickersList = User.Stickers
+                .Where(item => item.Count > 0)
                 .Select(item => item.Sticker)
                 .Where(item => item.Contains(InlineQuery.Query))
                 .ToList();

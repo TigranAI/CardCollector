@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.DailyTasks;
 using CardCollector.DataBase;
 using CardCollector.Resources;
 using CardCollector.UserDailyTask;

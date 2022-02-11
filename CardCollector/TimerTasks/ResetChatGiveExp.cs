@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Timers;
+using CardCollector.DataBase;
 using CardCollector.Resources;
 
 namespace CardCollector.TimerTasks
@@ -11,9 +12,14 @@ namespace CardCollector.TimerTasks
                 DateTime.Now.TimeOfDay.Minutes + Constants.TEST_ALERTS_INTERVAL, 0)
             : new TimeSpan(10, 0, 0);
         
-        protected override void TimerCallback(object o, ElapsedEventArgs e)
+        protected override async void TimerCallback(object o, ElapsedEventArgs e)
         {
-            /*GiveExp.GroupStickersExp.Clear();*/
+            using (var context = new BotDatabaseContext())
+            {
+                context.UserSendStickers.AttachRange(context.UserSendStickers);
+                context.UserSendStickers.RemoveRange(context.UserSendStickers);
+                await context.SaveChangesAsync();
+            }
         }
     }
 }

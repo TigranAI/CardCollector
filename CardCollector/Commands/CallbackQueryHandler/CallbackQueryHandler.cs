@@ -9,7 +9,7 @@ using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler
 {
-    [Attributes.CallbackQueryHandler]
+    [Attributes.Handlers.CallbackQueryHandler]
     public abstract class CallbackQueryHandler : HandlerModel
     {
         protected CallbackQuery CallbackQuery;
@@ -23,7 +23,7 @@ namespace CardCollector.Commands.CallbackQueryHandler
             foreach (var type in assembly.GetTypes())
             {
                 if (type == typeof(CallbackQueryHandler)) continue;
-                if (Attribute.IsDefined(type, typeof(Attributes.CallbackQueryHandler)))
+                if (Attribute.IsDefined(type, typeof(Attributes.Handlers.CallbackQueryHandler)))
                     Commands.Add(type);
             }
         }
@@ -31,8 +31,10 @@ namespace CardCollector.Commands.CallbackQueryHandler
         public static async Task<HandlerModel> Factory(Update update)
         {
             var context = new BotDatabaseContext();
-            var user = await context.Users.FindUserWithSession(update.CallbackQuery!.From);
+            var user = await context.Users.FindUser(update.CallbackQuery!.From);
             if (user.IsBlocked) return new IgnoreHandler(user, context);
+            
+            user.InitSession();
 
             foreach (var handlerType in Commands)
             {

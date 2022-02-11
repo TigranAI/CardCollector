@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using CardCollector.Commands;
 using CardCollector.Commands.CallbackQueryHandler;
 using CardCollector.Commands.ChosenInlineResultHandler;
 using CardCollector.Commands.InlineQueryHandler;
 using CardCollector.Commands.MessageHandler;
-using CardCollector.Commands.MyChatMember;
+using CardCollector.Commands.MyChatMemberHandler;
 using CardCollector.Commands.PreCheckoutQueryHandler;
+using CardCollector.DataBase;
+using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
 using CardCollector.Session.Modules;
 using Telegram.Bot;
@@ -40,7 +43,14 @@ namespace CardCollector.Controllers
                     UpdateType.PreCheckoutQuery => await PreCheckoutQueryHandler.Factory(update),
                     _ => throw new ArgumentOutOfRangeException()
                 };
-                await executor.PrepareAndExecute();
+                try
+                {
+                    await executor.PrepareAndExecute();
+                }
+                catch (Exception e)
+                {
+                    await SendError(update, e);
+                }
             }
             catch (Exception e)
             {
@@ -56,6 +66,33 @@ namespace CardCollector.Controllers
                         LogOutError(e);
                         break;
                 }
+            }
+        }
+
+        private static async Task SendError(Update update, Exception exception)
+        {
+            try
+            {
+                var context = new BotDatabaseContext();
+                var userDetails = update.Type switch
+                {
+                    UpdateType.Message => update.Message!.From,
+                    UpdateType.CallbackQuery => update.CallbackQuery!.From,
+                    UpdateType.ChosenInlineResult => update.ChosenInlineResult!.From,
+                    UpdateType.MyChatMember => update.MyChatMember!.From,
+                    UpdateType.InlineQuery => update.InlineQuery!.From,
+                    UpdateType.PreCheckoutQuery => update.PreCheckoutQuery!.From,
+                    _ => null
+                };
+                if (userDetails == null) return;
+                var user = await context.Users.FindUser(userDetails);
+                if (user.IsBlocked) return;
+                await new SayError(user, context, exception).PrepareAndExecute();
+            }
+            catch (Exception e)
+            {
+                LogOutError(exception);
+                LogOutError(e);
             }
         }
 
@@ -158,6 +195,7 @@ namespace CardCollector.Controllers
             if (user.IsBlocked) return;
             try
             {
+                user.Session.PopLastCommand();
                 await Bot.Client.AnswerCallbackQueryAsync(callbackQueryId, text, showAlert);
             }
             catch (Exception e)

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using CardCollector.Attributes.Menu;
 using CardCollector.Controllers;
 using CardCollector.DataBase;
 using CardCollector.DataBase.EntityDao;
@@ -9,15 +10,15 @@ using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Filters
 {
+    [MenuPoint]
     public class AuthorsMenu : CallbackQueryHandler
     {
         protected override string CommandText => CallbackQueryCommands.authors_menu;
-        protected override bool AddToStack => true;
 
         protected override async Task Execute()
         {
             var offset = int.Parse(CallbackQuery.Data!.Split('=')[1]);
-            var packs = await Context.Packs.FindNext(offset, 10);
+            var packs = await Context.Packs.FindNextSkipRandom(offset, 10);
             var packsCount = Context.Packs.Count() - 1;
             if (packs.Count == 0)
                 await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.page_not_found);

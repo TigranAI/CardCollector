@@ -13,6 +13,7 @@ namespace CardCollector.DataBase.Entity
         public int CollectIncomeMessageId { get; set; } = -1;
         public int TopUsersMessageId { get; set; } = -1;
         public int DailyTaskMessageId { get; set; } = -1;
+        public int DailyTaskAlertMessageId { get; set; } = -1;
         public int DailyTaskProgressMessageId { get; set; } = -1;
         public ICollection<int> ChatMessages { get; set; } = new HashSet<int>();
         public ICollection<int> ChatStickers { get; set; } = new HashSet<int>();
@@ -54,6 +55,7 @@ namespace CardCollector.DataBase.Entity
             string fileId,
             IReplyMarkup? keyboard = null)
         {
+            await ClearMessages(user);
             var messageId = await MessageController.SendSticker(user, fileId, keyboard);
             ChatStickers.Add(messageId);
         }
@@ -89,13 +91,22 @@ namespace CardCollector.DataBase.Entity
         public async Task SendDailyTaskProgress(User user, string message)
         {
             if (DailyTaskProgressMessageId != -1) await MessageController.DeleteMessage(user, DailyTaskProgressMessageId);
-            DailyTaskProgressMessageId = await MessageController.SendMessage(user, Messages.main_menu);
+            DailyTaskProgressMessageId = await MessageController.SendMessage(user, message);
+        }
+
+        public async Task SendDailyTaskAlert(User user)
+        {
+            if (DailyTaskAlertMessageId != -1) await MessageController.DeleteMessage(user, DailyTaskAlertMessageId);
+            DailyTaskAlertMessageId = await MessageController.SendMessage(user, Messages.daily_task_alertation);
+            ChatMessages.Add(DailyTaskAlertMessageId);
         }
 
         public async Task SendDailyTaskComplete(User user)
         {
+            await ClearChat(user);
             if (DailyTaskMessageId != -1) await MessageController.DeleteMessage(user, DailyTaskMessageId);
             DailyTaskMessageId = await MessageController.SendMessage(user, Messages.pack_prize, Keyboard.MyPacks);
+            ChatMessages.Add(DailyTaskMessageId);
         }
 
         public async Task SendTopUsers(User user, string message, InlineKeyboardMarkup keyboard)

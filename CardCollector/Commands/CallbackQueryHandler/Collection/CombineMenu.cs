@@ -1,4 +1,6 @@
 ﻿using System.Threading.Tasks;
+using CardCollector.Attributes;
+using CardCollector.Attributes.Menu;
 using CardCollector.Commands.CallbackQueryHandler.Others;
 using CardCollector.DataBase;
 using CardCollector.Resources;
@@ -8,10 +10,10 @@ using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Collection
 {
+    [MenuPoint]
     public class CombineMenu : CallbackQueryHandler
     {
         protected override string CommandText => "";
-        protected override bool AddToStack => true;
         protected override bool ClearStickers => true;
 
         protected override async Task Execute()

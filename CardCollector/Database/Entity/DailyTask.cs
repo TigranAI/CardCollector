@@ -8,7 +8,7 @@ namespace CardCollector.DataBase.Entity
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
-        public User User { get; set; }
+        public virtual User User { get; set; }
         public TaskKeys TaskId { get; set; }
         public int Progress { get; set; }
     }

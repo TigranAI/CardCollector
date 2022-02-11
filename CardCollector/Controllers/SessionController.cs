@@ -1,4 +1,4 @@
-﻿using System.Collections.Concurrent;
+﻿using System.Collections.Generic;
 using CardCollector.DataBase.Entity;
 using CardCollector.Session;
 
@@ -6,13 +6,17 @@ namespace CardCollector.Controllers
 {
     public static class SessionController
     {
-        private static ConcurrentDictionary<long, UserSession> _openedSessions = new();
+        private static Dictionary<long, UserSession> _openedSessions = new();
 
-        public static UserSession FindSession(User user)
+        public static UserSession? FindSession(User user)
         {
-            if (_openedSessions.TryGetValue(user.Id, out var session))
-                session.User = user;
-            return _openedSessions.GetOrAdd(user.Id, new UserSession(user));
+            if (_openedSessions.ContainsKey(user.Id)) return _openedSessions[user.Id];
+            return null;
+        }
+
+        public static void AddSession(User user)
+        {
+            if (!_openedSessions.ContainsKey(user.Id)) _openedSessions.Add(user.Id, user.Session);
         }
     }
 }

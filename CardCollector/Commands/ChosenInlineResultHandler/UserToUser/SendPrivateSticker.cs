@@ -60,7 +60,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.UserToUser
                     $" / {TaskGoals.Goals[TaskKeys.SendStickersToUsers]}");
         }
 
-        protected SendPrivateSticker(User user, BotDatabaseContext context, ChosenInlineResult chosenInlineResult) : base(user, context, chosenInlineResult)
+        public SendPrivateSticker(User user, BotDatabaseContext context, ChosenInlineResult chosenInlineResult) : base(user, context, chosenInlineResult)
         {
         }
     }

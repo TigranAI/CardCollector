@@ -13,7 +13,7 @@ using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands.MessageHandler
 {
-    [Attributes.MessageHandler]
+    [Attributes.Handlers.MessageHandler]
     public abstract class MessageHandler : HandlerModel
     {
         protected Message Message;
@@ -27,7 +27,7 @@ namespace CardCollector.Commands.MessageHandler
             foreach (var type in assembly.GetTypes())
             {
                 if (type == typeof(MessageHandler)) continue;
-                if (Attribute.IsDefined(type, typeof(Attributes.MessageHandler)))
+                if (Attribute.IsDefined(type, typeof(Attributes.Handlers.MessageHandler)))
                     Commands.Add(type);
             }
         }
@@ -35,7 +35,7 @@ namespace CardCollector.Commands.MessageHandler
         public static async Task<HandlerModel> Factory(Update update)
         {
             var context = new BotDatabaseContext();
-            var user = await context.Users.FindUserWithSession(update.Message!.From!);
+            var user = await context.Users.FindUser(update.Message!.From!);
             if (user.IsBlocked) return new IgnoreHandler(user, context);
             
             if (update.Message?.From?.Username == AppSettings.NAME)
@@ -44,10 +44,11 @@ namespace CardCollector.Commands.MessageHandler
                 return new IgnoreHandler(user, context);
             }
 
-            
             if (update.Message!.Chat.Type is ChatType.Private && update.Message.Text != Text.start)
                 await MessageController.DeleteMessage(user, update.Message.MessageId);
 
+            user.InitSession();
+            
             foreach (var handlerType in Commands)
             {
                 var handler = (HandlerModel?) Activator.CreateInstance(handlerType, user, context, update.Message);

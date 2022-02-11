@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using CardCollector.Commands.MessageHandler;
+using CardCollector.Controllers;
 using CardCollector.DataBase;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.Entity.NotMapped;
@@ -13,7 +14,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector
 {
-    using static Controllers.MessageController;
+    using static MessageController;
     public static class Bot
     {
         private static TelegramBotClient? _client;
@@ -39,8 +40,7 @@ namespace CardCollector
             var cts = new CancellationTokenSource();
             await Client.SetMyCommandsAsync(Commands, BotCommandScope.AllPrivateChats(), cancellationToken: cts.Token);
             Client.StartReceiving(HandleUpdateAsync, HandleErrorAsync, cancellationToken: cts.Token);
-
-            Logs.LogOut("Bot started");
+            
             End.WaitOne();
             await Client.CloseAsync();
             cts.Cancel();
@@ -49,11 +49,6 @@ namespace CardCollector
 
         public static async Task StopProgram()
         {
-            /*SendStickers.WriteLogs();
-            CollectIncome.WriteLogs();
-            SendStickerHandler.WriteLogs();
-            BuyGemsItem.WriteLogs();
-            ConfirmSelling.WriteLogs();*/
             await ContextManager.DisposeAllAsync();
             End.Set();
         }

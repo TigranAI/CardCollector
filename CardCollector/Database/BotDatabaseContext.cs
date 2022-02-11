@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.DailyTasks;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.Entity.NotMapped;
 using CardCollector.Resources;
@@ -18,6 +17,7 @@ namespace CardCollector.DataBase
 
     public class BotDatabaseContext : DbContext
     {
+        private bool _disposed;
         private double _id;
 
         public BotDatabaseContext()
@@ -26,12 +26,6 @@ namespace CardCollector.DataBase
                 new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)
             ).TotalMilliseconds;
             ContextManager.AddNewContext(_id, this);
-        }
-
-        public override ValueTask DisposeAsync()
-        {
-            ContextManager.DeleteContext(_id);
-            return base.DisposeAsync();
         }
 
         public DbSet<User> Users { get; set; }
@@ -50,17 +44,26 @@ namespace CardCollector.DataBase
         public DbSet<CountLogs> CountLogs { get; set; }
         public DbSet<UserMessages> UserMessages { get; set; }
         public DbSet<Payment> Payments { get; set; }
+        public DbSet<UserActivity> UserActivities { get; set; }
+        public DbSet<UserSendStickerToChat> UserSendStickers { get; set; }
+        
+        public bool IsDisposed()
+        {
+            return _disposed;
+        }
 
         /* Конфигурация подключения к БД */
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL(
-                $"server={DB_IP};" +
-                $"port={DB_PORT};" +
-                $"database={DB_SCHEMA};" +
-                $"uid={DB_UID};" +
-                $"pwd={DB_PWD}"
-            );
+            optionsBuilder
+                .UseLazyLoadingProxies()
+                .UseMySQL(
+                    $"server={DB_IP};" +
+                    $"port={DB_PORT};" +
+                    $"database={DB_SCHEMA};" +
+                    $"uid={DB_UID};" +
+                    $"pwd={DB_PWD}"
+                );
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -73,6 +76,17 @@ namespace CardCollector.DataBase
             ConfigureLevelLevelReward(modelBuilder);
             ConfigureDailyTaskTaskId(modelBuilder);
             ConfigureStickerEffect(modelBuilder);
+            ConfigureUserActivity(modelBuilder);
+        }
+
+        private void ConfigureUserActivity(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<UserActivity>()
+                .Property(entity => entity.Action)
+                .HasConversion(
+                    to => to.ToString(),
+                    from => Type.GetType(from));
         }
 
         private void ConfigureUserLevel(ModelBuilder modelBuilder)
@@ -169,6 +183,20 @@ namespace CardCollector.DataBase
                 .HasConversion(
                     to => (int) to,
                     from => (PrivilegeLevel) from);
+        }
+
+        public override ValueTask DisposeAsync()
+        {
+            _disposed = true;
+            ContextManager.DeleteContext(_id);
+            return base.DisposeAsync();
+        }
+
+        public override void Dispose()
+        {
+            _disposed = true;
+            ContextManager.DeleteContext(_id);
+            base.Dispose();
         }
     }
 }

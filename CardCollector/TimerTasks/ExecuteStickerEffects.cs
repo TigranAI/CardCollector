@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
-using CardCollector.Controllers;
 using CardCollector.DataBase;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
+using CardCollector.Others;
 using CardCollector.Resources;
 using CardCollector.StickerEffects;
+using Microsoft.EntityFrameworkCore;
 
 namespace CardCollector.TimerTasks
 {
@@ -26,88 +29,105 @@ namespace CardCollector.TimerTasks
         
         public async Task GivePacks()
         {
-            /*var users = await UserDao.GetAllWhere(user => !user.IsBlocked);
-            var settings = await SettingsDao.GetAll();
-            foreach (var user in users)
+            using (var context = new BotDatabaseContext())
             {
-                var stickers = await UserStickerRelationDao.GetListById(user.Id);
-                var packsCount = await Random1Pack5Day.GetPacksCount(stickers);
-                if (packsCount > 0)
+                var users = await context.Users.Where(user => !user.IsBlocked).ToListAsync();
+                foreach (var user in users)
                 {
-                    var userPacks = await UserPacksDao.GetOne(user.Id, 1);
-                    userPacks.Count += packsCount;
-                    Logs.LogOut($"{userPacks.Id} - {userPacks.UserId} - {userPacks.Count}");
-                    try {
-                        if (settings[user.Id][UserSettingsEnum.StickerEffects])
-                            await MessageController.SendMessage(user,
-                                $"{Messages.effect_Random1Pack5Day} {packsCount}{Text.items}", addToList: false);
-                    }
-                    catch {
-                        await MessageController.SendMessage(user,
-                            $"{Messages.effect_Random1Pack5Day} {packsCount}{Text.items}", addToList: false);
+                    
+                    var packsCount = user.Stickers
+                        .Where(item => 
+                            item.Sticker.Effect == Effect.Random1Pack5Day 
+                            && item.GivePrizeDate.CompareTo(DateTime.Today.AddDays(-5)) <= 0)
+                        .Sum(sticker => sticker.Count);
+                    if (packsCount > 0)
+                    {
+                        var pack = await context.Packs.FindById(1);
+                        user.AddPack(pack, packsCount);
+
+                        if (user.Settings[UserSettingsEnum.StickerEffects])
+                            await user.Messages.SendMessage(user,
+                                $"{Messages.effect_Random1Pack5Day} {packsCount}{Text.items}");
                     }
                 }
-            }*/
+
+                await context.SaveChangesAsync();
+            }
         }
 
         public static async Task GiveTier2()
         {
-            /*var users = await UserDao.GetAll();
-            var settings = await SettingsDao.GetAll();
-            foreach (var user in users)
+            using (var context = new BotDatabaseContext())
             {
-                user.Stickers = await UserStickerRelationDao.GetListById(user.Id);
-                var stickerCount = await RandomSticker2Tier3Day.GetStickersCount(user.Stickers);
-                if (stickerCount > 0)
+                var users = await context.Users.Where(user => !user.IsBlocked).ToListAsync();
+                foreach (var user in users)
                 {
-                    var stickerList = await RandomSticker2Tier3Day.GenerateList(stickerCount);
-                    var generatedMessage = "";
-                    foreach (var (sticker, count) in stickerList)
+                    
+                    var stickersCount = user.Stickers
+                        .Where(item => 
+                            item.Sticker.Effect == Effect.RandomSticker2Tier3Day 
+                            && item.GivePrizeDate.CompareTo(DateTime.Today.AddDays(-3)) <= 0)
+                        .Sum(sticker => sticker.Count);
+                    if (stickersCount > 0)
                     {
-                        generatedMessage += $"\n{sticker.Title} {count}{Text.items}";
-                        await UserStickerRelationDao.AddSticker(user, sticker, count);
-                    }
-                    try {
-                        if (settings[user.Id][UserSettingsEnum.StickerEffects])
-                            await MessageController.SendMessage(user,
-                                $"{Messages.effect_RandomSticker2Tier3Day}{generatedMessage}", addToList: false);
-                    }
-                    catch {
-                        await MessageController.SendMessage(user,
-                            $"{Messages.effect_RandomSticker2Tier3Day}{generatedMessage}", addToList: false);
+                        var message = Messages.effect_RandomSticker2Tier3Day;
+                        var prizeList = await GenerateList(context, stickersCount, 2);
+                        foreach (var sticker in prizeList.DistinctBy(item => item.Id))
+                        {
+                            var count = prizeList.Count(sticker1 => sticker1.Id == sticker.Id);
+                            message += $"\n{sticker.Title} {Text.by} {sticker.Author} {count}{Text.items}";
+                            await user.AddSticker(sticker, count);
+                        }
+                        if (user.Settings[UserSettingsEnum.StickerEffects])
+                            await user.Messages.SendMessage(user, message);
                     }
                 }
-            }*/
+
+                await context.SaveChangesAsync();
+            }
         }
 
         public static async Task GiveTier1()
         {
-            /*var users = await UserDao.GetAll();
-            var settings = await SettingsDao.GetAll();
-            foreach (var user in users)
+            using (var context = new BotDatabaseContext())
             {
-                user.Stickers = await UserStickerRelationDao.GetListById(user.Id);
-                var stickerCount = await RandomSticker1Tier3Day.GetStickersCount(user.Stickers);
-                if (stickerCount > 0)
+                var users = await context.Users.Where(user => !user.IsBlocked).ToListAsync();
+                foreach (var user in users)
                 {
-                    var stickerList = await RandomSticker1Tier3Day.GenerateList(stickerCount);
-                    var generatedMessage = "";
-                    foreach (var (sticker, count) in stickerList)
+                    
+                    var stickersCount = user.Stickers
+                        .Where(item => 
+                            item.Sticker.Effect == Effect.RandomSticker2Tier3Day 
+                            && item.GivePrizeDate.CompareTo(DateTime.Today.AddDays(-2)) <= 0)
+                        .Sum(sticker => sticker.Count);
+                    if (stickersCount > 0)
                     {
-                        generatedMessage += $"\n{sticker.Title} {count}{Text.items}";
-                        await UserStickerRelationDao.AddSticker(user, sticker, count);
-                    }
-                    try {
-                        if (settings[user.Id][UserSettingsEnum.StickerEffects])
-                            await MessageController.SendMessage(user,
-                                $"{Messages.effect_RandomSticker1Tier3Day}{generatedMessage}", addToList: false);
-                    }
-                    catch {
-                        await MessageController.SendMessage(user,
-                            $"{Messages.effect_RandomSticker1Tier3Day}{generatedMessage}", addToList: false);
+                        var message = Messages.effect_RandomSticker1Tier3Day;
+                        var prizeList = await GenerateList(context, stickersCount, 1);
+                        foreach (var sticker in prizeList.DistinctBy(item => item.Id))
+                        {
+                            var count = prizeList.Count(sticker1 => sticker1.Id == sticker.Id);
+                            message += $"\n{sticker.Title} {Text.by} {sticker.Author} {count}{Text.items}";
+                            await user.AddSticker(sticker, count);
+                        }
+                        if (user.Settings[UserSettingsEnum.StickerEffects])
+                            await user.Messages.SendMessage(user, message);
                     }
                 }
-            }*/
+
+                await context.SaveChangesAsync();
+            }
+        }
+
+        private static async Task<List<Sticker>> GenerateList(BotDatabaseContext context, int stickersCount, int tier)
+        {
+            var stickersByTier = await context.Stickers.FindAllByTier(tier);
+            var result = new List<Sticker>();
+            while (result.Count != stickersCount)
+            {
+                result.Add(stickersByTier.Random());
+            }
+            return result;
         }
     }
 }

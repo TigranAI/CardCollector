@@ -1,5 +1,8 @@
+using System;
 using System.Threading.Tasks;
+using CardCollector.Attributes.Menu;
 using CardCollector.DataBase;
+using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
 using User = CardCollector.DataBase.Entity.User;
 
@@ -9,7 +12,6 @@ namespace CardCollector.Commands
     {
         protected abstract string CommandText { get; }
         protected virtual bool ClearMenu => false;
-        protected virtual bool AddToStack => false;
         protected virtual bool ClearStickers => false;
         
         protected User User;
@@ -18,7 +20,8 @@ namespace CardCollector.Commands
         public async Task InitNewContext(long userId)
         {
             Context = new BotDatabaseContext();
-            User = await Context.Users.FindByIdWithSession(userId);
+            User = await Context.Users.FindById(userId);
+            User.InitSession();
         }
         
         public virtual async Task PrepareAndExecute()
@@ -30,9 +33,13 @@ namespace CardCollector.Commands
 
         protected virtual async Task BeforeExecute()
         {
-            User.Session.SetCurrentCommand(GetType());
+            var activity = new UserActivity() {User = User, Action = GetType()};
+            await Context.UserActivities.AddAsync(activity);
+            
+            User.InitSession();
             if (ClearMenu) User.Session.ClearMenuStack();
-            if (AddToStack) User.Session.AddMenuToStack(this);
+            if (!Attribute.IsDefined(GetType(), typeof(DontAddToCommandStack)))
+                User.Session.AddCommandToStack(this);
             if (ClearStickers) await User.Messages.ClearStickers(User);
         }
         
@@ -40,6 +47,7 @@ namespace CardCollector.Commands
 
         protected virtual async Task AfterExecute()
         {
+            if (Context.IsDisposed()) return;
             Context.ChangeTracker.DetectChanges();
             await Context.SaveChangesAsync();
             await Context.DisposeAsync();

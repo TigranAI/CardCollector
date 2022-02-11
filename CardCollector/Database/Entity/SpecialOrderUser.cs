@@ -8,8 +8,8 @@ namespace CardCollector.DataBase.Entity
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
-        public SpecialOrder Order { get; set; }
-        public User User { get; set; }
+        public virtual User User { get; set; }
+        public virtual SpecialOrder Order { get; set; }
         public DateTime Timestamp { get; set; } = DateTime.Now;
     }
 }

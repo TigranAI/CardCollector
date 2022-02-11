@@ -342,4 +342,7 @@
     <data name="random_author_description" xml:space="preserve">
         <value>Из данного пака есть шанс получить абсолютно любой стикер любого автора!</value>
     </data>
+    <data name="by" xml:space="preserve">
+        <value>от</value>
+    </data>
 </root>

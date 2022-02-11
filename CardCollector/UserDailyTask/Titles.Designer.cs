@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CardCollector.DailyTasks {
+namespace CardCollector.UserDailyTask {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace CardCollector.DailyTasks {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CardCollector.DailyTasks.Titles", typeof(Titles).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CardCollector.UserDailyTask.Titles", typeof(Titles).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -63,9 +63,9 @@ namespace CardCollector.DailyTasks {
         /// <summary>
         ///   Looks up a localized string similar to Отправка стикеров 5-и пользователям.
         /// </summary>
-        internal static string send_stickers {
+        internal static string SendStickersToUsers {
             get {
-                return ResourceManager.GetString("send_stickers", resourceCulture);
+                return ResourceManager.GetString("SendStickersToUsers", resourceCulture);
             }
         }
     }

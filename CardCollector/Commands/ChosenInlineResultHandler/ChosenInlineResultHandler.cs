@@ -9,7 +9,7 @@ using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands.ChosenInlineResultHandler
 {
-    [Attributes.ChosenInlineResultHandler]
+    [Attributes.Handlers.ChosenInlineResultHandler]
     public abstract class ChosenInlineResultHandler : HandlerModel
     {
         protected readonly ChosenInlineResult ChosenInlineResult;
@@ -23,7 +23,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler
             foreach (var type in assembly.GetTypes())
             {
                 if (type == typeof(ChosenInlineResultHandler)) continue;
-                if (Attribute.IsDefined(type, typeof(Attributes.ChosenInlineResultHandler)))
+                if (Attribute.IsDefined(type, typeof(Attributes.Handlers.ChosenInlineResultHandler)))
                     Commands.Add(type);
             }
         }
@@ -31,9 +31,11 @@ namespace CardCollector.Commands.ChosenInlineResultHandler
         public static async Task<HandlerModel> Factory(Update update)
         {
             var context = new BotDatabaseContext();
-            var user = await context.Users.FindUserWithSession(update.ChosenInlineResult!.From);
+            var user = await context.Users.FindUser(update.ChosenInlineResult!.From);
             if (user.IsBlocked) return new IgnoreHandler(user, context);
 
+            user.InitSession();
+            
             foreach (var handlerType in Commands)
             {
                 var handler = (HandlerModel?) Activator.CreateInstance(handlerType, user, context, update.ChosenInlineResult);

@@ -16,12 +16,13 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Collection
         {
             var stickerId = long.Parse(ChosenInlineResult.ResultId.Split('=')[1]);
             var module = User.Session.GetModule<CombineModule>();
+            module.Count = 1;
             module.SelectedStickerId = stickerId;
             var sticker = await Context.Stickers.FindById(stickerId);
             var userSticker = User.Stickers.Single(item => item.Sticker.Id == stickerId);
             await User.Messages.SendSticker(User, sticker.FileId);
             await User.Messages.EditMessage(User, sticker.ToString(userSticker.Count), 
-                Keyboard.GetCollectionStickerKeyboard(sticker, module.Count));
+                Keyboard.GetCombineStickerKeyboard(module));
         }
 
         public override bool Match()

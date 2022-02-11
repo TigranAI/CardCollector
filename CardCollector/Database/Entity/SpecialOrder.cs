@@ -8,7 +8,7 @@ namespace CardCollector.DataBase.Entity
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public Pack Pack { get; set; }
+        public virtual Pack Pack { get; set; }
         [MaxLength(256)] public string Title { get; set; }
         public bool IsInfinite { get; set; }
         public int Count { get; set; }

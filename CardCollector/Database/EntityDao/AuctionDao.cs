@@ -34,6 +34,7 @@ namespace CardCollector.DataBase.EntityDao
             var list = await table
                 .Include(item => item.Sticker)
                 .Where(item =>
+                    item.Count > 0 &&
                     item.Sticker.Author.Contains(query)
                     || item.Sticker.Emoji.Contains(query)
                     || item.Sticker.Title.Contains(query))
@@ -48,7 +49,7 @@ namespace CardCollector.DataBase.EntityDao
             string query = "")
         {
             var list = await table
-                .Where(item => item.Sticker.Id == stickerId && item.Trader.Username.Contains(query))
+                .Where(item => item.Count > 0 && item.Sticker.Id == stickerId && item.Trader.Username.Contains(query))
                 .ToListAsync();
             return list;
         }

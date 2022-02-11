@@ -1,4 +1,6 @@
 ﻿using System.Threading.Tasks;
+using CardCollector.Attributes;
+using CardCollector.Attributes.Menu;
 using CardCollector.DataBase;
 using CardCollector.Resources;
 using Telegram.Bot.Types;
@@ -6,10 +8,10 @@ using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Admin
 {
+    [MenuPoint]
     public class UploadStickerPack : CallbackQueryHandler
     {
         protected override string CommandText => CallbackQueryCommands.upload_stickerpack;
-        protected override bool AddToStack => true;
 
         protected override async Task Execute()
         {

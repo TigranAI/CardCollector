@@ -7,7 +7,7 @@ namespace CardCollector.DataBase.Entity
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
-        public User User { get; set; }
+        public virtual User User { get; set; }
         public int TotalAmount { get; set; }
         [MaxLength(16)] public string InvoicePayload { get; set; }
         [MaxLength(127)] public string TelegramPaymentChargeId { get; set; }

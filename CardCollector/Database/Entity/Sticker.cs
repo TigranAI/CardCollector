@@ -20,8 +20,8 @@ namespace CardCollector.DataBase.Entity
         public int Tier { get; set; }
         public Effect Effect { get; set; }
         [MaxLength(127)] public string Emoji { get; set; }
-        [MaxLength(1024)] public string Description { get; set; }
-        public Pack Pack { get; set; }
+        [MaxLength(1024)] public string? Description { get; set; }
+        public virtual Pack Pack { get; set; }
         [MaxLength(127)] public string FileId { get; set; }
         public bool IsAnimated { get; set; }
         [MaxLength(127)] public string? ForSaleFileId { get; set; }

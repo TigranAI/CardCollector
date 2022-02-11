@@ -21,7 +21,7 @@ namespace CardCollector.Commands.MessageHandler.Admin
             var message = $"{Messages.upload_your_stickers}" +
                           $"\n{Messages.uploaded_count} {module.StickersList.Count}";
             foreach (var (stickerEntity, i) in module.StickersList.WithIndex())
-                message += $"\n{Text.sticker} {i + 1}: {stickerEntity.Id}";
+                message += $"\n{Text.sticker} {i + 1}: {stickerEntity.FileId}";
             await User.Messages.EditMessage(User, message, Keyboard.EndStickerUpload);
         }
 

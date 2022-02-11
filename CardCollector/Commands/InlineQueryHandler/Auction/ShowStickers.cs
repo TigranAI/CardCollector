@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using CardCollector.Attributes.Menu;
 using CardCollector.Commands.ChosenInlineResultHandler;
 using CardCollector.Controllers;
 using CardCollector.DataBase;
@@ -11,6 +12,7 @@ using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands.InlineQueryHandler.Auction
 {
+    [DontAddToCommandStack]
     public class ShowStickers : InlineQueryHandler
     {
         protected override async Task Execute()
