@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using CardCollector.Attributes.Logs;
 using CardCollector.Attributes.Menu;
 using CardCollector.DataBase;
 using CardCollector.DataBase.Entity;
@@ -17,7 +18,7 @@ namespace CardCollector.Commands
         protected User User;
         protected BotDatabaseContext Context;
 
-        public async Task InitNewContext(long userId)
+        public virtual async Task InitNewContext(long userId)
         {
             Context = new BotDatabaseContext();
             User = await Context.Users.FindById(userId);
@@ -33,9 +34,6 @@ namespace CardCollector.Commands
 
         protected virtual async Task BeforeExecute()
         {
-            var activity = new UserActivity() {User = User, Action = GetType()};
-            await Context.UserActivities.AddAsync(activity);
-            
             User.InitSession();
             if (ClearMenu) User.Session.ClearMenuStack();
             if (!Attribute.IsDefined(GetType(), typeof(DontAddToCommandStack)))
@@ -47,10 +45,27 @@ namespace CardCollector.Commands
 
         protected virtual async Task AfterExecute()
         {
-            if (Context.IsDisposed()) return;
-            Context.ChangeTracker.DetectChanges();
-            await Context.SaveChangesAsync();
-            await Context.DisposeAsync();
+            if (!Context.IsDisposed())
+            {
+                if (Attribute.IsDefined(GetType(), typeof(SavedActivityAttribute)))
+                {
+                    var activity = new UserActivity() {User = User, Action = GetType().FullName};
+                    await Context.UserActivities.AddAsync(activity);
+                }
+                Context.ChangeTracker.DetectChanges();
+                await Context.SaveChangesAsync();
+                await Context.DisposeAsync();
+            }
+            else if (Attribute.IsDefined(GetType(), typeof(SavedActivityAttribute)))
+            {
+                using (var context = new BotDatabaseContext())
+                {
+                    var user = await context.Users.FindById(User.Id);
+                    var activity = new UserActivity() {User = user, Action = GetType().FullName};
+                    await Context.UserActivities.AddAsync(activity);
+                    await context.SaveChangesAsync();
+                }
+            }
         }
 
         public abstract bool Match();

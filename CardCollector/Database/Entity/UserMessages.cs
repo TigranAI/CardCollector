@@ -92,6 +92,7 @@ namespace CardCollector.DataBase.Entity
         {
             if (DailyTaskProgressMessageId != -1) await MessageController.DeleteMessage(user, DailyTaskProgressMessageId);
             DailyTaskProgressMessageId = await MessageController.SendMessage(user, message);
+            ChatMessages.Add(DailyTaskProgressMessageId);
         }
 
         public async Task SendDailyTaskAlert(User user)
@@ -113,6 +114,14 @@ namespace CardCollector.DataBase.Entity
         {
             if (TopUsersMessageId != -1) await MessageController.DeleteMessage(user, TopUsersMessageId);
             TopUsersMessageId = await MessageController.SendMessage(user, message, keyboard, ParseMode.Html);
+            ChatMessages.Add(TopUsersMessageId);
+        }
+
+        public async Task SendPiggyBankAlert(User user, string message)
+        {
+            if (CollectIncomeMessageId != -1) await MessageController.DeleteMessage(user, CollectIncomeMessageId);
+            CollectIncomeMessageId = await MessageController.SendMessage(user, message);
+            ChatMessages.Add(CollectIncomeMessageId);
         }
     }
 }

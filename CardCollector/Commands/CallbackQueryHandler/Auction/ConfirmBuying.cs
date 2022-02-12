@@ -18,7 +18,8 @@ namespace CardCollector.Commands.CallbackQueryHandler.Auction
             var auctionModule = User.Session.GetModule<AuctionModule>();
             var auction = await Context.Auctions.FindById(auctionModule.SelectedAuctionId);
             if (auction == null) return;
-            var price = auction.Price * auctionModule.Count ;
+            var price = auction.Price * auctionModule.Count;
+            if (User.HasAuctionDiscount()) price = (int) (price * 0.95);
             if (price > User.Cash.Gems)
                 await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.not_enougth_gems, true);
             else
@@ -26,10 +27,14 @@ namespace CardCollector.Commands.CallbackQueryHandler.Auction
                 var text = $"{Messages.confirm_buying}" +
                            $"\n{auctionModule.Count}{Text.items} {Text.per} {price}{Text.gem}" +
                            $"\n{Messages.are_you_sure}";
-                await User.Messages.EditMessage(User, text, Keyboard.GetConfirmationKeyboard(CallbackQueryCommands.buy_sticker));
+                await User.Messages.EditMessage(User, text,
+                    Keyboard.GetConfirmationKeyboard(CallbackQueryCommands.buy_sticker));
             }
         }
 
-        public ConfirmBuying(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context, callbackQuery) { }
+        public ConfirmBuying(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context,
+            callbackQuery)
+        {
+        }
     }
 }

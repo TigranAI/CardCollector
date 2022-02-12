@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using CardCollector.Attributes.Logs;
 using CardCollector.DataBase;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
@@ -7,6 +8,7 @@ using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands.ChosenInlineResultHandler.UserToChat
 {
+    [SavedActivity]
     public class ChatSendSticker : ChosenInlineResultHandler
     {
         protected override string CommandText => ChosenInlineResultCommands.chat_send_sticker;

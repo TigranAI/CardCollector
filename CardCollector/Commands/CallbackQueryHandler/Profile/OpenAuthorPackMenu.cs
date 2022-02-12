@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Attributes.Menu;
+using CardCollector.Commands.CallbackQueryHandler.Others;
 using CardCollector.Controllers;
 using CardCollector.DataBase;
 using CardCollector.Resources;
@@ -14,12 +15,16 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
     {
         protected override string CommandText => CallbackQueryCommands.open_author_pack_menu;
         protected override bool ClearStickers => true;
+        private bool _fromOpenPackCommand;
 
         protected override async Task Execute()
         {
             var packs = User.Packs.Where(item => item.Count > 0 && item.Pack.Id != 1).ToList();
             if (packs.Count == 0)
+            {
                 await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.packs_count_zero, true);
+                if (_fromOpenPackCommand) await new Back(User, Context, CallbackQuery).PrepareAndExecute();
+            }
             else
             {
                 var offset = int.Parse(CallbackQuery.Data!.Split('=')[1]);
@@ -31,6 +36,12 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
                     await User.Messages.EditMessage(User, Messages.choose_author,
                         Keyboard.GetUserPacksKeyboard(packs, offset, totalCount));
             }
+        }
+
+        public override async Task InitNewContext(long userId)
+        {
+            await base.InitNewContext(userId);
+            _fromOpenPackCommand = true;
         }
 
         public OpenAuthorPackMenu(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user,

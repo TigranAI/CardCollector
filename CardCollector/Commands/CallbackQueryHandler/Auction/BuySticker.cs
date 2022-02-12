@@ -45,7 +45,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Auction
                 
                 if (User.HasAuctionDiscount()) sum = (int) (sum * 0.95);
                 User.Cash.Gems -= sum;
-                await User.Messages.SendMessage(User, string.Format(Messages.thanks_for_buying_sticker,
+                await User.Messages.EditMessage(User, string.Format(Messages.thanks_for_buying_sticker,
                     productInfo.Trader.Username), Keyboard.BackKeyboard);
 
                 await User.AddSticker(productInfo.Sticker, productInfo.Count);

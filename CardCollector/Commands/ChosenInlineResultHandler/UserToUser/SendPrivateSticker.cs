@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using CardCollector.Attributes.Logs;
 using CardCollector.Commands.ChosenInlineResultHandler.UserToChat;
 using CardCollector.DataBase;
 using CardCollector.DataBase.Entity;
@@ -11,6 +12,7 @@ using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands.ChosenInlineResultHandler.UserToUser
 {
+    [SavedActivity]
     public class SendPrivateSticker : ChatSendSticker
     {
         protected override string CommandText => ChosenInlineResultCommands.send_private_sticker;
@@ -26,7 +28,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.UserToUser
 
         private DailyTask GetTaskInfo()
         {
-            var dailyTask = User.DailyTasks.SingleOrDefault(item => item.Id == 1);
+            var dailyTask = User.DailyTasks.SingleOrDefault(item => item.TaskId == TaskKeys.SendStickersToUsers);
             if (dailyTask is null)
             {
                 dailyTask = new DailyTask()

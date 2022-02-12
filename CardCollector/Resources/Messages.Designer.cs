@@ -470,7 +470,7 @@ namespace CardCollector.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Поздравляем! Вы получили следующие стикеры:.
         /// </summary>
-        internal static string effect_RandomSticker1Tier3Day {
+        internal static string effect_RandomSticker1Tier2Day {
             get {
                 return ResourceManager.GetString("effect_RandomSticker1Tier3Day", resourceCulture);
             }

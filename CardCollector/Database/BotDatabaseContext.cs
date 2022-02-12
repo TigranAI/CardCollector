@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.Entity.NotMapped;
@@ -76,17 +77,6 @@ namespace CardCollector.DataBase
             ConfigureLevelLevelReward(modelBuilder);
             ConfigureDailyTaskTaskId(modelBuilder);
             ConfigureStickerEffect(modelBuilder);
-            ConfigureUserActivity(modelBuilder);
-        }
-
-        private void ConfigureUserActivity(ModelBuilder modelBuilder)
-        {
-            modelBuilder
-                .Entity<UserActivity>()
-                .Property(entity => entity.Action)
-                .HasConversion(
-                    to => to.ToString(),
-                    from => Type.GetType(from));
         }
 
         private void ConfigureUserLevel(ModelBuilder modelBuilder)

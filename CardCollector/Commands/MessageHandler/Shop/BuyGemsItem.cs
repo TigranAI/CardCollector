@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using CardCollector.Attributes.Logs;
 using CardCollector.Commands.PreCheckoutQueryHandler;
 using CardCollector.DataBase;
 using CardCollector.DataBase.Entity;
@@ -10,6 +11,7 @@ using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands.MessageHandler.Shop
 {
+    [SavedActivity]
     public class BuyGemsItem : MessageHandler
     {
         protected override string CommandText => PreCheckoutQueryCommands.buy_gems_item;

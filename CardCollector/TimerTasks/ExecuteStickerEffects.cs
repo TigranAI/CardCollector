@@ -15,18 +15,18 @@ namespace CardCollector.TimerTasks
 {
     public class ExecuteStickerEffects : TimerTask
     {
-        protected override TimeSpan RunAt => Constants.DEBUG 
+        protected override TimeSpan RunAt => Constants.DEBUG
             ? new TimeSpan(DateTime.Now.TimeOfDay.Hours,
-                DateTime.Now.TimeOfDay.Minutes + Constants.TEST_ALERTS_INTERVAL, 0) 
+                DateTime.Now.TimeOfDay.Minutes + Constants.TEST_ALERTS_INTERVAL, 0)
             : new TimeSpan(11, 0, 0);
-        
+
         protected override async void TimerCallback(object o, ElapsedEventArgs e)
         {
             await GivePacks();
             await GiveTier1();
             await GiveTier2();
         }
-        
+
         public async Task GivePacks()
         {
             using (var context = new BotDatabaseContext())
@@ -34,11 +34,14 @@ namespace CardCollector.TimerTasks
                 var users = await context.Users.Where(user => !user.IsBlocked).ToListAsync();
                 foreach (var user in users)
                 {
-                    
                     var packsCount = user.Stickers
-                        .Where(item => 
-                            item.Sticker.Effect == Effect.Random1Pack5Day 
-                            && item.GivePrizeDate.CompareTo(DateTime.Today.AddDays(-5)) <= 0)
+                        .Where(item =>
+                        {
+                            var result = item.Sticker.Effect == Effect.Random1Pack5Day
+                                         && item.GivePrizeDate.CompareTo(DateTime.Today.AddDays(-5)) <= 0;
+                            if (result) item.GivePrizeDate = DateTime.Today;
+                            return result;
+                        })
                         .Sum(sticker => sticker.Count);
                     if (packsCount > 0)
                     {
@@ -62,11 +65,14 @@ namespace CardCollector.TimerTasks
                 var users = await context.Users.Where(user => !user.IsBlocked).ToListAsync();
                 foreach (var user in users)
                 {
-                    
                     var stickersCount = user.Stickers
-                        .Where(item => 
-                            item.Sticker.Effect == Effect.RandomSticker2Tier3Day 
-                            && item.GivePrizeDate.CompareTo(DateTime.Today.AddDays(-3)) <= 0)
+                        .Where(item =>
+                        {
+                            var result = item.Sticker.Effect == Effect.RandomSticker2Tier3Day
+                                         && item.GivePrizeDate.CompareTo(DateTime.Today.AddDays(-3)) <= 0;
+                            if (result) item.GivePrizeDate = DateTime.Today;
+                            return result;
+                        })
                         .Sum(sticker => sticker.Count);
                     if (stickersCount > 0)
                     {
@@ -78,6 +84,7 @@ namespace CardCollector.TimerTasks
                             message += $"\n{sticker.Title} {Text.by} {sticker.Author} {count}{Text.items}";
                             await user.AddSticker(sticker, count);
                         }
+
                         if (user.Settings[UserSettingsEnum.StickerEffects])
                             await user.Messages.SendMessage(user, message);
                     }
@@ -94,15 +101,18 @@ namespace CardCollector.TimerTasks
                 var users = await context.Users.Where(user => !user.IsBlocked).ToListAsync();
                 foreach (var user in users)
                 {
-                    
                     var stickersCount = user.Stickers
-                        .Where(item => 
-                            item.Sticker.Effect == Effect.RandomSticker2Tier3Day 
-                            && item.GivePrizeDate.CompareTo(DateTime.Today.AddDays(-2)) <= 0)
+                        .Where(item =>
+                        {
+                            var result = item.Sticker.Effect == Effect.RandomSticker1Tier2Day
+                                         && item.GivePrizeDate.CompareTo(DateTime.Today.AddDays(-2)) <= 0;
+                            if (result) item.GivePrizeDate = DateTime.Today;
+                            return result;
+                        })
                         .Sum(sticker => sticker.Count);
                     if (stickersCount > 0)
                     {
-                        var message = Messages.effect_RandomSticker1Tier3Day;
+                        var message = Messages.effect_RandomSticker1Tier2Day;
                         var prizeList = await GenerateList(context, stickersCount, 1);
                         foreach (var sticker in prizeList.DistinctBy(item => item.Id))
                         {
@@ -110,6 +120,7 @@ namespace CardCollector.TimerTasks
                             message += $"\n{sticker.Title} {Text.by} {sticker.Author} {count}{Text.items}";
                             await user.AddSticker(sticker, count);
                         }
+
                         if (user.Settings[UserSettingsEnum.StickerEffects])
                             await user.Messages.SendMessage(user, message);
                     }
@@ -127,6 +138,7 @@ namespace CardCollector.TimerTasks
             {
                 result.Add(stickersByTier.Random());
             }
+
             return result;
         }
     }

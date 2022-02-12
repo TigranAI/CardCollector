@@ -63,7 +63,7 @@ namespace CardCollector.Session
 
         public HandlerModel? GetPreviousCommand()
         {
-            if (!_commandStack.TryPop(out _)) return null;
+            if (!_commandStack.TryPop(out var current)) return null;
             while (_commandStack.TryPop(out var previousCommand))
             {
                 if (Attribute.IsDefined(previousCommand.GetType(), typeof(MenuPoint))) return previousCommand;

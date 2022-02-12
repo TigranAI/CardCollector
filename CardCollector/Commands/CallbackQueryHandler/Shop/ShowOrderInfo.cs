@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase;
 using CardCollector.DataBase.EntityDao;
@@ -23,9 +22,8 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
             var message = specialOrder.Title;
             if (specialOrder.Discount > 0) message += $"\n{Text.discount}: {specialOrder.Discount}%";
             if (specialOrder.AdditionalPrize is not null) message += $"\n{Text.prize}: {await PrizeToString(specialOrder.AdditionalPrize)}";
-            message += specialOrder.TimeLimited
-                ? specialOrder.TimeLimit.ToString()!.Split(' ')[0]
-                : Text.unexpired;
+            message += $"\n{Text.time_limit} " +
+                       $"{(specialOrder.TimeLimited ? specialOrder.TimeLimit.ToString()!.Split(' ')[0] : Text.unexpired)}";
             if (specialOrder.Description is not null) message += $"\n{Text.description}: {specialOrder.Description}";
             await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, message, true);
         }

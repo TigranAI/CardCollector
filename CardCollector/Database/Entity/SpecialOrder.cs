@@ -20,7 +20,7 @@ namespace CardCollector.DataBase.Entity
         [MaxLength(256)] public string? AdditionalPrize { get; set; }
         [MaxLength(256)] public string? Description { get; set; }
         public string? PreviewFileId { get; set; }
-        public bool IsPreviewAnimated { get; set; }
+        public bool? IsPreviewAnimated { get; set; }
 
         public bool IsExpired()
         {

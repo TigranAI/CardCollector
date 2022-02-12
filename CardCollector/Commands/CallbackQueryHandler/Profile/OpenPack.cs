@@ -27,15 +27,15 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
                 userPack.Count--;
                 var tier = GetTier(Utilities.rnd.NextDouble() * 100);
                 var stickers = userPack.Pack.Id != 1
-                    ? userPack.Pack.Stickers
-                    : await Context.Stickers.ToListAsync();
-                var result = stickers.Where(sticker => sticker.Tier == tier).Random();
-                await User.AddSticker(result, 1);
+                    ? userPack.Pack.Stickers.Where(sticker => sticker.Tier == tier)
+                    : await Context.Stickers.Where(sticker => sticker.Tier == tier).ToListAsync();
+                var result = stickers.Random();
                 await User.Messages.SendSticker(User, result.FileId);
                 await User.Messages.EditMessage(User, $"{Messages.congratulation}\n{result}",
                     userPack.Count > 0
                         ? Keyboard.RepeatCommand(Text.open_more, CallbackQuery.Data!)
                         : Keyboard.BackKeyboard);
+                await User.AddSticker(result, 1);
             }
         }
 

@@ -6,9 +6,9 @@ namespace CardCollector.DataBase.EntityDao
 {
     public static class ShopDao
     {
-        public static async Task<SpecialOrder?> FindById(this DbSet<SpecialOrder> table, long? id)
+        public static async Task<SpecialOrder?> FindById(this DbSet<SpecialOrder> table, int? id)
         {
-            return await table.FirstOrDefaultAsync(item => item.Id == id);
+            return await table.SingleOrDefaultAsync(item => item.Id == id);
         }
     }
 }

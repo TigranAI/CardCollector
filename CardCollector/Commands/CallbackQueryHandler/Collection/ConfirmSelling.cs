@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using CardCollector.Attributes.Logs;
 using CardCollector.Commands.MessageHandler.Collection;
 using CardCollector.Controllers;
 using CardCollector.DataBase;
@@ -11,6 +12,7 @@ using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Collection
 {
+    [SavedActivity]
     public class ConfirmSelling : CallbackQueryHandler
     {
         protected override string CommandText => CallbackQueryCommands.confirm_selling;

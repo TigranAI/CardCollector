@@ -10,6 +10,6 @@ namespace CardCollector.DataBase.Entity
         public long Id { get; set; }
         public DateTime Timestamp { get; set; } = DateTime.Now;
         public virtual User User { get; set; }
-        public Type? Action { get; set; }
+        public string? Action { get; set; }
     }
 }

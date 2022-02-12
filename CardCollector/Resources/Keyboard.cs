@@ -512,7 +512,7 @@ namespace CardCollector.Resources
             else
             {
                 var price = product.Price;
-                if (user.HasAuctionDiscount()) price = (int) (price * 0.05);
+                if (user.HasAuctionDiscount()) price = (int) (price * 0.95);
                 keyboard.AddRange(new[]
                 {
                     new[]

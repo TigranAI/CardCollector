@@ -25,7 +25,6 @@ namespace CardCollector.DataBase.EntityDao
         public static async Task<List<User>> FindTopByExp(this DbSet<User> users, int top = 5)
         {
             return await users
-                .Include(user => user.Level)
                 .Where(user => user.PrivilegeLevel < PrivilegeLevel.Programmer)
                 .OrderByDescending(user => user.Level.TotalExp)
                 .Take(top)
@@ -35,8 +34,6 @@ namespace CardCollector.DataBase.EntityDao
         public static async Task<List<User>> FindTopByTier4Stickers(this DbSet<User> users, int top = 5)
         {
             return await users
-                .Include(user => user.Stickers)
-                .Include(user => user.Stickers.Select(sticker => sticker.Sticker))
                 .Where(user => user.PrivilegeLevel < PrivilegeLevel.Programmer)
                 .OrderByDescending(user => user.Stickers.Where(sticker => sticker.Sticker.Tier == 4).Count())
                 .Take(top)

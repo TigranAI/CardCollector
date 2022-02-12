@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Timers;
-using CardCollector.Controllers;
+using CardCollector.DataBase;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
-using Telegram.Bot.Types.Enums;
+using Microsoft.EntityFrameworkCore;
 
 namespace CardCollector.TimerTasks
 {
@@ -17,31 +18,20 @@ namespace CardCollector.TimerTasks
         
         protected override async void TimerCallback(object o, ElapsedEventArgs e)
         {
-            /*var usersExp = await UserLevelDao.GetTop(5);
-            if (usersExp.Count < 1) return;
-            var users = await UserDao.GetAllWhere(item => !item.IsBlocked);
-            var settings = await SettingsDao.GetAll();
-            var messages = await UserMessagesDao.GetAll();
-            var message = Messages.users_top_exp;
-            foreach (var (userLevel, index) in usersExp.WithIndex())
+            using (var context = new BotDatabaseContext())
             {
-                var user = await UserDao.GetById(userLevel.UserId);
-                message += $"\n{index+1}.{user.Username}: {userLevel.TotalExp} {Text.exp}";
+                var topByExp = await context.Users.FindTopByExp();
+                var users = await context.Users.Where(user => !user.IsBlocked).ToListAsync();
+                if (topByExp.Count != 0)
+                {
+                    var message = Messages.users_top_exp + string.Join("\n", topByExp.Select((user, i) =>
+                        $"\n{i + 1}.{user.Username}: {user.Level.TotalExp} {Text.exp}"));
+                    foreach (var user in users.Where(user => user.Settings[UserSettingsEnum.DailyExpTop]))
+                        await user.Messages.SendTopUsers(user, message, Keyboard.GetTopButton(TopBy.Tier4Stickers));
+                }
+
+                await context.SaveChangesAsync();
             }
-            foreach (var user in users)
-            {
-                try {
-                    if (settings[user.Id][UserSettingsEnum.DailyExpTop])
-                        messages[user.Id].TopUsersMessageId = 
-                            await MessageController.DeleteAndSend(user, messages[user.Id].TopUsersMessageId,
-                                message, Keyboard.GetTopButton(TopBy.Tier4Stickers), ParseMode.Html);
-                }
-                catch {
-                    messages[user.Id].TopUsersMessageId = 
-                        await MessageController.DeleteAndSend(user, messages[user.Id].TopUsersMessageId,
-                            message, Keyboard.GetTopButton(TopBy.Tier4Stickers), ParseMode.Html);
-                }
-            }*/
         }
     }
 }

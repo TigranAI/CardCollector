@@ -12,5 +12,15 @@ namespace CardCollector.DataBase.Entity
         public int PeopleSendsStickerOneOrMoreTimes { get; set; }
         public int PeopleDonated { get; set; }
         public int PeoplePutsStickerToAuction { get; set; }
+
+        public bool IsEmpty()
+        {
+            return PeopleCollectedIncomeOneToThreeTimes == 0
+                   && PeopleCollectedIncomeMoreTimes == 0
+                   && PeopleCompletedDailyTask == 0
+                   && PeopleSendsStickerOneOrMoreTimes == 0
+                   && PeopleDonated == 0
+                   && PeoplePutsStickerToAuction == 0;
+        }
     }
 }

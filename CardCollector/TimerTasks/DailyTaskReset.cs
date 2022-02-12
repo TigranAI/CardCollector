@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Timers;
 using CardCollector.DataBase;
 using CardCollector.DataBase.Entity;

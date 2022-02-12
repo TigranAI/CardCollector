@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using CardCollector.Attributes.Logs;
 using CardCollector.Controllers;
 using CardCollector.DataBase;
 using CardCollector.DataBase.EntityDao;
@@ -8,6 +10,7 @@ using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Profile
 {
+    [SavedActivity]
     public class CollectIncome : CallbackQueryHandler
     {
         protected override string CommandText => CallbackQueryCommands.collect_income;
@@ -27,7 +30,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
                 $"\n{Messages.level}: {User.Level.Level}" +
                 $"\n{Messages.current_exp}: {User.Level.CurrentExp} / {expGoal}" +
                 $"\n{Messages.cash_capacity}: {User.Cash.MaxCapacity}{Text.coin}",
-                Keyboard.GetProfileKeyboard(User.Packs.Count));
+                Keyboard.GetProfileKeyboard(User.Packs.Sum(pack => pack.Count)));
         }
 
         public CollectIncome(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context, callbackQuery) { }
