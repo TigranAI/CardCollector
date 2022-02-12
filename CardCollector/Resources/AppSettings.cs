@@ -3,12 +3,15 @@ namespace CardCollector.Resources
     using static Constants;
     public static class AppSettings
     {
-        public const string TOKEN = DEBUG ? "1947951335:AAFX_kMdRbM_lih3dGUdvQ4d4-0qQzy7igg" : "";
-        public const string NAME = DEBUG ? "TigranCardCollectorBot" : "";
-        public const string DB_IP = "localhost";
-        public const string DB_PORT = "3306";
-        public const string DB_UID = "card_collector";
-        public const string DB_PWD = DEBUG ? "Password1*" : "";
-        public const string DB_SCHEMA = DEBUG ? "card_collector" : "";
+        public static readonly string TOKEN;
+        public static readonly string NAME;
+        public static readonly string SITE_URL;
+        public static readonly string DB_IP;
+        public static readonly string DB_PORT;
+        public static readonly string DB_UID;
+        public static readonly string DB_PWD;
+        public static readonly string DB_SCHEMA;
+        public static readonly string SberbankToken;
+        public static readonly string YouKassaToken;
     }
 }
