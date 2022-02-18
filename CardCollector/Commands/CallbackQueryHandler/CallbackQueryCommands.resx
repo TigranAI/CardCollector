@@ -162,4 +162,19 @@
     <data name="special_offers" xml:space="preserve">
         <value>ABS</value>
     </data>
+    <data name="create_giveaway" xml:space="preserve">
+        <value>ABW</value>
+    </data>
+    <data name="set_giveaway_prize" xml:space="preserve">
+        <value>ABX</value>
+    </data>
+    <data name="confirm_giveaway" xml:space="preserve">
+        <value>ABY</value>
+    </data>
+    <data name="skip" xml:space="preserve">
+        <value>ABZ</value>
+    </data>
+    <data name="ignore" xml:space="preserve">
+        <value>000</value>
+    </data>
 </root>

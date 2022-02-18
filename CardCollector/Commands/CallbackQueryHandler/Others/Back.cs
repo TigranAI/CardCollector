@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 using CardCollector.Attributes.Menu;
+using CardCollector.Commands.MessageHandler.Admin;
+using CardCollector.Commands.MessageHandler.Admin.Giveaway;
 using CardCollector.Commands.MessageHandler.Collection;
 using CardCollector.Commands.MessageHandler.Menu;
 using CardCollector.Commands.MessageHandler.Shop;
@@ -19,6 +21,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Others
             EnterEmoji.RemoveFromQueue(User.Id);
             EnterGemsExchange.RemoveFromQueue(User.Id);
             EnterGemsPrice.RemoveFromQueue(User.Id);
+            EnterPrizeCount.RemoveFromQueue(User.Id);
             var command = User.Session.GetPreviousCommand();
             if (command != null)
             {

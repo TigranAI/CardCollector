@@ -76,9 +76,6 @@
     <data name="enter_emoji" xml:space="preserve">
         <value>Введите эмоцию</value>
     </data>
-    <data name="enter_only_one_emoji" xml:space="preserve">
-        <value>Введите только одну эмоцию!</value>
-    </data>
     <data name="please_enter_emoji" xml:space="preserve">
         <value>Пожалуйста, введите только эмоцию</value>
     </data>
@@ -101,7 +98,7 @@
         <value>Стикеры успешно загружены!</value>
     </data>
     <data name="unexpected_exception" xml:space="preserve">
-        <value>Произошла неожиданная ошибка, попробуйте еще раз.</value>
+        <value>Произошла неожиданная ошибка, сообщите об этом разработчикам.</value>
     </data>
     <data name="coins" xml:space="preserve">
         <value>Монеты</value>
@@ -237,7 +234,7 @@
     <data name="effect_RandomSticker2Tier3Day" xml:space="preserve">
         <value>Поздравляем! Вы получили следующие стикеры:</value>
     </data>
-    <data name="effect_RandomSticker1Tier3Day" xml:space="preserve">
+    <data name="effect_RandomSticker1Tier2Day" xml:space="preserve">
         <value>Поздравляем! Вы получили следующие стикеры:</value>
     </data>
     <data name="cant_sell_zero" xml:space="preserve">
@@ -254,9 +251,6 @@
     </data>
     <data name="confirm_exchange" xml:space="preserve">
         <value>Подтвердите обмен:</value>
-    </data>
-    <data name="enter_exchange_sum" xml:space="preserve">
-        <value>Введите количество алмазов для обмена:</value>
     </data>
     <data name="gems_exchange_count" xml:space="preserve">
         <value>Вы заплатите алмазов:</value>
@@ -420,5 +414,45 @@ https://telegra.ph/help-11-04-4</value>
     </data>
     <data name="thanks_for_selling_sticker" xml:space="preserve">
         <value>{0}: спасибо, что продал мне стикер {1} в количестве {2}, вот твоя оплата {3}💎</value>
+    </data>
+    <data name="select_channel" xml:space="preserve">
+        <value>Выберите канал из предложенных ниже:</value>
+    </data>
+    <data name="enter_number_of_prizes" xml:space="preserve">
+        <value>Введите количество призов:</value>
+    </data>
+    <data name="please_confirm_this_giveaway" xml:space="preserve">
+        <value>Пожалуйста, подтвердите создание раздачи:</value>
+    </data>
+    <data name="enter_giveaway_message" xml:space="preserve">
+        <value>Введите сообщение раздачи:
+
+Вы можете вставить в текст значения из раздачи, просто вставьте в текст следующие конструкции (не обязательно):
+&lt;code&gt;{0}&lt;/code&gt; - количество призов всего
+&lt;code&gt;{1}&lt;/code&gt; - название приза</value>
+    </data>
+    <data name="enter_when_giveaway_will_be_sended" xml:space="preserve">
+        <value>Отправьте дату и время, когда раздача должна быть отправлена в формате: dd.MM hh:mm
+dd - день
+MM - месяц
+hh - часы
+mm - минуты
+Вы можете пропустить этот шаг, тогда раздача будет отправлена сразу после подтверждения.</value>
+    </data>
+    <data name="incorrect_datetime_format" xml:space="preserve">
+        <value>Некорректный формат! Введите дату в формате dd.MM hh:mm</value>
+    </data>
+    <data name="enter_button_text" xml:space="preserve">
+        <value>Введите текст кнопки. Пожалуйста, воздержитесь от слишком длинного текста, рекомендуемый объем 2-3 слова.
+
+Вы можете вставить в текст значения из раздачи, просто вставьте в текст следующие конструкции (не обязательно):
+&lt;code&gt;{0}&lt;/code&gt; - количество призов всего
+&lt;code&gt;{1}&lt;/code&gt; - название приза
+
+Вы можете пропустить этот шаг, в таком случае будет задано значение по умолчанию "Забрать награду {0}"</value>
+    </data>
+    <data name="send_giveaway_image" xml:space="preserve">
+        <value>Отправьте мне изображение для раздачи.
+Вы можете пропустить этот шаг.</value>
     </data>
 </root>

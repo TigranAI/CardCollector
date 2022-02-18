@@ -472,7 +472,7 @@ namespace CardCollector.Resources {
         /// </summary>
         internal static string effect_RandomSticker1Tier2Day {
             get {
-                return ResourceManager.GetString("effect_RandomSticker1Tier3Day", resourceCulture);
+                return ResourceManager.GetString("effect_RandomSticker1Tier2Day", resourceCulture);
             }
         }
         
@@ -495,6 +495,21 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Введите текст кнопки. Пожалуйста, воздержитесь от слишком длинного текста, рекомендуемый объем 2-3 слова.
+        ///
+        ///Вы можете вставить в текст значения из раздачи, просто вставьте в текст следующие конструкции (не обязательно):
+        ///&lt;code&gt;{0}&lt;/code&gt; - количество призов всего
+        ///&lt;code&gt;{1}&lt;/code&gt; - название приза
+        ///
+        ///Вы можете пропустить этот шаг, в таком случае будет задано значение по умолчанию &quot;Забрать награду {0}&quot;.
+        /// </summary>
+        internal static string enter_button_text {
+            get {
+                return ResourceManager.GetString("enter_button_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Введите эмоцию.
         /// </summary>
         internal static string enter_emoji {
@@ -504,20 +519,38 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Введите количество алмазов для обмена:.
+        ///   Looks up a localized string similar to Введите сообщение раздачи:
+        ///
+        ///Вы можете вставить в текст значения из раздачи, просто вставьте в текст следующие конструкции (не обязательно):
+        ///&lt;code&gt;{0}&lt;/code&gt; - количество призов всего
+        ///&lt;code&gt;{1}&lt;/code&gt; - название приза.
         /// </summary>
-        internal static string enter_exchange_sum {
+        internal static string enter_giveaway_message {
             get {
-                return ResourceManager.GetString("enter_exchange_sum", resourceCulture);
+                return ResourceManager.GetString("enter_giveaway_message", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Введите только одну эмоцию!.
+        ///   Looks up a localized string similar to Введите количество призов:.
         /// </summary>
-        internal static string enter_only_one_emoji {
+        internal static string enter_number_of_prizes {
             get {
-                return ResourceManager.GetString("enter_only_one_emoji", resourceCulture);
+                return ResourceManager.GetString("enter_number_of_prizes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Отправьте дату и время, когда раздача должна быть отправлена в формате: dd.MM hh:mm
+        ///dd - день
+        ///MM - месяц
+        ///hh - часы
+        ///mm - минуты
+        ///Вы можете пропустить этот шаг, тогда раздача будет отправлена сразу после подтверждения..
+        /// </summary>
+        internal static string enter_when_giveaway_will_be_sended {
+            get {
+                return ResourceManager.GetString("enter_when_giveaway_will_be_sended", resourceCulture);
             }
         }
         
@@ -582,6 +615,15 @@ namespace CardCollector.Resources {
         internal static string help {
             get {
                 return ResourceManager.GetString("help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Некорректный формат! Введите дату в формате dd.MM hh:mm.
+        /// </summary>
+        internal static string incorrect_datetime_format {
+            get {
+                return ResourceManager.GetString("incorrect_datetime_format", resourceCulture);
             }
         }
         
@@ -720,6 +762,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Пожалуйста, подтвердите создание раздачи:.
+        /// </summary>
+        internal static string please_confirm_this_giveaway {
+            get {
+                return ResourceManager.GetString("please_confirm_this_giveaway", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Пожалуйста, введите только эмоцию.
         /// </summary>
         internal static string please_enter_emoji {
@@ -783,6 +834,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выберите канал из предложенных ниже:.
+        /// </summary>
+        internal static string select_channel {
+            get {
+                return ResourceManager.GetString("select_channel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Установите фильтры кнопками ниже.
         /// </summary>
         internal static string select_filter {
@@ -806,6 +866,16 @@ namespace CardCollector.Resources {
         internal static string select_sticker {
             get {
                 return ResourceManager.GetString("select_sticker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Отправьте мне изображение для раздачи.
+        ///Вы можете пропустить этот шаг..
+        /// </summary>
+        internal static string send_giveaway_image {
+            get {
+                return ResourceManager.GetString("send_giveaway_image", resourceCulture);
             }
         }
         
@@ -985,7 +1055,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Произошла неожиданная ошибка, попробуйте еще раз..
+        ///   Looks up a localized string similar to Произошла неожиданная ошибка, сообщите об этом разработчикам..
         /// </summary>
         internal static string unexpected_exception {
             get {

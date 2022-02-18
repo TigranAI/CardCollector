@@ -28,12 +28,18 @@
         <value>AAD</value>
     </data>
     <data name="sticker_info" xml:space="preserve">
-        <value>AAF</value>
+        <value>AAG</value>
     </data>
     <data name="chat_send_sticker" xml:space="preserve">
         <value>AAA</value>
     </data>
     <data name="send_private_sticker" xml:space="preserve">
         <value>AAE</value>
+    </data>
+    <data name="set_giveaway_prize" xml:space="preserve">
+        <value>AAF</value>
+    </data>
+    <data name="set_giveaway_channel" xml:space="preserve">
+        <value>AAG</value>
     </data>
 </root>

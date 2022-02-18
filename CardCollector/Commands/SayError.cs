@@ -15,7 +15,8 @@ namespace CardCollector.Commands
         protected override string CommandText => "";
         protected override async Task Execute()
         {
-            await User.Messages.SendMessage(User, $"{Messages.unexpected_exception}\n{_exception}");
+            await User.Messages.SendMessage(User, $"{Messages.unexpected_exception} {_exception.Message}");
+            Logs.LogOutError(_exception);
         }
 
         public override bool Match() => true;

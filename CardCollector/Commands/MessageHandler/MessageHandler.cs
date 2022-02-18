@@ -60,7 +60,9 @@ namespace CardCollector.Commands.MessageHandler
 
         public override bool Match()
         {
-            return Message.Type == MessageType.Text && Message.Text == CommandText;
+            if (Message.Chat.Type is not (ChatType.Sender or ChatType.Private)) return false;
+            if (Message.Type != MessageType.Text) return false;
+            return  Message.Text == CommandText;
         }
 
         protected MessageHandler(User user, BotDatabaseContext context, Message message) : base(user, context)

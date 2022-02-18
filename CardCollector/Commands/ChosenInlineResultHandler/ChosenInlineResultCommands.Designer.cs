@@ -106,7 +106,25 @@ namespace CardCollector.Commands.ChosenInlineResultHandler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AAG.
+        /// </summary>
+        internal static string set_giveaway_channel {
+            get {
+                return ResourceManager.GetString("set_giveaway_channel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AAF.
+        /// </summary>
+        internal static string set_giveaway_prize {
+            get {
+                return ResourceManager.GetString("set_giveaway_prize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AAG.
         /// </summary>
         internal static string sticker_info {
             get {

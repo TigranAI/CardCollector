@@ -24,7 +24,8 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Collection
 
         public override bool Match()
         {
-            return base.Match() && User.Session.State is not (UserState.ShopMenu or UserState.AuctionMenu);
+            return base.Match() &&
+                   User.Session.State is not (UserState.ShopMenu or UserState.AuctionMenu or UserState.CreateGiveaway);
         }
 
         public StickerInfo(User user, BotDatabaseContext context, ChosenInlineResult chosenInlineResult) : base(user,

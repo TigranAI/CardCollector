@@ -75,6 +75,7 @@ namespace CardCollector.DataBase.Entity
             Username = telegramUser.Username ?? $"user{telegramUser.Id}";
             ChatId = telegramUser.Id;
             PrivilegeLevel = PrivilegeLevel.User;
+            IsBlocked = telegramUser.IsBot;
 
             Level = new UserLevel();
             Cash = new Cash();

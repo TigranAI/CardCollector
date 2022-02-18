@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.Entity.NotMapped;
@@ -36,7 +35,7 @@ namespace CardCollector.DataBase
         public DbSet<Auction> Auctions { get; set; }
         public DbSet<SpecialOrder> SpecialOrders { get; set; }
         public DbSet<DailyTask> DailyTasks { get; set; }
-        public DbSet<UserPacks> UsersPacks { get; set; }
+        public DbSet<UserPacks> UserPacks { get; set; }
         public DbSet<Pack> Packs { get; set; }
         public DbSet<SpecialOrderUser> SpecialOrderUsers { get; set; }
         public DbSet<UserLevel> UserLevels { get; set; }
@@ -47,7 +46,9 @@ namespace CardCollector.DataBase
         public DbSet<Payment> Payments { get; set; }
         public DbSet<UserActivity> UserActivities { get; set; }
         public DbSet<UserSendStickerToChat> UserSendStickers { get; set; }
-        
+        public DbSet<TelegramChat> TelegramChats { get; set; }
+        public DbSet<ChannelGiveaway> ChannelGiveaways { get; set; }
+
         public bool IsDisposed()
         {
             return _disposed;
@@ -56,14 +57,9 @@ namespace CardCollector.DataBase
         /* Конфигурация подключения к БД */
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            var connectionString = $"server={DB_IP};port={DB_PORT};database={DB_SCHEMA};uid={DB_UID};pwd={DB_PWD}";
             optionsBuilder
-                .UseMySQL(
-                    $"server={DB_IP};" +
-                    $"port={DB_PORT};" +
-                    $"database={DB_SCHEMA};" +
-                    $"uid={DB_UID};" +
-                    $"pwd={DB_PWD}"
-                )
+                .UseMySql(connectionString,ServerVersion.AutoDetect(connectionString))
                 .UseLazyLoadingProxies()
                 .UseSnakeCaseNamingConvention();
         }
@@ -84,14 +80,14 @@ namespace CardCollector.DataBase
         {
             modelBuilder
                 .Entity<User>()
-                .OwnsOne(user => user.Level);
+                .OwnsOne(user => user.Level, builder => builder.ToTable("user_level"));
         }
 
         private void ConfigureUserCash(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .Entity<User>()
-                .OwnsOne(user => user.Cash);
+                .OwnsOne(user => user.Cash, builder => builder.ToTable("user_cash"));
         }
 
         private void ConfigureStickerEffect(ModelBuilder modelBuilder)
@@ -108,9 +104,11 @@ namespace CardCollector.DataBase
         {
             modelBuilder
                 .Entity<User>()
-                .OwnsOne(user => user.Messages, messages =>
+                .OwnsOne(user => user.Messages, builder =>
                 {
-                    messages.Property(entity => entity.ChatMessages)
+                    builder.ToTable("user_messages");
+                    builder
+                        .Property(entity => entity.ChatMessages)
                         .HasConversion(
                             to => Utilities.ToJson(to),
                             from => Utilities.FromJson<HashSet<int>>(from),
@@ -118,7 +116,8 @@ namespace CardCollector.DataBase
                                 (l1, l2) => l2 != null && l1 != null && l1.SequenceEqual(l2),
                                 l => l.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
                                 l => l.ToHashSet()));
-                    messages.Property(entity => entity.ChatStickers)
+                    builder
+                        .Property(entity => entity.ChatStickers)
                         .HasConversion(
                             to => Utilities.ToJson(to),
                             from => Utilities.FromJson<List<int>>(from),
@@ -153,17 +152,23 @@ namespace CardCollector.DataBase
         {
             modelBuilder
                 .Entity<User>()
-                .OwnsOne(user => user.Settings)
-                .Property(entity => entity.Settings)
-                .HasConversion(
-                    to => Utilities.ToJson(to.ToDictionary(pair => (int) pair.Key, pair => pair.Value)),
-                    from => Utilities.FromJson<Dictionary<int, bool>>(from)
-                        .ToDictionary(pair => (UserSettingsEnum) pair.Key, pair => pair.Value),
-                    new ValueComparer<Dictionary<UserSettingsEnum, bool>>(
-                        (l1, l2) => l2 != null && l1 != null && l1.Values.SequenceEqual(l2.Values),
-                        l => l.Aggregate(0, (a, v) =>
-                            HashCode.Combine(a, HashCode.Combine(v.Key.GetHashCode(), v.Value.GetHashCode()))),
-                        l => l.ToDictionary(p => p.Key, p => p.Value)));
+                .OwnsOne(user => user.Settings, builder =>
+                {
+                    builder
+                        .ToTable("user_settings")
+                        .Property(entity => entity.Settings)
+                        .HasConversion(
+                            to => 
+                                Utilities.ToJson(to.ToDictionary(pair => (int) pair.Key, pair => pair.Value)),
+                            from => 
+                                Utilities.FromJson<Dictionary<int, bool>>(from)
+                                .ToDictionary(pair => (UserSettingsEnum) pair.Key, pair => pair.Value),
+                            new ValueComparer<Dictionary<UserSettingsEnum, bool>>(
+                                (l1, l2) => l2 != null && l1 != null && l1.Values.SequenceEqual(l2.Values),
+                                l => l.Aggregate(0, (a, v) =>
+                                    HashCode.Combine(a, HashCode.Combine(v.Key.GetHashCode(), v.Value.GetHashCode()))),
+                                l => l.ToDictionary(p => p.Key, p => p.Value)));
+                });
         }
 
         private void ConfigureUserPrivilegeLevel(ModelBuilder modelBuilder)

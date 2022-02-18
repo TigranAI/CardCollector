@@ -58,6 +58,34 @@ namespace CardCollector.Resources
             new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)}
         });
 
+        public static InlineKeyboardMarkup GiveawayKeyboard = new(new[]
+        {
+            new[]
+            {
+                InlineKeyboardButton.WithCallbackData(Text.random_pack,
+                    $"{CallbackQueryCommands.set_giveaway_prize}={(int) ChannelGiveaway.PrizeType.RandomPack}")
+            },
+            new[]
+            {
+                InlineKeyboardButton.WithCallbackData(Text.random_sticker,
+                    $"{CallbackQueryCommands.set_giveaway_prize}={(int) ChannelGiveaway.PrizeType.RandomSticker}")
+            },
+            new[] {InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.choose_sticker)},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)},
+        });
+
+        public static InlineKeyboardMarkup SelectChannel = new(new[]
+        {
+            new[] {InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.choose_channel)},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)},
+        });
+
+        public static InlineKeyboardMarkup CreateGiveaway = new(new[]
+        {
+            new[] {InlineKeyboardButton.WithCallbackData(Text.confirm, CallbackQueryCommands.confirm_giveaway)},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)},
+        });
+
         public static InlineKeyboardMarkup BuyCoinsKeyboard(bool confirmButton = false)
         {
             var keyboard = new List<InlineKeyboardButton[]>
@@ -253,7 +281,7 @@ namespace CardCollector.Resources
             new[]
             {
                 InlineKeyboardButton.WithCallbackData(Text.all,
-                    $"{CallbackQueryCommands.set}={CallbackQueryCommands.emoji}=")
+                    $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.Emoji}=")
             },
             new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)},
         });
@@ -760,6 +788,11 @@ namespace CardCollector.Resources
                     {
                         InlineKeyboardButton.WithCallbackData(Text.logs_menu,
                             $"{CallbackQueryCommands.logs_menu}={DateTime.Today}")
+                    },
+                    new[]
+                    {
+                        InlineKeyboardButton.WithCallbackData(Text.create_giveaway,
+                            $"{CallbackQueryCommands.create_giveaway}")
                     }
                 });
             if (level == PrivilegeLevel.Programmer)
@@ -828,6 +861,17 @@ namespace CardCollector.Resources
                 {
                     InlineKeyboardButton.WithCallbackData(Text.confirm_login,
                         $"{CallbackQueryCommands.confirm_login}={data}")
+                },
+                new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)}
+            });
+        }
+
+        public static InlineKeyboardMarkup SkipKeyboard(string name)
+        {
+            return new InlineKeyboardMarkup(new[]
+            {
+                new[] {
+                    InlineKeyboardButton.WithCallbackData(Text.skip,$"{CallbackQueryCommands.skip}={name}")
                 },
                 new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)}
             });

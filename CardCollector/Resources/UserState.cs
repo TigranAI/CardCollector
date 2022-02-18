@@ -21,6 +21,7 @@
         LoadForSaleSticker,
         UploadPackPreview,
         EditSticker,
-        GiveSticker
+        GiveSticker,
+        CreateGiveaway
     }
 }

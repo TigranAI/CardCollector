@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using CardCollector.Commands.MessageHandler;
 using CardCollector.Controllers;
 using CardCollector.DataBase;
-using CardCollector.Migrations;
 using CardCollector.Resources;
 using CardCollector.TimerTasks;
+using Microsoft.EntityFrameworkCore;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
@@ -31,7 +31,7 @@ namespace CardCollector
         public static async Task Main(string[] args)
         {
             CheckArgs(args);
-            await InitDatabase();
+            await UpdateDatabase();
             
             TimerTask.SetupAll();
             
@@ -67,13 +67,11 @@ namespace CardCollector
             }
         }
 
-        private static async Task InitDatabase()
+        private static async Task UpdateDatabase()
         {
             using (var context = new BotDatabaseContext())
             {
-                var created = context.Database.EnsureCreated();
-                if (created) await DatabaseMigration.Migrate(context);
-                await context.SaveChangesAsync();
+                await context.Database.MigrateAsync();
             }
         }
     }

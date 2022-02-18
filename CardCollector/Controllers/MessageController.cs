@@ -19,6 +19,7 @@ using Telegram.Bot.Exceptions;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.InlineQueryResults;
+using Telegram.Bot.Types.InputFiles;
 using Telegram.Bot.Types.Payments;
 using Telegram.Bot.Types.ReplyMarkups;
 using User = CardCollector.DataBase.Entity.User;
@@ -279,6 +280,22 @@ namespace CardCollector.Controllers
             catch
             {
                 /**/
+            }
+        }
+
+        public static async Task<int> SendImage(User user, string fileId, string message, InlineKeyboardMarkup keyboard)
+        {
+            if (user.IsBlocked) return -1;
+            try
+            {
+                var msg = await Bot.Client.SendPhotoAsync(user.ChatId, new InputOnlineFile(fileId), message,
+                    replyMarkup: keyboard, disableNotification: true);
+                return msg.MessageId;
+            }
+            catch (Exception e)
+            {
+                LogOutWarning($"Cant send image: {e.Message}");
+                return -1;
             }
         }
     }

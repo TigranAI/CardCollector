@@ -44,6 +44,21 @@ namespace CardCollector
             return result;
         }
 
+        public static IEnumerable<InlineQueryResult> ToTelegramResults
+            (this IEnumerable<TelegramChat> list, string command, int offset)
+        {
+            var result = new List<InlineQueryResult>();
+            foreach (var item in list.Skip(offset).Take(50))
+            {
+                result.Add(new InlineQueryResultArticle(
+                    $"{command}={item.Id}", 
+                    item.Title ?? item.ChatId.ToString(),
+                    new InputTextMessageContent(Text.select))
+                );
+            }
+            return result;
+        }
+
         public static async Task<IEnumerable<T>> WhereAsync<T>(
             this IEnumerable<T> source, Func<T, Task<bool>> predicate)
         {

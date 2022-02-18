@@ -345,4 +345,37 @@
     <data name="by" xml:space="preserve">
         <value>от</value>
     </data>
+    <data name="create_giveaway" xml:space="preserve">
+        <value>🎁 Создать раздачу 🎁</value>
+    </data>
+    <data name="choose_sticker" xml:space="preserve">
+        <value>Выбрать стикер</value>
+    </data>
+    <data name="random_pack" xml:space="preserve">
+        <value>Случайный пак</value>
+    </data>
+    <data name="random_sticker" xml:space="preserve">
+        <value>Случайный стикер</value>
+    </data>
+    <data name="choose_channel" xml:space="preserve">
+        <value>Выберите канал</value>
+    </data>
+    <data name="channel_giveaway_template" xml:space="preserve">
+        <value>Выбранный канал: {0}
+Приз: {1}
+Общее количество призов: {2}шт.
+Время начала раздачи: {3}</value>
+    </data>
+    <data name="selected_sticker" xml:space="preserve">
+        <value>Выбранный стикер</value>
+    </data>
+    <data name="skip" xml:space="preserve">
+        <value>Пропустить</value>
+    </data>
+    <data name="claim_prize" xml:space="preserve">
+        <value>Забрать награду {0}</value>
+    </data>
+    <data name="confirm" xml:space="preserve">
+        <value>Подтвердить</value>
+    </data>
 </root>

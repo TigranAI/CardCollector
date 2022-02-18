@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
 using CardCollector.DataBase;
+using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
+using Microsoft.EntityFrameworkCore;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using User = CardCollector.DataBase.Entity.User;
@@ -15,21 +17,61 @@ namespace CardCollector.Commands.MyChatMemberHandler
         protected override string CommandText => "";
 
         private readonly ChatMemberUpdated _chatMemberUpdated;
-        protected override Task Execute()
+
+        protected override async Task Execute()
         {
             var status = _chatMemberUpdated.NewChatMember.Status;
             switch (status)
             {
-                case ChatMemberStatus.Member:
-                    User.IsBlocked = false;
+                case ChatMemberStatus.Member or ChatMemberStatus.Administrator:
+                    await AddChat();
                     break;
-                case ChatMemberStatus.Kicked:
-                    User.IsBlocked = true;
-                    break;
-                case ChatMemberStatus.Restricted or ChatMemberStatus.Left:
+                case ChatMemberStatus.Kicked or ChatMemberStatus.Left:
+                    await BlockChat();
                     break;
             }
-            return Task.CompletedTask;
+        }
+
+        private async Task AddChat()
+        {
+            if (_chatMemberUpdated.Chat.Type is (ChatType.Group or ChatType.Supergroup or ChatType.Channel))
+            {
+                var telegramChat = await Context.TelegramChats
+                    .SingleOrDefaultAsync(item => item.ChatId == _chatMemberUpdated.Chat.Id);
+                if (telegramChat == null)
+                {
+                    telegramChat = (
+                            await Context.TelegramChats.AddAsync(
+                                new TelegramChat()
+                                {
+                                    ChatId = _chatMemberUpdated.Chat.Id,
+                                    ChatType = _chatMemberUpdated.Chat.Type,
+                                    Title = _chatMemberUpdated.Chat.Title
+                                }
+                            )
+                    ).Entity;
+                }
+                telegramChat.IsBlocked = false;
+            }
+            else
+            {
+                User.IsBlocked = false;
+            }
+        }
+
+        private async Task BlockChat()
+        {
+            if (_chatMemberUpdated.Chat.Type is (ChatType.Group or ChatType.Supergroup or ChatType.Channel))
+            {
+                var telegramChat = await Context.TelegramChats
+                    .SingleOrDefaultAsync(item => item.ChatId == _chatMemberUpdated.Chat.Id);
+                if (telegramChat == null) return;
+                telegramChat.IsBlocked = true;
+            }
+            else
+            {
+                User.IsBlocked = true;
+            }
         }
 
         public override bool Match() => true;
@@ -38,13 +80,14 @@ namespace CardCollector.Commands.MyChatMemberHandler
         {
             var context = new BotDatabaseContext();
             var user = await context.Users.FindUser(update.MyChatMember!.From);
-            
+
             user.InitSession();
 
             return new MyChatMemberCommand(user, context, update.MyChatMember);
         }
 
-        private MyChatMemberCommand(User user, BotDatabaseContext context, ChatMemberUpdated member) : base(user, context)
+        private MyChatMemberCommand(User user, BotDatabaseContext context, ChatMemberUpdated member) : base(user,
+            context)
         {
             _chatMemberUpdated = member;
         }

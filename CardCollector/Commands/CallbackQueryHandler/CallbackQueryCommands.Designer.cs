@@ -196,6 +196,15 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ABY.
+        /// </summary>
+        internal static string confirm_giveaway {
+            get {
+                return ResourceManager.GetString("confirm_giveaway", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AAP.
         /// </summary>
         internal static string confirm_login {
@@ -228,6 +237,15 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         internal static string count {
             get {
                 return ResourceManager.GetString("count", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ABW.
+        /// </summary>
+        internal static string create_giveaway {
+            get {
+                return ResourceManager.GetString("create_giveaway", resourceCulture);
             }
         }
         
@@ -273,6 +291,15 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         internal static string end_sticker_upload {
             get {
                 return ResourceManager.GetString("end_sticker_upload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 000.
+        /// </summary>
+        internal static string ignore {
+            get {
+                return ResourceManager.GetString("ignore", resourceCulture);
             }
         }
         
@@ -412,6 +439,15 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ABX.
+        /// </summary>
+        internal static string set_giveaway_prize {
+            get {
+                return ResourceManager.GetString("set_giveaway_prize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ABL.
         /// </summary>
         internal static string settings {
@@ -444,6 +480,15 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         internal static string show_top_by {
             get {
                 return ResourceManager.GetString("show_top_by", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ABZ.
+        /// </summary>
+        internal static string skip {
+            get {
+                return ResourceManager.GetString("skip", resourceCulture);
             }
         }
         

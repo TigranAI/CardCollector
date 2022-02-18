@@ -24,10 +24,12 @@ namespace CardCollector.DataBase.Entity
             {
                 await MessageController.DeleteMessage(user, messageId);
             }
+
             foreach (var messageId in ChatStickers)
             {
                 await MessageController.DeleteMessage(user, messageId);
             }
+
             ChatMessages.Clear();
             ChatStickers.Clear();
         }
@@ -38,6 +40,7 @@ namespace CardCollector.DataBase.Entity
             {
                 await MessageController.DeleteMessage(user, messageId);
             }
+
             ChatMessages.Clear();
         }
 
@@ -47,6 +50,7 @@ namespace CardCollector.DataBase.Entity
             {
                 await MessageController.DeleteMessage(user, messageId);
             }
+
             ChatStickers.Clear();
         }
 
@@ -80,6 +84,16 @@ namespace CardCollector.DataBase.Entity
             if (messageId != -1) ChatMessages.Add(messageId);
         }
 
+        public async Task SendPhoto(
+            User user,
+            string fileId,
+            string message,
+            InlineKeyboardMarkup keyboard)
+        {
+            var messageId = await MessageController.SendImage(user, fileId, message, keyboard);
+            if (messageId != -1) ChatMessages.Add(messageId);
+        }
+
         public async Task SendMenu(User user)
         {
             await ClearChat(user);
@@ -90,7 +104,8 @@ namespace CardCollector.DataBase.Entity
 
         public async Task SendDailyTaskProgress(User user, string message)
         {
-            if (DailyTaskProgressMessageId != -1) await MessageController.DeleteMessage(user, DailyTaskProgressMessageId);
+            if (DailyTaskProgressMessageId != -1)
+                await MessageController.DeleteMessage(user, DailyTaskProgressMessageId);
             DailyTaskProgressMessageId = await MessageController.SendMessage(user, message);
             ChatMessages.Add(DailyTaskProgressMessageId);
         }

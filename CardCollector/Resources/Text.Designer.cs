@@ -277,6 +277,45 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выбранный канал: {0}
+        ///Приз: {1}
+        ///Общее количество призов: {2}шт.
+        ///Время начала раздачи: {3}.
+        /// </summary>
+        internal static string channel_giveaway_template {
+            get {
+                return ResourceManager.GetString("channel_giveaway_template", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выберите канал.
+        /// </summary>
+        internal static string choose_channel {
+            get {
+                return ResourceManager.GetString("choose_channel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выбрать стикер.
+        /// </summary>
+        internal static string choose_sticker {
+            get {
+                return ResourceManager.GetString("choose_sticker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Забрать награду {0}.
+        /// </summary>
+        internal static string claim_prize {
+            get {
+                return ResourceManager.GetString("claim_prize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 💰.
         /// </summary>
         internal static string coin {
@@ -309,6 +348,15 @@ namespace CardCollector.Resources {
         internal static string combine {
             get {
                 return ResourceManager.GetString("combine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Подтвердить.
+        /// </summary>
+        internal static string confirm {
+            get {
+                return ResourceManager.GetString("confirm", resourceCulture);
             }
         }
         
@@ -354,6 +402,15 @@ namespace CardCollector.Resources {
         internal static string count {
             get {
                 return ResourceManager.GetString("count", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🎁 Создать раздачу 🎁.
+        /// </summary>
+        internal static string create_giveaway {
+            get {
+                return ResourceManager.GetString("create_giveaway", resourceCulture);
             }
         }
         
@@ -763,11 +820,29 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Случайный пак.
+        /// </summary>
+        internal static string random_pack {
+            get {
+                return ResourceManager.GetString("random_pack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Получено случайных паков:.
         /// </summary>
         internal static string random_packs_added {
             get {
                 return ResourceManager.GetString("random_packs_added", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Случайный стикер.
+        /// </summary>
+        internal static string random_sticker {
+            get {
+                return ResourceManager.GetString("random_sticker", resourceCulture);
             }
         }
         
@@ -804,6 +879,15 @@ namespace CardCollector.Resources {
         internal static string select_another {
             get {
                 return ResourceManager.GetString("select_another", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выбранный стикер.
+        /// </summary>
+        internal static string selected_sticker {
+            get {
+                return ResourceManager.GetString("selected_sticker", resourceCulture);
             }
         }
         
@@ -876,6 +960,15 @@ namespace CardCollector.Resources {
         internal static string show_users {
             get {
                 return ResourceManager.GetString("show_users", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пропустить.
+        /// </summary>
+        internal static string skip {
+            get {
+                return ResourceManager.GetString("skip", resourceCulture);
             }
         }
         
