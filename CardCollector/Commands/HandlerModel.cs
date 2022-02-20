@@ -38,6 +38,8 @@ namespace CardCollector.Commands
             if (ClearMenu) User.Session.ClearMenuStack();
             if (!Attribute.IsDefined(GetType(), typeof(DontAddToCommandStack)))
                 User.Session.AddCommandToStack(this);
+            if (Attribute.IsDefined(GetType(), typeof(ResetModuleAttribute)))
+                User.Session.ResetModules();
             if (ClearStickers) await User.Messages.ClearStickers(User);
         }
         

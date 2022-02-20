@@ -378,4 +378,7 @@
     <data name="confirm" xml:space="preserve">
         <value>Подтвердить</value>
     </data>
+    <data name="random_sticker_tier" xml:space="preserve">
+        <value>Случайный стикер {0} тира</value>
+    </data>
 </root>

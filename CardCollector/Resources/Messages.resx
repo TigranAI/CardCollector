@@ -130,9 +130,6 @@
     <data name="are_you_sure" xml:space="preserve">
         <value>Вы уверены?</value>
     </data>
-    <data name="you_sold" xml:space="preserve">
-        <value>Вы продали</value>
-    </data>
     <data name="cant_combine" xml:space="preserve">
         <value>Не удалось добавить стикеры. Необходимое количество уже собрано.</value>
     </data>
@@ -454,5 +451,30 @@ mm - минуты
     <data name="send_giveaway_image" xml:space="preserve">
         <value>Отправьте мне изображение для раздачи.
 Вы можете пропустить этот шаг.</value>
+    </data>
+    <data name="giveaway_successfully_created" xml:space="preserve">
+        <value>Раздача успешно создана!
+Ссылка на раздачу &lt;a href="{0}"&gt;тык&lt;/a&gt;</value>
+    </data>
+    <data name="error_when_preparing_giveaway" xml:space="preserve">
+        <value>Произошла ошибка при подготовке раздачи: {0}</value>
+    </data>
+    <data name="prize_count_must_be_positive" xml:space="preserve">
+        <value>Количество призов должно быть положительным!</value>
+    </data>
+    <data name="date_is_expired" xml:space="preserve">
+        <value>Дата и/или время уже истекли!</value>
+    </data>
+    <data name="selected_chat_is_blocked" xml:space="preserve">
+        <value>Выбранный чат заблокирован!</value>
+    </data>
+    <data name="you_are_now_awarded" xml:space="preserve">
+        <value>Вы уже получили награду из этой раздачи.</value>
+    </data>
+    <data name="gievaway_now_ended" xml:space="preserve">
+        <value>Раздача завершена!</value>
+    </data>
+    <data name="you_got_from_this_giveaway" xml:space="preserve">
+        <value>Вы получили {0} с этой раздачи</value>
     </data>
 </root>

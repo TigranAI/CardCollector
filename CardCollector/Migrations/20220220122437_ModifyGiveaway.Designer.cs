@@ -3,6 +3,7 @@ using System;
 using CardCollector.DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CardCollector.Migrations
 {
     [DbContext(typeof(BotDatabaseContext))]
-    partial class BotDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220220122437_ModifyGiveaway")]
+    partial class ModifyGiveaway
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -507,6 +509,10 @@ namespace CardCollector.Migrations
                         .HasColumnType("bigint")
                         .HasColumnName("id");
 
+                    b.Property<int?>("ChannelGiveawayId")
+                        .HasColumnType("int")
+                        .HasColumnName("channel_giveaway_id");
+
                     b.Property<long>("ChatId")
                         .HasColumnType("bigint")
                         .HasColumnName("chat_id");
@@ -531,6 +537,9 @@ namespace CardCollector.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_users");
+
+                    b.HasIndex("ChannelGiveawayId")
+                        .HasDatabaseName("ix_users_channel_giveaway_id");
 
                     b.ToTable("users", (string)null);
                 });
@@ -657,25 +666,6 @@ namespace CardCollector.Migrations
                     b.ToTable("user_stickers", (string)null);
                 });
 
-            modelBuilder.Entity("ChannelGiveawayUser", b =>
-                {
-                    b.Property<long>("AwardedUsersId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("awarded_users_id");
-
-                    b.Property<int>("UsedGiveawaysId")
-                        .HasColumnType("int")
-                        .HasColumnName("used_giveaways_id");
-
-                    b.HasKey("AwardedUsersId", "UsedGiveawaysId")
-                        .HasName("pk_channel_giveaway_user");
-
-                    b.HasIndex("UsedGiveawaysId")
-                        .HasDatabaseName("ix_channel_giveaway_user_used_giveaways_id");
-
-                    b.ToTable("channel_giveaway_user", (string)null);
-                });
-
             modelBuilder.Entity("CardCollector.DataBase.Entity.Auction", b =>
                 {
                     b.HasOne("CardCollector.DataBase.Entity.Sticker", "Sticker")
@@ -785,6 +775,11 @@ namespace CardCollector.Migrations
 
             modelBuilder.Entity("CardCollector.DataBase.Entity.User", b =>
                 {
+                    b.HasOne("CardCollector.DataBase.Entity.ChannelGiveaway", null)
+                        .WithMany("AwardedUsers")
+                        .HasForeignKey("ChannelGiveawayId")
+                        .HasConstraintName("fk_users_channel_giveaways_channel_giveaway_id");
+
                     b.OwnsOne("CardCollector.DataBase.Entity.Cash", "Cash", b1 =>
                         {
                             b1.Property<long>("UserId")
@@ -995,21 +990,9 @@ namespace CardCollector.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("ChannelGiveawayUser", b =>
+            modelBuilder.Entity("CardCollector.DataBase.Entity.ChannelGiveaway", b =>
                 {
-                    b.HasOne("CardCollector.DataBase.Entity.User", null)
-                        .WithMany()
-                        .HasForeignKey("AwardedUsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_channel_giveaway_user_users_awarded_users_id");
-
-                    b.HasOne("CardCollector.DataBase.Entity.ChannelGiveaway", null)
-                        .WithMany()
-                        .HasForeignKey("UsedGiveawaysId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_channel_giveaway_user_channel_giveaways_used_giveaways_id");
+                    b.Navigation("AwardedUsers");
                 });
 
             modelBuilder.Entity("CardCollector.DataBase.Entity.Pack", b =>

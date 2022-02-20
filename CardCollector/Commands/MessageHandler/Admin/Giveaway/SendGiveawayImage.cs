@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CardCollector.Commands.CallbackQueryHandler;
 using CardCollector.DataBase;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
@@ -26,7 +27,7 @@ namespace CardCollector.Commands.MessageHandler.Admin.Giveaway
             giveaway.ImageFileId = Message.Photo?.First().FileId;
             await User.Messages.ClearChat(User);
             await User.Messages.SendPhoto(User, giveaway.ImageFileId!, giveaway.GetFormattedMessage(),
-                giveaway.GetFormattedKeyboard());
+                giveaway.GetFormattedKeyboard(CallbackQueryCommands.ignore));
             await User.Messages.SendMessage(User, Messages.please_confirm_this_giveaway, Keyboard.CreateGiveaway);
         }
 
@@ -37,7 +38,8 @@ namespace CardCollector.Commands.MessageHandler.Admin.Giveaway
             if (module.SelectedChannelGiveawayId == null) return;
             var giveaway = await context.ChannelGiveaways.FindById(module.SelectedChannelGiveawayId.Value);
             await user.Messages.ClearChat(user);
-            await user.Messages.SendMessage(user, giveaway.GetFormattedMessage(), giveaway.GetFormattedKeyboard());
+            await user.Messages.SendMessage(user, giveaway.GetFormattedMessage(), 
+                giveaway.GetFormattedKeyboard(CallbackQueryCommands.ignore));
             await user.Messages.SendMessage(user, Messages.please_confirm_this_giveaway, Keyboard.CreateGiveaway);
         }
 

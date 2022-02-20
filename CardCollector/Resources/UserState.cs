@@ -22,6 +22,7 @@
         UploadPackPreview,
         EditSticker,
         GiveSticker,
-        CreateGiveaway
+        CreateGiveaway,
+        SelectGiveawayPrize
     }
 }

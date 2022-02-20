@@ -14,7 +14,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin.Giveaway
 
         protected override async Task Execute()
         {
-            User.Session.State = UserState.CreateGiveaway;
+            User.Session.State = UserState.SelectGiveawayPrize;
             var giveaway = await Context.ChannelGiveaways.CreateNew();
             await Context.SaveChangesAsync();
             User.Session.GetModule<AdminModule>().SelectedChannelGiveawayId = giveaway.Id;

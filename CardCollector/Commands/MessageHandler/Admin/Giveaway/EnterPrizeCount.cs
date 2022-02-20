@@ -13,8 +13,8 @@ namespace CardCollector.Commands.MessageHandler.Admin.Giveaway
     public class EnterPrizeCount : MessageHandler
     {
         protected override string CommandText => "";
-        
-        private static readonly LinkedList<long> Queue = new ();
+
+        private static readonly LinkedList<long> Queue = new();
 
         protected override async Task Execute()
         {
@@ -25,12 +25,13 @@ namespace CardCollector.Commands.MessageHandler.Admin.Giveaway
                 if (module.SelectedChannelGiveawayId == null) return;
                 var giveaway = await Context.ChannelGiveaways.FindById(module.SelectedChannelGiveawayId.Value);
                 giveaway.PrizeCount = count;
-                await User.Messages.EditMessage(User, Messages.enter_giveaway_message, Keyboard.BackKeyboard);
+                await User.Messages.EditMessage(User, Messages.enter_giveaway_message, Keyboard.BackKeyboard,
+                    ParseMode.Html);
                 EnterGiveawayMessage.AddToQueue(User.Id);
             }
             else await User.Messages.EditMessage(User, Messages.please_enter_integer, Keyboard.BackKeyboard);
         }
-        
+
         public static void AddToQueue(long userId)
         {
             if (!Queue.Contains(userId)) Queue.AddLast(userId);

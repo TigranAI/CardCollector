@@ -42,4 +42,7 @@
     <data name="auction" xml:space="preserve">
         <value>Аукцион</value>
     </data>
+    <data name="claim_giveaway" xml:space="preserve">
+        <value>claim_giveaway</value>
+    </data>
 </root>

@@ -31,8 +31,7 @@ namespace CardCollector.Commands.InlineQueryHandler.Admin
 
         public override bool Match()
         {
-            if (User.Session.State is not UserState.CreateGiveaway) return false;
-            return User.Session.GetModule<AdminModule>().SelectedChannelGiveawayId == null;
+            return User.Session.State is UserState.SelectGiveawayPrize;
         }
 
         public ShowGiveawayStickers(User user, BotDatabaseContext context, InlineQuery inlineQuery) : base(user,

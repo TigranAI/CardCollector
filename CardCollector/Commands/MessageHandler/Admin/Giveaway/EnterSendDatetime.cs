@@ -29,7 +29,7 @@ namespace CardCollector.Commands.MessageHandler.Admin.Giveaway
                 var giveaway = await Context.ChannelGiveaways.FindById(module.SelectedChannelGiveawayId.Value);
                 giveaway.SendAt = datetime;
                 await User.Messages.EditMessage(User, Messages.enter_button_text,
-                    Keyboard.SkipKeyboard(typeof(EnterButtonText).Name));
+                    Keyboard.SkipKeyboard(typeof(EnterButtonText).Name), ParseMode.Html);
                 EnterButtonText.AddToQueue(User.Id);
             }
             else await User.Messages.EditMessage(User, Messages.incorrect_datetime_format,
@@ -40,7 +40,7 @@ namespace CardCollector.Commands.MessageHandler.Admin.Giveaway
         {
             RemoveFromQueue(user.Id);
             await user.Messages.EditMessage(user, Messages.enter_button_text,
-                Keyboard.SkipKeyboard(typeof(EnterButtonText).Name));
+                Keyboard.SkipKeyboard(typeof(EnterButtonText).Name), ParseMode.Html);
             EnterButtonText.AddToQueue(user.Id);
         }
 

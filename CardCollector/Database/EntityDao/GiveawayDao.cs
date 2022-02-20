@@ -6,9 +6,9 @@ namespace CardCollector.DataBase.EntityDao
 {
     public static class GiveawayDao
     {
-        public static async Task<ChannelGiveaway> FindById(this DbSet<ChannelGiveaway> table, int id)
+        public static async Task<ChannelGiveaway?> FindById(this DbSet<ChannelGiveaway> table, int? id)
         {
-            return await table.SingleAsync(item => item.Id == id);
+            return await table.SingleOrDefaultAsync(item => item.Id == id);
         }
 
         public static async Task<ChannelGiveaway> CreateNew(this DbSet<ChannelGiveaway> table)

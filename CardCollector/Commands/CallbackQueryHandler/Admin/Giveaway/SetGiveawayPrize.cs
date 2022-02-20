@@ -15,11 +15,15 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin.Giveaway
 
         protected override async Task Execute()
         {
+            User.Session.State = UserState.CreateGiveaway;
             var module = User.Session.GetModule<AdminModule>();
             var giveaway = await Context.ChannelGiveaways.FindById(module.SelectedChannelGiveawayId!.Value);
             giveaway.Prize = (ChannelGiveaway.PrizeType) int.Parse(CallbackQuery.Data!.Split("=")[1]);
             module.SelectedChannelGiveawayId = giveaway.Id;
-            await User.Messages.EditMessage(User, Messages.select_channel, Keyboard.SelectChannel);
+            if (giveaway.Prize is ChannelGiveaway.PrizeType.RandomSticker)
+                await User.Messages.EditMessage(User, Messages.choose_tier, Keyboard.GiveawayTier);
+            else
+                await User.Messages.EditMessage(User, Messages.select_channel, Keyboard.SelectChannel);
         }
 
         public override bool Match()

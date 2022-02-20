@@ -6,11 +6,12 @@
 	<s:String x:Key="/Default/CodeInspection/PencilsConfiguration/FiltersState/=SpellingFilter/@EntryIndexedValue">On</s:String>
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="C:\Users\DarkGolly\.nuget\packages\telegram.bot\17.0.0-alpha.3\lib\netcoreapp3.1\Telegram.Bot.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Users\Tigran\.nuget\packages\telegram.bot\17.0.0\lib\netcoreapp3.1\Telegram.Bot.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FCommands_002FCallbackQueryHandler_002FCallbackQueryCommands/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FCommands_002FChosenInlineResultHandler_002FChosenInlineResultCommands/@EntryIndexedValue">False</s:Boolean>
 	
-	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FCommands_002FMessageHandler_002FMessageCommands/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FCommands_002FMessageHandler_002FMessageCommands/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FCommands_002FPreCheckoutQueryHandler_002FPreCheckoutQueryCommands/@EntryIndexedValue">True</s:Boolean>
 	
 	

@@ -29,6 +29,7 @@ namespace CardCollector.DataBase.Entity
         public virtual ICollection<UserPacks> Packs { get; set; }
         public virtual ICollection<DailyTask> DailyTasks { get; set; }
         public virtual ICollection<SpecialOrderUser> SpecialOrdersUser { get; set; }
+        public virtual ICollection<ChannelGiveaway> UsedGiveaways { get; set; }
 
         [NotMapped] public UserSession Session;
 

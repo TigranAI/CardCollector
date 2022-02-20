@@ -70,6 +70,15 @@ namespace CardCollector.Commands.MessageHandler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to claim_giveaway.
+        /// </summary>
+        internal static string claim_giveaway {
+            get {
+                return ResourceManager.GetString("claim_giveaway", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Коллекция.
         /// </summary>
         internal static string collection {

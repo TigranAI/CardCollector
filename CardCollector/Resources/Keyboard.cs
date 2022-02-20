@@ -86,6 +86,18 @@ namespace CardCollector.Resources
             new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)},
         });
 
+        public static InlineKeyboardMarkup GiveawayTier = new(new[]
+        {
+            new[]
+            {
+                InlineKeyboardButton.WithCallbackData("1", $"{CallbackQueryCommands.select_giveaway_tier}=1"),
+                InlineKeyboardButton.WithCallbackData("2", $"{CallbackQueryCommands.select_giveaway_tier}=1"),
+                InlineKeyboardButton.WithCallbackData("3", $"{CallbackQueryCommands.select_giveaway_tier}=1"),
+                InlineKeyboardButton.WithCallbackData("4", $"{CallbackQueryCommands.select_giveaway_tier}=1"),
+            },
+            new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)},
+        });
+
         public static InlineKeyboardMarkup BuyCoinsKeyboard(bool confirmButton = false)
         {
             var keyboard = new List<InlineKeyboardButton[]>

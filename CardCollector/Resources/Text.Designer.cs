@@ -856,6 +856,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Случайный стикер {0} тира.
+        /// </summary>
+        internal static string random_sticker_tier {
+            get {
+                return ResourceManager.GetString("random_sticker_tier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Вернуть с аукциона.
         /// </summary>
         internal static string return_from_auction {

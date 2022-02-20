@@ -151,6 +151,15 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ACB.
+        /// </summary>
+        internal static string claim_giveaway {
+            get {
+                return ResourceManager.GetString("claim_giveaway", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AAK.
         /// </summary>
         internal static string collect_income {
@@ -363,6 +372,15 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         internal static string select_for_sale_pack {
             get {
                 return ResourceManager.GetString("select_for_sale_pack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ACA.
+        /// </summary>
+        internal static string select_giveaway_tier {
+            get {
+                return ResourceManager.GetString("select_giveaway_tier", resourceCulture);
             }
         }
         

@@ -423,6 +423,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Дата и/или время уже истекли!.
+        /// </summary>
+        internal static string date_is_expired {
+            get {
+                return ResourceManager.GetString("date_is_expired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Удаляю файлы....
         /// </summary>
         internal static string deleting_files {
@@ -564,6 +573,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Произошла ошибка при подготовке раздачи: {0}.
+        /// </summary>
+        internal static string error_when_preparing_giveaway {
+            get {
+                return ResourceManager.GetString("error_when_preparing_giveaway", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Покупка монет производится за алмазы, 1💎 = 10💰..
         /// </summary>
         internal static string exchange_mesage {
@@ -605,6 +623,25 @@ namespace CardCollector.Resources {
         internal static string gems_exchange_count {
             get {
                 return ResourceManager.GetString("gems_exchange_count", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Раздача завершена!.
+        /// </summary>
+        internal static string gievaway_now_ended {
+            get {
+                return ResourceManager.GetString("gievaway_now_ended", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Раздача успешно создана!
+        ///Ссылка на раздачу &lt;a href=&quot;{0}&quot;&gt;тык&lt;/a&gt;.
+        /// </summary>
+        internal static string giveaway_successfully_created {
+            get {
+                return ResourceManager.GetString("giveaway_successfully_created", resourceCulture);
             }
         }
         
@@ -807,6 +844,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Количество призов должно быть положительным!.
+        /// </summary>
+        internal static string prize_count_must_be_positive {
+            get {
+                return ResourceManager.GetString("prize_count_must_be_positive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Обычный пак.
         /// </summary>
         internal static string random_packs {
@@ -866,6 +912,15 @@ namespace CardCollector.Resources {
         internal static string select_sticker {
             get {
                 return ResourceManager.GetString("select_sticker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выбранный чат заблокирован!.
+        /// </summary>
+        internal static string selected_chat_is_blocked {
+            get {
+                return ResourceManager.GetString("selected_chat_is_blocked", resourceCulture);
             }
         }
         
@@ -1169,6 +1224,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Вы уже получили награду из этой раздачи..
+        /// </summary>
+        internal static string you_are_now_awarded {
+            get {
+                return ResourceManager.GetString("you_are_now_awarded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Чтобы увеличить получаемый опыт, Вы можете добавить бота в беседу..
         /// </summary>
         internal static string you_can_add_bot_to_conversation {
@@ -1205,11 +1269,11 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вы продали.
+        ///   Looks up a localized string similar to Вы получили {0} с этой раздачи.
         /// </summary>
-        internal static string you_sold {
+        internal static string you_got_from_this_giveaway {
             get {
-                return ResourceManager.GetString("you_sold", resourceCulture);
+                return ResourceManager.GetString("you_got_from_this_giveaway", resourceCulture);
             }
         }
         

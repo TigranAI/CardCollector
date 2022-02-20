@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using CardCollector.Attributes.Menu;
 using CardCollector.DataBase;
 using CardCollector.Resources;
 using CardCollector.Session.Modules;
@@ -7,7 +8,7 @@ using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands.MessageHandler.Collection
 {
-    [Attributes.Menu.MenuPoint]
+    [MenuPoint]
     public class Collection : MessageHandler
     {
         protected override string CommandText => MessageCommands.collection;

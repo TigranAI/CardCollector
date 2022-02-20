@@ -177,4 +177,10 @@
     <data name="ignore" xml:space="preserve">
         <value>000</value>
     </data>
+    <data name="select_giveaway_tier" xml:space="preserve">
+        <value>ACA</value>
+    </data>
+    <data name="claim_giveaway" xml:space="preserve">
+        <value>ACB</value>
+    </data>
 </root>

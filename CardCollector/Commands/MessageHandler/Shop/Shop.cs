@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using CardCollector.Attributes.Menu;
 using CardCollector.DataBase;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
@@ -9,7 +10,7 @@ using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands.MessageHandler.Shop
 {
-    [Attributes.Menu.MenuPoint]
+    [MenuPoint]
     public class Shop : MessageHandler
     {
         protected override string CommandText => MessageCommands.shop;

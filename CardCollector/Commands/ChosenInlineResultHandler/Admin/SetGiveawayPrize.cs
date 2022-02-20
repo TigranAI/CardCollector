@@ -17,6 +17,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Admin
 
         protected override async Task Execute()
         {
+            User.Session.State = UserState.CreateGiveaway;
             var stickerId = long.Parse(ChosenInlineResult.ResultId.Split("=")[1]);
             var sticker = await Context.Stickers.FindById(stickerId);
             var module = User.Session.GetModule<AdminModule>();

@@ -79,16 +79,20 @@ namespace CardCollector.Session
         public void ClearMenuStack()
         {
             _commandStack.Clear();
-            foreach (var module in _modules.Values)
-            {
-                if (module.GetType() == typeof(FiltersModule)) continue;
-                module.Reset();
-            }
         }
 
         public void PopLastCommand()
         {
             _commandStack.TryPop(out _);
+        }
+
+        public void ResetModules()
+        {
+            foreach (var module in _modules.Values)
+            {
+                if (module.GetType() == typeof(FiltersModule)) continue;
+                module.Reset();
+            }
         }
     }
 }
