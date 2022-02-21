@@ -53,8 +53,11 @@ namespace CardCollector.DataBase.Entity
                 Stickers.Add(newUserSticker);
                 await sticker.ApplyEffect(this, newUserSticker);
             }
+
+            await Messages.SendMessage(this,
+                string.Format(Resources.Messages.you_got_sticker, sticker.ToString(count)));
         }
-        
+
         public void AddPack(Pack pack, int count)
         {
             if (Packs.FirstOrDefault(item => item.Pack.Id == pack.Id) is { } userPack)

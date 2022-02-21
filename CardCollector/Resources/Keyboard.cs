@@ -93,9 +93,9 @@ namespace CardCollector.Resources
             new[]
             {
                 InlineKeyboardButton.WithCallbackData("1", $"{CallbackQueryCommands.select_giveaway_tier}=1"),
-                InlineKeyboardButton.WithCallbackData("2", $"{CallbackQueryCommands.select_giveaway_tier}=1"),
-                InlineKeyboardButton.WithCallbackData("3", $"{CallbackQueryCommands.select_giveaway_tier}=1"),
-                InlineKeyboardButton.WithCallbackData("4", $"{CallbackQueryCommands.select_giveaway_tier}=1"),
+                InlineKeyboardButton.WithCallbackData("2", $"{CallbackQueryCommands.select_giveaway_tier}=2"),
+                InlineKeyboardButton.WithCallbackData("3", $"{CallbackQueryCommands.select_giveaway_tier}=3"),
+                InlineKeyboardButton.WithCallbackData("4", $"{CallbackQueryCommands.select_giveaway_tier}=4"),
             },
             new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)},
         });

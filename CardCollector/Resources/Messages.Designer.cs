@@ -1362,6 +1362,16 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Вы получили стикер(ы):
+        ///{0}.
+        /// </summary>
+        internal static string you_got_sticker {
+            get {
+                return ResourceManager.GetString("you_got_sticker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Баланс.
         /// </summary>
         internal static string your_cash {

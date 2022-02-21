@@ -507,4 +507,8 @@ mm - минуты
     <data name="roulette_now_ended" xml:space="preserve">
         <value>Рулетка уже завершена! Если вы хотите начать новую, то запустите команду {0}@{1}</value>
     </data>
+    <data name="you_got_sticker" xml:space="preserve">
+        <value>Вы получили стикер(ы):
+{0}</value>
+    </data>
 </root>
