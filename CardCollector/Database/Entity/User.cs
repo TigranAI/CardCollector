@@ -38,7 +38,7 @@ namespace CardCollector.DataBase.Entity
             return Stickers.Any(item => item.Sticker.Effect == Effect.AuctionDiscount5);
         }
 
-        public async Task AddSticker(Sticker sticker, int count)
+        public async Task AddSticker(Sticker sticker, int count, bool sendAlert = false)
         {
             if (Stickers.SingleOrDefault(item => item.Sticker.Id == sticker.Id) is { } userSticker)
                 userSticker.Count += count;
@@ -54,8 +54,12 @@ namespace CardCollector.DataBase.Entity
                 await sticker.ApplyEffect(this, newUserSticker);
             }
 
-            await Messages.SendMessage(this,
-                string.Format(Resources.Messages.you_got_sticker, sticker.ToString(count)));
+            if (sendAlert)
+            {
+                await Messages.SendSticker(this, sticker.FileId);
+                await Messages.SendMessage(this,
+                    string.Format(Resources.Messages.you_got_sticker, sticker.ToString(count)));
+            }
         }
 
         public void AddPack(Pack pack, int count)

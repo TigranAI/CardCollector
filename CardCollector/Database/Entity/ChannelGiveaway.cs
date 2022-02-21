@@ -10,6 +10,7 @@ using CardCollector.Commands.MessageHandler;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Others;
 using CardCollector.Resources;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Telegram.Bot;
 using Telegram.Bot.Types.InputFiles;
 using Telegram.Bot.Types.ReplyMarkups;
@@ -72,11 +73,11 @@ namespace CardCollector.DataBase.Entity
             switch (Prize)
             {
                 case PrizeType.SelectedSticker:
-                    await user.AddSticker(SelectedSticker!, 1);
+                    await user.AddSticker(SelectedSticker!, 1, true);
                     break;
                 case PrizeType.RandomSticker:
                     var stickers = await context.Stickers.FindAllByTier(SelectedStickerTier!.Value);
-                    await user.AddSticker(stickers.Random(), 1);
+                    await user.AddSticker(stickers.Random(), 1, true);
                     break;
                 case PrizeType.RandomPack:
                     var pack = await context.Packs.FindById(1);
@@ -97,7 +98,7 @@ namespace CardCollector.DataBase.Entity
         {
             if (PrizeCount <= 0)
                 await Bot.Client.EditMessageTextAsync(Channel.ChatId, MessageId, Messages.gievaway_now_ended);
-            else
+            else if (ButtonText == null || ButtonText.Contains("{0}") || ButtonText.Contains("{1}"))
                 await Bot.Client.EditMessageReplyMarkupAsync(Channel.ChatId, MessageId, GetFormattedKeyboard());
         }
 
