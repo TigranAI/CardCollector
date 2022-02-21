@@ -367,6 +367,15 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ACD.
+        /// </summary>
+        internal static string roulette_rule {
+            get {
+                return ResourceManager.GetString("roulette_rule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ABE.
         /// </summary>
         internal static string select_for_sale_pack {
@@ -525,6 +534,15 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         internal static string special_offers {
             get {
                 return ResourceManager.GetString("special_offers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ACC.
+        /// </summary>
+        internal static string start_roulette {
+            get {
+                return ResourceManager.GetString("start_roulette", resourceCulture);
             }
         }
         

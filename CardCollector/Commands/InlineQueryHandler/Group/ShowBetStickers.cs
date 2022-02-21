@@ -1,38 +1,39 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.Attributes.Menu;
 using CardCollector.Commands.ChosenInlineResultHandler;
 using CardCollector.Controllers;
 using CardCollector.DataBase;
+using CardCollector.Others;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using User = CardCollector.DataBase.Entity.User;
 
-namespace CardCollector.Commands.InlineQueryHandler.UserToUser
+namespace CardCollector.Commands.InlineQueryHandler.Group
 {
-    [DontAddToCommandStack]
-    public class ShowStickersInPrivate : InlineQueryHandler
+    public class ShowBetStickers : InlineQueryHandler
     {
+        protected override string CommandText => InlineQueryCommands.roulette;
+
         protected override async Task Execute()
         {
+            var query = InlineQuery.Query.Substring(CommandText.Length).TrimStart();
             var stickersList = User.Stickers
-                .Where(item => item.Count > 0)
-                .Select(item => item.Sticker)
-                .Where(item => item.Contains(InlineQuery.Query))
+                .Where(item => item.Count > 0 && item.Sticker.Contains(query))
                 .ToList();
             var offset = int.Parse(InlineQuery.Offset == "" ? "0" : InlineQuery.Offset);
             var newOffset = offset + 50 > stickersList.Count() ? "" : (offset + 50).ToString();
             var results = stickersList
-                .ToTelegramStickers(ChosenInlineResultCommands.send_private_sticker, offset);
+                .ToTelegramResults(ChosenInlineResultCommands.made_a_bet, offset);
             await MessageController.AnswerInlineQuery(User, InlineQuery.Id, results, newOffset);
         }
-        
+
         public override bool Match()
         {
-            return InlineQuery.ChatType is ChatType.Private;
+            if (InlineQuery.ChatType is not (ChatType.Group or ChatType.Supergroup)) return false;
+            return InlineQuery.Query.StartsWith(CommandText);
         }
-
-        public ShowStickersInPrivate(User user, BotDatabaseContext context, InlineQuery inlineQuery) : base(user, context, inlineQuery)
+        
+        public ShowBetStickers(User user, BotDatabaseContext context, InlineQuery inlineQuery) : base(user, context, inlineQuery)
         {
         }
     }

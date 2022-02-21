@@ -42,4 +42,7 @@
     <data name="set_giveaway_channel" xml:space="preserve">
         <value>AAG</value>
     </data>
+    <data name="made_a_bet" xml:space="preserve">
+        <value>AAH</value>
+    </data>
 </root>

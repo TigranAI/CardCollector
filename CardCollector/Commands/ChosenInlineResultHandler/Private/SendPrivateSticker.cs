@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Attributes.Logs;
-using CardCollector.Commands.ChosenInlineResultHandler.UserToChat;
+using CardCollector.Commands.ChosenInlineResultHandler.Group;
 using CardCollector.DataBase;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;

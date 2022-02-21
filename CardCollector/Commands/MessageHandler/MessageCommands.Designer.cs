@@ -124,6 +124,15 @@ namespace CardCollector.Commands.MessageHandler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /roulette.
+        /// </summary>
+        internal static string roulette {
+            get {
+                return ResourceManager.GetString("roulette", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Магазин.
         /// </summary>
         internal static string shop {

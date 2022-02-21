@@ -29,7 +29,7 @@ namespace CardCollector.DataBase.Entity
 
         public override string ToString()
         {
-            var str = $"\n{Title} {string.Concat(Enumerable.Repeat(Text.star, Tier))}" +
+            var str = $"\n{Title} {TierAsStars()}" +
                       $"\n{Text.emoji}: {Emoji}" +
                       $"\n{Text.author}: {Author}" +
                       $"\n{Income}{Text.coin} {IncomeTime}{Text.time}{Text.minutes}";
@@ -41,7 +41,7 @@ namespace CardCollector.DataBase.Entity
 
         public string ToString(int count)
         {
-            var str = $"\n{Title} {string.Concat(Enumerable.Repeat(Text.star, Tier))}" +
+            var str = $"\n{Title} {TierAsStars()}" +
                       $"\n{Text.emoji}: {Emoji}" +
                       $"\n{Text.author}: {Author}" +
                       $"\n{Text.count}: {(count != -1 ? count : "∞")}" +
@@ -50,6 +50,11 @@ namespace CardCollector.DataBase.Entity
                 str += $"\n{Text.effect}: {EffectTranslations.ResourceManager.GetString(((int) Effect).ToString())}";
             if (Description != "") str += $"\n\n{Text.description}: {Description}";
             return str;
+        }
+
+        public string TierAsStars()
+        {
+            return string.Concat(Enumerable.Repeat(Text.star, Tier));
         }
 
         public bool Contains(string value)

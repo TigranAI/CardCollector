@@ -9,7 +9,7 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using User = CardCollector.DataBase.Entity.User;
 
-namespace CardCollector.Commands.MessageHandler.UserToChat
+namespace CardCollector.Commands.MessageHandler.Group
 {
     public class SendStickerInChat : MessageHandler
     {

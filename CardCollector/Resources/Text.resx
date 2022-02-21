@@ -381,4 +381,16 @@
     <data name="random_sticker_tier" xml:space="preserve">
         <value>Случайный стикер {0} тира</value>
     </data>
+    <data name="place_a_bet" xml:space="preserve">
+        <value>Сделать ставку</value>
+    </data>
+    <data name="roulette_rule" xml:space="preserve">
+        <value>Правила игры</value>
+    </data>
+    <data name="start_roulette" xml:space="preserve">
+        <value>Начать игру</value>
+    </data>
+    <data name="bet" xml:space="preserve">
+        <value>поставил</value>
+    </data>
 </root>

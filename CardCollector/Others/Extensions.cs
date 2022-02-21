@@ -7,7 +7,7 @@ using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using Telegram.Bot.Types.InlineQueryResults;
 
-namespace CardCollector
+namespace CardCollector.Others
 {
     public static class Extensions
     {
@@ -17,6 +17,24 @@ namespace CardCollector
             var result = new List<InlineQueryResult>();
             foreach (var sticker in list.Skip(offset).Take(50))
                 result.Add(new InlineQueryResultCachedSticker($"{command}={sticker.Id}", sticker.FileId));
+            return result;
+        }
+
+        public static IEnumerable<InlineQueryResult> ToTelegramResults(this IEnumerable<UserSticker> list,
+            string command, int offset)
+        {
+            var result = new List<InlineQueryResult>();
+            foreach (var userSticker in list.Skip(offset).Take(50))
+                result.Add(new InlineQueryResultArticle(
+                    $"{command}={userSticker.Id}",
+                    userSticker.Sticker.Title,
+                    new InputTextMessageContent(
+                        $"{userSticker.User.Username} {Text.bet} " +
+                        $"{userSticker.Sticker.Title} {userSticker.Sticker.TierAsStars()}"))
+                {
+                    Description =
+                        $"{Text.tier}: {userSticker.Sticker.TierAsStars()} | {Text.count}: {userSticker.Count}"
+                });
             return result;
         }
 
@@ -41,6 +59,7 @@ namespace CardCollector
                         $"{item.Trader.Username} {item.Count}{Text.items}", new InputTextMessageContent(Text.buy))
                     {Description = $"{price}{Text.gem} {Text.per} 1{Text.items}"});
             }
+
             return result;
         }
 
@@ -51,11 +70,12 @@ namespace CardCollector
             foreach (var item in list.Skip(offset).Take(50))
             {
                 result.Add(new InlineQueryResultArticle(
-                    $"{command}={item.Id}", 
+                    $"{command}={item.Id}",
                     item.Title ?? item.ChatId.ToString(),
                     new InputTextMessageContent(Text.select))
                 );
             }
+
             return result;
         }
 

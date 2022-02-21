@@ -70,6 +70,15 @@ namespace CardCollector.Commands.ChosenInlineResultHandler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AAH.
+        /// </summary>
+        internal static string made_a_bet {
+            get {
+                return ResourceManager.GetString("made_a_bet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AAB.
         /// </summary>
         internal static string select_edit_sticker {

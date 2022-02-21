@@ -18,34 +18,7 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="help" xml:space="preserve">
-        <value>/help</value>
-    </data>
-    <data name="login" xml:space="preserve">
-        <value>login</value>
-    </data>
-    <data name="start" xml:space="preserve">
-        <value>/start</value>
-    </data>
-    <data name="shop" xml:space="preserve">
-        <value>Магазин</value>
-    </data>
-    <data name="profile" xml:space="preserve">
-        <value>Профиль</value>
-    </data>
-    <data name="menu" xml:space="preserve">
-        <value>/menu</value>
-    </data>
-    <data name="collection" xml:space="preserve">
-        <value>Коллекция</value>
-    </data>
-    <data name="auction" xml:space="preserve">
-        <value>Аукцион</value>
-    </data>
-    <data name="claim_giveaway" xml:space="preserve">
-        <value>claim_giveaway</value>
-    </data>
     <data name="roulette" xml:space="preserve">
-        <value>/roulette</value>
+        <value>#roulette</value>
     </data>
 </root>

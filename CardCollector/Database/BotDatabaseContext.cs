@@ -4,11 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.Entity.NotMapped;
+using CardCollector.Migrations;
 using CardCollector.Resources;
 using CardCollector.StickerEffects;
 using CardCollector.UserDailyTask;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using ChannelGiveaway = CardCollector.DataBase.Entity.ChannelGiveaway;
 using DailyTask = CardCollector.DataBase.Entity.DailyTask;
 
 namespace CardCollector.DataBase
@@ -48,6 +50,7 @@ namespace CardCollector.DataBase
         public DbSet<UserSendStickerToChat> UserSendStickers { get; set; }
         public DbSet<TelegramChat> TelegramChats { get; set; }
         public DbSet<ChannelGiveaway> ChannelGiveaways { get; set; }
+        public DbSet<ChatRoulette> ChatRoulette { get; set; }
 
         public bool IsDisposed()
         {
@@ -74,7 +77,22 @@ namespace CardCollector.DataBase
             ConfigureLevelLevelReward(modelBuilder);
             ConfigureDailyTaskTaskId(modelBuilder);
             ConfigureStickerEffect(modelBuilder);
+            /*ConfigureTelegramChat(modelBuilder);*/
         }
+
+        /*private void ConfigureTelegramChat(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<TelegramChat>()
+                .Property(entity => entity.ChatMessages)
+                .HasConversion(
+                    to => Utilities.ToJson(to),
+                    from => Utilities.FromJson<HashSet<int>>(from),
+                    new ValueComparer<ICollection<int>>(
+                        (l1, l2) => l2 != null && l1 != null && l1.SequenceEqual(l2),
+                        l => l.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
+                        l => l.ToHashSet()));
+        }*/
 
         private void ConfigureUserLevel(ModelBuilder modelBuilder)
         {

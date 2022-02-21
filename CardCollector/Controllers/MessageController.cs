@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CardCollector.Commands;
@@ -113,50 +112,34 @@ namespace CardCollector.Controllers
         }
 
         public static async Task<int> EditMessage(
-            User user,
-            string message,
-            InlineKeyboardMarkup? keyboard = null,
-            ParseMode? parseMode = null)
-        {
-            if (user.IsBlocked) return -1;
-            if (user.Messages.ChatMessages.Count == 0) return await SendMessage(user, message, keyboard, parseMode);
-            var messageId = user.Messages.ChatMessages.Last();
-            return await EditMessage(user, messageId, message, keyboard, parseMode);
-        }
-
-        public static async Task<int> EditMessage(
-            User user,
+            long chatId,
             int messageId,
             string message,
             InlineKeyboardMarkup? keyboard = null,
             ParseMode? parseMode = null)
         {
-            if (user.IsBlocked) return -1;
             try
             {
-                var msg = await Bot.Client.EditMessageTextAsync(user.ChatId, messageId, message, parseMode,
+                var msg = await Bot.Client.EditMessageTextAsync(chatId, messageId, message, parseMode,
                     replyMarkup: keyboard);
                 return msg.MessageId;
             }
             catch (Exception)
             {
-                user.Messages.ChatMessages.Remove(messageId);
-                user.Messages.ChatStickers.Remove(messageId);
-                await DeleteMessage(user, messageId);
-                return await SendMessage(user, message, keyboard, parseMode);
+                await DeleteMessage(chatId, messageId);
+                return await SendMessage(chatId, message, keyboard, parseMode);
             }
         }
 
         public static async Task<int> SendMessage(
-            User user,
+            long chatId,
             string message,
             IReplyMarkup? keyboard = null,
             ParseMode? parseMode = null)
         {
-            if (user.IsBlocked) return -1;
             try
             {
-                var msg = await Bot.Client.SendTextMessageAsync(user.ChatId, message, parseMode,
+                var msg = await Bot.Client.SendTextMessageAsync(chatId, message, parseMode,
                     replyMarkup: keyboard, disableNotification: true);
                 return msg.MessageId;
             }
@@ -168,15 +151,14 @@ namespace CardCollector.Controllers
         }
 
         public static async Task<int> SendSticker(
-            User user,
+            long chatId,
             string fileId,
             IReplyMarkup? keyboard = null)
         {
-            if (user.IsBlocked) return -1;
             try
             {
-                var msg = await Bot.Client.SendStickerAsync(user.ChatId, fileId,
-                    replyMarkup: keyboard, disableNotification: true);
+                var msg = await Bot.Client.SendStickerAsync(chatId, fileId,
+                    replyMarkup: keyboard, protectContent: true, disableNotification: true);
                 return msg.MessageId;
             }
             catch (Exception e)
@@ -206,13 +188,12 @@ namespace CardCollector.Controllers
         }
 
         public static async Task DeleteMessage(
-            User user,
+            long chatId,
             int messageId)
         {
-            if (user.IsBlocked) return;
             try
             {
-                await Bot.Client.DeleteMessageAsync(user.ChatId, messageId);
+                await Bot.Client.DeleteMessageAsync(chatId, messageId);
             }
             catch (Exception e)
             {
@@ -295,6 +276,20 @@ namespace CardCollector.Controllers
             catch (Exception e)
             {
                 LogOutWarning($"Cant send image: {e.Message}");
+                return -1;
+            }
+        }
+
+        public static async Task<int> SendDice(long chatId, Emoji emoji)
+        {
+            try
+            {
+                var msg = await Bot.Client.SendDiceAsync(chatId, emoji, true);
+                return msg.MessageId;
+            }
+            catch (Exception e)
+            {
+                LogOutWarning($"Cant send dice: {e.Message}");
                 return -1;
             }
         }

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using CardCollector.Commands.CallbackQueryHandler;
+using CardCollector.Commands.InlineQueryHandler;
 using CardCollector.Commands.MessageHandler;
 using CardCollector.DataBase.Entity;
+using CardCollector.Others;
 using CardCollector.Session.Modules;
 using Telegram.Bot.Types.ReplyMarkups;
 
@@ -97,6 +99,27 @@ namespace CardCollector.Resources
             },
             new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)},
         });
+
+        public static InlineKeyboardMarkup RouletteKeyboard(long rouletteId)
+        {
+            return new InlineKeyboardMarkup(new[]
+            {
+                new[]
+                {
+                    InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.place_a_bet,
+                        InlineQueryCommands.roulette)
+                },
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(Text.roulette_rule, CallbackQueryCommands.roulette_rule)
+                },
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(Text.start_roulette,
+                        $"{CallbackQueryCommands.start_roulette}={rouletteId}")
+                }
+            });
+        }
 
         public static InlineKeyboardMarkup BuyCoinsKeyboard(bool confirmButton = false)
         {
@@ -882,8 +905,9 @@ namespace CardCollector.Resources
         {
             return new InlineKeyboardMarkup(new[]
             {
-                new[] {
-                    InlineKeyboardButton.WithCallbackData(Text.skip,$"{CallbackQueryCommands.skip}={name}")
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(Text.skip, $"{CallbackQueryCommands.skip}={name}")
                 },
                 new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)}
             });

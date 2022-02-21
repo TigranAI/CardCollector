@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.Resources;
@@ -20,25 +21,17 @@ namespace CardCollector.DataBase.Entity
 
         public async Task ClearChat(User user)
         {
-            foreach (var messageId in ChatMessages)
-            {
-                await MessageController.DeleteMessage(user, messageId);
-            }
-
-            foreach (var messageId in ChatStickers)
-            {
-                await MessageController.DeleteMessage(user, messageId);
-            }
-
-            ChatMessages.Clear();
-            ChatStickers.Clear();
+            if (user.IsBlocked) return;
+            await ClearMessages(user);
+            await ClearStickers(user);
         }
 
         public async Task ClearMessages(User user)
         {
+            if (user.IsBlocked) return;
             foreach (var messageId in ChatMessages)
             {
-                await MessageController.DeleteMessage(user, messageId);
+                await MessageController.DeleteMessage(user.ChatId, messageId);
             }
 
             ChatMessages.Clear();
@@ -46,9 +39,10 @@ namespace CardCollector.DataBase.Entity
 
         public async Task ClearStickers(User user)
         {
+            if (user.IsBlocked) return;
             foreach (var messageId in ChatStickers)
             {
-                await MessageController.DeleteMessage(user, messageId);
+                await MessageController.DeleteMessage(user.ChatId, messageId);
             }
 
             ChatStickers.Clear();
@@ -59,9 +53,10 @@ namespace CardCollector.DataBase.Entity
             string fileId,
             IReplyMarkup? keyboard = null)
         {
+            if (user.IsBlocked) return;
             await ClearMessages(user);
-            var messageId = await MessageController.SendSticker(user, fileId, keyboard);
-            ChatStickers.Add(messageId);
+            var messageId = await MessageController.SendSticker(user.ChatId, fileId, keyboard);
+            if (messageId != -1) ChatStickers.Add(messageId);
         }
 
         public async Task EditMessage(
@@ -70,8 +65,14 @@ namespace CardCollector.DataBase.Entity
             InlineKeyboardMarkup? keyboard = null,
             ParseMode? parseMode = null)
         {
-            var messageId = await MessageController.EditMessage(user, message, keyboard, parseMode);
-            if (messageId != -1) ChatMessages.Add(messageId);
+            if (user.IsBlocked) return;
+            if (ChatMessages.Count == 0) await SendMessage(user, message, keyboard, parseMode);
+            else
+            {
+                var messageId = await MessageController.EditMessage(user.ChatId, ChatMessages.Last(),
+                    message, keyboard, parseMode);
+                if (messageId != -1) ChatMessages.Add(messageId);
+            }
         }
 
         public async Task SendMessage(
@@ -80,7 +81,8 @@ namespace CardCollector.DataBase.Entity
             IReplyMarkup? keyboard = null,
             ParseMode? parseMode = null)
         {
-            var messageId = await MessageController.SendMessage(user, message, keyboard, parseMode);
+            if (user.IsBlocked) return;
+            var messageId = await MessageController.SendMessage(user.ChatId, message, keyboard, parseMode);
             if (messageId != -1) ChatMessages.Add(messageId);
         }
 
@@ -90,52 +92,59 @@ namespace CardCollector.DataBase.Entity
             string message,
             InlineKeyboardMarkup keyboard)
         {
+            if (user.IsBlocked) return;
             var messageId = await MessageController.SendImage(user, fileId, message, keyboard);
             if (messageId != -1) ChatMessages.Add(messageId);
         }
 
         public async Task SendMenu(User user)
         {
+            if (user.IsBlocked) return;
             await ClearChat(user);
-            if (MenuMessageId != -1) await MessageController.DeleteMessage(user, MenuMessageId);
+            if (MenuMessageId != -1) await MessageController.DeleteMessage(user.ChatId, MenuMessageId);
             MenuMessageId =
-                await MessageController.SendMessage(user, Messages.main_menu, Keyboard.Menu, ParseMode.Html);
+                await MessageController.SendMessage(user.ChatId, Messages.main_menu, Keyboard.Menu, ParseMode.Html);
         }
 
         public async Task SendDailyTaskProgress(User user, string message)
         {
+            if (user.IsBlocked) return;
             if (DailyTaskProgressMessageId != -1)
-                await MessageController.DeleteMessage(user, DailyTaskProgressMessageId);
-            DailyTaskProgressMessageId = await MessageController.SendMessage(user, message);
+                await MessageController.DeleteMessage(user.ChatId, DailyTaskProgressMessageId);
+            DailyTaskProgressMessageId = await MessageController.SendMessage(user.ChatId, message);
             ChatMessages.Add(DailyTaskProgressMessageId);
         }
 
         public async Task SendDailyTaskAlert(User user)
         {
-            if (DailyTaskAlertMessageId != -1) await MessageController.DeleteMessage(user, DailyTaskAlertMessageId);
-            DailyTaskAlertMessageId = await MessageController.SendMessage(user, Messages.daily_task_alertation);
+            if (user.IsBlocked) return;
+            if (DailyTaskAlertMessageId != -1) await MessageController.DeleteMessage(user.ChatId, DailyTaskAlertMessageId);
+            DailyTaskAlertMessageId = await MessageController.SendMessage(user.ChatId, Messages.daily_task_alertation);
             ChatMessages.Add(DailyTaskAlertMessageId);
         }
 
         public async Task SendDailyTaskComplete(User user)
         {
+            if (user.IsBlocked) return;
             await ClearChat(user);
-            if (DailyTaskMessageId != -1) await MessageController.DeleteMessage(user, DailyTaskMessageId);
-            DailyTaskMessageId = await MessageController.SendMessage(user, Messages.pack_prize, Keyboard.MyPacks);
+            if (DailyTaskMessageId != -1) await MessageController.DeleteMessage(user.ChatId, DailyTaskMessageId);
+            DailyTaskMessageId = await MessageController.SendMessage(user.ChatId, Messages.pack_prize, Keyboard.MyPacks);
             ChatMessages.Add(DailyTaskMessageId);
         }
 
         public async Task SendTopUsers(User user, string message, InlineKeyboardMarkup keyboard)
         {
-            if (TopUsersMessageId != -1) await MessageController.DeleteMessage(user, TopUsersMessageId);
-            TopUsersMessageId = await MessageController.SendMessage(user, message, keyboard, ParseMode.Html);
+            if (user.IsBlocked) return;
+            if (TopUsersMessageId != -1) await MessageController.DeleteMessage(user.ChatId, TopUsersMessageId);
+            TopUsersMessageId = await MessageController.SendMessage(user.ChatId, message, keyboard, ParseMode.Html);
             ChatMessages.Add(TopUsersMessageId);
         }
 
         public async Task SendPiggyBankAlert(User user, string message)
         {
-            if (CollectIncomeMessageId != -1) await MessageController.DeleteMessage(user, CollectIncomeMessageId);
-            CollectIncomeMessageId = await MessageController.SendMessage(user, message);
+            if (user.IsBlocked) return;
+            if (CollectIncomeMessageId != -1) await MessageController.DeleteMessage(user.ChatId, CollectIncomeMessageId);
+            CollectIncomeMessageId = await MessageController.SendMessage(user.ChatId, message);
             ChatMessages.Add(CollectIncomeMessageId);
         }
     }

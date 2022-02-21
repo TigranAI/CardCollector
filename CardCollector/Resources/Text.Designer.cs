@@ -187,6 +187,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to поставил.
+        /// </summary>
+        internal static string bet {
+            get {
+                return ResourceManager.GetString("bet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Купить.
         /// </summary>
         internal static string buy {
@@ -757,6 +766,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Сделать ставку.
+        /// </summary>
+        internal static string place_a_bet {
+            get {
+                return ResourceManager.GetString("place_a_bet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to +.
         /// </summary>
         internal static string plus {
@@ -870,6 +888,15 @@ namespace CardCollector.Resources {
         internal static string return_from_auction {
             get {
                 return ResourceManager.GetString("return_from_auction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Правила игры.
+        /// </summary>
+        internal static string roulette_rule {
+            get {
+                return ResourceManager.GetString("roulette_rule", resourceCulture);
             }
         }
         
@@ -1014,6 +1041,15 @@ namespace CardCollector.Resources {
         internal static string start {
             get {
                 return ResourceManager.GetString("start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Начать игру.
+        /// </summary>
+        internal static string start_roulette {
+            get {
+                return ResourceManager.GetString("start_roulette", resourceCulture);
             }
         }
         

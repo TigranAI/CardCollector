@@ -477,4 +477,34 @@ mm - минуты
     <data name="you_got_from_this_giveaway" xml:space="preserve">
         <value>Вы получили {0} с этой раздачи</value>
     </data>
+    <data name="roulette_message" xml:space="preserve">
+        <value>{0} предлагает начать игру в рулетку. Игра автоматически начнётся через 5 минут. {0} может начать игру раньше.
+Список участников:
+{1}</value>
+    </data>
+    <data name="creator_didnt_bet" xml:space="preserve">
+        <value>{0} не сделал ставку!</value>
+    </data>
+    <data name="too_few_players" xml:space="preserve">
+        <value>Слишком мало участников!</value>
+    </data>
+    <data name="congratulation_to_roulette_winner" xml:space="preserve">
+        <value>Победителем становится {0} с шансом {1}%. Он получает: 
+{2}</value>
+    </data>
+    <data name="you_are_not_creator" xml:space="preserve">
+        <value>Вы не можете начать рулетку, так как не являетесь ее создателем.</value>
+    </data>
+    <data name="rules_sent_to_private" xml:space="preserve">
+        <value>Правила были отправлены вам в личные сообщения</value>
+    </data>
+    <data name="roulette_rules" xml:space="preserve">
+        <value>Какие-то правила рулетки. Ждем текст</value>
+    </data>
+    <data name="roulette_start_now" xml:space="preserve">
+        <value>Рулетка уже запущена в этой группе!</value>
+    </data>
+    <data name="roulette_now_ended" xml:space="preserve">
+        <value>Рулетка уже завершена! Если вы хотите начать новую, то запустите команду {0}@{1}</value>
+    </data>
 </root>

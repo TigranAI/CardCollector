@@ -369,6 +369,16 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Победителем становится {0} с шансом {1}%. Он получает: 
+        ///{2}.
+        /// </summary>
+        internal static string congratulation_to_roulette_winner {
+            get {
+                return ResourceManager.GetString("congratulation_to_roulette_winner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 👑&lt;b&gt;Панель управления&lt;/b&gt;👑.
         /// </summary>
         internal static string control_panel {
@@ -383,6 +393,15 @@ namespace CardCollector.Resources {
         internal static string count_sends_per_day {
             get {
                 return ResourceManager.GetString("count_sends_per_day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} не сделал ставку!.
+        /// </summary>
+        internal static string creator_didnt_bet {
+            get {
+                return ResourceManager.GetString("creator_didnt_bet", resourceCulture);
             }
         }
         
@@ -871,6 +890,53 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} предлагает начать игру в рулетку. Игра автоматически начнётся через 5 минут. {0} может начать игру раньше.
+        ///Список участников:
+        ///{1}.
+        /// </summary>
+        internal static string roulette_message {
+            get {
+                return ResourceManager.GetString("roulette_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Рулетка уже завершена! Если вы хотите начать новую, то запустите команду {0}@{1}.
+        /// </summary>
+        internal static string roulette_now_ended {
+            get {
+                return ResourceManager.GetString("roulette_now_ended", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Какие-то правила рулетки. Ждем текст.
+        /// </summary>
+        internal static string roulette_rules {
+            get {
+                return ResourceManager.GetString("roulette_rules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Рулетка уже запущена в этой группе!.
+        /// </summary>
+        internal static string roulette_start_now {
+            get {
+                return ResourceManager.GetString("roulette_start_now", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Правила были отправлены вам в личные сообщения.
+        /// </summary>
+        internal static string rules_sent_to_private {
+            get {
+                return ResourceManager.GetString("rules_sent_to_private", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ваши стикеры можно посмотреть, нажав на Коллекция..
         /// </summary>
         internal static string see_your_stickers {
@@ -1101,6 +1167,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Слишком мало участников!.
+        /// </summary>
+        internal static string too_few_players {
+            get {
+                return ResourceManager.GetString("too_few_players", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Не забывайте собирать прибыль во вкладке профиля. Несобранная прибыль составляет.
         /// </summary>
         internal static string uncollected_income {
@@ -1220,6 +1295,15 @@ namespace CardCollector.Resources {
         internal static string you_already_use_this_order {
             get {
                 return ResourceManager.GetString("you_already_use_this_order", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы не можете начать рулетку, так как не являетесь ее создателем..
+        /// </summary>
+        internal static string you_are_not_creator {
+            get {
+                return ResourceManager.GetString("you_are_not_creator", resourceCulture);
             }
         }
         

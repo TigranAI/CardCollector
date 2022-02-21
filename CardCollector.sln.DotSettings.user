@@ -10,8 +10,9 @@
 &lt;/AssemblyExplorer&gt;</s:String>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FCommands_002FCallbackQueryHandler_002FCallbackQueryCommands/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FCommands_002FChosenInlineResultHandler_002FChosenInlineResultCommands/@EntryIndexedValue">False</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FCommands_002FInlineQueryHandler_002FInlineQueryCommands/@EntryIndexedValue">False</s:Boolean>
 	
-	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FCommands_002FMessageHandler_002FMessageCommands/@EntryIndexedValue">False</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FCommands_002FMessageHandler_002FMessageCommands/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FCommands_002FPreCheckoutQueryHandler_002FPreCheckoutQueryCommands/@EntryIndexedValue">True</s:Boolean>
 	
 	
@@ -27,9 +28,9 @@
 	
 	
 	
-	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FResources_002FMessages/@EntryIndexedValue">False</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FResources_002FMessages/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FResources_002FSortingTypes/@EntryIndexedValue">False</s:Boolean>
-	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FResources_002FText/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FResources_002FText/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FResources_002FTopByTexts/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FStickerEffects_002FEffectTranslations/@EntryIndexedValue">True</s:Boolean>
 	

@@ -4,6 +4,7 @@ using CardCollector.Commands.ChosenInlineResultHandler;
 using CardCollector.Controllers;
 using CardCollector.DataBase;
 using CardCollector.DataBase.EntityDao;
+using CardCollector.Others;
 using CardCollector.Resources;
 using CardCollector.Session.Modules;
 using Telegram.Bot.Types;

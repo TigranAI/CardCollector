@@ -4,14 +4,15 @@ using CardCollector.Attributes.Menu;
 using CardCollector.Commands.ChosenInlineResultHandler;
 using CardCollector.Controllers;
 using CardCollector.DataBase;
+using CardCollector.Others;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using User = CardCollector.DataBase.Entity.User;
 
-namespace CardCollector.Commands.InlineQueryHandler.UserToChat
+namespace CardCollector.Commands.InlineQueryHandler.Private
 {
     [DontAddToCommandStack]
-    public class ShowStickersInGroup : InlineQueryHandler
+    public class ShowStickersInPrivate : InlineQueryHandler
     {
         protected override async Task Execute()
         {
@@ -23,17 +24,16 @@ namespace CardCollector.Commands.InlineQueryHandler.UserToChat
             var offset = int.Parse(InlineQuery.Offset == "" ? "0" : InlineQuery.Offset);
             var newOffset = offset + 50 > stickersList.Count() ? "" : (offset + 50).ToString();
             var results = stickersList
-                .ToTelegramStickers(ChosenInlineResultCommands.chat_send_sticker, offset);
+                .ToTelegramStickers(ChosenInlineResultCommands.send_private_sticker, offset);
             await MessageController.AnswerInlineQuery(User, InlineQuery.Id, results, newOffset);
         }
-
+        
         public override bool Match()
         {
-            return InlineQuery.ChatType is ChatType.Group or ChatType.Supergroup or ChatType.Channel;
+            return InlineQuery.ChatType is ChatType.Private;
         }
 
-        public ShowStickersInGroup(User user, BotDatabaseContext context, InlineQuery inlineQuery) : base(user, context,
-            inlineQuery)
+        public ShowStickersInPrivate(User user, BotDatabaseContext context, InlineQuery inlineQuery) : base(user, context, inlineQuery)
         {
         }
     }

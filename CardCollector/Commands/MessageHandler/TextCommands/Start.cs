@@ -1,8 +1,6 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase;
-using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
 using Telegram.Bot.Types;
@@ -31,7 +29,7 @@ namespace CardCollector.Commands.MessageHandler.TextCommands
 
         protected override async Task AfterExecute()
         {
-            await MessageController.DeleteMessage(User, Message.MessageId);
+            await MessageController.DeleteMessage(User.ChatId, Message.MessageId);
             await base.AfterExecute();
         }
 

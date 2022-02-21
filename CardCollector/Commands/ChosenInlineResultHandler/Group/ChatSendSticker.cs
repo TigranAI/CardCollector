@@ -6,7 +6,7 @@ using CardCollector.Resources;
 using Telegram.Bot.Types;
 using User = CardCollector.DataBase.Entity.User;
 
-namespace CardCollector.Commands.ChosenInlineResultHandler.UserToChat
+namespace CardCollector.Commands.ChosenInlineResultHandler.Group
 {
     [SavedActivity]
     public class ChatSendSticker : ChosenInlineResultHandler

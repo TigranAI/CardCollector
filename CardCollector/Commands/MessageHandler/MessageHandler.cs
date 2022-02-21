@@ -45,7 +45,7 @@ namespace CardCollector.Commands.MessageHandler
             }
 
             if (update.Message!.Chat.Type is ChatType.Private && update.Message.Text != Text.start)
-                await MessageController.DeleteMessage(user, update.Message.MessageId);
+                await MessageController.DeleteMessage(user.ChatId, update.Message.MessageId);
 
             user.InitSession();
             

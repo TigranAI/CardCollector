@@ -1,36 +1,39 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using CardCollector.Attributes.Menu;
-using CardCollector.Commands.ChosenInlineResultHandler;
+using CardCollector.Commands.CallbackQueryHandler;
 using CardCollector.Controllers;
 using CardCollector.DataBase;
-using CardCollector.DataBase.EntityDao;
 using CardCollector.Others;
-using CardCollector.Resources;
-using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using User = CardCollector.DataBase.Entity.User;
 
-namespace CardCollector.Commands.InlineQueryHandler.Auction
+namespace CardCollector.Commands.InlineQueryHandler.Channel
 {
     [DontAddToCommandStack]
     public class ShowStickers : InlineQueryHandler
     {
         protected override async Task Execute()
         {
-            var stickersList = await Context.Auctions.FindAll(User.Session.GetModule<FiltersModule>(), InlineQuery.Query);
+            var stickersList = User.Stickers
+                .Where(item => item.Count > 0)
+                .Select(item => item.Sticker)
+                .Where(item => item.Contains(InlineQuery.Query))
+                .ToList();
             var offset = int.Parse(InlineQuery.Offset == "" ? "0" : InlineQuery.Offset);
-            var newOffset = offset + 50 > stickersList.Count ? "" : (offset + 50).ToString();
+            var newOffset = offset + 50 > stickersList.Count() ? "" : (offset + 50).ToString();
+            
             var results = stickersList
-                .ToTelegramStickersAsMessage(ChosenInlineResultCommands.select_sticker, offset);
+                .ToTelegramStickers(CallbackQueryCommands.ignore, offset);
             await MessageController.AnswerInlineQuery(User, InlineQuery.Id, results, newOffset);
         }
 
         public override bool Match()
         {
-            return User.Session.State is UserState.AuctionMenu && InlineQuery.ChatType is ChatType.Sender;
+            return InlineQuery.ChatType is ChatType.Channel;
         }
-
+        
         public ShowStickers(User user, BotDatabaseContext context, InlineQuery inlineQuery) : base(user, context, inlineQuery)
         {
         }

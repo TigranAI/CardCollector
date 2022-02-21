@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using CardCollector.Commands.MessageHandler;
 using CardCollector.Controllers;
 using CardCollector.DataBase;
 using CardCollector.Resources;
@@ -20,14 +18,6 @@ namespace CardCollector
 
         private static readonly ManualResetEvent End = new(false);
 
-        private static readonly IEnumerable<BotCommand> Commands = new[]
-        {
-            /*new BotCommand {Command = Text.start, Description = "Запуск бота"},*/
-            new BotCommand {Command = MessageCommands.menu, Description = "Показать меню"},
-            new BotCommand {Command = MessageCommands.help, Description = "Показать информацию"},
-            /*new BotCommand {Command = "/error", Description = "Сообщить об ошибке"},*/
-        };
-
         public static async Task Main(string[] args)
         {
             CheckArgs(args);
@@ -35,14 +25,13 @@ namespace CardCollector
             
             TimerTask.SetupAll();
             
-            var cts = new CancellationTokenSource();
-            await Client.SetMyCommandsAsync(Commands, BotCommandScope.AllPrivateChats(), cancellationToken: cts.Token);
-            Client.StartReceiving(HandleUpdateAsync, HandleErrorAsync, cancellationToken: cts.Token);
+            await Client.SetMyCommandsAsync(Constants.PrivateCommands, BotCommandScope.AllPrivateChats());
+            await Client.SetMyCommandsAsync(Constants.GroupCommands, BotCommandScope.AllGroupChats());
+            Client.StartReceiving(HandleUpdateAsync, HandleErrorAsync);
             
             Logs.LogOut("Bot started");
             End.WaitOne();
             await Client.CloseAsync();
-            cts.Cancel();
             Logs.LogOut("Bot stopped");
         }
 
