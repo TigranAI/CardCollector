@@ -4,7 +4,9 @@ using System.Threading.Tasks;
 using CardCollector.DataBase;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
+using CardCollector.Resources.Enums;
 using Microsoft.EntityFrameworkCore;
+using SortingTypes = CardCollector.Resources.Enums.SortingTypes;
 
 namespace CardCollector.Session.Modules
 {
@@ -108,27 +110,6 @@ namespace CardCollector.Session.Modules
             PriceGemsFrom = null;
             PriceGemsTo = null;
             Sorting = SortingTypes.None;
-        }
-
-        public enum SortingTypes
-        {
-            None = 1,
-            ByAuthor = 2,
-            ByTitle = 3,
-            ByTierIncrease = 4,
-            ByTierDecrease = 5
-        }
-
-        public enum FilterKeys
-        {
-            Author = 1,
-            Tier = 2,
-            Emoji = 3,
-            PriceCoinsFrom = 4,
-            PriceCoinsTo = 5,
-            PriceGemsFrom = 6,
-            PriceGemsTo = 7,
-            Sorting = 8,
         }
     }
 }

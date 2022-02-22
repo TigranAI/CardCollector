@@ -4,14 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.Entity.NotMapped;
-using CardCollector.Migrations;
 using CardCollector.Resources;
+using CardCollector.Resources.Enums;
 using CardCollector.StickerEffects;
 using CardCollector.UserDailyTask;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using ChannelGiveaway = CardCollector.DataBase.Entity.ChannelGiveaway;
-using DailyTask = CardCollector.DataBase.Entity.DailyTask;
+using UserSettings = CardCollector.DataBase.Entity.UserSettings;
 
 namespace CardCollector.DataBase
 {
@@ -180,8 +179,8 @@ namespace CardCollector.DataBase
                                 Utilities.ToJson(to.ToDictionary(pair => (int) pair.Key, pair => pair.Value)),
                             from => 
                                 Utilities.FromJson<Dictionary<int, bool>>(from)
-                                .ToDictionary(pair => (UserSettingsEnum) pair.Key, pair => pair.Value),
-                            new ValueComparer<Dictionary<UserSettingsEnum, bool>>(
+                                .ToDictionary(pair => (Resources.Enums.UserSettings) pair.Key, pair => pair.Value),
+                            new ValueComparer<Dictionary<Resources.Enums.UserSettings, bool>>(
                                 (l1, l2) => l2 != null && l1 != null && l1.Values.SequenceEqual(l2.Values),
                                 l => l.Aggregate(0, (a, v) =>
                                     HashCode.Combine(a, HashCode.Combine(v.Key.GetHashCode(), v.Value.GetHashCode()))),

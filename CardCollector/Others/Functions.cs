@@ -3,7 +3,7 @@ using System.Linq;
 using CardCollector.Commands.CallbackQueryHandler.Collection;
 using CardCollector.Commands.CallbackQueryHandler.Profile;
 using CardCollector.Commands.ChosenInlineResultHandler.Group;
-using CardCollector.Commands.ChosenInlineResultHandler.UserToUser;
+using CardCollector.Commands.ChosenInlineResultHandler.Private;
 using CardCollector.Commands.MessageHandler.Shop;
 using CardCollector.DataBase.Entity;
 

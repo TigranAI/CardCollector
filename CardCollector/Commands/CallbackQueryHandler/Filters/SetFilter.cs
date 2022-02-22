@@ -3,6 +3,7 @@ using CardCollector.Attributes.Menu;
 using CardCollector.Commands.CallbackQueryHandler.Others;
 using CardCollector.Commands.MessageHandler.Menu;
 using CardCollector.DataBase;
+using CardCollector.Resources.Enums;
 using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
 using User = CardCollector.DataBase.Entity.User;
@@ -19,43 +20,43 @@ namespace CardCollector.Commands.CallbackQueryHandler.Filters
             EnterEmoji.RemoveFromQueue(User.Id);
             var data = CallbackQuery.Data!.Split('=');
             var filters = User.Session.GetModule<FiltersModule>();
-            var key = (FiltersModule.FilterKeys) int.Parse(data[1]);
+            var key = (FilterKeys) int.Parse(data[1]);
             var value = data[2] == "" ? null : data[2];
             switch (key)
             {
-                case FiltersModule.FilterKeys.Author:
+                case FilterKeys.Author:
                     filters.Author = value;
                     break;
-                case FiltersModule.FilterKeys.Emoji:
+                case FilterKeys.Emoji:
                     filters.Emoji = value;
                     break;
-                case FiltersModule.FilterKeys.Sorting:
-                    filters.Sorting = (FiltersModule.SortingTypes) int.Parse(value!);
+                case FilterKeys.Sorting:
+                    filters.Sorting = (SortingTypes) int.Parse(value!);
                     break;
-                case FiltersModule.FilterKeys.Tier:
+                case FilterKeys.Tier:
                     filters.Tier = value == null 
                         ? null
                         : int.Parse(value);
                     break;
-                case FiltersModule.FilterKeys.PriceCoinsFrom:
+                case FilterKeys.PriceCoinsFrom:
                     filters.PriceCoinsFrom = value == null 
                         ? null
                         : int.Parse(value);
                     if (filters.PriceCoinsFrom > filters.PriceCoinsTo) filters.PriceCoinsTo = null;
                     break;
-                case FiltersModule.FilterKeys.PriceCoinsTo:
+                case FilterKeys.PriceCoinsTo:
                     filters.PriceCoinsTo = value == null 
                         ? null
                         : int.Parse(value);
                     if (filters.PriceCoinsFrom > filters.PriceCoinsTo) filters.PriceCoinsFrom = null;
                     break;
-                case FiltersModule.FilterKeys.PriceGemsFrom:
+                case FilterKeys.PriceGemsFrom:
                     filters.PriceGemsFrom = value == null 
                         ? null
                         : int.Parse(value);
                     if (filters.PriceGemsFrom > filters.PriceGemsTo) filters.PriceGemsTo = null;
                     break;
-                case FiltersModule.FilterKeys.PriceGemsTo:
+                case FilterKeys.PriceGemsTo:
                     filters.PriceGemsTo = value == null 
                         ? null
                         : int.Parse(value);

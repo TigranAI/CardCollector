@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.DataBase;
 using CardCollector.Resources;
+using CardCollector.Resources.Enums;
 using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
 using User = CardCollector.DataBase.Entity.User;

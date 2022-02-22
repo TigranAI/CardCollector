@@ -1,4 +1,4 @@
-﻿namespace CardCollector.Resources
+﻿namespace CardCollector.Resources.Enums
 {
     /* Представление состояний пользователя */
     public enum UserState

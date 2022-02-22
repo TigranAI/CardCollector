@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.Resources;
+using CardCollector.Resources.Enums;
 using CardCollector.Session;
 using CardCollector.StickerEffects;
 using CardCollector.UserDailyTask;

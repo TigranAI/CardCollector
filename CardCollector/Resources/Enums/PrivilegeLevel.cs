@@ -1,4 +1,4 @@
-﻿namespace CardCollector.Resources
+﻿namespace CardCollector.Resources.Enums
 {
     public enum PrivilegeLevel
     {

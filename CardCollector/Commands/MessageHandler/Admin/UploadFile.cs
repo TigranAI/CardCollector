@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CardCollector.DataBase;
 using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
+using CardCollector.Resources.Enums;
 using CardCollector.Session.Modules;
 using CardCollector.StickerEffects;
 using OfficeOpenXml;

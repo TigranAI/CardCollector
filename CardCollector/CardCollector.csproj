@@ -25,21 +25,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Update="Resources\Messages.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Messages.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
       <EmbeddedResource Update="Resources\SortingTypes.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>SortingTypes.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\SortingTypes.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>SortingTypes.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Text.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Text.Designer.cs</LastGenOutput>
       </EmbeddedResource>
       <EmbeddedResource Update="DailyTasks\Titles.resx">
         <Generator>ResXFileCodeGenerator</Generator>
@@ -48,18 +36,6 @@
       <EmbeddedResource Update="DailyTasks\Descriptions.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Descriptions.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="StickerEffects\EffectTranslations.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>EffectTranslations.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\LogsTranslations.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>LogsTranslations.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\TopByTexts.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>TopByTexts.Designer.cs</LastGenOutput>
       </EmbeddedResource>
       <EmbeddedResource Update="Commands\ChosenInlineResultHandler\ChosenInlineResultCommands.resx">
         <Generator>ResXFileCodeGenerator</Generator>
@@ -85,28 +61,37 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>InlineQueryCommands.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Translations\Messages.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Translations\LogsTranslations.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>LogsTranslations.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Translations\SortingTypes.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>SortingTypes.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Translations\Text.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Text.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Translations\TopByTexts.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>TopByTexts.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Translations\EffectTranslations.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>EffectTranslations.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Resources\Messages.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>Messages.resx</DependentUpon>
-      </Compile>
       <Compile Update="Resources\SortingTypes.Designer.cs">
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>SortingTypes.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\SortingTypes.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>SortingTypes.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\Text.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>Text.resx</DependentUpon>
       </Compile>
       <Compile Update="DailyTasks\Titles.Designer.cs">
         <DesignTime>True</DesignTime>
@@ -117,21 +102,6 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>Description.resx</DependentUpon>
-      </Compile>
-      <Compile Update="StickerEffects\EffectTranslations.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>EffectTranslations.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\LogsTranslations.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>LogsStranslations.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\TopByTexts.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>TopByTexts.resx</DependentUpon>
       </Compile>
       <Compile Update="Commands\ChosenInlineResultHandler\ChosenInlineResultCommands.Designer.cs">
         <DesignTime>True</DesignTime>
@@ -162,6 +132,36 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>InlineQueryCommands.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Translations\Messages.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Messages.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Translations\LogsTranslations.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>LogsStranslations.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Translations\SortingTypes.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>SortingTypes.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Translations\Text.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Text.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Translations\TopByTexts.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>TopByTexts.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Translations\EffectTranslations.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>EffectTranslations.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

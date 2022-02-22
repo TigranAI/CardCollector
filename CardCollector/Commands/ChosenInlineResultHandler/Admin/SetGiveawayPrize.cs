@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using CardCollector.Attributes.Menu;
 using CardCollector.DataBase;
-using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
+using CardCollector.Resources.Enums;
 using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
 using User = CardCollector.DataBase.Entity.User;
@@ -22,7 +22,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Admin
             var sticker = await Context.Stickers.FindById(stickerId);
             var module = User.Session.GetModule<AdminModule>();
             var giveaway = await Context.ChannelGiveaways.FindById(module.SelectedChannelGiveawayId!.Value);
-            giveaway.Prize = ChannelGiveaway.PrizeType.SelectedSticker;
+            giveaway.Prize = PrizeType.SelectedSticker;
             giveaway.SelectedSticker = sticker;
             module.SelectedChannelGiveawayId = giveaway.Id;
             await User.Messages.EditMessage(User, Messages.select_channel, Keyboard.SelectChannel);

@@ -54,7 +54,6 @@ namespace CardCollector.DataBase.Entity
             IReplyMarkup? keyboard = null)
         {
             if (user.IsBlocked) return;
-            await ClearMessages(user);
             var messageId = await MessageController.SendSticker(user.ChatId, fileId, keyboard);
             if (messageId != -1) ChatStickers.Add(messageId);
         }

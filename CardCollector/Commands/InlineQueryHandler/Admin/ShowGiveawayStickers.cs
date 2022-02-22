@@ -6,6 +6,7 @@ using CardCollector.Controllers;
 using CardCollector.DataBase;
 using CardCollector.Others;
 using CardCollector.Resources;
+using CardCollector.Resources.Enums;
 using CardCollector.Session.Modules;
 using Microsoft.EntityFrameworkCore;
 using Telegram.Bot.Types;

@@ -8,6 +8,7 @@ using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Others;
 using CardCollector.Resources;
+using CardCollector.Resources.Enums;
 using CardCollector.StickerEffects;
 using Microsoft.EntityFrameworkCore;
 
@@ -48,7 +49,7 @@ namespace CardCollector.TimerTasks
                         var pack = await context.Packs.FindById(1);
                         user.AddPack(pack, packsCount);
 
-                        if (user.Settings[UserSettingsEnum.StickerEffects])
+                        if (user.Settings[Resources.Enums.UserSettings.StickerEffects])
                             await user.Messages.SendMessage(user,
                                 $"{Messages.effect_Random1Pack5Day} {packsCount}{Text.items}");
                     }
@@ -85,7 +86,7 @@ namespace CardCollector.TimerTasks
                             await user.AddSticker(sticker, count);
                         }
 
-                        if (user.Settings[UserSettingsEnum.StickerEffects])
+                        if (user.Settings[Resources.Enums.UserSettings.StickerEffects])
                             await user.Messages.SendMessage(user, message);
                     }
                 }
@@ -121,7 +122,7 @@ namespace CardCollector.TimerTasks
                             await user.AddSticker(sticker, count);
                         }
 
-                        if (user.Settings[UserSettingsEnum.StickerEffects])
+                        if (user.Settings[Resources.Enums.UserSettings.StickerEffects])
                             await user.Messages.SendMessage(user, message);
                     }
                 }

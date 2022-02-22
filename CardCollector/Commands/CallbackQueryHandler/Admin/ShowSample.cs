@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using CardCollector.DataBase;
 using CardCollector.Resources;
+using CardCollector.Resources.Enums;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;

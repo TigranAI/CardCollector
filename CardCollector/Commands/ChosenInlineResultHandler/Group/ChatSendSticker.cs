@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using CardCollector.Attributes.Logs;
 using CardCollector.DataBase;
-using CardCollector.DataBase.Entity;
 using CardCollector.Resources;
 using Telegram.Bot.Types;
 using User = CardCollector.DataBase.Entity.User;
@@ -16,7 +15,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Group
         {
             if (!User.Session.ChosenResultWithMessage)
             {
-                if (User.Settings[UserSettingsEnum.ExpGain])
+                if (User.Settings[Resources.Enums.UserSettings.ExpGain])
                     await User.Messages.EditMessage(User,
                         $"{Messages.you_gained} 1 {Text.exp} {Messages.send_sticker}" +
                         $"\n{Messages.you_can_add_bot_to_conversation}");

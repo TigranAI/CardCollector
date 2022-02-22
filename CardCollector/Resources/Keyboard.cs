@@ -5,8 +5,10 @@ using CardCollector.Commands.InlineQueryHandler;
 using CardCollector.Commands.MessageHandler;
 using CardCollector.DataBase.Entity;
 using CardCollector.Others;
+using CardCollector.Resources.Enums;
 using CardCollector.Session.Modules;
 using Telegram.Bot.Types.ReplyMarkups;
+using UserSettings = CardCollector.DataBase.Entity.UserSettings;
 
 namespace CardCollector.Resources
 {
@@ -65,12 +67,12 @@ namespace CardCollector.Resources
             new[]
             {
                 InlineKeyboardButton.WithCallbackData(Text.random_pack,
-                    $"{CallbackQueryCommands.set_giveaway_prize}={(int) ChannelGiveaway.PrizeType.RandomPack}")
+                    $"{CallbackQueryCommands.set_giveaway_prize}={(int) PrizeType.RandomPack}")
             },
             new[]
             {
                 InlineKeyboardButton.WithCallbackData(Text.random_sticker,
-                    $"{CallbackQueryCommands.set_giveaway_prize}={(int) ChannelGiveaway.PrizeType.RandomSticker}")
+                    $"{CallbackQueryCommands.set_giveaway_prize}={(int) PrizeType.RandomSticker}")
             },
             new[] {InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.choose_sticker)},
             new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)},
@@ -193,29 +195,29 @@ namespace CardCollector.Resources
                 new[]
                 {
                     InlineKeyboardButton.WithCallbackData(
-                        $"{Text.daily_tasks} {(settings[UserSettingsEnum.DailyTasks] ? Text.alert_on : Text.alert_off)}",
-                        $"{CallbackQueryCommands.alerts}={(int) UserSettingsEnum.DailyTasks}"),
+                        $"{Text.daily_tasks} {(settings[Enums.UserSettings.DailyTasks] ? Text.alert_on : Text.alert_off)}",
+                        $"{CallbackQueryCommands.alerts}={(int) Enums.UserSettings.DailyTasks}"),
                     InlineKeyboardButton.WithCallbackData(
-                        $"{Text.sticker_effects} {(settings[UserSettingsEnum.StickerEffects] ? Text.alert_on : Text.alert_off)}",
-                        $"{CallbackQueryCommands.alerts}={(int) UserSettingsEnum.StickerEffects}")
+                        $"{Text.sticker_effects} {(settings[Enums.UserSettings.StickerEffects] ? Text.alert_on : Text.alert_off)}",
+                        $"{CallbackQueryCommands.alerts}={(int) Enums.UserSettings.StickerEffects}")
                 },
                 new[]
                 {
                     InlineKeyboardButton.WithCallbackData(
-                        $"{Text.exp_gain} {(settings[UserSettingsEnum.ExpGain] ? Text.alert_on : Text.alert_off)}",
-                        $"{CallbackQueryCommands.alerts}={(int) UserSettingsEnum.ExpGain}"),
+                        $"{Text.exp_gain} {(settings[Enums.UserSettings.ExpGain] ? Text.alert_on : Text.alert_off)}",
+                        $"{CallbackQueryCommands.alerts}={(int) Enums.UserSettings.ExpGain}"),
                     InlineKeyboardButton.WithCallbackData(
-                        $"{Text.daily_task_progress} {(settings[UserSettingsEnum.DailyTaskProgress] ? Text.alert_on : Text.alert_off)}",
-                        $"{CallbackQueryCommands.alerts}={(int) UserSettingsEnum.DailyTaskProgress}")
+                        $"{Text.daily_task_progress} {(settings[Enums.UserSettings.DailyTaskProgress] ? Text.alert_on : Text.alert_off)}",
+                        $"{CallbackQueryCommands.alerts}={(int) Enums.UserSettings.DailyTaskProgress}")
                 },
                 new[]
                 {
                     InlineKeyboardButton.WithCallbackData(
-                        $"{Text.piggy_bank_capacity} {(settings[UserSettingsEnum.PiggyBankCapacity] ? Text.alert_on : Text.alert_off)}",
-                        $"{CallbackQueryCommands.alerts}={(int) UserSettingsEnum.PiggyBankCapacity}"),
+                        $"{Text.piggy_bank_capacity} {(settings[Enums.UserSettings.PiggyBankCapacity] ? Text.alert_on : Text.alert_off)}",
+                        $"{CallbackQueryCommands.alerts}={(int) Enums.UserSettings.PiggyBankCapacity}"),
                     InlineKeyboardButton.WithCallbackData(
-                        $"{Text.daily_exp_top} {(settings[UserSettingsEnum.DailyExpTop] ? Text.alert_on : Text.alert_off)}",
-                        $"{CallbackQueryCommands.alerts}={(int) UserSettingsEnum.DailyExpTop}")
+                        $"{Text.daily_exp_top} {(settings[Enums.UserSettings.DailyExpTop] ? Text.alert_on : Text.alert_off)}",
+                        $"{CallbackQueryCommands.alerts}={(int) Enums.UserSettings.DailyExpTop}")
                 },
                 new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)},
             };
@@ -254,27 +256,27 @@ namespace CardCollector.Resources
             new[]
             {
                 InlineKeyboardButton.WithCallbackData(Text.no,
-                    $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.Sorting}={(int) FiltersModule.SortingTypes.None}")
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.Sorting}={(int) Enums.SortingTypes.None}")
             },
             new[]
             {
                 InlineKeyboardButton.WithCallbackData(SortingTypes.ByTierIncrease,
-                    $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.Sorting}={(int) FiltersModule.SortingTypes.ByTierIncrease}")
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.Sorting}={(int) Enums.SortingTypes.ByTierIncrease}")
             },
             new[]
             {
                 InlineKeyboardButton.WithCallbackData(SortingTypes.ByTierDecrease,
-                    $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.Sorting}={(int) FiltersModule.SortingTypes.ByTierDecrease}")
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.Sorting}={(int) Enums.SortingTypes.ByTierDecrease}")
             },
             new[]
             {
                 InlineKeyboardButton.WithCallbackData(SortingTypes.ByAuthor,
-                    $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.Sorting}={(int) FiltersModule.SortingTypes.ByAuthor}")
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.Sorting}={(int) Enums.SortingTypes.ByAuthor}")
             },
             new[]
             {
                 InlineKeyboardButton.WithCallbackData(SortingTypes.ByTitle,
-                    $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.Sorting}={(int) FiltersModule.SortingTypes.ByTitle}")
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.Sorting}={(int) Enums.SortingTypes.ByTitle}")
             },
             new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)},
         });
@@ -285,27 +287,27 @@ namespace CardCollector.Resources
             new[]
             {
                 InlineKeyboardButton.WithCallbackData(Text.all,
-                    $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.Tier}=")
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.Tier}=")
             },
             new[]
             {
                 InlineKeyboardButton.WithCallbackData("1",
-                    $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.Tier}=1")
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.Tier}=1")
             },
             new[]
             {
                 InlineKeyboardButton.WithCallbackData("2",
-                    $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.Tier}=2")
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.Tier}=2")
             },
             new[]
             {
                 InlineKeyboardButton.WithCallbackData("3",
-                    $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.Tier}=3")
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.Tier}=3")
             },
             new[]
             {
                 InlineKeyboardButton.WithCallbackData("4",
-                    $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.Tier}=4")
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.Tier}=4")
             },
             new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)},
         });
@@ -316,7 +318,7 @@ namespace CardCollector.Resources
             new[]
             {
                 InlineKeyboardButton.WithCallbackData(Text.all,
-                    $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.Emoji}=")
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.Emoji}=")
             },
             new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)},
         });
@@ -361,30 +363,30 @@ namespace CardCollector.Resources
             new[]
             {
                 InlineKeyboardButton.WithCallbackData($"💰 {Text.from} 0",
-                    $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.PriceCoinsFrom}=0"),
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.PriceCoinsFrom}=0"),
                 InlineKeyboardButton.WithCallbackData($"💰 {Text.to} 100",
-                    $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.PriceCoinsTo}=100"),
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.PriceCoinsTo}=100"),
             },
             new[]
             {
                 InlineKeyboardButton.WithCallbackData($"💰 {Text.from} 100",
-                    $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.PriceCoinsFrom}=100"),
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.PriceCoinsFrom}=100"),
                 InlineKeyboardButton.WithCallbackData($"💰 {Text.to} 500",
-                    $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.PriceCoinsTo}=500"),
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.PriceCoinsTo}=500"),
             },
             new[]
             {
                 InlineKeyboardButton.WithCallbackData($"💰 {Text.from} 500",
-                    $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.PriceCoinsFrom}=500"),
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.PriceCoinsFrom}=500"),
                 InlineKeyboardButton.WithCallbackData($"💰 {Text.to} 1000",
-                    $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.PriceCoinsTo}=1000"),
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.PriceCoinsTo}=1000"),
             },
             new[]
             {
                 InlineKeyboardButton.WithCallbackData($"💰 {Text.from} 1000",
-                    $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.PriceCoinsFrom}=1000"),
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.PriceCoinsFrom}=1000"),
                 InlineKeyboardButton.WithCallbackData($"💰 {Text.to} ∞",
-                    $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.PriceCoinsTo}"),
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.PriceCoinsTo}"),
             },
             new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)},
         });
@@ -395,30 +397,30 @@ namespace CardCollector.Resources
             new[]
             {
                 InlineKeyboardButton.WithCallbackData($"💎 {Text.from} 0",
-                    $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.PriceGemsFrom}=0"),
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.PriceGemsFrom}=0"),
                 InlineKeyboardButton.WithCallbackData($"💎 {Text.to} 10",
-                    $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.PriceGemsTo}=10"),
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.PriceGemsTo}=10"),
             },
             new[]
             {
                 InlineKeyboardButton.WithCallbackData($"💎 {Text.from} 10",
-                    $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.PriceGemsFrom}=10"),
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.PriceGemsFrom}=10"),
                 InlineKeyboardButton.WithCallbackData($"💎 {Text.to} 50",
-                    $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.PriceGemsTo}=50"),
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.PriceGemsTo}=50"),
             },
             new[]
             {
                 InlineKeyboardButton.WithCallbackData($"💎 {Text.from} 50",
-                    $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.PriceGemsFrom}=50"),
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.PriceGemsFrom}=50"),
                 InlineKeyboardButton.WithCallbackData($"💎 {Text.to} 100",
-                    $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.PriceGemsTo}=100"),
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.PriceGemsTo}=100"),
             },
             new[]
             {
                 InlineKeyboardButton.WithCallbackData($"💎 {Text.from} 100",
-                    $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.PriceGemsFrom}=100"),
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.PriceGemsFrom}=100"),
                 InlineKeyboardButton.WithCallbackData($"💎 {Text.to} ∞",
-                    $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.PriceGemsTo}"),
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.PriceGemsTo}"),
             },
             new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)},
         });
@@ -431,7 +433,7 @@ namespace CardCollector.Resources
                 new[]
                 {
                     InlineKeyboardButton.WithCallbackData(Text.all,
-                        $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.Author}=")
+                        $"{CallbackQueryCommands.set}={(int) FilterKeys.Author}=")
                 }
             };
             foreach (var (author, i) in list.WithIndex())
@@ -440,14 +442,14 @@ namespace CardCollector.Resources
                     keyboardList.Add(new[]
                     {
                         InlineKeyboardButton.WithCallbackData(author.Author,
-                            $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.Author}={author.Author}")
+                            $"{CallbackQueryCommands.set}={(int) FilterKeys.Author}={author.Author}")
                     });
                 else
                     keyboardList[keyboardList.Count - 1] = new[]
                     {
                         keyboardList[keyboardList.Count - 1][0],
                         InlineKeyboardButton.WithCallbackData(author.Author,
-                            $"{CallbackQueryCommands.set}={(int) FiltersModule.FilterKeys.Author}={author.Author}")
+                            $"{CallbackQueryCommands.set}={(int) FilterKeys.Author}={author.Author}")
                     };
             }
 

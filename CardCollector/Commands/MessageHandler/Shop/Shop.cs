@@ -4,6 +4,7 @@ using CardCollector.Attributes.Menu;
 using CardCollector.DataBase;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
+using CardCollector.Resources.Enums;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using User = CardCollector.DataBase.Entity.User;

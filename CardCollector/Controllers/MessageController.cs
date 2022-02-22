@@ -12,6 +12,7 @@ using CardCollector.Commands.PreCheckoutQueryHandler;
 using CardCollector.DataBase;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
+using CardCollector.Resources.Enums;
 using CardCollector.Session.Modules;
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;

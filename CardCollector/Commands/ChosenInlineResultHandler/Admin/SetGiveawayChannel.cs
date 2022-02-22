@@ -5,6 +5,7 @@ using CardCollector.Commands.MessageHandler.Admin.Giveaway;
 using CardCollector.DataBase;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
+using CardCollector.Resources.Enums;
 using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
 using User = CardCollector.DataBase.Entity.User;

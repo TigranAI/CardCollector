@@ -27,7 +27,7 @@ namespace CardCollector.Commands.MessageHandler.Shop
             User.Level.GiveExp(gemsCount * 2);
             await User.Level.CheckLevelUp(Context, User);
             
-            if (User.Settings[UserSettingsEnum.ExpGain])
+            if (User.Settings[Resources.Enums.UserSettings.ExpGain])
                 await User.Messages.SendMessage(User,
                     $"{Messages.you_gained} {gemsCount * 2} {Text.exp} {Messages.for_buy_gems}",
                     Keyboard.BackKeyboard);

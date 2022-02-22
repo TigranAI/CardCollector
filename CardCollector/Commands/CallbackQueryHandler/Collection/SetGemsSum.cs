@@ -3,6 +3,7 @@ using CardCollector.Commands.PreCheckoutQueryHandler;
 using CardCollector.Controllers;
 using CardCollector.DataBase;
 using CardCollector.Resources;
+using CardCollector.Resources.Enums;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Payments;
 using User = CardCollector.DataBase.Entity.User;

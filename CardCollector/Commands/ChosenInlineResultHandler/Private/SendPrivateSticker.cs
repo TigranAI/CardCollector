@@ -10,7 +10,7 @@ using CardCollector.UserDailyTask;
 using Telegram.Bot.Types;
 using User = CardCollector.DataBase.Entity.User;
 
-namespace CardCollector.Commands.ChosenInlineResultHandler.UserToUser
+namespace CardCollector.Commands.ChosenInlineResultHandler.Private
 {
     [SavedActivity]
     public class SendPrivateSticker : ChatSendSticker
@@ -55,7 +55,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.UserToUser
 
         private async Task SendAlert(DailyTask dailyTask)
         {
-            if (User.Settings[UserSettingsEnum.DailyTaskProgress])
+            if (User.Settings[Resources.Enums.UserSettings.DailyTaskProgress])
                 await User.Messages.SendDailyTaskProgress(User,
                     $"{Messages.send_sticker_progress}: " +
                     $"{TaskGoals.Goals[TaskKeys.SendStickersToUsers] - dailyTask.Progress}" +

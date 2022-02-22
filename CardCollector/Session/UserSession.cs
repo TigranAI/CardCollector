@@ -4,6 +4,7 @@ using CardCollector.Attributes.Menu;
 using CardCollector.Commands;
 using CardCollector.Others;
 using CardCollector.Resources;
+using CardCollector.Resources.Enums;
 using CardCollector.Session.Modules;
 
 namespace CardCollector.Session

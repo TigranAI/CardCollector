@@ -10,7 +10,7 @@ using CardCollector.Commands.MessageHandler;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Others;
 using CardCollector.Resources;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using CardCollector.Resources.Enums;
 using Telegram.Bot;
 using Telegram.Bot.Types.InputFiles;
 using Telegram.Bot.Types.ReplyMarkups;
@@ -152,13 +152,6 @@ namespace CardCollector.DataBase.Entity
                     replyMarkup: GetFormattedKeyboard());
                 MessageId = message.MessageId;
             }
-        }
-
-        public enum PrizeType
-        {
-            RandomSticker,
-            SelectedSticker,
-            RandomPack
         }
     }
 }

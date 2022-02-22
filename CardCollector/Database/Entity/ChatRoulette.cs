@@ -100,10 +100,10 @@ namespace CardCollector.DataBase.Entity
         private string BetsToMessage()
         {
             var pool = Bets.Sum(item => Math.Pow(5, item.Sticker.Tier - 1));
-            return string.Join("\n", Bets.Select(item =>
+            return string.Join("\n", Bets.Select((item, i) =>
             {
                 var chance = Math.Pow(5, item.Sticker.Tier - 1) / pool * 100;
-                return $"{item.User.Username}: {item.Sticker.Title} ({Math.Round(chance, 2)}%)";
+                return $"{i+1}. {item.User.Username}: {item.Sticker.Title} ({Math.Round(chance, 2)}%)";
             }));
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace CardCollector.StickerEffects
+﻿namespace CardCollector.Resources.Enums
 {
     public enum Effect
     {

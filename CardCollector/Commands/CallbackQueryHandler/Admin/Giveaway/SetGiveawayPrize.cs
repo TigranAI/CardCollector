@@ -3,6 +3,7 @@ using CardCollector.DataBase;
 using CardCollector.DataBase.Entity;
 using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
+using CardCollector.Resources.Enums;
 using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
 using User = CardCollector.DataBase.Entity.User;
@@ -18,9 +19,9 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin.Giveaway
             User.Session.State = UserState.CreateGiveaway;
             var module = User.Session.GetModule<AdminModule>();
             var giveaway = await Context.ChannelGiveaways.FindById(module.SelectedChannelGiveawayId!.Value);
-            giveaway.Prize = (ChannelGiveaway.PrizeType) int.Parse(CallbackQuery.Data!.Split("=")[1]);
+            giveaway.Prize = (PrizeType) int.Parse(CallbackQuery.Data!.Split("=")[1]);
             module.SelectedChannelGiveawayId = giveaway.Id;
-            if (giveaway.Prize is ChannelGiveaway.PrizeType.RandomSticker)
+            if (giveaway.Prize is PrizeType.RandomSticker)
                 await User.Messages.EditMessage(User, Messages.choose_tier, Keyboard.GiveawayTier);
             else
                 await User.Messages.EditMessage(User, Messages.select_channel, Keyboard.SelectChannel);

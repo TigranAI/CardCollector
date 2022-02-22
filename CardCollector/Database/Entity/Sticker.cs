@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Resources;
+using CardCollector.Resources.Enums;
 using CardCollector.StickerEffects;
 
 namespace CardCollector.DataBase.Entity

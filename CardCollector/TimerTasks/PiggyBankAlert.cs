@@ -20,7 +20,7 @@ namespace CardCollector.TimerTasks
             using (var context = new BotDatabaseContext())
             {
                 var users = await context.Users.Where(user => !user.IsBlocked).ToListAsync();
-                foreach (var user in users.Where(user => user.Settings[UserSettingsEnum.PiggyBankCapacity]))
+                foreach (var user in users.Where(user => user.Settings[Resources.Enums.UserSettings.PiggyBankCapacity]))
                 {
                     var income = user.Cash.GetIncome(user.Stickers);
                     await user.Messages.SendPiggyBankAlert(user,

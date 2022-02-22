@@ -4,27 +4,27 @@ namespace CardCollector.DataBase.Entity
 {
     public class UserSettings
     {
-        public Dictionary<UserSettingsEnum, bool> Settings { get; set; }
+        public Dictionary<Resources.Enums.UserSettings, bool> Settings { get; set; }
         
         public UserSettings()
         {
-            Settings = new Dictionary<UserSettingsEnum, bool>();
-            Settings.Add(UserSettingsEnum.DailyTasks, true);
-            Settings.Add(UserSettingsEnum.ExpGain, true);
-            Settings.Add(UserSettingsEnum.StickerEffects, true);
-            Settings.Add(UserSettingsEnum.DailyTaskProgress, true);
-            Settings.Add(UserSettingsEnum.PiggyBankCapacity, true);
-            Settings.Add(UserSettingsEnum.DailyExpTop, true);
+            Settings = new Dictionary<Resources.Enums.UserSettings, bool>();
+            Settings.Add(Resources.Enums.UserSettings.DailyTasks, true);
+            Settings.Add(Resources.Enums.UserSettings.ExpGain, true);
+            Settings.Add(Resources.Enums.UserSettings.StickerEffects, true);
+            Settings.Add(Resources.Enums.UserSettings.DailyTaskProgress, true);
+            Settings.Add(Resources.Enums.UserSettings.PiggyBankCapacity, true);
+            Settings.Add(Resources.Enums.UserSettings.DailyExpTop, true);
         }
 
-        public void SwitchProperty(UserSettingsEnum property)
+        public void SwitchProperty(Resources.Enums.UserSettings property)
         {
             if (!Settings.ContainsKey(property))
                 Settings.Add(property, true);
             Settings[property] = !Settings[property];
         }
 
-        public bool this[UserSettingsEnum key]
+        public bool this[Resources.Enums.UserSettings key]
         {
             get
             {
@@ -39,15 +39,5 @@ namespace CardCollector.DataBase.Entity
                 else Settings[key] = value;
             }
         }
-    }
-    
-    public enum UserSettingsEnum
-    {
-        DailyTasks,
-        ExpGain,
-        StickerEffects,
-        DailyTaskProgress,
-        PiggyBankCapacity,
-        DailyExpTop,
     }
 }

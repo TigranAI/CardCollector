@@ -2,6 +2,7 @@
 using System.Timers;
 using CardCollector.DataBase;
 using CardCollector.Resources;
+using CardCollector.Resources.Enums;
 using Telegram.Bot.Types;
 using User = CardCollector.DataBase.Entity.User;
 
