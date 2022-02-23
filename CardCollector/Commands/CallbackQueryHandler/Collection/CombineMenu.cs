@@ -2,11 +2,11 @@
 using CardCollector.Attributes;
 using CardCollector.Attributes.Menu;
 using CardCollector.Commands.CallbackQueryHandler.Others;
-using CardCollector.DataBase;
+using CardCollector.Database;
 using CardCollector.Resources;
 using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
-using User = CardCollector.DataBase.Entity.User;
+using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Collection
 {

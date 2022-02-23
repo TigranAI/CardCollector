@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 using CardCollector.Attributes.Menu;
 using CardCollector.Commands.ChosenInlineResultHandler;
 using CardCollector.Controllers;
-using CardCollector.DataBase;
+using CardCollector.Database;
 using CardCollector.Others;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using User = CardCollector.DataBase.Entity.User;
+using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.InlineQueryHandler.Private
 {

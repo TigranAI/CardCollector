@@ -9,8 +9,8 @@ using CardCollector.Commands.InlineQueryHandler;
 using CardCollector.Commands.MessageHandler;
 using CardCollector.Commands.MyChatMemberHandler;
 using CardCollector.Commands.PreCheckoutQueryHandler;
-using CardCollector.DataBase;
-using CardCollector.DataBase.EntityDao;
+using CardCollector.Database;
+using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
 using CardCollector.Session.Modules;
@@ -22,7 +22,7 @@ using Telegram.Bot.Types.InlineQueryResults;
 using Telegram.Bot.Types.InputFiles;
 using Telegram.Bot.Types.Payments;
 using Telegram.Bot.Types.ReplyMarkups;
-using User = CardCollector.DataBase.Entity.User;
+using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Controllers
 {

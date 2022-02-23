@@ -3,10 +3,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.Resources;
+using CardCollector.Resources.Translations;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 
-namespace CardCollector.DataBase.Entity
+namespace CardCollector.Database.Entity
 {
     public class UserMessages
     {

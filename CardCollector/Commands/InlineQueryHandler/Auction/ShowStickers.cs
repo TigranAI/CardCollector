@@ -2,15 +2,15 @@
 using CardCollector.Attributes.Menu;
 using CardCollector.Commands.ChosenInlineResultHandler;
 using CardCollector.Controllers;
-using CardCollector.DataBase;
-using CardCollector.DataBase.EntityDao;
+using CardCollector.Database;
+using CardCollector.Database.EntityDao;
 using CardCollector.Others;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
 using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using User = CardCollector.DataBase.Entity.User;
+using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.InlineQueryHandler.Auction
 {

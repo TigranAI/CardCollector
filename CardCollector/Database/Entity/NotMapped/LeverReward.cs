@@ -1,10 +1,9 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using CardCollector.DataBase.EntityDao;
+﻿using System.Threading.Tasks;
+using CardCollector.Database.EntityDao;
 using CardCollector.Others;
-using CardCollector.Resources;
+using CardCollector.Resources.Translations;
 
-namespace CardCollector.DataBase.Entity.NotMapped
+namespace CardCollector.Database.Entity.NotMapped
 {
     public class LevelReward
     {

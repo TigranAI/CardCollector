@@ -5,9 +5,9 @@ using CardCollector.Commands.MessageHandler.Admin.Giveaway;
 using CardCollector.Commands.MessageHandler.Collection;
 using CardCollector.Commands.MessageHandler.Menu;
 using CardCollector.Commands.MessageHandler.Shop;
-using CardCollector.DataBase;
+using CardCollector.Database;
 using Telegram.Bot.Types;
-using User = CardCollector.DataBase.Entity.User;
+using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Others
 {

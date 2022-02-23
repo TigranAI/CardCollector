@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.DataBase;
+using CardCollector.Database;
 using CardCollector.Resources;
 using Telegram.Bot.Types;
-using User = CardCollector.DataBase.Entity.User;
+using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.MessageHandler.Menu
 {

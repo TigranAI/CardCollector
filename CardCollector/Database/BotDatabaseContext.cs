@@ -2,17 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.DataBase.Entity;
-using CardCollector.DataBase.Entity.NotMapped;
+using CardCollector.Database.Entity;
+using CardCollector.Database.Entity.NotMapped;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
-using CardCollector.StickerEffects;
 using CardCollector.UserDailyTask;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using UserSettings = CardCollector.DataBase.Entity.UserSettings;
+using UserSettings = CardCollector.Database.Entity.UserSettings;
 
-namespace CardCollector.DataBase
+namespace CardCollector.Database
 {
     using static AppSettings;
 

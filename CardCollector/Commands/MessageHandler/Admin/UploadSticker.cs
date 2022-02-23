@@ -1,13 +1,14 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.DataBase;
+using CardCollector.Database;
 using CardCollector.Others;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
+using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using Sticker = CardCollector.DataBase.Entity.Sticker;
-using User = CardCollector.DataBase.Entity.User;
+using Sticker = CardCollector.Database.Entity.Sticker;
+using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.MessageHandler.Admin
 {

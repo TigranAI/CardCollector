@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CardCollector.DataBase.Entity
+namespace CardCollector.Database.Entity
 {
     public class UserSettings
     {

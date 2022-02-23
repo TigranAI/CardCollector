@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Timers;
-using CardCollector.DataBase;
-using CardCollector.DataBase.Entity;
+using CardCollector.Database;
 using CardCollector.Resources;
 using CardCollector.UserDailyTask;
 using Microsoft.EntityFrameworkCore;

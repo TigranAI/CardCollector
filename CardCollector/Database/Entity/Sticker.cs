@@ -3,11 +3,10 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.Resources;
 using CardCollector.Resources.Enums;
-using CardCollector.StickerEffects;
+using CardCollector.Resources.Translations;
 
-namespace CardCollector.DataBase.Entity
+namespace CardCollector.Database.Entity
 {
     public class Sticker
     {

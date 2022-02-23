@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using CardCollector.Controllers;
-using CardCollector.DataBase;
+using CardCollector.Database;
 using CardCollector.Resources;
 using CardCollector.TimerTasks;
 using Microsoft.EntityFrameworkCore;

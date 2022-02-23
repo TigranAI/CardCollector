@@ -32,7 +32,8 @@
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FResources_002FSortingTypes/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FResources_002FText/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FResources_002FTopByTexts/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FResources_002FTranslations_002FLogsTranslations/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FResources_002FTranslations_002FEffectTranslations/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FResources_002FTranslations_002FLogsTranslations/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FResources_002FTranslations_002FMessages/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FResources_002FTranslations_002FSortingTypes/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FResources_002FTranslations_002FText/@EntryIndexedValue">False</s:Boolean>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using CardCollector.Resources;
 using Telegram.Bot;
 using Telegram.Bot.Types;
-using Sticker = CardCollector.DataBase.Entity.Sticker;
+using Sticker = CardCollector.Database.Entity.Sticker;
 
 namespace CardCollector
 {

@@ -2,10 +2,10 @@ using System;
 using System.Threading.Tasks;
 using CardCollector.Attributes.Logs;
 using CardCollector.Attributes.Menu;
-using CardCollector.DataBase;
-using CardCollector.DataBase.Entity;
-using CardCollector.DataBase.EntityDao;
-using User = CardCollector.DataBase.Entity.User;
+using CardCollector.Database;
+using CardCollector.Database.Entity;
+using CardCollector.Database.EntityDao;
+using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands
 {

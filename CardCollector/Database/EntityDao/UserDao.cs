@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.DataBase.Entity;
-using CardCollector.Resources;
+using CardCollector.Database.Entity;
 using CardCollector.Resources.Enums;
 using Microsoft.EntityFrameworkCore;
 
-namespace CardCollector.DataBase.EntityDao
+namespace CardCollector.Database.EntityDao
 {
     public static class UserDao
     {

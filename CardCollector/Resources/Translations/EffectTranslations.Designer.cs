@@ -8,10 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CardCollector.StickerEffects {
-    using System;
-    
-    
+namespace CardCollector.Resources.Translations {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>

@@ -4,13 +4,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Controllers;
-using CardCollector.Resources;
 using CardCollector.Resources.Enums;
 using CardCollector.Session;
-using CardCollector.StickerEffects;
 using CardCollector.UserDailyTask;
 
-namespace CardCollector.DataBase.Entity
+namespace CardCollector.Database.Entity
 {
     public class User
     {
@@ -59,7 +57,7 @@ namespace CardCollector.DataBase.Entity
             {
                 await Messages.SendSticker(this, sticker.FileId);
                 await Messages.SendMessage(this,
-                    string.Format(Resources.Messages.you_got_sticker, sticker.ToString(count)));
+                    string.Format(Resources.Translations.Messages.you_got_sticker, sticker.ToString(count)));
             }
         }
 

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 using CardCollector.Attributes.Handlers;
-using CardCollector.DataBase;
-using CardCollector.DataBase.EntityDao;
+using CardCollector.Database;
+using CardCollector.Database.EntityDao;
 using Microsoft.EntityFrameworkCore;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using User = CardCollector.DataBase.Entity.User;
+using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.MyChatMemberHandler
 {

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using CardCollector.DataBase.Entity.NotMapped;
+using CardCollector.Database.Entity.NotMapped;
 
-namespace CardCollector.DataBase.Entity
+namespace CardCollector.Database.Entity
 {
     public class Level
     {

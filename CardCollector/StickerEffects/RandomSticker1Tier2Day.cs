@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.DataBase.Entity;
-using CardCollector.DataBase.EntityDao;
 using CardCollector.Resources;
 
 namespace CardCollector.StickerEffects

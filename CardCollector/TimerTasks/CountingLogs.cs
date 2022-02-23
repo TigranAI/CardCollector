@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
-using CardCollector.DataBase;
-using CardCollector.DataBase.EntityDao;
+using CardCollector.Database;
+using CardCollector.Database.EntityDao;
 using CardCollector.Others;
 using CardCollector.Resources;
 using Microsoft.EntityFrameworkCore;

@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.DataBase;
-using CardCollector.DataBase.Entity;
+using CardCollector.Database;
+using CardCollector.Database.Entity;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
+using CardCollector.Resources.Translations;
 using Microsoft.EntityFrameworkCore;
 using SortingTypes = CardCollector.Resources.Enums.SortingTypes;
 
@@ -37,7 +38,7 @@ namespace CardCollector.Session.Modules
                     break;
             }
 
-            text += $"{Messages.sorting} {Resources.SortingTypes.ResourceManager.GetString(Sorting.ToString())}" +
+            text += $"{Messages.sorting} {Resources.Translations.SortingTypes.ResourceManager.GetString(Sorting.ToString())}" +
                     $"\n\n{Messages.select_filter}:";
             return text;
         }

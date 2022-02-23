@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.DataBase.Entity;
+using CardCollector.Database.Entity;
 using Microsoft.EntityFrameworkCore;
 
-namespace CardCollector.DataBase.EntityDao
+namespace CardCollector.Database.EntityDao
 {
     public static class GiveawayDao
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 
-namespace CardCollector.DataBase.Entity
+namespace CardCollector.Database.Entity
 {
     [Owned]
     public class ChatActivity

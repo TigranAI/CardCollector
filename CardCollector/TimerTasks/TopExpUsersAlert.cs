@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Timers;
-using CardCollector.DataBase;
-using CardCollector.DataBase.Entity;
-using CardCollector.DataBase.EntityDao;
+using CardCollector.Database;
+using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
+using CardCollector.Resources.Translations;
 using Microsoft.EntityFrameworkCore;
 
 namespace CardCollector.TimerTasks

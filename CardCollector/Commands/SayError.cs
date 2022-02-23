@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
 using CardCollector.Attributes.Menu;
-using CardCollector.DataBase;
-using CardCollector.DataBase.Entity;
+using CardCollector.Database;
+using CardCollector.Database.Entity;
 using CardCollector.Resources;
+using CardCollector.Resources.Translations;
 
 namespace CardCollector.Commands
 {

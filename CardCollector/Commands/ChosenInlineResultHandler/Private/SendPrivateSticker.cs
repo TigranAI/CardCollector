@@ -2,13 +2,14 @@
 using System.Threading.Tasks;
 using CardCollector.Attributes.Logs;
 using CardCollector.Commands.ChosenInlineResultHandler.Group;
-using CardCollector.DataBase;
-using CardCollector.DataBase.Entity;
-using CardCollector.DataBase.EntityDao;
+using CardCollector.Database;
+using CardCollector.Database.Entity;
+using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
+using CardCollector.Resources.Translations;
 using CardCollector.UserDailyTask;
 using Telegram.Bot.Types;
-using User = CardCollector.DataBase.Entity.User;
+using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.ChosenInlineResultHandler.Private
 {

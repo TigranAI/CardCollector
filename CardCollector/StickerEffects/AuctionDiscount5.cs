@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using CardCollector.DataBase.Entity;
-using CardCollector.DataBase.EntityDao;
 
 namespace CardCollector.StickerEffects
 {

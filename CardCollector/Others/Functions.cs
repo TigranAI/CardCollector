@@ -8,7 +8,7 @@ using CardCollector.Commands.MessageHandler.Group;
 using CardCollector.Commands.MessageHandler.Shop;
 using CardCollector.Commands.MyChatMemberHandler;
 using CardCollector.Controllers;
-using CardCollector.DataBase.Entity;
+using CardCollector.Database.Entity;
 
 namespace CardCollector.Others
 {

@@ -3,8 +3,9 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.DataBase.Entity;
+using CardCollector.Database.Entity;
 using CardCollector.Resources;
+using CardCollector.Resources.Translations;
 using Telegram.Bot.Types.InlineQueryResults;
 
 namespace CardCollector.Others

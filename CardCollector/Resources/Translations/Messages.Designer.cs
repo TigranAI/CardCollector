@@ -8,10 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CardCollector.Resources {
-    using System;
-    
-    
+namespace CardCollector.Resources.Translations {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -369,8 +366,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Победителем становится {0} с шансом {1}%. Он получает: 
-        ///{2}.
+        ///   Looks up a localized string similar to Победителем становится {0} с шансом {1}%. Он получает:{2}.
         /// </summary>
         internal static string congratulation_to_roulette_winner {
             get {
@@ -872,7 +868,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Приз уже получен.
+        ///   Looks up a localized string similar to Приз уже получен. Ожидайте следующую раздачу.
         /// </summary>
         internal static string prize_now_claimed {
             get {
@@ -1176,9 +1172,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Пришло время получить:
-        ///
-        ///{0}.
+        ///   Looks up a localized string similar to Пришло время получить:{0}.
         /// </summary>
         internal static string time_to_claim {
             get {
@@ -1400,8 +1394,7 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вы получили стикер(ы):
-        ///{0}.
+        ///   Looks up a localized string similar to Вы получили стикер(ы):{0}.
         /// </summary>
         internal static string you_got_sticker {
             get {

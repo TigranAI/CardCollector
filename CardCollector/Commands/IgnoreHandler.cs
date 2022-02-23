@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.DataBase;
-using CardCollector.DataBase.Entity;
+using CardCollector.Database;
+using CardCollector.Database.Entity;
 
 namespace CardCollector.Commands
 {

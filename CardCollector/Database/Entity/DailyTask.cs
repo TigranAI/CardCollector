@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using CardCollector.UserDailyTask;
 
-namespace CardCollector.DataBase.Entity
+namespace CardCollector.Database.Entity
 {
     public class DailyTask
     {

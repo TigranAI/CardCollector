@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using CardCollector.DataBase;
+using CardCollector.Database;
 using CardCollector.Resources;
+using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using User = CardCollector.DataBase.Entity.User;
+using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.MessageHandler.Menu
 {

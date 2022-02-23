@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.DataBase;
-using CardCollector.DataBase.Entity;
-using CardCollector.DataBase.EntityDao;
+using CardCollector.Database;
+using CardCollector.Database.Entity;
+using CardCollector.Database.EntityDao;
 using CardCollector.Others;
 using CardCollector.Resources;
+using CardCollector.Resources.Translations;
 using Microsoft.EntityFrameworkCore;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using User = CardCollector.DataBase.Entity.User;
+using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Admin
 {

@@ -5,12 +5,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
-using CardCollector.DataBase.EntityDao;
+using CardCollector.Database.EntityDao;
 using CardCollector.Others;
 using CardCollector.Resources;
+using CardCollector.Resources.Translations;
 using Telegram.Bot.Types.Enums;
 
-namespace CardCollector.DataBase.Entity
+namespace CardCollector.Database.Entity
 {
     public class ChatRoulette
     {

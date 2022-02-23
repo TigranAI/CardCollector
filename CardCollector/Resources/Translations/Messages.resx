@@ -489,8 +489,7 @@ mm - минуты
         <value>Слишком мало участников!</value>
     </data>
     <data name="congratulation_to_roulette_winner" xml:space="preserve">
-        <value>Победителем становится {0} с шансом {1}%. Он получает: 
-{2}</value>
+        <value>Победителем становится {0} с шансом {1}%. Он получает:{2}</value>
     </data>
     <data name="you_are_not_creator" xml:space="preserve">
         <value>Вы не можете начать рулетку, так как не являетесь ее создателем.</value>
@@ -508,19 +507,16 @@ mm - минуты
         <value>Рулетка уже завершена! Если вы хотите начать новую, то запустите команду {0}@{1}</value>
     </data>
     <data name="you_got_sticker" xml:space="preserve">
-        <value>Вы получили стикер(ы):
-{0}</value>
+        <value>Вы получили стикер(ы):{0}</value>
     </data>
     <data name="time_to_claim" xml:space="preserve">
-        <value>Пришло время получить:
-
-{0}</value>
+        <value>Пришло время получить:{0}</value>
     </data>
     <data name="you_are_now_be_awarded_in_another_group" xml:space="preserve">
         <value>Вы уже были участником раздачи в другой группе</value>
     </data>
     <data name="prize_now_claimed" xml:space="preserve">
-        <value>Приз уже получен</value>
+        <value>Приз уже получен. Ожидайте следующую раздачу</value>
     </data>
     <data name="user_claim_giveaway" xml:space="preserve">
         <value>{0} забирает приз - {1} следующая раздача возникнет случайно не раньше, чем через {2} часов.</value>

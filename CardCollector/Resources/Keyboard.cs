@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using CardCollector.Commands.CallbackQueryHandler;
 using CardCollector.Commands.InlineQueryHandler;
 using CardCollector.Commands.MessageHandler;
-using CardCollector.DataBase.Entity;
+using CardCollector.Database.Entity;
 using CardCollector.Others;
 using CardCollector.Resources.Enums;
+using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
 using Telegram.Bot.Types.ReplyMarkups;
-using UserSettings = CardCollector.DataBase.Entity.UserSettings;
+using SortingTypes = CardCollector.Resources.Translations.SortingTypes;
+using UserSettings = CardCollector.Database.Entity.UserSettings;
 
 namespace CardCollector.Resources
 {

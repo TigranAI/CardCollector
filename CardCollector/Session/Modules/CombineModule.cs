@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CardCollector.DataBase.Entity;
+using CardCollector.Database.Entity;
 using CardCollector.Others;
 using CardCollector.Resources;
+using CardCollector.Resources.Translations;
 
 namespace CardCollector.Session.Modules
 {

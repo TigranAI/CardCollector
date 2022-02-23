@@ -1,10 +1,11 @@
 ﻿using System.Threading.Tasks;
 using System.Timers;
-using CardCollector.DataBase;
+using CardCollector.Database;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
+using CardCollector.Resources.Translations;
 using Telegram.Bot.Types;
-using User = CardCollector.DataBase.Entity.User;
+using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Admin
 {

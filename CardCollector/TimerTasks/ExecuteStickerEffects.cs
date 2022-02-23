@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
-using CardCollector.DataBase;
-using CardCollector.DataBase.Entity;
-using CardCollector.DataBase.EntityDao;
+using CardCollector.Database;
+using CardCollector.Database.Entity;
+using CardCollector.Database.EntityDao;
 using CardCollector.Others;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
+using CardCollector.Resources.Translations;
 using CardCollector.StickerEffects;
 using Microsoft.EntityFrameworkCore;
 

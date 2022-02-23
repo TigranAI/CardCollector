@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using CardCollector.DataBase.Entity;
+using CardCollector.Database.Entity;
 
 namespace CardCollector.Session.Modules
 {

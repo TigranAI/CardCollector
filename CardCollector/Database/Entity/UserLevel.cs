@@ -1,8 +1,9 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.DataBase.EntityDao;
+using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
+using CardCollector.Resources.Translations;
 
-namespace CardCollector.DataBase.Entity
+namespace CardCollector.Database.Entity
 {
     public class UserLevel
     {

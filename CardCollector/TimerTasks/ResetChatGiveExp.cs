@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Timers;
-using CardCollector.DataBase;
+using CardCollector.Database;
 using CardCollector.Resources;
 
 namespace CardCollector.TimerTasks

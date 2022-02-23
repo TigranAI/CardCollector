@@ -1,12 +1,13 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Controllers;
-using CardCollector.DataBase;
+using CardCollector.Database;
 using CardCollector.Others;
 using CardCollector.Resources;
+using CardCollector.Resources.Translations;
 using Microsoft.EntityFrameworkCore;
 using Telegram.Bot.Types;
-using User = CardCollector.DataBase.Entity.User;
+using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Profile
 {
@@ -23,6 +24,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
                 await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.packs_count_zero, true);
             else
             {
+                await User.Messages.ClearChat(User);
                 userPack.Pack.OpenedCount++;
                 userPack.Count--;
                 var tier = GetTier(Utilities.rnd.NextDouble() * 100);
@@ -31,7 +33,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
                     : await Context.Stickers.Where(sticker => sticker.Tier == tier).ToListAsync();
                 var result = stickers.Random();
                 await User.Messages.SendSticker(User, result.FileId);
-                await User.Messages.EditMessage(User, $"{Messages.congratulation}\n{result}",
+                await User.Messages.SendMessage(User, $"{Messages.congratulation}\n{result}",
                     userPack.Count > 0
                         ? Keyboard.RepeatCommand(Text.open_more, CallbackQuery.Data!)
                         : Keyboard.BackKeyboard);

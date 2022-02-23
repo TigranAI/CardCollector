@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CardCollector.DataBase;
-using CardCollector.DataBase.Entity;
-using CardCollector.DataBase.EntityDao;
+using CardCollector.Database;
+using CardCollector.Database.Entity;
+using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
+using CardCollector.Resources.Translations;
 using CardCollector.Session;
 
 namespace CardCollector.Controllers

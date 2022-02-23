@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.DataBase;
-using CardCollector.DataBase.Entity;
+using CardCollector.Database;
+using CardCollector.Database.Entity;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
+using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
 using CardCollector.StickerEffects;
 using OfficeOpenXml;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using File = System.IO.File;
-using Sticker = CardCollector.DataBase.Entity.Sticker;
-using User = CardCollector.DataBase.Entity.User;
+using Sticker = CardCollector.Database.Entity.Sticker;
+using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.MessageHandler.Admin
 {

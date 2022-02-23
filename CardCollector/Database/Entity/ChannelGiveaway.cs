@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 using System.Timers;
 using CardCollector.Commands.CallbackQueryHandler;
 using CardCollector.Commands.MessageHandler;
-using CardCollector.DataBase.EntityDao;
+using CardCollector.Database.EntityDao;
 using CardCollector.Others;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
+using CardCollector.Resources.Translations;
 using Telegram.Bot;
 using Telegram.Bot.Types.InputFiles;
 using Telegram.Bot.Types.ReplyMarkups;
 
-namespace CardCollector.DataBase.Entity
+namespace CardCollector.Database.Entity
 {
     public class ChannelGiveaway
     {
