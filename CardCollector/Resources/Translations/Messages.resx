@@ -511,4 +511,18 @@ mm - минуты
         <value>Вы получили стикер(ы):
 {0}</value>
     </data>
+    <data name="time_to_claim" xml:space="preserve">
+        <value>Пришло время получить:
+
+{0}</value>
+    </data>
+    <data name="you_are_now_be_awarded_in_another_group" xml:space="preserve">
+        <value>Вы уже были участником раздачи в другой группе</value>
+    </data>
+    <data name="prize_now_claimed" xml:space="preserve">
+        <value>Приз уже получен</value>
+    </data>
+    <data name="user_claim_giveaway" xml:space="preserve">
+        <value>{0} забирает приз - {1} следующая раздача возникнет случайно не раньше, чем через {2} часов.</value>
+    </data>
 </root>

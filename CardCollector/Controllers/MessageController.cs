@@ -38,7 +38,7 @@ namespace CardCollector.Controllers
                 {
                     UpdateType.Message => await MessageHandler.Factory(update),
                     UpdateType.CallbackQuery => await CallbackQueryHandler.Factory(update),
-                    UpdateType.MyChatMember => await MyChatMemberCommand.Factory(update),
+                    UpdateType.MyChatMember => await MyChatMemberHandler.Factory(update),
                     UpdateType.InlineQuery => await InlineQueryHandler.Factory(update),
                     UpdateType.ChosenInlineResult => await ChosenInlineResultHandler.Factory(update),
                     UpdateType.PreCheckoutQuery => await PreCheckoutQueryHandler.Factory(update),

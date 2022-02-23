@@ -18,22 +18,34 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="PCIOTTT" xml:space="preserve">
+    <data name="PeopleCollectedIncomeOneToThreeTimes" xml:space="preserve">
         <value>Людей собрало прибыль 1-3 раза</value>
     </data>
-    <data name="PCIMT" xml:space="preserve">
+    <data name="PeopleCollectedIncomeMoreTimes" xml:space="preserve">
         <value>Людей собрало прибыль больше 3 раз</value>
     </data>
-    <data name="PCDT" xml:space="preserve">
+    <data name="PeopleCompletedDailyTask" xml:space="preserve">
         <value>Людей выполнило ежедневное задание</value>
     </data>
-    <data name="PSSOOMT" xml:space="preserve">
+    <data name="PeopleSendsStickerOneOrMoreTimes" xml:space="preserve">
         <value>Людей отправило хотя бы 1 стикер</value>
     </data>
-    <data name="PD" xml:space="preserve">
+    <data name="PeopleDonated" xml:space="preserve">
         <value>Людей задонатило</value>
     </data>
-    <data name="PPSTA" xml:space="preserve">
+    <data name="PeoplePutsStickerToAuction" xml:space="preserve">
         <value>Людей выставило стикер на аукцион</value>
+    </data>
+    <data name="GroupCountWasAdded" xml:space="preserve">
+        <value>В скольких беседах был добавлен</value>
+    </data>
+    <data name="GroupCountWasActive" xml:space="preserve">
+        <value>В каком количестве бесед был активен</value>
+    </data>
+    <data name="RoulettePlayCount" xml:space="preserve">
+        <value>Количество игр в рулетку</value>
+    </data>
+    <data name="GroupPrizeCount" xml:space="preserve">
+        <value>Сколько призов роздано за день</value>
     </data>
 </root>

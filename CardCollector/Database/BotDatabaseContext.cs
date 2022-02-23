@@ -50,6 +50,7 @@ namespace CardCollector.DataBase
         public DbSet<TelegramChat> TelegramChats { get; set; }
         public DbSet<ChannelGiveaway> ChannelGiveaways { get; set; }
         public DbSet<ChatRoulette> ChatRoulette { get; set; }
+        public DbSet<ChatActivity> ChatActivities { get; set; }
 
         public bool IsDisposed()
         {
@@ -76,22 +77,18 @@ namespace CardCollector.DataBase
             ConfigureLevelLevelReward(modelBuilder);
             ConfigureDailyTaskTaskId(modelBuilder);
             ConfigureStickerEffect(modelBuilder);
-            /*ConfigureTelegramChat(modelBuilder);*/
+            ConfigureTelegramChat(modelBuilder);
         }
 
-        /*private void ConfigureTelegramChat(ModelBuilder modelBuilder)
+        private void ConfigureTelegramChat(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .Entity<TelegramChat>()
-                .Property(entity => entity.ChatMessages)
-                .HasConversion(
-                    to => Utilities.ToJson(to),
-                    from => Utilities.FromJson<HashSet<int>>(from),
-                    new ValueComparer<ICollection<int>>(
-                        (l1, l2) => l2 != null && l1 != null && l1.SequenceEqual(l2),
-                        l => l.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
-                        l => l.ToHashSet()));
-        }*/
+                .OwnsOne(chat => chat.ChatActivity, builder =>
+                {
+                    builder.ToTable("chat_activity");
+                });
+        }
 
         private void ConfigureUserLevel(ModelBuilder modelBuilder)
         {

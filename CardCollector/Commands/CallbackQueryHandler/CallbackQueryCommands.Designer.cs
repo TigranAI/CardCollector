@@ -160,6 +160,15 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ACE.
+        /// </summary>
+        internal static string claim_group_prize {
+            get {
+                return ResourceManager.GetString("claim_group_prize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AAK.
         /// </summary>
         internal static string collect_income {

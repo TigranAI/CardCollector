@@ -39,7 +39,7 @@ namespace CardCollector.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CardCollector.Resources.Messages", typeof(Messages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CardCollector.Resources.Translations.Messages", typeof(Messages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -872,6 +872,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Приз уже получен.
+        /// </summary>
+        internal static string prize_now_claimed {
+            get {
+                return ResourceManager.GetString("prize_now_claimed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Обычный пак.
         /// </summary>
         internal static string random_packs {
@@ -1167,6 +1176,17 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Пришло время получить:
+        ///
+        ///{0}.
+        /// </summary>
+        internal static string time_to_claim {
+            get {
+                return ResourceManager.GetString("time_to_claim", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Слишком мало участников!.
         /// </summary>
         internal static string too_few_players {
@@ -1272,6 +1292,15 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} забирает приз - {1} следующая раздача возникнет случайно не раньше, чем через {2} часов..
+        /// </summary>
+        internal static string user_claim_giveaway {
+            get {
+                return ResourceManager.GetString("user_claim_giveaway", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 🧪&lt;b&gt;Топ пользователей по опыту&lt;/b&gt;🧪.
         /// </summary>
         internal static string users_top_exp {
@@ -1313,6 +1342,15 @@ namespace CardCollector.Resources {
         internal static string you_are_now_awarded {
             get {
                 return ResourceManager.GetString("you_are_now_awarded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы уже были участником раздачи в другой группе.
+        /// </summary>
+        internal static string you_are_now_be_awarded_in_another_group {
+            get {
+                return ResourceManager.GetString("you_are_now_be_awarded_in_another_group", resourceCulture);
             }
         }
         

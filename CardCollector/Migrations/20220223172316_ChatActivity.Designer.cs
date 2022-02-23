@@ -3,6 +3,7 @@ using System;
 using CardCollector.DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CardCollector.Migrations
 {
     [DbContext(typeof(BotDatabaseContext))]
-    partial class BotDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220223172316_ChatActivity")]
+    partial class ChatActivity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -158,18 +160,6 @@ namespace CardCollector.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("date");
 
-                    b.Property<int>("GroupCountWasActive")
-                        .HasColumnType("int")
-                        .HasColumnName("group_count_was_active");
-
-                    b.Property<int>("GroupCountWasAdded")
-                        .HasColumnType("int")
-                        .HasColumnName("group_count_was_added");
-
-                    b.Property<int>("GroupPrizeCount")
-                        .HasColumnType("int")
-                        .HasColumnName("group_prize_count");
-
                     b.Property<int>("PeopleCollectedIncomeMoreTimes")
                         .HasColumnType("int")
                         .HasColumnName("people_collected_income_more_times");
@@ -193,10 +183,6 @@ namespace CardCollector.Migrations
                     b.Property<int>("PeopleSendsStickerOneOrMoreTimes")
                         .HasColumnType("int")
                         .HasColumnName("people_sends_sticker_one_or_more_times");
-
-                    b.Property<int>("RoulettePlayCount")
-                        .HasColumnType("int")
-                        .HasColumnName("roulette_play_count");
 
                     b.HasKey("Date")
                         .HasName("pk_count_logs");
@@ -608,15 +594,11 @@ namespace CardCollector.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("action");
 
-                    b.Property<string>("AdditionalData")
-                        .HasColumnType("longtext")
-                        .HasColumnName("additional_data");
-
                     b.Property<DateTime>("Timestamp")
                         .HasColumnType("datetime(6)")
                         .HasColumnName("timestamp");
 
-                    b.Property<long?>("UserId")
+                    b.Property<long>("UserId")
                         .HasColumnType("bigint")
                         .HasColumnName("user_id");
 
@@ -1070,6 +1052,8 @@ namespace CardCollector.Migrations
                     b.HasOne("CardCollector.DataBase.Entity.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("fk_user_activities_users_user_id");
 
                     b.Navigation("User");

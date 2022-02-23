@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using CardCollector.Attributes.Logs;
 using CardCollector.Controllers;
 using CardCollector.DataBase;
 using CardCollector.DataBase.Entity;
@@ -12,6 +13,7 @@ using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands.MessageHandler.Group
 {
+    [SavedActivity]
     public class Roulette : MessageHandler
     {
         protected override string CommandText => MessageCommands.roulette;

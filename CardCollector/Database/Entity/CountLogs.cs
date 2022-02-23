@@ -12,6 +12,10 @@ namespace CardCollector.DataBase.Entity
         public int PeopleSendsStickerOneOrMoreTimes { get; set; }
         public int PeopleDonated { get; set; }
         public int PeoplePutsStickerToAuction { get; set; }
+        public int GroupCountWasAdded { get; set; }
+        public int GroupCountWasActive { get; set; }
+        public int RoulettePlayCount { get; set; }
+        public int GroupPrizeCount { get; set; }
 
         public bool IsEmpty()
         {
@@ -20,7 +24,11 @@ namespace CardCollector.DataBase.Entity
                    && PeopleCompletedDailyTask == 0
                    && PeopleSendsStickerOneOrMoreTimes == 0
                    && PeopleDonated == 0
-                   && PeoplePutsStickerToAuction == 0;
+                   && PeoplePutsStickerToAuction == 0
+                   && GroupCountWasAdded == 0
+                   && GroupCountWasActive == 0
+                   && RoulettePlayCount == 0
+                   && GroupPrizeCount == 0;
         }
     }
 }

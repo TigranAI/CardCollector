@@ -4,7 +4,10 @@ using CardCollector.Commands.CallbackQueryHandler.Collection;
 using CardCollector.Commands.CallbackQueryHandler.Profile;
 using CardCollector.Commands.ChosenInlineResultHandler.Group;
 using CardCollector.Commands.ChosenInlineResultHandler.Private;
+using CardCollector.Commands.MessageHandler.Group;
 using CardCollector.Commands.MessageHandler.Shop;
+using CardCollector.Commands.MyChatMemberHandler;
+using CardCollector.Controllers;
 using CardCollector.DataBase.Entity;
 
 namespace CardCollector.Others
@@ -21,6 +24,10 @@ namespace CardCollector.Others
             result.PeopleCompletedDailyTask = 0;
             result.PeoplePutsStickerToAuction = 0;
             result.PeopleSendsStickerOneOrMoreTimes = 0;
+            result.GroupCountWasAdded = 0;
+            result.GroupCountWasActive = 0;
+            result.RoulettePlayCount = 0;
+            result.GroupPrizeCount = 0;
 
             foreach (var userActivities in groupedActivities)
             {
@@ -34,6 +41,17 @@ namespace CardCollector.Others
                     userActivities.Any(item => item.Action == typeof(ConfirmSelling).FullName);
                 var isUserSendStickerToChat =
                     userActivities.Any(item => item.Action == typeof(ChatSendSticker).FullName);
+                var groupsAddedCount =
+                    userActivities.Count(item => item.Action == typeof(AddToGroup).FullName);
+                var rouletteCount =
+                    userActivities.Count(item => item.Action == typeof(Roulette).FullName);
+
+                var groupsWithPrize =
+                    userActivities.Where(item => item.Action == typeof(GroupController).FullName);
+                var groupsActiveCount = groupsWithPrize
+                    .DistinctBy(item => item.AdditionalData)
+                    .Count();
+                var groupPrizeCount = groupsWithPrize.Count();
 
                 if (userCollectIncomeTimes > 3) result.PeopleCollectedIncomeMoreTimes++;
                 else if (userCollectIncomeTimes > 0) result.PeopleCollectedIncomeOneToThreeTimes++;
@@ -41,6 +59,11 @@ namespace CardCollector.Others
                 if (isUserCompleteDailyTask) result.PeopleCompletedDailyTask++;
                 if (isUserPutStickerToAuction) result.PeoplePutsStickerToAuction++;
                 if (isUserSendStickerToChat) result.PeopleSendsStickerOneOrMoreTimes++;
+                
+                result.GroupCountWasAdded += groupsAddedCount;
+                result.GroupCountWasActive += groupsActiveCount;
+                result.RoulettePlayCount += rouletteCount;
+                result.GroupPrizeCount += groupPrizeCount;
             }
 
             return result;

@@ -39,7 +39,7 @@ namespace CardCollector.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CardCollector.Resources.LogsTranslations", typeof(LogsTranslations).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CardCollector.Resources.Translations.LogsTranslations", typeof(LogsTranslations).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,56 +61,92 @@ namespace CardCollector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Людей выполнило ежедневное задание.
+        ///   Looks up a localized string similar to В каком количестве бесед был активен.
         /// </summary>
-        internal static string PCDT {
+        internal static string GroupCountWasActive {
             get {
-                return ResourceManager.GetString("PCDT", resourceCulture);
+                return ResourceManager.GetString("GroupCountWasActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to В скольких беседах был добавлен.
+        /// </summary>
+        internal static string GroupCountWasAdded {
+            get {
+                return ResourceManager.GetString("GroupCountWasAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сколько призов роздано за день.
+        /// </summary>
+        internal static string GroupPrizeCount {
+            get {
+                return ResourceManager.GetString("GroupPrizeCount", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Людей собрало прибыль больше 3 раз.
         /// </summary>
-        internal static string PCIMT {
+        internal static string PeopleCollectedIncomeMoreTimes {
             get {
-                return ResourceManager.GetString("PCIMT", resourceCulture);
+                return ResourceManager.GetString("PeopleCollectedIncomeMoreTimes", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Людей собрало прибыль 1-3 раза.
         /// </summary>
-        internal static string PCIOTTT {
+        internal static string PeopleCollectedIncomeOneToThreeTimes {
             get {
-                return ResourceManager.GetString("PCIOTTT", resourceCulture);
+                return ResourceManager.GetString("PeopleCollectedIncomeOneToThreeTimes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Людей выполнило ежедневное задание.
+        /// </summary>
+        internal static string PeopleCompletedDailyTask {
+            get {
+                return ResourceManager.GetString("PeopleCompletedDailyTask", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Людей задонатило.
         /// </summary>
-        internal static string PD {
+        internal static string PeopleDonated {
             get {
-                return ResourceManager.GetString("PD", resourceCulture);
+                return ResourceManager.GetString("PeopleDonated", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Людей выставило стикер на аукцион.
         /// </summary>
-        internal static string PPSTA {
+        internal static string PeoplePutsStickerToAuction {
             get {
-                return ResourceManager.GetString("PPSTA", resourceCulture);
+                return ResourceManager.GetString("PeoplePutsStickerToAuction", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Людей отправило хотя бы 1 стикер.
         /// </summary>
-        internal static string PSSOOMT {
+        internal static string PeopleSendsStickerOneOrMoreTimes {
             get {
-                return ResourceManager.GetString("PSSOOMT", resourceCulture);
+                return ResourceManager.GetString("PeopleSendsStickerOneOrMoreTimes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Количество игр в рулетку.
+        /// </summary>
+        internal static string RoulettePlayCount {
+            get {
+                return ResourceManager.GetString("RoulettePlayCount", resourceCulture);
             }
         }
     }

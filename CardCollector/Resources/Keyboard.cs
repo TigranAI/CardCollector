@@ -914,5 +914,14 @@ namespace CardCollector.Resources
                 new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)}
             });
         }
+
+        public static InlineKeyboardMarkup GroupClaimPrize(long chatId, string prize, long prizeId)
+        {
+            return new InlineKeyboardMarkup(new[]
+            {
+                InlineKeyboardButton.WithCallbackData(Text.claim, 
+                    $"{CallbackQueryCommands.claim_group_prize}={chatId}={prize}={prizeId}")
+            });
+        }
     }
 }

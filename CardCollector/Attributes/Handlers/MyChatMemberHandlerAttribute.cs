@@ -1,6 +1,6 @@
 ﻿namespace CardCollector.Attributes.Handlers
 {
-    public class MessageHandlerAttribute : System.Attribute
+    public class MyChatMemberHandlerAttribute : System.Attribute
     {
         
     }

@@ -39,7 +39,7 @@ namespace CardCollector.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CardCollector.Resources.TopByTexts", typeof(TopByTexts).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CardCollector.Resources.Translations.TopByTexts", typeof(TopByTexts).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -189,4 +189,7 @@
     <data name="roulette_rule" xml:space="preserve">
         <value>ACD</value>
     </data>
+    <data name="claim_group_prize" xml:space="preserve">
+        <value>ACE</value>
+    </data>
 </root>

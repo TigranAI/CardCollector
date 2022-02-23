@@ -393,4 +393,7 @@
     <data name="bet" xml:space="preserve">
         <value>поставил</value>
     </data>
+    <data name="claim" xml:space="preserve">
+        <value>Получить</value>
+    </data>
 </root>

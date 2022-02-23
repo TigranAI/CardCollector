@@ -39,7 +39,7 @@ namespace CardCollector.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CardCollector.Resources.Text", typeof(Text).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CardCollector.Resources.Translations.Text", typeof(Text).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -312,6 +312,15 @@ namespace CardCollector.Resources {
         internal static string choose_sticker {
             get {
                 return ResourceManager.GetString("choose_sticker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Получить.
+        /// </summary>
+        internal static string claim {
+            get {
+                return ResourceManager.GetString("claim", resourceCulture);
             }
         }
         

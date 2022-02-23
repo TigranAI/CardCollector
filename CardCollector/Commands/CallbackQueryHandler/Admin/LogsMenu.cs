@@ -19,17 +19,25 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin
 
         protected override async Task Execute()
         {
+            var totalGroupsCount =
+                await Context.TelegramChats.CountAsync(item =>
+                    item.ChatType == ChatType.Group || item.ChatType == ChatType.Supergroup);
             var date = Convert.ToDateTime(CallbackQuery.Data!.Split('=')[1]);
             var message = string.Format(Messages.logs_on_date, date.ToString("dd.MM.yyyy"));
             var logsPage = date.Date == DateTime.Today.Date
                 ? await GetCurrentResults()
                 : await Context.CountLogs.FindByDate(date);
-            message += $"\n{LogsTranslations.PCIOTTT}: {logsPage.PeopleCollectedIncomeOneToThreeTimes}" +
-                       $"\n{LogsTranslations.PCIMT}: {logsPage.PeopleCollectedIncomeMoreTimes}" +
-                       $"\n{LogsTranslations.PCDT}: {logsPage.PeopleCompletedDailyTask}" +
-                       $"\n{LogsTranslations.PSSOOMT}: {logsPage.PeopleSendsStickerOneOrMoreTimes}" +
-                       $"\n{LogsTranslations.PD}: {logsPage.PeopleDonated}" +
-                       $"\n{LogsTranslations.PPSTA}: {logsPage.PeoplePutsStickerToAuction}";
+            message +=
+                $"\n{LogsTranslations.PeopleCollectedIncomeOneToThreeTimes}: {logsPage.PeopleCollectedIncomeOneToThreeTimes}" +
+                $"\n{LogsTranslations.PeopleCollectedIncomeMoreTimes}: {logsPage.PeopleCollectedIncomeMoreTimes}" +
+                $"\n{LogsTranslations.PeopleCompletedDailyTask}: {logsPage.PeopleCompletedDailyTask}" +
+                $"\n{LogsTranslations.PeopleSendsStickerOneOrMoreTimes}: {logsPage.PeopleSendsStickerOneOrMoreTimes}" +
+                $"\n{LogsTranslations.PeopleDonated}: {logsPage.PeopleDonated}" +
+                $"\n{LogsTranslations.PeoplePutsStickerToAuction}: {logsPage.PeoplePutsStickerToAuction}" +
+                $"\n{LogsTranslations.GroupCountWasAdded}: {logsPage.GroupCountWasAdded} / {totalGroupsCount}" +
+                $"\n{LogsTranslations.GroupCountWasActive}: {logsPage.GroupCountWasActive}" +
+                $"\n{LogsTranslations.RoulettePlayCount}: {logsPage.RoulettePlayCount}" +
+                $"\n{LogsTranslations.GroupPrizeCount}: {logsPage.GroupPrizeCount}";
             await User.Messages.EditMessage(User, message, Keyboard.LogsMenu(date), ParseMode.Html);
         }
 

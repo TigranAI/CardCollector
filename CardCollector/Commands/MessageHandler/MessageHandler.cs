@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
+using CardCollector.Attributes.Handlers;
 using CardCollector.Controllers;
 using CardCollector.DataBase;
 using CardCollector.DataBase.EntityDao;
@@ -13,7 +14,7 @@ using User = CardCollector.DataBase.Entity.User;
 
 namespace CardCollector.Commands.MessageHandler
 {
-    [Attributes.Handlers.MessageHandler]
+    [MessageHandler]
     public abstract class MessageHandler : HandlerModel
     {
         protected Message Message;
@@ -27,7 +28,7 @@ namespace CardCollector.Commands.MessageHandler
             foreach (var type in assembly.GetTypes())
             {
                 if (type == typeof(MessageHandler)) continue;
-                if (Attribute.IsDefined(type, typeof(Attributes.Handlers.MessageHandler)))
+                if (Attribute.IsDefined(type, typeof(MessageHandlerAttribute)))
                     Commands.Add(type);
             }
         }
@@ -46,6 +47,9 @@ namespace CardCollector.Commands.MessageHandler
 
             if (update.Message!.Chat.Type is ChatType.Private && update.Message.Text != Text.start)
                 await MessageController.DeleteMessage(user.ChatId, update.Message.MessageId);
+
+            if (update.Message.Chat.Type is ChatType.Group or ChatType.Supergroup)
+                await GroupController.OnGroupMessageReceived(update.Message.Chat, update.Message.From!);
 
             user.InitSession();
             
