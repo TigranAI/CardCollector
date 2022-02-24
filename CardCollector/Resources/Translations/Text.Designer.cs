@@ -9,6 +9,9 @@
 //------------------------------------------------------------------------------
 
 namespace CardCollector.Resources.Translations {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -588,6 +591,15 @@ namespace CardCollector.Resources.Translations {
         internal static string gift {
             get {
                 return ResourceManager.GetString("gift", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Беседы.
+        /// </summary>
+        internal static string groups {
+            get {
+                return ResourceManager.GetString("groups", resourceCulture);
             }
         }
         

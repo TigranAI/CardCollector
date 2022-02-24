@@ -24,7 +24,6 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
                 await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.packs_count_zero, true);
             else
             {
-                await User.Messages.ClearChat(User);
                 userPack.Pack.OpenedCount++;
                 userPack.Count--;
                 var tier = GetTier(Utilities.rnd.NextDouble() * 100);
@@ -32,6 +31,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
                     ? userPack.Pack.Stickers.Where(sticker => sticker.Tier == tier)
                     : await Context.Stickers.Where(sticker => sticker.Tier == tier).ToListAsync();
                 var result = stickers.Random();
+                await User.Messages.ClearChat(User);
                 await User.Messages.SendSticker(User, result.FileId);
                 await User.Messages.SendMessage(User, $"{Messages.congratulation}\n{result}",
                     userPack.Count > 0

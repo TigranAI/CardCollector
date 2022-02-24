@@ -36,7 +36,7 @@ namespace CardCollector.Resources.Translations {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CardCollector.StickerEffects.Translations.EffectTranslations", typeof(EffectTranslations).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CardCollector.Resources.Translations.EffectTranslations", typeof(EffectTranslations).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

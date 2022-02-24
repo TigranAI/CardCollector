@@ -144,9 +144,16 @@ namespace CardCollector.Controllers
                     replyMarkup: keyboard, disableNotification: true);
                 return msg.MessageId;
             }
-            catch (Exception e)
+            catch (ApiRequestException e)
             {
+                if (e.ErrorCode == 429 && e.Parameters != null && e.Parameters.RetryAfter is { } interval)
+                {
+                    Thread.Sleep(interval);
+                    return await SendMessage(chatId, message, keyboard, parseMode);
+                }
+
                 LogOutWarning($"Cant send message: {e.Message}");
+                LogOutError(e);
                 return -1;
             }
         }
@@ -162,9 +169,15 @@ namespace CardCollector.Controllers
                     replyMarkup: keyboard, protectContent: true, disableNotification: true);
                 return msg.MessageId;
             }
-            catch (Exception e)
+            catch (ApiRequestException e)
             {
+                if (e.ErrorCode == 429 && e.Parameters != null && e.Parameters.RetryAfter is { } interval)
+                {
+                    Thread.Sleep(interval);
+                    return await SendSticker(chatId, fileId, keyboard);
+                }
                 LogOutWarning("Can't send sticker " + e.Message);
+                LogOutError(e);
                 return -1;
             }
         }
@@ -182,9 +195,16 @@ namespace CardCollector.Controllers
                 user.Session.PopLastCommand();
                 await Bot.Client.AnswerCallbackQueryAsync(callbackQueryId, text, showAlert);
             }
-            catch (Exception e)
+            catch (ApiRequestException e)
             {
+                if (e.ErrorCode == 429 && e.Parameters != null && e.Parameters.RetryAfter is { } interval)
+                {
+                    Thread.Sleep(interval);
+                    await AnswerCallbackQuery(user, callbackQueryId, text, showAlert);
+                    return;
+                }
                 LogOutWarning("Can't answer CallbackQuery " + e.Message);
+                LogOutError(e);
             }
         }
 
@@ -196,9 +216,16 @@ namespace CardCollector.Controllers
             {
                 await Bot.Client.DeleteMessageAsync(chatId, messageId);
             }
-            catch (Exception e)
+            catch (ApiRequestException e)
             {
+                if (e.ErrorCode == 429 && e.Parameters != null && e.Parameters.RetryAfter is { } interval)
+                {
+                    Thread.Sleep(interval);
+                    await DeleteMessage(chatId, messageId);
+                    return;
+                }
                 LogOutWarning("Can't delete message " + e.Message);
+                LogOutError(e);
             }
         }
 
@@ -214,9 +241,16 @@ namespace CardCollector.Controllers
                 await Bot.Client.AnswerInlineQueryAsync(queryId, results, isPersonal: true, nextOffset: offset,
                     cacheTime: Constants.INLINE_RESULTS_CACHE_TIME);
             }
-            catch (Exception e)
+            catch (ApiRequestException e)
             {
+                if (e.ErrorCode == 429 && e.Parameters != null && e.Parameters.RetryAfter is { } interval)
+                {
+                    Thread.Sleep(interval);
+                    await AnswerInlineQuery(user, queryId, results, offset);
+                    return;
+                }
                 LogOutWarning($"Cant send answer inline query {e.Message}");
+                LogOutError(e);
             }
         }
 
@@ -245,9 +279,15 @@ namespace CardCollector.Controllers
                 user.Messages.ChatMessages.Add(result.MessageId);
                 return result.MessageId;
             }
-            catch (Exception e)
+            catch (ApiRequestException e)
             {
+                if (e.ErrorCode == 429 && e.Parameters != null && e.Parameters.RetryAfter is { } interval)
+                {
+                    Thread.Sleep(interval);
+                    return await SendInvoice(user, title, description, payload, prices, keyboard, currency);
+                }
                 LogOutWarning("Can't send invoice " + e.Message);
+                LogOutError(e);
                 return -1;
             }
         }
@@ -259,9 +299,13 @@ namespace CardCollector.Controllers
             {
                 await Bot.Client.EditMessageReplyMarkupAsync(user.ChatId, messageId, keyboard);
             }
-            catch
+            catch (ApiRequestException e)
             {
-                /**/
+                if (e.ErrorCode == 429 && e.Parameters != null && e.Parameters.RetryAfter is { } interval)
+                {
+                    Thread.Sleep(interval);
+                    await EditReplyMarkup(user, messageId, keyboard);
+                }
             }
         }
 
@@ -271,12 +315,18 @@ namespace CardCollector.Controllers
             try
             {
                 var msg = await Bot.Client.SendPhotoAsync(user.ChatId, new InputOnlineFile(fileId), message,
-                    replyMarkup: keyboard, disableNotification: true);
+                    protectContent: true, replyMarkup: keyboard, disableNotification: true);
                 return msg.MessageId;
             }
-            catch (Exception e)
+            catch (ApiRequestException e)
             {
+                if (e.ErrorCode == 429 && e.Parameters != null && e.Parameters.RetryAfter is { } interval)
+                {
+                    Thread.Sleep(interval);
+                    return await SendImage(user, fileId, message, keyboard);
+                }
                 LogOutWarning($"Cant send image: {e.Message}");
+                LogOutError(e);
                 return -1;
             }
         }
@@ -288,9 +338,15 @@ namespace CardCollector.Controllers
                 var msg = await Bot.Client.SendDiceAsync(chatId, emoji, true);
                 return msg.MessageId;
             }
-            catch (Exception e)
+            catch (ApiRequestException e)
             {
+                if (e.ErrorCode == 429 && e.Parameters != null && e.Parameters.RetryAfter is { } interval)
+                {
+                    Thread.Sleep(interval);
+                    return await SendDice(chatId, emoji);
+                }
                 LogOutWarning($"Cant send dice: {e.Message}");
+                LogOutError(e);
                 return -1;
             }
         }

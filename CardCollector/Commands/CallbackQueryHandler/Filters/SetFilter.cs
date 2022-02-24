@@ -21,7 +21,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Filters
             var data = CallbackQuery.Data!.Split('=');
             var filters = User.Session.GetModule<FiltersModule>();
             var key = (FilterKeys) int.Parse(data[1]);
-            var value = data[2] == "" ? null : data[2];
+            var value = data.Length == 2 || data[2] == "" ? null : data[2];
             switch (key)
             {
                 case FilterKeys.Author:

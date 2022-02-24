@@ -9,6 +9,9 @@
 //------------------------------------------------------------------------------
 
 namespace CardCollector.Resources.Translations {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -366,7 +369,8 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Победителем становится {0} с шансом {1}%. Он получает:{2}.
+        ///   Looks up a localized string similar to Победителем становится {0} с шансом {1}%. Список призов:
+        ///{2}.
         /// </summary>
         internal static string congratulation_to_roulette_winner {
             get {

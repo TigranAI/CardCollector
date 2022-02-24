@@ -20,16 +20,18 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Collection
             var userSticker = User.Stickers.Single(item => item.Sticker.Id == stickerId);
             if (User.Session.State is UserState.Default)
             {
+                await User.Messages.ClearChat(User);
                 await User.Messages.SendSticker(User, sticker.FileId);
-                await User.Messages.EditMessage(User, sticker.ToString(userSticker.Count),
+                await User.Messages.SendMessage(User, sticker.ToString(userSticker.Count),
                     Keyboard.GetStickerKeyboard(sticker));
             }
             else
             {
                 var module = User.Session.GetModule<CollectionModule>();
                 module.SelectedStickerId = stickerId;
+                await User.Messages.ClearChat(User);
                 await User.Messages.SendSticker(User, sticker.FileId);
-                await User.Messages.EditMessage(User, sticker.ToString(userSticker.Count),
+                await User.Messages.SendMessage(User, sticker.ToString(userSticker.Count),
                     Keyboard.GetCollectionStickerKeyboard(sticker, module.Count));
             }
         }

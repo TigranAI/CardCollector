@@ -489,7 +489,8 @@ mm - минуты
         <value>Слишком мало участников!</value>
     </data>
     <data name="congratulation_to_roulette_winner" xml:space="preserve">
-        <value>Победителем становится {0} с шансом {1}%. Он получает:{2}</value>
+        <value>Победителем становится {0} с шансом {1}%. Список призов:
+{2}</value>
     </data>
     <data name="you_are_not_creator" xml:space="preserve">
         <value>Вы не можете начать рулетку, так как не являетесь ее создателем.</value>

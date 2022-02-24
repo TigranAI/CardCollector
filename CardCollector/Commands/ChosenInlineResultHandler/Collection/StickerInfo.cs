@@ -18,8 +18,9 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Collection
             var stickerId = long.Parse(ChosenInlineResult.ResultId.Split('=')[1]);
             var sticker = await Context.Stickers.FindById(stickerId);
             var userSticker = User.Stickers.Single(item => item.Sticker.Id == stickerId);
+            await User.Messages.ClearChat(User);
             await User.Messages.SendSticker(User, sticker.FileId);
-            await User.Messages.EditMessage(User, sticker.ToString(userSticker.Count),
+            await User.Messages.SendMessage(User, sticker.ToString(userSticker.Count),
                 Keyboard.StickerInfoKeyboard);
         }
 

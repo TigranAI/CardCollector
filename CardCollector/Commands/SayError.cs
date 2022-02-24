@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using CardCollector.Attributes.Menu;
 using CardCollector.Database;
 using CardCollector.Database.Entity;
-using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 
 namespace CardCollector.Commands
@@ -16,6 +15,7 @@ namespace CardCollector.Commands
         protected override string CommandText => "";
         protected override async Task Execute()
         {
+            await User.Messages.ClearChat(User);
             await User.Messages.SendMessage(User, $"{Messages.unexpected_exception} {_exception.Message}");
             Logs.LogOutError(_exception);
         }

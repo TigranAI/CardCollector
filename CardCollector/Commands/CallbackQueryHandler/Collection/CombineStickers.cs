@@ -40,8 +40,9 @@ namespace CardCollector.Commands.CallbackQueryHandler.Collection
                     await Context.Stickers.FindAllByTierAndAuthor(combineModule.CombineTier!.Value + 1, randomAuthor);
                 var randSticker = stickers.Random();
                 await User.AddSticker(randSticker, 1);
+                await User.Messages.ClearChat(User);
                 await User.Messages.SendSticker(User, randSticker.FileId);
-                await User.Messages.EditMessage(User, $"{Messages.combined_sticker}:\n{randSticker}",
+                await User.Messages.SendMessage(User, $"{Messages.combined_sticker}:\n{randSticker}",
                     Keyboard.BackToFilters(randSticker.Title));
                 User.Session.DeleteModule<CombineModule>();
             }

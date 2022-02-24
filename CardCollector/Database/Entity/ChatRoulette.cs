@@ -31,15 +31,17 @@ namespace CardCollector.Database.Entity
             {
                 var roulette = await context.ChatRoulette.FindById(Id);
                 if (roulette == null) return;
-                await roulette.Start();
+                await roulette.Start(context);
                 await context.SaveChangesAsync();
             }
         }
 
-        public async Task Start()
+        public async Task Start(BotDatabaseContext context)
         {
             if (IsStarted) return;
             IsStarted = true;
+            Logs.LogOut($"roulette {Id} is started");
+            await context.SaveChangesAsync();
             if (!Bets.Any(item => item.User.Id == Creator.Id))
             {
                 await Group.EditMessage(string.Format(Messages.creator_didnt_bet, Creator.Username), MessageId);

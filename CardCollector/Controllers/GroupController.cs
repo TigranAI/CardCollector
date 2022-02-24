@@ -14,8 +14,8 @@ namespace CardCollector.Controllers
 {
     public static class GroupController
     {
-        public static readonly int GROUP_GIVEAWAY_HOURS_INTERVAL = Constants.DEBUG ? 0 : 8;
-        private static readonly int ACTIVITY_RATE = Constants.DEBUG ? 0 : 4;
+        public static readonly int GROUP_GIVEAWAY_HOURS_INTERVAL = Constants.DEBUG ? 1 : 8;
+        private static readonly int ACTIVITY_RATE = Constants.DEBUG ? 5 : 4;
 
         public static async Task OnGroupMessageReceived(Chat chat, TelegramUser user)
         {
