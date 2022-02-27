@@ -21,7 +21,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Auction
             if (auction == null) return;
             Context.Attach(auction);
             Context.Remove(auction);
-            await User.AddSticker(auction.Sticker, auction.Count);
+            await User.AddSticker(Context, auction.Sticker, auction.Count);
             await User.Messages.EditMessage(User,
                 string.Format(Messages.successfully_returned, auction.Count, auction.Sticker.Title),
                 Keyboard.BackKeyboard);

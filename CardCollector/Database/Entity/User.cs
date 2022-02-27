@@ -29,6 +29,7 @@ namespace CardCollector.Database.Entity
         public virtual ICollection<DailyTask> DailyTasks { get; set; }
         public virtual ICollection<SpecialOrderUser> SpecialOrdersUser { get; set; }
         public virtual ICollection<ChannelGiveaway> UsedGiveaways { get; set; }
+        public virtual ICollection<TelegramChat> AvailableChats { get; set; }
 
         [NotMapped] public UserSession Session;
 
@@ -37,7 +38,7 @@ namespace CardCollector.Database.Entity
             return Stickers.Any(item => item.Sticker.Effect == Effect.AuctionDiscount5);
         }
 
-        public async Task AddSticker(Sticker sticker, int count, bool sendAlert = false)
+        public async Task AddSticker(BotDatabaseContext context, Sticker sticker, int count, bool sendAlert = false)
         {
             if (Stickers.SingleOrDefault(item => item.Sticker.Id == sticker.Id) is { } userSticker)
                 userSticker.Count += count;
@@ -59,6 +60,8 @@ namespace CardCollector.Database.Entity
                 await Messages.SendMessage(this,
                     string.Format(Resources.Translations.Messages.you_got_sticker, sticker.ToString(count)));
             }
+
+            await context.SaveChangesAsync();
         }
 
         public void AddPack(Pack pack, int count)

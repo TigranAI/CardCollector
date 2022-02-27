@@ -32,6 +32,7 @@ namespace CardCollector.Controllers
     {
         public static async Task HandleUpdateAsync(ITelegramBotClient client, Update update, CancellationToken ct)
         {
+            LogOutJson(update);
             try
             {
                 var executor = update.Type switch

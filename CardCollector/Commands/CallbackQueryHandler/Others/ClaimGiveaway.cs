@@ -18,7 +18,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Others
             var giveawayId = int.Parse(CallbackQuery.Data!.Split("=")[1]);
             var giveaway = await Context.ChannelGiveaways.FindById(giveawayId);
             if (giveaway == null || giveaway.IsEnded())
-                await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.gievaway_now_ended, true);
+                await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.giveaway_now_ended, true);
             else if (giveaway.IsAwarded(User.Id))
                 await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.you_are_now_awarded, true);
             else

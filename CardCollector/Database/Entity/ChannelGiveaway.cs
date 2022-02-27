@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using CardCollector.Commands.CallbackQueryHandler;
 using CardCollector.Commands.MessageHandler;
+using CardCollector.Controllers;
 using CardCollector.Database.EntityDao;
 using CardCollector.Others;
 using CardCollector.Resources;
@@ -74,11 +75,11 @@ namespace CardCollector.Database.Entity
             switch (Prize)
             {
                 case PrizeType.SelectedSticker:
-                    await user.AddSticker(SelectedSticker!, 1, true);
+                    await user.AddSticker(context, SelectedSticker!, 1, true);
                     break;
                 case PrizeType.RandomSticker:
                     var stickers = await context.Stickers.FindAllByTier(SelectedStickerTier!.Value);
-                    await user.AddSticker(stickers.Random(), 1, true);
+                    await user.AddSticker(context, stickers.Random(), 1, true);
                     break;
                 case PrizeType.RandomPack:
                     var pack = await context.Packs.FindById(1);
@@ -98,7 +99,10 @@ namespace CardCollector.Database.Entity
         private async Task EditMessage()
         {
             if (PrizeCount <= 0)
-                await Bot.Client.EditMessageTextAsync(Channel.ChatId, MessageId, Messages.gievaway_now_ended);
+            {
+                await MessageController.DeleteMessage(Channel.ChatId, MessageId);
+                await MessageController.SendMessage(Channel.ChatId, Messages.giveaway_now_ended);
+            }
             else if (ButtonText == null || ButtonText.Contains("{0}") || ButtonText.Contains("{1}"))
                 await Bot.Client.EditMessageReplyMarkupAsync(Channel.ChatId, MessageId, GetFormattedKeyboard());
         }

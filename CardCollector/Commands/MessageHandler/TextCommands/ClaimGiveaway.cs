@@ -18,7 +18,7 @@ namespace CardCollector.Commands.MessageHandler.TextCommands
             var giveawayId = int.Parse(Message.Text!.Split(' ')[1].Split('=')[1]);
             var giveaway = await Context.ChannelGiveaways.FindById(giveawayId);
             if (giveaway == null || giveaway.IsEnded())
-                await User.Messages.EditMessage(User, Messages.gievaway_now_ended, Keyboard.BackKeyboard);
+                await User.Messages.EditMessage(User, Messages.giveaway_now_ended, Keyboard.BackKeyboard);
             else if (giveaway.IsAwarded(User.Id))
                 await User.Messages.EditMessage(User, Messages.you_are_now_awarded, Keyboard.BackKeyboard);
             else

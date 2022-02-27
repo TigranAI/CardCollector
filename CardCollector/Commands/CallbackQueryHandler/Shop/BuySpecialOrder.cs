@@ -76,7 +76,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
 
             if (sticker is not null)
             {
-                await User.AddSticker(sticker, 1);
+                await User.AddSticker(Context, sticker, 1);
                 await User.Messages.ClearChat(User);
                 await User.Messages.SendSticker(User, sticker.FileId);
                 await User.Messages.SendMessage(User, $"{Messages.congratulation}\n{sticker}");

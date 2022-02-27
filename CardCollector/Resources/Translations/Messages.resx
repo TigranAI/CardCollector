@@ -371,7 +371,7 @@ https://telegra.ph/help-11-04-4</value>
         <value>Стикер с вотеркой добавлен успешно!</value>
     </data>
     <data name="thanks_for_buying_sticker" xml:space="preserve">
-        <value>{0}: спасибо, что купил у меня стикер!</value>
+        <value>{0}: спасибо, что купил у меня {1}!</value>
     </data>
     <data name="users_top_tier_4_stickers_count" xml:space="preserve">
         <value>⭐&lt;b&gt;Топ пользователей по количеству 4⭐ стикеров&lt;/b&gt;⭐</value>
@@ -471,7 +471,7 @@ mm - минуты
     <data name="you_are_now_awarded" xml:space="preserve">
         <value>Вы уже получили награду из этой раздачи.</value>
     </data>
-    <data name="gievaway_now_ended" xml:space="preserve">
+    <data name="giveaway_now_ended" xml:space="preserve">
         <value>Раздача завершена!</value>
     </data>
     <data name="you_got_from_this_giveaway" xml:space="preserve">
@@ -489,7 +489,13 @@ mm - минуты
         <value>Слишком мало участников!</value>
     </data>
     <data name="congratulation_to_roulette_winner" xml:space="preserve">
-        <value>Победителем становится {0} с шансом {1}%. Список призов:
+        <value>Победитель:
+
+👑{0}👑 
+
+Шанс победы - {1}%
+
+Список призов🎁
 {2}</value>
     </data>
     <data name="you_are_not_creator" xml:space="preserve">
@@ -499,7 +505,7 @@ mm - минуты
         <value>Правила были отправлены вам в личные сообщения</value>
     </data>
     <data name="roulette_rules" xml:space="preserve">
-        <value>Какие-то правила рулетки. Ждем текст</value>
+        <value>Правила рулетки будут сформированы позже.</value>
     </data>
     <data name="roulette_start_now" xml:space="preserve">
         <value>Рулетка уже запущена в этой группе!</value>
@@ -514,7 +520,7 @@ mm - минуты
         <value>Пришло время получить:{0}</value>
     </data>
     <data name="you_are_now_be_awarded_in_another_group" xml:space="preserve">
-        <value>Вы уже были участником раздачи в другой группе</value>
+        <value>Вы уже были участником раздачи. Подождите {0} часов.</value>
     </data>
     <data name="prize_now_claimed" xml:space="preserve">
         <value>Приз уже получен. Ожидайте следующую раздачу</value>

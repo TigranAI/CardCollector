@@ -37,9 +37,12 @@ namespace CardCollector.Controllers
 
         private static async Task CheckActivityGiveaway(BotDatabaseContext context, TelegramChat chat)
         {
-            var interval = DateTime.Now - chat.ChatActivity!.LastGiveaway;
-            if (interval.TotalHours < GROUP_GIVEAWAY_HOURS_INTERVAL) return;
-            var membersCount = await Bot.Client.GetChatMemberCountAsync(chat.ChatId);
+            if (chat.ChatActivity!.LastGiveaway != null)
+            {
+                var interval = DateTime.Now - chat.ChatActivity.LastGiveaway.Value;
+                if (interval.TotalHours < GROUP_GIVEAWAY_HOURS_INTERVAL) return;
+            }
+            var membersCount = await Bot.Client.GetChatMemberCountAsync(chat.ChatId) - 1;
             var messageCount = chat.ChatActivity.MessageCount - chat.ChatActivity.MessageCountAtLastGiveaway;
             if (messageCount < membersCount * ACTIVITY_RATE) return;
             await SendGiveaway(context, chat);
@@ -47,6 +50,8 @@ namespace CardCollector.Controllers
 
         private static async Task SendGiveaway(BotDatabaseContext context, TelegramChat chat)
         {
+            if(chat.ChatActivity.GiveawayAvailable) return;
+            chat.ChatActivity.GiveawayAvailable = true;
             await context.UserActivities.AddAsync(new UserActivity()
             {
                 Action = typeof(GroupController).FullName,

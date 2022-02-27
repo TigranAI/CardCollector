@@ -369,7 +369,13 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Победителем становится {0} с шансом {1}%. Список призов:
+        ///   Looks up a localized string similar to Победитель:
+        ///
+        ///👑{0}👑 
+        ///
+        ///Шанс победы - {1}%
+        ///
+        ///Список призов🎁
         ///{2}.
         /// </summary>
         internal static string congratulation_to_roulette_winner {
@@ -648,9 +654,9 @@ namespace CardCollector.Resources.Translations {
         /// <summary>
         ///   Looks up a localized string similar to Раздача завершена!.
         /// </summary>
-        internal static string gievaway_now_ended {
+        internal static string giveaway_now_ended {
             get {
-                return ResourceManager.GetString("gievaway_now_ended", resourceCulture);
+                return ResourceManager.GetString("giveaway_now_ended", resourceCulture);
             }
         }
         
@@ -919,7 +925,7 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Какие-то правила рулетки. Ждем текст.
+        ///   Looks up a localized string similar to Правила рулетки будут сформированы позже..
         /// </summary>
         internal static string roulette_rules {
             get {
@@ -1149,7 +1155,7 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: спасибо, что купил у меня стикер!.
+        ///   Looks up a localized string similar to {0}: спасибо, что купил у меня {1}!.
         /// </summary>
         internal static string thanks_for_buying_sticker {
             get {
@@ -1344,7 +1350,7 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вы уже были участником раздачи в другой группе.
+        ///   Looks up a localized string similar to Вы уже были участником раздачи. Подождите {0} часов..
         /// </summary>
         internal static string you_are_now_be_awarded_in_another_group {
             get {

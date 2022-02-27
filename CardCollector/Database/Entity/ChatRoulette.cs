@@ -68,11 +68,13 @@ namespace CardCollector.Database.Entity
                     await Group.SendDice(Emoji.SlotMachine);
                     await Group.SendMessage(string.Format(Messages.congratulation_to_roulette_winner,
                             winner.User.Username, Math.Round(chance, 2),
-                            string.Join("\n", Bets.Select(item => $"{item.Sticker.Title} {item.Sticker.TierAsStars()}"))
+                            string.Join("\n", Bets
+                                .Where(item => item.User.Id != winner.Id)
+                                .Select(item => $"{item.Sticker.Title} {item.Sticker.TierAsStars()}"))
                         )
                     );
                     foreach (var bet in Bets)
-                        await winner.User.AddSticker(bet.Sticker, 1);
+                        await winner.User.AddSticker(context, bet.Sticker, 1);
                 }
             }
         }

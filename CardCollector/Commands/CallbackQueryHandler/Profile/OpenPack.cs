@@ -37,7 +37,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
                     userPack.Count > 0
                         ? Keyboard.RepeatCommand(Text.open_more, CallbackQuery.Data!)
                         : Keyboard.BackKeyboard);
-                await User.AddSticker(result, 1);
+                await User.AddSticker(Context, result, 1);
             }
         }
 

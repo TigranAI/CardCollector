@@ -3,6 +3,7 @@ using System;
 using CardCollector.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CardCollector.Migrations
 {
     [DbContext(typeof(BotDatabaseContext))]
-    partial class BotDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220224194600_EditGroupActivity")]
+    partial class EditGroupActivity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -578,6 +580,10 @@ namespace CardCollector.Migrations
                         .HasColumnType("int")
                         .HasColumnName("privilege_level");
 
+                    b.Property<long?>("TelegramChatId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("telegram_chat_id");
+
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(256)
@@ -586,6 +592,9 @@ namespace CardCollector.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_users");
+
+                    b.HasIndex("TelegramChatId")
+                        .HasDatabaseName("ix_users_telegram_chat_id");
 
                     b.ToTable("users", (string)null);
                 });
@@ -740,25 +749,6 @@ namespace CardCollector.Migrations
                         .HasDatabaseName("ix_channel_giveaway_user_used_giveaways_id");
 
                     b.ToTable("channel_giveaway_user", (string)null);
-                });
-
-            modelBuilder.Entity("TelegramChatUser", b =>
-                {
-                    b.Property<long>("AvailableChatsId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("available_chats_id");
-
-                    b.Property<long>("MembersId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("members_id");
-
-                    b.HasKey("AvailableChatsId", "MembersId")
-                        .HasName("pk_telegram_chat_user");
-
-                    b.HasIndex("MembersId")
-                        .HasDatabaseName("ix_telegram_chat_user_members_id");
-
-                    b.ToTable("telegram_chat_user", (string)null);
                 });
 
             modelBuilder.Entity("CardCollector.Database.Entity.Auction", b =>
@@ -932,6 +922,11 @@ namespace CardCollector.Migrations
 
             modelBuilder.Entity("CardCollector.Database.Entity.User", b =>
                 {
+                    b.HasOne("CardCollector.Database.Entity.TelegramChat", null)
+                        .WithMany("Members")
+                        .HasForeignKey("TelegramChatId")
+                        .HasConstraintName("fk_users_telegram_chats_telegram_chat_id");
+
                     b.OwnsOne("CardCollector.Database.Entity.Cash", "Cash", b1 =>
                         {
                             b1.Property<long>("UserId")
@@ -1162,23 +1157,6 @@ namespace CardCollector.Migrations
                         .HasConstraintName("fk_channel_giveaway_user_channel_giveaways_used_giveaways_id");
                 });
 
-            modelBuilder.Entity("TelegramChatUser", b =>
-                {
-                    b.HasOne("CardCollector.Database.Entity.TelegramChat", null)
-                        .WithMany()
-                        .HasForeignKey("AvailableChatsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_telegram_chat_user_telegram_chats_available_chats_id");
-
-                    b.HasOne("CardCollector.Database.Entity.User", null)
-                        .WithMany()
-                        .HasForeignKey("MembersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_telegram_chat_user_users_members_id");
-                });
-
             modelBuilder.Entity("CardCollector.Database.Entity.ChatRoulette", b =>
                 {
                     b.Navigation("Bets");
@@ -1187,6 +1165,11 @@ namespace CardCollector.Migrations
             modelBuilder.Entity("CardCollector.Database.Entity.Pack", b =>
                 {
                     b.Navigation("Stickers");
+                });
+
+            modelBuilder.Entity("CardCollector.Database.Entity.TelegramChat", b =>
+                {
+                    b.Navigation("Members");
                 });
 
             modelBuilder.Entity("CardCollector.Database.Entity.User", b =>

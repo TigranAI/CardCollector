@@ -84,7 +84,7 @@ namespace CardCollector.TimerTasks
                         {
                             var count = prizeList.Count(sticker1 => sticker1.Id == sticker.Id);
                             message += $"\n{sticker.Title} {Text.by} {sticker.Author} {count}{Text.items}";
-                            await user.AddSticker(sticker, count);
+                            await user.AddSticker(context, sticker, count);
                         }
 
                         if (user.Settings[Resources.Enums.UserSettings.StickerEffects])
@@ -120,7 +120,7 @@ namespace CardCollector.TimerTasks
                         {
                             var count = prizeList.Count(sticker1 => sticker1.Id == sticker.Id);
                             message += $"\n{sticker.Title} {Text.by} {sticker.Author} {count}{Text.items}";
-                            await user.AddSticker(sticker, count);
+                            await user.AddSticker(context, sticker, count);
                         }
 
                         if (user.Settings[Resources.Enums.UserSettings.StickerEffects])

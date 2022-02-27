@@ -24,7 +24,7 @@ namespace CardCollector.Database.Entity.NotMapped
             if (RandomStickerTier is not { } tier) return "";
             var stickers = await context.Stickers.FindAllByTier(tier);
             var sticker = stickers.Random();
-            await user.AddSticker(sticker, 1);
+            await user.AddSticker(context, sticker, 1);
             return $"\n{Text.random_sticker_added} {sticker.Title}";
         }
 

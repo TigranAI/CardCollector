@@ -7,7 +7,6 @@ using CardCollector.Database;
 using CardCollector.Database.Entity;
 using CardCollector.Database.EntityDao;
 using CardCollector.Others;
-using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 using Microsoft.EntityFrameworkCore;
 using Telegram.Bot.Types;
@@ -25,11 +24,12 @@ namespace CardCollector.Commands.CallbackQueryHandler.Group
         {
             var data = CallbackQuery.Data!.Split("=");
             var chat = await Context.TelegramChats.FindById(int.Parse(data[1]));
-            
+
             if (await CheckPrizeIsClaimed(chat)) return;
             if (!await CheckCanBeAwarded()) return;
-            
+
             await GivePrize(data, chat);
+            chat.ChatActivity.GiveawayAvailable = false;
             UpdateChatInfo(chat);
         }
 
@@ -38,7 +38,6 @@ namespace CardCollector.Commands.CallbackQueryHandler.Group
             chat.ChatActivity!.MessageCountAtLastGiveaway = chat.ChatActivity.MessageCount;
             chat.ChatActivity.LastGiveaway = DateTime.Now;
             chat.ChatActivity.PrizeClaimed = true;
-            
         }
 
         private async Task<bool> CheckPrizeIsClaimed(TelegramChat? chat)
@@ -48,25 +47,27 @@ namespace CardCollector.Commands.CallbackQueryHandler.Group
                 await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.prize_now_claimed);
                 return true;
             }
+
             return false;
         }
 
         private async Task<bool> CheckCanBeAwarded()
         {
-            var userGroups = await Context.TelegramChats
-                .Where(telegramChat => telegramChat.Members.Contains(User))
-                .ToListAsync();
-            var userCantBeAwarded = userGroups.Any(item =>
+            var lastUserAward = User.AvailableChats.FirstOrDefault(item =>
             {
-                var interval = DateTime.Now - item.ChatActivity.LastGiveaway;
+                if (item.ChatActivity.LastGiveaway == null) return false;
+                var interval = DateTime.Now - item.ChatActivity.LastGiveaway.Value;
                 return interval.TotalHours < GroupController.GROUP_GIVEAWAY_HOURS_INTERVAL;
             });
-            if (userCantBeAwarded)
+            if (lastUserAward != null)
             {
-                await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, 
-                    Messages.you_are_now_be_awarded_in_another_group);
+                var interval = DateTime.Now - lastUserAward.ChatActivity!.LastGiveaway!.Value;
+                await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id,
+                    string.Format(Messages.you_are_now_be_awarded_in_another_group, 8 - (int) interval.TotalHours),
+                    true);
                 return false;
             }
+
             return true;
         }
 
@@ -87,7 +88,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Group
         private async Task<string> ClaimSticker(long stickerId)
         {
             var sticker = await Context.Stickers.FindById(stickerId);
-            await User.AddSticker(sticker, 1);
+            await User.AddSticker(Context, sticker, 1);
             return $"{sticker.Title} {sticker.TierAsStars()}";
         }
 
