@@ -1,11 +1,8 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Database;
 using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
-using Telegram.Bot.Types;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Admin.Giveaway
 {
@@ -20,11 +17,6 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin.Giveaway
             giveaway.SelectedStickerTier = int.Parse(CallbackQuery.Data!.Split("=")[1]);
             module.SelectedChannelGiveawayId = giveaway.Id;
             await User.Messages.EditMessage(User, Messages.select_channel, Keyboard.SelectChannel);
-        }
-
-        public SelectGiveawayTier(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user,
-            context, callbackQuery)
-        {
         }
     }
 }

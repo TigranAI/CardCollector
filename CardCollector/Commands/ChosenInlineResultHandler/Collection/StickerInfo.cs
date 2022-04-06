@@ -1,11 +1,8 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.Database;
 using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
-using Telegram.Bot.Types;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.ChosenInlineResultHandler.Collection
 {
@@ -28,11 +25,6 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Collection
         {
             return base.Match() &&
                    User.Session.State is not (UserState.ShopMenu or UserState.AuctionMenu or UserState.CreateGiveaway);
-        }
-
-        public StickerInfo(User user, BotDatabaseContext context, ChosenInlineResult chosenInlineResult) : base(user,
-            context, chosenInlineResult)
-        {
         }
     }
 }

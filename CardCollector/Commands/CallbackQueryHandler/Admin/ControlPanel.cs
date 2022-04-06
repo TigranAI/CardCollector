@@ -1,13 +1,9 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Attributes;
 using CardCollector.Attributes.Menu;
-using CardCollector.Database;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
-using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Admin
 {
@@ -26,7 +22,5 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin
         {
             return base.Match() && User.PrivilegeLevel >= PrivilegeLevel.Programmer;
         }
-
-        public ControlPanel(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context, callbackQuery) { }
     }
 }

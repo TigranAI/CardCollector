@@ -1,16 +1,12 @@
 ﻿using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using CardCollector.Commands.MessageHandler;
-using CardCollector.Database;
 using CardCollector.Database.EntityDao;
 using CardCollector.Others;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
 using Microsoft.EntityFrameworkCore;
-using Telegram.Bot.Types;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.ChosenInlineResultHandler.Group
 {
@@ -25,8 +21,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Group
             if (userSticker == null) return;
 
             var module = User.Session.GetModule<GroupModule>();
-            while (module.SelectBetChatId == null)
-                await new Task(() => Thread.Sleep(100));
+            if (module.SelectBetChatId == null) await User.Messages.SendMessage(User, "Can't define roulette chat");
 
             var roulette = await Context.ChatRoulette
                 .Where(item => !item.IsStarted && item.Group.ChatId == module.SelectBetChatId)
@@ -40,11 +35,6 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Group
                 await telegramChat.SendMessage(string.Format(Messages.roulette_now_ended, MessageCommands.roulette,
                     AppSettings.NAME));
             }
-        }
-
-        public MadeABet(User user, BotDatabaseContext context, ChosenInlineResult chosenInlineResult) : base(user,
-            context, chosenInlineResult)
-        {
         }
     }
 }

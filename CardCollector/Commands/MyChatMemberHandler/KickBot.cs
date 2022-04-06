@@ -1,8 +1,6 @@
-﻿using System.Threading.Tasks;
-using CardCollector.Database;
-using Telegram.Bot.Types;
+﻿using System;
+using System.Threading.Tasks;
 using Telegram.Bot.Types.Enums;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.MyChatMemberHandler
 {
@@ -11,6 +9,7 @@ namespace CardCollector.Commands.MyChatMemberHandler
         protected override Task Execute()
         {
             User.IsBlocked = true;
+            User.BlockedAt = DateTime.Now;
             return Task.CompletedTask;
         }
 
@@ -19,10 +18,6 @@ namespace CardCollector.Commands.MyChatMemberHandler
             if (ChatMemberUpdated.NewChatMember.Status is not 
                 (ChatMemberStatus.Kicked or ChatMemberStatus.Left)) return false;
             return ChatMemberUpdated.Chat.Type is not (ChatType.Group or ChatType.Supergroup or ChatType.Channel);
-        }
-        
-        public KickBot(User user, BotDatabaseContext context, ChatMemberUpdated member) : base(user, context, member)
-        {
         }
     }
 }

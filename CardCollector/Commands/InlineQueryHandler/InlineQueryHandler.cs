@@ -12,7 +12,7 @@ namespace CardCollector.Commands.InlineQueryHandler
     [Attributes.Handlers.InlineQueryHandler]
     public abstract class InlineQueryHandler : HandlerModel
     {
-        protected readonly InlineQuery InlineQuery;
+        protected InlineQuery InlineQuery;
         protected override string CommandText => "";
 
         public static readonly ICollection<Type> Commands;
@@ -33,22 +33,23 @@ namespace CardCollector.Commands.InlineQueryHandler
         {
             var context = new BotDatabaseContext();
             var user = await context.Users.FindUser(update.InlineQuery!.From);
-            if (user.IsBlocked) return new IgnoreHandler(user, context);
+            if (user.IsBlocked) return new IgnoreHandler();
             
             user.InitSession();
 
             foreach (var handlerType in Commands)
             {
-                var handler = (HandlerModel?) Activator.CreateInstance(handlerType, user, context, update.InlineQuery);
-                if (handler != null && handler.Match()) return handler;
+                var handler = (HandlerModel?) Activator.CreateInstance(handlerType);
+                if (handler != null && handler.Init(user, context, update).Match()) return handler;
             }
             
-            return new IgnoreHandler(user, context);
+            return new IgnoreHandler();
         }
 
-        protected InlineQueryHandler(User user, BotDatabaseContext context, InlineQuery inlineQuery) : base(user, context)
+        public override HandlerModel Init(User user, BotDatabaseContext context, Update update)
         {
-            InlineQuery = inlineQuery;
+            InlineQuery = update.InlineQuery!;
+            return base.Init(user, context, update);
         }
     }
 }

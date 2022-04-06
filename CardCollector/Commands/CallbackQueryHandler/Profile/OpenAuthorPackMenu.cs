@@ -3,11 +3,9 @@ using System.Threading.Tasks;
 using CardCollector.Attributes.Menu;
 using CardCollector.Commands.CallbackQueryHandler.Others;
 using CardCollector.Controllers;
-using CardCollector.Database;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 using Telegram.Bot.Types;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Profile
 {
@@ -24,7 +22,10 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
             if (packs.Count == 0)
             {
                 await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.packs_count_zero, true);
-                if (_fromOpenPackCommand) await new Back(User, Context, CallbackQuery).PrepareAndExecute();
+                if (_fromOpenPackCommand) 
+                    await new Back()
+                        .Init(User, Context, new Update(){CallbackQuery = CallbackQuery})
+                        .PrepareAndExecute();
             }
             else
             {
@@ -43,11 +44,6 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
         {
             await base.InitNewContext(userId);
             _fromOpenPackCommand = true;
-        }
-
-        public OpenAuthorPackMenu(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user,
-            context, callbackQuery)
-        {
         }
     }
 }

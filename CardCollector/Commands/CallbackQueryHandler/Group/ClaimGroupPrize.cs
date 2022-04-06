@@ -3,14 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Attributes.Logs;
 using CardCollector.Controllers;
-using CardCollector.Database;
 using CardCollector.Database.Entity;
 using CardCollector.Database.EntityDao;
 using CardCollector.Others;
 using CardCollector.Resources.Translations;
-using Microsoft.EntityFrameworkCore;
-using Telegram.Bot.Types;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Group
 {
@@ -88,7 +84,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Group
         private async Task<string> ClaimSticker(long stickerId)
         {
             var sticker = await Context.Stickers.FindById(stickerId);
-            await User.AddSticker(Context, sticker, 1);
+            await User.AddSticker(sticker, 1);
             return $"{sticker.Title} {sticker.TierAsStars()}";
         }
 
@@ -97,11 +93,6 @@ namespace CardCollector.Commands.CallbackQueryHandler.Group
             var pack = await Context.Packs.FindById((int) packId);
             User.AddPack(pack, 1);
             return pack.Author;
-        }
-
-        public ClaimGroupPrize(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context,
-            callbackQuery)
-        {
         }
     }
 }

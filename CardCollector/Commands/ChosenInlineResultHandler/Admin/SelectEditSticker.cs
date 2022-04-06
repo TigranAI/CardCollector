@@ -1,11 +1,8 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Database;
 using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
-using Telegram.Bot.Types;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.ChosenInlineResultHandler.Admin
 {
@@ -20,10 +17,6 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Admin
             await User.Messages.ClearChat(User);
             await User.Messages.SendSticker(User, sticker.FileId);
             await User.Messages.SendMessage(User, Messages.upload_new_file, Keyboard.BackKeyboard);
-        }
-
-        public SelectEditSticker(User user, BotDatabaseContext context, ChosenInlineResult chosenInlineResult) : base(user, context, chosenInlineResult)
-        {
         }
     }
 }

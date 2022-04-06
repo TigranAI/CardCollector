@@ -2,12 +2,9 @@
 using System.Threading.Tasks;
 using CardCollector.Attributes.Menu;
 using CardCollector.Controllers;
-using CardCollector.Database;
 using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
-using Telegram.Bot.Types;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Filters
 {
@@ -26,10 +23,6 @@ namespace CardCollector.Commands.CallbackQueryHandler.Filters
             else
                 await User.Messages.EditMessage(User, Messages.choose_author,
                     Keyboard.GetAuthorsKeyboard(packs, offset, packsCount));
-        }
-
-        public AuthorsMenu(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context, callbackQuery)
-        {
         }
     }
 }

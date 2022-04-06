@@ -12,7 +12,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler
     [Attributes.Handlers.ChosenInlineResultHandler]
     public abstract class ChosenInlineResultHandler : HandlerModel
     {
-        protected readonly ChosenInlineResult ChosenInlineResult;
+        protected ChosenInlineResult ChosenInlineResult;
 
         public static readonly ICollection<Type> Commands;
         
@@ -32,17 +32,17 @@ namespace CardCollector.Commands.ChosenInlineResultHandler
         {
             var context = new BotDatabaseContext();
             var user = await context.Users.FindUser(update.ChosenInlineResult!.From);
-            if (user.IsBlocked) return new IgnoreHandler(user, context);
+            if (user.IsBlocked) return new IgnoreHandler();
 
             user.InitSession();
             
             foreach (var handlerType in Commands)
             {
-                var handler = (HandlerModel?) Activator.CreateInstance(handlerType, user, context, update.ChosenInlineResult);
-                if (handler != null && handler.Match()) return handler;
+                var handler = (HandlerModel?) Activator.CreateInstance(handlerType);
+                if (handler != null && handler.Init(user, context, update).Match()) return handler;
             }
             
-            return new IgnoreHandler(user, context);
+            return new IgnoreHandler();
         }
 
         public override bool Match()
@@ -51,10 +51,10 @@ namespace CardCollector.Commands.ChosenInlineResultHandler
             return CommandText == query;
         }
 
-        protected ChosenInlineResultHandler(User user, 
-            BotDatabaseContext context, ChosenInlineResult chosenInlineResult) : base(user, context)
+        public override HandlerModel Init(User user, BotDatabaseContext context, Update update)
         {
-            ChosenInlineResult = chosenInlineResult;
+            ChosenInlineResult = update.ChosenInlineResult!;
+            return base.Init(user, context, update);
         }
     }
 }

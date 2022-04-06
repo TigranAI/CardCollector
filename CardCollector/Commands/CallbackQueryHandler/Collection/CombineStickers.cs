@@ -39,18 +39,14 @@ namespace CardCollector.Commands.CallbackQueryHandler.Collection
                 var stickers =
                     await Context.Stickers.FindAllByTierAndAuthor(combineModule.CombineTier!.Value + 1, randomAuthor);
                 var randSticker = stickers.Random();
-                await User.AddSticker(Context, randSticker, 1);
+                await User.AddSticker(randSticker, 1);
                 await User.Messages.ClearChat(User);
                 await User.Messages.SendSticker(User, randSticker.FileId);
                 await User.Messages.SendMessage(User, $"{Messages.combined_sticker}:\n{randSticker}",
                     Keyboard.BackToFilters(randSticker.Title));
                 User.Session.DeleteModule<CombineModule>();
+                User.Session.DeleteModule<CollectionModule>();
             }
-        }
-
-        public CombineStickers(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context,
-            callbackQuery)
-        {
         }
     }
 }

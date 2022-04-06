@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using CardCollector.Database;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
-using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.MessageHandler.Shop
 {
@@ -53,10 +50,6 @@ namespace CardCollector.Commands.MessageHandler.Shop
         public override bool Match()
         {
             return Queue.Contains(User.Id) && Message.Type == MessageType.Text;
-        }
-
-        public EnterGemsExchange(User user, BotDatabaseContext context, Message message) : base(user, context, message)
-        {
         }
     }
 }

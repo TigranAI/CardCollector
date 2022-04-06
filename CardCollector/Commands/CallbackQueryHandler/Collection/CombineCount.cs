@@ -1,13 +1,10 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Controllers;
-using CardCollector.Database;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
-using Telegram.Bot.Types;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Collection
 {
@@ -37,10 +34,6 @@ namespace CardCollector.Commands.CallbackQueryHandler.Collection
         public override bool Match()
         {
             return base.Match() && User.Session.State is UserState.CombineMenu;
-        }
-
-        public CombineCount(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context, callbackQuery)
-        {
         }
     }
 }

@@ -1,13 +1,10 @@
 ﻿using System.Threading.Tasks;
 using CardCollector.Commands.PreCheckoutQueryHandler;
 using CardCollector.Controllers;
-using CardCollector.Database;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
-using Telegram.Bot.Types;
 using Telegram.Bot.Types.Payments;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Collection
 {
@@ -23,7 +20,5 @@ namespace CardCollector.Commands.CallbackQueryHandler.Collection
             await MessageController.SendInvoice(User, label, description, PreCheckoutQueryCommands.buy_gems_item, 
                 new[] {new LabeledPrice(label, count*69)}, Keyboard.BuyGemsKeyboard(count), Currency.RUB);
         }
-
-        public SetGemsSum(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context, callbackQuery) { }
     }
 }

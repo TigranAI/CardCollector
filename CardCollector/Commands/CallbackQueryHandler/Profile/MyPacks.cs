@@ -1,11 +1,8 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Attributes.Menu;
-using CardCollector.Database;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
-using Telegram.Bot.Types;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Profile
 {
@@ -25,7 +22,5 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
                 $"\n{Messages.author_pack}: {authorCount}{Text.items}",
                 Keyboard.PackMenu);
         }
-
-        public MyPacks(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context, callbackQuery) { }
     }
 }

@@ -1,14 +1,10 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Controllers;
-using CardCollector.Database;
 using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
-using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.MessageHandler.Admin
 {
@@ -33,10 +29,6 @@ namespace CardCollector.Commands.MessageHandler.Admin
             if (Message.Type is not MessageType.Sticker) return false;
             if (User.Session.GetModule<AdminModule>().SelectedPackId == null) return false;
             return true;
-        }
-
-        public UploadPreview(User user, BotDatabaseContext context, Message message) : base(user, context, message)
-        {
         }
     }
 }

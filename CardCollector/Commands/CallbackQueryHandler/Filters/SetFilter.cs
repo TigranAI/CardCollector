@@ -2,11 +2,9 @@
 using CardCollector.Attributes.Menu;
 using CardCollector.Commands.CallbackQueryHandler.Others;
 using CardCollector.Commands.MessageHandler.Menu;
-using CardCollector.Database;
 using CardCollector.Resources.Enums;
 using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Filters
 {
@@ -34,40 +32,37 @@ namespace CardCollector.Commands.CallbackQueryHandler.Filters
                     filters.Sorting = (SortingTypes) int.Parse(value!);
                     break;
                 case FilterKeys.Tier:
-                    filters.Tier = value == null 
+                    filters.Tier = value == null
                         ? null
                         : int.Parse(value);
                     break;
                 case FilterKeys.PriceCoinsFrom:
-                    filters.PriceCoinsFrom = value == null 
+                    filters.PriceCoinsFrom = value == null
                         ? null
                         : int.Parse(value);
                     if (filters.PriceCoinsFrom > filters.PriceCoinsTo) filters.PriceCoinsTo = null;
                     break;
                 case FilterKeys.PriceCoinsTo:
-                    filters.PriceCoinsTo = value == null 
+                    filters.PriceCoinsTo = value == null
                         ? null
                         : int.Parse(value);
                     if (filters.PriceCoinsFrom > filters.PriceCoinsTo) filters.PriceCoinsFrom = null;
                     break;
                 case FilterKeys.PriceGemsFrom:
-                    filters.PriceGemsFrom = value == null 
+                    filters.PriceGemsFrom = value == null
                         ? null
                         : int.Parse(value);
                     if (filters.PriceGemsFrom > filters.PriceGemsTo) filters.PriceGemsTo = null;
                     break;
                 case FilterKeys.PriceGemsTo:
-                    filters.PriceGemsTo = value == null 
+                    filters.PriceGemsTo = value == null
                         ? null
                         : int.Parse(value);
                     if (filters.PriceGemsFrom > filters.PriceGemsTo) filters.PriceGemsFrom = null;
                     break;
             }
-            await new Back(User, Context, CallbackQuery).PrepareAndExecute();
-        }
 
-        public SetFilter(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context, callbackQuery)
-        {
+            await new Back().Init(User, Context, new Update() {CallbackQuery = CallbackQuery}).PrepareAndExecute();
         }
     }
 }

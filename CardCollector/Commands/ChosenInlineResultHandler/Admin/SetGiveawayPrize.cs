@@ -1,13 +1,10 @@
 ﻿using System.Threading.Tasks;
 using CardCollector.Attributes.Menu;
-using CardCollector.Database;
 using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
-using Telegram.Bot.Types;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.ChosenInlineResultHandler.Admin
 {
@@ -27,11 +24,6 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Admin
             giveaway.SelectedSticker = sticker;
             module.SelectedChannelGiveawayId = giveaway.Id;
             await User.Messages.EditMessage(User, Messages.select_channel, Keyboard.SelectChannel);
-        }
-
-        public SetGiveawayPrize(User user, BotDatabaseContext context, ChosenInlineResult chosenInlineResult) : base(
-            user, context, chosenInlineResult)
-        {
         }
     }
 }

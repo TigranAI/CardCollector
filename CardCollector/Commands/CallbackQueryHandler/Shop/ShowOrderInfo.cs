@@ -1,12 +1,8 @@
 ﻿using System.Threading.Tasks;
 using CardCollector.Controllers;
-using CardCollector.Database;
 using CardCollector.Database.EntityDao;
-using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
-using Telegram.Bot.Types;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Shop
 {
@@ -43,7 +39,5 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
         {
             return base.Match() && User.Session.GetModule<ShopModule>().SelectedOrderId != null;
         }
-
-        public ShowOrderInfo(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context, callbackQuery) { }
     }
 }

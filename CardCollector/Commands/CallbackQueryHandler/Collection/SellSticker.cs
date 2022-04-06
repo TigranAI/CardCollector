@@ -1,13 +1,10 @@
 ﻿using System.Threading.Tasks;
 using CardCollector.Commands.MessageHandler.Collection;
 using CardCollector.Controllers;
-using CardCollector.Database;
 using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
-using Telegram.Bot.Types;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Collection
 {
@@ -26,7 +23,5 @@ namespace CardCollector.Commands.CallbackQueryHandler.Collection
                 $"\n{Messages.enter_your_gems_price} {Text.gem}:", Keyboard.BackKeyboard);
             EnterGemsPrice.AddToQueue(User.Id);
         }
-
-        public SellSticker(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context, callbackQuery) { }
     }
 }

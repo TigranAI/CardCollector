@@ -23,10 +23,5 @@ namespace CardCollector.Commands.MyChatMemberHandler
                 (ChatMemberStatus.Kicked or ChatMemberStatus.Left)) return false;
             return ChatMemberUpdated.Chat.Type is ChatType.Channel;
         }
-
-        public KickFromChannel(User user, BotDatabaseContext context, ChatMemberUpdated member) : base(user, context,
-            member)
-        {
-        }
     }
 }

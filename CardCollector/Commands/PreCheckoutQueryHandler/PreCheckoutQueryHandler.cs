@@ -13,7 +13,7 @@ namespace CardCollector.Commands.PreCheckoutQueryHandler
     [Attributes.Handlers.PreCheckoutQueryHandler]
     public abstract class PreCheckoutQueryHandler : HandlerModel
     {
-        protected readonly PreCheckoutQuery PreCheckoutQuery;
+        protected PreCheckoutQuery PreCheckoutQuery;
 
         public static readonly ICollection<Type> Commands;
         
@@ -34,17 +34,17 @@ namespace CardCollector.Commands.PreCheckoutQueryHandler
             
             var context = new BotDatabaseContext();
             var user = await context.Users.FindUser(update.PreCheckoutQuery!.From);
-            if (user.IsBlocked) return new IgnoreHandler(user, context);
+            if (user.IsBlocked) return new IgnoreHandler();
             
             user.InitSession();
             
             foreach (var handlerType in Commands)
             {
-                var handler = (HandlerModel?) Activator.CreateInstance(handlerType, user, context, update.PreCheckoutQuery);
-                if (handler != null && handler.Match()) return handler;
+                var handler = (HandlerModel?) Activator.CreateInstance(handlerType);
+                if (handler != null && handler.Init(user, context, update).Match()) return handler;
             }
             
-            return new IgnoreHandler(user, context);
+            return new IgnoreHandler();
         }
 
         public override bool Match()
@@ -52,9 +52,10 @@ namespace CardCollector.Commands.PreCheckoutQueryHandler
             return CommandText == PreCheckoutQuery.InvoicePayload;
         }
 
-        protected PreCheckoutQueryHandler(User user, BotDatabaseContext context, PreCheckoutQuery preCheckoutQuery) : base(user, context)
+        public override HandlerModel Init(User user, BotDatabaseContext context, Update update)
         {
-            PreCheckoutQuery = preCheckoutQuery;
+            PreCheckoutQuery = update.PreCheckoutQuery!;
+            return base.Init(user, context, update);
         }
     }
 }

@@ -1,13 +1,11 @@
 ﻿using System.Threading.Tasks;
 using CardCollector.Commands.CallbackQueryHandler.Others;
 using CardCollector.Controllers;
-using CardCollector.Database;
 using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
 using Telegram.Bot.Types;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Auction
 {
@@ -24,7 +22,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Auction
             {
                 await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.not_enougth_stickers,
                     true);
-                await new Back(User, Context, CallbackQuery).PrepareAndExecute();
+                await new Back().Init(User, Context, new Update() {CallbackQuery = CallbackQuery}).PrepareAndExecute();
             }
             else if (productInfo.Price * module.Count > User.Cash.Gems)
                 await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.not_enougth_gems, true);
@@ -49,13 +47,9 @@ namespace CardCollector.Commands.CallbackQueryHandler.Auction
                 await User.Messages.EditMessage(User, string.Format(Messages.thanks_for_buying_sticker,
                     productInfo.Trader.Username, productInfo.Sticker.Title), Keyboard.BackKeyboard);
 
-                await User.AddSticker(Context, productInfo.Sticker, productInfo.Count);
+                await User.AddSticker(productInfo.Sticker, module.Count);
                 User.Session.ResetModule<AuctionModule>();
             }
-        }
-
-        public BuySticker(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context, callbackQuery)
-        {
         }
     }
 }

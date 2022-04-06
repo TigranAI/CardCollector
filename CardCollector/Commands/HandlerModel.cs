@@ -1,10 +1,13 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CardCollector.Attributes.Logs;
 using CardCollector.Attributes.Menu;
 using CardCollector.Database;
 using CardCollector.Database.Entity;
 using CardCollector.Database.EntityDao;
+using Newtonsoft.Json;
+using Telegram.Bot.Types;
 using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands
@@ -14,7 +17,8 @@ namespace CardCollector.Commands
         protected abstract string CommandText { get; }
         protected virtual bool ClearMenu => false;
         protected virtual bool ClearStickers => false;
-        
+        protected readonly Dictionary<string, object> TRACE_DATA = new ();
+
         protected User User;
         protected BotDatabaseContext Context;
 
@@ -47,6 +51,7 @@ namespace CardCollector.Commands
 
         protected virtual async Task AfterExecute()
         {
+            Logs.LogOut(this);
             if (!Context.IsDisposed())
             {
                 if (Attribute.IsDefined(GetType(), typeof(SavedActivityAttribute)))
@@ -70,12 +75,21 @@ namespace CardCollector.Commands
             }
         }
 
+        public override string ToString()
+        {
+            string userId = $"user id: {User?.Id.ToString() ?? "null"}";
+            string commandFullname = GetType().FullName ?? GetType().Name;
+            string traceData = Utilities.ToJson(TRACE_DATA, Formatting.Indented);
+            return $"[{commandFullname}] triggered by [{userId}]. Trace data: {traceData}";
+        }
+
         public abstract bool Match();
 
-        protected HandlerModel(User user, BotDatabaseContext context)
+        public virtual HandlerModel Init(User user, BotDatabaseContext context, Update update)
         {
             User = user;
             Context = context;
+            return this;
         }
     }
 }

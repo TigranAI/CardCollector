@@ -37,10 +37,5 @@ namespace CardCollector.Commands.MyChatMemberHandler
                 (ChatMemberStatus.Member or ChatMemberStatus.Administrator)) return false;
             return ChatMemberUpdated.Chat.Type is ChatType.Channel;
         }
-
-        public AddToChannel(User user, BotDatabaseContext context, ChatMemberUpdated member) : base(user, context,
-            member)
-        {
-        }
     }
 }

@@ -1,14 +1,12 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.Database;
 using CardCollector.Database.Entity;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 using Microsoft.EntityFrameworkCore;
 using Telegram.Bot;
-using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using User = CardCollector.Database.Entity.User;
+using UserSettings = CardCollector.Resources.Enums.UserSettings;
 
 namespace CardCollector.Commands.MessageHandler.Group
 {
@@ -26,7 +24,7 @@ namespace CardCollector.Commands.MessageHandler.Group
             {
                 var membersCount = await Bot.Client.GetChatMemberCountAsync(Message.Chat.Id) - 1;
                 User.Level.GiveExp(membersCount < 21 ? membersCount : 20);
-                if (User.Settings[Resources.Enums.UserSettings.ExpGain])
+                if (User.Settings[UserSettings.ExpGain])
                     await User.Messages.SendMessage(User,
                         $"{Messages.you_gained} {(membersCount < 21 ? membersCount : 20)} {Text.exp} {Messages.send_sticker}" +
                         $"\n{Messages.count_sends_per_day} \"{Message.Chat.Title}\" {countSentStickers + 1} / 5");
@@ -42,10 +40,6 @@ namespace CardCollector.Commands.MessageHandler.Group
             if (bot.Username != AppSettings.NAME) return false;
             if (Message.Type != MessageType.Sticker) return false;
             return Message.Chat.Type is ChatType.Group or ChatType.Supergroup;
-        }
-
-        public SendStickerInChat(User user, BotDatabaseContext context, Message message) : base(user, context, message)
-        {
         }
     }
 }

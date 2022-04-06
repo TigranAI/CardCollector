@@ -2,11 +2,8 @@
 using System.Threading.Tasks;
 using CardCollector.Commands.ChosenInlineResultHandler;
 using CardCollector.Controllers;
-using CardCollector.Database;
 using CardCollector.Others;
-using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.InlineQueryHandler.Group
 {
@@ -31,10 +28,6 @@ namespace CardCollector.Commands.InlineQueryHandler.Group
         {
             if (InlineQuery.ChatType is not (ChatType.Group or ChatType.Supergroup)) return false;
             return InlineQuery.Query.StartsWith(CommandText);
-        }
-        
-        public ShowBetStickers(User user, BotDatabaseContext context, InlineQuery inlineQuery) : base(user, context, inlineQuery)
-        {
         }
     }
 }

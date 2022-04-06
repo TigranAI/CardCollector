@@ -3,13 +3,9 @@ using System.Threading.Tasks;
 using CardCollector.Attributes.Logs;
 using CardCollector.Commands.MessageHandler.Collection;
 using CardCollector.Controllers;
-using CardCollector.Database;
 using CardCollector.Database.EntityDao;
-using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
-using Telegram.Bot.Types;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Collection
 {
@@ -36,7 +32,5 @@ namespace CardCollector.Commands.CallbackQueryHandler.Collection
                 await User.Messages.EditMessage(User, Messages.successfully_selling);
             }
         }
-        
-        public ConfirmSelling(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context, callbackQuery){}
     }
 }

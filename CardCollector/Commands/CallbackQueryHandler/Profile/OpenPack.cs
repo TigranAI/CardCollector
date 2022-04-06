@@ -1,13 +1,10 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Controllers;
-using CardCollector.Database;
 using CardCollector.Others;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 using Microsoft.EntityFrameworkCore;
-using Telegram.Bot.Types;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Profile
 {
@@ -37,7 +34,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
                     userPack.Count > 0
                         ? Keyboard.RepeatCommand(Text.open_more, CallbackQuery.Data!)
                         : Keyboard.BackKeyboard);
-                await User.AddSticker(Context, result, 1);
+                await User.AddSticker(result, 1);
             }
         }
 
@@ -50,11 +47,6 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
                 < 16 => 2,
                 _ => 1
             };
-        }
-
-        public OpenPack(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context,
-            callbackQuery)
-        {
         }
     }
 }

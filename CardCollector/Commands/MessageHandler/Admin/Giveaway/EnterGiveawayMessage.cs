@@ -1,13 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using CardCollector.Database;
 using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
-using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.MessageHandler.Admin.Giveaway
 {
@@ -41,11 +38,6 @@ namespace CardCollector.Commands.MessageHandler.Admin.Giveaway
         public override bool Match()
         {
             return Queue.Contains(User.Id) && Message.Type == MessageType.Text;
-        }
-
-        public EnterGiveawayMessage(User user, BotDatabaseContext context, Message message) : base(user, context,
-            message)
-        {
         }
     }
 }

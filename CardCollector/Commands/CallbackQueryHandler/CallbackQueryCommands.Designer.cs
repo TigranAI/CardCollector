@@ -97,6 +97,15 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ACJ.
+        /// </summary>
+        internal static string beginners_tasks {
+            get {
+                return ResourceManager.GetString("beginners_tasks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AAE.
         /// </summary>
         internal static string buy_coins {
@@ -322,6 +331,15 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ACF.
+        /// </summary>
+        internal static string invite_friend {
+            get {
+                return ResourceManager.GetString("invite_friend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AAY.
         /// </summary>
         internal static string logs_menu {
@@ -489,6 +507,33 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         internal static string settings {
             get {
                 return ResourceManager.GetString("settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ACI.
+        /// </summary>
+        internal static string share_invite_url {
+            get {
+                return ResourceManager.GetString("share_invite_url", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ACH.
+        /// </summary>
+        internal static string show_invite_reward_info {
+            get {
+                return ResourceManager.GetString("show_invite_reward_info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ACG.
+        /// </summary>
+        internal static string show_invited_friends {
+            get {
+                return ResourceManager.GetString("show_invited_friends", resourceCulture);
             }
         }
         

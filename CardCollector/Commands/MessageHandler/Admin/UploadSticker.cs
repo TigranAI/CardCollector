@@ -1,14 +1,11 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Database;
+using CardCollector.Database.Entity;
 using CardCollector.Others;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
-using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using Sticker = CardCollector.Database.Entity.Sticker;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.MessageHandler.Admin
 {
@@ -33,10 +30,6 @@ namespace CardCollector.Commands.MessageHandler.Admin
             if (User.Session.State != UserState.UploadSticker) return false;
             if (Message.Type is not MessageType.Sticker) return false;
             return true;
-        }
-
-        public UploadSticker(User user, BotDatabaseContext context, Message message) : base(user, context, message)
-        {
         }
     }
 }

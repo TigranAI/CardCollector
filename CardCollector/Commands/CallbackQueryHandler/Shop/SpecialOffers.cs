@@ -2,12 +2,9 @@
 using System.Threading.Tasks;
 using CardCollector.Attributes.Menu;
 using CardCollector.Controllers;
-using CardCollector.Database;
 using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
-using Telegram.Bot.Types;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Shop
 {
@@ -28,11 +25,6 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
                 await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.offers_not_found, true);
             else
                 await User.Messages.EditMessage(User, Messages.available_offers, Keyboard.SpecialOrdersKeyboard(availableOffers));
-        }
-
-        public SpecialOffers(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context,
-            callbackQuery)
-        {
         }
     }
 }

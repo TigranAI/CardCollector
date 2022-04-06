@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using CardCollector.Attributes.Handlers;
 using CardCollector.Database;
 using CardCollector.Database.EntityDao;
-using Microsoft.EntityFrameworkCore;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using User = CardCollector.Database.Entity.User;
@@ -16,7 +15,7 @@ namespace CardCollector.Commands.MyChatMemberHandler
     public abstract class MyChatMemberHandler : HandlerModel
     {
         protected override string CommandText => "";
-        protected readonly ChatMemberUpdated ChatMemberUpdated;
+        protected ChatMemberUpdated ChatMemberUpdated;
 
         public static readonly ICollection<Type> Commands;
 
@@ -32,15 +31,6 @@ namespace CardCollector.Commands.MyChatMemberHandler
             }
         }
 
-
-        private async Task BlockChat()
-        {
-            if (ChatMemberUpdated.Chat.Type is (ChatType.Group or ChatType.Supergroup or ChatType.Channel))
-            {
-                
-            }
-        }
-
         public static async Task<HandlerModel> Factory(Update update)
         {
             var context = new BotDatabaseContext();
@@ -50,17 +40,17 @@ namespace CardCollector.Commands.MyChatMemberHandler
 
             foreach (var handlerType in Commands)
             {
-                var handler = (HandlerModel?) Activator.CreateInstance(handlerType, user, context, update.MyChatMember);
-                if (handler != null && handler.Match()) return handler;
+                var handler = (HandlerModel?) Activator.CreateInstance(handlerType);
+                if (handler != null && handler.Init(user, context, update).Match()) return handler;
             }
 
-            return new IgnoreHandler(user, context);
+            return new IgnoreHandler();
         }
 
-        protected MyChatMemberHandler(User user, BotDatabaseContext context, ChatMemberUpdated member) : base(user,
-            context)
+        public override HandlerModel Init(User user, BotDatabaseContext context, Update update)
         {
-            ChatMemberUpdated = member;
+            ChatMemberUpdated = update.ChatMember!;
+            return base.Init(user, context, update);
         }
     }
 }

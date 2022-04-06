@@ -3,14 +3,10 @@ using System.Threading.Tasks;
 using CardCollector.Attributes.Menu;
 using CardCollector.Commands.ChosenInlineResultHandler;
 using CardCollector.Controllers;
-using CardCollector.Database;
 using CardCollector.Others;
-using CardCollector.Resources;
 using CardCollector.Resources.Enums;
 using CardCollector.Session.Modules;
-using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.InlineQueryHandler.Collection
 {
@@ -40,10 +36,6 @@ namespace CardCollector.Commands.InlineQueryHandler.Collection
         public override bool Match()
         {
             return User.Session.State == UserState.CombineMenu && InlineQuery.ChatType is ChatType.Sender;
-        }
-
-        public ShowCombineStickers(User user, BotDatabaseContext context, InlineQuery inlineQuery) : base(user, context, inlineQuery)
-        {
         }
     }
 }

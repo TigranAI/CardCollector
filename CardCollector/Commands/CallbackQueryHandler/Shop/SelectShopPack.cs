@@ -1,12 +1,9 @@
 ﻿using System.Threading.Tasks;
 using CardCollector.Attributes.Menu;
-using CardCollector.Database;
 using CardCollector.Database.EntityDao;
 using CardCollector.Others;
 using CardCollector.Resources;
 using CardCollector.Session.Modules;
-using Telegram.Bot.Types;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Shop
 {
@@ -30,10 +27,6 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
             else
                 await User.Messages.SendSticker(User, packInfo.PreviewFileId,
                     Keyboard.ShopPackKeyboard(packInfo));
-        }
-
-        public SelectShopPack(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context, callbackQuery)
-        {
         }
     }
 }

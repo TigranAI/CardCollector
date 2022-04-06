@@ -1,10 +1,7 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Database;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
-using Telegram.Bot.Types;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Shop
 {
@@ -21,10 +18,6 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
                 $"\n{Messages.coins_exchange_count} {module.EnteredExchangeSum * 150}{Text.coin}" +
                 $"\n\n{Messages.choose_exchange_sum}",
                 Keyboard.BuyCoinsKeyboard());
-        }
-
-        public BuyCoins(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context, callbackQuery)
-        {
         }
     }
 }

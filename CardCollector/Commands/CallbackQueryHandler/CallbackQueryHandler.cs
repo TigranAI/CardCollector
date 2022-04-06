@@ -32,17 +32,17 @@ namespace CardCollector.Commands.CallbackQueryHandler
         {
             var context = new BotDatabaseContext();
             var user = await context.Users.FindUser(update.CallbackQuery!.From);
-            if (user.IsBlocked) return new IgnoreHandler(user, context);
+            if (user.IsBlocked) return new IgnoreHandler();
             
             user.InitSession();
 
             foreach (var handlerType in Commands)
             {
-                var handler = (HandlerModel?) Activator.CreateInstance(handlerType, user, context, update.CallbackQuery);
-                if (handler != null && handler.Match()) return handler;
+                var handler = (HandlerModel?) Activator.CreateInstance(handlerType);
+                if (handler != null && handler.Init(user, context, update).Match()) return handler;
             }
             
-            return new IgnoreHandler(user, context);
+            return new IgnoreHandler();
         }
 
         public override bool Match()
@@ -51,9 +51,10 @@ namespace CardCollector.Commands.CallbackQueryHandler
             return query == CommandText;
         }
 
-        protected CallbackQueryHandler(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context)
+        public override HandlerModel Init(User user, BotDatabaseContext context, Update update)
         {
-            CallbackQuery = callbackQuery;
+            CallbackQuery = update.CallbackQuery!;
+            return base.Init(user, context, update);
         }
     }
 }

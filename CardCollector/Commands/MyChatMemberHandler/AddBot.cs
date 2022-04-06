@@ -1,8 +1,6 @@
-﻿using System.Threading.Tasks;
-using CardCollector.Database;
-using Telegram.Bot.Types;
+﻿using System;
+using System.Threading.Tasks;
 using Telegram.Bot.Types.Enums;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.MyChatMemberHandler
 {
@@ -10,7 +8,11 @@ namespace CardCollector.Commands.MyChatMemberHandler
     {
         protected override Task Execute()
         {
-            User.IsBlocked = false;
+            if (User.IsBlocked)
+            {
+                User.UnblockedAt = DateTime.Now;
+                User.IsBlocked = false;
+            }
             return Task.CompletedTask;
         }
 
@@ -19,10 +21,6 @@ namespace CardCollector.Commands.MyChatMemberHandler
             if (ChatMemberUpdated.NewChatMember.Status is not 
                 (ChatMemberStatus.Member or ChatMemberStatus.Administrator)) return false;
             return ChatMemberUpdated.Chat.Type is not (ChatType.Group or ChatType.Supergroup or ChatType.Channel);
-        }
-        
-        public AddBot(User user, BotDatabaseContext context, ChatMemberUpdated member) : base(user, context, member)
-        {
         }
     }
 }

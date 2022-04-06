@@ -1,13 +1,11 @@
 ﻿using System.Threading.Tasks;
 using CardCollector.Attributes.Logs;
 using CardCollector.Commands.PreCheckoutQueryHandler;
-using CardCollector.Database;
 using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
+using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
-using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.MessageHandler.Shop
 {
@@ -27,7 +25,7 @@ namespace CardCollector.Commands.MessageHandler.Shop
             User.Level.GiveExp(gemsCount * 2);
             await User.Level.CheckLevelUp(Context, User);
             
-            if (User.Settings[Resources.Enums.UserSettings.ExpGain])
+            if (User.Settings[UserSettings.ExpGain])
                 await User.Messages.SendMessage(User,
                     $"{Messages.you_gained} {gemsCount * 2} {Text.exp} {Messages.for_buy_gems}",
                     Keyboard.BackKeyboard);
@@ -45,10 +43,6 @@ namespace CardCollector.Commands.MessageHandler.Shop
         {
             return Message.Type == MessageType.SuccessfulPayment &&
                    Message.SuccessfulPayment!.InvoicePayload.Equals(CommandText);
-        }
-
-        public BuyGemsItem(User user, BotDatabaseContext context, Message message) : base(user, context, message)
-        {
         }
     }
 }

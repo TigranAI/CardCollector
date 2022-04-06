@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.Database;
 using CardCollector.Database.Entity;
 using CardCollector.Database.EntityDao;
 using CardCollector.Others;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 using Microsoft.EntityFrameworkCore;
-using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Admin
 {
@@ -52,11 +49,6 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin
                 .ToListAsync();
             var results = new CountLogs();
             return Functions.CalculateActivityResults(results, todayActivities);
-        }
-
-        public LogsMenu(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context,
-            callbackQuery)
-        {
         }
     }
 }

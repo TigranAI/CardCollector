@@ -2,14 +2,11 @@
 using System.Threading.Tasks;
 using CardCollector.Attributes.Logs;
 using CardCollector.Commands.ChosenInlineResultHandler.Group;
-using CardCollector.Database;
 using CardCollector.Database.Entity;
 using CardCollector.Database.EntityDao;
-using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 using CardCollector.UserDailyTask;
-using Telegram.Bot.Types;
-using User = CardCollector.Database.Entity.User;
+using UserSettings = CardCollector.Resources.Enums.UserSettings;
 
 namespace CardCollector.Commands.ChosenInlineResultHandler.Private
 {
@@ -56,15 +53,11 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Private
 
         private async Task SendAlert(DailyTask dailyTask)
         {
-            if (User.Settings[Resources.Enums.UserSettings.DailyTaskProgress])
+            if (User.Settings[UserSettings.DailyTaskProgress])
                 await User.Messages.SendDailyTaskProgress(User,
                     $"{Messages.send_sticker_progress}: " +
                     $"{TaskGoals.Goals[TaskKeys.SendStickersToUsers] - dailyTask.Progress}" +
                     $" / {TaskGoals.Goals[TaskKeys.SendStickersToUsers]}");
-        }
-
-        public SendPrivateSticker(User user, BotDatabaseContext context, ChosenInlineResult chosenInlineResult) : base(user, context, chosenInlineResult)
-        {
         }
     }
 }

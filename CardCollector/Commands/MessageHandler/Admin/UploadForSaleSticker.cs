@@ -1,13 +1,10 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Database;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
 using Microsoft.EntityFrameworkCore;
-using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.MessageHandler.Admin
 {
@@ -31,10 +28,6 @@ namespace CardCollector.Commands.MessageHandler.Admin
             if (User.Session.State is not UserState.LoadForSaleSticker) return false;
             if (User.Session.GetModule<AdminModule>().SelectedStickerId == null) return false;
             return true;
-        }
-
-        public UploadForSaleSticker(User user, BotDatabaseContext context, Message message) : base(user, context, message)
-        {
         }
     }
 }

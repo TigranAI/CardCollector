@@ -1,11 +1,7 @@
 ﻿using System.Threading.Tasks;
 using CardCollector.Controllers;
-using CardCollector.Database;
 using CardCollector.Database.EntityDao;
-using CardCollector.Resources;
 using CardCollector.Resources.Translations;
-using Telegram.Bot.Types;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Others
 {
@@ -27,11 +23,6 @@ namespace CardCollector.Commands.CallbackQueryHandler.Others
                 await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id,
                     string.Format(Messages.you_got_from_this_giveaway, giveaway.PrizeText()), true);
             }
-        }
-
-        public ClaimGiveaway(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context,
-            callbackQuery)
-        {
         }
     }
 }

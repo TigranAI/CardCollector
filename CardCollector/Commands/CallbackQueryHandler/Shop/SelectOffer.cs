@@ -1,10 +1,7 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Database;
 using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
 using CardCollector.Session.Modules;
-using Telegram.Bot.Types;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Shop
 {
@@ -22,10 +19,6 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
                 await User.Messages.EditMessage(User, orderInfo.Title, Keyboard.OrderKeyboard(orderInfo));
             else
                 await User.Messages.SendSticker(User, orderInfo.PreviewFileId, Keyboard.OrderKeyboard(orderInfo));
-        }
-
-        public SelectOffer(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context, callbackQuery)
-        {
         }
     }
 }

@@ -1,16 +1,12 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Database;
 using CardCollector.Resources;
 using CardCollector.Session.Modules;
-using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.MessageHandler.Group
 {
     public class MadeABet : MessageHandler
     {
-
         protected override string CommandText => "";
         protected override Task Execute()
         {
@@ -24,10 +20,6 @@ namespace CardCollector.Commands.MessageHandler.Group
             if (bot.Username != AppSettings.NAME) return false;
             if (Message.Type != MessageType.Text) return false;
             return Message.Chat.Type is ChatType.Group or ChatType.Supergroup;
-        }
-
-        public MadeABet(User user, BotDatabaseContext context, Message message) : base(user, context, message)
-        {
         }
     }
 }

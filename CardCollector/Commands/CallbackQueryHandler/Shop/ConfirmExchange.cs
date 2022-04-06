@@ -1,11 +1,7 @@
 ﻿using System.Threading.Tasks;
 using CardCollector.Controllers;
-using CardCollector.Database;
-using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
-using Telegram.Bot.Types;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Shop
 {
@@ -26,7 +22,5 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
                     $"{Messages.you_got} {module.EnteredExchangeSum * 10}{Text.coin} {Text.per} {module.EnteredExchangeSum}{Text.gem}");
             }
         }
-
-        public ConfirmExchange(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context, callbackQuery) { }
     }
 }

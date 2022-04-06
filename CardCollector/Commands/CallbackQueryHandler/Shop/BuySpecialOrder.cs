@@ -1,16 +1,12 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Controllers;
-using CardCollector.Database;
 using CardCollector.Database.Entity;
 using CardCollector.Database.EntityDao;
 using CardCollector.Others;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
-using Telegram.Bot.Types;
-using Sticker = CardCollector.Database.Entity.Sticker;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Shop
 {
@@ -76,7 +72,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
 
             if (sticker is not null)
             {
-                await User.AddSticker(Context, sticker, 1);
+                await User.AddSticker(sticker, 1);
                 await User.Messages.ClearChat(User);
                 await User.Messages.SendSticker(User, sticker.FileId);
                 await User.Messages.SendMessage(User, $"{Messages.congratulation}\n{sticker}");
@@ -86,10 +82,6 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
         public override bool Match()
         {
             return base.Match() && User.Session.GetModule<ShopModule>().SelectedOrderId != null;
-        }
-
-        public BuySpecialOrder(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context, callbackQuery)
-        {
         }
     }
 }

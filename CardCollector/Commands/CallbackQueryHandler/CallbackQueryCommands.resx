@@ -192,4 +192,19 @@
     <data name="claim_group_prize" xml:space="preserve">
         <value>ACE</value>
     </data>
+    <data name="invite_friend" xml:space="preserve">
+        <value>ACF</value>
+    </data>
+    <data name="show_invited_friends" xml:space="preserve">
+        <value>ACG</value>
+    </data>
+    <data name="show_invite_reward_info" xml:space="preserve">
+        <value>ACH</value>
+    </data>
+    <data name="share_invite_url" xml:space="preserve">
+        <value>ACI</value>
+    </data>
+    <data name="beginners_tasks" xml:space="preserve">
+        <value>ACJ</value>
+    </data>
 </root>

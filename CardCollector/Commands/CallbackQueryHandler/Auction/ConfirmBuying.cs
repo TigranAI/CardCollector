@@ -1,12 +1,9 @@
 ﻿using System.Threading.Tasks;
 using CardCollector.Controllers;
-using CardCollector.Database;
 using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
-using Telegram.Bot.Types;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Auction
 {
@@ -31,11 +28,6 @@ namespace CardCollector.Commands.CallbackQueryHandler.Auction
                 await User.Messages.EditMessage(User, text,
                     Keyboard.GetConfirmationKeyboard(CallbackQueryCommands.buy_sticker));
             }
-        }
-
-        public ConfirmBuying(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context,
-            callbackQuery)
-        {
         }
     }
 }

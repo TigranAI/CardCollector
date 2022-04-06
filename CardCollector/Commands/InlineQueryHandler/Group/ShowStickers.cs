@@ -3,11 +3,8 @@ using System.Threading.Tasks;
 using CardCollector.Attributes.Menu;
 using CardCollector.Commands.ChosenInlineResultHandler;
 using CardCollector.Controllers;
-using CardCollector.Database;
 using CardCollector.Others;
-using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.InlineQueryHandler.Group
 {
@@ -18,6 +15,7 @@ namespace CardCollector.Commands.InlineQueryHandler.Group
         {
             var stickersList = User.Stickers
                 .Where(item => item.Count > 0 && item.Sticker.Contains(InlineQuery.Query))
+                .OrderByDescending(item => item.LastUsage)
                 .Select(item => item.Sticker)
                 .ToList();
             var offset = int.Parse(InlineQuery.Offset == "" ? "0" : InlineQuery.Offset);
@@ -31,11 +29,6 @@ namespace CardCollector.Commands.InlineQueryHandler.Group
         {
             if (InlineQuery.ChatType is not (ChatType.Group or ChatType.Supergroup)) return false;
             return !InlineQuery.Query.StartsWith("#");
-        }
-
-        public ShowStickers(User user, BotDatabaseContext context, InlineQuery inlineQuery) : base(user, context,
-            inlineQuery)
-        {
         }
     }
 }

@@ -3,15 +3,11 @@ using System.Threading.Tasks;
 using CardCollector.Attributes.Menu;
 using CardCollector.Commands.ChosenInlineResultHandler;
 using CardCollector.Controllers;
-using CardCollector.Database;
 using CardCollector.Database.EntityDao;
 using CardCollector.Others;
-using CardCollector.Resources;
 using CardCollector.Resources.Enums;
 using CardCollector.Session.Modules;
-using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.InlineQueryHandler.Admin
 {
@@ -37,11 +33,6 @@ namespace CardCollector.Commands.InlineQueryHandler.Admin
             if (User.PrivilegeLevel < PrivilegeLevel.Programmer) return false;
             if (User.Session.State is not (UserState.EditSticker or UserState.LoadForSaleSticker)) return false;
             return User.Session.GetModule<AdminModule>().SelectedPackId is not null;
-        }
-
-        public ShowStickersToEdit(User user, BotDatabaseContext context, InlineQuery inlineQuery) : base(user, context,
-            inlineQuery)
-        {
         }
     }
 }

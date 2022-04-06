@@ -1,10 +1,7 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Database;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 using CardCollector.UserDailyTask;
-using Telegram.Bot.Types;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Profile
 {
@@ -23,7 +20,5 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
             }
             await User.Messages.EditMessage(User, text, Keyboard.BackKeyboard);
         }
-
-        public DailyTasks(User user, BotDatabaseContext context, CallbackQuery callbackQuery) : base(user, context, callbackQuery) { }
     }
 }

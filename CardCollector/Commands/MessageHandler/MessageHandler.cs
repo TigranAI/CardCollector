@@ -28,7 +28,7 @@ namespace CardCollector.Commands.MessageHandler
             var assembly = Assembly.GetExecutingAssembly();
             foreach (var type in assembly.GetTypes())
             {
-                if (type == typeof(MessageHandler)) continue;
+                if (type.IsAbstract) continue;
                 if (Attribute.IsDefined(type, typeof(MessageHandlerAttribute)))
                     Commands.Add(type);
             }
@@ -38,12 +38,12 @@ namespace CardCollector.Commands.MessageHandler
         {
             var context = new BotDatabaseContext();
             var user = await context.Users.FindUser(update.Message!.From!);
-            if (user.IsBlocked) return new IgnoreHandler(user, context);
+            if (user.IsBlocked) return new IgnoreHandler();
             
             if (update.Message?.From?.Username == AppSettings.NAME)
             {
                 await Bot.Client.DeleteMessageAsync(update.Message.Chat.Id, update.Message.MessageId);
-                return new IgnoreHandler(user, context);
+                return new IgnoreHandler();
             }
 
             if (update.Message!.Chat.Type is ChatType.Private && update.Message.Text != Text.start)
@@ -56,11 +56,11 @@ namespace CardCollector.Commands.MessageHandler
             
             foreach (var handlerType in Commands)
             {
-                var handler = (HandlerModel?) Activator.CreateInstance(handlerType, user, context, update.Message);
-                if (handler != null && handler.Match()) return handler;
+                var handler = (HandlerModel?) Activator.CreateInstance(handlerType);
+                if (handler != null && handler.Init(user, context, update).Match()) return handler;
             }
 
-            return new IgnoreHandler(user, context);
+            return new IgnoreHandler();
         }
 
         public override bool Match()
@@ -70,9 +70,10 @@ namespace CardCollector.Commands.MessageHandler
             return  Message.Text == CommandText;
         }
 
-        protected MessageHandler(User user, BotDatabaseContext context, Message message) : base(user, context)
+        public override HandlerModel Init(User user, BotDatabaseContext context, Update update)
         {
-            Message = message;
+            Message = update.Message!;
+            return base.Init(user, context, update);
         }
     }
 }

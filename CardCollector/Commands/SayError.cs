@@ -10,7 +10,7 @@ namespace CardCollector.Commands
     [DontAddToCommandStack]
     public class SayError : HandlerModel
     {
-        private Exception _exception;
+        private Exception _exception { get; set; }
 
         protected override string CommandText => "";
         protected override async Task Execute()
@@ -21,10 +21,11 @@ namespace CardCollector.Commands
         }
 
         public override bool Match() => true;
-        
-        public SayError(User user, BotDatabaseContext context, Exception exception) : base(user, context)
+
+        public SayError SetException(Exception e)
         {
-            _exception = exception;
+            _exception = e;
+            return this;
         }
     }
 }

@@ -21,9 +21,6 @@
     <data name="help" xml:space="preserve">
         <value>/help</value>
     </data>
-    <data name="login" xml:space="preserve">
-        <value>login</value>
-    </data>
     <data name="start" xml:space="preserve">
         <value>/start</value>
     </data>
@@ -41,9 +38,6 @@
     </data>
     <data name="auction" xml:space="preserve">
         <value>Аукцион</value>
-    </data>
-    <data name="claim_giveaway" xml:space="preserve">
-        <value>claim_giveaway</value>
     </data>
     <data name="roulette" xml:space="preserve">
         <value>/roulette</value>

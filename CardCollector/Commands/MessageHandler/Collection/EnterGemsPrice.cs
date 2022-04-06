@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using CardCollector.Database;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
-using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.MessageHandler.Collection
 {
@@ -33,13 +30,11 @@ namespace CardCollector.Commands.MessageHandler.Collection
             }
         }
 
-        /* Добавляем пользователя в очередь */
         public static void AddToQueue(long userId)
         {
             if (!Queue.Contains(userId)) Queue.AddLast(userId);
         }
 
-        /* Удаляем пользователя из очереди */
         public static void RemoveFromQueue(long userId)
         {
             Queue.Remove(userId);
@@ -48,10 +43,6 @@ namespace CardCollector.Commands.MessageHandler.Collection
         public override bool Match()
         {
             return Queue.Contains(User.Id) && Message.Type == MessageType.Text;
-        }
-
-        public EnterGemsPrice(User user, BotDatabaseContext context, Message message) : base(user, context, message)
-        {
         }
     }
 }

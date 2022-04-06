@@ -39,9 +39,5 @@ namespace CardCollector.Commands.MyChatMemberHandler
                 (ChatMemberStatus.Member or ChatMemberStatus.Administrator)) return false;
             return ChatMemberUpdated.Chat.Type is ChatType.Group or ChatType.Supergroup;
         }
-
-        public AddToGroup(User user, BotDatabaseContext context, ChatMemberUpdated member) : base(user, context, member)
-        {
-        }
     }
 }

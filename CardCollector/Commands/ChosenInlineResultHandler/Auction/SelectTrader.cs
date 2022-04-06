@@ -1,10 +1,7 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Database;
 using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
 using CardCollector.Session.Modules;
-using Telegram.Bot.Types;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.ChosenInlineResultHandler.Auction
 {
@@ -19,12 +16,9 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Auction
             if (product is null) return;
             var module = User.Session.GetModule<AuctionModule>();
             module.SelectedAuctionId = productId;
+            module.Count = 1;
             await User.Messages.EditMessage(User, product.Sticker.ToString(product.Count), 
                 Keyboard.GetAuctionProductKeyboard(product, User, module.Count));
-        }
-
-        public SelectTrader(User user, BotDatabaseContext context, ChosenInlineResult chosenInlineResult) : base(user, context, chosenInlineResult)
-        {
         }
     }
 }
