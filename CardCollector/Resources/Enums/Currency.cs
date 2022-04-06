@@ -1,4 +1,5 @@
-﻿namespace CardCollector.Resources.Enums
+﻿// ReSharper disable InconsistentNaming
+namespace CardCollector.Resources.Enums
 {
     public enum Currency
     {

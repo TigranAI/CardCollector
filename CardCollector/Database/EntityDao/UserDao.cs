@@ -13,7 +13,7 @@ namespace CardCollector.Database.EntityDao
         {
             return await users
                        .SingleOrDefaultAsync(user => user.ChatId == telegramUser.Id)
-                   ?? (await users.AddAsync(new User(telegramUser))).Entity;
+                   ?? (await users.AddAsync(new User(telegramUser))).Entity.SetNew();
         }
 
         public static async Task<User> FindById(this DbSet<User> users, long userId)

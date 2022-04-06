@@ -179,7 +179,7 @@ namespace CardCollector.Migrations
 
                     b.Property<int>("PriceCoins")
                         .HasColumnType("int")
-                        .HasColumnName("price_coins");
+                        .HasColumnName("price_coinsprice_coins");
 
                     b.Property<int>("PriceGems")
                         .HasColumnType("int")

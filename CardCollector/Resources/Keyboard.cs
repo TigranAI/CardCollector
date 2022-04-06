@@ -61,6 +61,7 @@ namespace CardCollector.Resources
         {
             new[] {InlineKeyboardButton.WithCallbackData("Сбербанк", $"{CallbackQueryCommands.buy_gems}=Сбербанк")},
             new[] {InlineKeyboardButton.WithCallbackData("ЮКасса", $"{CallbackQueryCommands.buy_gems}=ЮКасса")},
+            new[] {InlineKeyboardButton.WithCallbackData("ПСБ", $"{CallbackQueryCommands.buy_gems}=ПСБ")},
             new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)}
         });
 
@@ -663,7 +664,7 @@ namespace CardCollector.Resources
         }
 
         /* Клавиатура, отображаемая вместе с сообщением профиля */
-        public static InlineKeyboardMarkup GetProfileKeyboard(int packsCount, int income = 0)
+        public static InlineKeyboardMarkup GetProfileKeyboard(int packsCount, InviteInfo? userInviteInfo, int income = 0)
         {
             var keyboard = new List<InlineKeyboardButton[]>();
             if (income > 0)
@@ -681,8 +682,11 @@ namespace CardCollector.Resources
                     InlineKeyboardButton.WithCallbackData($"{Text.my_packs} {(packsCount > 0 ? Text.gift : "")}",
                         CallbackQueryCommands.my_packs)
                 },
-                new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)},
+                new[] {InlineKeyboardButton.WithCallbackData(Text.invite_friend, CallbackQueryCommands.invite_friend)}
             });
+            if (userInviteInfo?.ShowInvitedBy() is true) 
+                keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.beginners_tasks, CallbackQueryCommands.beginners_tasks)});
+            keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)});
             return new InlineKeyboardMarkup(keyboard);
         }
 
@@ -700,7 +704,7 @@ namespace CardCollector.Resources
             };
             /*if (privilegeLevel >= PrivilegeLevel.Programmer)*/
             keyboard.Add(new[]
-                {InlineKeyboardButton.WithCallbackData(Text.buy_gems, CallbackQueryCommands.select_provider)});
+                {InlineKeyboardButton.WithCallbackData(Text.buy_gems, CallbackQueryCommands.buy_gems)});
             keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)});
             return new InlineKeyboardMarkup(keyboard);
         }
@@ -921,8 +925,34 @@ namespace CardCollector.Resources
         {
             return new InlineKeyboardMarkup(new[]
             {
-                InlineKeyboardButton.WithCallbackData(Text.claim, 
+                InlineKeyboardButton.WithCallbackData(Text.claim,
                     $"{CallbackQueryCommands.claim_group_prize}={chatId}={prize}={prizeId}")
+            });
+        }
+
+        public static InlineKeyboardMarkup InviteMenu(string url)
+        {
+            return new InlineKeyboardMarkup(new[]
+            {
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(Text.invited_friends,
+                        CallbackQueryCommands.show_invited_friends)
+                },
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(Text.invite_reward_info,
+                        CallbackQueryCommands.show_invite_reward_info)
+                },
+                new[]
+                {
+                    InlineKeyboardButton.WithUrl(Text.share_url,
+                        string.Format(Text.telegram_share_url, url))
+                },
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)
+                }
             });
         }
     }

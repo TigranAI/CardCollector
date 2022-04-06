@@ -85,6 +85,10 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>EffectTranslations.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Commands\MessageHandler\UrlCommands\MessageUrlCommands.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>MessageUrlCommands.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -162,6 +166,11 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>EffectTranslations.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Commands\MessageHandler\UrlCommands\MessageUrlCommands.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>MessageUrlCommands.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

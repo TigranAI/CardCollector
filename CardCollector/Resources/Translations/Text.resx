@@ -42,18 +42,6 @@
     <data name="next" xml:space="preserve">
         <value>→</value>
     </data>
-    <data name="profile" xml:space="preserve">
-        <value>Профиль</value>
-    </data>
-    <data name="collection" xml:space="preserve">
-        <value>Коллекция</value>
-    </data>
-    <data name="shop" xml:space="preserve">
-        <value>Магазин</value>
-    </data>
-    <data name="auction" xml:space="preserve">
-        <value>Аукцион</value>
-    </data>
     <data name="show_sample" xml:space="preserve">
         <value>Показать пример</value>
     </data>
@@ -114,15 +102,6 @@
     <data name="collect" xml:space="preserve">
         <value>Собрать</value>
     </data>
-    <data name="menu" xml:space="preserve">
-        <value>/menu</value>
-    </data>
-    <data name="help" xml:space="preserve">
-        <value>/help</value>
-    </data>
-    <data name="error" xml:space="preserve">
-        <value>/error</value>
-    </data>
     <data name="plus" xml:space="preserve">
         <value>+</value>
     </data>
@@ -161,9 +140,6 @@
     </data>
     <data name="delete" xml:space="preserve">
         <value>Удалить</value>
-    </data>
-    <data name="total" xml:space="preserve">
-        <value>Всего</value>
     </data>
     <data name="control_panel" xml:space="preserve">
         <value>Панель управления</value>
@@ -215,9 +191,6 @@
     </data>
     <data name="gems_description" xml:space="preserve">
         <value>После покупки вы получите {0} алмазов на свой счет.</value>
-    </data>
-    <data name="open_specific" xml:space="preserve">
-        <value>Открыть авторский пак</value>
     </data>
     <data name="effect" xml:space="preserve">
         <value>Эффект</value>
@@ -315,9 +288,6 @@
     <data name="add_for_sale_sticker" xml:space="preserve">
         <value>Добавить стикер с вотеркой</value>
     </data>
-    <data name="trader" xml:space="preserve">
-        <value>Продавец</value>
-    </data>
     <data name="stickers" xml:space="preserve">
         <value>Стикеров</value>
     </data>
@@ -327,20 +297,8 @@
     <data name="add_sticker_preview" xml:space="preserve">
         <value>Добавить обложку набора</value>
     </data>
-    <data name="confirm_preview" xml:space="preserve">
-        <value>Подтвердить обложку</value>
-    </data>
     <data name="edit_sticker" xml:space="preserve">
         <value>Заменить стикер</value>
-    </data>
-    <data name="show_users" xml:space="preserve">
-        <value>Показать пользователей</value>
-    </data>
-    <data name="random_author" xml:space="preserve">
-        <value>Случайный</value>
-    </data>
-    <data name="random_author_description" xml:space="preserve">
-        <value>Из данного пака есть шанс получить абсолютно любой стикер любого автора!</value>
     </data>
     <data name="by" xml:space="preserve">
         <value>от</value>
@@ -359,12 +317,6 @@
     </data>
     <data name="choose_channel" xml:space="preserve">
         <value>Выберите канал</value>
-    </data>
-    <data name="channel_giveaway_template" xml:space="preserve">
-        <value>Выбранный канал: {0}
-Приз: {1}
-Общее количество призов: {2}шт.
-Время начала раздачи: {3}</value>
     </data>
     <data name="selected_sticker" xml:space="preserve">
         <value>Выбранный стикер</value>
@@ -398,5 +350,44 @@
     </data>
     <data name="groups" xml:space="preserve">
         <value>Беседы</value>
+    </data>
+    <data name="invite_friend" xml:space="preserve">
+        <value>👍 Пригласить друга 👍</value>
+    </data>
+    <data name="telegram_url_pattern" xml:space="preserve">
+        <value>https://t.me/{0}?start={1}={2}</value>
+    </data>
+    <data name="invited_friends" xml:space="preserve">
+        <value>Приглашенные друзья</value>
+    </data>
+    <data name="invite_reward_info" xml:space="preserve">
+        <value>Информация о бонусах</value>
+    </data>
+    <data name="share_url" xml:space="preserve">
+        <value>Поделиться ссылкой в телеграм</value>
+    </data>
+    <data name="telegram_share_url" xml:space="preserve">
+        <value>https://t.me/share/url?url={0}&amp;text=Коллекционируй, покупай, продавай и отправляй стикеры в новом боте Wyrm Sticker!</value>
+    </data>
+    <data name="random_author" xml:space="preserve">
+        <value>Случайный</value>
+    </data>
+    <data name="random_author_description" xml:space="preserve">
+        <value>Из данного набора есть шанс получить абсолютно любой стикер!</value>
+    </data>
+    <data name="random_pack_file_id" xml:space="preserve">
+        <value>CAACAgIAAxkBAAIWs2DuY4vB50ARmyRwsgABs_7o5weDaAAC-g4AAmq4cUtH6M1FoN4bxSAE</value>
+    </data>
+    <data name="beginners_tasks" xml:space="preserve">
+        <value>🍼 Задания новичка 🍼</value>
+    </data>
+    <data name="complete" xml:space="preserve">
+        <value>✅</value>
+    </data>
+    <data name="uncomplete" xml:space="preserve">
+        <value>❎</value>
+    </data>
+    <data name="days" xml:space="preserve">
+        <value>дней</value>
     </data>
 </root>

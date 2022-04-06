@@ -124,6 +124,15 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Задания новичка.
+        /// </summary>
+        internal static string beginners_tasks {
+            get {
+                return ResourceManager.GetString("beginners_tasks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Бот уходит на технический перерыв....
         /// </summary>
         internal static string bot_turning_off {
@@ -140,6 +149,24 @@ namespace CardCollector.Resources.Translations {
         internal static string buy_gems {
             get {
                 return ResourceManager.GetString("buy_gems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Купить обычный пак.
+        /// </summary>
+        internal static string buy_standard_pack {
+            get {
+                return ResourceManager.GetString("buy_standard_pack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Купить стикер на аукционе.
+        /// </summary>
+        internal static string buy_sticker_on_auction {
+            get {
+                return ResourceManager.GetString("buy_sticker_on_auction", resourceCulture);
             }
         }
         
@@ -261,6 +288,15 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Собрать прибыль 3 раза.
+        /// </summary>
+        internal static string claim_income {
+            get {
+                return ResourceManager.GetString("claim_income", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Монеты.
         /// </summary>
         internal static string coins {
@@ -284,6 +320,15 @@ namespace CardCollector.Resources.Translations {
         internal static string combine_added_only {
             get {
                 return ResourceManager.GetString("combine_added_only", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Объединить стикеры.
+        /// </summary>
+        internal static string combine_stickers {
+            get {
+                return ResourceManager.GetString("combine_stickers", resourceCulture);
             }
         }
         
@@ -453,6 +498,15 @@ namespace CardCollector.Resources.Translations {
         internal static string date_is_expired {
             get {
                 return ResourceManager.GetString("date_is_expired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to На выполнение осталось {0} дней {1} часов {2} минут.
+        /// </summary>
+        internal static string days_left_to_complete {
+            get {
+                return ResourceManager.GetString("days_left_to_complete", resourceCulture);
             }
         }
         
@@ -690,11 +744,85 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Игрок {0} принял ваше приглашение в бота.
+        ///
+        ///Прогресс выполнения цепочки заданий &quot;Задания новичка&quot; вашего друга вы можете отследить в разделе &quot;Приглашённые друзья&quot;, у него есть 10 дней, чтобы завершить выполнение всех заданий.
+        ///
+        ///Вы и друг будете получать бонусы по ходу выполнения заданий, подробнее об этом в разделе &quot;Информация о бонусах&quot;
+        ///
+        ///Также за приглашение игрока вы получаете 1 обычный пак.
+        /// </summary>
+        internal static string invite_accepted {
+            get {
+                return ResourceManager.GetString("invite_accepted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пригласить друга.
+        /// </summary>
+        internal static string invite_friend {
+            get {
+                return ResourceManager.GetString("invite_friend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1-5 заданий (за каждое выполненное задание):
+        ///Обычный пак
+        ///6: Также + случайный стикер 2*
+        ///7: +1000 опыта
+        ///8: +100 алмазов
+        ///9: +100 алмазов
+        ///10: +случайный 2*
+        ///11: +случайный 3*
+        ///
+        ///Пригласивший по ходу выполнений заданий получает:
+        ///До 5 (т.е. даже если приглашённый выполнил одно задание, но вышло время заданий новичка): 2 пака
+        ///6: +100 алмазов
+        ///9: +случайный стикер 2*
+        ///11: +случайный стикер 3*.
+        /// </summary>
+        internal static string invite_reward_info {
+            get {
+                return ResourceManager.GetString("invite_reward_info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы приняли приглашение в бота от {0}.
+        ///Вы и ваш друг будете получать бонусы по мере вашего прогресса в выполнении заданий &quot;Задания новичка&quot;, для того чтобы ознакомиться с заданиями нажмите &quot;Профиль&quot; -&gt; &quot;Задания новичка&quot;, на их выполнение у вас есть 10 дней, по мере прогресса в выполнении заданий вы будете получать бонусы..
+        /// </summary>
+        internal static string invite_welcome_message {
+            get {
+                return ResourceManager.GetString("invite_welcome_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пригласивший в бота.
+        /// </summary>
+        internal static string inviter {
+            get {
+                return ResourceManager.GetString("inviter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Уровень.
         /// </summary>
         internal static string level {
             get {
                 return ResourceManager.GetString("level", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to К сожалению, такой пригласительной ссылки не существует.
+        /// </summary>
+        internal static string link_unavailable {
+            get {
+                return ResourceManager.GetString("link_unavailable", resourceCulture);
             }
         }
         
@@ -762,6 +890,15 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Открыть любой пак.
+        /// </summary>
+        internal static string open_pack {
+            get {
+                return ResourceManager.GetString("open_pack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Или введите другую сумму:.
         /// </summary>
         internal static string or_enter_another_sum {
@@ -820,6 +957,24 @@ namespace CardCollector.Resources.Translations {
         internal static string page_not_found {
             get {
                 return ResourceManager.GetString("page_not_found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выставить стикер на аукцион.
+        /// </summary>
+        internal static string place_sticker_on_auction {
+            get {
+                return ResourceManager.GetString("place_sticker_on_auction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сыграть в рулетку 6 раз.
+        /// </summary>
+        internal static string play_roulette {
+            get {
+                return ResourceManager.GetString("play_roulette", resourceCulture);
             }
         }
         
@@ -925,7 +1080,21 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Правила рулетки будут сформированы позже..
+        ///   Looks up a localized string similar to Правила игры
+        ///
+        ///Чтобы участвовать в рулетке, вы должны поставить любой свой стикер. Поставленные стикеры разыгрываются между всеми членами игры. Чем выше тир стикера (число звезд), тем выше ваши шансы на победу (их можно посмотреть в сообщении игры). Вы можете поменять ставку до начала игры, однако когда игра началась - вернуть стикер уже нельзя. 
+        ///
+        ///Шансы выигрыша
+        ///
+        ///Стикер 1 тира - 1 билет
+        ///
+        ///Стикер 2 тира - 5 билетов
+        ///
+        ///Стикер 3 тира - 25 билетов
+        ///
+        ///Стикер 4 тира - 125 билетов
+        ///
+        ///Когда вы ставите стикер, [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string roulette_rules {
             get {
@@ -979,15 +1148,6 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Выберите пак:.
-        /// </summary>
-        internal static string select_pack {
-            get {
-                return ResourceManager.GetString("select_pack", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Выберите стикер.
         /// </summary>
         internal static string select_sticker {
@@ -1034,11 +1194,11 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Обложка успешно установлена.
+        ///   Looks up a localized string similar to Отправить 3 друзьям стикер.
         /// </summary>
-        internal static string set_preview_success {
+        internal static string send_sticker_to_private {
             get {
-                return ResourceManager.GetString("set_preview_success", resourceCulture);
+                return ResourceManager.GetString("send_sticker_to_private", resourceCulture);
             }
         }
         
@@ -1137,6 +1297,15 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Поучаствовать в раздаче стикера в чате.
+        /// </summary>
+        internal static string take_part_at_chat_giveaway {
+            get {
+                return ResourceManager.GetString("take_part_at_chat_giveaway", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Спасибо за покупку! У вас в наличии:.
         /// </summary>
         internal static string thanks_for_buying {
@@ -1178,6 +1347,15 @@ namespace CardCollector.Resources.Translations {
         internal static string tier {
             get {
                 return ResourceManager.GetString("tier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Время истекло.
+        /// </summary>
+        internal static string time_is_up {
+            get {
+                return ResourceManager.GetString("time_is_up", resourceCulture);
             }
         }
         
@@ -1232,15 +1410,6 @@ namespace CardCollector.Resources.Translations {
         internal static string update_sticker_success {
             get {
                 return ResourceManager.GetString("update_sticker_success", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Загрузите файл с вотермаркой для этого стикера:.
-        /// </summary>
-        internal static string upload_file_with_watermark {
-            get {
-                return ResourceManager.GetString("upload_file_with_watermark", resourceCulture);
             }
         }
         
@@ -1323,6 +1492,15 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выиграть в рулетку 2 раза.
+        /// </summary>
+        internal static string win_roulette {
+            get {
+                return ResourceManager.GetString("win_roulette", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Вы уже воспользовались данным предложением!.
         /// </summary>
         internal static string you_already_use_this_order {
@@ -1364,6 +1542,15 @@ namespace CardCollector.Resources.Translations {
         internal static string you_can_add_bot_to_conversation {
             get {
                 return ResourceManager.GetString("you_can_add_bot_to_conversation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to К сожалению, Вы не можете принять приглашение, поскольку Вы уже являетесь активным пользователем бота.
+        /// </summary>
+        internal static string you_cant_be_invited {
+            get {
+                return ResourceManager.GetString("you_cant_be_invited", resourceCulture);
             }
         }
         
@@ -1413,6 +1600,15 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Вы не пригласили ни одного друга.
+        /// </summary>
+        internal static string you_havent_invite_friends {
+            get {
+                return ResourceManager.GetString("you_havent_invite_friends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Баланс.
         /// </summary>
         internal static string your_cash {
@@ -1431,11 +1627,13 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ваша ссылка для входа.
+        ///   Looks up a localized string similar to Пригласите друга и получите бонусы!
+        ///Для этого ваш друг должен перейти по ссылке:
+        ///&lt;code&gt;{0}&lt;/code&gt;.
         /// </summary>
-        internal static string your_login_link {
+        internal static string your_invite_link {
             get {
-                return ResourceManager.GetString("your_login_link", resourceCulture);
+                return ResourceManager.GetString("your_invite_link", resourceCulture);
             }
         }
         

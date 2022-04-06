@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
 using CardCollector.Commands.CallbackQueryHandler;
-using CardCollector.Commands.MessageHandler;
+using CardCollector.Commands.MessageHandler.UrlCommands;
 using CardCollector.Controllers;
 using CardCollector.Database.EntityDao;
 using CardCollector.Others;
@@ -75,11 +75,11 @@ namespace CardCollector.Database.Entity
             switch (Prize)
             {
                 case PrizeType.SelectedSticker:
-                    await user.AddSticker(context, SelectedSticker!, 1, true);
+                    await user.AddSticker(SelectedSticker!, 1, true);
                     break;
                 case PrizeType.RandomSticker:
                     var stickers = await context.Stickers.FindAllByTier(SelectedStickerTier!.Value);
-                    await user.AddSticker(context, stickers.Random(), 1, true);
+                    await user.AddSticker(stickers.Random(), 1, true);
                     break;
                 case PrizeType.RandomPack:
                     var pack = await context.Packs.FindById(1);
@@ -109,7 +109,7 @@ namespace CardCollector.Database.Entity
 
         public string GetUrl()
         {
-            return $"https://t.me/{AppSettings.NAME}?start={MessageCommands.claim_giveaway}={Id}";
+            return string.Format(Text.telegram_url_pattern, AppSettings.NAME, MessageUrlCommands.claim_giveaway, Id);
         }
 
         public async Task<Timer?> Prepare()

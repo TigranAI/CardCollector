@@ -3,6 +3,7 @@ using System;
 using CardCollector.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CardCollector.Migrations
 {
     [DbContext(typeof(BotDatabaseContext))]
-    partial class BotDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220406140234_BlockUnblockDate")]
+    partial class BlockUnblockDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -892,69 +894,7 @@ namespace CardCollector.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_invite_info_users_id");
 
-                    b.OwnsOne("CardCollector.Database.Entity.BeginnersTasksProgress", "TasksProgress", b1 =>
-                        {
-                            b1.Property<long>("InviteInfoid")
-                                .HasColumnType("bigint")
-                                .HasColumnName("id");
-
-                            b1.Property<bool>("BuyStandardPack")
-                                .HasColumnType("tinyint(1)")
-                                .HasColumnName("tasks_progress_buy_standard_pack");
-
-                            b1.Property<bool>("BuyStickerOnAuction")
-                                .HasColumnType("tinyint(1)")
-                                .HasColumnName("tasks_progress_buy_sticker_on_auction");
-
-                            b1.Property<int>("ClaimIncome")
-                                .HasColumnType("int")
-                                .HasColumnName("tasks_progress_claim_income");
-
-                            b1.Property<bool>("CombineStickers")
-                                .HasColumnType("tinyint(1)")
-                                .HasColumnName("tasks_progress_combine_stickers");
-
-                            b1.Property<bool>("InviteFriend")
-                                .HasColumnType("tinyint(1)")
-                                .HasColumnName("tasks_progress_invite_friend");
-
-                            b1.Property<bool>("OpenPack")
-                                .HasColumnType("tinyint(1)")
-                                .HasColumnName("tasks_progress_open_pack");
-
-                            b1.Property<bool>("PlaceStickerOnAuction")
-                                .HasColumnType("tinyint(1)")
-                                .HasColumnName("tasks_progress_place_sticker_on_auction");
-
-                            b1.Property<int>("PlayRoulette")
-                                .HasColumnType("int")
-                                .HasColumnName("tasks_progress_play_roulette");
-
-                            b1.Property<int>("SendStickersToPrivate")
-                                .HasColumnType("int")
-                                .HasColumnName("tasks_progress_send_stickers_to_private");
-
-                            b1.Property<bool>("TakePartAtChatGiveaway")
-                                .HasColumnType("tinyint(1)")
-                                .HasColumnName("tasks_progress_take_part_at_chat_giveaway");
-
-                            b1.Property<int>("WinRoulette")
-                                .HasColumnType("int")
-                                .HasColumnName("tasks_progress_win_roulette");
-
-                            b1.HasKey("InviteInfoid")
-                                .HasName("pk_invite_info");
-
-                            b1.ToTable("invite_info");
-
-                            b1.WithOwner()
-                                .HasForeignKey("InviteInfoid")
-                                .HasConstraintName("fk_invite_info_invite_info_id");
-                        });
-
                     b.Navigation("InvitedBy");
-
-                    b.Navigation("TasksProgress");
 
                     b.Navigation("User");
                 });

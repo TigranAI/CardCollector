@@ -50,6 +50,7 @@ namespace CardCollector.Database
         public DbSet<ChannelGiveaway> ChannelGiveaways { get; set; }
         public DbSet<ChatRoulette> ChatRoulette { get; set; }
         public DbSet<ChatActivity> ChatActivities { get; set; }
+        public DbSet<InviteInfo> InviteInfo { get; set; }
 
         public bool IsDisposed()
         {
@@ -73,10 +74,19 @@ namespace CardCollector.Database
             ConfigureUserMessages(modelBuilder);
             ConfigureUserCash(modelBuilder);
             ConfigureUserLevel(modelBuilder);
+            ConfigureUserInviteInfo(modelBuilder);
             ConfigureLevelLevelReward(modelBuilder);
             ConfigureDailyTaskTaskId(modelBuilder);
             ConfigureStickerEffect(modelBuilder);
             ConfigureTelegramChat(modelBuilder);
+        }
+
+        private void ConfigureUserInviteInfo(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<User>()
+                .HasOne(u => u.InviteInfo)
+                .WithOne(ii => ii.User);
         }
 
         private void ConfigureTelegramChat(ModelBuilder modelBuilder)

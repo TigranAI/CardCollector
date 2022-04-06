@@ -1,7 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using CardCollector.Commands.MessageHandler;
 using Telegram.Bot.Types;
+// ReSharper disable InconsistentNaming
+// ReSharper disable ConditionalTernaryEqualBranch
 
 namespace CardCollector.Resources
 {
@@ -35,5 +38,9 @@ namespace CardCollector.Resources
             new BotCommand {Command = MessageCommands.roulette, Description = "Запустить рулетку"},
             /*new BotCommand {Command = "/error", Description = "Сообщить об ошибке"},*/
         };
+        
+        
+        public static readonly TimeSpan UNBLOCK_INVITE_INTERVAL = new (14, 0, 0, 0);
+        public static readonly TimeSpan BEGINNERS_TASKS_INTERVAL = new (10, 0, 0, 0);
     }
 }

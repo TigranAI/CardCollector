@@ -12,6 +12,11 @@ namespace CardCollector.Others
 {
     public static class Extensions
     {
+        public static void Times(this int count, Action action)
+        {
+            for (var i = 0; i < count; ++i) action();
+        }
+        
         public static IEnumerable<InlineQueryResult> ToTelegramStickers(this IEnumerable<Sticker> list, string command,
             int offset)
         {

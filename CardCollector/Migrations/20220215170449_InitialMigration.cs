@@ -1,4 +1,6 @@
 ﻿using System;
+using CardCollector.Resources.Translations;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
@@ -13,7 +15,7 @@ namespace CardCollector.Migrations
             migrationBuilder.AlterDatabase()
                 .Annotation("MySql:CharSet", "utf8mb4");
 
-            /*migrationBuilder.CreateTable(
+            migrationBuilder.CreateTable(
                 name: "count_logs",
                 columns: table => new
                 {
@@ -459,7 +461,49 @@ namespace CardCollector.Migrations
             migrationBuilder.CreateIndex(
                 name: "ix_users_packs_user_id",
                 table: "users_packs",
-                column: "user_id");*/
+                column: "user_id");
+
+            InitValues(migrationBuilder);
+        }
+
+        private void InitValues(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.Sql("INSERT INTO packs(" +
+                                     "id, " +
+                                     "author, " +
+                                     "description, " +
+                                     "is_preview_animated, " +
+                                     "opened_count, " +
+                                     "preview_file_id, " +
+                                     "price_coins, " +
+                                     "price_gems) " +
+                                 "VALUES (" +
+                                     "1, " +
+                                     $"N'{Text.random_author}', " +
+                                     $"N'{Text.random_author_description}', " +
+                                     "false, " +
+                                     "0, " +
+                                     $"N'{Text.random_pack_file_id}', " +
+                                     "1000, " +
+                                     "100)");
+
+            migrationBuilder.Sql("INSERT INTO levels(" +
+                                     "id, " +
+                                     "level_exp_goal, " +
+                                     "level_reward, " +
+                                     "level_value) " +
+                                 "VALUES " +
+                                     "(1, 0, '{\\\"CashCapacity\\\":null,\\\"RandomPacks\\\":null,\\\"RandomStickerTier\\\":null}', 0), " +
+                                     "(2, 25, '{\\\"CashCapacity\\\":50,\\\"RandomPacks\\\":5,\\\"RandomStickerTier\\\":1}', 1), " +
+                                     "(3, 57, '{\\\"CashCapacity\\\":50,\\\"RandomPacks\\\":4,\\\"RandomStickerTier\\\":null}', 2), " +
+                                     "(4, 127, '{\\\"CashCapacity\\\":50,\\\"RandomPacks\\\":4,\\\"RandomStickerTier\\\":2}', 3), " +
+                                     "(5, 855, '{\\\"CashCapacity\\\":50,\\\"RandomPacks\\\":4,\\\"RandomStickerTier\\\":null}', 4), " +
+                                     "(6, 2563, '{\\\"CashCapacity\\\":50,\\\"RandomPacks\\\":3,\\\"RandomStickerTier\\\":null}', 5), " +
+                                     "(7, 7209, '{\\\"CashCapacity\\\":50,\\\"RandomPacks\\\":3,\\\"RandomStickerTier\\\":3}', 6), " +
+                                     "(8, 38294, '{\\\"CashCapacity\\\":50,\\\"RandomPacks\\\":3,\\\"RandomStickerTier\\\":null}', 7), " +
+                                     "(9, 102176, '{\\\"CashCapacity\\\":50,\\\"RandomPacks\\\":3,\\\"RandomStickerTier\\\":null}', 8), " +
+                                     "(10, 262737, '{\\\"CashCapacity\\\":50,\\\"RandomPacks\\\":3,\\\"RandomStickerTier\\\":null}', 9), " +
+                                     "(11, 665052, '{\\\"CashCapacity\\\":50,\\\"RandomPacks\\\":3,\\\"RandomStickerTier\\\":4}', 10)");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

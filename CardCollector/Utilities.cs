@@ -4,6 +4,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using CardCollector.Resources;
+using Newtonsoft.Json;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Sticker = CardCollector.Database.Entity.Sticker;
@@ -14,13 +15,17 @@ namespace CardCollector
     {
         public static readonly Random rnd = new Random();
         
-        public static string ToJson(object obj)
+        public static string ToJson(object obj, Formatting formatting)
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(obj);
+            return JsonConvert.SerializeObject(obj, formatting);
         }
         public static T FromJson<T>(string json)
         {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(json);
+            return JsonConvert.DeserializeObject<T>(json);
+        }
+        public static string ToJson(object obj)
+        {
+            return JsonConvert.SerializeObject(obj, Formatting.Indented);
         }
 
         public static async Task<string> DownloadFile(Document file)

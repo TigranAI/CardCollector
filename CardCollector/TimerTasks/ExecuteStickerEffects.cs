@@ -10,8 +10,8 @@ using CardCollector.Others;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
-using CardCollector.StickerEffects;
 using Microsoft.EntityFrameworkCore;
+using UserSettings = CardCollector.Resources.Enums.UserSettings;
 
 namespace CardCollector.TimerTasks
 {
@@ -50,7 +50,7 @@ namespace CardCollector.TimerTasks
                         var pack = await context.Packs.FindById(1);
                         user.AddPack(pack, packsCount);
 
-                        if (user.Settings[Resources.Enums.UserSettings.StickerEffects])
+                        if (user.Settings[UserSettings.StickerEffects])
                             await user.Messages.SendMessage(user,
                                 $"{Messages.effect_Random1Pack5Day} {packsCount}{Text.items}");
                     }
@@ -84,10 +84,10 @@ namespace CardCollector.TimerTasks
                         {
                             var count = prizeList.Count(sticker1 => sticker1.Id == sticker.Id);
                             message += $"\n{sticker.Title} {Text.by} {sticker.Author} {count}{Text.items}";
-                            await user.AddSticker(context, sticker, count);
+                            await user.AddSticker(sticker, count);
                         }
 
-                        if (user.Settings[Resources.Enums.UserSettings.StickerEffects])
+                        if (user.Settings[UserSettings.StickerEffects])
                             await user.Messages.SendMessage(user, message);
                     }
                 }
@@ -120,10 +120,10 @@ namespace CardCollector.TimerTasks
                         {
                             var count = prizeList.Count(sticker1 => sticker1.Id == sticker.Id);
                             message += $"\n{sticker.Title} {Text.by} {sticker.Author} {count}{Text.items}";
-                            await user.AddSticker(context, sticker, count);
+                            await user.AddSticker(sticker, count);
                         }
 
-                        if (user.Settings[Resources.Enums.UserSettings.StickerEffects])
+                        if (user.Settings[UserSettings.StickerEffects])
                             await user.Messages.SendMessage(user, message);
                     }
                 }

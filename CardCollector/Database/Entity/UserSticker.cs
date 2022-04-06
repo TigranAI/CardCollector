@@ -13,5 +13,6 @@ namespace CardCollector.Database.Entity
         public int Count { get; set; }
         public DateTime Payout { get; set; } = DateTime.Now;
         public DateTime GivePrizeDate { get; set; } = DateTime.Today;
+        public DateTime LastUsage { get; set; } = DateTime.Now;
     }
 }

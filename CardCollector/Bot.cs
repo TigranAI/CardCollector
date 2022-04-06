@@ -10,7 +10,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector
 {
-    using static MessageController;
+    using static UpdateController;
     public static class Bot
     {
         private static TelegramBotClient? _client;

@@ -160,15 +160,6 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Аукцион.
-        /// </summary>
-        internal static string auction {
-            get {
-                return ResourceManager.GetString("auction", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Автор.
         /// </summary>
         internal static string author {
@@ -183,6 +174,15 @@ namespace CardCollector.Resources.Translations {
         internal static string back {
             get {
                 return ResourceManager.GetString("back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🍼 Задания новичка 🍼.
+        /// </summary>
+        internal static string beginners_tasks {
+            get {
+                return ResourceManager.GetString("beginners_tasks", resourceCulture);
             }
         }
         
@@ -286,18 +286,6 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Выбранный канал: {0}
-        ///Приз: {1}
-        ///Общее количество призов: {2}шт.
-        ///Время начала раздачи: {3}.
-        /// </summary>
-        internal static string channel_giveaway_template {
-            get {
-                return ResourceManager.GetString("channel_giveaway_template", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Выберите канал.
         /// </summary>
         internal static string choose_channel {
@@ -352,20 +340,20 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Коллекция.
-        /// </summary>
-        internal static string collection {
-            get {
-                return ResourceManager.GetString("collection", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Объединить.
         /// </summary>
         internal static string combine {
             get {
                 return ResourceManager.GetString("combine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ✅.
+        /// </summary>
+        internal static string complete {
+            get {
+                return ResourceManager.GetString("complete", resourceCulture);
             }
         }
         
@@ -393,15 +381,6 @@ namespace CardCollector.Resources.Translations {
         internal static string confirm_login {
             get {
                 return ResourceManager.GetString("confirm_login", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Подтвердить обложку.
-        /// </summary>
-        internal static string confirm_preview {
-            get {
-                return ResourceManager.GetString("confirm_preview", resourceCulture);
             }
         }
         
@@ -456,6 +435,15 @@ namespace CardCollector.Resources.Translations {
         internal static string daily_tasks {
             get {
                 return ResourceManager.GetString("daily_tasks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to дней.
+        /// </summary>
+        internal static string days {
+            get {
+                return ResourceManager.GetString("days", resourceCulture);
             }
         }
         
@@ -519,15 +507,6 @@ namespace CardCollector.Resources.Translations {
         internal static string end_sticker_upload {
             get {
                 return ResourceManager.GetString("end_sticker_upload", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to /error.
-        /// </summary>
-        internal static string error {
-            get {
-                return ResourceManager.GetString("error", resourceCulture);
             }
         }
         
@@ -604,20 +583,38 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /help.
-        /// </summary>
-        internal static string help {
-            get {
-                return ResourceManager.GetString("help", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Информация.
         /// </summary>
         internal static string info {
             get {
                 return ResourceManager.GetString("info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 👍 Пригласить друга 👍.
+        /// </summary>
+        internal static string invite_friend {
+            get {
+                return ResourceManager.GetString("invite_friend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Информация о бонусах.
+        /// </summary>
+        internal static string invite_reward_info {
+            get {
+                return ResourceManager.GetString("invite_reward_info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Приглашенные друзья.
+        /// </summary>
+        internal static string invited_friends {
+            get {
+                return ResourceManager.GetString("invited_friends", resourceCulture);
             }
         }
         
@@ -645,15 +642,6 @@ namespace CardCollector.Resources.Translations {
         internal static string logs_menu {
             get {
                 return ResourceManager.GetString("logs_menu", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to /menu.
-        /// </summary>
-        internal static string menu {
-            get {
-                return ResourceManager.GetString("menu", resourceCulture);
             }
         }
         
@@ -739,15 +727,6 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Открыть авторский пак.
-        /// </summary>
-        internal static string open_specific {
-            get {
-                return ResourceManager.GetString("open_specific", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Пользователи открыли этот пак за все время:.
         /// </summary>
         internal static string opened_count {
@@ -829,15 +808,6 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Профиль.
-        /// </summary>
-        internal static string profile {
-            get {
-                return ResourceManager.GetString("profile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Случайный.
         /// </summary>
         internal static string random_author {
@@ -847,7 +817,7 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Из данного пака есть шанс получить абсолютно любой стикер любого автора!.
+        ///   Looks up a localized string similar to Из данного набора есть шанс получить абсолютно любой стикер!.
         /// </summary>
         internal static string random_author_description {
             get {
@@ -861,6 +831,15 @@ namespace CardCollector.Resources.Translations {
         internal static string random_pack {
             get {
                 return ResourceManager.GetString("random_pack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CAACAgIAAxkBAAIWs2DuY4vB50ARmyRwsgABs_7o5weDaAAC-g4AAmq4cUtH6M1FoN4bxSAE.
+        /// </summary>
+        internal static string random_pack_file_id {
+            get {
+                return ResourceManager.GetString("random_pack_file_id", resourceCulture);
             }
         }
         
@@ -973,11 +952,11 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Магазин.
+        ///   Looks up a localized string similar to Поделиться ссылкой в телеграм.
         /// </summary>
-        internal static string shop {
+        internal static string share_url {
             get {
-                return ResourceManager.GetString("shop", resourceCulture);
+                return ResourceManager.GetString("share_url", resourceCulture);
             }
         }
         
@@ -1005,15 +984,6 @@ namespace CardCollector.Resources.Translations {
         internal static string show_traders {
             get {
                 return ResourceManager.GetString("show_traders", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Показать пользователей.
-        /// </summary>
-        internal static string show_users {
-            get {
-                return ResourceManager.GetString("show_users", resourceCulture);
             }
         }
         
@@ -1108,6 +1078,24 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://t.me/share/url?url={0}&amp;text=Коллекционируй, покупай, продавай и отправляй стикеры в новом боте Wyrm Sticker!.
+        /// </summary>
+        internal static string telegram_share_url {
+            get {
+                return ResourceManager.GetString("telegram_share_url", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://t.me/{0}?start={1}={2}.
+        /// </summary>
+        internal static string telegram_url_pattern {
+            get {
+                return ResourceManager.GetString("telegram_url_pattern", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Тир.
         /// </summary>
         internal static string tier {
@@ -1153,20 +1141,11 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Всего.
+        ///   Looks up a localized string similar to ❎.
         /// </summary>
-        internal static string total {
+        internal static string uncomplete {
             get {
-                return ResourceManager.GetString("total", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Продавец.
-        /// </summary>
-        internal static string trader {
-            get {
-                return ResourceManager.GetString("trader", resourceCulture);
+                return ResourceManager.GetString("uncomplete", resourceCulture);
             }
         }
         

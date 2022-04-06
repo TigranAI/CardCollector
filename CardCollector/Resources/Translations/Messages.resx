@@ -258,9 +258,6 @@
     <data name="you_got" xml:space="preserve">
         <value>Вы получили</value>
     </data>
-    <data name="your_login_link" xml:space="preserve">
-        <value>Ваша ссылка для входа</value>
-    </data>
     <data name="upload_your_stickers" xml:space="preserve">
         <value>Загрузите свои стикеры в формате .webp или .tgs в том порядке, в котором вы описываете их в таблице Excel. Когда завершите загрузку, нажмите на "Завершить загрузку стикеров"</value>
     </data>
@@ -358,14 +355,8 @@ https://telegra.ph/help-11-04-4</value>
     <data name="first_reward" xml:space="preserve">
         <value>Спасибо за регистрацию! Вы получили 7 паков, используйте эту кнопку, чтобы открыть их.</value>
     </data>
-    <data name="select_pack" xml:space="preserve">
-        <value>Выберите пак:</value>
-    </data>
     <data name="choose_sticker" xml:space="preserve">
         <value>Выберите стикер:</value>
-    </data>
-    <data name="upload_file_with_watermark" xml:space="preserve">
-        <value>Загрузите файл с вотермаркой для этого стикера:</value>
     </data>
     <data name="add_watermark_success" xml:space="preserve">
         <value>Стикер с вотеркой добавлен успешно!</value>
@@ -384,9 +375,6 @@ https://telegra.ph/help-11-04-4</value>
     </data>
     <data name="please_upload_preview" xml:space="preserve">
         <value>Пожалуйста, загрузите превью стикерпака</value>
-    </data>
-    <data name="set_preview_success" xml:space="preserve">
-        <value>Обложка успешно установлена</value>
     </data>
     <data name="see_your_stickers" xml:space="preserve">
         <value>Ваши стикеры можно посмотреть, нажав на Коллекция.</value>
@@ -505,7 +493,23 @@ mm - минуты
         <value>Правила были отправлены вам в личные сообщения</value>
     </data>
     <data name="roulette_rules" xml:space="preserve">
-        <value>Правила рулетки будут сформированы позже.</value>
+        <value>Правила игры
+
+Чтобы участвовать в рулетке, вы должны поставить любой свой стикер. Поставленные стикеры разыгрываются между всеми членами игры. Чем выше тир стикера (число звезд), тем выше ваши шансы на победу (их можно посмотреть в сообщении игры). Вы можете поменять ставку до начала игры, однако когда игра началась - вернуть стикер уже нельзя. 
+
+Шансы выигрыша
+
+Стикер 1 тира - 1 билет
+
+Стикер 2 тира - 5 билетов
+
+Стикер 3 тира - 25 билетов
+
+Стикер 4 тира - 125 билетов
+
+Когда вы ставите стикер, вы получаете билеты. Число билетов за стикер написано выше. Когда начинается игра, выбирается случайный билет, и его владелец забирает все призы себе. Чем больше у вас билетов, тем больше шанс выиграть, однако победителя определяет случай. При проигрыше свой стикер вернуть вы не сможете. 
+
+Желаем вам удачи и побольше стикеров!</value>
     </data>
     <data name="roulette_start_now" xml:space="preserve">
         <value>Рулетка уже запущена в этой группе!</value>
@@ -527,5 +531,93 @@ mm - минуты
     </data>
     <data name="user_claim_giveaway" xml:space="preserve">
         <value>{0} забирает приз - {1} следующая раздача возникнет случайно не раньше, чем через {2} часов.</value>
+    </data>
+    <data name="your_invite_link" xml:space="preserve">
+        <value>Пригласите друга и получите бонусы!
+Для этого ваш друг должен перейти по ссылке:
+&lt;code&gt;{0}&lt;/code&gt;</value>
+    </data>
+    <data name="invite_accepted" xml:space="preserve">
+        <value>Игрок {0} принял ваше приглашение в бота.
+
+Прогресс выполнения цепочки заданий "Задания новичка" вашего друга вы можете отследить в разделе "Приглашённые друзья", у него есть 10 дней, чтобы завершить выполнение всех заданий.
+
+Вы и друг будете получать бонусы по ходу выполнения заданий, подробнее об этом в разделе "Информация о бонусах"
+
+Также за приглашение игрока вы получаете 1 обычный пак</value>
+    </data>
+    <data name="invite_welcome_message" xml:space="preserve">
+        <value>Вы приняли приглашение в бота от {0}.
+Вы и ваш друг будете получать бонусы по мере вашего прогресса в выполнении заданий "Задания новичка", для того чтобы ознакомиться с заданиями нажмите "Профиль" -&gt; "Задания новичка", на их выполнение у вас есть 10 дней, по мере прогресса в выполнении заданий вы будете получать бонусы.</value>
+    </data>
+    <data name="you_cant_be_invited" xml:space="preserve">
+        <value>К сожалению, Вы не можете принять приглашение, поскольку Вы уже являетесь активным пользователем бота</value>
+    </data>
+    <data name="link_unavailable" xml:space="preserve">
+        <value>К сожалению, такой пригласительной ссылки не существует</value>
+    </data>
+    <data name="inviter" xml:space="preserve">
+        <value>Пригласивший в бота</value>
+    </data>
+    <data name="beginners_tasks" xml:space="preserve">
+        <value>Задания новичка</value>
+    </data>
+    <data name="send_sticker_to_private" xml:space="preserve">
+        <value>Отправить 3 друзьям стикер</value>
+    </data>
+    <data name="combine_stickers" xml:space="preserve">
+        <value>Объединить стикеры</value>
+    </data>
+    <data name="buy_sticker_on_auction" xml:space="preserve">
+        <value>Купить стикер на аукционе</value>
+    </data>
+    <data name="buy_standard_pack" xml:space="preserve">
+        <value>Купить обычный пак</value>
+    </data>
+    <data name="open_pack" xml:space="preserve">
+        <value>Открыть любой пак</value>
+    </data>
+    <data name="take_part_at_chat_giveaway" xml:space="preserve">
+        <value>Поучаствовать в раздаче стикера в чате</value>
+    </data>
+    <data name="claim_income" xml:space="preserve">
+        <value>Собрать прибыль 3 раза</value>
+    </data>
+    <data name="play_roulette" xml:space="preserve">
+        <value>Сыграть в рулетку 6 раз</value>
+    </data>
+    <data name="win_roulette" xml:space="preserve">
+        <value>Выиграть в рулетку 2 раза</value>
+    </data>
+    <data name="place_sticker_on_auction" xml:space="preserve">
+        <value>Выставить стикер на аукцион</value>
+    </data>
+    <data name="invite_friend" xml:space="preserve">
+        <value>Пригласить друга</value>
+    </data>
+    <data name="days_left_to_complete" xml:space="preserve">
+        <value>На выполнение осталось {0} дней {1} часов {2} минут</value>
+    </data>
+    <data name="invite_reward_info" xml:space="preserve">
+        <value>1-5 заданий (за каждое выполненное задание):
+Обычный пак
+6: Также + случайный стикер 2*
+7: +1000 опыта
+8: +100 алмазов
+9: +100 алмазов
+10: +случайный 2*
+11: +случайный 3*
+
+Пригласивший по ходу выполнений заданий получает:
+До 5 (т.е. даже если приглашённый выполнил одно задание, но вышло время заданий новичка): 2 пака
+6: +100 алмазов
+9: +случайный стикер 2*
+11: +случайный стикер 3*</value>
+    </data>
+    <data name="time_is_up" xml:space="preserve">
+        <value>Время истекло</value>
+    </data>
+    <data name="you_havent_invite_friends" xml:space="preserve">
+        <value>Вы не пригласили ни одного друга</value>
     </data>
 </root>

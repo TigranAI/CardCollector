@@ -74,7 +74,7 @@ namespace CardCollector.Database.Entity
                         )
                     );
                     foreach (var bet in Bets)
-                        await winner.User.AddSticker(context, bet.Sticker, 1);
+                        await winner.User.AddSticker(bet.Sticker, 1);
                 }
             }
         }

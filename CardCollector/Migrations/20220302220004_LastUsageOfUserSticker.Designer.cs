@@ -3,6 +3,7 @@ using System;
 using CardCollector.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CardCollector.Migrations
 {
     [DbContext(typeof(BotDatabaseContext))]
-    partial class BotDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220302220004_LastUsageOfUserSticker")]
+    partial class LastUsageOfUserSticker
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -230,33 +232,6 @@ namespace CardCollector.Migrations
                         .HasDatabaseName("ix_daily_tasks_user_id");
 
                     b.ToTable("daily_tasks", (string)null);
-                });
-
-            modelBuilder.Entity("CardCollector.Database.Entity.InviteInfo", b =>
-                {
-                    b.Property<long>("id")
-                        .HasColumnType("bigint")
-                        .HasColumnName("id");
-
-                    b.Property<string>("InviteKey")
-                        .HasColumnType("longtext")
-                        .HasColumnName("invite_key");
-
-                    b.Property<DateTime?>("InvitedAt")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("invited_at");
-
-                    b.Property<long?>("InvitedById")
-                        .HasColumnType("bigint")
-                        .HasColumnName("invited_by_id");
-
-                    b.HasKey("id")
-                        .HasName("pk_invite_info");
-
-                    b.HasIndex("InvitedById")
-                        .HasDatabaseName("ix_invite_info_invited_by_id");
-
-                    b.ToTable("invite_info", (string)null);
                 });
 
             modelBuilder.Entity("CardCollector.Database.Entity.Level", b =>
@@ -589,10 +564,6 @@ namespace CardCollector.Migrations
                         .HasColumnType("bigint")
                         .HasColumnName("id");
 
-                    b.Property<DateTime>("BlockedAt")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("blocked_at");
-
                     b.Property<long>("ChatId")
                         .HasColumnType("bigint")
                         .HasColumnName("chat_id");
@@ -600,10 +571,6 @@ namespace CardCollector.Migrations
                     b.Property<bool>("FirstReward")
                         .HasColumnType("tinyint(1)")
                         .HasColumnName("first_reward");
-
-                    b.Property<long?>("InviteInfoid")
-                        .HasColumnType("bigint")
-                        .HasColumnName("invite_infoid");
 
                     b.Property<bool>("IsBlocked")
                         .HasColumnType("tinyint(1)")
@@ -613,10 +580,6 @@ namespace CardCollector.Migrations
                         .HasColumnType("int")
                         .HasColumnName("privilege_level");
 
-                    b.Property<DateTime>("UnblockedAt")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("unblocked_at");
-
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(256)
@@ -625,9 +588,6 @@ namespace CardCollector.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_users");
-
-                    b.HasIndex("InviteInfoid")
-                        .HasDatabaseName("ix_users_invite_infoid");
 
                     b.ToTable("users", (string)null);
                 });
@@ -878,87 +838,6 @@ namespace CardCollector.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("CardCollector.Database.Entity.InviteInfo", b =>
-                {
-                    b.HasOne("CardCollector.Database.Entity.User", "InvitedBy")
-                        .WithMany()
-                        .HasForeignKey("InvitedById")
-                        .HasConstraintName("fk_invite_info_users_invited_by_id");
-
-                    b.HasOne("CardCollector.Database.Entity.User", "User")
-                        .WithOne("InviteInfo")
-                        .HasForeignKey("CardCollector.Database.Entity.InviteInfo", "id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_invite_info_users_id");
-
-                    b.OwnsOne("CardCollector.Database.Entity.BeginnersTasksProgress", "TasksProgress", b1 =>
-                        {
-                            b1.Property<long>("InviteInfoid")
-                                .HasColumnType("bigint")
-                                .HasColumnName("id");
-
-                            b1.Property<bool>("BuyStandardPack")
-                                .HasColumnType("tinyint(1)")
-                                .HasColumnName("tasks_progress_buy_standard_pack");
-
-                            b1.Property<bool>("BuyStickerOnAuction")
-                                .HasColumnType("tinyint(1)")
-                                .HasColumnName("tasks_progress_buy_sticker_on_auction");
-
-                            b1.Property<int>("ClaimIncome")
-                                .HasColumnType("int")
-                                .HasColumnName("tasks_progress_claim_income");
-
-                            b1.Property<bool>("CombineStickers")
-                                .HasColumnType("tinyint(1)")
-                                .HasColumnName("tasks_progress_combine_stickers");
-
-                            b1.Property<bool>("InviteFriend")
-                                .HasColumnType("tinyint(1)")
-                                .HasColumnName("tasks_progress_invite_friend");
-
-                            b1.Property<bool>("OpenPack")
-                                .HasColumnType("tinyint(1)")
-                                .HasColumnName("tasks_progress_open_pack");
-
-                            b1.Property<bool>("PlaceStickerOnAuction")
-                                .HasColumnType("tinyint(1)")
-                                .HasColumnName("tasks_progress_place_sticker_on_auction");
-
-                            b1.Property<int>("PlayRoulette")
-                                .HasColumnType("int")
-                                .HasColumnName("tasks_progress_play_roulette");
-
-                            b1.Property<int>("SendStickersToPrivate")
-                                .HasColumnType("int")
-                                .HasColumnName("tasks_progress_send_stickers_to_private");
-
-                            b1.Property<bool>("TakePartAtChatGiveaway")
-                                .HasColumnType("tinyint(1)")
-                                .HasColumnName("tasks_progress_take_part_at_chat_giveaway");
-
-                            b1.Property<int>("WinRoulette")
-                                .HasColumnType("int")
-                                .HasColumnName("tasks_progress_win_roulette");
-
-                            b1.HasKey("InviteInfoid")
-                                .HasName("pk_invite_info");
-
-                            b1.ToTable("invite_info");
-
-                            b1.WithOwner()
-                                .HasForeignKey("InviteInfoid")
-                                .HasConstraintName("fk_invite_info_invite_info_id");
-                        });
-
-                    b.Navigation("InvitedBy");
-
-                    b.Navigation("TasksProgress");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("CardCollector.Database.Entity.Payment", b =>
                 {
                     b.HasOne("CardCollector.Database.Entity.User", "User")
@@ -1059,11 +938,6 @@ namespace CardCollector.Migrations
 
             modelBuilder.Entity("CardCollector.Database.Entity.User", b =>
                 {
-                    b.HasOne("CardCollector.Database.Entity.InviteInfo", null)
-                        .WithMany("InvitedFriends")
-                        .HasForeignKey("InviteInfoid")
-                        .HasConstraintName("fk_users_invite_info_invite_infoid");
-
                     b.OwnsOne("CardCollector.Database.Entity.Cash", "Cash", b1 =>
                         {
                             b1.Property<long>("UserId")
@@ -1316,11 +1190,6 @@ namespace CardCollector.Migrations
                     b.Navigation("Bets");
                 });
 
-            modelBuilder.Entity("CardCollector.Database.Entity.InviteInfo", b =>
-                {
-                    b.Navigation("InvitedFriends");
-                });
-
             modelBuilder.Entity("CardCollector.Database.Entity.Pack", b =>
                 {
                     b.Navigation("Stickers");
@@ -1329,8 +1198,6 @@ namespace CardCollector.Migrations
             modelBuilder.Entity("CardCollector.Database.Entity.User", b =>
                 {
                     b.Navigation("DailyTasks");
-
-                    b.Navigation("InviteInfo");
 
                     b.Navigation("Packs");
 
