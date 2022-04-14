@@ -21,4 +21,7 @@
     <data name="roulette" xml:space="preserve">
         <value>#roulette</value>
     </data>
+    <data name="sticker_voting" xml:space="preserve">
+        <value>#svote</value>
+    </data>
 </root>

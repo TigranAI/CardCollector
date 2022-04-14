@@ -13,7 +13,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
         protected override async Task Execute()
         {
             var data = CallbackQuery.Data!.Split('=');
-            if (data.Length > 1) User.Settings.SwitchProperty((UserSettings) int.Parse(data[1]));
+            if (data.Length > 1) User.Settings.SwitchProperty((UserSettingsTypes) int.Parse(data[1]));
             await User.Messages.EditMessage(User, Messages.alerts, Keyboard.Alerts(User.Settings), ParseMode.Html);
         }
     }

@@ -1,6 +1,6 @@
 ﻿namespace CardCollector.Attributes.Handlers
 {
-    public class CallbackQueryHandler : System.Attribute
+    public class CallbackQueryHandlerAttribute : System.Attribute
     {
         
     }

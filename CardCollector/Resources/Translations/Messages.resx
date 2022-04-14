@@ -612,12 +612,66 @@ mm - минуты
 До 5 (т.е. даже если приглашённый выполнил одно задание, но вышло время заданий новичка): 2 пака
 6: +100 алмазов
 9: +случайный стикер 2*
-11: +случайный стикер 3*</value>
+11: +случайный стикер 3*
+12: +случайный стикер 4*</value>
     </data>
     <data name="time_is_up" xml:space="preserve">
         <value>Время истекло</value>
     </data>
     <data name="you_havent_invite_friends" xml:space="preserve">
         <value>Вы не пригласили ни одного друга</value>
+    </data>
+    <data name="donate" xml:space="preserve">
+        <value>Пополнить счет</value>
+    </data>
+    <data name="beginners_task_reward" xml:space="preserve">
+        <value>Награда за выполнение "Заданий новичка" ({0} / {1}):
+{2}</value>
+    </data>
+    <data name="friend_beginners_task_reward" xml:space="preserve">
+        <value>Награда за выполнение "Заданий новичка" ({0} / {1}) игроком {2}:
+{3}</value>
+    </data>
+    <data name="beginners_task_pack_reward" xml:space="preserve">
+        <value>случайный пак стикеров!</value>
+    </data>
+    <data name="beginners_task_pack_and_tier2_sticker_reward" xml:space="preserve">
+        <value>случайный пак стикеров и случайный стикер 2-го тира!</value>
+    </data>
+    <data name="beginners_task_gems_reward" xml:space="preserve">
+        <value>100 алмазов!</value>
+    </data>
+    <data name="beginners_task_exp_reward" xml:space="preserve">
+        <value>1000 опыта!</value>
+    </data>
+    <data name="beginners_task_tier2_sticker_reward" xml:space="preserve">
+        <value>стикер 2-го тира!</value>
+    </data>
+    <data name="beginners_task_tier3_sticker_reward" xml:space="preserve">
+        <value>стикер 3-го тира!</value>
+    </data>
+    <data name="beginners_task_tier4_sticker_reward" xml:space="preserve">
+        <value>стикер 4-го тира!</value>
+    </data>
+    <data name="enter_distribution_text" xml:space="preserve">
+        <value>Введите текст рассылки:</value>
+    </data>
+    <data name="send_distribution_image" xml:space="preserve">
+        <value>Отправьте изображение для рассылки</value>
+    </data>
+    <data name="send_distribution_sticker" xml:space="preserve">
+        <value>Отправьте стикер для рассылки</value>
+    </data>
+    <data name="create_distribution_buttons" xml:space="preserve">
+        <value>Добавьте кнопки к рассылке</value>
+    </data>
+    <data name="send_distribution" xml:space="preserve">
+        <value>Выберите куда отправить рассылку</value>
+    </data>
+    <data name="enter_distribution_button_name" xml:space="preserve">
+        <value>Введите текст кнопки:</value>
+    </data>
+    <data name="enter_button_url" xml:space="preserve">
+        <value>Введите ссылку:</value>
     </data>
 </root>

@@ -403,11 +403,38 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 📨 Создать рассылку 📨.
+        /// </summary>
+        internal static string create_distribution {
+            get {
+                return ResourceManager.GetString("create_distribution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 🎁 Создать раздачу 🎁.
         /// </summary>
         internal static string create_giveaway {
             get {
                 return ResourceManager.GetString("create_giveaway", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Создать кнопку-выбор стикера.
+        /// </summary>
+        internal static string create_inline_button {
+            get {
+                return ResourceManager.GetString("create_inline_button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Создать кнопку-ссылку.
+        /// </summary>
+        internal static string create_url_button {
+            get {
+                return ResourceManager.GetString("create_url_button", resourceCulture);
             }
         }
         
@@ -498,6 +525,15 @@ namespace CardCollector.Resources.Translations {
         internal static string emoji {
             get {
                 return ResourceManager.GetString("emoji", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Завершить.
+        /// </summary>
+        internal static string end {
+            get {
+                return ResourceManager.GetString("end", resourceCulture);
             }
         }
         
@@ -799,6 +835,24 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Личные сообщения.
+        /// </summary>
+        internal static string private_chats {
+            get {
+                return ResourceManager.GetString("private_chats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Беседы и личные сообщения.
+        /// </summary>
+        internal static string private_chats_and_groups {
+            get {
+                return ResourceManager.GetString("private_chats_and_groups", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to В подарок вы получите.
         /// </summary>
         internal static string prize {
@@ -1056,6 +1110,15 @@ namespace CardCollector.Resources.Translations {
         internal static string sticker_effects {
             get {
                 return ResourceManager.GetString("sticker_effects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Голосование за стикер.
+        /// </summary>
+        internal static string sticker_voting {
+            get {
+                return ResourceManager.GetString("sticker_voting", resourceCulture);
             }
         }
         

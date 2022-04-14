@@ -23,6 +23,7 @@
         EditSticker,
         GiveSticker,
         CreateGiveaway,
-        SelectGiveawayPrize
+        SelectGiveawayPrize,
+        SendDistributionSticker
     }
 }

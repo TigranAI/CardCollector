@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using CardCollector.Attributes.Logs;
 using CardCollector.Controllers;
+using CardCollector.Database.Entity;
 using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
@@ -29,6 +30,13 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
                 $"\n{Messages.current_exp}: {User.Level.CurrentExp} / {expGoal}" +
                 $"\n{Messages.cash_capacity}: {User.Cash.MaxCapacity}{Text.coin}",
                 Keyboard.GetProfileKeyboard(User.Packs.Sum(pack => pack.Count), User.InviteInfo));
+            
+            if (User.InviteInfo?.TasksProgress is { } tp 
+                && tp.CollectIncome < BeginnersTasksProgress.CollectIncomeGoal)
+            {
+                tp.CollectIncome++;
+                await User.InviteInfo.CheckRewards(Context);
+            }
         }
     }
 }

@@ -17,8 +17,8 @@ namespace CardCollector.Database.Entity
         public int DailyTaskMessageId { get; set; } = -1;
         public int DailyTaskAlertMessageId { get; set; } = -1;
         public int DailyTaskProgressMessageId { get; set; } = -1;
-        public ICollection<int> ChatMessages { get; set; } = new HashSet<int>();
-        public ICollection<int> ChatStickers { get; set; } = new HashSet<int>();
+        public HashSet<int> ChatMessages { get; set; } = new ();
+        public HashSet<int> ChatStickers { get; set; } = new ();
 
         public async Task ClearChat(User user)
         {

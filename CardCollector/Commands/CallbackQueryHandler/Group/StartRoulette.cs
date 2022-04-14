@@ -11,13 +11,9 @@ namespace CardCollector.Commands.CallbackQueryHandler.Group
 
         protected override async Task Execute()
         {
-            Logs.LogOut("here");
             var rouletteId = long.Parse(CallbackQuery.Data!.Split("=")[1]);
-            Logs.LogOut("here");
             var roulette = await Context.ChatRoulette.FindById(rouletteId);
-            Logs.LogOut("here");
             if (roulette == null) return;
-            Logs.LogOut("here");
             if (roulette.Creator.Id != User.Id)
                 await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.you_are_not_creator);
             else

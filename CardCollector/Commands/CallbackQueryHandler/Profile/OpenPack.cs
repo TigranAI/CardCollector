@@ -35,6 +35,12 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
                         ? Keyboard.RepeatCommand(Text.open_more, CallbackQuery.Data!)
                         : Keyboard.BackKeyboard);
                 await User.AddSticker(result, 1);
+                
+                if (User.InviteInfo?.TasksProgress is { } tp && !tp.OpenPack)
+                {
+                    tp.OpenPack = true;
+                    await User.InviteInfo.CheckRewards(Context);
+                }
             }
         }
 

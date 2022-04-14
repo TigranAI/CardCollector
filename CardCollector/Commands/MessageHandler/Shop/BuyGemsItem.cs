@@ -25,12 +25,18 @@ namespace CardCollector.Commands.MessageHandler.Shop
             User.Level.GiveExp(gemsCount * 2);
             await User.Level.CheckLevelUp(Context, User);
             
-            if (User.Settings[UserSettings.ExpGain])
+            if (User.Settings[UserSettingsTypes.ExpGain])
                 await User.Messages.SendMessage(User,
                     $"{Messages.you_gained} {gemsCount * 2} {Text.exp} {Messages.for_buy_gems}",
                     Keyboard.BackKeyboard);
             
             await User.Messages.SendMessage(User, Messages.thanks_for_buying_gems, Keyboard.BackKeyboard);
+            
+            if (User.InviteInfo?.TasksProgress is { } tp && !tp.Donate)
+            {
+                tp.Donate = true;
+                await User.InviteInfo.CheckRewards(Context);
+            }
         }
 
         protected override async Task AfterExecute()

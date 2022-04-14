@@ -18,7 +18,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Group
             
             if (!User.Session.ChosenResultWithMessage)
             {
-                if (User.Settings[UserSettings.ExpGain])
+                if (User.Settings[UserSettingsTypes.ExpGain])
                     await User.Messages.EditMessage(User,
                         $"{Messages.you_gained} 1 {Text.exp} {Messages.send_sticker}" +
                         $"\n{Messages.you_can_add_bot_to_conversation}");

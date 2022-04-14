@@ -2,14 +2,11 @@
 using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Controllers;
-using CardCollector.Database;
 using CardCollector.Database.EntityDao;
 using CardCollector.Others;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
-using Telegram.Bot.Types;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Collection
 {
@@ -46,6 +43,12 @@ namespace CardCollector.Commands.CallbackQueryHandler.Collection
                     Keyboard.BackToFilters(randSticker.Title));
                 User.Session.DeleteModule<CombineModule>();
                 User.Session.DeleteModule<CollectionModule>();
+
+                if (User.InviteInfo?.TasksProgress is { } tp && !tp.CombineStickers)
+                {
+                    tp.CombineStickers = true;
+                    await User.InviteInfo.CheckRewards(Context);
+                }
             }
         }
     }

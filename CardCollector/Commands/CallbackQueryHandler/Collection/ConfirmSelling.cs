@@ -30,6 +30,12 @@ namespace CardCollector.Commands.CallbackQueryHandler.Collection
                 await Context.Auctions.AddAsync(User, userSticker.Sticker, collectionModule.Count,
                     collectionModule.SellPrice);
                 await User.Messages.EditMessage(User, Messages.successfully_selling);
+                
+                if (User.InviteInfo?.TasksProgress is { } tp && !tp.PlaceStickerOnAuction)
+                {
+                    tp.PlaceStickerOnAuction = true;
+                    await User.InviteInfo.CheckRewards(Context);
+                }
             }
         }
     }

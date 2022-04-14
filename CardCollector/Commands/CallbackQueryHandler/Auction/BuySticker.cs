@@ -49,6 +49,12 @@ namespace CardCollector.Commands.CallbackQueryHandler.Auction
 
                 await User.AddSticker(productInfo.Sticker, module.Count);
                 User.Session.ResetModule<AuctionModule>();
+                
+                if (User.InviteInfo?.TasksProgress is { } tp && !tp.BuyStickerOnAuction)
+                {
+                    tp.BuyStickerOnAuction = true;
+                    await User.InviteInfo.CheckRewards(Context);
+                }
             }
         }
     }

@@ -390,4 +390,25 @@
     <data name="days" xml:space="preserve">
         <value>дней</value>
     </data>
+    <data name="create_distribution" xml:space="preserve">
+        <value>📨 Создать рассылку 📨</value>
+    </data>
+    <data name="end" xml:space="preserve">
+        <value>Завершить</value>
+    </data>
+    <data name="create_url_button" xml:space="preserve">
+        <value>Создать кнопку-ссылку</value>
+    </data>
+    <data name="create_inline_button" xml:space="preserve">
+        <value>Создать кнопку-выбор стикера</value>
+    </data>
+    <data name="private_chats" xml:space="preserve">
+        <value>Личные сообщения</value>
+    </data>
+    <data name="private_chats_and_groups" xml:space="preserve">
+        <value>Беседы и личные сообщения</value>
+    </data>
+    <data name="sticker_voting" xml:space="preserve">
+        <value>Голосование за стикер</value>
+    </data>
 </root>

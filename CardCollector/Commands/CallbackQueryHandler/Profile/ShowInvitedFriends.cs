@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using CardCollector.Database.Entity;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 
@@ -17,8 +18,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
                     var timespan = friend.InviteInfo!.InvitedAt!.Value + Constants.BEGINNERS_TASKS_INTERVAL - DateTime.Now;
                     var progress =
                         (timespan < TimeSpan.Zero ? $"{Messages.time_is_up}" : $"{timespan.Days} {Text.days}") +
-                        $" ({friend.InviteInfo.TasksProgress!.GetTasksProgress()} / " +
-                        $"{friend.InviteInfo.TasksProgress!.GetTaskCount()})";
+                        $" ({friend.InviteInfo.TasksProgress!.Progress} / {BeginnersTasksProgress.TaskCount})";
                     return $"{friend.Username} - {progress}";
                 })
             );

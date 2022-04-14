@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using CardCollector.Attributes.Menu;
-using CardCollector.Database;
-using CardCollector.Database.Entity;
 using CardCollector.Resources.Translations;
 
 namespace CardCollector.Commands

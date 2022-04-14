@@ -6,6 +6,7 @@ using CardCollector.Commands.ChosenInlineResultHandler.Group;
 using CardCollector.Commands.ChosenInlineResultHandler.Private;
 using CardCollector.Commands.MessageHandler.Group;
 using CardCollector.Commands.MessageHandler.Shop;
+using CardCollector.Commands.MessageHandler.UrlCommands;
 using CardCollector.Commands.MyChatMemberHandler;
 using CardCollector.Controllers;
 using CardCollector.Database.Entity;
@@ -28,6 +29,7 @@ namespace CardCollector.Others
             result.GroupCountWasActive = 0;
             result.RoulettePlayCount = 0;
             result.GroupPrizeCount = 0;
+            result.InvitedUsers = 0;
 
             foreach (var userActivities in groupedActivities)
             {
@@ -53,6 +55,8 @@ namespace CardCollector.Others
                     .Count();
                 var groupPrizeCount = groupsWithPrize.Count();
 
+                var invitedUsers = userActivities.Count(item => item.Action == typeof(Invite).FullName);
+
                 if (userCollectIncomeTimes > 3) result.PeopleCollectedIncomeMoreTimes++;
                 else if (userCollectIncomeTimes > 0) result.PeopleCollectedIncomeOneToThreeTimes++;
                 if (isUserDonate) result.PeopleDonated++;
@@ -64,6 +68,7 @@ namespace CardCollector.Others
                 result.GroupCountWasActive += groupsActiveCount;
                 result.RoulettePlayCount += rouletteCount;
                 result.GroupPrizeCount += groupPrizeCount;
+                result.InvitedUsers += invitedUsers;
             }
 
             return result;

@@ -55,11 +55,7 @@ namespace CardCollector.Commands
             if (!Context.IsDisposed())
             {
                 if (Attribute.IsDefined(GetType(), typeof(SavedActivityAttribute)))
-                {
-                    var activity = new UserActivity() {User = User, Action = GetType().FullName};
-                    await Context.UserActivities.AddAsync(activity);
-                }
-                Context.ChangeTracker.DetectChanges();
+                    await SaveActivity(Context);
                 await Context.SaveChangesAsync();
                 await Context.DisposeAsync();
             }
@@ -67,12 +63,16 @@ namespace CardCollector.Commands
             {
                 using (var context = new BotDatabaseContext())
                 {
-                    var user = await context.Users.FindById(User.Id);
-                    var activity = new UserActivity() {User = user, Action = GetType().FullName};
-                    await Context.UserActivities.AddAsync(activity);
+                    await SaveActivity(context);
                     await context.SaveChangesAsync();
                 }
             }
+        }
+
+        protected virtual async Task SaveActivity(BotDatabaseContext context)
+        {
+            var activity = new UserActivity() {User = User, Action = GetType().FullName};
+            await context.UserActivities.AddAsync(activity);
         }
 
         public override string ToString()

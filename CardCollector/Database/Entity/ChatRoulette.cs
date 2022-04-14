@@ -40,7 +40,6 @@ namespace CardCollector.Database.Entity
         {
             if (IsStarted) return;
             IsStarted = true;
-            Logs.LogOut($"roulette {Id} is started");
             await context.SaveChangesAsync();
             if (!Bets.Any(item => item.User.Id == Creator.Id))
             {
@@ -62,6 +61,13 @@ namespace CardCollector.Database.Entity
                 }
                 else
                 {
+                    if (winner.User.InviteInfo?.TasksProgress is { } wtp 
+                        && wtp.WinRoulette < BeginnersTasksProgress.WinRouletteGoal)
+                    {
+                        wtp.WinRoulette++;
+                        await winner.User.InviteInfo.CheckRewards(context);
+                    }
+                    
                     var chance = Math.Pow(5, winner.Sticker.Tier - 1) /
                         Bets.Sum(item => Math.Pow(5, item.Sticker.Tier - 1)) * 100;
                     await Group.DeleteMessage(MessageId);
@@ -74,7 +80,16 @@ namespace CardCollector.Database.Entity
                         )
                     );
                     foreach (var bet in Bets)
+                    {
                         await winner.User.AddSticker(bet.Sticker, 1);
+                        
+                        if (bet.User.InviteInfo?.TasksProgress is { } tp 
+                            && tp.PlayRoulette < BeginnersTasksProgress.PlayRouletteGoal)
+                        {
+                            tp.PlayRoulette++;
+                            await bet.User.InviteInfo.CheckRewards(context);
+                        }
+                    }
                 }
             }
         }

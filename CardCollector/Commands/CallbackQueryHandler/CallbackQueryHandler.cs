@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
+using CardCollector.Attributes.Handlers;
 using CardCollector.Database;
 using CardCollector.Database.EntityDao;
 using Telegram.Bot.Types;
@@ -9,7 +10,7 @@ using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler
 {
-    [Attributes.Handlers.CallbackQueryHandler]
+    [CallbackQueryHandler]
     public abstract class CallbackQueryHandler : HandlerModel
     {
         protected CallbackQuery CallbackQuery;
@@ -22,9 +23,8 @@ namespace CardCollector.Commands.CallbackQueryHandler
             var assembly = Assembly.GetExecutingAssembly();
             foreach (var type in assembly.GetTypes())
             {
-                if (type == typeof(CallbackQueryHandler)) continue;
-                if (Attribute.IsDefined(type, typeof(Attributes.Handlers.CallbackQueryHandler)))
-                    Commands.Add(type);
+                if (type.IsAbstract) continue;
+                if (Attribute.IsDefined(type, typeof(CallbackQueryHandlerAttribute))) Commands.Add(type);
             }
         }
 

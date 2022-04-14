@@ -124,6 +124,79 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 1000 опыта!.
+        /// </summary>
+        internal static string beginners_task_exp_reward {
+            get {
+                return ResourceManager.GetString("beginners_task_exp_reward", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 100 алмазов!.
+        /// </summary>
+        internal static string beginners_task_gems_reward {
+            get {
+                return ResourceManager.GetString("beginners_task_gems_reward", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to случайный пак стикеров и случайный стикер 2-го тира!.
+        /// </summary>
+        internal static string beginners_task_pack_and_tier2_sticker_reward {
+            get {
+                return ResourceManager.GetString("beginners_task_pack_and_tier2_sticker_reward", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to случайный пак стикеров!.
+        /// </summary>
+        internal static string beginners_task_pack_reward {
+            get {
+                return ResourceManager.GetString("beginners_task_pack_reward", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Награда за выполнение &quot;Заданий новичка&quot; ({0} / {1}):
+        ///{2}.
+        /// </summary>
+        internal static string beginners_task_reward {
+            get {
+                return ResourceManager.GetString("beginners_task_reward", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to стикер 2-го тира!.
+        /// </summary>
+        internal static string beginners_task_tier2_sticker_reward {
+            get {
+                return ResourceManager.GetString("beginners_task_tier2_sticker_reward", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to стикер 3-го тира!.
+        /// </summary>
+        internal static string beginners_task_tier3_sticker_reward {
+            get {
+                return ResourceManager.GetString("beginners_task_tier3_sticker_reward", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to стикер 4-го тира!.
+        /// </summary>
+        internal static string beginners_task_tier4_sticker_reward {
+            get {
+                return ResourceManager.GetString("beginners_task_tier4_sticker_reward", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Задания новичка.
         /// </summary>
         internal static string beginners_tasks {
@@ -448,6 +521,15 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Добавьте кнопки к рассылке.
+        /// </summary>
+        internal static string create_distribution_buttons {
+            get {
+                return ResourceManager.GetString("create_distribution_buttons", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} не сделал ставку!.
         /// </summary>
         internal static string creator_didnt_bet {
@@ -516,6 +598,15 @@ namespace CardCollector.Resources.Translations {
         internal static string deleting_files {
             get {
                 return ResourceManager.GetString("deleting_files", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пополнить счет.
+        /// </summary>
+        internal static string donate {
+            get {
+                return ResourceManager.GetString("donate", resourceCulture);
             }
         }
         
@@ -594,6 +685,33 @@ namespace CardCollector.Resources.Translations {
         internal static string enter_button_text {
             get {
                 return ResourceManager.GetString("enter_button_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введите ссылку:.
+        /// </summary>
+        internal static string enter_button_url {
+            get {
+                return ResourceManager.GetString("enter_button_url", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введите текст кнопки:.
+        /// </summary>
+        internal static string enter_distribution_button_name {
+            get {
+                return ResourceManager.GetString("enter_distribution_button_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введите текст рассылки:.
+        /// </summary>
+        internal static string enter_distribution_text {
+            get {
+                return ResourceManager.GetString("enter_distribution_text", resourceCulture);
             }
         }
         
@@ -684,6 +802,16 @@ namespace CardCollector.Resources.Translations {
         internal static string for_buy_gems {
             get {
                 return ResourceManager.GetString("for_buy_gems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Награда за выполнение &quot;Заданий новичка&quot; ({0} / {1}) игроком {2}:
+        ///{3}.
+        /// </summary>
+        internal static string friend_beginners_task_reward {
+            get {
+                return ResourceManager.GetString("friend_beginners_task_reward", resourceCulture);
             }
         }
         
@@ -781,7 +909,8 @@ namespace CardCollector.Resources.Translations {
         ///До 5 (т.е. даже если приглашённый выполнил одно задание, но вышло время заданий новичка): 2 пака
         ///6: +100 алмазов
         ///9: +случайный стикер 2*
-        ///11: +случайный стикер 3*.
+        ///11: +случайный стикер 3*
+        ///12: +случайный стикер 4*.
         /// </summary>
         internal static string invite_reward_info {
             get {
@@ -1162,6 +1291,33 @@ namespace CardCollector.Resources.Translations {
         internal static string selected_chat_is_blocked {
             get {
                 return ResourceManager.GetString("selected_chat_is_blocked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выберите куда отправить рассылку.
+        /// </summary>
+        internal static string send_distribution {
+            get {
+                return ResourceManager.GetString("send_distribution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Отправьте изображение для рассылки.
+        /// </summary>
+        internal static string send_distribution_image {
+            get {
+                return ResourceManager.GetString("send_distribution_image", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Отправьте стикер для рассылки.
+        /// </summary>
+        internal static string send_distribution_sticker {
+            get {
+                return ResourceManager.GetString("send_distribution_sticker", resourceCulture);
             }
         }
         

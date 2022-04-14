@@ -26,7 +26,8 @@ namespace CardCollector.Commands.CallbackQueryHandler.Others
                     var topByTier4 = Messages.users_top_tier_4_stickers_count + string.Join("\n", 
                         usersTier4Top.Select((user, i) =>
                         {
-                            var count = user.Stickers.Where(sticker => sticker.Sticker.Tier == 4).Count();
+                            var count = user.Stickers.Where(sticker => sticker.Sticker.Tier == 4)
+                                .Sum(item => item.Count);
                             return $"\n{i + 1}.{user.Username}: {count} {Text.stickers}";
                         }));
                     await User.Messages.SendTopUsers(User, topByTier4, Keyboard.GetTopButton(TopBy.Exp));

@@ -9,12 +9,14 @@ namespace CardCollector.Session.Modules
         public long? SelectedStickerId;
         public List<Sticker> StickersList = new();
         public int? SelectedChannelGiveawayId;
+        public int? ChatDistributionId;
 
         public void Reset()
         {
             SelectedPackId = null;
             SelectedStickerId = null;
             SelectedChannelGiveawayId = null;
+            ChatDistributionId = null;
             StickersList.Clear();
         }
     }

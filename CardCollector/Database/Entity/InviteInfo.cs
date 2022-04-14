@@ -38,6 +38,18 @@ namespace CardCollector.Database.Entity
             return InvitedBy != null &&
                    DateTime.Now - InvitedAt <= Constants.BEGINNERS_TASKS_INTERVAL;
         }
+        
+        public async Task CheckRewards(BotDatabaseContext context)
+        {
+            if (TasksProgress?.GetTasksProgress() > TasksProgress?.Progress)
+            {
+                TasksProgress!.Progress++;
+                var func = BeginnersTasksProgressRewards.RewardMap[TasksProgress.Progress];
+                await func.Invoke(context, InvitedBy, User);
+
+                await CheckRewards(context);
+            }
+        }
 
         public static async Task<string> GenerateKey()
         {

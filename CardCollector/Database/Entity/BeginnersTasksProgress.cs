@@ -1,13 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace CardCollector.Database.Entity
 {
-    [Owned]
     public class BeginnersTasksProgress
     {
+        public int Progress { get; set; }
+        [NotMapped] public static int TaskCount = 12;
+        
         public int SendStickersToPrivate { get; set; }
-        [NotMapped] public int SentStickersGoalToPrivate = 3;
+        [NotMapped] public static int SendStickersGoalToPrivate = 3;
         
         public bool CombineStickers { get; set; }
         
@@ -19,39 +20,37 @@ namespace CardCollector.Database.Entity
         
         public bool TakePartAtChatGiveaway { get; set; }
         
-        public int ClaimIncome { get; set; }
-        [NotMapped] public int ClaimIncomeGoal = 3;
+        public int CollectIncome { get; set; }
+        [NotMapped] public static int CollectIncomeGoal = 3;
         
         public int PlayRoulette { get; set; }
-        [NotMapped] public int PlayRouletteGoal = 6;
+        [NotMapped] public static int PlayRouletteGoal = 6;
         
         public int WinRoulette { get; set; }
-        [NotMapped] public int WinRouletteGoal = 2;
+        [NotMapped] public static int WinRouletteGoal = 2;
         
         public bool PlaceStickerOnAuction { get; set; }
         
         public bool InviteFriend { get; set; }
+        
+        public bool Donate { get; set; }
 
         public int GetTasksProgress()
         {
             var result = 0;
-            if (SendStickersToPrivate == SentStickersGoalToPrivate) result++;
+            if (SendStickersToPrivate == SendStickersGoalToPrivate) result++;
             if (CombineStickers) result++;
             if (BuyStickerOnAuction) result++;
             if (BuyStandardPack) result++;
             if (OpenPack) result++;
             if (TakePartAtChatGiveaway) result++;
-            if (ClaimIncome == ClaimIncomeGoal) result++;
+            if (CollectIncome == CollectIncomeGoal) result++;
             if (PlayRoulette == PlayRouletteGoal) result++;
             if (WinRoulette == WinRouletteGoal) result++;
             if (PlaceStickerOnAuction) result++;
             if (InviteFriend) result++;
+            if (Donate) result++;
             return result;
-        }
-
-        public int GetTaskCount()
-        {
-            return 11;
         }
     }
 }

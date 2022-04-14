@@ -221,9 +221,15 @@ namespace CardCollector.Controllers
         public static async Task<int> SendImage(User user, string fileId, string message, InlineKeyboardMarkup keyboard)
         {
             if (user.IsBlocked) return -1;
+            return await SendImage(user.ChatId, fileId, message, keyboard);
+        }
+
+        public static async Task<int> SendImage(long chatId, string fileId, string message,
+            InlineKeyboardMarkup? keyboard = null)
+        {
             try
             {
-                var msg = await Bot.Client.SendPhotoAsync(user.ChatId, new InputOnlineFile(fileId), message,
+                var msg = await Bot.Client.SendPhotoAsync(chatId, new InputOnlineFile(fileId), message,
                     protectContent: true, replyMarkup: keyboard, disableNotification: true);
                 return msg.MessageId;
             }
@@ -232,7 +238,7 @@ namespace CardCollector.Controllers
                 if (e.ErrorCode == 429 && e.Parameters != null && e.Parameters.RetryAfter is { } interval)
                 {
                     Thread.Sleep(interval);
-                    return await SendImage(user, fileId, message, keyboard);
+                    return await SendImage(chatId, fileId, message, keyboard);
                 }
                 LogOutWarning($"Cant send image: {e.Message}");
                 LogOutError(e);

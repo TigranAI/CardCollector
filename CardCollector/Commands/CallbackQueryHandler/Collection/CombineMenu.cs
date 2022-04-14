@@ -8,9 +8,8 @@ using Telegram.Bot.Types;
 namespace CardCollector.Commands.CallbackQueryHandler.Collection
 {
     [MenuPoint]
-    public class CombineMenu : CallbackQueryHandler
+    public abstract class CombineMenu : CallbackQueryHandler
     {
-        protected override string CommandText => "";
         protected override bool ClearStickers => true;
 
         protected override async Task Execute()
@@ -21,7 +20,5 @@ namespace CardCollector.Commands.CallbackQueryHandler.Collection
             else 
                 await User.Messages.EditMessage(User, combineModule.ToString(), Keyboard.GetCombineKeyboard(combineModule));
         }
-
-        public override bool Match() => false;
     }
 }

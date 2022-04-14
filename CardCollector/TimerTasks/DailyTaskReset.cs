@@ -26,7 +26,7 @@ namespace CardCollector.TimerTasks
                     {
                         userDailyTask.Progress = TaskGoals.Goals[userDailyTask.TaskId];
                     }
-                    if (user.Settings[Resources.Enums.UserSettings.DailyTasks])
+                    if (user.Settings[Resources.Enums.UserSettingsTypes.DailyTasks])
                         await user.Messages.SendDailyTaskAlert(user);
                 }
 

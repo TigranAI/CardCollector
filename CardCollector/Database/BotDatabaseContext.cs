@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Database.Entity;
 using CardCollector.Database.Entity.NotMapped;
+using CardCollector.Others;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
 using CardCollector.UserDailyTask;
@@ -51,6 +52,7 @@ namespace CardCollector.Database
         public DbSet<ChatRoulette> ChatRoulette { get; set; }
         public DbSet<ChatActivity> ChatActivities { get; set; }
         public DbSet<InviteInfo> InviteInfo { get; set; }
+        public DbSet<ChatDistribution> ChatDistributions { get; set; }
 
         public bool IsDisposed()
         {
@@ -79,6 +81,16 @@ namespace CardCollector.Database
             ConfigureDailyTaskTaskId(modelBuilder);
             ConfigureStickerEffect(modelBuilder);
             ConfigureTelegramChat(modelBuilder);
+            ConfigureChatDistributions(modelBuilder);
+        }
+
+        private void ConfigureChatDistributions(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<ChatDistribution>()
+                .Property(cd => cd.Buttons)
+                .HasConversion(new JsonValueConverter<List<ButtonInfo>>(),
+                    new CollectionComparer<ButtonInfo>());
         }
 
         private void ConfigureUserInviteInfo(ModelBuilder modelBuilder)
@@ -87,6 +99,11 @@ namespace CardCollector.Database
                 .Entity<User>()
                 .HasOne(u => u.InviteInfo)
                 .WithOne(ii => ii.User);
+
+            modelBuilder
+                .Entity<InviteInfo>()
+                .OwnsOne(ii => ii.TasksProgress,
+                    builder => builder.ToTable("beginners_tasks_progress"));
         }
 
         private void ConfigureTelegramChat(ModelBuilder modelBuilder)
@@ -132,22 +149,12 @@ namespace CardCollector.Database
                     builder.ToTable("user_messages");
                     builder
                         .Property(entity => entity.ChatMessages)
-                        .HasConversion(
-                            to => Utilities.ToJson(to),
-                            from => Utilities.FromJson<HashSet<int>>(from),
-                            new ValueComparer<ICollection<int>>(
-                                (l1, l2) => l2 != null && l1 != null && l1.SequenceEqual(l2),
-                                l => l.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
-                                l => l.ToHashSet()));
+                        .HasConversion(new JsonValueConverter<HashSet<int>>(),
+                            new HashSetComparer<int>());
                     builder
                         .Property(entity => entity.ChatStickers)
-                        .HasConversion(
-                            to => Utilities.ToJson(to),
-                            from => Utilities.FromJson<List<int>>(from),
-                            new ValueComparer<ICollection<int>>(
-                                (l1, l2) => l2 != null && l1 != null && l1.SequenceEqual(l2),
-                                l => l.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
-                                l => l.ToHashSet()));
+                        .HasConversion(new JsonValueConverter<HashSet<int>>(),
+                            new HashSetComparer<int>());
                 });
         }
 
@@ -166,9 +173,7 @@ namespace CardCollector.Database
             modelBuilder
                 .Entity<Level>()
                 .Property(entity => entity.LevelReward)
-                .HasConversion(
-                    to => Utilities.ToJson(to),
-                    from => Utilities.FromJson<LevelReward>(from));
+                .HasConversion(new JsonValueConverter<LevelReward>());
         }
 
         private void ConfigureUserSettings(ModelBuilder modelBuilder)
@@ -185,8 +190,8 @@ namespace CardCollector.Database
                                 Utilities.ToJson(to.ToDictionary(pair => (int) pair.Key, pair => pair.Value)),
                             from => 
                                 Utilities.FromJson<Dictionary<int, bool>>(from)
-                                .ToDictionary(pair => (Resources.Enums.UserSettings) pair.Key, pair => pair.Value),
-                            new ValueComparer<Dictionary<Resources.Enums.UserSettings, bool>>(
+                                .ToDictionary(pair => (UserSettingsTypes) pair.Key, pair => pair.Value),
+                            new ValueComparer<Dictionary<UserSettingsTypes, bool>>(
                                 (l1, l2) => l2 != null && l1 != null && l1.Values.SequenceEqual(l2.Values),
                                 l => l.Aggregate(0, (a, v) =>
                                     HashCode.Combine(a, HashCode.Combine(v.Key.GetHashCode(), v.Value.GetHashCode()))),

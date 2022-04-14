@@ -32,6 +32,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin
                 $"\n{LogsTranslations.PeopleSendsStickerOneOrMoreTimes}: {logsPage.PeopleSendsStickerOneOrMoreTimes}" +
                 $"\n{LogsTranslations.PeopleDonated}: {logsPage.PeopleDonated}" +
                 $"\n{LogsTranslations.PeoplePutsStickerToAuction}: {logsPage.PeoplePutsStickerToAuction}" +
+                $"\n{LogsTranslations.InvitedUsers}: {logsPage.InvitedUsers}" +
                 $"\n\n{Text.groups}:" +
                 $"\n{LogsTranslations.GroupCountWasAdded}: {logsPage.GroupCountWasAdded} / {totalGroupsCount}" +
                 $"\n{LogsTranslations.GroupCountWasActive}: {logsPage.GroupCountWasActive}" +

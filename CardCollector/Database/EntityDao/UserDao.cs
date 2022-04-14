@@ -11,8 +11,7 @@ namespace CardCollector.Database.EntityDao
     {
         public static async Task<User> FindUser(this DbSet<User> users, Telegram.Bot.Types.User telegramUser)
         {
-            return await users
-                       .SingleOrDefaultAsync(user => user.ChatId == telegramUser.Id)
+            return await users.SingleOrDefaultAsync(user => user.ChatId == telegramUser.Id)
                    ?? (await users.AddAsync(new User(telegramUser))).Entity.SetNew();
         }
 
@@ -41,8 +40,17 @@ namespace CardCollector.Database.EntityDao
         {
             return await users
                 .Where(user => user.PrivilegeLevel < PrivilegeLevel.Tester)
-                .OrderByDescending(user => user.Stickers.Where(sticker => sticker.Sticker.Tier == 4).Count())
+                .OrderByDescending(user => 
+                    user.Stickers.Where(sticker => sticker.Sticker.Tier == 4).Sum(item => item.Count))
                 .Take(top)
+                .ToListAsync();
+        }
+
+        public static async Task<List<long>> SelectUserChatIds(this DbSet<User> table)
+        {
+            return await table
+                .Where(item => !item.IsBlocked)
+                .Select(item => item.ChatId)
                 .ToListAsync();
         }
     }

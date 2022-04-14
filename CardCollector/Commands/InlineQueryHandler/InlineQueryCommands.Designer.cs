@@ -68,5 +68,14 @@ namespace CardCollector.Commands.InlineQueryHandler {
                 return ResourceManager.GetString("roulette", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #svote.
+        /// </summary>
+        internal static string sticker_voting {
+            get {
+                return ResourceManager.GetString("sticker_voting", resourceCulture);
+            }
+        }
     }
 }

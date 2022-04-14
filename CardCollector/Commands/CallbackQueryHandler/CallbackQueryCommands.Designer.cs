@@ -151,6 +151,15 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ACL.
+        /// </summary>
+        internal static string check_distribution {
+            get {
+                return ResourceManager.GetString("check_distribution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AAJ.
         /// </summary>
         internal static string choose_pack {
@@ -268,11 +277,38 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ACK.
+        /// </summary>
+        internal static string create_distribution {
+            get {
+                return ResourceManager.GetString("create_distribution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ABW.
         /// </summary>
         internal static string create_giveaway {
             get {
                 return ResourceManager.GetString("create_giveaway", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ACQ.
+        /// </summary>
+        internal static string create_inline_button {
+            get {
+                return ResourceManager.GetString("create_inline_button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ACP.
+        /// </summary>
+        internal static string create_url_button {
+            get {
+                return ResourceManager.GetString("create_url_button", resourceCulture);
             }
         }
         
@@ -466,11 +502,47 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ACN.
+        /// </summary>
+        internal static string send_distribution_to_groups {
+            get {
+                return ResourceManager.GetString("send_distribution_to_groups", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ACM.
+        /// </summary>
+        internal static string send_distribution_to_private {
+            get {
+                return ResourceManager.GetString("send_distribution_to_private", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ACO.
+        /// </summary>
+        internal static string send_distribution_to_private_and_groups {
+            get {
+                return ResourceManager.GetString("send_distribution_to_private_and_groups", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ABK.
         /// </summary>
         internal static string set {
             get {
                 return ResourceManager.GetString("set", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ACR.
+        /// </summary>
+        internal static string set_distribution_button_value {
+            get {
+                return ResourceManager.GetString("set_distribution_button_value", resourceCulture);
             }
         }
         

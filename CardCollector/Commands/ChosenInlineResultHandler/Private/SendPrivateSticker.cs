@@ -4,9 +4,9 @@ using CardCollector.Attributes.Logs;
 using CardCollector.Commands.ChosenInlineResultHandler.Group;
 using CardCollector.Database.Entity;
 using CardCollector.Database.EntityDao;
+using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
 using CardCollector.UserDailyTask;
-using UserSettings = CardCollector.Resources.Enums.UserSettings;
 
 namespace CardCollector.Commands.ChosenInlineResultHandler.Private
 {
@@ -22,6 +22,13 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Private
             dailyTask.Progress--;
             await SendAlert(dailyTask);
             await GivePrize(dailyTask);
+
+            if (User.InviteInfo?.TasksProgress is { } tp
+                && tp.SendStickersToPrivate < BeginnersTasksProgress.SendStickersGoalToPrivate)
+            {
+                tp.SendStickersToPrivate++;
+                await User.InviteInfo.CheckRewards(Context);
+            }
         }
 
         private DailyTask GetTaskInfo()
@@ -53,7 +60,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Private
 
         private async Task SendAlert(DailyTask dailyTask)
         {
-            if (User.Settings[UserSettings.DailyTaskProgress])
+            if (User.Settings[UserSettingsTypes.DailyTaskProgress])
                 await User.Messages.SendDailyTaskProgress(User,
                     $"{Messages.send_sticker_progress}: " +
                     $"{TaskGoals.Goals[TaskKeys.SendStickersToUsers] - dailyTask.Progress}" +

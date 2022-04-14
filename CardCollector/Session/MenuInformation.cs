@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using CardCollector.Commands;
 using CardCollector.Database.Entity;
-using CardCollector.Resources;
 using CardCollector.Resources.Enums;
 using CardCollector.Session.Modules;
 

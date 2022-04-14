@@ -1,6 +1,6 @@
 ﻿namespace CardCollector.Resources.Enums
 {
-    public enum UserSettings
+    public enum UserSettingsTypes
     {
         DailyTasks,
         ExpGain,

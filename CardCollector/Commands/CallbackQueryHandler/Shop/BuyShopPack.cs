@@ -32,6 +32,12 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
                 await User.Messages.EditMessage(User,
                     $"{Messages.thanks_for_buying} {userPack.Count} {Text.packs} {packInfo.Author}",
                     Keyboard.BuyShopItem(CallbackQuery.Data));
+                
+                if (packId == 1 && User.InviteInfo?.TasksProgress is { } tp && !tp.BuyStandardPack)
+                {
+                    tp.BuyStandardPack = true;
+                    await User.InviteInfo.CheckRewards(Context);
+                }
             }
         }
 

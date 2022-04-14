@@ -27,7 +27,7 @@ namespace CardCollector.TimerTasks
                 {
                     var message = Messages.users_top_exp + string.Join("\n", topByExp.Select((user, i) =>
                         $"\n{i + 1}.{user.Username}: {user.Level.TotalExp} {Text.exp}"));
-                    foreach (var user in users.Where(user => user.Settings[Resources.Enums.UserSettings.DailyExpTop]))
+                    foreach (var user in users.Where(user => user.Settings[UserSettingsTypes.DailyExpTop]))
                         await user.Messages.SendTopUsers(user, message, Keyboard.GetTopButton(TopBy.Tier4Stickers));
                 }
 

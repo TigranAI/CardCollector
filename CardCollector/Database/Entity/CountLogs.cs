@@ -16,6 +16,7 @@ namespace CardCollector.Database.Entity
         public int GroupCountWasActive { get; set; }
         public int RoulettePlayCount { get; set; }
         public int GroupPrizeCount { get; set; }
+        public int InvitedUsers { get; set; }
 
         public bool IsEmpty()
         {

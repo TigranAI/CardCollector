@@ -207,4 +207,28 @@
     <data name="beginners_tasks" xml:space="preserve">
         <value>ACJ</value>
     </data>
+    <data name="create_distribution" xml:space="preserve">
+        <value>ACK</value>
+    </data>
+    <data name="check_distribution" xml:space="preserve">
+        <value>ACL</value>
+    </data>
+    <data name="send_distribution_to_private" xml:space="preserve">
+        <value>ACM</value>
+    </data>
+    <data name="send_distribution_to_groups" xml:space="preserve">
+        <value>ACN</value>
+    </data>
+    <data name="send_distribution_to_private_and_groups" xml:space="preserve">
+        <value>ACO</value>
+    </data>
+    <data name="create_url_button" xml:space="preserve">
+        <value>ACP</value>
+    </data>
+    <data name="create_inline_button" xml:space="preserve">
+        <value>ACQ</value>
+    </data>
+    <data name="set_distribution_button_value" xml:space="preserve">
+        <value>ACR</value>
+    </data>
 </root>

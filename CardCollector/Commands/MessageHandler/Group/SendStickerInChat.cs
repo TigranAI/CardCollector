@@ -2,11 +2,11 @@
 using System.Threading.Tasks;
 using CardCollector.Database.Entity;
 using CardCollector.Resources;
+using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
 using Microsoft.EntityFrameworkCore;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
-using UserSettings = CardCollector.Resources.Enums.UserSettings;
 
 namespace CardCollector.Commands.MessageHandler.Group
 {
@@ -24,7 +24,7 @@ namespace CardCollector.Commands.MessageHandler.Group
             {
                 var membersCount = await Bot.Client.GetChatMemberCountAsync(Message.Chat.Id) - 1;
                 User.Level.GiveExp(membersCount < 21 ? membersCount : 20);
-                if (User.Settings[UserSettings.ExpGain])
+                if (User.Settings[UserSettingsTypes.ExpGain])
                     await User.Messages.SendMessage(User,
                         $"{Messages.you_gained} {(membersCount < 21 ? membersCount : 20)} {Text.exp} {Messages.send_sticker}" +
                         $"\n{Messages.count_sends_per_day} \"{Message.Chat.Title}\" {countSentStickers + 1} / 5");

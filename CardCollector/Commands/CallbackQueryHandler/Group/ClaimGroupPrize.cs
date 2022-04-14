@@ -27,6 +27,15 @@ namespace CardCollector.Commands.CallbackQueryHandler.Group
             await GivePrize(data, chat);
             chat.ChatActivity.GiveawayAvailable = false;
             UpdateChatInfo(chat);
+
+            foreach (var member in chat.Members)
+            {
+                if (member.InviteInfo?.TasksProgress is { } tp && !tp.TakePartAtChatGiveaway)
+                {
+                    tp.TakePartAtChatGiveaway = true;
+                    await member.InviteInfo.CheckRewards(Context);
+                }
+            }
         }
 
         private static void UpdateChatInfo(TelegramChat? chat)

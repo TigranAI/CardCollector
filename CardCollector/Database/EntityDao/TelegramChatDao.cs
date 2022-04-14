@@ -1,7 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using CardCollector.Database.Entity;
 using Microsoft.EntityFrameworkCore;
 using Telegram.Bot.Types;
+using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Database.EntityDao
 {
@@ -29,6 +32,14 @@ namespace CardCollector.Database.EntityDao
                 Title = chat.Title
             });
             return result.Entity;
+        }
+
+        public static async Task<List<long>> SelectGroupChatIds(this DbSet<TelegramChat> table)
+        {
+            return await table
+                .Where(item => !item.IsBlocked)
+                .Select(item => item.ChatId)
+                .ToListAsync();
         }
     }
 }

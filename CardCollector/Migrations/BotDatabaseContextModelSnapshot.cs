@@ -113,6 +113,37 @@ namespace CardCollector.Migrations
                     b.ToTable("channel_giveaways", (string)null);
                 });
 
+            modelBuilder.Entity("CardCollector.Database.Entity.ChatDistribution", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Buttons")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("buttons");
+
+                    b.Property<string>("ImageFileId")
+                        .HasColumnType("longtext")
+                        .HasColumnName("image_file_id");
+
+                    b.Property<string>("StickerFileId")
+                        .HasColumnType("longtext")
+                        .HasColumnName("sticker_file_id");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("text");
+
+                    b.HasKey("Id")
+                        .HasName("pk_chat_distributions");
+
+                    b.ToTable("chat_distributions", (string)null);
+                });
+
             modelBuilder.Entity("CardCollector.Database.Entity.ChatRoulette", b =>
                 {
                     b.Property<long>("Id")
@@ -169,6 +200,10 @@ namespace CardCollector.Migrations
                     b.Property<int>("GroupPrizeCount")
                         .HasColumnType("int")
                         .HasColumnName("group_prize_count");
+
+                    b.Property<int>("InvitedUsers")
+                        .HasColumnType("int")
+                        .HasColumnName("invited_users");
 
                     b.Property<int>("PeopleCollectedIncomeMoreTimes")
                         .HasColumnType("int")
@@ -900,56 +935,64 @@ namespace CardCollector.Migrations
 
                             b1.Property<bool>("BuyStandardPack")
                                 .HasColumnType("tinyint(1)")
-                                .HasColumnName("tasks_progress_buy_standard_pack");
+                                .HasColumnName("buy_standard_pack");
 
                             b1.Property<bool>("BuyStickerOnAuction")
                                 .HasColumnType("tinyint(1)")
-                                .HasColumnName("tasks_progress_buy_sticker_on_auction");
+                                .HasColumnName("buy_sticker_on_auction");
 
-                            b1.Property<int>("ClaimIncome")
+                            b1.Property<int>("CollectIncome")
                                 .HasColumnType("int")
-                                .HasColumnName("tasks_progress_claim_income");
+                                .HasColumnName("collect_income");
 
                             b1.Property<bool>("CombineStickers")
                                 .HasColumnType("tinyint(1)")
-                                .HasColumnName("tasks_progress_combine_stickers");
+                                .HasColumnName("combine_stickers");
+
+                            b1.Property<bool>("Donate")
+                                .HasColumnType("tinyint(1)")
+                                .HasColumnName("donate");
 
                             b1.Property<bool>("InviteFriend")
                                 .HasColumnType("tinyint(1)")
-                                .HasColumnName("tasks_progress_invite_friend");
+                                .HasColumnName("invite_friend");
 
                             b1.Property<bool>("OpenPack")
                                 .HasColumnType("tinyint(1)")
-                                .HasColumnName("tasks_progress_open_pack");
+                                .HasColumnName("open_pack");
 
                             b1.Property<bool>("PlaceStickerOnAuction")
                                 .HasColumnType("tinyint(1)")
-                                .HasColumnName("tasks_progress_place_sticker_on_auction");
+                                .HasColumnName("place_sticker_on_auction");
 
                             b1.Property<int>("PlayRoulette")
                                 .HasColumnType("int")
-                                .HasColumnName("tasks_progress_play_roulette");
+                                .HasColumnName("play_roulette");
+
+                            b1.Property<int>("Progress")
+                                .HasColumnType("int")
+                                .HasColumnName("progress");
 
                             b1.Property<int>("SendStickersToPrivate")
                                 .HasColumnType("int")
-                                .HasColumnName("tasks_progress_send_stickers_to_private");
+                                .HasColumnName("send_stickers_to_private");
 
                             b1.Property<bool>("TakePartAtChatGiveaway")
                                 .HasColumnType("tinyint(1)")
-                                .HasColumnName("tasks_progress_take_part_at_chat_giveaway");
+                                .HasColumnName("take_part_at_chat_giveaway");
 
                             b1.Property<int>("WinRoulette")
                                 .HasColumnType("int")
-                                .HasColumnName("tasks_progress_win_roulette");
+                                .HasColumnName("win_roulette");
 
                             b1.HasKey("InviteInfoid")
-                                .HasName("pk_invite_info");
+                                .HasName("pk_beginners_tasks_progress");
 
-                            b1.ToTable("invite_info");
+                            b1.ToTable("beginners_tasks_progress", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("InviteInfoid")
-                                .HasConstraintName("fk_invite_info_invite_info_id");
+                                .HasConstraintName("fk_beginners_tasks_progress_invite_info_id");
                         });
 
                     b.Navigation("InvitedBy");

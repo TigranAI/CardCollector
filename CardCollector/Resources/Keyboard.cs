@@ -105,6 +105,24 @@ namespace CardCollector.Resources
             new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)},
         });
 
+        public static InlineKeyboardMarkup SendDistribution = new(new[]
+        {
+            new [] { InlineKeyboardButton.WithCallbackData(Text.private_chats, 
+                CallbackQueryCommands.send_distribution_to_private) },
+            new [] { InlineKeyboardButton.WithCallbackData(Text.groups, 
+                CallbackQueryCommands.send_distribution_to_groups) },
+            new [] { InlineKeyboardButton.WithCallbackData(Text.private_chats_and_groups, 
+                CallbackQueryCommands.send_distribution_to_private_and_groups) },
+            new [] { InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back) }
+        });
+
+        public static InlineKeyboardMarkup DistributionInlineOptions = new(new[]
+        {
+            new [] { InlineKeyboardButton.WithCallbackData(Text.sticker_voting, 
+                $"{CallbackQueryCommands.set_distribution_button_value}={InlineQueryCommands.sticker_voting}") },
+            new [] { InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back) }
+        });
+
         public static InlineKeyboardMarkup RouletteKeyboard(long rouletteId)
         {
             return new InlineKeyboardMarkup(new[]
@@ -198,29 +216,29 @@ namespace CardCollector.Resources
                 new[]
                 {
                     InlineKeyboardButton.WithCallbackData(
-                        $"{Text.daily_tasks} {(settings[Enums.UserSettings.DailyTasks] ? Text.alert_on : Text.alert_off)}",
-                        $"{CallbackQueryCommands.alerts}={(int) Enums.UserSettings.DailyTasks}"),
+                        $"{Text.daily_tasks} {(settings[Enums.UserSettingsTypes.DailyTasks] ? Text.alert_on : Text.alert_off)}",
+                        $"{CallbackQueryCommands.alerts}={(int) Enums.UserSettingsTypes.DailyTasks}"),
                     InlineKeyboardButton.WithCallbackData(
-                        $"{Text.sticker_effects} {(settings[Enums.UserSettings.StickerEffects] ? Text.alert_on : Text.alert_off)}",
-                        $"{CallbackQueryCommands.alerts}={(int) Enums.UserSettings.StickerEffects}")
+                        $"{Text.sticker_effects} {(settings[Enums.UserSettingsTypes.StickerEffects] ? Text.alert_on : Text.alert_off)}",
+                        $"{CallbackQueryCommands.alerts}={(int) Enums.UserSettingsTypes.StickerEffects}")
                 },
                 new[]
                 {
                     InlineKeyboardButton.WithCallbackData(
-                        $"{Text.exp_gain} {(settings[Enums.UserSettings.ExpGain] ? Text.alert_on : Text.alert_off)}",
-                        $"{CallbackQueryCommands.alerts}={(int) Enums.UserSettings.ExpGain}"),
+                        $"{Text.exp_gain} {(settings[Enums.UserSettingsTypes.ExpGain] ? Text.alert_on : Text.alert_off)}",
+                        $"{CallbackQueryCommands.alerts}={(int) Enums.UserSettingsTypes.ExpGain}"),
                     InlineKeyboardButton.WithCallbackData(
-                        $"{Text.daily_task_progress} {(settings[Enums.UserSettings.DailyTaskProgress] ? Text.alert_on : Text.alert_off)}",
-                        $"{CallbackQueryCommands.alerts}={(int) Enums.UserSettings.DailyTaskProgress}")
+                        $"{Text.daily_task_progress} {(settings[Enums.UserSettingsTypes.DailyTaskProgress] ? Text.alert_on : Text.alert_off)}",
+                        $"{CallbackQueryCommands.alerts}={(int) Enums.UserSettingsTypes.DailyTaskProgress}")
                 },
                 new[]
                 {
                     InlineKeyboardButton.WithCallbackData(
-                        $"{Text.piggy_bank_capacity} {(settings[Enums.UserSettings.PiggyBankCapacity] ? Text.alert_on : Text.alert_off)}",
-                        $"{CallbackQueryCommands.alerts}={(int) Enums.UserSettings.PiggyBankCapacity}"),
+                        $"{Text.piggy_bank_capacity} {(settings[Enums.UserSettingsTypes.PiggyBankCapacity] ? Text.alert_on : Text.alert_off)}",
+                        $"{CallbackQueryCommands.alerts}={(int) Enums.UserSettingsTypes.PiggyBankCapacity}"),
                     InlineKeyboardButton.WithCallbackData(
-                        $"{Text.daily_exp_top} {(settings[Enums.UserSettings.DailyExpTop] ? Text.alert_on : Text.alert_off)}",
-                        $"{CallbackQueryCommands.alerts}={(int) Enums.UserSettings.DailyExpTop}")
+                        $"{Text.daily_exp_top} {(settings[Enums.UserSettingsTypes.DailyExpTop] ? Text.alert_on : Text.alert_off)}",
+                        $"{CallbackQueryCommands.alerts}={(int) Enums.UserSettingsTypes.DailyExpTop}")
                 },
                 new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)},
             };
@@ -836,6 +854,11 @@ namespace CardCollector.Resources
                     {
                         InlineKeyboardButton.WithCallbackData(Text.create_giveaway,
                             $"{CallbackQueryCommands.create_giveaway}")
+                    },
+                    new[]
+                    {
+                        InlineKeyboardButton.WithCallbackData(Text.create_distribution,
+                            $"{CallbackQueryCommands.create_distribution}")
                     }
                 });
             if (level == PrivilegeLevel.Programmer)
@@ -955,5 +978,30 @@ namespace CardCollector.Resources
                 }
             });
         }
+
+        public static InlineKeyboardMarkup StickerSkipKeyboard(string name)
+        {
+            return new InlineKeyboardMarkup(new[]
+            {
+                new [] { InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.choose_sticker) },
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(Text.skip, $"{CallbackQueryCommands.skip}={name}")
+                },
+                new[] { InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back) }
+            });
+        }
+
+        public static InlineKeyboardMarkup DistributionButtonsKeyboard =  new (new[] {
+                new [] { InlineKeyboardButton.WithCallbackData(Text.create_url_button, 
+                    CallbackQueryCommands.create_url_button) },
+                new [] { InlineKeyboardButton.WithCallbackData(Text.create_inline_button, 
+                    CallbackQueryCommands.create_inline_button) },
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(Text.end, CallbackQueryCommands.check_distribution)
+                },
+                new[] { InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back) }
+        });
     }
 }

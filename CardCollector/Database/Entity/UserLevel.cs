@@ -11,10 +11,10 @@ namespace CardCollector.Database.Entity
         public long CurrentExp { get; set; }
         public long TotalExp { get; set; }
 
-        public void GiveExp(int gemsCount)
+        public void GiveExp(int expCount)
         {
-            CurrentExp += gemsCount;
-            TotalExp += gemsCount;
+            CurrentExp += expCount;
+            TotalExp += expCount;
         }
 
         public async Task CheckLevelUp(BotDatabaseContext context, User user)
