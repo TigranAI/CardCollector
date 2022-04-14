@@ -42,4 +42,10 @@
     <data name="roulette" xml:space="preserve">
         <value>/roulette</value>
     </data>
+    <data name="disable_distributions" xml:space="preserve">
+        <value>/disable</value>
+    </data>
+    <data name="enable_distributions" xml:space="preserve">
+        <value>/enable</value>
+    </data>
 </root>

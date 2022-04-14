@@ -602,6 +602,24 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Рассылки успешно отключены!.
+        /// </summary>
+        internal static string distributions_successfully_disabled {
+            get {
+                return ResourceManager.GetString("distributions_successfully_disabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Рассылки успешно включены!.
+        /// </summary>
+        internal static string distributions_successfully_enabled {
+            get {
+                return ResourceManager.GetString("distributions_successfully_enabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Пополнить счет.
         /// </summary>
         internal static string donate {
@@ -1494,6 +1512,15 @@ namespace CardCollector.Resources.Translations {
         internal static string thanks_for_selling_sticker {
             get {
                 return ResourceManager.GetString("thanks_for_selling_sticker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Эту команду могут использовать только администраторы!.
+        /// </summary>
+        internal static string this_command_can_execute_only_administrator {
+            get {
+                return ResourceManager.GetString("this_command_can_execute_only_administrator", resourceCulture);
             }
         }
         

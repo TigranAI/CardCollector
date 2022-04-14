@@ -36,6 +36,8 @@ namespace CardCollector.Resources
         public static readonly IEnumerable<BotCommand> GroupCommands = new[]
         {
             new BotCommand {Command = MessageCommands.roulette, Description = "Запустить рулетку"},
+            new BotCommand {Command = MessageCommands.disable_distributions, Description = "Отключить рассылки"},
+            new BotCommand {Command = MessageCommands.enable_distributions, Description = "Включить рассылки"},
             /*new BotCommand {Command = "/error", Description = "Сообщить об ошибке"},*/
         };
         

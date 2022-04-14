@@ -8,5 +8,6 @@
         DailyTaskProgress,
         PiggyBankCapacity,
         DailyExpTop,
+        Distributions
     }
 }

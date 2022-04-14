@@ -13,6 +13,8 @@ namespace CardCollector.Database.Entity
         public ChatType ChatType { get; set; }
         public string? Title { get; set; }
         public bool IsBlocked { get; set; }
+        
+        public bool DistributionsDisabled { get; set; }
 
         public virtual ICollection<User> Members { get; set; } = new List<User>();
         public virtual ChatActivity? ChatActivity { get; set; }

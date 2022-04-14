@@ -286,6 +286,15 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Рассылки.
+        /// </summary>
+        internal static string chat_distributions_alerts {
+            get {
+                return ResourceManager.GetString("chat_distributions_alerts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Выберите канал.
         /// </summary>
         internal static string choose_channel {

@@ -40,7 +40,7 @@ namespace CardCollector.Database.EntityDao
         {
             return await users
                 .Where(user => user.PrivilegeLevel < PrivilegeLevel.Tester)
-                .OrderByDescending(user => 
+                .OrderByDescending(user =>
                     user.Stickers.Where(sticker => sticker.Sticker.Tier == 4).Sum(item => item.Count))
                 .Take(top)
                 .ToListAsync();
@@ -48,10 +48,13 @@ namespace CardCollector.Database.EntityDao
 
         public static async Task<List<long>> SelectUserChatIds(this DbSet<User> table)
         {
-            return await table
+            var users = await table
                 .Where(item => !item.IsBlocked)
-                .Select(item => item.ChatId)
                 .ToListAsync();
+            return users
+                .Where(item => item.Settings[UserSettingsTypes.Distributions])
+                .Select(item => item.ChatId)
+                .ToList();
         }
     }
 }

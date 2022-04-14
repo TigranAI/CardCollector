@@ -9,8 +9,7 @@ using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
 using Telegram.Bot.Types.ReplyMarkups;
-using SortingTypes = CardCollector.Resources.Translations.SortingTypes;
-using UserSettings = CardCollector.Database.Entity.UserSettings;
+using SortingTypes = CardCollector.Resources.Enums.SortingTypes;
 
 namespace CardCollector.Resources
 {
@@ -216,29 +215,35 @@ namespace CardCollector.Resources
                 new[]
                 {
                     InlineKeyboardButton.WithCallbackData(
-                        $"{Text.daily_tasks} {(settings[Enums.UserSettingsTypes.DailyTasks] ? Text.alert_on : Text.alert_off)}",
-                        $"{CallbackQueryCommands.alerts}={(int) Enums.UserSettingsTypes.DailyTasks}"),
+                        $"{Text.daily_tasks} {(settings[UserSettingsTypes.DailyTasks] ? Text.alert_on : Text.alert_off)}",
+                        $"{CallbackQueryCommands.alerts}={(int) UserSettingsTypes.DailyTasks}"),
                     InlineKeyboardButton.WithCallbackData(
-                        $"{Text.sticker_effects} {(settings[Enums.UserSettingsTypes.StickerEffects] ? Text.alert_on : Text.alert_off)}",
-                        $"{CallbackQueryCommands.alerts}={(int) Enums.UserSettingsTypes.StickerEffects}")
+                        $"{Text.sticker_effects} {(settings[UserSettingsTypes.StickerEffects] ? Text.alert_on : Text.alert_off)}",
+                        $"{CallbackQueryCommands.alerts}={(int) UserSettingsTypes.StickerEffects}")
                 },
                 new[]
                 {
                     InlineKeyboardButton.WithCallbackData(
-                        $"{Text.exp_gain} {(settings[Enums.UserSettingsTypes.ExpGain] ? Text.alert_on : Text.alert_off)}",
-                        $"{CallbackQueryCommands.alerts}={(int) Enums.UserSettingsTypes.ExpGain}"),
+                        $"{Text.exp_gain} {(settings[UserSettingsTypes.ExpGain] ? Text.alert_on : Text.alert_off)}",
+                        $"{CallbackQueryCommands.alerts}={(int) UserSettingsTypes.ExpGain}"),
                     InlineKeyboardButton.WithCallbackData(
-                        $"{Text.daily_task_progress} {(settings[Enums.UserSettingsTypes.DailyTaskProgress] ? Text.alert_on : Text.alert_off)}",
-                        $"{CallbackQueryCommands.alerts}={(int) Enums.UserSettingsTypes.DailyTaskProgress}")
+                        $"{Text.daily_task_progress} {(settings[UserSettingsTypes.DailyTaskProgress] ? Text.alert_on : Text.alert_off)}",
+                        $"{CallbackQueryCommands.alerts}={(int) UserSettingsTypes.DailyTaskProgress}")
                 },
                 new[]
                 {
                     InlineKeyboardButton.WithCallbackData(
-                        $"{Text.piggy_bank_capacity} {(settings[Enums.UserSettingsTypes.PiggyBankCapacity] ? Text.alert_on : Text.alert_off)}",
-                        $"{CallbackQueryCommands.alerts}={(int) Enums.UserSettingsTypes.PiggyBankCapacity}"),
+                        $"{Text.piggy_bank_capacity} {(settings[UserSettingsTypes.PiggyBankCapacity] ? Text.alert_on : Text.alert_off)}",
+                        $"{CallbackQueryCommands.alerts}={(int) UserSettingsTypes.PiggyBankCapacity}"),
                     InlineKeyboardButton.WithCallbackData(
-                        $"{Text.daily_exp_top} {(settings[Enums.UserSettingsTypes.DailyExpTop] ? Text.alert_on : Text.alert_off)}",
-                        $"{CallbackQueryCommands.alerts}={(int) Enums.UserSettingsTypes.DailyExpTop}")
+                        $"{Text.daily_exp_top} {(settings[UserSettingsTypes.DailyExpTop] ? Text.alert_on : Text.alert_off)}",
+                        $"{CallbackQueryCommands.alerts}={(int) UserSettingsTypes.DailyExpTop}")
+                },
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(
+                        $"{Text.chat_distributions_alerts} {(settings[UserSettingsTypes.Distributions] ? Text.alert_on : Text.alert_off)}",
+                        $"{CallbackQueryCommands.alerts}={(int) UserSettingsTypes.Distributions}")
                 },
                 new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)},
             };
@@ -277,27 +282,27 @@ namespace CardCollector.Resources
             new[]
             {
                 InlineKeyboardButton.WithCallbackData(Text.no,
-                    $"{CallbackQueryCommands.set}={(int) FilterKeys.Sorting}={(int) Enums.SortingTypes.None}")
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.Sorting}={(int) SortingTypes.None}")
             },
             new[]
             {
-                InlineKeyboardButton.WithCallbackData(SortingTypes.ByTierIncrease,
-                    $"{CallbackQueryCommands.set}={(int) FilterKeys.Sorting}={(int) Enums.SortingTypes.ByTierIncrease}")
+                InlineKeyboardButton.WithCallbackData(Translations.SortingTypes.ByTierIncrease,
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.Sorting}={(int) SortingTypes.ByTierIncrease}")
             },
             new[]
             {
-                InlineKeyboardButton.WithCallbackData(SortingTypes.ByTierDecrease,
-                    $"{CallbackQueryCommands.set}={(int) FilterKeys.Sorting}={(int) Enums.SortingTypes.ByTierDecrease}")
+                InlineKeyboardButton.WithCallbackData(Translations.SortingTypes.ByTierDecrease,
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.Sorting}={(int) SortingTypes.ByTierDecrease}")
             },
             new[]
             {
-                InlineKeyboardButton.WithCallbackData(SortingTypes.ByAuthor,
-                    $"{CallbackQueryCommands.set}={(int) FilterKeys.Sorting}={(int) Enums.SortingTypes.ByAuthor}")
+                InlineKeyboardButton.WithCallbackData(Translations.SortingTypes.ByAuthor,
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.Sorting}={(int) SortingTypes.ByAuthor}")
             },
             new[]
             {
-                InlineKeyboardButton.WithCallbackData(SortingTypes.ByTitle,
-                    $"{CallbackQueryCommands.set}={(int) FilterKeys.Sorting}={(int) Enums.SortingTypes.ByTitle}")
+                InlineKeyboardButton.WithCallbackData(Translations.SortingTypes.ByTitle,
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.Sorting}={(int) SortingTypes.ByTitle}")
             },
             new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)},
         });

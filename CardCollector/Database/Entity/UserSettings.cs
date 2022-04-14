@@ -15,6 +15,7 @@ namespace CardCollector.Database.Entity
             Settings.Add(Resources.Enums.UserSettingsTypes.DailyTaskProgress, true);
             Settings.Add(Resources.Enums.UserSettingsTypes.PiggyBankCapacity, true);
             Settings.Add(Resources.Enums.UserSettingsTypes.DailyExpTop, true);
+            Settings.Add(Resources.Enums.UserSettingsTypes.Distributions, true);
         }
 
         public void SwitchProperty(Resources.Enums.UserSettingsTypes property)

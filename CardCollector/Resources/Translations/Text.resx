@@ -411,4 +411,7 @@
     <data name="sticker_voting" xml:space="preserve">
         <value>Голосование за стикер</value>
     </data>
+    <data name="chat_distributions_alerts" xml:space="preserve">
+        <value>Рассылки</value>
+    </data>
 </root>

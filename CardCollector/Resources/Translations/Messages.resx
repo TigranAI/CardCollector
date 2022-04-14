@@ -674,4 +674,13 @@ mm - минуты
     <data name="enter_button_url" xml:space="preserve">
         <value>Введите ссылку:</value>
     </data>
+    <data name="this_command_can_execute_only_administrator" xml:space="preserve">
+        <value>Эту команду могут использовать только администраторы!</value>
+    </data>
+    <data name="distributions_successfully_disabled" xml:space="preserve">
+        <value>Рассылки успешно отключены!</value>
+    </data>
+    <data name="distributions_successfully_enabled" xml:space="preserve">
+        <value>Рассылки успешно включены!</value>
+    </data>
 </root>

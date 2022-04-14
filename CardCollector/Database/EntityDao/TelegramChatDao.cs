@@ -37,7 +37,7 @@ namespace CardCollector.Database.EntityDao
         public static async Task<List<long>> SelectGroupChatIds(this DbSet<TelegramChat> table)
         {
             return await table
-                .Where(item => !item.IsBlocked)
+                .Where(item => !item.IsBlocked && !item.DistributionsDisabled)
                 .Select(item => item.ChatId)
                 .ToListAsync();
         }

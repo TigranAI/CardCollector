@@ -79,6 +79,24 @@ namespace CardCollector.Commands.MessageHandler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /disable.
+        /// </summary>
+        internal static string disable_distributions {
+            get {
+                return ResourceManager.GetString("disable_distributions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /enable.
+        /// </summary>
+        internal static string enable_distributions {
+            get {
+                return ResourceManager.GetString("enable_distributions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /help.
         /// </summary>
         internal static string help {
