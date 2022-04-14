@@ -518,10 +518,10 @@ mm - минуты
         <value>Рулетка уже завершена! Если вы хотите начать новую, то запустите команду {0}@{1}</value>
     </data>
     <data name="you_got_sticker" xml:space="preserve">
-        <value>Вы получили стикер(ы):{0}</value>
+        <value>Вы получили стикер(ы): {0}</value>
     </data>
     <data name="time_to_claim" xml:space="preserve">
-        <value>Пришло время получить:{0}</value>
+        <value>Пришло время получить: {0}</value>
     </data>
     <data name="you_are_now_be_awarded_in_another_group" xml:space="preserve">
         <value>Вы уже были участником раздачи. Подождите {0} часов.</value>
@@ -682,5 +682,9 @@ mm - минуты
     </data>
     <data name="distributions_successfully_enabled" xml:space="preserve">
         <value>Рассылки успешно включены!</value>
+    </data>
+    <data name="cant_define_bet" xml:space="preserve">
+        <value>Извините, я не смог определить беседу, в которой вы сделали ставку! Попробуйте еще раз.
+Проверьте, что вы делаете ставку от своего имени, а не от имени канала. Также проверьте не включен ли в вашей беседе анонимный режим.</value>
     </data>
 </root>

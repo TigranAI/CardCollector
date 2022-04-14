@@ -115,6 +115,15 @@ namespace CardCollector.Commands.ChosenInlineResultHandler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AAI.
+        /// </summary>
+        internal static string set_distribution_sticker {
+            get {
+                return ResourceManager.GetString("set_distribution_sticker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AAG.
         /// </summary>
         internal static string set_giveaway_channel {

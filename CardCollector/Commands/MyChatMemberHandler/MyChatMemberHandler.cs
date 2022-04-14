@@ -6,7 +6,6 @@ using CardCollector.Attributes.Handlers;
 using CardCollector.Database;
 using CardCollector.Database.EntityDao;
 using Telegram.Bot.Types;
-using Telegram.Bot.Types.Enums;
 using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.MyChatMemberHandler
@@ -49,7 +48,7 @@ namespace CardCollector.Commands.MyChatMemberHandler
 
         public override HandlerModel Init(User user, BotDatabaseContext context, Update update)
         {
-            ChatMemberUpdated = update.ChatMember!;
+            ChatMemberUpdated = update.MyChatMember!;
             return base.Init(user, context, update);
         }
     }

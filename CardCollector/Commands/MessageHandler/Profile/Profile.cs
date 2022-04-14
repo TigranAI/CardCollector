@@ -29,7 +29,7 @@ namespace CardCollector.Commands.MessageHandler.Profile
                           $"\n{Messages.current_exp}: {User.Level.CurrentExp} / {expGoal}" +
                           $"\n{Messages.cash_capacity}: {User.Cash.MaxCapacity}{Text.coin}";
             if (User.InviteInfo?.ShowInvitedBy() is true)
-                message += $"\n{Messages.inviter}: {User.InviteInfo.User.Username}";
+                message += $"\n{Messages.inviter}: {User.InviteInfo.InvitedBy!.Username}";
             message += $"\n{Messages.see_your_stickers}";
             
             await User.Messages.EditMessage(User, message, Keyboard.GetProfileKeyboard(packsCount, User.InviteInfo, income));

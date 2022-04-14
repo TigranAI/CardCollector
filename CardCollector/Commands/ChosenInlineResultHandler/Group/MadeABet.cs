@@ -21,7 +21,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Group
             if (userSticker == null) return;
 
             var module = User.Session.GetModule<GroupModule>();
-            if (module.SelectBetChatId == null) await User.Messages.SendMessage(User, "Can't define roulette chat");
+            if (module.SelectBetChatId == null) await User.Messages.SendMessage(User, Messages.cant_define_bet);
 
             var roulette = await Context.ChatRoulette
                 .Where(item => !item.IsStarted && item.Group.ChatId == module.SelectBetChatId)

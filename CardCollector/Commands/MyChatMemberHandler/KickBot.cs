@@ -17,6 +17,7 @@ namespace CardCollector.Commands.MyChatMemberHandler
         {
             if (ChatMemberUpdated.NewChatMember.Status is not 
                 (ChatMemberStatus.Kicked or ChatMemberStatus.Left)) return false;
+            Logs.LogOut(ChatMemberUpdated.Chat.Type);
             return ChatMemberUpdated.Chat.Type is not (ChatType.Group or ChatType.Supergroup or ChatType.Channel);
         }
     }

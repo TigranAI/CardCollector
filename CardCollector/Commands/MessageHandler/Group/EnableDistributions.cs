@@ -2,6 +2,7 @@
 using CardCollector.Database.Entity;
 using CardCollector.Database.EntityDao;
 using CardCollector.Others;
+using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
@@ -38,7 +39,9 @@ namespace CardCollector.Commands.MessageHandler.Group
         public override bool Match()
         {
             if (Message.Type != MessageType.Text) return false;
-            if (Message.Text!.Split("@")[0] != CommandText) return false;
+            var data = Message.Text!.Split("@");
+            if (data.Length < 2) return false;
+            if (data[0] != CommandText || data[1] != AppSettings.NAME) return false;
             return Message.Chat.Type is ChatType.Group or ChatType.Supergroup;
         }
     }

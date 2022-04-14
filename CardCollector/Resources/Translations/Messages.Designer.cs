@@ -262,6 +262,16 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Извините, я не смог определить беседу, в которой вы сделали ставку! Попробуйте еще раз.
+        ///Проверьте, что вы делаете ставку от своего имени, а не от имени канала. Также проверьте не включен ли в вашей беседе анонимный режим..
+        /// </summary>
+        internal static string cant_define_bet {
+            get {
+                return ResourceManager.GetString("cant_define_bet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Нельзя продать товар за 0!.
         /// </summary>
         internal static string cant_sell_zero {
@@ -1543,7 +1553,7 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Пришло время получить:{0}.
+        ///   Looks up a localized string similar to Пришло время получить: {0}.
         /// </summary>
         internal static string time_to_claim {
             get {
@@ -1774,7 +1784,7 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вы получили стикер(ы):{0}.
+        ///   Looks up a localized string similar to Вы получили стикер(ы): {0}.
         /// </summary>
         internal static string you_got_sticker {
             get {

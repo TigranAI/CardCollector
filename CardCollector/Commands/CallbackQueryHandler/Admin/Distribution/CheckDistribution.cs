@@ -11,6 +11,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin.Distribution
         protected override string CommandText => CallbackQueryCommands.check_distribution;
         protected override async Task Execute()
         {
+            await User.Messages.ClearChat(User);
             var module = User.Session.GetModule<AdminModule>();
             var distribution = await Context.ChatDistributions.FindById(module.ChatDistributionId!.Value);
             await distribution.Send(User.ChatId);

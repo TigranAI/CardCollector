@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using CardCollector.Commands.ChosenInlineResultHandler.Admin;
 using CardCollector.Database;
 using CardCollector.Database.Entity;
 using CardCollector.Database.EntityDao;
@@ -26,20 +27,18 @@ namespace CardCollector.Commands.MessageHandler.Admin.Distribution
             distribution.ImageFileId = Message.Photo![0].FileId;
             
             await User.Messages.SendMessage(User, Messages.send_distribution_sticker, 
-                Keyboard.StickerSkipKeyboard(typeof(SendDistributionSticker).Name));
+                Keyboard.StickerSkipKeyboard(typeof(SetDistributionSticker).Name));
             
             User.Session.State = UserState.SendDistributionSticker;
-            SendDistributionSticker.AddToQueue(User.Id);
         }
 
         public static async Task Skip(User user, BotDatabaseContext context)
         {
             RemoveFromQueue(user.Id);
             await user.Messages.SendMessage(user, Messages.send_distribution_sticker, 
-                Keyboard.StickerSkipKeyboard(typeof(SendDistributionSticker).Name));
+                Keyboard.StickerSkipKeyboard(typeof(SetDistributionSticker).Name));
             
             user.Session.State = UserState.SendDistributionSticker;
-            SendDistributionSticker.AddToQueue(user.Id);
         }
 
         public static void AddToQueue(long userId)

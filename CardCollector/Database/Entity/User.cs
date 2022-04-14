@@ -129,7 +129,7 @@ namespace CardCollector.Database.Entity
 
         public bool IsUnblocked()
         {
-            return BlockedAt - UnblockedAt >= Constants.UNBLOCK_INVITE_INTERVAL;
+            return UnblockedAt - BlockedAt >= Constants.UNBLOCK_INVITE_INTERVAL;
         }
 
         public bool IsNotInvited()

@@ -9,7 +9,7 @@
   &lt;Assembly Path="C:\Users\Tigran\.nuget\packages\telegram.bot\17.0.0\lib\netcoreapp3.1\Telegram.Bot.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FCommands_002FCallbackQueryHandler_002FCallbackQueryCommands/@EntryIndexedValue">False</s:Boolean>
-	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FCommands_002FChosenInlineResultHandler_002FChosenInlineResultCommands/@EntryIndexedValue">False</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FCommands_002FChosenInlineResultHandler_002FChosenInlineResultCommands/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FCommands_002FInlineQueryHandler_002FInlineQueryCommands/@EntryIndexedValue">False</s:Boolean>
 	
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FCommands_002FMessageHandler_002FMessageCommands/@EntryIndexedValue">False</s:Boolean>

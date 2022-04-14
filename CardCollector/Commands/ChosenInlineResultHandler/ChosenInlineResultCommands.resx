@@ -45,4 +45,7 @@
     <data name="made_a_bet" xml:space="preserve">
         <value>AAH</value>
     </data>
+    <data name="set_distribution_sticker" xml:space="preserve">
+        <value>AAI</value>
+    </data>
 </root>
