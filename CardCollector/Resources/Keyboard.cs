@@ -171,9 +171,9 @@ namespace CardCollector.Resources
         {
             new[]
             {
-                InlineKeyboardButton.WithCallbackData($"100{Text.gem}", $"{CallbackQueryCommands.set_gems_sum}=100"),
-                InlineKeyboardButton.WithCallbackData($"300{Text.gem}", $"{CallbackQueryCommands.set_gems_sum}=300"),
-                InlineKeyboardButton.WithCallbackData($"700{Text.gem}", $"{CallbackQueryCommands.set_gems_sum}=700")
+                InlineKeyboardButton.WithCallbackData($"500{Text.gem}", $"{CallbackQueryCommands.set_gems_sum}=500"),
+                InlineKeyboardButton.WithCallbackData($"1000{Text.gem}", $"{CallbackQueryCommands.set_gems_sum}=1000"),
+                InlineKeyboardButton.WithCallbackData($"1500{Text.gem}", $"{CallbackQueryCommands.set_gems_sum}=1500")
             },
             new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)}
         });
@@ -370,7 +370,7 @@ namespace CardCollector.Resources
             {
                 new[]
                 {
-                    InlineKeyboardButton.WithPayment($"{Text.buy} {count}{Text.gem} {Text.per} ₽{count * 69 / 100}")
+                    InlineKeyboardButton.WithPayment($"{Text.buy} {count}{Text.gem} {Text.per} ₽{count / 5}")
                 },
                 new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)},
             });

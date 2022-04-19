@@ -215,7 +215,7 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Покупка алмазов производится по курсу ₽69 = 100💎
+        ///   Looks up a localized string similar to Покупка алмазов производится по курсу ₽20 = 100💎
         ///
         ///Выберите одну из опций ниже:.
         /// </summary>

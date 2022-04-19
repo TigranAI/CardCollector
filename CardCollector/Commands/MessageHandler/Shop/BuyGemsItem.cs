@@ -19,7 +19,7 @@ namespace CardCollector.Commands.MessageHandler.Shop
             await User.Messages.ClearChat(User);
             
             var amount = Message.SuccessfulPayment!.TotalAmount;
-            var gemsCount = amount / 69;
+            var gemsCount = amount * 5 / 100;
             
             User.Cash.Gems += gemsCount;
             User.Level.GiveExp(gemsCount * 2);
