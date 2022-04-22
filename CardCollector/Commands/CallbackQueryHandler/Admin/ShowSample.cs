@@ -15,15 +15,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin
 
         protected override async Task Execute()
         {
-            var loginUrl = new LoginUrl
-            {
-                Url = "http://127.0.0.1:8081/login"
-            };
-            await Bot.Client.SendTextMessageAsync(User.ChatId, "Test", replyMarkup: new InlineKeyboardMarkup(
-                new []
-                {
-                    InlineKeyboardButton.WithLoginUrl("test", loginUrl), 
-                }));
+            
         }
 
         /* Нужно помимо совпадения текста проверить пользователя на уровень привилегий */

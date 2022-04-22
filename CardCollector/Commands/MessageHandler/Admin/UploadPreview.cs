@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using CardCollector.Database.EntityDao;
+using CardCollector.Others;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
@@ -20,6 +21,13 @@ namespace CardCollector.Commands.MessageHandler.Admin
             pack.PreviewFileId = Message.Sticker!.FileId;
             pack.IsPreviewAnimated = Message.Sticker.IsAnimated;
             await User.Messages.EditMessage(User, Messages.update_preview_success, Keyboard.BackKeyboard);
+            
+            await Context.SaveChangesAsync();
+            await new RequestBuilder()
+                .SetUrl("recache")
+                .AddParam("packId", pack.Id)
+                .AddParam("type", (int) RecacheType.UploadPackPreview)
+                .Send();
         }
 
         public override bool Match()

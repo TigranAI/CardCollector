@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Database.Entity;
+using CardCollector.Others;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
@@ -54,9 +55,16 @@ namespace CardCollector.Commands.MessageHandler.Admin
                     sticker.Pack = newPack;
                 }
 
-                await Context.Packs.AddAsync(newPack);
+                var result = await Context.Packs.AddAsync(newPack);
+                await Context.SaveChangesAsync();
                 /* Сообщаем пользователю, что стикеры загружены */
                 await User.Messages.EditMessage(User, Messages.stickers_succesfully_uploaded);
+
+                await new RequestBuilder()
+                    .SetUrl("recache")
+                    .AddParam("packId", result.Entity.Id)
+                    .AddParam("type", (int) RecacheType.UploadPack)
+                    .Send();
             }
             catch (Exception e)
             {

@@ -14,6 +14,7 @@ namespace CardCollector.Database.Entity
         public int PriceGems { get; set; }
         [MaxLength(127)] public string? PreviewFileId { get; set; }
         public bool? IsPreviewAnimated { get; set; }
+        public string? GifPreviewFileId { get; set; }
         public long OpenedCount { get; set; }
         public virtual ICollection<Sticker> Stickers { get; set; }
     }

@@ -1231,6 +1231,15 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Загрузить gif-обложку.
+        /// </summary>
+        internal static string upload_pack_gif_preview {
+            get {
+                return ResourceManager.GetString("upload_pack_gif_preview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Загрузить стикерпак.
         /// </summary>
         internal static string upload_stickerpack {

@@ -414,4 +414,7 @@
     <data name="chat_distributions_alerts" xml:space="preserve">
         <value>Рассылки</value>
     </data>
+    <data name="upload_pack_gif_preview" xml:space="preserve">
+        <value>Загрузить gif-обложку</value>
+    </data>
 </root>

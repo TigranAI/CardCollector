@@ -691,6 +691,15 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ACS.
+        /// </summary>
+        internal static string upload_pack_gif_preview {
+            get {
+                return ResourceManager.GetString("upload_pack_gif_preview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ABV.
         /// </summary>
         internal static string upload_stickerpack {

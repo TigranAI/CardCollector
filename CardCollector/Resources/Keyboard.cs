@@ -864,6 +864,11 @@ namespace CardCollector.Resources
                     {
                         InlineKeyboardButton.WithCallbackData(Text.create_distribution,
                             $"{CallbackQueryCommands.create_distribution}")
+                    },
+                    new[]
+                    {
+                        InlineKeyboardButton.WithCallbackData(Text.upload_pack_gif_preview,
+                            $"{CallbackQueryCommands.choose_pack}={CallbackQueryCommands.upload_pack_gif_preview}=0")
                     }
                 });
             if (level == PrivilegeLevel.Programmer)

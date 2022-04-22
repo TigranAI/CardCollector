@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using CardCollector.Others;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
@@ -19,6 +20,13 @@ namespace CardCollector.Commands.MessageHandler.Admin
             sticker.FileId = Message.Sticker!.FileId;
             sticker.IsAnimated = Message.Sticker.IsAnimated;
             await User.Messages.EditMessage(User, Messages.update_sticker_success, Keyboard.BackAndMoreKeyboard);
+            
+            await Context.SaveChangesAsync();
+            await new RequestBuilder()
+                .SetUrl("recache")
+                .AddParam("stickerId", sticker.Id)
+                .AddParam("type", (int) RecacheType.UploadSticker)
+                .Send();
         }
 
         public override bool Match()

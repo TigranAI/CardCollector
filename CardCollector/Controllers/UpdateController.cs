@@ -10,6 +10,7 @@ using CardCollector.Commands.MyChatMemberHandler;
 using CardCollector.Commands.PreCheckoutQueryHandler;
 using CardCollector.Database;
 using CardCollector.Database.EntityDao;
+using Newtonsoft.Json;
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Types;
@@ -23,6 +24,7 @@ namespace CardCollector.Controllers
     {
         public static async Task HandleUpdateAsync(ITelegramBotClient client, Update update, CancellationToken ct)
         {
+            LogOut(Utilities.ToJson(update, Formatting.Indented));
             try
             {
                 var handler = await BuildHandler(update);

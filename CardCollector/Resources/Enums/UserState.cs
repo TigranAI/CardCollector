@@ -24,6 +24,7 @@
         GiveSticker,
         CreateGiveaway,
         SelectGiveawayPrize,
-        SendDistributionSticker
+        SendDistributionSticker,
+        UploadPackGifPreview
     }
 }
