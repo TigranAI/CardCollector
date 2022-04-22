@@ -11,7 +11,6 @@ namespace CardCollector.Resources
         public static readonly string DB_UID;
         public static readonly string DB_PWD;
         public static readonly string DB_SCHEMA;
-        public static readonly string SberbankToken;
-        public static readonly string YouKassaToken;
+        public static readonly string PSB_TOKEN;
     }
 }
