@@ -184,7 +184,7 @@ namespace CardCollector.Controllers
             try
             {
                 var result = await Bot.Client.SendInvoiceAsync(user.ChatId, title, description, payload,
-                    AppSettings.PSBToken, currency.ToString(), prices, replyMarkup: keyboard, disableNotification: true);
+                    AppSettings.PSB_TOKEN, currency.ToString(), prices, replyMarkup: keyboard, disableNotification: true);
                 user.Messages.ChatMessages.Add(result.MessageId);
                 return result.MessageId;
             }
