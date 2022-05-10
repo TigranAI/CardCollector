@@ -1,6 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using CardCollector.Commands.ChosenInlineResultHandler;
+using CardCollector.Resources;
+using CardCollector.Resources.Translations;
+using Telegram.Bot.Types.InlineQueryResults;
 
 namespace CardCollector.Database.Entity
 {
@@ -8,11 +12,30 @@ namespace CardCollector.Database.Entity
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
+
         public virtual User User { get; set; }
         public virtual Sticker Sticker { get; set; }
+        public bool IsUnlocked { get; set; } = false;
+        public int ExclusiveTaskProgress { get; set; } = 0;
         public int Count { get; set; }
         public DateTime Payout { get; set; } = DateTime.Now;
         public DateTime GivePrizeDate { get; set; } = DateTime.Today;
         public DateTime LastUsage { get; set; } = DateTime.Now;
+
+        public string GetFileId()
+        {
+            if (Sticker.Tier != 10 || IsUnlocked) return Sticker.FileId;
+            return Sticker.GrayFileId ?? Sticker.FileId;
+        }
+
+        public void UpdateLastUsage()
+        {
+            LastUsage = DateTime.Now;
+        }
+
+        public InlineQueryResultCachedSticker AsTelegramCachedSticker(string command)
+        {
+            return new InlineQueryResultCachedSticker($"{command}={Id}", GetFileId());
+        }
     }
 }

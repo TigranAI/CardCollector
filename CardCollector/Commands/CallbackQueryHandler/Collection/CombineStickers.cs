@@ -23,7 +23,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Collection
                 await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.not_enougth_coins, true);
             else
             {
-                User.Cash.Coins -= price.Value;
+                await User.DecreaseCoins(price.Value);
                 foreach (var (sticker, count) in combineModule.CombineList)
                 {
                     var userSticker = User.Stickers.FirstOrDefault(item => item.Sticker.Id == sticker.Id);

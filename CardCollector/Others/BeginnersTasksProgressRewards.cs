@@ -23,7 +23,7 @@ namespace CardCollector.Others
             {9, GemsRewardWithInviter},
             {10, Tier2StickerReward},
             {11, Tier3StickerRewardWithInviter},
-            {12, Tier4StickerReward}
+            {12, Tier3StickerReward}
         };
         
         private static async Task PackReward(BotDatabaseContext context, User inviter, User invited)
@@ -50,7 +50,7 @@ namespace CardCollector.Others
                 invited.InviteInfo!.TasksProgress!.Progress, BeginnersTasksProgress.TaskCount,
                 invited.Username, Messages.beginners_task_gems_reward));
 
-            inviter.Cash.Gems += 100;
+            await inviter.AddGems(100);
         }
 
         private static async Task ExpReward(BotDatabaseContext context, User inviter, User invited)
@@ -69,7 +69,7 @@ namespace CardCollector.Others
                 invited.InviteInfo!.TasksProgress!.Progress, BeginnersTasksProgress.TaskCount,
                 Messages.beginners_task_gems_reward));
 
-            invited.Cash.Gems += 100;
+            await invited.AddGems(100);
         }
 
         private static async Task GemsRewardWithInviter(BotDatabaseContext context, User inviter, User invited)
@@ -78,7 +78,7 @@ namespace CardCollector.Others
                 invited.InviteInfo!.TasksProgress!.Progress, BeginnersTasksProgress.TaskCount,
                 Messages.beginners_task_gems_reward));
 
-            invited.Cash.Gems += 100;
+            await invited.AddGems(100);
             
             await inviter.Messages.SendMessage(inviter, string.Format(Messages.friend_beginners_task_reward,
                 invited.InviteInfo!.TasksProgress!.Progress, BeginnersTasksProgress.TaskCount,
@@ -102,25 +102,28 @@ namespace CardCollector.Others
         {
             await invited.Messages.SendMessage(invited, string.Format(Messages.beginners_task_reward,
                 invited.InviteInfo!.TasksProgress!.Progress, BeginnersTasksProgress.TaskCount,
-                Messages.beginners_task_tier3_sticker_reward));
+                Messages.beginners_task_tier2_sticker_reward + " x3"));
             
-            var stickers = await context.Stickers.FindAllByTier(3);
+            var stickers = await context.Stickers.FindAllByTier(2);
+            await invited.AddSticker(stickers.Random(), 1, true);
+            await invited.AddSticker(stickers.Random(), 1, true);
             await invited.AddSticker(stickers.Random(), 1, true);
             
             await inviter.Messages.SendMessage(inviter, string.Format(Messages.friend_beginners_task_reward,
                 invited.InviteInfo!.TasksProgress!.Progress, BeginnersTasksProgress.TaskCount,
                 invited.Username, Messages.beginners_task_tier3_sticker_reward));
             
+            stickers = await context.Stickers.FindAllByTier(3);
             await inviter.AddSticker(stickers.Random(), 1, true);
         }
 
-        private static async Task Tier4StickerReward(BotDatabaseContext context, User inviter, User invited)
+        private static async Task Tier3StickerReward(BotDatabaseContext context, User inviter, User invited)
         {
             await invited.Messages.SendMessage(invited, string.Format(Messages.beginners_task_reward,
                 invited.InviteInfo!.TasksProgress!.Progress, BeginnersTasksProgress.TaskCount,
-                Messages.beginners_task_tier4_sticker_reward));
+                Messages.beginners_task_tier3_sticker_reward));
             
-            var stickers = await context.Stickers.FindAllByTier(4);
+            var stickers = await context.Stickers.FindAllByTier(3);
             await invited.AddSticker(stickers.Random(), 1, true);
             
             /*await inviter.Messages.SendMessage(inviter, string.Format(Messages.friend_beginners_task_reward,

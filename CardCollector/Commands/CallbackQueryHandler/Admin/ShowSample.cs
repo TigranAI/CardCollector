@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using CardCollector.Resources.Enums;
-using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;
 
@@ -15,7 +14,15 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin
 
         protected override async Task Execute()
         {
-            
+            var webAppInfo = new WebAppInfo()
+            {
+                Url = "https://wyrmstore.com"
+            };
+            var keyboard = new ReplyKeyboardMarkup(new[]
+            {
+                new[] {KeyboardButton.WithWebApp("hello", webAppInfo)}
+            });
+            await User.Messages.SendMessage(User, "test", keyboard);
         }
 
         /* Нужно помимо совпадения текста проверить пользователя на уровень привилегий */

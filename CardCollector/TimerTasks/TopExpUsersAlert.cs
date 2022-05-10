@@ -19,7 +19,7 @@ namespace CardCollector.TimerTasks
         
         protected override async void TimerCallback(object o, ElapsedEventArgs e)
         {
-            using (var context = new BotDatabaseContext())
+            /*using (var context = new BotDatabaseContext())
             {
                 var topByExp = await context.Users.FindTopByExp();
                 var users = await context.Users.Where(user => !user.IsBlocked).ToListAsync();
@@ -32,7 +32,7 @@ namespace CardCollector.TimerTasks
                 }
 
                 await context.SaveChangesAsync();
-            }
+            }*/
         }
     }
 }

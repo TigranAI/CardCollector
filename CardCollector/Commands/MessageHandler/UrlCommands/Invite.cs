@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Attributes.Logs;
 using CardCollector.Controllers;
 using CardCollector.Database;
 using CardCollector.Database.Entity;
 using CardCollector.Database.EntityDao;
+using CardCollector.Extensions;
+using CardCollector.Extensions.Database.Entity;
 using CardCollector.Resources;
+using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
 using Telegram.Bot.Types.Enums;
 
@@ -43,7 +47,9 @@ namespace CardCollector.Commands.MessageHandler.UrlCommands
                 await User.Messages.SendSticker(User, packInfo.PreviewFileId!);
                 await User.Messages.SendMessage(User, Messages.first_reward, Keyboard.MyPacks, ParseMode.Html);
             }
-            await User.Messages.SendMessage(User, Messages.start_message, Keyboard.Menu);
+
+            var isFirstOrderPicked = User.SpecialOrdersUser.Any(item => item.Id == 2);
+            await User.Messages.SendMessage(User, Messages.start_message, Keyboard.Menu(isFirstOrderPicked));
             
             inviteInfo.InvitedFriends.Add(User);
             User.InviteInfo = new InviteInfo()
@@ -68,6 +74,10 @@ namespace CardCollector.Commands.MessageHandler.UrlCommands
                 tp.InviteFriend = true;
                 await inviteInfo.User.InviteInfo.CheckRewards(Context);
             }
+
+            await inviteInfo.User.Stickers
+                .Where(sticker => sticker.Sticker.Effect is Effect.InviteFriends)
+                .Apply(sticker => sticker.DoExclusiveTask());
         }
         
         protected override async Task AfterExecute()

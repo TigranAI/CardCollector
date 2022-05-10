@@ -79,7 +79,7 @@ namespace CardCollector.Database
             ConfigureUserInviteInfo(modelBuilder);
             ConfigureLevelLevelReward(modelBuilder);
             ConfigureDailyTaskTaskId(modelBuilder);
-            ConfigureStickerEffect(modelBuilder);
+            ConfigureSticker(modelBuilder);
             ConfigureTelegramChat(modelBuilder);
             ConfigureChatDistributions(modelBuilder);
         }
@@ -130,7 +130,7 @@ namespace CardCollector.Database
                 .OwnsOne(user => user.Cash, builder => builder.ToTable("user_cash"));
         }
 
-        private void ConfigureStickerEffect(ModelBuilder modelBuilder)
+        private void ConfigureSticker(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .Entity<Sticker>()
@@ -138,6 +138,13 @@ namespace CardCollector.Database
                 .HasConversion(
                     to => (int) to,
                     from => (Effect) from);
+            
+            modelBuilder
+                .Entity<Sticker>()
+                .Property(entity => entity.ExclusiveTask)
+                .HasConversion(
+                    to => (int) to,
+                    from => (ExclusiveTask) from);
         }
 
         private void ConfigureUserMessages(ModelBuilder modelBuilder)

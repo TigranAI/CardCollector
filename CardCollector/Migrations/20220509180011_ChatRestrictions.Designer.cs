@@ -3,6 +3,7 @@ using System;
 using CardCollector.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CardCollector.Migrations
 {
     [DbContext(typeof(BotDatabaseContext))]
-    partial class BotDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220509180011_ChatRestrictions")]
+    partial class ChatRestrictions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -550,10 +552,6 @@ namespace CardCollector.Migrations
                         .HasColumnType("int")
                         .HasColumnName("exclusive_task");
 
-                    b.Property<int>("ExclusiveTaskGoal")
-                        .HasColumnType("int")
-                        .HasColumnName("exclusive_task_goal");
-
                     b.Property<string>("FileId")
                         .IsRequired()
                         .HasMaxLength(127)
@@ -801,10 +799,6 @@ namespace CardCollector.Migrations
                     b.Property<int>("Count")
                         .HasColumnType("int")
                         .HasColumnName("count");
-
-                    b.Property<int>("ExclusiveTaskProgress")
-                        .HasColumnType("int")
-                        .HasColumnName("exclusive_task_progress");
 
                     b.Property<DateTime>("GivePrizeDate")
                         .HasColumnType("datetime(6)")

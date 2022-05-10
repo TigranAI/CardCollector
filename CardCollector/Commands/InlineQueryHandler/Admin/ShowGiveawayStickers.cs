@@ -21,7 +21,7 @@ namespace CardCollector.Commands.InlineQueryHandler.Admin
                 .ToList();
             var newOffset = offset + 50 > stickersList.Count ? "" : (offset + 50).ToString();
             var results = stickersList
-                .ToTelegramStickersAsMessage(ChosenInlineResultCommands.set_giveaway_prize, offset);
+                .ToTelegramStickers(ChosenInlineResultCommands.set_giveaway_prize, offset);
             await MessageController.AnswerInlineQuery(User, InlineQuery.Id, results, newOffset);
         }
 

@@ -29,12 +29,14 @@ namespace CardCollector
             await Client.SetMyCommandsAsync(Constants.GroupCommands, BotCommandScope.AllGroupChats());
             Client.StartReceiving(HandleUpdateAsync, HandleErrorAsync);
             
+            MessageController.RunWaitQueueResolver();
+            
             Logs.LogOut("Bot started");
             End.WaitOne();
             await Client.CloseAsync();
             Logs.LogOut("Bot stopped");
         }
-
+        
         public static async Task StopProgram()
         {
             await SessionController.CloseSessions();

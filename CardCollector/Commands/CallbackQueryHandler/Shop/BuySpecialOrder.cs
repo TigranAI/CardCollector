@@ -33,7 +33,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
             else
             {
                 await User.Messages.ClearChat(User);
-                if (currency == "coins") User.Cash.Coins -= orderInfo.GetResultPriceCoins();
+                if (currency == "coins") await User.DecreaseCoins(orderInfo.GetResultPriceCoins());
                 else if (currency == "gems") User.Cash.Gems -= orderInfo.GetResultPriceGems();
                 if (!orderInfo.IsInfinite)
                     User.SpecialOrdersUser.Add(new SpecialOrderUser()

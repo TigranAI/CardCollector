@@ -18,12 +18,14 @@ namespace CardCollector.Commands.InlineQueryHandler.Admin
         {
             var packId = User.Session.GetModule<AdminModule>().SelectedPackId;
             var pack = await Context.Packs.FindById(packId);
-            var stickersList = pack.Stickers.Where(item => item.Contains(InlineQuery.Query)).ToList();
-            stickersList.Sort(new TierComparer());
+            var stickersList = pack.Stickers
+                .Where(item => item.Contains(InlineQuery.Query))
+                .OrderBy(sticker => sticker.Tier)
+                .ToList();
             var offset = int.Parse(InlineQuery.Offset == "" ? "0" : InlineQuery.Offset);
             var newOffset = offset + 50 > stickersList.Count ? "" : (offset + 50).ToString();
             var results = stickersList
-                .ToTelegramStickersAsMessage(ChosenInlineResultCommands.select_edit_sticker, offset);
+                .ToTelegramStickers(ChosenInlineResultCommands.select_edit_sticker, offset);
             await MessageController.AnswerInlineQuery(User, InlineQuery.Id, results, newOffset);
         }
 

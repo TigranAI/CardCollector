@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
@@ -21,7 +22,9 @@ namespace CardCollector.Commands.MessageHandler.TextCommands
                 await User.Messages.SendSticker(User, packInfo.PreviewFileId!);
                 await User.Messages.SendMessage(User, Messages.first_reward, Keyboard.MyPacks, ParseMode.Html);
             }
-            await User.Messages.SendMessage(User, Messages.start_message, Keyboard.Menu);
+            
+            var isFirstOrderPicked = User.SpecialOrdersUser.Any(item => item.Id == 2);
+            await User.Messages.SendMessage(User, Messages.start_message, Keyboard.Menu(isFirstOrderPicked));
         }
 
         protected override async Task AfterExecute()

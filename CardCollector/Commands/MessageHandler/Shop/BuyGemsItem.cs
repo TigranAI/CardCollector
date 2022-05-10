@@ -21,7 +21,7 @@ namespace CardCollector.Commands.MessageHandler.Shop
             var amount = Message.SuccessfulPayment!.TotalAmount;
             var gemsCount = amount * 5 / 100;
             
-            User.Cash.Gems += gemsCount;
+            await User.AddGems(gemsCount);
             User.Level.GiveExp(gemsCount * 2);
             await User.Level.CheckLevelUp(Context, User);
             

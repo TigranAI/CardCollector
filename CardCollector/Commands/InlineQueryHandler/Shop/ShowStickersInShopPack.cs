@@ -18,8 +18,10 @@ namespace CardCollector.Commands.InlineQueryHandler.Shop
         {
             var packId = User.Session.GetModule<ShopModule>().SelectedPackId;
             var pack = await Context.Packs.FindById(packId);
-            var stickersList = pack.Stickers.Where(item => item.Contains(InlineQuery.Query)).ToList();
-            stickersList.Sort(new TierComparer());
+            var stickersList = pack.Stickers
+                .Where(item => item.Contains(InlineQuery.Query))
+                .OrderBy(sticker => sticker.Tier)
+                .ToList();
             var offset = int.Parse(InlineQuery.Offset == "" ? "0" : InlineQuery.Offset);
             var newOffset = offset + 50 > stickersList.Count ? "" : (offset + 50).ToString();
             var results = stickersList

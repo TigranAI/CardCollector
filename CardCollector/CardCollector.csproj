@@ -20,8 +20,7 @@
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.1" />
-      <PackageReference Include="Telegram.Bot" Version="18.0.0-alpha.1" />
-      <PackageReference Include="Telegram.Bot.Extensions.Polling" Version="2.0.0-alpha.1" />
+      <PackageReference Include="Telegram.Bot" Version="18.0.0-alpha.2" />
     </ItemGroup>
 
     <ItemGroup>
@@ -88,6 +87,10 @@
       <EmbeddedResource Update="Commands\MessageHandler\UrlCommands\MessageUrlCommands.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>MessageUrlCommands.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Translations\ExclusiveTaskTranslations.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>ExclusiveTaskTranslations.Designer.cs</LastGenOutput>
       </EmbeddedResource>
     </ItemGroup>
 
@@ -171,6 +174,11 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>MessageUrlCommands.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Translations\ExclusiveTaskTranslations.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ExclusiveTaskTranslations.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

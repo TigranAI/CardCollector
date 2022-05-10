@@ -6,8 +6,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
 using CardCollector.Database.EntityDao;
+using CardCollector.Extensions;
+using CardCollector.Extensions.Database.Entity;
 using CardCollector.Others;
 using CardCollector.Resources;
+using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
 using Telegram.Bot.Types.Enums;
 
@@ -53,35 +56,35 @@ namespace CardCollector.Database.Entity
             }
             else
             {
-                var winner = Bets.WeightedRandom(item => (int) Math.Pow(5, item.Sticker.Tier - 1));
-                if (winner == null)
+                var stickerWinner = Bets.WeightedRandom(item => (int) Math.Pow(5, item.Sticker.Tier - 1));
+                if (stickerWinner == null)
                 {
                     Logs.LogOutError("Cant define bet winner. RouletteId: " + Id);
                     ReturnBets();
                 }
                 else
                 {
-                    if (winner.User.InviteInfo?.TasksProgress is { } wtp 
+                    if (stickerWinner.User.InviteInfo?.TasksProgress is { } wtp 
                         && wtp.WinRoulette < BeginnersTasksProgress.WinRouletteGoal)
                     {
                         wtp.WinRoulette++;
-                        await winner.User.InviteInfo.CheckRewards(context);
+                        await stickerWinner.User.InviteInfo.CheckRewards(context);
                     }
                     
-                    var chance = Math.Pow(5, winner.Sticker.Tier - 1) /
+                    var chance = Math.Pow(5, stickerWinner.Sticker.Tier - 1) /
                         Bets.Sum(item => Math.Pow(5, item.Sticker.Tier - 1)) * 100;
                     await Group.DeleteMessage(MessageId);
                     await Group.SendDice(Emoji.SlotMachine);
                     await Group.SendMessage(string.Format(Messages.congratulation_to_roulette_winner,
-                            winner.User.Username, Math.Round(chance, 2),
+                            stickerWinner.User.Username, Math.Round(chance, 2),
                             string.Join("\n", Bets
-                                .Where(item => item.User.Id != winner.Id)
+                                .Where(item => item.User.Id != stickerWinner.Id)
                                 .Select(item => $"{item.Sticker.Title} {item.Sticker.TierAsStars()}"))
                         )
                     );
                     foreach (var bet in Bets)
                     {
-                        await winner.User.AddSticker(bet.Sticker, 1);
+                        await stickerWinner.User.AddSticker(bet.Sticker, 1);
                         
                         if (bet.User.InviteInfo?.TasksProgress is { } tp 
                             && tp.PlayRoulette < BeginnersTasksProgress.PlayRouletteGoal)
@@ -90,6 +93,10 @@ namespace CardCollector.Database.Entity
                             await bet.User.InviteInfo.CheckRewards(context);
                         }
                     }
+                    
+                    await stickerWinner.User.Stickers
+                        .Where(sticker => sticker.Sticker.ExclusiveTask is ExclusiveTask.WinRoulette)
+                        .Apply(async sticker => await sticker.DoExclusiveTask());
                 }
             }
         }
@@ -112,7 +119,8 @@ namespace CardCollector.Database.Entity
             }
             userSticker.Count--;
             Bets.Add(userSticker);
-            await Group.EditMessage(string.Format(Messages.roulette_message, Creator.Username, BetsToMessage()),
+            MessageId = await Group.EditMessage(
+                string.Format(Messages.roulette_message, Creator.Username, BetsToMessage()),
                 MessageId, Keyboard.RouletteKeyboard(Id));
             return true;
         }

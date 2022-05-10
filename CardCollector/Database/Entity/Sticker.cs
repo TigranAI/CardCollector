@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
+using Telegram.Bot.Types.InlineQueryResults;
 
 namespace CardCollector.Database.Entity
 {
@@ -19,6 +20,7 @@ namespace CardCollector.Database.Entity
         public int IncomeTime { get; set; }
         public int Tier { get; set; }
         public Effect Effect { get; set; }
+        public ExclusiveTask ExclusiveTask { get; set; }
         [MaxLength(127)] public string Emoji { get; set; }
         [MaxLength(1024)] public string? Description { get; set; }
         public virtual Pack Pack { get; set; }
@@ -26,15 +28,23 @@ namespace CardCollector.Database.Entity
         public bool IsAnimated { get; set; }
         [MaxLength(127)] public string? ForSaleFileId { get; set; }
         public bool? IsForSaleAnimated { get; set; }
+        [MaxLength(127)] public string? GrayFileId { get; set; }
+        public int ExclusiveTaskGoal { get; set; }
 
         public override string ToString()
         {
             var str = $"\n{Title} {TierAsStars()}" +
                       $"\n{Text.emoji}: {Emoji}" +
-                      $"\n{Text.author}: {Author}" +
-                      $"\n{Income}{Text.coin} {IncomeTime}{Text.time}{Text.minutes}";
+                      $"\n{Text.author}: {Author}";
+            str += Tier != 10
+                ? $"\n{Income}{Text.coin} {IncomeTime}{Text.time}{Text.minutes}"
+                : $"\n1{Text.candy} 1{Text.sun}{Text.day}";
             if (Effect != Effect.None)
-                str += $"\n{Text.effect}: {EffectTranslations.ResourceManager.GetString(((int) Effect).ToString())}";
+                str += $"\n{Text.effect}: " +
+                       $"{EffectTranslations.ResourceManager.GetString(((int) Effect).ToString())}";
+            if (ExclusiveTask != ExclusiveTask.None)
+                str += $"\n{Text.upgradable}: " +
+                       $"{ExclusiveTaskTranslations.ResourceManager.GetString(((int) Effect).ToString())}";
             if (Description != "") str += $"\n\n{Text.description}: {Description}";
             return str;
         }
@@ -44,16 +54,23 @@ namespace CardCollector.Database.Entity
             var str = $"\n{Title} {TierAsStars()}" +
                       $"\n{Text.emoji}: {Emoji}" +
                       $"\n{Text.author}: {Author}" +
-                      $"\n{Text.count}: {(count != -1 ? count : "∞")}" +
-                      $"\n{Income}{Text.coin} {IncomeTime}{Text.time}{Text.minutes}";
+                      $"\n{Text.count}: {count}";
+            str += Tier != 10
+                ? $"\n{Income}{Text.coin} {IncomeTime}{Text.time}{Text.minutes}"
+                : $"\n1{Text.candy} 1{Text.sun}{Text.day}";
             if (Effect != Effect.None)
-                str += $"\n{Text.effect}: {EffectTranslations.ResourceManager.GetString(((int) Effect).ToString())}";
+                str += $"\n{Text.effect}: " +
+                       $"{EffectTranslations.ResourceManager.GetString(((int) Effect).ToString())}";
+            if (ExclusiveTask != ExclusiveTask.None)
+                str += $"\n{Text.upgradable}: " +
+                       $"{ExclusiveTaskTranslations.ResourceManager.GetString(((int) Effect).ToString())}";
             if (Description != "") str += $"\n\n{Text.description}: {Description}";
             return str;
         }
 
         public string TierAsStars()
         {
+            if (Tier == 10) return Text.exclusive_star;
             return string.Concat(Enumerable.Repeat(Text.star, Tier));
         }
 
@@ -75,7 +92,7 @@ namespace CardCollector.Database.Entity
                     await user.Messages.SendMessage(user, Messages.effect_PiggyBank200);
                     break;
                 case Effect.Diamonds25Percent:
-                    user.Cash.Gems += (int) (user.Cash.Gems * 0.25);
+                    await user.AddGems((int) (user.Cash.Gems * 0.25));
                     await user.Messages.SendMessage(user, Messages.effect_Diamonds25Percent);
                     break;
                 case Effect.Random1Pack5Day:
@@ -88,6 +105,11 @@ namespace CardCollector.Database.Entity
                     userSticker.GivePrizeDate = DateTime.Today;
                     break;
             }
+        }
+
+        public InlineQueryResultCachedSticker AsTelegramCachedSticker(string command)
+        {
+            return new InlineQueryResultCachedSticker($"{command}={Id}", FileId);
         }
     }
 }

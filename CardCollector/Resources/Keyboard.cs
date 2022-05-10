@@ -15,11 +15,22 @@ namespace CardCollector.Resources
 {
     public static class Keyboard
     {
-        public static readonly ReplyKeyboardMarkup Menu = new(new[]
+        public static ReplyKeyboardMarkup Menu(bool isFirstOrderPicked)
         {
-            new KeyboardButton[] {MessageCommands.profile, MessageCommands.collection},
-            new KeyboardButton[] {MessageCommands.shop, MessageCommands.auction},
-        }) {ResizeKeyboard = true};
+            return new ReplyKeyboardMarkup(new[]
+            {
+                new KeyboardButton[]
+                {
+                    MessageCommands.profile,
+                    MessageCommands.collection
+                },
+                new KeyboardButton[]
+                {
+                    MessageCommands.shop + (isFirstOrderPicked ? "" : $" {Text.gift}"),
+                    MessageCommands.auction
+                },
+            }) {ResizeKeyboard = true, InputFieldPlaceholder = Text.select_action};
+        }
 
         public static readonly InlineKeyboardMarkup PackMenu = new(new[]
         {
@@ -106,20 +117,32 @@ namespace CardCollector.Resources
 
         public static InlineKeyboardMarkup SendDistribution = new(new[]
         {
-            new [] { InlineKeyboardButton.WithCallbackData(Text.private_chats, 
-                CallbackQueryCommands.send_distribution_to_private) },
-            new [] { InlineKeyboardButton.WithCallbackData(Text.groups, 
-                CallbackQueryCommands.send_distribution_to_groups) },
-            new [] { InlineKeyboardButton.WithCallbackData(Text.private_chats_and_groups, 
-                CallbackQueryCommands.send_distribution_to_private_and_groups) },
-            new [] { InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back) }
+            new[]
+            {
+                InlineKeyboardButton.WithCallbackData(Text.private_chats,
+                    CallbackQueryCommands.send_distribution_to_private)
+            },
+            new[]
+            {
+                InlineKeyboardButton.WithCallbackData(Text.groups,
+                    CallbackQueryCommands.send_distribution_to_groups)
+            },
+            new[]
+            {
+                InlineKeyboardButton.WithCallbackData(Text.private_chats_and_groups,
+                    CallbackQueryCommands.send_distribution_to_private_and_groups)
+            },
+            new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)}
         });
 
         public static InlineKeyboardMarkup DistributionInlineOptions = new(new[]
         {
-            new [] { InlineKeyboardButton.WithCallbackData(Text.sticker_voting, 
-                $"{CallbackQueryCommands.set_distribution_button_value}={InlineQueryCommands.sticker_voting}") },
-            new [] { InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back) }
+            new[]
+            {
+                InlineKeyboardButton.WithCallbackData(Text.sticker_voting,
+                    $"{CallbackQueryCommands.set_distribution_button_value}={InlineQueryCommands.sticker_voting}")
+            },
+            new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)}
         });
 
         public static InlineKeyboardMarkup RouletteKeyboard(long rouletteId)
@@ -142,6 +165,11 @@ namespace CardCollector.Resources
                 }
             });
         }
+
+        public static InlineKeyboardMarkup AnswerBet = new(new[]
+        {
+            InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.answer_a_bet, InlineQueryCommands.roulette)
+        });
 
         public static InlineKeyboardMarkup BuyCoinsKeyboard(bool confirmButton = false)
         {
@@ -687,7 +715,8 @@ namespace CardCollector.Resources
         }
 
         /* Клавиатура, отображаемая вместе с сообщением профиля */
-        public static InlineKeyboardMarkup GetProfileKeyboard(int packsCount, InviteInfo? userInviteInfo, int income = 0)
+        public static InlineKeyboardMarkup GetProfileKeyboard(int packsCount, InviteInfo? userInviteInfo,
+            int income = 0)
         {
             var keyboard = new List<InlineKeyboardButton[]>();
             if (income > 0)
@@ -707,8 +736,11 @@ namespace CardCollector.Resources
                 },
                 new[] {InlineKeyboardButton.WithCallbackData(Text.invite_friend, CallbackQueryCommands.invite_friend)}
             });
-            if (userInviteInfo?.ShowInvitedBy() is true) 
-                keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.beginners_tasks, CallbackQueryCommands.beginners_tasks)});
+            if (userInviteInfo?.ShowInvitedBy() is true)
+                keyboard.Add(new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(Text.beginners_tasks, CallbackQueryCommands.beginners_tasks)
+                });
             keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)});
             return new InlineKeyboardMarkup(keyboard);
         }
@@ -869,7 +901,11 @@ namespace CardCollector.Resources
                     {
                         InlineKeyboardButton.WithCallbackData(Text.upload_pack_gif_preview,
                             $"{CallbackQueryCommands.choose_pack}={CallbackQueryCommands.upload_pack_gif_preview}=0")
-                    }
+                    },
+                    new[]
+                    {
+                        InlineKeyboardButton.WithCallbackData(Text.show_sample, CallbackQueryCommands.show_sample)
+                    },
                 });
             if (level == PrivilegeLevel.Programmer)
                 keyboard.AddRange(new[]
@@ -882,10 +918,6 @@ namespace CardCollector.Resources
                     {
                         InlineKeyboardButton.WithCallbackData(Text.upload_stickerpack,
                             CallbackQueryCommands.upload_stickerpack)
-                    },
-                    new[]
-                    {
-                        InlineKeyboardButton.WithCallbackData(Text.show_sample, CallbackQueryCommands.show_sample)
                     },
                     new[]
                     {
@@ -993,25 +1025,38 @@ namespace CardCollector.Resources
         {
             return new InlineKeyboardMarkup(new[]
             {
-                new [] { InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.choose_sticker) },
+                new[] {InlineKeyboardButton.WithSwitchInlineQueryCurrentChat(Text.choose_sticker)},
                 new[]
                 {
                     InlineKeyboardButton.WithCallbackData(Text.skip, $"{CallbackQueryCommands.skip}={name}")
                 },
-                new[] { InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back) }
+                new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)}
             });
         }
 
-        public static InlineKeyboardMarkup DistributionButtonsKeyboard =  new (new[] {
-                new [] { InlineKeyboardButton.WithCallbackData(Text.create_url_button, 
-                    CallbackQueryCommands.create_url_button) },
-                new [] { InlineKeyboardButton.WithCallbackData(Text.create_inline_button, 
-                    CallbackQueryCommands.create_inline_button) },
-                new[]
-                {
-                    InlineKeyboardButton.WithCallbackData(Text.end, CallbackQueryCommands.check_distribution)
-                },
-                new[] { InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back) }
+        public static InlineKeyboardMarkup DistributionButtonsKeyboard = new(new[]
+        {
+            new[]
+            {
+                InlineKeyboardButton.WithCallbackData(Text.create_url_button,
+                    CallbackQueryCommands.create_url_button)
+            },
+            new[]
+            {
+                InlineKeyboardButton.WithCallbackData(Text.create_inline_button,
+                    CallbackQueryCommands.create_inline_button)
+            },
+            new[]
+            {
+                InlineKeyboardButton.WithCallbackData(Text.end, CallbackQueryCommands.check_distribution)
+            },
+            new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)}
+        });
+
+        public static InlineKeyboardMarkup SiteUrl = new(new[]
+        {
+            new[] {InlineKeyboardButton.WithUrl(Text.site_url, AppSettings.SITE_URL)},
+            new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)}
         });
     }
 }

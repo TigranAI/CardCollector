@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Database.Entity;
+using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
@@ -22,11 +24,13 @@ namespace CardCollector.Commands.MessageHandler.Group
                 .CountAsync();
             if (countSentStickers < 5)
             {
+                var telegramChat = await Context.TelegramChats.FindByChatId(Message.Chat.Id);
                 var membersCount = await Bot.Client.GetChatMemberCountAsync(Message.Chat.Id) - 1;
-                User.Level.GiveExp(membersCount < 21 ? membersCount : 20);
+                User.Level.GiveExp(Math.Min(membersCount, telegramChat.MaxExpGain));
                 if (User.Settings[UserSettingsTypes.ExpGain])
                     await User.Messages.SendMessage(User,
-                        $"{Messages.you_gained} {(membersCount < 21 ? membersCount : 20)} {Text.exp} {Messages.send_sticker}" +
+                        $"{Messages.you_gained} {Math.Min(membersCount, telegramChat.MaxExpGain)} " +
+                        $"{Text.exp} {Messages.send_sticker}" +
                         $"\n{Messages.count_sends_per_day} \"{Message.Chat.Title}\" {countSentStickers + 1} / 5");
                 await User.Level.CheckLevelUp(Context, User);
                 await Context.UserSendStickers.AddAsync(new UserSendStickerToChat()

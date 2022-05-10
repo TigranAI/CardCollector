@@ -16,7 +16,6 @@ namespace CardCollector.Commands.InlineQueryHandler.Group
             var stickersList = User.Stickers
                 .Where(item => item.Count > 0 && item.Sticker.Contains(InlineQuery.Query))
                 .OrderByDescending(item => item.LastUsage)
-                .Select(item => item.Sticker)
                 .ToList();
             var offset = int.Parse(InlineQuery.Offset == "" ? "0" : InlineQuery.Offset);
             var newOffset = offset + 50 > stickersList.Count() ? "" : (offset + 50).ToString();

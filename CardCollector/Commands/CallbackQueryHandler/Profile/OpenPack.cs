@@ -1,10 +1,8 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Controllers;
-using CardCollector.Others;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
-using Microsoft.EntityFrameworkCore;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Profile
 {
@@ -21,20 +19,14 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
                 await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.packs_count_zero, true);
             else
             {
-                userPack.Pack.OpenedCount++;
-                userPack.Count--;
-                var tier = GetTier(Utilities.rnd.NextDouble() * 100);
-                var stickers = userPack.Pack.Id != 1
-                    ? userPack.Pack.Stickers.Where(sticker => sticker.Tier == tier)
-                    : await Context.Stickers.Where(sticker => sticker.Tier == tier).ToListAsync();
-                var result = stickers.Random();
+                var sticker = await userPack.Open();
                 await User.Messages.ClearChat(User);
-                await User.Messages.SendSticker(User, result.FileId);
-                await User.Messages.SendMessage(User, $"{Messages.congratulation}\n{result}",
+                await User.Messages.SendSticker(User, sticker.FileId);
+                await User.Messages.SendMessage(User, $"{Messages.congratulation}\n{sticker}",
                     userPack.Count > 0
                         ? Keyboard.RepeatCommand(Text.open_more, CallbackQuery.Data!)
                         : Keyboard.BackKeyboard);
-                await User.AddSticker(result, 1);
+                await User.AddSticker(sticker, 1);
                 
                 if (User.InviteInfo?.TasksProgress is { } tp && !tp.OpenPack)
                 {
@@ -42,17 +34,6 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
                     await User.InviteInfo.CheckRewards(Context);
                 }
             }
-        }
-
-        private int GetTier(double chance)
-        {
-            return chance switch
-            {
-                < 0.7 => 4,
-                < 3.3 => 3,
-                < 16 => 2,
-                _ => 1
-            };
         }
     }
 }

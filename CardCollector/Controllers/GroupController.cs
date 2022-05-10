@@ -14,7 +14,6 @@ namespace CardCollector.Controllers
 {
     public static class GroupController
     {
-        public static readonly int GROUP_GIVEAWAY_HOURS_INTERVAL = Constants.DEBUG ? 1 : 8;
         private static readonly int ACTIVITY_RATE = Constants.DEBUG ? 5 : 4;
 
         public static async Task OnGroupMessageReceived(Chat chat, TelegramUser user)
@@ -40,7 +39,7 @@ namespace CardCollector.Controllers
             if (chat.ChatActivity!.LastGiveaway != null)
             {
                 var interval = DateTime.Now - chat.ChatActivity.LastGiveaway.Value;
-                if (interval.TotalHours < GROUP_GIVEAWAY_HOURS_INTERVAL) return;
+                if (interval.TotalMinutes < chat.GiveawayDuration) return;
             }
             var membersCount = await Bot.Client.GetChatMemberCountAsync(chat.ChatId) - 1;
             var messageCount = chat.ChatActivity.MessageCount - chat.ChatActivity.MessageCountAtLastGiveaway;

@@ -15,7 +15,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
             await User.Messages.EditMessage(User,
                 $"{Messages.exchange_mesage}" + 
                 $"\n{Messages.gems_exchange_count} {module.EnteredExchangeSum}{Text.gem}" +
-                $"\n{Messages.coins_exchange_count} {module.EnteredExchangeSum * 150}{Text.coin}" +
+                $"\n{Messages.coins_exchange_count} {module.EnteredExchangeSum * 10}{Text.coin}" +
                 $"\n\n{Messages.choose_exchange_sum}",
                 Keyboard.BuyCoinsKeyboard());
         }

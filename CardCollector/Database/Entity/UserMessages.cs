@@ -102,8 +102,9 @@ namespace CardCollector.Database.Entity
             if (user.IsBlocked) return;
             await ClearChat(user);
             if (MenuMessageId != -1) await MessageController.DeleteMessage(user.ChatId, MenuMessageId);
-            MenuMessageId =
-                await MessageController.SendMessage(user.ChatId, Messages.main_menu, Keyboard.Menu, ParseMode.Html);
+            var isFirstOrderPicked = user.SpecialOrdersUser.Any(item => item.Id == 2);
+            MenuMessageId = await MessageController.SendMessage(user.ChatId, Messages.main_menu,
+                Keyboard.Menu(isFirstOrderPicked), ParseMode.Html);
         }
 
         public async Task SendDailyTaskProgress(User user, string message)

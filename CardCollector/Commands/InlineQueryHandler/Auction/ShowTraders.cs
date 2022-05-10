@@ -1,9 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using CardCollector.Attributes.Menu;
-using CardCollector.Commands.ChosenInlineResultHandler;
 using CardCollector.Controllers;
 using CardCollector.Database.EntityDao;
-using CardCollector.Others;
 using CardCollector.Resources.Enums;
 using CardCollector.Session.Modules;
 using Telegram.Bot.Types.Enums;
@@ -20,9 +19,11 @@ namespace CardCollector.Commands.InlineQueryHandler.Auction
             User.Session.GetModule<FiltersModule>().ApplyPriceTo(tradersList);
             var offset = int.Parse(InlineQuery.Offset == "" ? "0" : InlineQuery.Offset);
             var newOffset = offset + 50 > tradersList.Count ? "" : (offset + 50).ToString();
-            var hasDiscount = User.HasAuctionDiscount();
-            var results = tradersList.ToTelegramResults(ChosenInlineResultCommands.select_trader,
-                offset, hasDiscount ? 0.95 : 1);
+            var discount = User.HasAuctionDiscount() ? 0.95 : 1;
+            var results = tradersList
+                .Skip(offset)
+                .Take(50)
+                .Select(item => item.AsTelegramArticle(discount));
             await MessageController.AnswerInlineQuery(User, InlineQuery.Id, results, newOffset);
         }
 

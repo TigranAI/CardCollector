@@ -26,5 +26,12 @@ namespace CardCollector.Commands.MessageHandler.Shop
             await User.Messages.EditMessage(User, Messages.shop_message,
                 Keyboard.ShopKeyboard(haveSpecialOffers, User.PrivilegeLevel), ParseMode.Html);
         }
+
+        public override bool Match()
+        {
+            if (Message.Chat.Type is not (ChatType.Sender or ChatType.Private)) return false;
+            if (Message.Type != MessageType.Text) return false;
+            return Message.Text == CommandText || Message.Text == $"{CommandText} {Text.gift}";
+        }
     }
 }

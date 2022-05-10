@@ -36,23 +36,23 @@ namespace CardCollector
 
         public static void LogOut(object message)
         {
-            Print($"[INFO] [{DateTime.Now.ToString(Constants.TimeCulture.ShortTimePattern)}] {message}");
+            Print($"[INFO] [{DateTime.Now.ToString(Constants.TimeCulture.LongTimePattern)}] {message}");
         }
 
         public static void LogOutWarning(object message)
         {
-            Print($"[WARNING] [{DateTime.Now.ToString(Constants.TimeCulture.ShortTimePattern)}] {message}");
+            Print($"[WARNING] [{DateTime.Now.ToString(Constants.TimeCulture.LongTimePattern)}] {message}");
         }
 
         public static void LogOutError(object message)
         {
-            Print($"[ERROR] [{DateTime.Now.ToString(Constants.TimeCulture.ShortTimePattern)}] {message}");
+            Print($"[ERROR] [{DateTime.Now.ToString(Constants.TimeCulture.LongTimePattern)}] {message}");
         }
 
         public static void LogOutJson(object message)
         {
             Print(
-                $"[JSON] [{DateTime.Now.ToString(Constants.TimeCulture.ShortTimePattern)}] {Utilities.ToJson(message)}");
+                $"[JSON] [{DateTime.Now.ToString(Constants.TimeCulture.LongTimePattern)}] {Utilities.ToJson(message)}");
         }
     }
 }

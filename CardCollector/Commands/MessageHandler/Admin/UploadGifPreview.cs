@@ -30,8 +30,6 @@ namespace CardCollector.Commands.MessageHandler.Admin
 
         public override bool Match()
         {
-            Logs.LogOut(Message.Type);
-            Logs.LogOut(Message.Document?.MimeType);
             return User.PrivilegeLevel >= PrivilegeLevel.Programmer
                    && User.Session.State is UserState.UploadPackGifPreview
                    && Message.Type is MessageType.Document

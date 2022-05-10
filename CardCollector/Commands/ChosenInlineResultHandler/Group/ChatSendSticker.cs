@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Attributes.Logs;
 using CardCollector.Resources.Enums;
@@ -13,9 +12,6 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Group
         protected override string CommandText => ChosenInlineResultCommands.chat_send_sticker;
         protected override async Task Execute()
         {
-            var stickerId = int.Parse(ChosenInlineResult.ResultId.Split("=")[1]);
-            User.Stickers.First(item => item.Sticker.Id == stickerId).LastUsage = DateTime.Now;
-            
             if (!User.Session.ChosenResultWithMessage)
             {
                 if (User.Settings[UserSettingsTypes.ExpGain])
@@ -26,6 +22,9 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Group
                 await User.Level.CheckLevelUp(Context, User);
             }
             else User.Session.ChosenResultWithMessage = false;
+            
+            var userStickerId = int.Parse(ChosenInlineResult.ResultId.Split("=")[1]);
+            User.Stickers.SingleOrDefault(item => item.Id == userStickerId)?.UpdateLastUsage();
         }
     }
 }

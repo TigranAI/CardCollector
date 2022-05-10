@@ -30,7 +30,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Group
             if (roulette != null) await roulette.MadeABet(userSticker);
             else
             {
-                var telegramChat = await Context.TelegramChats.FindByChatId(module.SelectBetChatId.Value);
+                var telegramChat = await Context.TelegramChats.FindByChatId(module.SelectBetChatId);
                 if (telegramChat == null) return;
                 await telegramChat.SendMessage(string.Format(Messages.roulette_now_ended, MessageCommands.roulette,
                     AppSettings.NAME));

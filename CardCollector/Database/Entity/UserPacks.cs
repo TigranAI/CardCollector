@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Threading.Tasks;
 
 namespace CardCollector.Database.Entity
 {
@@ -20,6 +22,16 @@ namespace CardCollector.Database.Entity
 
         public UserPacks()
         {
+        }
+
+        public async Task<Sticker> Open()
+        {
+            if (Count <= 0) throw new AggregateException("Packs count must be greater than zero!");
+            Count--;
+            Pack.OpenedCount++;
+            return Pack.IsExclusive
+                ? Pack.OpenExclusive(User.Stickers)
+                : await Pack.Open();
         }
     }
 }

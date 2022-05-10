@@ -5,6 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Controllers;
+using CardCollector.Extensions;
+using CardCollector.Extensions.Database.Entity;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
 using CardCollector.Session;
@@ -135,6 +137,22 @@ namespace CardCollector.Database.Entity
         public bool IsNotInvited()
         {
             return InviteInfo == null || InviteInfo.InvitedBy == null;
+        }
+
+        public async Task AddGems(int count)
+        {
+            Cash.Gems += count;
+            await Stickers
+                .Where(sticker => sticker.Sticker.ExclusiveTask is ExclusiveTask.GotGems)
+                .Apply(async sticker => await sticker.DoExclusiveTask(count));
+        }
+
+        public async Task DecreaseCoins(int count)
+        {
+            Cash.Coins -= count;
+            await Stickers
+                .Where(sticker => sticker.Sticker.ExclusiveTask is ExclusiveTask.SpendCoins)
+                .Apply(async sticker => await sticker.DoExclusiveTask(count));
         }
     }
 }

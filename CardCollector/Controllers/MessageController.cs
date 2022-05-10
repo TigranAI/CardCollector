@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CardCollector.Database.Entity;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
-using CardCollector.Session.Modules;
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Types.Enums;
@@ -20,6 +20,37 @@ namespace CardCollector.Controllers
 
     public static class MessageController
     {
+        private static SortedList<DateTime, List<Task>> WaitQueue = new();
+
+        public static void RunWaitQueueResolver()
+        {
+            Task.Run(async () =>
+            {
+                while (true)
+                {
+                    if (WaitQueue.Count == 0) Thread.Sleep(1000);
+                    else
+                    {
+                        var item = WaitQueue.FirstOrDefault();
+                        if (item.Key <= DateTime.Now)
+                        {
+                            foreach (var task in item.Value) await task;
+                            WaitQueue.RemoveAt(0);
+                        }
+                        else Thread.Sleep((item.Key - DateTime.Now).Milliseconds);
+                    }
+                }
+            });
+        }
+
+        private static void AddToWaitQueue(int seconds, Task task)
+        {
+            var key = DateTime.Now.AddSeconds(seconds);
+            
+            if (WaitQueue.TryGetValue(key, out var list)) list.Add(task);
+            else WaitQueue.Add(key, new List<Task>() { task });
+        }
+
         public static async Task<int> EditMessage(
             long chatId,
             int messageId,
@@ -33,7 +64,7 @@ namespace CardCollector.Controllers
                     replyMarkup: keyboard);
                 return msg.MessageId;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 await DeleteMessage(chatId, messageId);
                 return await SendMessage(chatId, message, keyboard, parseMode);
@@ -55,13 +86,8 @@ namespace CardCollector.Controllers
             catch (ApiRequestException e)
             {
                 if (e.ErrorCode == 429 && e.Parameters != null && e.Parameters.RetryAfter is { } interval)
-                {
-                    Thread.Sleep(interval);
-                    return await SendMessage(chatId, message, keyboard, parseMode);
-                }
-
-                LogOutWarning($"Cant send message: {e.Message}");
-                LogOutError(e);
+                    AddToWaitQueue(interval, SendMessage(chatId, message, keyboard, parseMode));
+                else LogOutError(e);
                 return -1;
             }
         }
@@ -80,12 +106,8 @@ namespace CardCollector.Controllers
             catch (ApiRequestException e)
             {
                 if (e.ErrorCode == 429 && e.Parameters != null && e.Parameters.RetryAfter is { } interval)
-                {
-                    Thread.Sleep(interval);
-                    return await SendSticker(chatId, fileId, keyboard);
-                }
-                LogOutWarning("Can't send sticker " + e.Message);
-                LogOutError(e);
+                    AddToWaitQueue(interval, SendSticker(chatId, fileId, keyboard));
+                else LogOutError(e);
                 return -1;
             }
         }
@@ -106,13 +128,8 @@ namespace CardCollector.Controllers
             catch (ApiRequestException e)
             {
                 if (e.ErrorCode == 429 && e.Parameters != null && e.Parameters.RetryAfter is { } interval)
-                {
-                    Thread.Sleep(interval);
-                    await AnswerCallbackQuery(user, callbackQueryId, text, showAlert);
-                    return;
-                }
-                LogOutWarning("Can't answer CallbackQuery " + e.Message);
-                LogOutError(e);
+                    AddToWaitQueue(interval, AnswerCallbackQuery(user, callbackQueryId, text, showAlert));
+                else LogOutError(e);
             }
         }
 
@@ -127,13 +144,8 @@ namespace CardCollector.Controllers
             catch (ApiRequestException e)
             {
                 if (e.ErrorCode == 429 && e.Parameters != null && e.Parameters.RetryAfter is { } interval)
-                {
-                    Thread.Sleep(interval);
-                    await DeleteMessage(chatId, messageId);
-                    return;
-                }
-                LogOutWarning("Can't delete message " + e.Message);
-                LogOutError(e);
+                    AddToWaitQueue(interval, DeleteMessage(chatId, messageId));
+                else LogOutError(e);
             }
         }
 
@@ -152,13 +164,8 @@ namespace CardCollector.Controllers
             catch (ApiRequestException e)
             {
                 if (e.ErrorCode == 429 && e.Parameters != null && e.Parameters.RetryAfter is { } interval)
-                {
-                    Thread.Sleep(interval);
-                    await AnswerInlineQuery(user, queryId, results, offset);
-                    return;
-                }
-                LogOutWarning($"Cant send answer inline query {e.Message}");
-                LogOutError(e);
+                    AddToWaitQueue(interval, AnswerInlineQuery(user, queryId, results, offset));
+                else LogOutError(e);
             }
         }
 
@@ -172,31 +179,19 @@ namespace CardCollector.Controllers
             Currency currency = Currency.RUB)
         {
             if (user.IsBlocked) return -1;
-            var module = user.Session.GetModule<ShopModule>();
-            /*var token = module.SelectedProvider switch
-            {
-                "Сбербанк" => AppSettings.SberbankToken,
-                "ЮКасса" => AppSettings.YouKassaToken,
-                "ПСБ" => AppSettings.PSBToken,
-                _ => ""
-            };*/
-
             try
             {
                 var result = await Bot.Client.SendInvoiceAsync(user.ChatId, title, description, payload,
-                    AppSettings.PSB_TOKEN, currency.ToString(), prices, replyMarkup: keyboard, disableNotification: true);
+                    AppSettings.PSB_TOKEN, currency.ToString(), prices, replyMarkup: keyboard,
+                    disableNotification: true);
                 user.Messages.ChatMessages.Add(result.MessageId);
                 return result.MessageId;
             }
             catch (ApiRequestException e)
             {
                 if (e.ErrorCode == 429 && e.Parameters != null && e.Parameters.RetryAfter is { } interval)
-                {
-                    Thread.Sleep(interval);
-                    return await SendInvoice(user, title, description, payload, prices, keyboard, currency);
-                }
-                LogOutWarning("Can't send invoice " + e.Message);
-                LogOutError(e);
+                    AddToWaitQueue(interval, SendInvoice(user, title, description, payload, prices, keyboard, currency));
+                else LogOutError(e);
                 return -1;
             }
         }
@@ -211,10 +206,8 @@ namespace CardCollector.Controllers
             catch (ApiRequestException e)
             {
                 if (e.ErrorCode == 429 && e.Parameters != null && e.Parameters.RetryAfter is { } interval)
-                {
-                    Thread.Sleep(interval);
-                    await EditReplyMarkup(user, messageId, keyboard);
-                }
+                    AddToWaitQueue(interval, EditReplyMarkup(user, messageId, keyboard));
+                else LogOutError(e);
             }
         }
 
@@ -236,12 +229,8 @@ namespace CardCollector.Controllers
             catch (ApiRequestException e)
             {
                 if (e.ErrorCode == 429 && e.Parameters != null && e.Parameters.RetryAfter is { } interval)
-                {
-                    Thread.Sleep(interval);
-                    return await SendImage(chatId, fileId, message, keyboard);
-                }
-                LogOutWarning($"Cant send image: {e.Message}");
-                LogOutError(e);
+                    AddToWaitQueue(interval, SendImage(chatId, fileId, message, keyboard));
+                else LogOutError(e);
                 return -1;
             }
         }
@@ -256,12 +245,8 @@ namespace CardCollector.Controllers
             catch (ApiRequestException e)
             {
                 if (e.ErrorCode == 429 && e.Parameters != null && e.Parameters.RetryAfter is { } interval)
-                {
-                    Thread.Sleep(interval);
-                    return await SendDice(chatId, emoji);
-                }
-                LogOutWarning($"Cant send dice: {e.Message}");
-                LogOutError(e);
+                    AddToWaitQueue(interval, SendDice(chatId, emoji));
+                else LogOutError(e);
                 return -1;
             }
         }

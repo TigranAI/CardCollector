@@ -37,10 +37,10 @@ namespace CardCollector.Commands.CallbackQueryHandler.Auction
 
                 var sum = productInfo.Price * module.Count;
                 
-                productInfo.Trader.Cash.Gems += (int) (sum * 0.70);
                 await productInfo.Trader.Messages.SendMessage(productInfo.Trader,
                     string.Format(Messages.thanks_for_selling_sticker, User.Username, productInfo.Sticker.Title,
                         module.Count, (int) (sum * 0.70)));
+                await productInfo.Trader.AddGems((int) (sum * 0.7));
                 
                 if (User.HasAuctionDiscount()) sum = (int) (sum * 0.95);
                 User.Cash.Gems -= sum;

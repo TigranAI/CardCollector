@@ -4,6 +4,8 @@ using CardCollector.Attributes.Logs;
 using CardCollector.Commands.ChosenInlineResultHandler.Group;
 using CardCollector.Database.Entity;
 using CardCollector.Database.EntityDao;
+using CardCollector.Extensions;
+using CardCollector.Extensions.Database.Entity;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
 using CardCollector.UserDailyTask;
@@ -29,6 +31,9 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Private
                 tp.SendStickersToPrivate++;
                 await User.InviteInfo.CheckRewards(Context);
             }
+
+            var userStickerId = long.Parse(ChosenInlineResult.ResultId.Split("=")[1]);
+            User.Stickers.SingleOrDefault(item => item.Id == userStickerId)?.UpdateLastUsage();
         }
 
         private DailyTask GetTaskInfo()
@@ -55,6 +60,9 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Private
                 var packInfo = await Context.Packs.FindById(1);
                 User.AddPack(packInfo, 1);
                 await User.Messages.SendDailyTaskComplete(User);
+                await User.Stickers
+                    .Where(sticker => sticker.Sticker.ExclusiveTask is ExclusiveTask.CompleteDailyTask)
+                    .Apply(async sticker => await sticker.DoExclusiveTask());
             }
         }
 

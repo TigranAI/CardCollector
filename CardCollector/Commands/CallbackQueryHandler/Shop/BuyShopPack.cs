@@ -25,7 +25,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
             else
             {
                 await User.Messages.ClearChat(User);
-                if (currency == "coins") User.Cash.Coins -= packInfo.PriceCoins;
+                if (currency == "coins") await User.DecreaseCoins(packInfo.PriceCoins);
                 else if (currency == "gems") User.Cash.Gems -= packInfo.PriceGems;
                 User.AddPack(packInfo, 1);
                 var userPack = User.Packs.Single(item => item.Pack.Id == packInfo.Id);

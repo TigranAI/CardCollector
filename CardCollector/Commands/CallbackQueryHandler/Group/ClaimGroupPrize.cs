@@ -62,13 +62,14 @@ namespace CardCollector.Commands.CallbackQueryHandler.Group
             {
                 if (item.ChatActivity.LastGiveaway == null) return false;
                 var interval = DateTime.Now - item.ChatActivity.LastGiveaway.Value;
-                return interval.TotalHours < GroupController.GROUP_GIVEAWAY_HOURS_INTERVAL;
+                return interval.TotalMinutes < item.GiveawayDuration;
             });
             if (lastUserAward != null)
             {
                 var interval = DateTime.Now - lastUserAward.ChatActivity!.LastGiveaway!.Value;
                 await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id,
-                    string.Format(Messages.you_are_now_be_awarded_in_another_group, 8 - (int) interval.TotalHours),
+                    string.Format(Messages.you_are_now_be_awarded_in_another_group, 
+                        lastUserAward.GiveawayDuration - (int) interval.TotalMinutes),
                     true);
                 return false;
             }
@@ -87,7 +88,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Group
                     : "";
 
             await chat!.EditMessage(string.Format(Messages.user_claim_giveaway, User.Username, prizeMessage,
-                GroupController.GROUP_GIVEAWAY_HOURS_INTERVAL), CallbackQuery.Message!.MessageId);
+                chat.GiveawayDuration), CallbackQuery.Message!.MessageId);
         }
 
         private async Task<string> ClaimSticker(long stickerId)

@@ -513,6 +513,15 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Поздравляем! Вы прокачали стикер {1}! Вам доступна цветная версия стикера, теперь он приносит 1🍬 в день..
+        /// </summary>
+        internal static string congratulations_sticker_unlocked {
+            get {
+                return ResourceManager.GetString("congratulations_sticker_unlocked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 👑&lt;b&gt;Панель управления&lt;/b&gt;👑.
         /// </summary>
         internal static string control_panel {
@@ -924,21 +933,22 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 1-5 заданий (за каждое выполненное задание):
+        ///   Looks up a localized string similar to При выполнении заданий приглашённый получает:
+        ///1-5 заданий (за каждое выполненное задание):
         ///Обычный пак
         ///6: Также + случайный стикер 2*
         ///7: +1000 опыта
         ///8: +100 алмазов
         ///9: +100 алмазов
         ///10: +случайный 2*
-        ///11: +случайный 3*
+        ///11: +3 случайных 2*
+        ///12: случайный 3*
         ///
         ///Пригласивший по ходу выполнений заданий получает:
         ///До 5 (т.е. даже если приглашённый выполнил одно задание, но вышло время заданий новичка): 2 пака
         ///6: +100 алмазов
         ///9: +случайный стикер 2*
-        ///11: +случайный стикер 3*
-        ///12: +случайный стикер 4*.
+        ///11: +случайный стикер 3*.
         /// </summary>
         internal static string invite_reward_info {
             get {
@@ -1658,7 +1668,7 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} забирает приз - {1} следующая раздача возникнет случайно не раньше, чем через {2} часов..
+        ///   Looks up a localized string similar to {0} забирает приз - {1} следующая раздача возникнет случайно не раньше, чем через {2} минут..
         /// </summary>
         internal static string user_claim_giveaway {
             get {
@@ -1721,7 +1731,7 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вы уже были участником раздачи. Подождите {0} часов..
+        ///   Looks up a localized string similar to Вы уже были участником раздачи. Подождите {0} минут..
         /// </summary>
         internal static string you_are_now_be_awarded_in_another_group {
             get {
@@ -1735,6 +1745,15 @@ namespace CardCollector.Resources.Translations {
         internal static string you_can_add_bot_to_conversation {
             get {
                 return ResourceManager.GetString("you_can_add_bot_to_conversation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы можете посмотреть топ на нашем сайте!.
+        /// </summary>
+        internal static string you_can_see_top_on_site {
+            get {
+                return ResourceManager.GetString("you_can_see_top_on_site", resourceCulture);
             }
         }
         

@@ -14,9 +14,8 @@ namespace CardCollector.Commands.InlineQueryHandler.Private
         protected override async Task Execute()
         {
             var stickersList = User.Stickers
-                .Where(item => item.Count > 0)
-                .Select(item => item.Sticker)
-                .Where(item => item.Contains(InlineQuery.Query))
+                .Where(item => item.Count > 0 && item.Sticker.Contains(InlineQuery.Query))
+                .OrderByDescending(item => item.LastUsage)
                 .ToList();
             var offset = int.Parse(InlineQuery.Offset == "" ? "0" : InlineQuery.Offset);
             var newOffset = offset + 50 > stickersList.Count() ? "" : (offset + 50).ToString();

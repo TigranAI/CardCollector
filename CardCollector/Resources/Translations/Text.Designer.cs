@@ -142,6 +142,15 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ответить на ставку.
+        /// </summary>
+        internal static string answer_a_bet {
+            get {
+                return ResourceManager.GetString("answer_a_bet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ◀.
         /// </summary>
         internal static string arrow_left {
@@ -273,6 +282,15 @@ namespace CardCollector.Resources.Translations {
         internal static string by {
             get {
                 return ResourceManager.GetString("by", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🍬.
+        /// </summary>
+        internal static string candy {
+            get {
+                return ResourceManager.GetString("candy", resourceCulture);
             }
         }
         
@@ -475,6 +493,15 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to день.
+        /// </summary>
+        internal static string day {
+            get {
+                return ResourceManager.GetString("day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to дней.
         /// </summary>
         internal static string days {
@@ -556,6 +583,15 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 🌟.
+        /// </summary>
+        internal static string exclusive_star {
+            get {
+                return ResourceManager.GetString("exclusive_star", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to опыта.
         /// </summary>
         internal static string exp {
@@ -628,6 +664,15 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to В рублях.
+        /// </summary>
+        internal static string in_roubles {
+            get {
+                return ResourceManager.GetString("in_roubles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Информация.
         /// </summary>
         internal static string info {
@@ -687,6 +732,15 @@ namespace CardCollector.Resources.Translations {
         internal static string logs_menu {
             get {
                 return ResourceManager.GetString("logs_menu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Количество участников.
+        /// </summary>
+        internal static string members_count {
+            get {
+                return ResourceManager.GetString("members_count", resourceCulture);
             }
         }
         
@@ -970,6 +1024,15 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выберите действие.
+        /// </summary>
+        internal static string select_action {
+            get {
+                return ResourceManager.GetString("select_action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Выбрать другой стикер.
         /// </summary>
         internal static string select_another {
@@ -1047,6 +1110,15 @@ namespace CardCollector.Resources.Translations {
         internal static string show_traders {
             get {
                 return ResourceManager.GetString("show_traders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ссылка на сайт.
+        /// </summary>
+        internal static string site_url {
+            get {
+                return ResourceManager.GetString("site_url", resourceCulture);
             }
         }
         
@@ -1150,6 +1222,15 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ☀.
+        /// </summary>
+        internal static string sun {
+            get {
+                return ResourceManager.GetString("sun", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to https://t.me/share/url?url={0}&amp;text=Коллекционируй, покупай, продавай и отправляй стикеры в новом боте Wyrm Sticker!.
         /// </summary>
         internal static string telegram_share_url {
@@ -1227,6 +1308,15 @@ namespace CardCollector.Resources.Translations {
         internal static string unexpired {
             get {
                 return ResourceManager.GetString("unexpired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Прокачиваемый.
+        /// </summary>
+        internal static string upgradable {
+            get {
+                return ResourceManager.GetString("upgradable", resourceCulture);
             }
         }
         

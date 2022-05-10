@@ -23,7 +23,6 @@ namespace CardCollector.Others
                 if (value >= sum && value < sum + step) return item;
                 sum += step;
             }
-
             return default;
         }
     }

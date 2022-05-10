@@ -3,6 +3,7 @@ using System.Linq;
 using System.Timers;
 using CardCollector.Database;
 using CardCollector.Resources;
+using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,7 +21,7 @@ namespace CardCollector.TimerTasks
             using (var context = new BotDatabaseContext())
             {
                 var users = await context.Users.Where(user => !user.IsBlocked).ToListAsync();
-                foreach (var user in users.Where(user => user.Settings[Resources.Enums.UserSettingsTypes.PiggyBankCapacity]))
+                foreach (var user in users.Where(user => user.Settings[UserSettingsTypes.PiggyBankCapacity]))
                 {
                     var income = user.Cash.GetIncome(user.Stickers);
                     await user.Messages.SendPiggyBankAlert(user,

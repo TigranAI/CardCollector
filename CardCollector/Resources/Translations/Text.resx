@@ -417,4 +417,34 @@
     <data name="upload_pack_gif_preview" xml:space="preserve">
         <value>Загрузить gif-обложку</value>
     </data>
+    <data name="select_action" xml:space="preserve">
+        <value>Выберите действие</value>
+    </data>
+    <data name="exclusive_star" xml:space="preserve">
+        <value>🌟</value>
+    </data>
+    <data name="answer_a_bet" xml:space="preserve">
+        <value>Ответить на ставку</value>
+    </data>
+    <data name="members_count" xml:space="preserve">
+        <value>Количество участников</value>
+    </data>
+    <data name="upgradable" xml:space="preserve">
+        <value>Прокачиваемый</value>
+    </data>
+    <data name="candy" xml:space="preserve">
+        <value>🍬</value>
+    </data>
+    <data name="sun" xml:space="preserve">
+        <value>☀</value>
+    </data>
+    <data name="day" xml:space="preserve">
+        <value>день</value>
+    </data>
+    <data name="in_roubles" xml:space="preserve">
+        <value>В рублях</value>
+    </data>
+    <data name="site_url" xml:space="preserve">
+        <value>Ссылка на сайт</value>
+    </data>
 </root>

@@ -11,6 +11,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
 
         protected override async Task Execute()
         {
+            await User.Messages.ClearChat(User);
             var orderId = int.Parse(CallbackQuery.Data!.Split('=')[1]);
             var orderInfo = await Context.SpecialOrders.FindById(orderId);
             if (orderInfo == null) return;

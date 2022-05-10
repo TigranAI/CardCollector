@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using CardCollector.Commands.ChosenInlineResultHandler;
 using CardCollector.Database.Entity;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
@@ -17,108 +16,57 @@ namespace CardCollector.Others
             for (var i = 0; i < count; ++i) action();
         }
         
-        public static IEnumerable<InlineQueryResult> ToTelegramStickers(this IEnumerable<Sticker> list, string command,
+        public static IEnumerable<InlineQueryResult> ToTelegramStickers(
+            this IEnumerable<Sticker> list,
+            string command,
             int offset)
         {
-            var result = new List<InlineQueryResult>();
-            foreach (var sticker in list.Skip(offset).Take(50))
-                result.Add(new InlineQueryResultCachedSticker($"{command}={sticker.Id}", sticker.FileId));
-            return result;
+            return list
+                .Skip(offset)
+                .Take(50)
+                .Select(sticker => sticker.AsTelegramCachedSticker(command));
         }
-
-        public static IEnumerable<InlineQueryResult> ToTelegramResults(this IEnumerable<UserSticker> list,
-            string command, int offset)
+        
+        public static IEnumerable<InlineQueryResult> ToTelegramStickers(
+            this IEnumerable<UserSticker> list,
+            string command,
+            int offset)
         {
-            var result = new List<InlineQueryResult>();
-            foreach (var userSticker in list.Skip(offset).Take(50))
-                result.Add(new InlineQueryResultArticle(
-                    $"{command}={userSticker.Id}",
-                    userSticker.Sticker.Title,
-                    new InputTextMessageContent(
-                        $"{userSticker.User.Username} {Text.bet} " +
-                        $"{userSticker.Sticker.Title} {userSticker.Sticker.TierAsStars()}"))
-                {
-                    Description =
-                        $"{Text.tier}: {userSticker.Sticker.TierAsStars()} | {Text.count}: {userSticker.Count}"
-                });
-            return result;
+            return list
+                .Skip(offset)
+                .Take(50)
+                .Select(sticker => sticker.AsTelegramCachedSticker(command));
         }
 
         public static IEnumerable<InlineQueryResult> ToTelegramStickersAsMessage(this IEnumerable<Sticker> list,
             string command, int offset)
         {
-            var result = new List<InlineQueryResult>();
-            foreach (var sticker in list.Skip(offset).Take(50))
-                result.Add(new InlineQueryResultCachedSticker($"{command}={sticker.Id}", sticker.FileId)
-                    {InputMessageContent = new InputTextMessageContent(Text.select)});
-            return result;
-        }
-
-        public static IEnumerable<InlineQueryResult> ToTelegramResults
-            (this IEnumerable<Auction> list, string command, int offset, double discount)
-        {
-            var result = new List<InlineQueryResult>();
-            foreach (var item in list.Skip(offset).Take(50))
-            {
-                var price = (int) (item.Price * discount);
-                result.Add(new InlineQueryResultArticle($"{command}={item.Id}",
-                        $"{item.Trader.Username} {item.Count}{Text.items}", new InputTextMessageContent(Text.buy))
-                    {Description = $"{price}{Text.gem} {Text.per} 1{Text.items}"});
-            }
-
-            return result;
-        }
-
-        public static IEnumerable<InlineQueryResult> ToTelegramResults
-            (this IEnumerable<TelegramChat> list, string command, int offset)
-        {
-            var result = new List<InlineQueryResult>();
-            foreach (var item in list.Skip(offset).Take(50))
-            {
-                result.Add(new InlineQueryResultArticle(
-                    $"{command}={item.Id}",
-                    item.Title ?? item.ChatId.ToString(),
-                    new InputTextMessageContent(Text.select))
-                );
-            }
-
-            return result;
-        }
-
-        public static async Task<IEnumerable<T>> WhereAsync<T>(
-            this IEnumerable<T> source, Func<T, Task<bool>> predicate)
-        {
-            var results = new ConcurrentQueue<T>();
-            var tasks = source.Select(
-                async x =>
+            return list
+                .Skip(offset)
+                .Take(50)
+                .Select(sticker =>
                 {
-                    if (await predicate(x))
-                        results.Enqueue(x);
+                    var result = sticker.AsTelegramCachedSticker(command);
+                    result.InputMessageContent = new InputTextMessageContent(Text.select);
+                    return result;
                 });
-            await Task.WhenAll(tasks);
-            return results;
-        }
-
-        public static async Task<bool> AnyAsync<T>(
-            this IEnumerable<T> source, Func<T, Task<bool>> predicate)
-        {
-            foreach (var element in source)
-                if (await predicate(element))
-                    return true;
-            return false;
         }
 
         public static IEnumerable<(T item, int index)> WithIndex<T>(this IEnumerable<T> source)
         {
             return source.Select((item, index) => (item, index));
         }
-
-        public static async Task<int> SumAsync<TSource>(this IEnumerable<TSource> source,
-            Func<TSource, Task<int>> selector)
+        
+        public static InlineQueryResultArticle AsTelegramBetArticle(this UserSticker sticker)
         {
-            var sum = 0;
-            foreach (var item in source) sum += await selector(item);
-            return sum;
+            var betMessage = new InputTextMessageContent(
+                $"{sticker.User.Username} {Text.bet} {sticker.Sticker.Title} {sticker.Sticker.TierAsStars()}");
+            return new InlineQueryResultArticle
+                ($"{ChosenInlineResultCommands.made_a_bet}={sticker.Id}", sticker.Sticker.Title, betMessage)
+                {
+                    Description = $"{Text.tier}: {sticker.Sticker.TierAsStars()} | {Text.count}: {sticker.Count}",
+                    ReplyMarkup = Keyboard.AnswerBet
+                };
         }
     }
 }

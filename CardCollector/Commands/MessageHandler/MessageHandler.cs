@@ -67,7 +67,7 @@ namespace CardCollector.Commands.MessageHandler
         {
             if (Message.Chat.Type is not (ChatType.Sender or ChatType.Private)) return false;
             if (Message.Type != MessageType.Text) return false;
-            return  Message.Text == CommandText;
+            return Message.Text == CommandText;
         }
 
         public override HandlerModel Init(User user, BotDatabaseContext context, Update update)

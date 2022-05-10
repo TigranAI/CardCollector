@@ -24,7 +24,6 @@ namespace CardCollector.Controllers
     {
         public static async Task HandleUpdateAsync(ITelegramBotClient client, Update update, CancellationToken ct)
         {
-            LogOut(Utilities.ToJson(update, Formatting.Indented));
             try
             {
                 var handler = await BuildHandler(update);

@@ -27,7 +27,7 @@ namespace CardCollector.Commands.MessageHandler.Group
                 telegramChat = result.Entity;
             }
             var chatMember = await Bot.Client.GetChatMemberAsync(Message.Chat.Id, User.ChatId);
-            Logs.LogOut(chatMember.Status);
+            
             if (chatMember.Status is not (ChatMemberStatus.Administrator or ChatMemberStatus.Creator))
                 await telegramChat.SendMessage(Messages.this_command_can_execute_only_administrator);
             else

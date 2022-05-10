@@ -12,7 +12,8 @@ namespace CardCollector.Commands.CallbackQueryHandler.Others
         protected override string CommandText => CallbackQueryCommands.show_top_by;
         protected override async Task Execute()
         {
-            var topBy = (TopBy) int.Parse(CallbackQuery.Data!.Split('=')[1]);
+            await User.Messages.SendTopUsers(User, Messages.you_can_see_top_on_site, Keyboard.SiteUrl);
+            /*var topBy = (TopBy) int.Parse(CallbackQuery.Data!.Split('=')[1]);
             switch (topBy)
             {
                 case TopBy.Exp:
@@ -32,7 +33,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Others
                         }));
                     await User.Messages.SendTopUsers(User, topByTier4, Keyboard.GetTopButton(TopBy.Exp));
                     break;
-            }
+            }*/
         }
     }
 }
