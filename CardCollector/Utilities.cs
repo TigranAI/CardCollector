@@ -13,8 +13,12 @@ namespace CardCollector
 {
     public static class Utilities
     {
-        public static readonly Random rnd = new Random();
+        public static readonly Random Rnd = new();
         
+        public static string ToJson(object obj)
+        {
+            return ToJson(obj, Formatting.None);
+        }
         public static string ToJson(object obj, Formatting formatting)
         {
             return JsonConvert.SerializeObject(obj, formatting);
@@ -22,10 +26,6 @@ namespace CardCollector
         public static T FromJson<T>(string json)
         {
             return JsonConvert.DeserializeObject<T>(json);
-        }
-        public static string ToJson(object obj)
-        {
-            return JsonConvert.SerializeObject(obj, Formatting.Indented);
         }
 
         public static async Task<string> DownloadFile(Document file)

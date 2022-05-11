@@ -1,5 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
+using CardCollector.Cache.Entity;
+using CardCollector.Cache.Repository;
 using CardCollector.Controllers;
 using CardCollector.Database;
 using CardCollector.Resources;
@@ -22,7 +24,7 @@ namespace CardCollector
         {
             CheckArgs(args);
             await UpdateDatabase();
-            
+
             TimerTask.SetupAll();
             
             await Client.SetMyCommandsAsync(Constants.PrivateCommands, BotCommandScope.AllPrivateChats());
