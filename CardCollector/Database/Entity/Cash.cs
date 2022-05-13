@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CardCollector.Database.Entity.NotMapped;
+using CardCollector.Resources.Translations;
 
 namespace CardCollector.Database.Entity
 {
@@ -8,31 +10,32 @@ namespace CardCollector.Database.Entity
     {
         public int Coins { get; set; }
         public int Gems { get; set; }
+        public int Candies { get; set; }
         public int MaxCapacity { get; set; } = 200;
         public DateTime LastPayout { get; set; } = DateTime.Now;
-        
-        public int GetIncome(ICollection<UserSticker> stickers)
+
+        public Income GetIncome(ICollection<UserSticker> stickers)
         {
-            LastPayout = DateTime.Now;
-            var result = stickers.Sum(sticker => Payout(sticker));
-            return result > MaxCapacity ? MaxCapacity : result;
+            return new Income()
+                .Calculate(stickers, LastPayout = DateTime.Now)
+                .ApplyLimits(MaxCapacity, -1, stickers.Count(sticker => sticker.Sticker.Tier == 10));
         }
-        
-        public int Payout(ICollection<UserSticker> stickers)
+
+        public Income Payout(ICollection<UserSticker> stickers)
         {
-            var result = stickers.Sum(sticker => Payout(sticker, true));
-            result = result > MaxCapacity ? MaxCapacity : result;
-            Coins += result;
-            return result;
+            return new Income()
+                .Calculate(stickers, LastPayout = DateTime.Now, true)
+                .ApplyLimits(MaxCapacity, -1, stickers.Count(sticker => sticker.Sticker.Tier == 10))
+                .Payout(this);
         }
-        
-        private int Payout(UserSticker userSticker, bool updatePayout = false)
+
+        public override string ToString()
         {
-            var payoutInterval = LastPayout - userSticker.Payout;
-            var payoutsCount = (int) (payoutInterval.TotalMinutes / userSticker.Sticker.IncomeTime);
-            if (updatePayout) userSticker.Payout = LastPayout;
-            if (payoutsCount < 1) return 0;
-            return userSticker.Sticker.Income * payoutsCount * userSticker.Count;
+            List<string> values = new();
+            if (Coins > 0) values.Add($"{Coins}{Text.coin}");
+            if (Gems > 0) values.Add($"{Gems}{Text.gem}");
+            if (Candies > 0) values.Add($"{Candies}{Text.candy}");
+            return string.Join(" ", values);
         }
     }
 }

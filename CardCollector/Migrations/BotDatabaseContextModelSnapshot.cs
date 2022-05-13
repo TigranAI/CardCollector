@@ -578,6 +578,10 @@ namespace CardCollector.Migrations
                         .HasColumnType("int")
                         .HasColumnName("income_time");
 
+                    b.Property<int>("IncomeType")
+                        .HasColumnType("int")
+                        .HasColumnName("income_type");
+
                     b.Property<bool>("IsAnimated")
                         .HasColumnType("tinyint(1)")
                         .HasColumnName("is_animated");
@@ -636,9 +640,17 @@ namespace CardCollector.Migrations
                         .HasColumnType("tinyint(1)")
                         .HasColumnName("is_blocked");
 
+                    b.Property<DateTime?>("LastGiveaway")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("last_giveaway");
+
                     b.Property<int>("MaxExpGain")
                         .HasColumnType("int")
                         .HasColumnName("max_exp_gain");
+
+                    b.Property<int>("MembersCount")
+                        .HasColumnType("int")
+                        .HasColumnName("members_count");
 
                     b.Property<string>("Title")
                         .HasColumnType("longtext")
@@ -1100,47 +1112,6 @@ namespace CardCollector.Migrations
                     b.Navigation("Pack");
                 });
 
-            modelBuilder.Entity("CardCollector.Database.Entity.TelegramChat", b =>
-                {
-                    b.OwnsOne("CardCollector.Database.Entity.ChatActivity", "ChatActivity", b1 =>
-                        {
-                            b1.Property<long>("TelegramChatId")
-                                .HasColumnType("bigint")
-                                .HasColumnName("id");
-
-                            b1.Property<bool>("GiveawayAvailable")
-                                .HasColumnType("tinyint(1)")
-                                .HasColumnName("giveaway_available");
-
-                            b1.Property<DateTime?>("LastGiveaway")
-                                .HasColumnType("datetime(6)")
-                                .HasColumnName("last_giveaway");
-
-                            b1.Property<long>("MessageCount")
-                                .HasColumnType("bigint")
-                                .HasColumnName("message_count");
-
-                            b1.Property<long>("MessageCountAtLastGiveaway")
-                                .HasColumnType("bigint")
-                                .HasColumnName("message_count_at_last_giveaway");
-
-                            b1.Property<bool>("PrizeClaimed")
-                                .HasColumnType("tinyint(1)")
-                                .HasColumnName("prize_claimed");
-
-                            b1.HasKey("TelegramChatId")
-                                .HasName("pk_chat_activity");
-
-                            b1.ToTable("chat_activity", (string)null);
-
-                            b1.WithOwner()
-                                .HasForeignKey("TelegramChatId")
-                                .HasConstraintName("fk_chat_activity_telegram_chats_id");
-                        });
-
-                    b.Navigation("ChatActivity");
-                });
-
             modelBuilder.Entity("CardCollector.Database.Entity.User", b =>
                 {
                     b.HasOne("CardCollector.Database.Entity.InviteInfo", null)
@@ -1153,6 +1124,10 @@ namespace CardCollector.Migrations
                             b1.Property<long>("UserId")
                                 .HasColumnType("bigint")
                                 .HasColumnName("id");
+
+                            b1.Property<int>("Candies")
+                                .HasColumnType("int")
+                                .HasColumnName("candies");
 
                             b1.Property<int>("Coins")
                                 .HasColumnType("int")

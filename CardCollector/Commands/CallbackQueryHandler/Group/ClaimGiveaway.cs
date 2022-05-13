@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.Attributes.Logs;
+using CardCollector.Attributes;
+using CardCollector.Cache.Repository;
 using CardCollector.Controllers;
 using CardCollector.Database.Entity;
 using CardCollector.Database.EntityDao;
@@ -10,23 +11,24 @@ using CardCollector.Resources.Translations;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Group
 {
-    [SavedActivity]
-    public class ClaimGroupPrize : CallbackQueryHandler
+    [Statistics]
+    public class ClaimGiveaway : CallbackQueryHandler
     {
         /* syntax command=<chatId>=<prizeType>=<prizeId> */
-        protected override string CommandText => CallbackQueryCommands.claim_group_prize;
+        protected override string CommandText => CallbackQueryCommands.group_claim_giveaway;
 
         protected override async Task Execute()
         {
             var data = CallbackQuery.Data!.Split("=");
             var chat = await Context.TelegramChats.FindById(int.Parse(data[1]));
 
-            if (await CheckPrizeIsClaimed(chat)) return;
-            if (!await CheckCanBeAwarded()) return;
+            var listRepo = new ListRepository<long>();
+            
+            if (!await listRepo.ContainsAsync(CommandText, chat!.Id)) return;
+            if (!await CheckCanBeAwarded(chat.Id)) return;
 
             await GivePrize(data, chat);
-            chat.ChatActivity.GiveawayAvailable = false;
-            UpdateChatInfo(chat);
+            await listRepo.RemoveAsync(CommandText, chat.Id);
 
             foreach (var member in chat.Members)
             {
@@ -38,46 +40,28 @@ namespace CardCollector.Commands.CallbackQueryHandler.Group
             }
         }
 
-        private static void UpdateChatInfo(TelegramChat? chat)
-        {
-            chat.ChatActivity!.MessageCountAtLastGiveaway = chat.ChatActivity.MessageCount;
-            chat.ChatActivity.LastGiveaway = DateTime.Now;
-            chat.ChatActivity.PrizeClaimed = true;
-        }
-
-        private async Task<bool> CheckPrizeIsClaimed(TelegramChat? chat)
-        {
-            if (chat.ChatActivity.PrizeClaimed)
-            {
-                await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.prize_now_claimed);
-                return true;
-            }
-
-            return false;
-        }
-
-        private async Task<bool> CheckCanBeAwarded()
+        private async Task<bool> CheckCanBeAwarded(long chatId)
         {
             var lastUserAward = User.AvailableChats.FirstOrDefault(item =>
             {
-                if (item.ChatActivity.LastGiveaway == null) return false;
-                var interval = DateTime.Now - item.ChatActivity.LastGiveaway.Value;
+                if (item.LastGiveaway == null) return false;
+                if (item.Id == chatId) return false;
+                var interval = DateTime.Now - item.LastGiveaway.Value;
                 return interval.TotalMinutes < item.GiveawayDuration;
             });
             if (lastUserAward != null)
             {
-                var interval = DateTime.Now - lastUserAward.ChatActivity!.LastGiveaway!.Value;
+                var interval = DateTime.Now - lastUserAward.LastGiveaway!.Value;
                 await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id,
                     string.Format(Messages.you_are_now_be_awarded_in_another_group, 
                         lastUserAward.GiveawayDuration - (int) interval.TotalMinutes),
                     true);
                 return false;
             }
-
             return true;
         }
 
-        private async Task GivePrize(string[] data, TelegramChat? chat)
+        private async Task GivePrize(string[] data, TelegramChat chat)
         {
             var prizeId = long.Parse(data[3]);
 

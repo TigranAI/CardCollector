@@ -46,12 +46,14 @@ namespace CardCollector.Database.Entity
             await context.SaveChangesAsync();
             if (!Bets.Any(item => item.User.Id == Creator.Id))
             {
-                await Group.EditMessage(string.Format(Messages.creator_didnt_bet, Creator.Username), MessageId);
+                await Group.DeleteMessage(MessageId);
+                await Group.SendMessage(string.Format(Messages.creator_didnt_bet, Creator.Username));
                 ReturnBets();
             }
             else if (Bets.Count < Constants.ROULETTE_MIN_PLAYERS)
             {
-                await Group.EditMessage(Messages.too_few_players, MessageId);
+                await Group.DeleteMessage(MessageId);
+                await Group.SendMessage(Messages.too_few_players);
                 ReturnBets();
             }
             else
@@ -128,7 +130,7 @@ namespace CardCollector.Database.Entity
         private string BetsToMessage()
         {
             var pool = Bets.Sum(item => Math.Pow(5, item.Sticker.Tier - 1));
-            return string.Join("\n", Bets.Select((item, i) =>
+            return string.Join("\n", Bets.OrderByDescending(item => item.Sticker.Tier).Select((item, i) =>
             {
                 var chance = Math.Pow(5, item.Sticker.Tier - 1) / pool * 100;
                 return $"{i+1}. {item.User.Username}: {item.Sticker.Title} ({Math.Round(chance, 2)}%)";

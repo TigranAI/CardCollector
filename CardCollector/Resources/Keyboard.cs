@@ -4,6 +4,7 @@ using CardCollector.Commands.CallbackQueryHandler;
 using CardCollector.Commands.InlineQueryHandler;
 using CardCollector.Commands.MessageHandler;
 using CardCollector.Database.Entity;
+using CardCollector.Database.Entity.NotMapped;
 using CardCollector.Others;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
@@ -716,14 +717,13 @@ namespace CardCollector.Resources
 
         /* Клавиатура, отображаемая вместе с сообщением профиля */
         public static InlineKeyboardMarkup GetProfileKeyboard(int packsCount, InviteInfo? userInviteInfo,
-            int income = 0)
+            Income? income = null)
         {
             var keyboard = new List<InlineKeyboardButton[]>();
-            if (income > 0)
+            if (income != null && !income.Empty())
                 keyboard.Add(new[]
                 {
-                    InlineKeyboardButton.WithCallbackData($"{Text.collect} {income}{Text.coin}",
-                        CallbackQueryCommands.collect_income)
+                    InlineKeyboardButton.WithCallbackData($"{Text.collect} {income}",CallbackQueryCommands.collect_income)
                 });
             keyboard.AddRange(new[]
             {
@@ -991,7 +991,7 @@ namespace CardCollector.Resources
             return new InlineKeyboardMarkup(new[]
             {
                 InlineKeyboardButton.WithCallbackData(Text.claim,
-                    $"{CallbackQueryCommands.claim_group_prize}={chatId}={prize}={prizeId}")
+                    $"{CallbackQueryCommands.group_claim_giveaway}={chatId}={prize}={prizeId}")
             });
         }
 

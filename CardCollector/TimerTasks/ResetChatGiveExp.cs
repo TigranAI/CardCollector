@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Timers;
-using CardCollector.Database;
+using CardCollector.Cache.Repository;
 using CardCollector.Resources;
 
 namespace CardCollector.TimerTasks
@@ -14,12 +14,8 @@ namespace CardCollector.TimerTasks
         
         protected override async void TimerCallback(object o, ElapsedEventArgs e)
         {
-            using (var context = new BotDatabaseContext())
-            {
-                context.UserSendStickers.AttachRange(context.UserSendStickers);
-                context.UserSendStickers.RemoveRange(context.UserSendStickers);
-                await context.SaveChangesAsync();
-            }
+            var repo = new ChatInfoRepository();
+            await repo.ClearAsync();
         }
     }
 }

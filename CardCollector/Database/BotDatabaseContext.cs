@@ -46,11 +46,9 @@ namespace CardCollector.Database
         public DbSet<UserMessages> UserMessages { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<UserActivity> UserActivities { get; set; }
-        public DbSet<UserSendStickerToChat> UserSendStickers { get; set; }
         public DbSet<TelegramChat> TelegramChats { get; set; }
         public DbSet<ChannelGiveaway> ChannelGiveaways { get; set; }
         public DbSet<ChatRoulette> ChatRoulette { get; set; }
-        public DbSet<ChatActivity> ChatActivities { get; set; }
         public DbSet<InviteInfo> InviteInfo { get; set; }
         public DbSet<ChatDistribution> ChatDistributions { get; set; }
 
@@ -80,7 +78,6 @@ namespace CardCollector.Database
             ConfigureLevelLevelReward(modelBuilder);
             ConfigureDailyTaskTaskId(modelBuilder);
             ConfigureSticker(modelBuilder);
-            ConfigureTelegramChat(modelBuilder);
             ConfigureChatDistributions(modelBuilder);
         }
 
@@ -104,16 +101,6 @@ namespace CardCollector.Database
                 .Entity<InviteInfo>()
                 .OwnsOne(ii => ii.TasksProgress,
                     builder => builder.ToTable("beginners_tasks_progress"));
-        }
-
-        private void ConfigureTelegramChat(ModelBuilder modelBuilder)
-        {
-            modelBuilder
-                .Entity<TelegramChat>()
-                .OwnsOne(chat => chat.ChatActivity, builder =>
-                {
-                    builder.ToTable("chat_activity");
-                });
         }
 
         private void ConfigureUserLevel(ModelBuilder modelBuilder)
@@ -145,6 +132,13 @@ namespace CardCollector.Database
                 .HasConversion(
                     to => (int) to,
                     from => (ExclusiveTask) from);
+            
+            modelBuilder
+                .Entity<Sticker>()
+                .Property(entity => entity.IncomeType)
+                .HasConversion(
+                    to => (int) to,
+                    from => (IncomeType) from);
         }
 
         private void ConfigureUserMessages(ModelBuilder modelBuilder)

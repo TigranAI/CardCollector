@@ -1,38 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Timers;
-using CardCollector.Attributes.TimerTask;
 
 namespace CardCollector.TimerTasks
 {
-    [TimerTask]
     public abstract class TimerTask
     {
         protected Timer Timer = new ();
         protected abstract TimeSpan RunAt { get; }
 
-        private static ICollection<TimerTask> TasksList;
-
-        static TimerTask()
-        {
-            TasksList = new LinkedList<TimerTask>();
-            var assembly = Assembly.GetExecutingAssembly();
-            foreach (var type in assembly.GetTypes())
-            {
-                if (type == typeof(TimerTask)) continue;
-                if (Attribute.IsDefined(type, typeof(TimerTaskAttribute)))
-                {
-                    var timerTask = (TimerTask?) Activator.CreateInstance(type);
-                    if (timerTask != null) TasksList.Add(timerTask);
-                }
-            }
-        }
+        private static ICollection<TimerTask?> TasksList = Assembly.GetExecutingAssembly()
+            .GetTypes()
+            .Where(type => type.IsSubclassOf(typeof(TimerTask)))
+            .Select(type => (TimerTask?) Activator.CreateInstance(type))
+            .ToList();
 
         public static void SetupAll()
         {
             foreach (var task in TasksList)
-                task.Setup();
+                task?.Setup();
         }
 
         protected static void SetupTimer(Timer timer, TimeSpan timeToRun)

@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using CardCollector.Resources;
+using Newtonsoft.Json;
 
 // ReSharper disable ConditionIsAlwaysTrueOrFalse
 // ReSharper disable LocalizableElement
@@ -11,13 +12,13 @@ namespace CardCollector
 {
     public static class Logs
     {
-        private static readonly string path;
+        private static readonly string Path;
 
         static Logs()
         {
-            path = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location) + "/Logs";
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
+            Path = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location) + "/Logs";
+            if (!Directory.Exists(Path))
+                Directory.CreateDirectory(Path);
         }
 
         private static async void Print(string message)
@@ -26,7 +27,7 @@ namespace CardCollector
             else
             {
                 using (var sw =
-                    File.AppendText($"{path}/{DateTime.Today.ToString(Constants.TimeCulture.ShortDatePattern)}.log"))
+                    File.AppendText($"{Path}/{DateTime.Today.ToString(Constants.TimeCulture.ShortDatePattern)}.log"))
                 {
                     await sw.WriteLineAsync(message);
                     sw.Close();
@@ -51,8 +52,8 @@ namespace CardCollector
 
         public static void LogOutJson(object message)
         {
-            Print(
-                $"[JSON] [{DateTime.Now.ToString(Constants.TimeCulture.LongTimePattern)}] {Utilities.ToJson(message)}");
+            Print($"[JSON] [{DateTime.Now.ToString(Constants.TimeCulture.LongTimePattern)}] " +
+                  $"{Utilities.ToJson(message, Formatting.Indented)}");
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Attributes.Logs;
+using CardCollector.Attributes;
 using CardCollector.Database;
 using CardCollector.Database.Entity;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +9,7 @@ using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.MyChatMemberHandler
 {
-    [SavedActivity]
+    [Statistics]
     public class AddToGroup : MyChatMemberHandler
     {
         protected override async Task Execute()

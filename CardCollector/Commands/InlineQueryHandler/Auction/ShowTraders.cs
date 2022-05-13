@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.Attributes.Menu;
+using CardCollector.Attributes;
 using CardCollector.Controllers;
 using CardCollector.Database.EntityDao;
 using CardCollector.Resources.Enums;
@@ -9,7 +9,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.InlineQueryHandler.Auction
 {
-    [DontAddToCommandStack]
+    [SkipCommand]
     public class ShowTraders : InlineQueryHandler
     {
         protected override async Task Execute()

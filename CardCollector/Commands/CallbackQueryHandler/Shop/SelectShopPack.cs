@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Attributes.Menu;
+using CardCollector.Attributes;
 using CardCollector.Database.EntityDao;
 using CardCollector.Others;
 using CardCollector.Resources;

@@ -1,15 +1,16 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.Attributes.Logs;
+using CardCollector.Attributes;
 using CardCollector.Controllers;
 using CardCollector.Database.Entity;
 using CardCollector.Database.EntityDao;
+using CardCollector.Extensions.Database.Entity;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Profile
 {
-    [SavedActivity]
+    [Statistics]
     public class CollectIncome : CallbackQueryHandler
     {
         protected override string CommandText => CallbackQueryCommands.collect_income;
@@ -17,22 +18,15 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
         protected override async Task Execute()
         {
             var result = User.Cash.Payout(User.Stickers);
-            await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, 
-                $"{Messages.you_collected} {result}{Text.coin} " +
-                $"\n\n{Messages.your_cash}: {User.Cash.Coins}{Text.coin} {User.Cash.Gems}{Text.gem}", true);
+            await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id,
+                $"{Messages.you_collected} {result} " +
+                $"\n\n{Messages.your_cash}: {User.Cash}", true);
             var currentLevel = await Context.Levels.FindLevel(User.Level.Level + 1);
             var expGoal = currentLevel?.LevelExpGoal.ToString() ?? "∞";
-            await User.Messages.EditMessage(User, 
-                $"{User.Username}" +
-                $"\n{Messages.coins}: {User.Cash.Coins}{Text.coin}" +
-                $"\n{Messages.gems}: {User.Cash.Gems}{Text.gem}" +
-                $"\n{Messages.level}: {User.Level.Level}" +
-                $"\n{Messages.current_exp}: {User.Level.CurrentExp} / {expGoal}" +
-                $"\n{Messages.cash_capacity}: {User.Cash.MaxCapacity}{Text.coin}",
+            await User.Messages.EditMessage(User, User.GetProfileMessage(expGoal),
                 Keyboard.GetProfileKeyboard(User.Packs.Sum(pack => pack.Count), User.InviteInfo));
-            
-            if (User.InviteInfo?.TasksProgress is { } tp 
-                && tp.CollectIncome < BeginnersTasksProgress.CollectIncomeGoal)
+
+            if (User.InviteInfo?.TasksProgress is { } tp && tp.CollectIncome < BeginnersTasksProgress.CollectIncomeGoal)
             {
                 tp.CollectIncome++;
                 await User.InviteInfo.CheckRewards(Context);

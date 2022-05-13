@@ -9,13 +9,13 @@ namespace CardCollector.Others
         public static T Random<T>(this IEnumerable<T> source)
         {
             var list = source.ToList();
-            return list[Utilities.rnd.Next(list.Count)];
+            return list[Utilities.Rnd.Next(list.Count)];
         }
 
         public static T? WeightedRandom<T>(this IEnumerable<T> source, Func<T, int> weightExpression)
         {
             var pool = source.Sum(item => weightExpression.Invoke(item));
-            var value = Utilities.rnd.Next(pool);
+            var value = Utilities.Rnd.Next(pool);
             var sum = 0;
             foreach (var item in source)
             {

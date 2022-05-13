@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.Attributes.Logs;
+using CardCollector.Attributes;
 using CardCollector.Controllers;
 using CardCollector.Database.Entity;
 using CardCollector.Database.EntityDao;
@@ -11,13 +11,13 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.MessageHandler.Group
 {
-    [SavedActivity]
+    [Statistics]
     public class Roulette : MessageHandler
     {
         protected override string CommandText => MessageCommands.roulette;
         protected override async Task Execute()
         {
-            var telegramChat = await Context.TelegramChats.FindChat(Message.Chat);
+            var telegramChat = await Context.TelegramChats.FindByChat(Message.Chat);
             if (Context.ChatRoulette.Any(item => !item.IsStarted && item.Group.Id == telegramChat.Id))
             {
                 await telegramChat.SendMessage(Messages.roulette_start_now);

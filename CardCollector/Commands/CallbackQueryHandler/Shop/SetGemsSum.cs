@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Attributes.Menu;
 using CardCollector.Commands.PreCheckoutQueryHandler;
 using CardCollector.Controllers;
 using CardCollector.Resources;

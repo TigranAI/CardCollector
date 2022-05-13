@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Attributes.Menu;
+using CardCollector.Attributes;
 using CardCollector.Commands.CallbackQueryHandler.Others;
 using CardCollector.Resources;
 using CardCollector.Session.Modules;
@@ -7,7 +7,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Collection
 {
-    [DontAddToCommandStack]
+    [SkipCommand]
     public class DeleteCombine : CallbackQueryHandler
     {
         protected override string CommandText => CallbackQueryCommands.delete_combine;

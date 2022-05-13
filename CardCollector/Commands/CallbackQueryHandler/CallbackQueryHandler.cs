@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using CardCollector.Attributes.Handlers;
 using CardCollector.Database;
 using CardCollector.Database.EntityDao;
 using Telegram.Bot.Types;
@@ -10,23 +10,14 @@ using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.CallbackQueryHandler
 {
-    [CallbackQueryHandler]
     public abstract class CallbackQueryHandler : HandlerModel
     {
         protected CallbackQuery CallbackQuery;
         
-        public static readonly ICollection<Type> Commands;
-
-        static CallbackQueryHandler()
-        {
-            Commands = new LinkedList<Type>();
-            var assembly = Assembly.GetExecutingAssembly();
-            foreach (var type in assembly.GetTypes())
-            {
-                if (type.IsAbstract) continue;
-                if (Attribute.IsDefined(type, typeof(CallbackQueryHandlerAttribute))) Commands.Add(type);
-            }
-        }
+        public static readonly ICollection<Type> Commands = Assembly.GetExecutingAssembly()
+            .GetTypes()
+            .Where(type => type.IsSubclassOf(typeof(CallbackQueryHandler)) && !type.IsAbstract)
+            .ToList();
 
         public static async Task<HandlerModel> Factory(Update update)
         {

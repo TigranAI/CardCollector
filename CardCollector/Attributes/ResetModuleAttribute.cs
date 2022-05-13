@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CardCollector.Attributes.Menu
+namespace CardCollector.Attributes
 {
     [NotInherited]
     public class ResetModuleAttribute : Attribute

@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CardCollector.Attributes.Logs;
-using CardCollector.Attributes.Menu;
+using CardCollector.Attributes;
 using CardCollector.Database;
 using CardCollector.Database.Entity;
 using CardCollector.Database.EntityDao;
+using CardCollector.Resources.Translations;
 using Newtonsoft.Json;
 using Telegram.Bot.Types;
 using User = CardCollector.Database.Entity.User;
@@ -31,16 +31,43 @@ namespace CardCollector.Commands
         
         public virtual async Task PrepareAndExecute()
         {
-            await BeforeExecute();
-            await Execute();
-            await AfterExecute();
+            try
+            {
+                await BeforeExecute();
+                await Execute();
+                await AfterExecute();
+            }
+            catch (Exception e)
+            {
+                await OnFallback(e);
+            }
+        }
+
+        private async Task OnFallback(Exception e)
+        {
+            try
+            {
+                using (var context = new BotDatabaseContext())
+                {
+                    var user = await context.Users.FindById(User.Id);
+                    await user.Messages.ClearChat(user);
+                    await user.Messages.SendMessage(user, $"{Messages.unexpected_exception} {e.Message}");
+                    Logs.LogOutError(e);
+                    await context.SaveChangesAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.LogOutError(e);
+                Logs.LogOutError(ex);
+            }
         }
 
         protected virtual async Task BeforeExecute()
         {
             User.InitSession();
             if (ClearMenu) User.Session.ClearMenuStack();
-            if (!Attribute.IsDefined(GetType(), typeof(DontAddToCommandStack)))
+            if (!Attribute.IsDefined(GetType(), typeof(SkipCommandAttribute)))
                 User.Session.AddCommandToStack(this);
             if (Attribute.IsDefined(GetType(), typeof(ResetModuleAttribute)))
                 User.Session.ResetModules();
@@ -54,12 +81,12 @@ namespace CardCollector.Commands
             Logs.LogOut(this);
             if (!Context.IsDisposed())
             {
-                if (Attribute.IsDefined(GetType(), typeof(SavedActivityAttribute)))
+                if (Attribute.IsDefined(GetType(), typeof(StatisticsAttribute)))
                     await SaveActivity(Context);
                 await Context.SaveChangesAsync();
                 await Context.DisposeAsync();
             }
-            else if (Attribute.IsDefined(GetType(), typeof(SavedActivityAttribute)))
+            else if (Attribute.IsDefined(GetType(), typeof(StatisticsAttribute)))
             {
                 using (var context = new BotDatabaseContext())
                 {

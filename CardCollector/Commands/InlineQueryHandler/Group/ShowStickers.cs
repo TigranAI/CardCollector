@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.Attributes.Menu;
+using CardCollector.Attributes;
 using CardCollector.Commands.ChosenInlineResultHandler;
 using CardCollector.Controllers;
 using CardCollector.Others;
@@ -8,7 +8,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.InlineQueryHandler.Group
 {
-    [DontAddToCommandStack]
+    [SkipCommand]
     public class ShowStickers : InlineQueryHandler
     {
         protected override async Task Execute()

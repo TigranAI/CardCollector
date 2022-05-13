@@ -178,15 +178,6 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ACE.
-        /// </summary>
-        internal static string claim_group_prize {
-            get {
-                return ResourceManager.GetString("claim_group_prize", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to AAK.
         /// </summary>
         internal static string collect_income {
@@ -354,6 +345,15 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         internal static string end_sticker_upload {
             get {
                 return ResourceManager.GetString("end_sticker_upload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ACE.
+        /// </summary>
+        internal static string group_claim_giveaway {
+            get {
+                return ResourceManager.GetString("group_claim_giveaway", resourceCulture);
             }
         }
         

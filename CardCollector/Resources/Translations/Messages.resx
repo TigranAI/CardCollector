@@ -299,7 +299,7 @@
         <value>Вы получили</value>
     </data>
     <data name="send_sticker" xml:space="preserve">
-        <value>за отправку стикера в беседу.</value>
+        <value>за отправку стикера в беседу</value>
     </data>
     <data name="you_can_add_bot_to_conversation" xml:space="preserve">
         <value>Чтобы увеличить получаемый опыт, Вы можете добавить бота в беседу.</value>
@@ -307,8 +307,8 @@
     <data name="for_buy_gems" xml:space="preserve">
         <value>за покупку алмазов в магазине</value>
     </data>
-    <data name="count_sends_per_day" xml:space="preserve">
-        <value>Количество отправлений за этот день в беседу</value>
+    <data name="today_exp_gain" xml:space="preserve">
+        <value>Сегодня получено опыта</value>
     </data>
     <data name="thanks_for_buying_gems" xml:space="preserve">
         <value>Спасибо за покупку алмазов!</value>
@@ -377,7 +377,7 @@ https://telegra.ph/help-11-04-4</value>
         <value>Пожалуйста, загрузите превью стикерпака</value>
     </data>
     <data name="see_your_stickers" xml:space="preserve">
-        <value>Ваши стикеры можно посмотреть, нажав на Коллекция.</value>
+        <value>Ваши стикеры можно посмотреть в меню "Коллекция".</value>
     </data>
     <data name="select_sticker" xml:space="preserve">
         <value>Выберите стикер</value>
@@ -693,5 +693,11 @@ mm - минуты
     </data>
     <data name="congratulations_sticker_unlocked" xml:space="preserve">
         <value>Поздравляем! Вы прокачали стикер {1}! Вам доступна цветная версия стикера, теперь он приносит 1🍬 в день.</value>
+    </data>
+    <data name="candies" xml:space="preserve">
+        <value>Конфет</value>
+    </data>
+    <data name="attempts" xml:space="preserve">
+        <value>раз</value>
     </data>
 </root>

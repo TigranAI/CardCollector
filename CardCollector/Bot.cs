@@ -1,7 +1,5 @@
 using System.Threading;
 using System.Threading.Tasks;
-using CardCollector.Cache.Entity;
-using CardCollector.Cache.Repository;
 using CardCollector.Controllers;
 using CardCollector.Database;
 using CardCollector.Resources;
@@ -29,7 +27,9 @@ namespace CardCollector
             
             await Client.SetMyCommandsAsync(Constants.PrivateCommands, BotCommandScope.AllPrivateChats());
             await Client.SetMyCommandsAsync(Constants.GroupCommands, BotCommandScope.AllGroupChats());
+
             Client.StartReceiving(HandleUpdateAsync, HandleErrorAsync);
+            UpdateController.Run();
             
             MessageController.RunWaitQueueResolver();
             

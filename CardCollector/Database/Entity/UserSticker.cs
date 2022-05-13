@@ -15,8 +15,8 @@ namespace CardCollector.Database.Entity
 
         public virtual User User { get; set; }
         public virtual Sticker Sticker { get; set; }
-        public bool IsUnlocked { get; set; } = false;
-        public int ExclusiveTaskProgress { get; set; } = 0;
+        public bool IsUnlocked { get; set; }
+        public int ExclusiveTaskProgress { get; set; }
         public int Count { get; set; }
         public DateTime Payout { get; set; } = DateTime.Now;
         public DateTime GivePrizeDate { get; set; } = DateTime.Today;

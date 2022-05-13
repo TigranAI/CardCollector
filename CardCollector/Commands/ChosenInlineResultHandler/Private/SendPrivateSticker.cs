@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.Attributes.Logs;
+using CardCollector.Attributes;
 using CardCollector.Commands.ChosenInlineResultHandler.Group;
 using CardCollector.Database.Entity;
 using CardCollector.Database.EntityDao;
@@ -12,7 +12,7 @@ using CardCollector.UserDailyTask;
 
 namespace CardCollector.Commands.ChosenInlineResultHandler.Private
 {
-    [SavedActivity]
+    [Statistics]
     public class SendPrivateSticker : ChatSendSticker
     {
         protected override string CommandText => ChosenInlineResultCommands.send_private_sticker;

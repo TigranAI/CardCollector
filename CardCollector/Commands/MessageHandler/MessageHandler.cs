@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using CardCollector.Attributes.Handlers;
 using CardCollector.Controllers;
 using CardCollector.Database;
 using CardCollector.Database.EntityDao;
@@ -15,24 +15,14 @@ using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.MessageHandler
 {
-    [MessageHandler]
     public abstract class MessageHandler : HandlerModel
     {
         protected Message Message;
         
-        private static ICollection<Type> Commands;
-
-        static MessageHandler()
-        {
-            Commands = new LinkedList<Type>();
-            var assembly = Assembly.GetExecutingAssembly();
-            foreach (var type in assembly.GetTypes())
-            {
-                if (type.IsAbstract) continue;
-                if (Attribute.IsDefined(type, typeof(MessageHandlerAttribute)))
-                    Commands.Add(type);
-            }
-        }
+        private static ICollection<Type> Commands = Assembly.GetExecutingAssembly()
+            .GetTypes()
+            .Where(type => type.IsSubclassOf(typeof(MessageHandler)) && !type.IsAbstract)
+            .ToList();
 
         public static async Task<HandlerModel> Factory(Update update)
         {
@@ -50,7 +40,7 @@ namespace CardCollector.Commands.MessageHandler
                 await MessageController.DeleteMessage(user.ChatId, update.Message.MessageId);
 
             if (update.Message.Chat.Type is ChatType.Group or ChatType.Supergroup)
-                await GroupController.OnGroupMessageReceived(update.Message.Chat, update.Message.From!);
+                await GroupController.OnMessageReceived(update.Message);
 
             user.InitSession();
             

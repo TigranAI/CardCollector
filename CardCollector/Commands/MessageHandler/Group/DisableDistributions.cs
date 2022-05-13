@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Database.Entity;
 using CardCollector.Database.EntityDao;
 using CardCollector.Others;
 using CardCollector.Resources;
@@ -14,18 +13,7 @@ namespace CardCollector.Commands.MessageHandler.Group
         protected override string CommandText => MessageCommands.disable_distributions;
         protected override async Task Execute()
         {
-            var telegramChat = await Context.TelegramChats.FindByChatId(Message.Chat.Id);
-            if (telegramChat == null)
-            {
-                var result = await Context.TelegramChats.AddAsync(new TelegramChat()
-                {
-                    ChatId = Message.Chat.Id,
-                    ChatActivity = new ChatActivity(),
-                    ChatType = Message.Chat.Type,
-                    Title = Message.Chat.Title
-                });
-                telegramChat = result.Entity;
-            }
+            var telegramChat = await Context.TelegramChats.FindByChat(Message.Chat);
             var chatMember = await Bot.Client.GetChatMemberAsync(Message.Chat.Id, User.ChatId);
             
             if (chatMember.Status is not (ChatMemberStatus.Administrator or ChatMemberStatus.Creator))

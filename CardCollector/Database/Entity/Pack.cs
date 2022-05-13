@@ -37,7 +37,7 @@ namespace CardCollector.Database.Entity
 
         public async Task<Sticker> Open()
         {
-            var tier = GetTier(Utilities.rnd.NextDouble() * 100);
+            var tier = GetTier(Utilities.Rnd.NextDouble() * 100);
             if (Id != 1) return Stickers.Where(sticker => sticker.Tier == tier).Random();
             using (var context = new BotDatabaseContext())
             {

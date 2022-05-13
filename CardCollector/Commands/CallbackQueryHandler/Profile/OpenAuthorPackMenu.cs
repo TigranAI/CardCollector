@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.Attributes.Menu;
+using CardCollector.Attributes;
 using CardCollector.Commands.CallbackQueryHandler.Others;
 using CardCollector.Controllers;
 using CardCollector.Resources;

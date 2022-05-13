@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Attributes.Menu;
+using CardCollector.Attributes;
 using CardCollector.Commands.CallbackQueryHandler.Others;
 using CardCollector.Commands.MessageHandler.Menu;
 using CardCollector.Resources.Enums;
@@ -8,7 +8,7 @@ using Telegram.Bot.Types;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Filters
 {
-    [DontAddToCommandStack]
+    [SkipCommand]
     public class SetFilter : CallbackQueryHandler
     {
         protected override string CommandText => CallbackQueryCommands.set;

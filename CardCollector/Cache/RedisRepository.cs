@@ -1,27 +1,38 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
+using CardCollector.Others;
 using StackExchange.Redis;
 
 namespace CardCollector.Cache
 {
-    public abstract class RedisRepository<TK, TV>
+    public abstract class RedisRepository<TK, TV> where TK : IConvertible
     {
         protected abstract int DbNum { get; }
         protected IDatabase Database => RedisCache.Connection.GetDatabase(DbNum);
 
-        public Task<bool> SaveAsync(TK key, TV value)
+        public Task<bool> SaveAsync([NotNull] TK key, [NotNull] TV value)
         {
-            if (key is null) throw new NullReferenceException("key must be initialized");
-            if (value is null) throw new NullReferenceException("value must be initialized");
+            ThrowHelper.CheckNonNull(value);
             return Database.StringSetAsync(key.ToString(), Utilities.ToJson(value));
         }
 
-        public async Task<TV> GetAsync(TK key)
+        public async Task<TV?> GetOrDefaultAsync([NotNull] TK key, TV? defaultValue = default)
         {
-            if (key is null) throw new NullReferenceException("key must be initialized");
             var redisResult = await Database.StringGetAsync(key.ToString());
-            if (!redisResult.HasValue) throw new NullReferenceException($"key {key} not found");
-            return Utilities.FromJson<TV>(redisResult);
+            return redisResult.HasValue
+                ? Utilities.FromJson<TV>(redisResult)
+                : defaultValue;
+        }
+
+        public Task<bool> DeleteAsync([NotNull] TK key)
+        {
+            return Database.KeyDeleteAsync(key.ToString());
+        }
+
+        public Task ClearAsync()
+        {
+            return Database.ExecuteAsync("FLUSHDB");
         }
     }
 }

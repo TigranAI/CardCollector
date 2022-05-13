@@ -97,6 +97,15 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to раз.
+        /// </summary>
+        internal static string attempts {
+            get {
+                return ResourceManager.GetString("attempts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Автор.
         /// </summary>
         internal static string author {
@@ -240,6 +249,15 @@ namespace CardCollector.Resources.Translations {
         internal static string buy_sticker_on_auction {
             get {
                 return ResourceManager.GetString("buy_sticker_on_auction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Конфет.
+        /// </summary>
+        internal static string candies {
+            get {
+                return ResourceManager.GetString("candies", resourceCulture);
             }
         }
         
@@ -527,15 +545,6 @@ namespace CardCollector.Resources.Translations {
         internal static string control_panel {
             get {
                 return ResourceManager.GetString("control_panel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Количество отправлений за этот день в беседу.
-        /// </summary>
-        internal static string count_sends_per_day {
-            get {
-                return ResourceManager.GetString("count_sends_per_day", resourceCulture);
             }
         }
         
@@ -1288,7 +1297,7 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ваши стикеры можно посмотреть, нажав на Коллекция..
+        ///   Looks up a localized string similar to Ваши стикеры можно посмотреть в меню &quot;Коллекция&quot;..
         /// </summary>
         internal static string see_your_stickers {
             get {
@@ -1370,7 +1379,7 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to за отправку стикера в беседу..
+        ///   Looks up a localized string similar to за отправку стикера в беседу.
         /// </summary>
         internal static string send_sticker {
             get {
@@ -1568,6 +1577,15 @@ namespace CardCollector.Resources.Translations {
         internal static string time_to_claim {
             get {
                 return ResourceManager.GetString("time_to_claim", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сегодня получено опыта.
+        /// </summary>
+        internal static string today_exp_gain {
+            get {
+                return ResourceManager.GetString("today_exp_gain", resourceCulture);
             }
         }
         

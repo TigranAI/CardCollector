@@ -18,6 +18,7 @@ namespace CardCollector.Database.Entity
         [MaxLength(128)] public string Author { get; set; }
         public int Income { get; set; }
         public int IncomeTime { get; set; }
+        public IncomeType IncomeType { get; set; } = IncomeType.Coins;
         public int Tier { get; set; }
         public Effect Effect { get; set; }
         public ExclusiveTask ExclusiveTask { get; set; }

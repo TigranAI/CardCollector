@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Attributes.Logs;
+using CardCollector.Attributes;
 using CardCollector.Commands.PreCheckoutQueryHandler;
 using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
@@ -9,7 +9,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.MessageHandler.Shop
 {
-    [SavedActivity]
+    [Statistics]
     public class BuyGemsItem : MessageHandler
     {
         protected override string CommandText => PreCheckoutQueryCommands.buy_gems_item;

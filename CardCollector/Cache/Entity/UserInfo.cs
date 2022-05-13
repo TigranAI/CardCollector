@@ -2,6 +2,6 @@
 {
     public class UserInfo
     {
-        public int ladderGames;
+        public int ladderPrizes;
     }
 }

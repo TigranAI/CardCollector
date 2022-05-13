@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using CardCollector.Resources.Translations;
@@ -18,9 +19,9 @@ namespace CardCollector.Database.Entity
         public bool DistributionsDisabled { get; set; }
         public int MaxExpGain { get; set; } = 20;
         public int GiveawayDuration { get; set; } = 180;
-
+        public int MembersCount { get; set; }
+        public DateTime? LastGiveaway { get; set; }
         public virtual ICollection<User> Members { get; set; } = new List<User>();
-        public virtual ChatActivity? ChatActivity { get; set; }
 
         public InlineQueryResultArticle AsTelegramArticle(string command)
         {

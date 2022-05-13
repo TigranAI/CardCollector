@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Attributes.Menu;
+using CardCollector.Attributes;
 using CardCollector.Commands.MessageHandler.Admin.Distribution;
 using CardCollector.Commands.MessageHandler.Admin.Giveaway;
 using CardCollector.Commands.MessageHandler.Collection;
@@ -8,7 +8,7 @@ using CardCollector.Commands.MessageHandler.Shop;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Others
 {
-    [DontAddToCommandStack]
+    [SkipCommand]
     public class Back : CallbackQueryHandler
     {
         protected override string CommandText => CallbackQueryCommands.back;

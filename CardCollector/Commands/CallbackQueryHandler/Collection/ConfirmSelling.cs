@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.Attributes.Logs;
+using CardCollector.Attributes;
 using CardCollector.Commands.MessageHandler.Collection;
 using CardCollector.Controllers;
 using CardCollector.Database.EntityDao;
@@ -9,7 +9,7 @@ using CardCollector.Session.Modules;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Collection
 {
-    [SavedActivity]
+    [Statistics]
     public class ConfirmSelling : CallbackQueryHandler
     {
         protected override string CommandText => CallbackQueryCommands.confirm_selling;

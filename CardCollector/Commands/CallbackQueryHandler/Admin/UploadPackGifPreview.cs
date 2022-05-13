@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Attributes.Menu;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.Attributes.Logs;
+using CardCollector.Attributes;
 using CardCollector.Controllers;
 using CardCollector.Database;
 using CardCollector.Database.Entity;
@@ -15,7 +15,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace CardCollector.Commands.MessageHandler.UrlCommands
 {
-    [SavedActivity]
+    [Statistics]
     public class Invite : MessageUrlHandler
     {
         protected override string CommandText => MessageUrlCommands.invite_friend;

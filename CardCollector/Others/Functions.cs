@@ -10,6 +10,7 @@ using CardCollector.Commands.MessageHandler.UrlCommands;
 using CardCollector.Commands.MyChatMemberHandler;
 using CardCollector.Controllers;
 using CardCollector.Database.Entity;
+using CardCollector.Games;
 
 namespace CardCollector.Others
 {
@@ -49,7 +50,7 @@ namespace CardCollector.Others
                     userActivities.Count(item => item.Action == typeof(Roulette).FullName);
 
                 var groupsWithPrize =
-                    userActivities.Where(item => item.Action == typeof(GroupController).FullName);
+                    userActivities.Where(item => item.Action == typeof(Giveaway).FullName);
                 var groupsActiveCount = groupsWithPrize
                     .DistinctBy(item => item.AdditionalData)
                     .Count();

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using CardCollector.Attributes.Menu;
+using CardCollector.Attributes;
 using CardCollector.Commands;
 using CardCollector.Others;
 using CardCollector.Resources;
@@ -15,8 +15,6 @@ namespace CardCollector.Session
         public UserState State = UserState.Default;
         private readonly Dictionary<Type, Module> _modules = new();
         private readonly UniqueStack<HandlerModel> _commandStack = new(new HandlerEqualityComparer());
-
-        public bool ChosenResultWithMessage = false;
 
         public T InitNewModule<T>() where T : Module
         {
@@ -67,7 +65,7 @@ namespace CardCollector.Session
             if (!_commandStack.TryPop(out var current)) return null;
             while (_commandStack.TryPop(out var previousCommand))
             {
-                if (Attribute.IsDefined(previousCommand.GetType(), typeof(MenuPoint))) return previousCommand;
+                if (Attribute.IsDefined(previousCommand.GetType(), typeof(MenuPointAttribute))) return previousCommand;
             }
             return null;
         }
