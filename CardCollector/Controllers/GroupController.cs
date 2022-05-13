@@ -2,10 +2,8 @@
 using CardCollector.Database;
 using CardCollector.Database.EntityDao;
 using CardCollector.Games;
-using CardCollector.Resources;
 using Telegram.Bot;
 using Telegram.Bot.Types;
-using Telegram.Bot.Types.Enums;
 using TelegramUser = Telegram.Bot.Types.User;
 
 namespace CardCollector.Controllers
@@ -25,9 +23,6 @@ namespace CardCollector.Controllers
                 if (!chat.Members.Contains(user)) chat.Members.Add(user);
 
                 await Giveaway.OnMessageReceived(context, chat);
-                
-                if (message.Type is MessageType.Sticker && message.ViaBot?.Username == AppSettings.NAME)
-                    await Ladder.OnStickerReceived(context, chat, message, user);
 
                 await context.SaveChangesAsync();
             }

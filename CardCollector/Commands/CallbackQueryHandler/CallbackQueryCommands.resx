@@ -234,4 +234,7 @@
     <data name="upload_pack_gif_preview" xml:space="preserve">
         <value>ACS</value>
     </data>
+    <data name="group_claim_ladder" xml:space="preserve">
+        <value>ACT</value>
+    </data>
 </root>

@@ -700,4 +700,13 @@ mm - минуты
     <data name="attempts" xml:space="preserve">
         <value>раз</value>
     </data>
+    <data name="ladder_message" xml:space="preserve">
+        <value>За отправленные в ряд {0} стикеров {1} один из вас может забрать набор стикеров {1}! Осталось сегодня {2} / {3}</value>
+    </data>
+    <data name="you_are_now_reach_limit" xml:space="preserve">
+        <value>Вы уже забрали все призы на сегодня</value>
+    </data>
+    <data name="ladder_message_claimed" xml:space="preserve">
+        <value>Пользователь {0} забирает набор стикеров {1} за игру в лесенку!</value>
+    </data>
 </root>

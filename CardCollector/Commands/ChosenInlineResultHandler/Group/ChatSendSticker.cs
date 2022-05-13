@@ -6,6 +6,7 @@ using CardCollector.Cache.Entity;
 using CardCollector.Cache.Repository;
 using CardCollector.Database.Entity;
 using CardCollector.Database.EntityDao;
+using CardCollector.Games;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
@@ -23,6 +24,9 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Group
         {
             var repo = new ChosenResultRepository();
             var chatId = await repo.GetOrDefaultAsync(User.Id);
+            var data = ChosenInlineResult.ResultId.Split("=");
+            var userStickerId = long.Parse(data[1]);
+            
             if (User.Settings[UserSettingsTypes.ExpGain])
             {
                 if (chatId == null)
@@ -37,12 +41,14 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Group
                     await repo.DeleteAsync(User.Id);
                     var chat = await Context.TelegramChats.FindByChatId(chatId.Value);
                     await GiveExp(chat);
+                    var userSticker = User.Stickers.First(item => item.Id == userStickerId);
+                    await Ladder.OnStickerReceived(Context, chat, userSticker.Sticker, User);
                 }
             }
 
             await User.Level.CheckLevelUp(Context, User);
 
-            var userStickerId = int.Parse(ChosenInlineResult.ResultId.Split("=")[1]);
+            
             User.Stickers.SingleOrDefault(item => item.Id == userStickerId)?.UpdateLastUsage();
         }
 

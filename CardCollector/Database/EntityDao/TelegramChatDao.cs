@@ -17,6 +17,7 @@ namespace CardCollector.Database.EntityDao
 
         public static async Task<TelegramChat> FindByChatId(this DbSet<TelegramChat> table, long chatId)
         {
+            Logs.LogOut(chatId);
             return await table.SingleOrDefaultAsync(item => item.ChatId == chatId)
                 ?? await table.Create(await Bot.Client.GetChatAsync(chatId));
         }

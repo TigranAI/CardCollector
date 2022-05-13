@@ -1,11 +1,13 @@
 ﻿using System.Threading.Tasks;
 using CardCollector.Cache.Entity;
 using CardCollector.Cache.Repository;
+using CardCollector.Commands.CallbackQueryHandler;
 using CardCollector.Database;
 using CardCollector.Database.Entity;
-using CardCollector.Database.EntityDao;
+using CardCollector.Others;
 using CardCollector.Resources;
-using Telegram.Bot.Types;
+using CardCollector.Resources.Translations;
+using Telegram.Bot.Types.ReplyMarkups;
 using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Games
@@ -19,18 +21,16 @@ namespace CardCollector.Games
         public static async Task OnStickerReceived(
             BotDatabaseContext context,
             TelegramChat chat,
-            Message message,
+            Sticker sticker,
             User user)
         {
             if (chat.MembersCount + 1 < LADDER_MIN_USERS) return;
 
             var repo = new LadderInfoRepository();
-            var info = await repo.GetOrDefaultAsync(message.Chat.Id, new LadderInfo());
+            var info = await repo.GetOrDefaultAsync(chat.Id, new LadderInfo());
 
-            /*if (info!.IsLimitReached(LADDER_MAX_GAMES_PER_DAY)) return;
+            if (info!.IsLimitReached(LADDER_MAX_GAMES_PER_DAY)) return;
             //if (ladderInfo.IsLimitReached(chat.MaxLadderGames)) return;
-
-            var sticker = await context.Stickers.FindByFileId(message.Sticker!.FileId);
             
             if (sticker.Tier == 10)
             {
@@ -42,15 +42,46 @@ namespace CardCollector.Games
             info.SetPack(pack.Id);
             info.Add(user.Id, sticker.Id);
 
-            if (info.TryComplete(LADDER_GOAL)) await SendPrizeMessage(chat, pack);
+            if (info.TryComplete(LADDER_GOAL))
+            {
+                await SendPrizeMessage(chat, pack, info.GamesToday);
+                await SaveActivity(context, chat.Id);
+                await AddToLadderList(chat.Id);
+            }
 
-            await context.SaveChangesAsync();
-            await repo.SaveAsync(message.Chat.Id, info);*/
+            await repo.SaveAsync(chat.Id, info);
         }
 
-        private static async Task SendPrizeMessage(TelegramChat chat, Pack pack)
+        private static async Task SendPrizeMessage(TelegramChat chat, Pack pack, int gamesToday)
         {
-            throw new System.NotImplementedException();
+            if (pack.PreviewFileId != null) await chat.SendSticker(pack.PreviewFileId);
+            await chat.SendMessage(string.Format(Messages.ladder_message,
+                    LADDER_GOAL, pack.Author, gamesToday, LADDER_MAX_GAMES_PER_DAY),
+                Keyboard(chat.Id, pack.Id));
+        }
+
+        private static InlineKeyboardMarkup Keyboard(long chatId, int packId)
+        {
+            return new InlineKeyboardMarkup(new[]
+            {
+                InlineKeyboardButton.WithCallbackData(Text.claim, 
+                    $"{CallbackQueryCommands.group_claim_ladder}={chatId}={packId}") 
+            });
+        }
+        
+        private static async Task AddToLadderList(long chatId)
+        {
+            var listRepo = new ListRepository<long>();
+            await listRepo.AddAsync(CallbackQueryCommands.group_claim_ladder, chatId);
+        }
+        
+        private static async Task SaveActivity(BotDatabaseContext context, long chatId)
+        {
+            await context.UserActivities.AddAsync(new UserActivity()
+            {
+                Action = typeof(Ladder).FullName,
+                AdditionalData = $"chatId{chatId}"
+            });
         }
     }
 }

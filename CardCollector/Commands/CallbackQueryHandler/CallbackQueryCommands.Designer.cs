@@ -358,6 +358,15 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ACT.
+        /// </summary>
+        internal static string group_claim_ladder {
+            get {
+                return ResourceManager.GetString("group_claim_ladder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 000.
         /// </summary>
         internal static string ignore {

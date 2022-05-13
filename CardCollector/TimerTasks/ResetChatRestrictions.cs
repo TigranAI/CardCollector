@@ -5,7 +5,7 @@ using CardCollector.Resources;
 
 namespace CardCollector.TimerTasks
 {
-    public class ResetChatGiveExp : TimerTask
+    public class ResetChatRestrictions : TimerTask
     {
         protected override TimeSpan RunAt => Constants.DEBUG 
             ? new TimeSpan(DateTime.Now.TimeOfDay.Hours,
@@ -14,8 +14,9 @@ namespace CardCollector.TimerTasks
         
         protected override async void TimerCallback(object o, ElapsedEventArgs e)
         {
-            var repo = new ChatInfoRepository();
-            await repo.ClearAsync();
+            await new ChatInfoRepository().ClearAsync();
+            await new LadderInfoRepository().ClearAsync();
+            await new UserInfoRepository().ClearAsync();
         }
     }
 }

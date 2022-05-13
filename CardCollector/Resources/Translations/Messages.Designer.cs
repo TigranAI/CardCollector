@@ -985,6 +985,24 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to За отправленные в ряд {0} стикеров {1} один из вас может забрать набор стикеров {1}! Осталось сегодня {2} / {3}.
+        /// </summary>
+        internal static string ladder_message {
+            get {
+                return ResourceManager.GetString("ladder_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пользователь {0} забирает набор стикеров {1} за игру в лесенку!.
+        /// </summary>
+        internal static string ladder_message_claimed {
+            get {
+                return ResourceManager.GetString("ladder_message_claimed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Уровень.
         /// </summary>
         internal static string level {
@@ -1754,6 +1772,15 @@ namespace CardCollector.Resources.Translations {
         internal static string you_are_now_be_awarded_in_another_group {
             get {
                 return ResourceManager.GetString("you_are_now_be_awarded_in_another_group", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы уже забрали все призы на сегодня.
+        /// </summary>
+        internal static string you_are_now_reach_limit {
+            get {
+                return ResourceManager.GetString("you_are_now_reach_limit", resourceCulture);
             }
         }
         
