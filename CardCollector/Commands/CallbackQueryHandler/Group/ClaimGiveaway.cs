@@ -71,7 +71,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Group
                     ? await ClaimSticker(prizeId)
                     : "";
 
-            await chat!.EditMessage(string.Format(Messages.user_claim_giveaway, User.Username, prizeMessage,
+            await chat.EditMessage(string.Format(Messages.user_claim_giveaway, User.Username, prizeMessage,
                 chat.GiveawayDuration), CallbackQuery.Message!.MessageId);
         }
 

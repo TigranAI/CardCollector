@@ -1,10 +1,14 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using CardCollector.Cache.Entity;
 using CardCollector.Cache.Repository;
 using CardCollector.Controllers;
 using CardCollector.Database.EntityDao;
+using CardCollector.Extensions;
+using CardCollector.Extensions.Database.Entity;
 using CardCollector.Others;
 using CardCollector.Resources;
+using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Group
@@ -33,6 +37,9 @@ namespace CardCollector.Commands.CallbackQueryHandler.Group
                     CallbackQuery.Message.MessageId);
                 User.AddPack(pack, 1);
                 await repo.SaveAsync(User.Id, info);
+                await User.Stickers
+                    .Where(sticker => sticker.Sticker.ExclusiveTask is ExclusiveTask.ClaimLadderPrize)
+                    .Apply(sticker => sticker.DoExclusiveTask());
             }
             else
                 await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.you_are_now_reach_limit);
