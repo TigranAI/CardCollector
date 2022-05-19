@@ -22,13 +22,13 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
 
             var currency = CallbackQuery.Data!.Split('=')[1];
             if (currency == "coins" && User.Cash.Coins < orderInfo.GetResultPriceCoins())
-                await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.not_enougth_coins, true);
+                await AnswerCallbackQuery(User, CallbackQuery.Id, Messages.not_enougth_coins, true);
             else if (currency == "gems" && User.Cash.Gems < orderInfo.GetResultPriceGems())
-                await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.not_enougth_gems, true);
+                await AnswerCallbackQuery(User, CallbackQuery.Id, Messages.not_enougth_gems, true);
             else if (orderInfo.IsExpired())
-                await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.order_expired, true);
+                await AnswerCallbackQuery(User, CallbackQuery.Id, Messages.order_expired, true);
             else if (!orderInfo.IsInfinite && User.SpecialOrdersUser.Any(item => item.Order.Id == orderInfo.Id))
-                await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.you_already_use_this_order,
+                await AnswerCallbackQuery(User, CallbackQuery.Id, Messages.you_already_use_this_order,
                     true);
             else
             {

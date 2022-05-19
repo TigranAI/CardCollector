@@ -157,11 +157,11 @@ namespace CardCollector.Resources
                 },
                 new[]
                 {
-                    InlineKeyboardButton.WithCallbackData(Text.roulette_rule, CallbackQueryCommands.roulette_rule)
+                    InlineKeyboardButton.WithCallbackData(Text.game_rules, $"{CallbackQueryCommands.send_rules}={(int) GamesType.Roulette}")
                 },
                 new[]
                 {
-                    InlineKeyboardButton.WithCallbackData(Text.start_roulette,
+                    InlineKeyboardButton.WithCallbackData(Text.start_game,
                         $"{CallbackQueryCommands.start_roulette}={rouletteId}")
                 }
             });
@@ -777,21 +777,6 @@ namespace CardCollector.Resources
             return new InlineKeyboardMarkup(keyboard);
         }
 
-        public static InlineKeyboardMarkup ShopPacksKeyboard = new(new[]
-        {
-            new[]
-            {
-                InlineKeyboardButton.WithCallbackData(Text.buy_random, $"{CallbackQueryCommands.select_shop_pack}=1")
-            },
-            new[]
-            {
-                InlineKeyboardButton.WithCallbackData(Text.buy_author,
-                    $"{CallbackQueryCommands.choose_pack}={CallbackQueryCommands.select_shop_pack}=0")
-            },
-            new[] {InlineKeyboardButton.WithCallbackData(Text.info, CallbackQueryCommands.pack_info)},
-            new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)},
-        });
-
         public static InlineKeyboardMarkup OrderKeyboard(SpecialOrder order)
         {
             var keyboard = new List<InlineKeyboardButton[]>();
@@ -874,69 +859,6 @@ namespace CardCollector.Resources
                 new[] {InlineKeyboardButton.WithCallbackData(Text.open_packs, CallbackQueryCommands.my_packs)},
                 new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)},
             });
-        }
-
-        public static InlineKeyboardMarkup ControlPanel(PrivilegeLevel level)
-        {
-            var keyboard = new List<InlineKeyboardButton[]>();
-            if (level >= PrivilegeLevel.Programmer)
-                keyboard.AddRange(new[]
-                {
-                    new[]
-                    {
-                        InlineKeyboardButton.WithCallbackData(Text.logs_menu,
-                            $"{CallbackQueryCommands.logs_menu}={DateTime.Today}")
-                    },
-                    new[]
-                    {
-                        InlineKeyboardButton.WithCallbackData(Text.create_giveaway,
-                            $"{CallbackQueryCommands.create_giveaway}")
-                    },
-                    new[]
-                    {
-                        InlineKeyboardButton.WithCallbackData(Text.create_distribution,
-                            $"{CallbackQueryCommands.create_distribution}")
-                    },
-                    new[]
-                    {
-                        InlineKeyboardButton.WithCallbackData(Text.upload_pack_gif_preview,
-                            $"{CallbackQueryCommands.choose_pack}={CallbackQueryCommands.upload_pack_gif_preview}=0")
-                    },
-                    new[]
-                    {
-                        InlineKeyboardButton.WithCallbackData(Text.show_sample, CallbackQueryCommands.show_sample)
-                    },
-                });
-            if (level == PrivilegeLevel.Programmer)
-                keyboard.AddRange(new[]
-                {
-                    new[]
-                    {
-                        InlineKeyboardButton.WithCallbackData(Text.stop_bot, CallbackQueryCommands.stop_bot)
-                    },
-                    new[]
-                    {
-                        InlineKeyboardButton.WithCallbackData(Text.upload_stickerpack,
-                            CallbackQueryCommands.upload_stickerpack)
-                    },
-                    new[]
-                    {
-                        InlineKeyboardButton.WithCallbackData(Text.add_for_sale_sticker,
-                            $"{CallbackQueryCommands.choose_pack}={CallbackQueryCommands.select_for_sale_pack}=0")
-                    },
-                    new[]
-                    {
-                        InlineKeyboardButton.WithCallbackData(Text.add_sticker_preview,
-                            $"{CallbackQueryCommands.choose_pack}={CallbackQueryCommands.add_sticker_preview}=0")
-                    },
-                    new[]
-                    {
-                        InlineKeyboardButton.WithCallbackData(Text.edit_sticker,
-                            $"{CallbackQueryCommands.choose_pack}={CallbackQueryCommands.edit_sticker}=0")
-                    },
-                });
-            keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)});
-            return new InlineKeyboardMarkup(keyboard);
         }
 
         public static InlineKeyboardMarkup LogsMenu(DateTime date)

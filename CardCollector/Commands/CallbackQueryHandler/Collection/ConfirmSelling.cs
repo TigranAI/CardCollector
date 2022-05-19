@@ -19,7 +19,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Collection
         {
             var collectionModule = User.Session.GetModule<CollectionModule>();
             if (collectionModule.SellPrice <= 0)
-                await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.cant_sell_zero, true);
+                await AnswerCallbackQuery(User, CallbackQuery.Id, Messages.cant_sell_zero, true);
             else
             {
                 EnterGemsPrice.RemoveFromQueue(User.Id);

@@ -22,7 +22,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
                                || !User.SpecialOrdersUser.Any(usedOrder => usedOrder.Order.Id == item.Id))
                 .ToList();
             if (availableOffers.Count < 1)
-                await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.offers_not_found, true);
+                await AnswerCallbackQuery(User, CallbackQuery.Id, Messages.offers_not_found, true);
             else
                 await User.Messages.EditMessage(User, Messages.available_offers, Keyboard.SpecialOrdersKeyboard(availableOffers));
         }

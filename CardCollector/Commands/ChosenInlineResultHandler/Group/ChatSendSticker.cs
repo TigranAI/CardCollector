@@ -23,7 +23,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Group
         protected override async Task Execute()
         {
             var repo = new ChosenResultRepository();
-            var chatId = await repo.GetOrDefaultAsync(User.Id);
+            var chatId = await repo.GetAsync(User.Id);
             var data = ChosenInlineResult.ResultId.Split("=");
             var userStickerId = long.Parse(data[1]);
             
@@ -55,15 +55,15 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Group
         private async Task GiveExp(TelegramChat chat)
         {
             var chatRepo = new ChatInfoRepository();
-            var info = await chatRepo.GetOrDefaultAsync(chat.ChatId, new ChatInfo());
-            if (!info!.IsLimitReached(User.Id, MAX_EXP_COUNT))
+            var info = await chatRepo.GetAsync(chat);
+            if (!info.IsLimitReached(User.Id, MAX_EXP_COUNT))
             {
                 var exp = Math.Min(chat.MembersCount, chat.MaxExpGain);
                 User.Level.GiveExp(exp);
                 await User.Messages.SendMessage(User,
                     $"{Messages.you_gained} {exp} {Text.exp} {Messages.send_sticker} \"{chat.Title}\"" +
                     $"\n{Messages.today_exp_gain}  {info.GetAndIncrease(User.Id)} / {MAX_EXP_COUNT} {Messages.attempts}");
-                await chatRepo.SaveAsync(chat.ChatId, info);
+                await chatRepo.SaveAsync(chat, info);
             }
         }
     }

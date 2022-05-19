@@ -144,7 +144,7 @@ namespace CardCollector.Database.Entity
             Cash.Gems += count;
             await Stickers
                 .Where(sticker => sticker.Sticker.ExclusiveTask is ExclusiveTask.GotGems)
-                .Apply(async sticker => await sticker.DoExclusiveTask(count));
+                .ApplyAsync(async sticker => await sticker.DoExclusiveTask(count));
         }
 
         public async Task DecreaseCoins(int count)
@@ -152,7 +152,7 @@ namespace CardCollector.Database.Entity
             Cash.Coins -= count;
             await Stickers
                 .Where(sticker => sticker.Sticker.ExclusiveTask is ExclusiveTask.SpendCoins)
-                .Apply(async sticker => await sticker.DoExclusiveTask(count));
+                .ApplyAsync(async sticker => await sticker.DoExclusiveTask(count));
         }
     }
 }

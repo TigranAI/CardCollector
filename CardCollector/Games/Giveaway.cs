@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Cache.Entity;
 using CardCollector.Cache.Repository;
 using CardCollector.Commands.CallbackQueryHandler;
 using CardCollector.Database;
@@ -18,8 +17,8 @@ namespace CardCollector.Games
         public static async Task OnMessageReceived(BotDatabaseContext context, TelegramChat chat)
         {
             var repo = new GiveawayInfoRepository();
-            var info = await repo.GetOrDefaultAsync(chat.Id, new GiveawayInfo());
-            info!.MessageCount++;
+            var info = await repo.GetAsync(chat);
+            info.MessageCount++;
 
             if (info.TryComplete(chat, ACTIVITY_RATE))
             {
@@ -45,7 +44,7 @@ namespace CardCollector.Games
                 await AddToGiveawayList(chat.Id);
             }
 
-            await repo.SaveAsync(chat.Id, info);
+            await repo.SaveAsync(chat, info);
         }
 
         private static async Task AddToGiveawayList(long chatId)

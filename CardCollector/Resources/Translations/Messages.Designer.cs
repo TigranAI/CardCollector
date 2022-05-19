@@ -531,6 +531,16 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Поздравляем! Вы собрали пазл!
+        ///{0}.
+        /// </summary>
+        internal static string congratulation_you_solve_puzzle {
+            get {
+                return ResourceManager.GetString("congratulation_you_solve_puzzle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Поздравляем! Вы прокачали стикер {1}! Вам доступна цветная версия стикера, теперь он приносит 1🍬 в день..
         /// </summary>
         internal static string congratulations_sticker_unlocked {
@@ -1048,6 +1058,24 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Лимит наград в этой беседе исчерпан, но вы можете продолжать играть для удовольствия.
+        /// </summary>
+        internal static string no_rewards_available {
+            get {
+                return ResourceManager.GetString("no_rewards_available", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Для получения наград в чате должно быть от 20 человек и более.
+        /// </summary>
+        internal static string no_rewards_available_in_this_chat {
+            get {
+                return ResourceManager.GetString("no_rewards_available_in_this_chat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Недостаточно монет!.
         /// </summary>
         internal static string not_enougth_coins {
@@ -1062,6 +1090,15 @@ namespace CardCollector.Resources.Translations {
         internal static string not_enougth_gems {
             get {
                 return ResourceManager.GetString("not_enougth_gems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Недостаточно мест.
+        /// </summary>
+        internal static string not_enougth_slots {
+            get {
+                return ResourceManager.GetString("not_enougth_slots", resourceCulture);
             }
         }
         
@@ -1236,6 +1273,93 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Упс! Время вышло! {0} не успел сделать ход :(.
+        /// </summary>
+        internal static string puzzle_end_of_turn {
+            get {
+                return ResourceManager.GetString("puzzle_end_of_turn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} предлагает начать игру в пазл. Игра автоматически начнётся через 2 минуты. {0} может начать игру раньше.
+        ///Минимальное кол-во игроков: 2
+        ///Максимальное: 5
+        ///Участники:
+        ///👑 {0} 👑
+        ///{1}.
+        /// </summary>
+        internal static string puzzle_message {
+            get {
+                return ResourceManager.GetString("puzzle_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Игра уже создана.
+        /// </summary>
+        internal static string puzzle_now_created {
+            get {
+                return ResourceManager.GetString("puzzle_now_created", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Игра уже завершена.
+        /// </summary>
+        internal static string puzzle_now_ended {
+            get {
+                return ResourceManager.GetString("puzzle_now_ended", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Игра уже началась!.
+        /// </summary>
+        internal static string puzzle_now_started {
+            get {
+                return ResourceManager.GetString("puzzle_now_started", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Бот отправляет правила в лс.
+        /// </summary>
+        internal static string puzzle_rules {
+            get {
+                return ResourceManager.GetString("puzzle_rules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Игра началась! У вас есть 30 секунд на ход, порядок ходов следующий:
+        ///{0}.
+        /// </summary>
+        internal static string puzzle_start_message {
+            get {
+                return ResourceManager.GetString("puzzle_start_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to По окончании игры случайный игрок получает 3⭐️ стикер.
+        /// </summary>
+        internal static string puzzle_supergame_info {
+            get {
+                return ResourceManager.GetString("puzzle_supergame_info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Упс! Неверный ответ! {0} выбрал не тот кусочек пазла :(.
+        /// </summary>
+        internal static string puzzle_wrong_piece {
+            get {
+                return ResourceManager.GetString("puzzle_wrong_piece", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Обычный пак.
         /// </summary>
         internal static string random_packs {
@@ -1245,7 +1369,7 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Читаю документ....
+        ///   Looks up a localized string similar to Читаю таблицу....
         /// </summary>
         internal static string reading_document {
             get {
@@ -1306,7 +1430,7 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Правила были отправлены вам в личные сообщения.
+        ///   Looks up a localized string similar to Правила отправлены вам в лc.
         /// </summary>
         internal static string rules_sent_to_private {
             get {
@@ -1617,6 +1741,15 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Слишком много участников!.
+        /// </summary>
+        internal static string too_many_players {
+            get {
+                return ResourceManager.GetString("too_many_players", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Не забывайте собирать прибыль во вкладке профиля. Несобранная прибыль составляет.
         /// </summary>
         internal static string uncollected_income {
@@ -1631,6 +1764,15 @@ namespace CardCollector.Resources.Translations {
         internal static string unexpected_exception {
             get {
                 return ResourceManager.GetString("unexpected_exception", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Распаковываю архив....
+        /// </summary>
+        internal static string unzip_file {
+            get {
+                return ResourceManager.GetString("unzip_file", resourceCulture);
             }
         }
         
@@ -1658,6 +1800,24 @@ namespace CardCollector.Resources.Translations {
         internal static string upload_new_file {
             get {
                 return ResourceManager.GetString("upload_new_file", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Загрузите zip архив содержащий:
+        ///1. Excel таблицу с названием description.xlsx
+        /// в которой описан набор
+        ///2. Обложку набора с именем thumb.webp, опционально, добавьте gif версию с именем thumb.gif
+        ///3. Папку стикеров с именем stickers
+        ///4. Папку стикеров с вотремаркой с именем watermark_stickers
+        ///5. Опционально, папку стикеров с именем monochrome_stickers для эксклюзивных наборов
+        ///
+        ///Более подробно см. Readme.txt
+        ///А также см. пример архива.
+        /// </summary>
+        internal static string upload_stickerpack_instructions {
+            get {
+                return ResourceManager.GetString("upload_stickerpack_instructions", resourceCulture);
             }
         }
         
@@ -1713,6 +1873,15 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} получает {1}.
+        /// </summary>
+        internal static string user_receives_reward {
+            get {
+                return ResourceManager.GetString("user_receives_reward", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 🧪&lt;b&gt;Топ пользователей по опыту&lt;/b&gt;🧪.
         /// </summary>
         internal static string users_top_exp {
@@ -1749,11 +1918,20 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вы не можете начать рулетку, так как не являетесь ее создателем..
+        ///   Looks up a localized string similar to Вы не можете начать игру, так как не являетесь ее создателем..
         /// </summary>
         internal static string you_are_not_creator {
             get {
                 return ResourceManager.GetString("you_are_not_creator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы не находитесь в игре!.
+        /// </summary>
+        internal static string you_are_not_in_game {
+            get {
+                return ResourceManager.GetString("you_are_not_in_game", resourceCulture);
             }
         }
         
@@ -1772,6 +1950,24 @@ namespace CardCollector.Resources.Translations {
         internal static string you_are_now_be_awarded_in_another_group {
             get {
                 return ResourceManager.GetString("you_are_now_be_awarded_in_another_group", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы уже в игре.
+        /// </summary>
+        internal static string you_are_now_in_game {
+            get {
+                return ResourceManager.GetString("you_are_now_in_game", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}, вы уже играете в пазл.
+        /// </summary>
+        internal static string you_are_now_playing_puzzle {
+            get {
+                return ResourceManager.GetString("you_are_now_playing_puzzle", resourceCulture);
             }
         }
         

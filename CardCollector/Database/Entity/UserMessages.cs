@@ -5,6 +5,7 @@ using CardCollector.Controllers;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.InputFiles;
 using Telegram.Bot.Types.ReplyMarkups;
 
 namespace CardCollector.Database.Entity
@@ -32,7 +33,7 @@ namespace CardCollector.Database.Entity
             if (user.IsBlocked) return;
             foreach (var messageId in ChatMessages)
             {
-                await MessageController.DeleteMessage(user.ChatId, messageId);
+                await DeleteMessage(user.ChatId, messageId);
             }
 
             ChatMessages.Clear();
@@ -43,7 +44,7 @@ namespace CardCollector.Database.Entity
             if (user.IsBlocked) return;
             foreach (var messageId in ChatStickers)
             {
-                await MessageController.DeleteMessage(user.ChatId, messageId);
+                await DeleteMessage(user.ChatId, messageId);
             }
 
             ChatStickers.Clear();
@@ -101,7 +102,7 @@ namespace CardCollector.Database.Entity
         {
             if (user.IsBlocked) return;
             await ClearChat(user);
-            if (MenuMessageId != -1) await MessageController.DeleteMessage(user.ChatId, MenuMessageId);
+            if (MenuMessageId != -1) await DeleteMessage(user.ChatId, MenuMessageId);
             var isFirstOrderPicked = user.SpecialOrdersUser.Any(item => item.Id == 2);
             MenuMessageId = await MessageController.SendMessage(user.ChatId, Messages.main_menu,
                 Keyboard.Menu(isFirstOrderPicked), ParseMode.Html);
@@ -111,7 +112,7 @@ namespace CardCollector.Database.Entity
         {
             if (user.IsBlocked) return;
             if (DailyTaskProgressMessageId != -1)
-                await MessageController.DeleteMessage(user.ChatId, DailyTaskProgressMessageId);
+                await DeleteMessage(user.ChatId, DailyTaskProgressMessageId);
             DailyTaskProgressMessageId = await MessageController.SendMessage(user.ChatId, message);
             ChatMessages.Add(DailyTaskProgressMessageId);
         }
@@ -119,7 +120,7 @@ namespace CardCollector.Database.Entity
         public async Task SendDailyTaskAlert(User user)
         {
             if (user.IsBlocked) return;
-            if (DailyTaskAlertMessageId != -1) await MessageController.DeleteMessage(user.ChatId, DailyTaskAlertMessageId);
+            if (DailyTaskAlertMessageId != -1) await DeleteMessage(user.ChatId, DailyTaskAlertMessageId);
             DailyTaskAlertMessageId = await MessageController.SendMessage(user.ChatId, Messages.daily_task_alertation);
             ChatMessages.Add(DailyTaskAlertMessageId);
         }
@@ -128,7 +129,7 @@ namespace CardCollector.Database.Entity
         {
             if (user.IsBlocked) return;
             await ClearChat(user);
-            if (DailyTaskMessageId != -1) await MessageController.DeleteMessage(user.ChatId, DailyTaskMessageId);
+            if (DailyTaskMessageId != -1) await DeleteMessage(user.ChatId, DailyTaskMessageId);
             DailyTaskMessageId = await MessageController.SendMessage(user.ChatId, Messages.pack_prize, Keyboard.MyPacks);
             ChatMessages.Add(DailyTaskMessageId);
         }
@@ -136,7 +137,7 @@ namespace CardCollector.Database.Entity
         public async Task SendTopUsers(User user, string message, InlineKeyboardMarkup keyboard)
         {
             if (user.IsBlocked) return;
-            if (TopUsersMessageId != -1) await MessageController.DeleteMessage(user.ChatId, TopUsersMessageId);
+            if (TopUsersMessageId != -1) await DeleteMessage(user.ChatId, TopUsersMessageId);
             TopUsersMessageId = await MessageController.SendMessage(user.ChatId, message, keyboard, ParseMode.Html);
             ChatMessages.Add(TopUsersMessageId);
         }
@@ -144,9 +145,15 @@ namespace CardCollector.Database.Entity
         public async Task SendPiggyBankAlert(User user, string message)
         {
             if (user.IsBlocked) return;
-            if (CollectIncomeMessageId != -1) await MessageController.DeleteMessage(user.ChatId, CollectIncomeMessageId);
+            if (CollectIncomeMessageId != -1) await DeleteMessage(user.ChatId, CollectIncomeMessageId);
             CollectIncomeMessageId = await MessageController.SendMessage(user.ChatId, message);
             ChatMessages.Add(CollectIncomeMessageId);
+        }
+
+        public async Task SendDocument(User user, InputFileStream file, InlineKeyboardMarkup? keyboard = null)
+        {
+            if (user.IsBlocked) return;
+            ChatMessages.Add(await MessageController.SendDocument(user.ChatId, file, keyboard));
         }
     }
 }

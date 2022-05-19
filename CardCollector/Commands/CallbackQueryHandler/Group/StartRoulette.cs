@@ -15,7 +15,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Group
             var roulette = await Context.ChatRoulette.FindById(rouletteId);
             if (roulette == null) return;
             if (roulette.Creator.Id != User.Id)
-                await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.you_are_not_creator);
+                await AnswerCallbackQuery(User, CallbackQuery.Id, Messages.you_are_not_creator);
             else
                 await roulette.Start(Context);
         }

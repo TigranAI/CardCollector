@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.Database.EntityDao;
+using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
 
@@ -19,10 +20,12 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
             var message = specialOrder.Title;
             if (specialOrder.Discount > 0) message += $"\n{Text.discount}: {specialOrder.Discount}%";
             if (specialOrder.AdditionalPrize is not null) message += $"\n{Text.prize}: {await PrizeToString(specialOrder.AdditionalPrize)}";
-            message += $"\n{Text.time_limit} " +
-                       $"{(specialOrder.TimeLimited ? specialOrder.TimeLimit.ToString()!.Split(' ')[0] : Text.unexpired)}";
+            var timeLimit = specialOrder.TimeLimited 
+                ? specialOrder.TimeLimit!.Value.ToString(Constants.TimeCulture.ShortDatePattern)
+                : Text.unexpired;
+            message += $"\n{Text.time_limit} {timeLimit}";
             if (specialOrder.Description is not null) message += $"\n{Text.description}: {specialOrder.Description}";
-            await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, message, true);
+            await AnswerCallbackQuery(User, CallbackQuery.Id, message, true);
         }
         private async Task<string> PrizeToString(string prize)
         {

@@ -22,6 +22,7 @@ namespace CardCollector.Resources
         public static readonly int ROULETTE_MIN_PLAYERS = DEBUG ? 2 : 2;
 
         public static readonly long ROULETTE_INTERVAL = DEBUG ? 5 * 60 * 1000 : 5 * 60 * 1000;
+        public static readonly long PUZZLE_INTERVAL = DEBUG ? 2 * 60 * 1000 : 2 * 60 * 1000;
 
         public static DateTimeFormatInfo TimeCulture = new CultureInfo("ru-RU", false).DateTimeFormat;
         
@@ -36,6 +37,7 @@ namespace CardCollector.Resources
         public static readonly IEnumerable<BotCommand> GroupCommands = new[]
         {
             new BotCommand {Command = MessageCommands.roulette, Description = "Запустить рулетку"},
+            new BotCommand {Command = MessageCommands.start_puzzle, Description = "Запустить пазл"},
             new BotCommand {Command = MessageCommands.disable_distributions, Description = "Отключить рассылки"},
             new BotCommand {Command = MessageCommands.enable_distributions, Description = "Включить рассылки"},
             /*new BotCommand {Command = "/error", Description = "Сообщить об ошибке"},*/

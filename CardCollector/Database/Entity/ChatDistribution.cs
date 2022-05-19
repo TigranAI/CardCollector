@@ -25,11 +25,11 @@ namespace CardCollector.Database.Entity
             foreach (var chatId in chatIds)
             {
                 if (StickerFileId != null)
-                    await MessageController.SendSticker(chatId, StickerFileId);
+                    await SendSticker(chatId, StickerFileId);
                 if (ImageFileId != null)
-                    await MessageController.SendImage(chatId, ImageFileId, Text, GetKeyboard());
+                    await SendImage(chatId, ImageFileId, Text, GetKeyboard());
                 else
-                    await MessageController.SendMessage(chatId, Text, GetKeyboard());
+                    await SendMessage(chatId, Text, GetKeyboard());
             }
         }
 

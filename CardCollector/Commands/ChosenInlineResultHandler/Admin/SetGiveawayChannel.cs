@@ -16,7 +16,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Admin
 
         protected override async Task Execute()
         {
-            var chatId = int.Parse(ChosenInlineResult.ResultId.Split("=")[1]);
+            var chatId = long.Parse(ChosenInlineResult.ResultId.Split("=")[1]);
             var chat = await Context.TelegramChats.FindById(chatId);
             var giveawayId = User.Session.GetModule<AdminModule>().SelectedChannelGiveawayId;
             if (chat == null || giveawayId == null) return;

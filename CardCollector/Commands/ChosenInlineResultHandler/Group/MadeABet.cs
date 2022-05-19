@@ -17,7 +17,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Group
         protected override async Task Execute()
         {
             var repo = new ChosenResultRepository();
-            var chatId = await repo.GetOrDefaultAsync(User.Id);
+            var chatId = await repo.GetAsync(User.Id);
             if (chatId == null)
                 await User.Messages.SendMessage(User, Messages.cant_define_bet);
             else

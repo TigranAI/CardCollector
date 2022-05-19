@@ -21,5 +21,10 @@ namespace CardCollector.Extensions.Database.Entity
             rows.Add($"{Messages.see_your_stickers}");
             return string.Join("\n", rows);
         }
+
+        public static string GetMention(this User user)
+        {
+            return string.Format(Text.inline_mention, user.ChatId, user.Username);
+        }
     }
 }

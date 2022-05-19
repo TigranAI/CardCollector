@@ -100,8 +100,8 @@ namespace CardCollector.Database.Entity
         {
             if (PrizeCount <= 0)
             {
-                await MessageController.DeleteMessage(Channel.ChatId, MessageId);
-                await MessageController.SendMessage(Channel.ChatId, Messages.giveaway_now_ended);
+                await DeleteMessage(Channel.ChatId, MessageId);
+                await SendMessage(Channel.ChatId, Messages.giveaway_now_ended);
             }
             else if (ButtonText == null || ButtonText.Contains("{0}") || ButtonText.Contains("{1}"))
                 await Bot.Client.EditMessageReplyMarkupAsync(Channel.ChatId, MessageId, GetFormattedKeyboard());

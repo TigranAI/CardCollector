@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.Cache.Entity;
 using CardCollector.Cache.Repository;
 using CardCollector.Controllers;
 using CardCollector.Database.EntityDao;
@@ -21,28 +20,27 @@ namespace CardCollector.Commands.CallbackQueryHandler.Group
         protected override async Task Execute()
         {
             var data = CallbackQuery.Data!.Split("=");
-            var chatId = int.Parse(data[1]);
+            var chatId = long.Parse(data[1]);
             var listRepo = new ListRepository<long>();
             if (!await listRepo.ContainsAsync(CommandText, chatId)) return;
 
             var repo = new UserInfoRepository();
-            var info = await repo.GetOrDefaultAsync(User.Id, new UserInfo());
+            var info = await repo.GetAsync(User);
             if (info!.TryClaimLadder(MAX_LADDER_PRIZES))
             {
                 var chat = await Context.TelegramChats.FindById(chatId);
                 var packId = int.Parse(data[2]);
                 var pack = await Context.Packs.FindById(packId);
-                await chat.EditMessage(string.Format(Messages.ladder_message_claimed,
-                        User.Username, pack.Author),
-                    CallbackQuery.Message.MessageId);
+                await chat!.EditMessage(string.Format(Messages.ladder_message_claimed, User.Username, pack.Author),
+                    CallbackQuery.Message!.MessageId);
                 User.AddPack(pack, 1);
-                await repo.SaveAsync(User.Id, info);
+                await repo.SaveAsync(User, info);
                 await User.Stickers
                     .Where(sticker => sticker.Sticker.ExclusiveTask is ExclusiveTask.ClaimLadderPrize)
-                    .Apply(sticker => sticker.DoExclusiveTask());
+                    .ApplyAsync(sticker => sticker.DoExclusiveTask());
             }
             else
-                await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.you_are_now_reach_limit);
+                await AnswerCallbackQuery(User, CallbackQuery.Id, Messages.you_are_now_reach_limit);
         }
     }
 }

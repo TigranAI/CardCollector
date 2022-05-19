@@ -17,10 +17,10 @@ namespace CardCollector.Database.EntityDao
             return result;
         }
 
-        public static async Task<User> FindById(this DbSet<User> users, long userId)
+        public static async Task<User?> FindById(this DbSet<User> users, long userId)
         {
             return await users
-                .SingleAsync(user => user.Id == userId);
+                .SingleOrDefaultAsync(user => user.Id == userId);
         }
 
         public static async Task<User> FindByChatId(this DbSet<User> users, long chatId)

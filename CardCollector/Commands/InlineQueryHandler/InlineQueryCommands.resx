@@ -24,4 +24,7 @@
     <data name="sticker_voting" xml:space="preserve">
         <value>#svote</value>
     </data>
+    <data name="puzzle" xml:space="preserve">
+        <value>#puzzle</value>
+    </data>
 </root>

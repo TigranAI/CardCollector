@@ -8,7 +8,6 @@
         AuctionDiscount5 = 3,
         Random1Pack5Day = 4,
         RandomSticker2Tier3Day = 5,
-        RandomSticker1Tier2Day = 6,
-        InviteFriends
+        RandomSticker1Tier2Day = 6
     }
 }

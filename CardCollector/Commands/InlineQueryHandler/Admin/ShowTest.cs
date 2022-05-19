@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using CardCollector.Controllers;
 using Telegram.Bot.Types.InlineQueryResults;
 
 namespace CardCollector.Commands.InlineQueryHandler.Admin
@@ -13,10 +12,9 @@ namespace CardCollector.Commands.InlineQueryHandler.Admin
         {
             var answer = new List<InlineQueryResultCachedSticker>()
             {
-                new InlineQueryResultCachedSticker("1",
-                    "CAACAgIAAxkBAAJRwWJhc1w-OmssUWdw3HZ94YmZrV9mAAJxFAACx1bpSxoOmlJY9fivJAQ")
+                new ("1", "CAACAgIAAxkBAAJRwWJhc1w-OmssUWdw3HZ94YmZrV9mAAJxFAACx1bpSxoOmlJY9fivJAQ")
             };
-            await MessageController.AnswerInlineQuery(User, InlineQuery.Id, answer, null);
+            await AnswerInlineQuery(User, InlineQuery.Id, answer, null);
         }
 
         public override bool Match()

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using CardCollector.Commands.ChosenInlineResultHandler;
-using CardCollector.Resources;
-using CardCollector.Resources.Translations;
 using Telegram.Bot.Types.InlineQueryResults;
 
 namespace CardCollector.Database.Entity

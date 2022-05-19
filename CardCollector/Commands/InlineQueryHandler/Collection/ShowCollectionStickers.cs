@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using CardCollector.Attributes;
 using CardCollector.Commands.ChosenInlineResultHandler;
-using CardCollector.Controllers;
+using CardCollector.Extensions;
 using CardCollector.Others;
 using CardCollector.Resources.Enums;
 using CardCollector.Session.Modules;
@@ -15,17 +15,21 @@ namespace CardCollector.Commands.InlineQueryHandler.Collection
     {
         protected override async Task Execute()
         {
+            var offset = int.Parse(InlineQuery.Offset == "" ? "0" : InlineQuery.Offset);
+            var length = 0;
+            
             var filters = User.Session.GetModule<FiltersModule>();
             var stickersList = User.Stickers
-                .Where(item => item.Count > 0)
+                .Where(item => item.Count > 0 && item.Sticker.Contains(InlineQuery.Query))
                 .Select(item => item.Sticker)
                 .ToList();
             stickersList = filters.ApplyTo(stickersList);
-            stickersList.RemoveAll(item => !item.Contains(InlineQuery.Query));
-            var offset = int.Parse(InlineQuery.Offset == "" ? "0" : InlineQuery.Offset);
-            var newOffset = offset + 50 > stickersList.Count ? "" : (offset + 50).ToString();
-            var results = stickersList.ToTelegramStickersAsMessage(ChosenInlineResultCommands.select_sticker, offset);
-            await MessageController.AnswerInlineQuery(User, InlineQuery.Id, results, newOffset);
+            var results = stickersList
+                .And(list => length = list.Count)
+                .ToTelegramStickersAsMessage(ChosenInlineResultCommands.select_sticker, offset);
+            
+            var newOffset = offset + 50 > length ? "" : (offset + 50).ToString();
+            await AnswerInlineQuery(User, InlineQuery.Id, results, newOffset);
         }
 
         public override bool Match()

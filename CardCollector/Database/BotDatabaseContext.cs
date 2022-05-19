@@ -51,6 +51,7 @@ namespace CardCollector.Database
         public DbSet<ChatRoulette> ChatRoulette { get; set; }
         public DbSet<InviteInfo> InviteInfo { get; set; }
         public DbSet<ChatDistribution> ChatDistributions { get; set; }
+        public DbSet<PuzzlePiece> PuzzlePieces { get; set; }
 
         public bool IsDisposed()
         {

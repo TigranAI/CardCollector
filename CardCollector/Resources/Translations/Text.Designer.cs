@@ -232,6 +232,15 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Эксклюзивный пак.
+        /// </summary>
+        internal static string buy_exclusive {
+            get {
+                return ResourceManager.GetString("buy_exclusive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Купить алмазы.
         /// </summary>
         internal static string buy_gems {
@@ -610,11 +619,29 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 🎆.
+        /// </summary>
+        internal static string fireworks {
+            get {
+                return ResourceManager.GetString("fireworks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to От.
         /// </summary>
         internal static string from {
             get {
                 return ResourceManager.GetString("from", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Правила игры.
+        /// </summary>
+        internal static string game_rules {
+            get {
+                return ResourceManager.GetString("game_rules", resourceCulture);
             }
         }
         
@@ -682,6 +709,15 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;a href=&quot;tg://user?id={0}&quot;&gt;{1}&lt;/a&gt;.
+        /// </summary>
+        internal static string inline_mention {
+            get {
+                return ResourceManager.GetString("inline_mention", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 👍 Пригласить друга 👍.
         /// </summary>
         internal static string invite_friend {
@@ -714,6 +750,15 @@ namespace CardCollector.Resources.Translations {
         internal static string items {
             get {
                 return ResourceManager.GetString("items", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Участвовать.
+        /// </summary>
+        internal static string join_game {
+            get {
+                return ResourceManager.GetString("join_game", resourceCulture);
             }
         }
         
@@ -1006,15 +1051,6 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Правила игры.
-        /// </summary>
-        internal static string roulette_rule {
-            get {
-                return ResourceManager.GetString("roulette_rule", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Выбрать.
         /// </summary>
         internal static string select {
@@ -1170,9 +1206,9 @@ namespace CardCollector.Resources.Translations {
         /// <summary>
         ///   Looks up a localized string similar to Начать игру.
         /// </summary>
-        internal static string start_roulette {
+        internal static string start_game {
             get {
-                return ResourceManager.GetString("start_roulette", resourceCulture);
+                return ResourceManager.GetString("start_game", resourceCulture);
             }
         }
         
@@ -1227,6 +1263,15 @@ namespace CardCollector.Resources.Translations {
         internal static string sun {
             get {
                 return ResourceManager.GetString("sun", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Суперигра!.
+        /// </summary>
+        internal static string supergame {
+            get {
+                return ResourceManager.GetString("supergame", resourceCulture);
             }
         }
         

@@ -17,23 +17,24 @@ namespace CardCollector.Commands.MessageHandler.Group
         protected override string CommandText => MessageCommands.roulette;
         protected override async Task Execute()
         {
-            var telegramChat = await Context.TelegramChats.FindByChat(Message.Chat);
-            if (Context.ChatRoulette.Any(item => !item.IsStarted && item.Group.Id == telegramChat.Id))
+            var chat = await Context.TelegramChats.FindByChat(Message.Chat);
+            if (Context.ChatRoulette.Any(item => !item.IsStarted && item.Group.Id == chat.Id))
             {
-                await telegramChat.SendMessage(Messages.roulette_start_now);
+                await chat.SendMessage(Messages.roulette_start_now);
                 return;
             }
             var roulette = new ChatRoulette()
             {
                 Creator = User,
-                Group = telegramChat
+                Group = chat
             };
             var entityResult = await Context.ChatRoulette.AddAsync(roulette);
             roulette = entityResult.Entity;
             await Context.SaveChangesAsync();
-            var messageId = await telegramChat.SendMessage(string.Format(Messages.roulette_message, User.Username, ""),
+            var messageId = await chat.SendMessage(string.Format(Messages.roulette_message, User.Username, ""),
                 Keyboard.RouletteKeyboard(roulette.Id));
             roulette.MessageId = messageId;
+            
             TimerController.SetupTimer(Constants.ROULETTE_INTERVAL, roulette.Start);
         }
 

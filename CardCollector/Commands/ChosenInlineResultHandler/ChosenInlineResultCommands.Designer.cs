@@ -88,6 +88,15 @@ namespace CardCollector.Commands.ChosenInlineResultHandler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AAI.
+        /// </summary>
+        internal static string select_puzzle {
+            get {
+                return ResourceManager.GetString("select_puzzle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AAC.
         /// </summary>
         internal static string select_sticker {

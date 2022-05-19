@@ -98,7 +98,7 @@ namespace CardCollector.Database.Entity
                     
                     await stickerWinner.User.Stickers
                         .Where(sticker => sticker.Sticker.ExclusiveTask is ExclusiveTask.WinRoulette)
-                        .Apply(async sticker => await sticker.DoExclusiveTask());
+                        .ApplyAsync(async sticker => await sticker.DoExclusiveTask());
                 }
             }
         }

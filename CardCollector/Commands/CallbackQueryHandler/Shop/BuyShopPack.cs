@@ -19,9 +19,9 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
 
             var currency = CallbackQuery.Data!.Split('=')[1];
             if (currency == "coins" && User.Cash.Coins < packInfo.PriceCoins)
-                await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.not_enougth_coins, true);
+                await AnswerCallbackQuery(User, CallbackQuery.Id, Messages.not_enougth_coins, true);
             else if (currency == "gems" && User.Cash.Gems < packInfo.PriceGems)
-                await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.not_enougth_gems, true);
+                await AnswerCallbackQuery(User, CallbackQuery.Id, Messages.not_enougth_gems, true);
             else
             {
                 await User.Messages.ClearChat(User);

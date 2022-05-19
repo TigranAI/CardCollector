@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
+using System.IO;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using CardCollector.Resources;
 using Newtonsoft.Json;
 using Telegram.Bot;
 using Telegram.Bot.Types;
+using File = System.IO.File;
 using Sticker = CardCollector.Database.Entity.Sticker;
 
 namespace CardCollector
@@ -28,16 +30,24 @@ namespace CardCollector
             return JsonConvert.DeserializeObject<T>(json);
         }
 
-        public static async Task<string> DownloadFile(Document file)
+        public static async Task<string> DownloadFile(Document file, long chatId = 0)
         {
             /* Получаем информацию о файле */
             var fileInfo = await Bot.Client.GetFileAsync(file.FileId);
             /* Собираем ссылку на файл */
             var fileUri = $"https://api.telegram.org/file/bot{AppSettings.TOKEN}/{fileInfo.FilePath}";
+            var fileName = $"./downloads/{chatId}/" + (file.FileName ?? "file");
             /* Загружаем файл */
-            var client = new WebClient();
-            client.DownloadFile(new Uri(fileUri), file.FileName ?? "file");
-            return file.FileName ?? "file";
+            var client = new HttpClient();
+            var response = await client.GetAsync(fileUri);
+            Directory.CreateDirectory(Path.GetDirectoryName(fileName)!);
+            if (File.Exists(fileName)) File.Delete(fileName);
+            using (var stream = new FileStream(fileName, FileMode.CreateNew))
+            {
+                await response.Content.CopyToAsync(stream);
+                stream.Close();
+            }
+            return fileName;
         }
         
         public static void ReplaceOldEmoji(List<Sticker> stickers)

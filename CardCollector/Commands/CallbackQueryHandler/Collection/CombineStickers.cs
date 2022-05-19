@@ -20,7 +20,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Collection
             var price = combineModule.CombinePrice;
             if (price == null) return;
             if (User.Cash.Coins < price)
-                await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.not_enougth_coins, true);
+                await AnswerCallbackQuery(User, CallbackQuery.Id, Messages.not_enougth_coins, true);
             else
             {
                 await User.DecreaseCoins(price.Value);

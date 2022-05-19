@@ -10,17 +10,35 @@ namespace CardCollector.Database.EntityDao
     {
         public static Task<Pack> FindById(this DbSet<Pack> table, int? id)
         {
-            return table.Include(item => item.Stickers).SingleAsync(pack => pack.Id == id);
+            return table
+                .Include(item => item.Stickers)
+                .SingleAsync(pack => pack.Id == id);
         }
 
         public static Task<List<Pack>> FindNext(this DbSet<Pack> table, int offset, int count)
         {
-            return table.Skip(offset).Take(count).ToListAsync();
+            return table
+                .Skip(offset)
+                .Take(count)
+                .ToListAsync();
         }
 
         public static Task<List<Pack>> FindNextSkipRandom(this DbSet<Pack> table, int offset, int count)
         {
-            return table.Where(item => item.Id != 1).Skip(offset).Take(count).ToListAsync();
+            return table
+                .Where(item => item.Id != 1)
+                .Skip(offset)
+                .Take(count)
+                .ToListAsync();
+        }
+
+        public static Task<List<Pack>> FindNextSkipRandom(this DbSet<Pack> table, int offset, int count, bool exclusive)
+        {
+            return table
+                .Where(item => item.Id != 1 && item.IsExclusive == exclusive)
+                .Skip(offset)
+                .Take(count)
+                .ToListAsync();
         }
 
         public static Task<int> GetCount(this DbSet<Pack> table)

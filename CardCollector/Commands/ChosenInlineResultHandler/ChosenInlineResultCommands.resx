@@ -48,4 +48,7 @@
     <data name="set_distribution_sticker" xml:space="preserve">
         <value>AAI</value>
     </data>
+    <data name="select_puzzle" xml:space="preserve">
+        <value>AAI</value>
+    </data>
 </root>

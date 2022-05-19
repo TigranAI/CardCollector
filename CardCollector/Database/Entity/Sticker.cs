@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -31,7 +32,10 @@ namespace CardCollector.Database.Entity
         public bool? IsForSaleAnimated { get; set; }
         [MaxLength(127)] public string? GrayFileId { get; set; }
         public int ExclusiveTaskGoal { get; set; }
-
+        public virtual ICollection<PuzzlePiece> PuzzlePieces { get; set; }
+        
+        [NotMapped] public string Filename { get; set; }
+        
         public override string ToString()
         {
             var str = $"\n{Title} {TierAsStars()}" +
@@ -111,6 +115,23 @@ namespace CardCollector.Database.Entity
         public InlineQueryResultCachedSticker AsTelegramCachedSticker(string command)
         {
             return new InlineQueryResultCachedSticker($"{command}={Id}", FileId);
+        }
+
+        public void SetSticker(Telegram.Bot.Types.Sticker sticker)
+        {
+            FileId = sticker.FileId;
+            IsAnimated = sticker.IsAnimated;
+        }
+
+        public void SetWatermark(Telegram.Bot.Types.Sticker sticker)
+        {
+            ForSaleFileId = sticker.FileId;
+            IsForSaleAnimated = sticker.IsAnimated;
+        }
+
+        public void SetMonochrome(Telegram.Bot.Types.Sticker sticker)
+        {
+            GrayFileId = sticker.FileId;
         }
     }
 }

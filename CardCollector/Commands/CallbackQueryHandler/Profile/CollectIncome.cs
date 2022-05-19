@@ -18,7 +18,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
         protected override async Task Execute()
         {
             var result = User.Cash.Payout(User.Stickers);
-            await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id,
+            await AnswerCallbackQuery(User, CallbackQuery.Id,
                 $"{Messages.you_collected} {result} " +
                 $"\n\n{Messages.your_cash}: {User.Cash}", true);
             var currentLevel = await Context.Levels.FindLevel(User.Level.Level + 1);

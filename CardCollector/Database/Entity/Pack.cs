@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Database.EntityDao;
 using CardCollector.Others;
+using Telegram.Bot.Types;
 
 namespace CardCollector.Database.Entity
 {
@@ -55,6 +56,17 @@ namespace CardCollector.Database.Entity
                 <= 16 => 2,
                 _ => 1
             };
+        }
+
+        public void SetPreview(Telegram.Bot.Types.Sticker sticker)
+        {
+            PreviewFileId = sticker.FileId;
+            IsPreviewAnimated = sticker.IsAnimated;
+        }
+
+        public void SetGifPreview(File file)
+        {
+            GifPreviewFileId = file.FileId;
         }
     }
 }

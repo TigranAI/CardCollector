@@ -9,6 +9,7 @@
         ClaimPuzzlePrize,
         ClaimGiveaway,
         GotGems,
-        SpendCoins
+        InviteFriends,
+        SpendCoins,
     }
 }

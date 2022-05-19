@@ -16,7 +16,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
             var packId = int.Parse(CallbackQuery.Data!.Split("=")[1]);
             var userPack = User.Packs.SingleOrDefault(item => item.Pack.Id == packId);
             if (userPack == null || userPack.Count < 1)
-                await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.packs_count_zero, true);
+                await AnswerCallbackQuery(User, CallbackQuery.Id, Messages.packs_count_zero, true);
             else
             {
                 var sticker = await userPack.Open();

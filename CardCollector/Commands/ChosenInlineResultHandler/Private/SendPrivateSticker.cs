@@ -62,7 +62,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Private
                 await User.Messages.SendDailyTaskComplete(User);
                 await User.Stickers
                     .Where(sticker => sticker.Sticker.ExclusiveTask is ExclusiveTask.CompleteDailyTask)
-                    .Apply(async sticker => await sticker.DoExclusiveTask());
+                    .ApplyAsync(async sticker => await sticker.DoExclusiveTask());
             }
         }
 

@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Cache.Entity;
 using CardCollector.Cache.Repository;
 using CardCollector.Commands.CallbackQueryHandler;
 using CardCollector.Database;
@@ -8,7 +7,6 @@ using CardCollector.Others;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 using Telegram.Bot.Types.ReplyMarkups;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Games
 {
@@ -27,9 +25,9 @@ namespace CardCollector.Games
             if (chat.MembersCount + 1 < LADDER_MIN_USERS) return;
 
             var repo = new LadderInfoRepository();
-            var info = await repo.GetOrDefaultAsync(chat.Id, new LadderInfo());
+            var info = await repo.GetAsync(chat);
 
-            if (info!.IsLimitReached(LADDER_MAX_GAMES_PER_DAY)) return;
+            if (info.IsLimitReached(LADDER_MAX_GAMES_PER_DAY)) return;
             //if (ladderInfo.IsLimitReached(chat.MaxLadderGames)) return;
             
             if (sticker.Tier == 10)
@@ -49,7 +47,7 @@ namespace CardCollector.Games
                 await AddToLadderList(chat.Id);
             }
 
-            await repo.SaveAsync(chat.Id, info);
+            await repo.SaveAsync(chat, info);
         }
 
         private static async Task SendPrizeMessage(TelegramChat chat, Pack pack, int gamesToday)

@@ -94,6 +94,10 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>ExclusiveTaskTranslations.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Translations\ExceptionMessages.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -181,6 +185,11 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>ExclusiveTaskTranslations.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Translations\ExceptionMessages.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ExceptionMessages.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

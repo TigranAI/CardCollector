@@ -16,7 +16,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin.Giveaway
             User.Session.State = UserState.CreateGiveaway;
             var module = User.Session.GetModule<AdminModule>();
             var giveaway = await Context.ChannelGiveaways.FindById(module.SelectedChannelGiveawayId!.Value);
-            giveaway.Prize = (PrizeType) int.Parse(CallbackQuery.Data!.Split("=")[1]);
+            giveaway!.Prize = (PrizeType) int.Parse(CallbackQuery.Data!.Split("=")[1]);
             module.SelectedChannelGiveawayId = giveaway.Id;
             if (giveaway.Prize is PrizeType.RandomSticker)
                 await User.Messages.EditMessage(User, Messages.choose_tier, Keyboard.GiveawayTier);

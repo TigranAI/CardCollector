@@ -40,15 +40,16 @@ namespace CardCollector.Controllers
                         else Thread.Sleep((item.Key - DateTime.Now).Milliseconds);
                     }
                 }
+                // ReSharper disable once FunctionNeverReturns
             });
         }
 
         private static void AddToWaitQueue(int seconds, Task task)
         {
             var key = DateTime.Now.AddSeconds(seconds);
-            
+
             if (WaitQueue.TryGetValue(key, out var list)) list.Add(task);
-            else WaitQueue.Add(key, new List<Task>() { task });
+            else WaitQueue.Add(key, new List<Task>() {task});
         }
 
         public static async Task<int> EditMessage(
@@ -64,7 +65,7 @@ namespace CardCollector.Controllers
                     replyMarkup: keyboard);
                 return msg.MessageId;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 await DeleteMessage(chatId, messageId);
                 return await SendMessage(chatId, message, keyboard, parseMode);
@@ -153,7 +154,7 @@ namespace CardCollector.Controllers
             User user,
             string queryId,
             IEnumerable<InlineQueryResult> results,
-            string offset)
+            string offset = "")
         {
             if (user.IsBlocked) return;
             try
@@ -190,7 +191,8 @@ namespace CardCollector.Controllers
             catch (ApiRequestException e)
             {
                 if (e.ErrorCode == 429 && e.Parameters != null && e.Parameters.RetryAfter is { } interval)
-                    AddToWaitQueue(interval, SendInvoice(user, title, description, payload, prices, keyboard, currency));
+                    AddToWaitQueue(interval,
+                        SendInvoice(user, title, description, payload, prices, keyboard, currency));
                 else LogOutError(e);
                 return -1;
             }
@@ -246,6 +248,26 @@ namespace CardCollector.Controllers
             {
                 if (e.ErrorCode == 429 && e.Parameters != null && e.Parameters.RetryAfter is { } interval)
                     AddToWaitQueue(interval, SendDice(chatId, emoji));
+                else LogOutError(e);
+                return -1;
+            }
+        }
+
+        public static async Task<int> SendDocument(long chatId, InputFileStream file, InlineKeyboardMarkup? keyboard = null)
+        {
+            try
+            {
+                var msg = await Bot.Client.SendDocumentAsync(
+                    chatId,
+                    new InputOnlineFile(file.Content ?? throw new ApiRequestException("File is empty"), file.FileName),
+                    replyMarkup: keyboard,
+                    disableNotification: true);
+                return msg.MessageId;
+            }
+            catch (ApiRequestException e)
+            {
+                if (e.ErrorCode == 429 && e.Parameters != null && e.Parameters.RetryAfter is { } interval)
+                    AddToWaitQueue(interval, SendDocument(chatId, file, keyboard));
                 else LogOutError(e);
                 return -1;
             }

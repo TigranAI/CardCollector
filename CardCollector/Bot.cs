@@ -1,3 +1,5 @@
+global using static CardCollector.Controllers.MessageController;
+
 using System.Threading;
 using System.Threading.Tasks;
 using CardCollector.Controllers;
@@ -29,9 +31,9 @@ namespace CardCollector
             await Client.SetMyCommandsAsync(Constants.GroupCommands, BotCommandScope.AllGroupChats());
 
             Client.StartReceiving(HandleUpdateAsync, HandleErrorAsync);
-            UpdateController.Run();
+            Run();
             
-            MessageController.RunWaitQueueResolver();
+            RunWaitQueueResolver();
             
             Logs.LogOut("Bot started");
             End.WaitOne();

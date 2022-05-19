@@ -41,5 +41,10 @@ namespace CardCollector.Cache.Entity
             StickerIds.Clear();
             CurrentPackId = -1;
         }
+
+        public void ResetRestrictions()
+        {
+            GamesToday = 0;
+        }
     }
 }

@@ -17,5 +17,10 @@ namespace CardCollector.Cache.Entity
             else StickerCount.Add(userId, 1);
             return StickerCount[userId];
         }
+
+        public void ResetRestrictions()
+        {
+            StickerCount.Clear();
+        }
     }
 }

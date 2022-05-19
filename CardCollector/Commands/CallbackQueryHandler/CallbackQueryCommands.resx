@@ -186,7 +186,7 @@
     <data name="start_roulette" xml:space="preserve">
         <value>ACC</value>
     </data>
-    <data name="roulette_rule" xml:space="preserve">
+    <data name="send_rules" xml:space="preserve">
         <value>ACD</value>
     </data>
     <data name="group_claim_giveaway" xml:space="preserve">
@@ -236,5 +236,17 @@
     </data>
     <data name="group_claim_ladder" xml:space="preserve">
         <value>ACT</value>
+    </data>
+    <data name="start_puzzle" xml:space="preserve">
+        <value>ACU</value>
+    </data>
+    <data name="join_puzzle" xml:space="preserve">
+        <value>ACV</value>
+    </data>
+    <data name="puzzle_supergame" xml:space="preserve">
+        <value>ACW</value>
+    </data>
+    <data name="upload_stickerpack_beta" xml:space="preserve">
+        <value>ACX</value>
     </data>
 </root>

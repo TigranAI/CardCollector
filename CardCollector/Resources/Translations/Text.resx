@@ -336,10 +336,10 @@
     <data name="place_a_bet" xml:space="preserve">
         <value>Сделать ставку</value>
     </data>
-    <data name="roulette_rule" xml:space="preserve">
+    <data name="game_rules" xml:space="preserve">
         <value>Правила игры</value>
     </data>
-    <data name="start_roulette" xml:space="preserve">
+    <data name="start_game" xml:space="preserve">
         <value>Начать игру</value>
     </data>
     <data name="bet" xml:space="preserve">
@@ -446,5 +446,20 @@
     </data>
     <data name="site_url" xml:space="preserve">
         <value>Ссылка на сайт</value>
+    </data>
+    <data name="inline_mention" xml:space="preserve">
+        <value>&lt;a href="tg://user?id={0}"&gt;{1}&lt;/a&gt;</value>
+    </data>
+    <data name="join_game" xml:space="preserve">
+        <value>Участвовать</value>
+    </data>
+    <data name="fireworks" xml:space="preserve">
+        <value>🎆</value>
+    </data>
+    <data name="supergame" xml:space="preserve">
+        <value>Суперигра!</value>
+    </data>
+    <data name="buy_exclusive" xml:space="preserve">
+        <value>Эксклюзивный пак</value>
     </data>
 </root>

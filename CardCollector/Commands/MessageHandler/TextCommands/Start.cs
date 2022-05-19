@@ -29,7 +29,7 @@ namespace CardCollector.Commands.MessageHandler.TextCommands
 
         protected override async Task AfterExecute()
         {
-            await MessageController.DeleteMessage(User.ChatId, Message.MessageId);
+            await DeleteMessage(User.ChatId, Message.MessageId);
             await base.AfterExecute();
         }
     }

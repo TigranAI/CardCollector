@@ -89,7 +89,7 @@
         <value>Загружаю файл...</value>
     </data>
     <data name="reading_document" xml:space="preserve">
-        <value>Читаю документ...</value>
+        <value>Читаю таблицу...</value>
     </data>
     <data name="deleting_files" xml:space="preserve">
         <value>Удаляю файлы...</value>
@@ -487,10 +487,10 @@ mm - минуты
 {2}</value>
     </data>
     <data name="you_are_not_creator" xml:space="preserve">
-        <value>Вы не можете начать рулетку, так как не являетесь ее создателем.</value>
+        <value>Вы не можете начать игру, так как не являетесь ее создателем.</value>
     </data>
     <data name="rules_sent_to_private" xml:space="preserve">
-        <value>Правила были отправлены вам в личные сообщения</value>
+        <value>Правила отправлены вам в лc</value>
     </data>
     <data name="roulette_rules" xml:space="preserve">
         <value>Правила игры
@@ -708,5 +708,81 @@ mm - минуты
     </data>
     <data name="ladder_message_claimed" xml:space="preserve">
         <value>Пользователь {0} забирает набор стикеров {1} за игру в лесенку!</value>
+    </data>
+    <data name="you_are_now_playing_puzzle" xml:space="preserve">
+        <value>{0}, вы уже играете в пазл</value>
+    </data>
+    <data name="puzzle_now_started" xml:space="preserve">
+        <value>Игра уже началась!</value>
+    </data>
+    <data name="puzzle_now_created" xml:space="preserve">
+        <value>Игра уже создана</value>
+    </data>
+    <data name="puzzle_message" xml:space="preserve">
+        <value>{0} предлагает начать игру в пазл. Игра автоматически начнётся через 2 минуты. {0} может начать игру раньше.
+Минимальное кол-во игроков: 2
+Максимальное: 5
+Участники:
+👑 {0} 👑
+{1}</value>
+    </data>
+    <data name="puzzle_rules" xml:space="preserve">
+        <value>Бот отправляет правила в лс</value>
+    </data>
+    <data name="you_are_now_in_game" xml:space="preserve">
+        <value>Вы уже в игре</value>
+    </data>
+    <data name="puzzle_now_ended" xml:space="preserve">
+        <value>Игра уже завершена</value>
+    </data>
+    <data name="not_enougth_slots" xml:space="preserve">
+        <value>Недостаточно мест</value>
+    </data>
+    <data name="too_many_players" xml:space="preserve">
+        <value>Слишком много участников!</value>
+    </data>
+    <data name="puzzle_start_message" xml:space="preserve">
+        <value>Игра началась! У вас есть 30 секунд на ход, порядок ходов следующий:
+{0}</value>
+    </data>
+    <data name="puzzle_end_of_turn" xml:space="preserve">
+        <value>Упс! Время вышло! {0} не успел сделать ход :(</value>
+    </data>
+    <data name="puzzle_wrong_piece" xml:space="preserve">
+        <value>Упс! Неверный ответ! {0} выбрал не тот кусочек пазла :(</value>
+    </data>
+    <data name="you_are_not_in_game" xml:space="preserve">
+        <value>Вы не находитесь в игре!</value>
+    </data>
+    <data name="puzzle_supergame_info" xml:space="preserve">
+        <value>По окончании игры случайный игрок получает 3⭐️ стикер</value>
+    </data>
+    <data name="congratulation_you_solve_puzzle" xml:space="preserve">
+        <value>Поздравляем! Вы собрали пазл!
+{0}</value>
+    </data>
+    <data name="no_rewards_available" xml:space="preserve">
+        <value>Лимит наград в этой беседе исчерпан, но вы можете продолжать играть для удовольствия</value>
+    </data>
+    <data name="user_receives_reward" xml:space="preserve">
+        <value>{0} получает {1}</value>
+    </data>
+    <data name="no_rewards_available_in_this_chat" xml:space="preserve">
+        <value>Для получения наград в чате должно быть от 20 человек и более</value>
+    </data>
+    <data name="upload_stickerpack_instructions" xml:space="preserve">
+        <value>Загрузите zip архив содержащий:
+1. Excel таблицу с названием description.xlsx
+ в которой описан набор
+2. Обложку набора с именем thumb.webp, опционально, добавьте gif версию с именем thumb.gif
+3. Папку стикеров с именем stickers
+4. Папку стикеров с вотремаркой с именем watermark_stickers
+5. Опционально, папку стикеров с именем monochrome_stickers для эксклюзивных наборов
+
+Более подробно см. Readme.txt
+А также см. пример архива</value>
+    </data>
+    <data name="unzip_file" xml:space="preserve">
+        <value>Распаковываю архив...</value>
     </data>
 </root>

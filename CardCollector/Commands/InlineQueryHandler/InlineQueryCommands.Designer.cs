@@ -61,6 +61,15 @@ namespace CardCollector.Commands.InlineQueryHandler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to #puzzle.
+        /// </summary>
+        internal static string puzzle {
+            get {
+                return ResourceManager.GetString("puzzle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to #roulette.
         /// </summary>
         internal static string roulette {

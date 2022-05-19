@@ -37,7 +37,7 @@ namespace CardCollector.Commands.MessageHandler
             }
 
             if (update.Message!.Chat.Type is ChatType.Private && update.Message.Text != Text.start)
-                await MessageController.DeleteMessage(user.ChatId, update.Message.MessageId);
+                await DeleteMessage(user.ChatId, update.Message.MessageId);
 
             if (update.Message.Chat.Type is ChatType.Group or ChatType.Supergroup)
                 await GroupController.OnMessageReceived(update.Message);

@@ -18,18 +18,18 @@ namespace CardCollector.Commands.CallbackQueryHandler.Others
             var giveawayId = int.Parse(CallbackQuery.Data!.Split("=")[1]);
             var giveaway = await Context.ChannelGiveaways.FindById(giveawayId);
             if (giveaway == null || giveaway.IsEnded())
-                await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.giveaway_now_ended, true);
+                await AnswerCallbackQuery(User, CallbackQuery.Id, Messages.giveaway_now_ended, true);
             else if (giveaway.IsAwarded(User.Id))
-                await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.you_are_now_awarded, true);
+                await AnswerCallbackQuery(User, CallbackQuery.Id, Messages.you_are_now_awarded, true);
             else
             {
                 await giveaway.Claim(User, Context);
-                await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id,
+                await AnswerCallbackQuery(User, CallbackQuery.Id,
                     string.Format(Messages.you_got_from_this_giveaway, giveaway.PrizeText()), true);
 
                 await User.Stickers
                     .Where(sticker => sticker.Sticker.ExclusiveTask is ExclusiveTask.ClaimGiveaway)
-                    .Apply(sticker => sticker.DoExclusiveTask());
+                    .ApplyAsync(sticker => sticker.DoExclusiveTask());
             }
         }
     }

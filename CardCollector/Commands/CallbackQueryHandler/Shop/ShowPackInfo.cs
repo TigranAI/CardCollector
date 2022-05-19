@@ -26,7 +26,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
             }
 
             if (pack.Description != null) message += $"\n{Text.description}: {pack.Description}";
-            await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, message, true);
+            await AnswerCallbackQuery(User, CallbackQuery.Id, message, true);
         }
 
         public override bool Match()

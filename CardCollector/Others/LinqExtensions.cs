@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CardCollector.Extensions;
 
 namespace CardCollector.Others
 {
@@ -24,6 +25,19 @@ namespace CardCollector.Others
                 sum += step;
             }
             return default;
+        }
+        
+        public static IList<T> Shuffle<T>(this IList<T> source)
+        {
+            var n = source.Count;
+            while (n > 1) {
+                n--;
+                var k = Utilities.Rnd.Next(n + 1);
+                var value = source[k];
+                source[k] = source[n];
+                source[n] = value;
+            }
+            return source;
         }
     }
 }

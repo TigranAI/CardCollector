@@ -149,5 +149,14 @@ namespace CardCollector.Commands.MessageHandler {
                 return ResourceManager.GetString("start", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /puzzle.
+        /// </summary>
+        internal static string start_puzzle {
+            get {
+                return ResourceManager.GetString("start_puzzle", resourceCulture);
+            }
+        }
     }
 }

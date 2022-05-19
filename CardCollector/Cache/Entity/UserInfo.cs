@@ -2,13 +2,19 @@
 {
     public class UserInfo
     {
-        public int ladderPrizes;
+        public int LadderPrizes;
+        public long PuzzleChatId;
 
         public bool TryClaimLadder(int limit)
         {
-            if (ladderPrizes == limit) return false;
-            ladderPrizes++;
+            if (LadderPrizes == limit) return false;
+            LadderPrizes++;
             return true;
+        }
+
+        public void ResetRestrictions()
+        {
+            LadderPrizes = 0;
         }
     }
 }

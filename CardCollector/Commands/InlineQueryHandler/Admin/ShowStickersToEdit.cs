@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using CardCollector.Attributes;
 using CardCollector.Commands.ChosenInlineResultHandler;
-using CardCollector.Controllers;
 using CardCollector.Database.EntityDao;
+using CardCollector.Extensions;
 using CardCollector.Others;
 using CardCollector.Resources.Enums;
 using CardCollector.Session.Modules;
@@ -18,15 +18,17 @@ namespace CardCollector.Commands.InlineQueryHandler.Admin
         {
             var packId = User.Session.GetModule<AdminModule>().SelectedPackId;
             var pack = await Context.Packs.FindById(packId);
+            var length = 0;
             var stickersList = pack.Stickers
                 .Where(item => item.Contains(InlineQuery.Query))
+                .And(list => length = list.Count())
                 .OrderBy(sticker => sticker.Tier)
                 .ToList();
             var offset = int.Parse(InlineQuery.Offset == "" ? "0" : InlineQuery.Offset);
-            var newOffset = offset + 50 > stickersList.Count ? "" : (offset + 50).ToString();
+            var newOffset = offset + 50 > length ? "" : (offset + 50).ToString();
             var results = stickersList
                 .ToTelegramStickers(ChosenInlineResultCommands.select_edit_sticker, offset);
-            await MessageController.AnswerInlineQuery(User, InlineQuery.Id, results, newOffset);
+            await AnswerInlineQuery(User, InlineQuery.Id, results, newOffset);
         }
 
         public override bool Match()

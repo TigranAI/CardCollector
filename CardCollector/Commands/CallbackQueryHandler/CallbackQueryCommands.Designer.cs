@@ -385,6 +385,15 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ACV.
+        /// </summary>
+        internal static string join_puzzle {
+            get {
+                return ResourceManager.GetString("join_puzzle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AAY.
         /// </summary>
         internal static string logs_menu {
@@ -430,20 +439,20 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ACW.
+        /// </summary>
+        internal static string puzzle_supergame {
+            get {
+                return ResourceManager.GetString("puzzle_supergame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ABD.
         /// </summary>
         internal static string return_from_auction {
             get {
                 return ResourceManager.GetString("return_from_auction", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ACD.
-        /// </summary>
-        internal static string roulette_rule {
-            get {
-                return ResourceManager.GetString("roulette_rule", resourceCulture);
             }
         }
         
@@ -534,6 +543,15 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         internal static string send_distribution_to_private_and_groups {
             get {
                 return ResourceManager.GetString("send_distribution_to_private_and_groups", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ACD.
+        /// </summary>
+        internal static string send_rules {
+            get {
+                return ResourceManager.GetString("send_rules", resourceCulture);
             }
         }
         
@@ -673,6 +691,15 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ACU.
+        /// </summary>
+        internal static string start_puzzle {
+            get {
+                return ResourceManager.GetString("start_puzzle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ACC.
         /// </summary>
         internal static string start_roulette {
@@ -714,6 +741,15 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         internal static string upload_stickerpack {
             get {
                 return ResourceManager.GetString("upload_stickerpack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ACX.
+        /// </summary>
+        internal static string upload_stickerpack_beta {
+            get {
+                return ResourceManager.GetString("upload_stickerpack_beta", resourceCulture);
             }
         }
     }

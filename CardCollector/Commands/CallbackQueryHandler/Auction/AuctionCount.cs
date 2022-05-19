@@ -19,15 +19,15 @@ namespace CardCollector.Commands.CallbackQueryHandler.Auction
             if (CallbackQuery.Data!.Contains(Text.plus))
             {
                 if (module.Count < auction?.Count) module.Count++;
-                else await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.cant_change_count);
+                else await AnswerCallbackQuery(User, CallbackQuery.Id, Messages.cant_change_count);
             }
             else if (CallbackQuery.Data!.Contains(Text.minus))
             {
                 if (module.Count > 1) module.Count--;
-                else await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.cant_change_count);
+                else await AnswerCallbackQuery(User, CallbackQuery.Id, Messages.cant_change_count);
             }
 
-            await MessageController.EditReplyMarkup(User, CallbackQuery.Message!.MessageId,
+            await EditReplyMarkup(User, CallbackQuery.Message!.MessageId,
                 Keyboard.GetAuctionProductKeyboard(auction!, User, module.Count));
         }
 

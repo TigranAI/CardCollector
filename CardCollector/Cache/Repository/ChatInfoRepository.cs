@@ -1,9 +1,22 @@
 ﻿using CardCollector.Cache.Entity;
+using CardCollector.Database.Entity;
 
 namespace CardCollector.Cache.Repository
 {
-    public class ChatInfoRepository : RedisRepository<long, ChatInfo>
+    public class ChatInfoRepository : BaseRedisRepository<TelegramChat, ChatInfo>
     {
-        protected override int DbNum => 3;
+        public ChatInfoRepository() : base(3)
+        {
+        }
+
+        protected override ChatInfo GetDefault()
+        {
+            return new ChatInfo();
+        }
+
+        protected override string GetKey(TelegramChat key)
+        {
+            return key.Id.ToString();
+        }
     }
 }

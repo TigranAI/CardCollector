@@ -14,7 +14,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Collection
 
         protected override async Task Execute()
         {
-            await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.comission_warning, true);
+            await AnswerCallbackQuery(User, CallbackQuery.Id, Messages.comission_warning, true);
             var module = User.Session.GetModule<CollectionModule>();
             var lowerPrice = await Context.Auctions.FindMinPriceByStickerId(module.SelectedStickerId);
             await User.Messages.EditMessage(User,

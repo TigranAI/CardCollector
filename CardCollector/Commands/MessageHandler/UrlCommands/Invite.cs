@@ -76,13 +76,13 @@ namespace CardCollector.Commands.MessageHandler.UrlCommands
             }
 
             await inviteInfo.User.Stickers
-                .Where(sticker => sticker.Sticker.Effect is Effect.InviteFriends)
-                .Apply(sticker => sticker.DoExclusiveTask());
+                .Where(sticker => sticker.Sticker.ExclusiveTask is ExclusiveTask.InviteFriends)
+                .ApplyAsync(sticker => sticker.DoExclusiveTask());
         }
         
         protected override async Task AfterExecute()
         {
-            await MessageController.DeleteMessage(User.ChatId, Message.MessageId);
+            await DeleteMessage(User.ChatId, Message.MessageId);
             await base.AfterExecute();
         }
 

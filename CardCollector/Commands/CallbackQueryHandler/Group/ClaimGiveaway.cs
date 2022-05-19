@@ -20,7 +20,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Group
         protected override async Task Execute()
         {
             var data = CallbackQuery.Data!.Split("=");
-            var chat = await Context.TelegramChats.FindById(int.Parse(data[1]));
+            var chat = await Context.TelegramChats.FindById(long.Parse(data[1]));
 
             var listRepo = new ListRepository<long>();
             
@@ -52,7 +52,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Group
             if (lastUserAward != null)
             {
                 var interval = DateTime.Now - lastUserAward.LastGiveaway!.Value;
-                await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id,
+                await AnswerCallbackQuery(User, CallbackQuery.Id,
                     string.Format(Messages.you_are_now_be_awarded_in_another_group, 
                         lastUserAward.GiveawayDuration - (int) interval.TotalMinutes),
                     true);

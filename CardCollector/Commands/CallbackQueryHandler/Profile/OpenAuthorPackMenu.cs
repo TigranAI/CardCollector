@@ -21,7 +21,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
             var packs = User.Packs.Where(item => item.Count > 0 && item.Pack.Id != 1).ToList();
             if (packs.Count == 0)
             {
-                await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.packs_count_zero, true);
+                await AnswerCallbackQuery(User, CallbackQuery.Id, Messages.packs_count_zero, true);
                 if (_fromOpenPackCommand) 
                     await new Back()
                         .Init(User, Context, new Update(){CallbackQuery = CallbackQuery})
@@ -33,7 +33,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
                 var totalCount = packs.Count;
                 packs = packs.Skip(offset).Take(10).ToList();
                 if (packs.Count == 0)
-                    await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.page_not_found);
+                    await AnswerCallbackQuery(User, CallbackQuery.Id, Messages.page_not_found);
                 else
                     await User.Messages.EditMessage(User, Messages.choose_author,
                         Keyboard.GetUserPacksKeyboard(packs, offset, totalCount));

@@ -20,12 +20,12 @@ namespace CardCollector.Commands.CallbackQueryHandler.Auction
             var productInfo = await Context.Auctions.FindById(module.SelectedAuctionId);
             if (productInfo == null || module.Count > productInfo.Count)
             {
-                await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.not_enougth_stickers,
+                await AnswerCallbackQuery(User, CallbackQuery.Id, Messages.not_enougth_stickers,
                     true);
                 await new Back().Init(User, Context, new Update() {CallbackQuery = CallbackQuery}).PrepareAndExecute();
             }
             else if (productInfo.Price * module.Count > User.Cash.Gems)
-                await MessageController.AnswerCallbackQuery(User, CallbackQuery.Id, Messages.not_enougth_gems, true);
+                await AnswerCallbackQuery(User, CallbackQuery.Id, Messages.not_enougth_gems, true);
             else
             {
                 productInfo.Count -= module.Count;

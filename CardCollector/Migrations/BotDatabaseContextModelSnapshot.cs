@@ -415,6 +415,40 @@ namespace CardCollector.Migrations
                     b.ToTable("payments", (string)null);
                 });
 
+            modelBuilder.Entity("CardCollector.Database.Entity.PuzzlePiece", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    b.Property<string>("FileId")
+                        .IsRequired()
+                        .HasMaxLength(127)
+                        .HasColumnType("varchar(127)")
+                        .HasColumnName("file_id");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int")
+                        .HasColumnName("order");
+
+                    b.Property<int>("PieceCount")
+                        .HasColumnType("int")
+                        .HasColumnName("piece_count");
+
+                    b.Property<long>("StickerId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("sticker_id");
+
+                    b.HasKey("Id")
+                        .HasName("pk_puzzle_pieces");
+
+                    b.HasIndex("StickerId")
+                        .HasDatabaseName("ix_puzzle_pieces_sticker_id");
+
+                    b.ToTable("puzzle_pieces", (string)null);
+                });
+
             modelBuilder.Entity("CardCollector.Database.Entity.SpecialOrder", b =>
                 {
                     b.Property<int>("Id")
@@ -775,30 +809,6 @@ namespace CardCollector.Migrations
                     b.ToTable("user_packs", (string)null);
                 });
 
-            modelBuilder.Entity("CardCollector.Database.Entity.UserSendStickerToChat", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasColumnName("id");
-
-                    b.Property<long>("ChatId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("chat_id");
-
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("user_id");
-
-                    b.HasKey("Id")
-                        .HasName("pk_user_send_stickers");
-
-                    b.HasIndex("UserId")
-                        .HasDatabaseName("ix_user_send_stickers_user_id");
-
-                    b.ToTable("user_send_stickers", (string)null);
-                });
-
             modelBuilder.Entity("CardCollector.Database.Entity.UserSticker", b =>
                 {
                     b.Property<long>("Id")
@@ -1067,6 +1077,18 @@ namespace CardCollector.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("CardCollector.Database.Entity.PuzzlePiece", b =>
+                {
+                    b.HasOne("CardCollector.Database.Entity.Sticker", "Sticker")
+                        .WithMany("PuzzlePieces")
+                        .HasForeignKey("StickerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_puzzle_pieces_stickers_sticker_id");
+
+                    b.Navigation("Sticker");
+                });
+
             modelBuilder.Entity("CardCollector.Database.Entity.SpecialOrder", b =>
                 {
                     b.HasOne("CardCollector.Database.Entity.Pack", "Pack")
@@ -1298,18 +1320,6 @@ namespace CardCollector.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("CardCollector.Database.Entity.UserSendStickerToChat", b =>
-                {
-                    b.HasOne("CardCollector.Database.Entity.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_user_send_stickers_users_user_id");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("CardCollector.Database.Entity.UserSticker", b =>
                 {
                     b.HasOne("CardCollector.Database.Entity.ChatRoulette", null)
@@ -1383,6 +1393,11 @@ namespace CardCollector.Migrations
             modelBuilder.Entity("CardCollector.Database.Entity.Pack", b =>
                 {
                     b.Navigation("Stickers");
+                });
+
+            modelBuilder.Entity("CardCollector.Database.Entity.Sticker", b =>
+                {
+                    b.Navigation("PuzzlePieces");
                 });
 
             modelBuilder.Entity("CardCollector.Database.Entity.User", b =>
