@@ -28,9 +28,9 @@ namespace CardCollector.Commands.CallbackQueryHandler.Login
             var siteUrl = $"https://{AppSettings.SITE_URL}/login/event";
             var response = await httpClient.PostAsync(siteUrl, content);
             if (response.StatusCode == HttpStatusCode.OK)
-                await User.Messages.EditMessage(User, Messages.successfully_authorized, Keyboard.BackKeyboard);
+                await User.Messages.EditMessage(Messages.successfully_authorized, Keyboard.BackKeyboard);
             else
-                await User.Messages.EditMessage(User, Messages.unexpected_exception, Keyboard.BackKeyboard);
+                await User.Messages.EditMessage(Messages.unexpected_exception, Keyboard.BackKeyboard);
         }
     }
 }

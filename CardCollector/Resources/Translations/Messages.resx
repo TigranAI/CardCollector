@@ -386,7 +386,7 @@ https://telegra.ph/help-11-04-4</value>
         <value>Загрузите новый файл</value>
     </data>
     <data name="update_sticker_success" xml:space="preserve">
-        <value>Стикер заменен успешно!</value>
+        <value>Стикер загружен успешно!</value>
     </data>
     <data name="choose_user" xml:space="preserve">
         <value>Выберите пользователя</value>
@@ -784,5 +784,18 @@ mm - минуты
     </data>
     <data name="unzip_file" xml:space="preserve">
         <value>Распаковываю архив...</value>
+    </data>
+    <data name="choose_action" xml:space="preserve">
+        <value>Выберите действие</value>
+    </data>
+    <data name="send_puzzle_archive" xml:space="preserve">
+        <value>Отправьте архив с пазлами к данному стикеру. Название файла должно отражать порядковый номер пазла, начиная с 0, например:
+0.webp
+1.webp
+2.tgs</value>
+    </data>
+    <data name="top_reward_message" xml:space="preserve">
+        <value>Вы заняли {0} место в "{1}". Вы получаете награду: {2}.
+Следующие результаты будут через 2 недели.</value>
     </data>
 </root>

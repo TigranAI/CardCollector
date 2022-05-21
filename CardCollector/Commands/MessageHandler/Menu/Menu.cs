@@ -8,8 +8,8 @@ namespace CardCollector.Commands.MessageHandler.Menu
 
         protected override async Task Execute()
         {
-            await User.Messages.ClearChat(User);
-            await User.Messages.SendMenu(User);
+            await User.Messages.ClearChat();
+            await User.Messages.SendMenu();
         }
     }
 }

@@ -14,7 +14,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
         {
             var data = CallbackQuery.Data!.Split('=');
             if (data.Length > 1) User.Settings.SwitchProperty((UserSettingsTypes) int.Parse(data[1]));
-            await User.Messages.EditMessage(User, Messages.alerts, Keyboard.Alerts(User.Settings), ParseMode.Html);
+            await User.Messages.EditMessage(Messages.alerts, Keyboard.Alerts(User.Settings), ParseMode.Html);
         }
     }
 }

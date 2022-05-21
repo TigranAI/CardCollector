@@ -15,21 +15,16 @@ namespace CardCollector.Commands.InlineQueryHandler.Collection
     {
         protected override async Task Execute()
         {
-            var offset = int.Parse(InlineQuery.Offset == "" ? "0" : InlineQuery.Offset);
+            var offset = Offset.Of(InlineQuery);
             var length = 0;
             
-            var filters = User.Session.GetModule<FiltersModule>();
-            var stickersList = User.Stickers
+            var results = User.Stickers
                 .Where(item => item.Count > 0 && item.Sticker.Contains(InlineQuery.Query))
-                .Select(item => item.Sticker)
-                .ToList();
-            stickersList = filters.ApplyTo(stickersList);
-            var results = stickersList
-                .And(list => length = list.Count)
-                .ToTelegramStickersAsMessage(ChosenInlineResultCommands.select_sticker, offset);
+                .ApplyFilters(User.Session.GetModule<FiltersModule>())
+                .And(list => length = list.Count())
+                .ToTelegramResults(ChosenInlineResultCommands.select_sticker, offset);
             
-            var newOffset = offset + 50 > length ? "" : (offset + 50).ToString();
-            await AnswerInlineQuery(User, InlineQuery.Id, results, newOffset);
+            await AnswerInlineQuery(User, InlineQuery.Id, results, offset.GetNext(length));
         }
 
         public override bool Match()

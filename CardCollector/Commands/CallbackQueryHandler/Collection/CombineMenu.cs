@@ -18,7 +18,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Collection
             if (combineModule.CombineCount == 0)
                 await new Back().Init(User, Context, new Update() {CallbackQuery = CallbackQuery}).PrepareAndExecute();
             else 
-                await User.Messages.EditMessage(User, combineModule.ToString(), Keyboard.GetCombineKeyboard(combineModule));
+                await User.Messages.EditMessage(combineModule.ToString(), Keyboard.GetCombineKeyboard(combineModule));
         }
     }
 }

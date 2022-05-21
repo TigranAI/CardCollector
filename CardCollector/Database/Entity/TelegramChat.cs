@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using CardCollector.Others;
 using CardCollector.Resources.Translations;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.InlineQueryResults;
 
 namespace CardCollector.Database.Entity
 {
-    public class TelegramChat
+    public class TelegramChat : ITelegramInlineQueryResult
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
@@ -23,7 +24,7 @@ namespace CardCollector.Database.Entity
         public DateTime? LastGiveaway { get; set; }
         public virtual ICollection<User> Members { get; set; } = new List<User>();
 
-        public InlineQueryResultArticle AsTelegramArticle(string command)
+        public InlineQueryResult ToResult(string command)
         {
             return new InlineQueryResultArticle($"{command}={Id}", Title ?? $"chat{Id}",
                 new InputTextMessageContent(Text.select))

@@ -18,7 +18,7 @@ namespace CardCollector.Commands.MessageHandler.Auction
             User.Session.ResetModules();
             User.Session.State = UserState.AuctionMenu;
             var text = User.Session.GetModule<FiltersModule>().ToString(User.Session.State);
-            await User.Messages.EditMessage(User, text, Keyboard.GetSortingMenu(User.Session.State));
+            await User.Messages.EditMessage(text, Keyboard.GetSortingMenu(User.Session.State));
         }
     }
 }

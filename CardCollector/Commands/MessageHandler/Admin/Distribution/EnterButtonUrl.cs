@@ -25,7 +25,7 @@ namespace CardCollector.Commands.MessageHandler.Admin.Distribution
             distribution.Buttons.Last().Value = Message.Text!;
             Context.ChatDistributions.Update(distribution);
 
-            await User.Messages.SendMessage(User, Messages.enter_distribution_button_name, 
+            await User.Messages.SendMessage(Messages.enter_distribution_button_name, 
                 Keyboard.BackKeyboard);
             
             EnterDistributionButtonName.AddToQueue(User.Id);

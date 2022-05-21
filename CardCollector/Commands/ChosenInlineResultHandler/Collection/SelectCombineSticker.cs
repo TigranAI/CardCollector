@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
 using CardCollector.Session.Modules;
@@ -16,11 +15,10 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Collection
             var module = User.Session.GetModule<CombineModule>();
             module.Count = 1;
             module.SelectedStickerId = stickerId;
-            var sticker = await Context.Stickers.FindById(stickerId);
-            var userSticker = User.Stickers.Single(item => item.Sticker.Id == stickerId);
-            await User.Messages.ClearChat(User);
-            await User.Messages.SendSticker(User, sticker.FileId);
-            await User.Messages.SendMessage(User, sticker.ToString(userSticker.Count), 
+            var userSticker = User.Stickers.Single(item => item.Id == stickerId);
+            await User.Messages.ClearChat();
+            await User.Messages.SendSticker(userSticker.GetFileId());
+            await User.Messages.SendMessage(userSticker.Sticker.ToString(userSticker.Count), 
                 Keyboard.GetCombineStickerKeyboard(module));
         }
 

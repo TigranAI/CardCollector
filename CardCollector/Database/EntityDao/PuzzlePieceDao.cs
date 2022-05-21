@@ -15,12 +15,12 @@ public static class PuzzlePieceDao
         return await table.FirstAsync(item => item.Id == pieceId);
     }
     
-    public static async Task<List<PuzzlePiece>> GetAllByPieceCount(
+    public static async Task<List<PuzzlePiece>> GetAllFirstByPieceCount(
         this DbSet<PuzzlePiece> table,
         int pieceCount)
     {
         return await table
-            .Where(piece => piece.PieceCount == pieceCount)
+            .Where(piece => piece.PieceCount == pieceCount && piece.Order == 0)
             .ToListAsync();
     }
 

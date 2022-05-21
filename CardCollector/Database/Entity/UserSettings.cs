@@ -1,44 +1,49 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using CardCollector.Resources.Enums;
 
-namespace CardCollector.Database.Entity
+namespace CardCollector.Database.Entity;
+
+[Table("user_settings")]
+public class UserSettings
 {
-    public class UserSettings
-    {
-        public Dictionary<Resources.Enums.UserSettingsTypes, bool> Settings { get; set; }
+    [Key, ForeignKey("id")]
+    public virtual User User { get; set; }
+    public Dictionary<UserSettingsTypes, bool> Settings { get; set; }
         
-        public UserSettings()
-        {
-            Settings = new Dictionary<Resources.Enums.UserSettingsTypes, bool>();
-            Settings.Add(Resources.Enums.UserSettingsTypes.DailyTasks, true);
-            Settings.Add(Resources.Enums.UserSettingsTypes.ExpGain, true);
-            Settings.Add(Resources.Enums.UserSettingsTypes.StickerEffects, true);
-            Settings.Add(Resources.Enums.UserSettingsTypes.DailyTaskProgress, true);
-            Settings.Add(Resources.Enums.UserSettingsTypes.PiggyBankCapacity, true);
-            Settings.Add(Resources.Enums.UserSettingsTypes.DailyExpTop, true);
-            Settings.Add(Resources.Enums.UserSettingsTypes.Distributions, true);
-        }
+    public UserSettings()
+    {
+        Settings = new Dictionary<UserSettingsTypes, bool>();
+        Settings.Add(UserSettingsTypes.DailyTasks, true);
+        Settings.Add(UserSettingsTypes.ExpGain, true);
+        Settings.Add(UserSettingsTypes.StickerEffects, true);
+        Settings.Add(UserSettingsTypes.DailyTaskProgress, true);
+        Settings.Add(UserSettingsTypes.PiggyBankCapacity, true);
+        Settings.Add(UserSettingsTypes.DailyExpTop, true);
+        Settings.Add(UserSettingsTypes.Distributions, true);
+    }
 
-        public void SwitchProperty(Resources.Enums.UserSettingsTypes property)
-        {
-            if (!Settings.ContainsKey(property))
-                Settings.Add(property, true);
-            Settings[property] = !Settings[property];
-        }
+    public void SwitchProperty(UserSettingsTypes property)
+    {
+        if (!Settings.ContainsKey(property))
+            Settings.Add(property, true);
+        Settings[property] = !Settings[property];
+    }
 
-        public bool this[Resources.Enums.UserSettingsTypes key]
+    public bool this[Resources.Enums.UserSettingsTypes key]
+    {
+        get
         {
-            get
-            {
-                if (!Settings.ContainsKey(key))
-                    Settings.Add(key, true);
-                return Settings[key];
-            }
-            set
-            {
-                if (!Settings.ContainsKey(key))
-                    Settings.Add(key, value);
-                else Settings[key] = value;
-            }
+            if (!Settings.ContainsKey(key))
+                Settings.Add(key, true);
+            return Settings[key];
+        }
+        set
+        {
+            if (!Settings.ContainsKey(key))
+                Settings.Add(key, value);
+            else Settings[key] = value;
         }
     }
 }

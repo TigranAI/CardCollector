@@ -12,7 +12,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Group
         {
             var game = (GamesType) int.Parse(CallbackQuery.Data!.Split("=")[1]);
             await AnswerCallbackQuery(User, CallbackQuery.Id, Messages.rules_sent_to_private);
-            await User.Messages.SendMessage(User, GetRules(game), Keyboard.BackKeyboard);
+            await User.Messages.SendMessage(GetRules(game), Keyboard.BackKeyboard);
         }
 
         private string GetRules(GamesType type)

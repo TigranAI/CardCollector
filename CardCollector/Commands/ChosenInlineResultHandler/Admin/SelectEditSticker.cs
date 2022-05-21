@@ -14,9 +14,9 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Admin
             var stickerId = long.Parse(ChosenInlineResult.ResultId.Split('=')[1]);
             User.Session.GetModule<AdminModule>().SelectedStickerId = stickerId;
             var sticker = await Context.Stickers.FindById(stickerId);
-            await User.Messages.ClearChat(User);
-            await User.Messages.SendSticker(User, sticker.FileId);
-            await User.Messages.SendMessage(User, Messages.upload_new_file, Keyboard.BackKeyboard);
+            await User.Messages.ClearChat();
+            await User.Messages.SendSticker(sticker.FileId);
+            await User.Messages.SendMessage(Messages.upload_new_file, Keyboard.BackKeyboard);
         }
     }
 }

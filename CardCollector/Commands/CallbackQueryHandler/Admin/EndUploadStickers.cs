@@ -12,7 +12,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin
         protected override async Task Execute()
         {
             User.Session.State = UserState.UploadFile;
-            await User.Messages.EditMessage(User, Messages.upload_your_file, Keyboard.BackKeyboard);
+            await User.Messages.EditMessage(Messages.upload_your_file, Keyboard.BackKeyboard);
         }
     }
 }

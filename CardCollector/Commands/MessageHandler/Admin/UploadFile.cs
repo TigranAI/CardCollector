@@ -24,24 +24,24 @@ namespace CardCollector.Commands.MessageHandler.Admin
             try
             {
                 /* Соообщаем, что начали загрузку файла */
-                await User.Messages.EditMessage(User, Messages.downloading_file);
+                await User.Messages.EditMessage(Messages.downloading_file);
 
                 /* Загружаем файл */
                 var fileName = await Utilities.DownloadFile(Message.Document!);
 
                 /* Сообщаем пользователю, что читаем документ */
-                await User.Messages.EditMessage(User, Messages.reading_document);
+                await User.Messages.EditMessage(Messages.reading_document);
 
                 /* Парсим файл */
                 var stickersList = await ParseExcelFile(fileName, module.StickersList);
                 Utilities.ReplaceOldEmoji(stickersList);
 
                 /* Сообщаем пользователю, что удаляем файлы */
-                await User.Messages.EditMessage(User, Messages.deleting_files);
+                await User.Messages.EditMessage(Messages.deleting_files);
                 File.Delete(fileName);
 
                 /* Сообщаем пользователю, что загружаем стикеры */
-                await User.Messages.EditMessage(User, Messages.uploading_stickers);
+                await User.Messages.EditMessage(Messages.uploading_stickers);
                 var newPack = new Pack()
                 {
                     Author = stickersList.First().Author,
@@ -58,7 +58,7 @@ namespace CardCollector.Commands.MessageHandler.Admin
                 var result = await Context.Packs.AddAsync(newPack);
                 await Context.SaveChangesAsync();
                 /* Сообщаем пользователю, что стикеры загружены */
-                await User.Messages.EditMessage(User, Messages.stickers_succesfully_uploaded);
+                await User.Messages.EditMessage(Messages.stickers_succesfully_uploaded);
 
                 await new RequestBuilder()
                     .SetUrl("recache")
@@ -69,7 +69,7 @@ namespace CardCollector.Commands.MessageHandler.Admin
             catch (Exception e)
             {
                 /* Сообщаем пользователю, что произошла ошибка */
-                await User.Messages.EditMessage(User, $"{Messages.unexpected_exception}: {e.Message}");
+                await User.Messages.EditMessage($"{Messages.unexpected_exception}: {e.Message}");
                 Logs.LogOutError(e.ToString());
             }
         }

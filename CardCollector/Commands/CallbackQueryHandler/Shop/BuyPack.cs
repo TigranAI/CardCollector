@@ -13,7 +13,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
 
         protected override async Task Execute()
         {
-            await User.Messages.EditMessage(User, Messages.choose_option, Keyboard);
+            await User.Messages.EditMessage(Messages.choose_option, Keyboard);
         }
         
         private InlineKeyboardMarkup Keyboard = new(new[]

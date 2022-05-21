@@ -12,7 +12,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
 
         protected override async Task Execute()
         {
-            await User.Messages.EditMessage(User, Messages.choose_provider, Keyboard.ProviderKeyboard);
+            await User.Messages.EditMessage(Messages.choose_provider, Keyboard.ProviderKeyboard);
         }
     }
 }

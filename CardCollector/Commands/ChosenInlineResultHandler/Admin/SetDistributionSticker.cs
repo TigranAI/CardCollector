@@ -22,14 +22,14 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Admin
             var sticker = await Context.Stickers.FindById(stickerId);
             distribution.StickerFileId = sticker.FileId;
             
-            await User.Messages.SendMessage(User, Messages.create_distribution_buttons,
+            await User.Messages.SendMessage(Messages.create_distribution_buttons,
                 Keyboard.DistributionButtonsKeyboard);
         }
         
         public static async Task Skip(User user, BotDatabaseContext context)
         {
             user.Session.State = UserState.Default;
-            await user.Messages.SendMessage(user, Messages.create_distribution_buttons,
+            await user.Messages.SendMessage(Messages.create_distribution_buttons,
                 Keyboard.DistributionButtonsKeyboard);
         }
     }

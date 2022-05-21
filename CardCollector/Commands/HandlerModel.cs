@@ -25,7 +25,7 @@ namespace CardCollector.Commands
         public virtual async Task InitNewContext(long userId)
         {
             Context = new BotDatabaseContext();
-            User = await Context.Users.FindById(userId);
+            User = (await Context.Users.FindById(userId))!;
             User.InitSession();
         }
         
@@ -49,9 +49,9 @@ namespace CardCollector.Commands
             {
                 using (var context = new BotDatabaseContext())
                 {
-                    var user = await context.Users.FindById(User.Id);
-                    await user.Messages.ClearChat(user);
-                    await user.Messages.SendMessage(user, $"{Messages.unexpected_exception} {e.Message}");
+                    User = (await context.Users.FindById(User.Id))!;
+                    await User.Messages.ClearChat();
+                    await User.Messages.SendMessage($"{Messages.unexpected_exception} {e.Message}");
                     Logs.LogOutError(e);
                     await context.SaveChangesAsync();
                 }
@@ -71,7 +71,7 @@ namespace CardCollector.Commands
                 User.Session.AddCommandToStack(this);
             if (Attribute.IsDefined(GetType(), typeof(ResetModuleAttribute)))
                 User.Session.ResetModules();
-            if (ClearStickers) await User.Messages.ClearStickers(User);
+            if (ClearStickers) await User.Messages.ClearStickers();
         }
         
         protected abstract Task Execute();
@@ -104,9 +104,9 @@ namespace CardCollector.Commands
 
         public override string ToString()
         {
-            string userId = $"user id: {User?.Id.ToString() ?? "null"}";
-            string commandFullname = GetType().FullName ?? GetType().Name;
-            string traceData = Utilities.ToJson(TRACE_DATA, Formatting.Indented);
+            var userId = $"user id: {User?.Id.ToString() ?? "null"}";
+            var commandFullname = GetType().FullName ?? GetType().Name;
+            var traceData = Utilities.ToJson(TRACE_DATA, Formatting.Indented);
             return $"[{commandFullname}] triggered by [{userId}]. Trace data: {traceData}";
         }
 

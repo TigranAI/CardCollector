@@ -32,7 +32,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
                     true);
             else
             {
-                await User.Messages.ClearChat(User);
+                await User.Messages.ClearChat();
                 if (currency == "coins") await User.DecreaseCoins(orderInfo.GetResultPriceCoins());
                 else if (currency == "gems") User.Cash.Gems -= orderInfo.GetResultPriceGems();
                 if (!orderInfo.IsInfinite)
@@ -45,7 +45,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
                 User.AddPack(packInfo, orderInfo.Count);
                 var userPack = User.Packs.Single(item => item.Pack.Id == orderInfo.Pack.Id);
                 await GivePrize(orderInfo.AdditionalPrize);
-                await User.Messages.EditMessage(User,
+                await User.Messages.EditMessage(
                     $"{Messages.thanks_for_buying} {userPack.Count} {Text.packs} {packInfo.Author}",
                     orderInfo.IsExpired() || !orderInfo.IsInfinite
                         ? Keyboard.BackShopKeyboard
@@ -73,9 +73,9 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
             if (sticker is not null)
             {
                 await User.AddSticker(sticker, 1);
-                await User.Messages.ClearChat(User);
-                await User.Messages.SendSticker(User, sticker.FileId);
-                await User.Messages.SendMessage(User, $"{Messages.congratulation}\n{sticker}");
+                await User.Messages.ClearChat();
+                await User.Messages.SendSticker(sticker.FileId);
+                await User.Messages.SendMessage($"{Messages.congratulation}\n{sticker}");
             }
         }
 

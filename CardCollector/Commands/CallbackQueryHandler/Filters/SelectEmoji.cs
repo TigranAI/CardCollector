@@ -12,7 +12,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Filters
         protected override async Task Execute()
         {
             EnterEmoji.AddToQueue(User.Id);
-            await User.Messages.EditMessage(User, Messages.enter_emoji, Keyboard.EmojiOptions);
+            await User.Messages.EditMessage(Messages.enter_emoji, Keyboard.EmojiOptions);
         }
     }
 }

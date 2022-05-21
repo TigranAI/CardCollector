@@ -17,8 +17,8 @@ namespace CardCollector.Commands.MessageHandler.Admin
             var module = User.Session.GetModule<AdminModule>();
             var pack = await Context.Packs.FindById(module.SelectedPackId);
             pack.GifPreviewFileId = Message.Document!.FileId;
-            await User.Messages.ClearChat(User);
-            await User.Messages.SendMessage(User, Messages.update_preview_success, Keyboard.BackKeyboard);
+            await User.Messages.ClearChat();
+            await User.Messages.SendMessage(Messages.update_preview_success, Keyboard.BackKeyboard);
             
             await Context.SaveChangesAsync();
             await new RequestBuilder()

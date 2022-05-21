@@ -23,7 +23,7 @@ namespace CardCollector.Commands.MessageHandler.Admin.Distribution
             var distribution = await Context.ChatDistributions.FindById(module.ChatDistributionId!.Value);
             distribution.Text = Message.Text!;
             
-            await User.Messages.SendMessage(User, Messages.send_distribution_image, 
+            await User.Messages.SendMessage(Messages.send_distribution_image, 
                 Keyboard.SkipKeyboard(typeof(SendDistributionImage).Name));
             
             SendDistributionImage.AddToQueue(User.Id);

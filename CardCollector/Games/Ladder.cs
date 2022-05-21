@@ -40,7 +40,7 @@ namespace CardCollector.Games
             info.SetPack(pack.Id);
             info.Add(user.Id, sticker.Id);
 
-            if (info.TryComplete(LADDER_GOAL))
+            if (await info.TryComplete(LADDER_GOAL))
             {
                 await SendPrizeMessage(chat, pack, info.GamesToday);
                 await SaveActivity(context, chat.Id);

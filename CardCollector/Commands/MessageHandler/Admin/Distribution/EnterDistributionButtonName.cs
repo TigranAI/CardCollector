@@ -25,7 +25,7 @@ namespace CardCollector.Commands.MessageHandler.Admin.Distribution
             distribution.Buttons.Last().Name = Message.Text!;
             Context.ChatDistributions.Update(distribution);
             
-            await User.Messages.SendMessage(User, Messages.create_distribution_buttons, 
+            await User.Messages.SendMessage(Messages.create_distribution_buttons, 
                 Keyboard.DistributionButtonsKeyboard);
         }
 

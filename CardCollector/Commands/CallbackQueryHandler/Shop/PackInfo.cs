@@ -10,7 +10,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
 
         protected override async Task Execute()
         {
-            await User.Messages.EditMessage(User, Messages.pack_info, Keyboard.BackKeyboard);
+            await User.Messages.EditMessage(Messages.pack_info, Keyboard.BackKeyboard);
         }
     }
 }

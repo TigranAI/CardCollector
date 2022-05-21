@@ -20,9 +20,9 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
             else
             {
                 var sticker = await userPack.Open();
-                await User.Messages.ClearChat(User);
-                await User.Messages.SendSticker(User, sticker.FileId);
-                await User.Messages.SendMessage(User, $"{Messages.congratulation}\n{sticker}",
+                await User.Messages.ClearChat();
+                await User.Messages.SendSticker(sticker.FileId);
+                await User.Messages.SendMessage($"{Messages.congratulation}\n{sticker}",
                     userPack.Count > 0
                         ? Keyboard.RepeatCommand(Text.open_more, CallbackQuery.Data!)
                         : Keyboard.BackKeyboard);

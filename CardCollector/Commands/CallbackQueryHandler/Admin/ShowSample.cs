@@ -22,7 +22,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin
             {
                 new[] {KeyboardButton.WithWebApp("hello", webAppInfo)}
             });
-            await User.Messages.SendMessage(User, "test", keyboard);
+            await User.Messages.SendMessage("test", keyboard);
         }
 
         /* Нужно помимо совпадения текста проверить пользователя на уровень привилегий */

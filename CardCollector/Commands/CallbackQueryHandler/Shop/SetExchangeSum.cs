@@ -13,7 +13,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
         {
             var module = User.Session.GetModule<ShopModule>();
             module.EnteredExchangeSum = int.Parse(CallbackQuery.Data!.Split('=')[1]); 
-            await User.Messages.EditMessage(User,
+            await User.Messages.EditMessage(
                 $"{Messages.exchange_mesage}" +
                 $"\n{Messages.gems_exchange_count} {module.EnteredExchangeSum}{Text.gem}" +
                 $"\n{Messages.coins_exchange_count} {module.EnteredExchangeSum * 10}{Text.coin}" +

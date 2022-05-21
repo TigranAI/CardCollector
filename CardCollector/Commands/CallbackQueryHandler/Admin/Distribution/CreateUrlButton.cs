@@ -22,7 +22,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin.Distribution
             
             distribution.Buttons.Last().Type = ButtonType.Url;
             
-            await User.Messages.SendMessage(User, Messages.enter_button_url, Keyboard.BackKeyboard);
+            await User.Messages.SendMessage(Messages.enter_button_url, Keyboard.BackKeyboard);
 
             EnterButtonUrl.AddToQueue(User.Id);
         }

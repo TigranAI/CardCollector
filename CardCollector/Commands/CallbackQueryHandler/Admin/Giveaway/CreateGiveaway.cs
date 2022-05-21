@@ -17,7 +17,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin.Giveaway
             var giveaway = await Context.ChannelGiveaways.CreateNew();
             await Context.SaveChangesAsync();
             User.Session.GetModule<AdminModule>().SelectedChannelGiveawayId = giveaway.Id;
-            await User.Messages.EditMessage(User, Messages.choose_option, Keyboard.GiveawayKeyboard);
+            await User.Messages.EditMessage(Messages.choose_option, Keyboard.GiveawayKeyboard);
         }
 
         public override bool Match()

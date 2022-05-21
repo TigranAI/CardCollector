@@ -13,7 +13,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
 
         protected override async Task Execute()
         {
-            await User.Messages.EditMessage(User, Messages.settings,
+            await User.Messages.EditMessage(Messages.settings,
                 Keyboard.Settings(User.PrivilegeLevel), ParseMode.Html);
         }
     }

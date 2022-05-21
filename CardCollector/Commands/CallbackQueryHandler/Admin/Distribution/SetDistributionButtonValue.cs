@@ -20,7 +20,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin.Distribution
             distribution.Buttons.Last().Value = value;
             Context.ChatDistributions.Update(distribution);
 
-            await User.Messages.SendMessage(User, Messages.enter_distribution_button_name, Keyboard.BackKeyboard);
+            await User.Messages.SendMessage(Messages.enter_distribution_button_name, Keyboard.BackKeyboard);
 
             EnterDistributionButtonName.AddToQueue(User.Id);
         }

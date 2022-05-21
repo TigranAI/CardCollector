@@ -18,7 +18,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
                 var goal = TaskGoals.Goals[task.TaskId];
                 text += $"\n{title} ({goal - task.Progress}/{goal})";
             }
-            await User.Messages.EditMessage(User, text, Keyboard.BackKeyboard);
+            await User.Messages.EditMessage(text, Keyboard.BackKeyboard);
         }
     }
 }

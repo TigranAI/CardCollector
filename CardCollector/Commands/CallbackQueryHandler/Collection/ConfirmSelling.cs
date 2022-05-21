@@ -29,7 +29,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Collection
                 userSticker.Count -= collectionModule.Count;
                 await Context.Auctions.AddAsync(User, userSticker.Sticker, collectionModule.Count,
                     collectionModule.SellPrice);
-                await User.Messages.EditMessage(User, Messages.successfully_selling);
+                await User.Messages.EditMessage(Messages.successfully_selling);
                 
                 if (User.InviteInfo?.TasksProgress is { } tp && !tp.PlaceStickerOnAuction)
                 {

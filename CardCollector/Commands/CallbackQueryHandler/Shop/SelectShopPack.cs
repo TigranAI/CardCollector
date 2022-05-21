@@ -21,11 +21,11 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
             if (packInfo.PreviewFileId == null)
             {
                 var sticker = packInfo.Stickers.Random();
-                await User.Messages.SendSticker(User, sticker.ForSaleFileId ?? sticker.FileId,
+                await User.Messages.SendSticker(sticker.ForSaleFileId ?? sticker.FileId,
                     Keyboard.ShopPackKeyboard(packInfo));
             }
             else
-                await User.Messages.SendSticker(User, packInfo.PreviewFileId,
+                await User.Messages.SendSticker(packInfo.PreviewFileId,
                     Keyboard.ShopPackKeyboard(packInfo));
         }
     }

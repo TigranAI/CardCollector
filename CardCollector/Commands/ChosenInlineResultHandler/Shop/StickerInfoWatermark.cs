@@ -14,9 +14,9 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Shop
         {
             var stickerId = long.Parse(ChosenInlineResult.ResultId.Split('=')[1]);
             var sticker = await Context.Stickers.FindById(stickerId);
-            await User.Messages.ClearChat(User);
-            await User.Messages.SendSticker(User, sticker.ForSaleFileId ?? sticker.FileId);
-            await User.Messages.SendMessage(User, sticker.ToString(), Keyboard.StickerInfoKeyboard);
+            await User.Messages.ClearChat();
+            await User.Messages.SendSticker(sticker.ForSaleFileId ?? sticker.FileId);
+            await User.Messages.SendMessage(sticker.ToString(), Keyboard.StickerInfoKeyboard);
         }
 
         public override bool Match()

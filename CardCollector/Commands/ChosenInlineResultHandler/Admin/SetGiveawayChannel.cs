@@ -22,7 +22,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Admin
             if (chat == null || giveawayId == null) return;
             var giveaway = await Context.ChannelGiveaways.FindById(giveawayId.Value);
             giveaway.Channel = chat;
-            await User.Messages.EditMessage(User, Messages.enter_number_of_prizes, Keyboard.BackKeyboard);
+            await User.Messages.EditMessage(Messages.enter_number_of_prizes, Keyboard.BackKeyboard);
             EnterPrizeCount.AddToQueue(User.Id);
         }
 

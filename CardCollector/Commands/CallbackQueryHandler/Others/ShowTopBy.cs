@@ -1,8 +1,5 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using CardCollector.Database.EntityDao;
+﻿using System.Threading.Tasks;
 using CardCollector.Resources;
-using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Others
@@ -12,7 +9,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Others
         protected override string CommandText => CallbackQueryCommands.show_top_by;
         protected override async Task Execute()
         {
-            await User.Messages.SendTopUsers(User, Messages.you_can_see_top_on_site, Keyboard.SiteUrl);
+            await User.Messages.SendTopUsers(Messages.you_can_see_top_on_site, Keyboard.SiteUrl);
             /*var topBy = (TopBy) int.Parse(CallbackQuery.Data!.Split('=')[1]);
             switch (topBy)
             {

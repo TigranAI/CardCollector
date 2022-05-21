@@ -11,7 +11,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Filters
 
         protected override async Task Execute()
         {
-            await User.Messages.EditMessage(User, Messages.choose_price, 
+            await User.Messages.EditMessage(Messages.choose_price, 
                 User.Session.State == UserState.AuctionMenu ? Keyboard.GemsPriceOptions : Keyboard.CoinsPriceOptions);
         }
     }

@@ -10,7 +10,7 @@ namespace CardCollector.Commands.MessageHandler.UrlCommands
 
         protected override async Task Execute()
         {
-            await User.Messages.EditMessage(User, $"{Messages.confirm_login} {AppSettings.SITE_URL}",
+            await User.Messages.EditMessage($"{Messages.confirm_login} {AppSettings.SITE_URL}",
                 Keyboard.ConfirmLogin(StartData[1]));
         }
     }

@@ -1,8 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.Controllers;
 using CardCollector.Database.Entity;
-using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
@@ -24,7 +23,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Collection
                 combineModule.SelectedStickerId = collectionModule.SelectedStickerId;
                 combineModule.Count = collectionModule.Count;
             }
-            var selectedSticker = await Context.Stickers.FindById(combineModule.SelectedStickerId!.Value);
+            var selectedSticker = User.Stickers.Single(item => item.Id == combineModule.SelectedStickerId);
             var combineCount = combineModule.CombineCount;
             if (combineCount == Constants.COMBINE_COUNT)
                 await AnswerCallbackQuery(User, CallbackQuery.Id, Messages.cant_combine, true);
@@ -36,7 +35,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Collection
                     await AnswerCallbackQuery(User, CallbackQuery.Id, $"{Messages.combine_added_only} " +
                         $"{combineModule.Count}{Text.items}", true);
                 }
-                combineModule.CombineList.Add(new Tuple<Sticker, int>(selectedSticker, combineModule.Count));
+                combineModule.CombineList.Add(new Tuple<Sticker, int>(selectedSticker.Sticker, combineModule.Count));
             }
             await base.Execute();
         }

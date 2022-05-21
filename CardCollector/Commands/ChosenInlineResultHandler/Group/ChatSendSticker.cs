@@ -31,7 +31,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Group
             {
                 if (chatId == null)
                 {
-                    await User.Messages.EditMessage(User,
+                    await User.Messages.EditMessage(
                         $"{Messages.you_gained} 1 {Text.exp} {Messages.send_sticker}" +
                         $"\n{Messages.you_can_add_bot_to_conversation}");
                     User.Level.GiveExp(1);
@@ -46,7 +46,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Group
                 }
             }
 
-            await User.Level.CheckLevelUp(Context, User);
+            await User.Level.CheckLevelUp(Context);
 
             
             User.Stickers.SingleOrDefault(item => item.Id == userStickerId)?.UpdateLastUsage();
@@ -60,7 +60,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Group
             {
                 var exp = Math.Min(chat.MembersCount, chat.MaxExpGain);
                 User.Level.GiveExp(exp);
-                await User.Messages.SendMessage(User,
+                await User.Messages.SendMessage(
                     $"{Messages.you_gained} {exp} {Text.exp} {Messages.send_sticker} \"{chat.Title}\"" +
                     $"\n{Messages.today_exp_gain}  {info.GetAndIncrease(User.Id)} / {MAX_EXP_COUNT} {Messages.attempts}");
                 await chatRepo.SaveAsync(chat, info);

@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using CardCollector.Commands.CallbackQueryHandler.Others;
-using CardCollector.Controllers;
 using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
@@ -37,14 +36,14 @@ namespace CardCollector.Commands.CallbackQueryHandler.Auction
 
                 var sum = productInfo.Price * module.Count;
                 
-                await productInfo.Trader.Messages.SendMessage(productInfo.Trader,
+                await productInfo.Trader.Messages.SendMessage(
                     string.Format(Messages.thanks_for_selling_sticker, User.Username, productInfo.Sticker.Title,
                         module.Count, (int) (sum * 0.70)));
                 await productInfo.Trader.AddGems((int) (sum * 0.7));
                 
                 if (User.HasAuctionDiscount()) sum = (int) (sum * 0.95);
                 User.Cash.Gems -= sum;
-                await User.Messages.EditMessage(User, string.Format(Messages.thanks_for_buying_sticker,
+                await User.Messages.EditMessage(string.Format(Messages.thanks_for_buying_sticker,
                     productInfo.Trader.Username, productInfo.Sticker.Title), Keyboard.BackKeyboard);
 
                 await User.AddSticker(productInfo.Sticker, module.Count);

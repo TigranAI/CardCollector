@@ -24,7 +24,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Others
             if (packs.Count == 0)
                 await AnswerCallbackQuery(User, CallbackQuery.Id, Messages.page_not_found);
             else
-                await User.Messages.EditMessage(User, Messages.choose_author,
+                await User.Messages.EditMessage(Messages.choose_author,
                     Keyboard.GetPacksKeyboard(packs, offset, await Context.Packs.GetCount(), targetCommand));
         }
     }

@@ -22,8 +22,8 @@ namespace CardCollector.Commands.MessageHandler.Admin.Giveaway
             var module = User.Session.GetModule<AdminModule>();
             if (module.SelectedChannelGiveawayId == null) return;
             var giveaway = await Context.ChannelGiveaways.FindById(module.SelectedChannelGiveawayId.Value);
-            giveaway.ButtonText = Message.Text;
-            await User.Messages.EditMessage(User, Messages.send_giveaway_image,
+            giveaway!.ButtonText = Message.Text;
+            await User.Messages.EditMessage(Messages.send_giveaway_image,
                 Keyboard.SkipKeyboard(typeof(SendGiveawayImage).Name));
             SendGiveawayImage.AddToQueue(User.Id);
         }
@@ -34,8 +34,8 @@ namespace CardCollector.Commands.MessageHandler.Admin.Giveaway
             var module = user.Session.GetModule<AdminModule>();
             if (module.SelectedChannelGiveawayId == null) return;
             var giveaway = await context.ChannelGiveaways.FindById(module.SelectedChannelGiveawayId.Value);
-            giveaway.ButtonText = Text.claim_prize;
-            await user.Messages.EditMessage(user, Messages.send_giveaway_image,
+            giveaway!.ButtonText = Text.claim_prize;
+            await user.Messages.EditMessage(Messages.send_giveaway_image,
                 Keyboard.SkipKeyboard(typeof(SendGiveawayImage).Name));
             SendGiveawayImage.AddToQueue(user.Id);
         }

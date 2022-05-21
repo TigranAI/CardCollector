@@ -13,18 +13,16 @@ namespace CardCollector.Commands.InlineQueryHandler.Group
     {
         protected override async Task Execute()
         {
-            var offset = int.Parse(InlineQuery.Offset == "" ? "0" : InlineQuery.Offset);
+            var offset = Offset.Of(InlineQuery);
             var length = 0;
-            var stickersList = User.Stickers
+            
+            var results = User.Stickers
                 .Where(item => item.Count > 0 && item.Sticker.Contains(InlineQuery.Query))
                 .OrderByDescending(item => item.LastUsage)
-                .ToList();
-            var results = stickersList
-                .And(list => length = list.Count)
-                .ToTelegramStickers(ChosenInlineResultCommands.chat_send_sticker, offset);
+                .And(list => length = list.Count())
+                .ToTelegramResults(ChosenInlineResultCommands.chat_send_sticker, offset);
             
-            var newOffset = offset + 50 > length ? "" : (offset + 50).ToString();
-            await AnswerInlineQuery(User, InlineQuery.Id, results, newOffset);
+            await AnswerInlineQuery(User, InlineQuery.Id, results, offset.GetNext(length));
         }
 
         public override bool Match()

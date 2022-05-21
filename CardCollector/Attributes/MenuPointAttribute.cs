@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace CardCollector.Attributes
+namespace CardCollector.Attributes;
+
+[NotInherited]
+public class MenuPointAttribute : Attribute
 {
-    [NotInherited]
-    public class MenuPointAttribute : Attribute
-    {
         
-    }
 }

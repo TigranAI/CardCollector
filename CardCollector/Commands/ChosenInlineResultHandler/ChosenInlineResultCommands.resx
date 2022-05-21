@@ -49,6 +49,9 @@
         <value>AAI</value>
     </data>
     <data name="select_puzzle" xml:space="preserve">
-        <value>AAI</value>
+        <value>AAJ</value>
+    </data>
+    <data name="add_puzzle" xml:space="preserve">
+        <value>AAK</value>
     </data>
 </root>

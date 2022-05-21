@@ -16,7 +16,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin
             if (ConfirmStop) await Bot.StopProgram();
             else
             {
-                await User.Messages.EditMessage(User, Messages.confirm_stopping, Keyboard.StopKeyboard);
+                await User.Messages.EditMessage(Messages.confirm_stopping, Keyboard.StopKeyboard);
                 ConfirmStop = true;
                 var timer = new Timer
                 {

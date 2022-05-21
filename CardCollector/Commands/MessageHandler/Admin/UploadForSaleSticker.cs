@@ -20,7 +20,7 @@ namespace CardCollector.Commands.MessageHandler.Admin
             var sticker = await Context.Stickers.SingleAsync(item => item.Id == stickerId);
             sticker.ForSaleFileId = Message.Sticker!.FileId;
             sticker.IsForSaleAnimated = Message.Sticker.IsAnimated;
-            await User.Messages.EditMessage(User, Messages.add_watermark_success, Keyboard.BackAndMoreKeyboard);
+            await User.Messages.EditMessage(Messages.add_watermark_success, Keyboard.BackAndMoreKeyboard);
 
             await Context.SaveChangesAsync();
             await new RequestBuilder()

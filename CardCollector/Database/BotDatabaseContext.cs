@@ -52,6 +52,8 @@ namespace CardCollector.Database
         public DbSet<InviteInfo> InviteInfo { get; set; }
         public DbSet<ChatDistribution> ChatDistributions { get; set; }
         public DbSet<PuzzlePiece> PuzzlePieces { get; set; }
+        public DbSet<UserStats> UsersStats { get; set; }
+        public DbSet<TopHistory> TopHistory { get; set; }
 
         public bool IsDisposed()
         {
@@ -63,7 +65,7 @@ namespace CardCollector.Database
         {
             var connectionString = $"server={DB_IP};port={DB_PORT};database={DB_SCHEMA};uid={DB_UID};pwd={DB_PWD}";
             optionsBuilder
-                .UseMySql(connectionString,ServerVersion.AutoDetect(connectionString))
+                .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
                 .UseLazyLoadingProxies()
                 .UseSnakeCaseNamingConvention();
         }
@@ -73,8 +75,6 @@ namespace CardCollector.Database
             ConfigureUserPrivilegeLevel(modelBuilder);
             ConfigureUserSettings(modelBuilder);
             ConfigureUserMessages(modelBuilder);
-            ConfigureUserCash(modelBuilder);
-            ConfigureUserLevel(modelBuilder);
             ConfigureUserInviteInfo(modelBuilder);
             ConfigureLevelLevelReward(modelBuilder);
             ConfigureDailyTaskTaskId(modelBuilder);
@@ -104,20 +104,6 @@ namespace CardCollector.Database
                     builder => builder.ToTable("beginners_tasks_progress"));
         }
 
-        private void ConfigureUserLevel(ModelBuilder modelBuilder)
-        {
-            modelBuilder
-                .Entity<User>()
-                .OwnsOne(user => user.Level, builder => builder.ToTable("user_level"));
-        }
-
-        private void ConfigureUserCash(ModelBuilder modelBuilder)
-        {
-            modelBuilder
-                .Entity<User>()
-                .OwnsOne(user => user.Cash, builder => builder.ToTable("user_cash"));
-        }
-
         private void ConfigureSticker(ModelBuilder modelBuilder)
         {
             modelBuilder
@@ -126,14 +112,14 @@ namespace CardCollector.Database
                 .HasConversion(
                     to => (int) to,
                     from => (Effect) from);
-            
+
             modelBuilder
                 .Entity<Sticker>()
                 .Property(entity => entity.ExclusiveTask)
                 .HasConversion(
                     to => (int) to,
                     from => (ExclusiveTask) from);
-            
+
             modelBuilder
                 .Entity<Sticker>()
                 .Property(entity => entity.IncomeType)
@@ -145,8 +131,7 @@ namespace CardCollector.Database
         private void ConfigureUserMessages(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .Entity<User>()
-                .OwnsOne(user => user.Messages, builder =>
+                .Entity<UserMessages>(builder =>
                 {
                     builder.ToTable("user_messages");
                     builder
@@ -181,24 +166,19 @@ namespace CardCollector.Database
         private void ConfigureUserSettings(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .Entity<User>()
-                .OwnsOne(user => user.Settings, builder =>
-                {
-                    builder
-                        .ToTable("user_settings")
-                        .Property(entity => entity.Settings)
-                        .HasConversion(
-                            to => 
-                                Utilities.ToJson(to.ToDictionary(pair => (int) pair.Key, pair => pair.Value)),
-                            from => 
-                                Utilities.FromJson<Dictionary<int, bool>>(from)
-                                .ToDictionary(pair => (UserSettingsTypes) pair.Key, pair => pair.Value),
-                            new ValueComparer<Dictionary<UserSettingsTypes, bool>>(
-                                (l1, l2) => l2 != null && l1 != null && l1.Values.SequenceEqual(l2.Values),
-                                l => l.Aggregate(0, (a, v) =>
-                                    HashCode.Combine(a, HashCode.Combine(v.Key.GetHashCode(), v.Value.GetHashCode()))),
-                                l => l.ToDictionary(p => p.Key, p => p.Value)));
-                });
+                .Entity<UserSettings>()
+                .Property(entity => entity.Settings)
+                .HasConversion(
+                    to =>
+                        Utilities.ToJson(to.ToDictionary(pair => (int) pair.Key, pair => pair.Value)),
+                    from =>
+                        Utilities.FromJson<Dictionary<int, bool>>(from)
+                            .ToDictionary(pair => (UserSettingsTypes) pair.Key, pair => pair.Value),
+                    new ValueComparer<Dictionary<UserSettingsTypes, bool>>(
+                        (l1, l2) => l2 != null && l1 != null && l1.Values.SequenceEqual(l2.Values),
+                        l => l.Aggregate(0, (a, v) =>
+                            HashCode.Combine(a, HashCode.Combine(v.Key.GetHashCode(), v.Value.GetHashCode()))),
+                        l => l.ToDictionary(p => p.Key, p => p.Value)));
         }
 
         private void ConfigureUserPrivilegeLevel(ModelBuilder modelBuilder)

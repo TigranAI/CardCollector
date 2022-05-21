@@ -25,7 +25,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Auction
                 var text = $"{Messages.confirm_buying}" +
                            $"\n{auctionModule.Count}{Text.items} {Text.per} {price}{Text.gem}" +
                            $"\n{Messages.are_you_sure}";
-                await User.Messages.EditMessage(User, text,
+                await User.Messages.EditMessage(text,
                     Keyboard.GetConfirmationKeyboard(CallbackQueryCommands.buy_sticker));
             }
         }

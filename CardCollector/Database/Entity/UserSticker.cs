@@ -1,11 +1,14 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using CardCollector.Others;
+using CardCollector.Resources;
+using CardCollector.Resources.Translations;
 using Telegram.Bot.Types.InlineQueryResults;
 
 namespace CardCollector.Database.Entity
 {
-    public class UserSticker
+    public class UserSticker : ITelegramInlineQueryResult, ITelegramInlineQueryMessageResult
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
@@ -30,9 +33,20 @@ namespace CardCollector.Database.Entity
             LastUsage = DateTime.Now;
         }
 
-        public InlineQueryResultCachedSticker AsTelegramCachedSticker(string command)
+        public InlineQueryResult ToResult(string command)
         {
             return new InlineQueryResultCachedSticker($"{command}={Id}", GetFileId());
+        }
+
+        public InlineQueryResult ToMessageResult(string command)
+        {
+            var betMessage =
+                new InputTextMessageContent($"{User.Username} {Text.bet} {Sticker.Title} {Sticker.TierAsStars()}");
+            return new InlineQueryResultArticle($"{command}={Id}", Sticker.Title, betMessage)
+            {
+                Description = $"{Text.tier}: {Sticker.TierAsStars()} | {Text.count}: {Count}",
+                ReplyMarkup = Keyboard.AnswerBet
+            };
         }
     }
 }

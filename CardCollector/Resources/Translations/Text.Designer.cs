@@ -79,6 +79,15 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Добавить пазл.
+        /// </summary>
+        internal static string add_puzzle {
+            get {
+                return ResourceManager.GetString("add_puzzle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Добавить стикер.
         /// </summary>
         internal static string add_sticker {
@@ -552,6 +561,15 @@ namespace CardCollector.Resources.Translations {
         internal static string edit_sticker {
             get {
                 return ResourceManager.GetString("edit_sticker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Редактировать набор.
+        /// </summary>
+        internal static string edit_stickerpack {
+            get {
+                return ResourceManager.GetString("edit_stickerpack", resourceCulture);
             }
         }
         
@@ -1335,6 +1353,78 @@ namespace CardCollector.Resources.Translations {
         internal static string to {
             get {
                 return ResourceManager.GetString("to", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Топ по опыту.
+        /// </summary>
+        internal static string top_by_exp {
+            get {
+                return ResourceManager.GetString("top_by_exp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Топ по полученным подаркам.
+        /// </summary>
+        internal static string top_by_gifts_received {
+            get {
+                return ResourceManager.GetString("top_by_gifts_received", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Топ по приглашенным друзьям.
+        /// </summary>
+        internal static string top_by_invited_friends {
+            get {
+                return ResourceManager.GetString("top_by_invited_friends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Топ по играм в лесенку.
+        /// </summary>
+        internal static string top_by_ladder_games {
+            get {
+                return ResourceManager.GetString("top_by_ladder_games", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Топ по играм в пазл.
+        /// </summary>
+        internal static string top_by_puzzle_games {
+            get {
+                return ResourceManager.GetString("top_by_puzzle_games", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Топ по играм в рулетку.
+        /// </summary>
+        internal static string top_by_roulette_games {
+            get {
+                return ResourceManager.GetString("top_by_roulette_games", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Топ по полученным 4* стикерам.
+        /// </summary>
+        internal static string top_by_tier_4_sticker {
+            get {
+                return ResourceManager.GetString("top_by_tier_4_sticker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}💎 алмазов, {1}🧪 опыта, {2}💰 золота.
+        /// </summary>
+        internal static string top_reward {
+            get {
+                return ResourceManager.GetString("top_reward", resourceCulture);
             }
         }
         

@@ -18,10 +18,10 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin
             User.Session.State = UserState.UploadStickerPackZip;
             var readme = new FileStream("./stickerpack/readme.txt", FileMode.Open);
             var sample = new FileStream("./stickerpack/sample.zip", FileMode.Open);
-            await User.Messages.ClearChat(User);
-            await User.Messages.SendDocument(User, new InputFileStream(readme, "readme.txt"));
-            await User.Messages.SendDocument(User, new InputFileStream(sample, "sample.zip"));
-            await User.Messages.SendMessage(User, Messages.upload_stickerpack_instructions, Keyboard.BackKeyboard);
+            await User.Messages.ClearChat();
+            await User.Messages.SendDocument(new InputFileStream(readme, "readme.txt"));
+            await User.Messages.SendDocument(new InputFileStream(sample, "sample.zip"));
+            await User.Messages.SendMessage(Messages.upload_stickerpack_instructions, Keyboard.BackKeyboard);
             readme.Close();
             sample.Close();
         }

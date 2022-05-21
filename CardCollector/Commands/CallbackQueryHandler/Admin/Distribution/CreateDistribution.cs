@@ -13,7 +13,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin.Distribution
         protected override string CommandText => CallbackQueryCommands.create_distribution;
         protected override async Task Execute()
         {
-            await User.Messages.SendMessage(User, Messages.enter_distribution_text, Keyboard.BackKeyboard);
+            await User.Messages.SendMessage(Messages.enter_distribution_text, Keyboard.BackKeyboard);
             
             var distribution = new ChatDistribution();
             var result = await Context.ChatDistributions.AddAsync(distribution);

@@ -49,7 +49,7 @@ public class JoinPuzzle : CallbackQueryHandler
             await userRepo.SaveAsync(User, userInfo);
             await puzzleRepo.SaveAsync(chat, puzzleInfo);
 
-            if (puzzleInfo.Players.Count == 4) await Puzzle.Start(Context, chat);
+            if (puzzleInfo.Players.Count + 1 == Puzzle.PUZZLE_MAX_PLAYERS) await Puzzle.Start(Context, chat);
         }
         else
         {

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CardCollector.Commands.ChosenInlineResultHandler;
 using CardCollector.Database.Entity;
-using CardCollector.Resources;
 using CardCollector.Resources.Translations;
+using CardCollector.Session.Modules;
 using Telegram.Bot.Types.InlineQueryResults;
 
 namespace CardCollector.Others
@@ -16,37 +15,26 @@ namespace CardCollector.Others
             for (var i = 0; i < count; ++i) action();
         }
         
-        public static IEnumerable<InlineQueryResult> ToTelegramStickers(
-            this IEnumerable<Sticker> list,
+        public static IEnumerable<InlineQueryResult> ToTelegramResults<T>(
+            this IEnumerable<T> source,
             string command,
-            int offset)
+            Offset offset) where T : ITelegramInlineQueryResult
         {
-            return list
-                .Skip(offset)
-                .Take(50)
-                .Select(sticker => sticker.AsTelegramCachedSticker(command));
-        }
-        
-        public static IEnumerable<InlineQueryResult> ToTelegramStickers(
-            this IEnumerable<UserSticker> list,
-            string command,
-            int offset)
-        {
-            return list
-                .Skip(offset)
-                .Take(50)
-                .Select(sticker => sticker.AsTelegramCachedSticker(command));
+            return source
+                .ApplyOffset(offset)
+                .Select(item => item.ToResult(command));
         }
 
-        public static IEnumerable<InlineQueryResult> ToTelegramStickersAsMessage(this IEnumerable<Sticker> list,
-            string command, int offset)
+        public static IEnumerable<InlineQueryResult> ToTelegramMessageResults<T>(
+            this IEnumerable<T> list,
+            string command,
+            Offset offset) where T : ITelegramInlineQueryMessageResult
         {
             return list
-                .Skip(offset)
-                .Take(50)
+                .ApplyOffset(offset)
                 .Select(sticker =>
                 {
-                    var result = sticker.AsTelegramCachedSticker(command);
+                    var result = (InlineQueryResultCachedSticker) sticker.ToMessageResult(command);
                     result.InputMessageContent = new InputTextMessageContent(Text.select);
                     return result;
                 });
@@ -56,17 +44,22 @@ namespace CardCollector.Others
         {
             return source.Select((item, index) => (item, index));
         }
-        
-        public static InlineQueryResultArticle AsTelegramBetArticle(this UserSticker sticker)
+
+        public static IEnumerable<T> ApplyOffset<T>(this IEnumerable<T> source, Offset offset)
         {
-            var betMessage = new InputTextMessageContent(
-                $"{sticker.User.Username} {Text.bet} {sticker.Sticker.Title} {sticker.Sticker.TierAsStars()}");
-            return new InlineQueryResultArticle
-                ($"{ChosenInlineResultCommands.made_a_bet}={sticker.Id}", sticker.Sticker.Title, betMessage)
-                {
-                    Description = $"{Text.tier}: {sticker.Sticker.TierAsStars()} | {Text.count}: {sticker.Count}",
-                    ReplyMarkup = Keyboard.AnswerBet
-                };
+            return source
+                .Skip(offset.Value)
+                .Take(50);
+        }
+
+        public static IEnumerable<Sticker> ApplyFilters(this IEnumerable<Sticker> source, FiltersModule filters)
+        {
+            return filters.ApplyTo(source);
+        }
+
+        public static IEnumerable<UserSticker> ApplyFilters(this IEnumerable<UserSticker> source, FiltersModule filters)
+        {
+            return filters.ApplyTo(source);
         }
     }
 }

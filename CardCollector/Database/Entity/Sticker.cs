@@ -4,17 +4,17 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using CardCollector.Others;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
 using Telegram.Bot.Types.InlineQueryResults;
 
 namespace CardCollector.Database.Entity
 {
-    public class Sticker
+    public class Sticker : ITelegramInlineQueryResult, ITelegramInlineQueryMessageResult
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
-
         [MaxLength(256)] public string Title { get; set; }
         [MaxLength(128)] public string Author { get; set; }
         public int Income { get; set; }
@@ -52,6 +52,19 @@ namespace CardCollector.Database.Entity
                        $"{ExclusiveTaskTranslations.ResourceManager.GetString(((int) Effect).ToString())}";
             if (Description != "") str += $"\n\n{Text.description}: {Description}";
             return str;
+        }
+
+        public InlineQueryResult ToMessageResult(string command)
+        {
+            return new InlineQueryResultCachedSticker($"{command}={Id}", FileId)
+            {
+                InputMessageContent = new InputTextMessageContent(Text.select)
+            };
+        }
+
+        public InlineQueryResult ToResult(string command)
+        {
+            return new InlineQueryResultCachedSticker($"{command}={Id}", FileId);
         }
 
         public string ToString(int count)
@@ -94,11 +107,11 @@ namespace CardCollector.Database.Entity
             {
                 case Effect.PiggyBank200:
                     user.Cash.MaxCapacity += 200;
-                    await user.Messages.SendMessage(user, Messages.effect_PiggyBank200);
+                    await user.Messages.SendMessage(Messages.effect_PiggyBank200);
                     break;
                 case Effect.Diamonds25Percent:
                     await user.AddGems((int) (user.Cash.Gems * 0.25));
-                    await user.Messages.SendMessage(user, Messages.effect_Diamonds25Percent);
+                    await user.Messages.SendMessage(Messages.effect_Diamonds25Percent);
                     break;
                 case Effect.Random1Pack5Day:
                     userSticker.GivePrizeDate = DateTime.Today;
@@ -110,11 +123,6 @@ namespace CardCollector.Database.Entity
                     userSticker.GivePrizeDate = DateTime.Today;
                     break;
             }
-        }
-
-        public InlineQueryResultCachedSticker AsTelegramCachedSticker(string command)
-        {
-            return new InlineQueryResultCachedSticker($"{command}={Id}", FileId);
         }
 
         public void SetSticker(Telegram.Bot.Types.Sticker sticker)
@@ -132,6 +140,21 @@ namespace CardCollector.Database.Entity
         public void SetMonochrome(Telegram.Bot.Types.Sticker sticker)
         {
             GrayFileId = sticker.FileId;
+        }
+
+        public void AddPuzzlePieces(List<Telegram.Bot.Types.Sticker> stickers)
+        {
+            foreach (var sticker in stickers.WithIndex())
+            {
+                var puzzle = new PuzzlePiece()
+                {
+                    FileId = sticker.item.FileId,
+                    Order = sticker.index,
+                    PieceCount = stickers.Count,
+                    Sticker = this
+                };
+                PuzzlePieces.Add(puzzle);
+            }
         }
     }
 }

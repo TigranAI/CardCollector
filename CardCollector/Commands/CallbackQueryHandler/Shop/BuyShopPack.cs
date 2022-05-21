@@ -24,12 +24,12 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
                 await AnswerCallbackQuery(User, CallbackQuery.Id, Messages.not_enougth_gems, true);
             else
             {
-                await User.Messages.ClearChat(User);
+                await User.Messages.ClearChat();
                 if (currency == "coins") await User.DecreaseCoins(packInfo.PriceCoins);
                 else if (currency == "gems") User.Cash.Gems -= packInfo.PriceGems;
                 User.AddPack(packInfo, 1);
                 var userPack = User.Packs.Single(item => item.Pack.Id == packInfo.Id);
-                await User.Messages.EditMessage(User,
+                await User.Messages.EditMessage(
                     $"{Messages.thanks_for_buying} {userPack.Count} {Text.packs} {packInfo.Author}",
                     Keyboard.BuyShopItem(CallbackQuery.Data));
                 

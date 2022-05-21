@@ -16,21 +16,18 @@ namespace CardCollector.Commands.InlineQueryHandler.Shop
     {
         protected override async Task Execute()
         {
-            var offset = int.Parse(InlineQuery.Offset == "" ? "0" : InlineQuery.Offset);
+            var offset = Offset.Of(InlineQuery);
             var length = 0;
             
             var packId = User.Session.GetModule<ShopModule>().SelectedPackId;
             var pack = await Context.Packs.FindById(packId);
-            var stickersList = pack.Stickers
+            var results = pack.Stickers
                 .Where(item => item.Contains(InlineQuery.Query))
                 .OrderBy(sticker => sticker.Tier)
-                .ToList();
-            var results = stickersList
-                .And(list => length = list.Count)
-                .ToTelegramStickersAsMessage(ChosenInlineResultCommands.sticker_info, offset);
+                .And(list => length = list.Count())
+                .ToTelegramMessageResults(ChosenInlineResultCommands.sticker_info, offset);
             
-            var newOffset = offset + 50 > length ? "" : (offset + 50).ToString();
-            await AnswerInlineQuery(User, InlineQuery.Id, results, newOffset);
+            await AnswerInlineQuery(User, InlineQuery.Id, results, offset.GetNext(length));
         }
 
         public override bool Match()

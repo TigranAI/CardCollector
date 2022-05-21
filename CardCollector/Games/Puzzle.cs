@@ -24,10 +24,10 @@ public static class Puzzle
 {
     private static readonly Dictionary<long, Timer> TurnTimers = new();
 
-    private static readonly int PUZZLE_MIN_PLAYERS = Constants.DEBUG ? 1 : 2;
-    private static readonly int PUZZLE_MAX_PLAYERS = Constants.DEBUG ? 2 : 5;
-    private static readonly int PUZZLE_MAX_REWARDS = Constants.DEBUG ? 2 : 5;
-    private static readonly int MIN_MEMBERS_IN_CHAT = Constants.DEBUG ? 2 : 20;
+    public static readonly int PUZZLE_MIN_PLAYERS = Constants.DEBUG ? 1 : 2;
+    public static readonly int PUZZLE_MAX_PLAYERS = Constants.DEBUG ? 2 : 5;
+    public static readonly int PUZZLE_MAX_REWARDS = Constants.DEBUG ? 2 : 5;
+    public static readonly int MIN_MEMBERS_IN_CHAT = Constants.DEBUG ? 2 : 20;
 
     public static async void Start(long chatId)
     {
@@ -87,12 +87,14 @@ public static class Puzzle
         await puzzleRepo.SaveAsync(chat, puzzleInfo);
     }
 
-    private static async Task ClearPlayerList(BotDatabaseContext context, List<long> players)
+    private static async Task ClearPlayerList(BotDatabaseContext context, List<long> players, bool success = false)
     {
         var userRepo = new UserInfoRepository();
         await players.ApplyAsync(async playerId =>
         {
             var user = await context.Users.FindById(playerId);
+            if (success)
+                user!.UserStats.IncreasePuzzleGames();
             var info = await userRepo.GetAsync(user!);
             info.PuzzleChatId = 0;
             await userRepo.SaveAsync(user, info);
@@ -118,7 +120,7 @@ public static class Puzzle
         var players = puzzleInfo.GetPlayers();
         var looser = await context.Users.FindById(players[puzzleInfo.Turn]);
         await chat.SendMessage(
-            string.Format(endOfTurn ? Messages.puzzle_end_of_turn : Messages.puzzle_wrong_piece, looser.GetMention()),
+            string.Format(endOfTurn ? Messages.puzzle_end_of_turn : Messages.puzzle_wrong_piece, looser!.GetMention()),
             parseMode: ParseMode.Html);
 
         await ClearPlayerList(context, players);
@@ -129,7 +131,7 @@ public static class Puzzle
     public static async Task SendPrepareMessage(PuzzleInfo puzzleInfo, TelegramChat chat, BotDatabaseContext context)
     {
         var creator = await context.Users.FindById(puzzleInfo.CreatorId);
-        var message = string.Format(Messages.puzzle_message, creator.GetMention(),
+        var message = string.Format(Messages.puzzle_message, creator!.GetMention(),
             await GetMentionList(context, puzzleInfo.Players));
 
         puzzleInfo.MessageId = puzzleInfo.MessageId == -1
@@ -208,7 +210,7 @@ public static class Puzzle
 
         await chat.SendMessage(message, parseMode: ParseMode.Html);
 
-        await ClearPlayerList(context, players);
+        await ClearPlayerList(context, players, true);
         puzzleInfo.EndGame();
         await puzzleRepo.SaveAsync(chat, puzzleInfo);
     }

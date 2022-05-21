@@ -16,21 +16,21 @@ namespace CardCollector.Commands.MessageHandler.Shop
 
         protected override async Task Execute()
         {
-            await User.Messages.ClearChat(User);
+            await User.Messages.ClearChat();
             
             var amount = Message.SuccessfulPayment!.TotalAmount;
             var gemsCount = amount * 5 / 100;
             
             await User.AddGems(gemsCount);
             User.Level.GiveExp(gemsCount * 2);
-            await User.Level.CheckLevelUp(Context, User);
+            await User.Level.CheckLevelUp(Context);
             
             if (User.Settings[UserSettingsTypes.ExpGain])
-                await User.Messages.SendMessage(User,
+                await User.Messages.SendMessage(
                     $"{Messages.you_gained} {gemsCount * 2} {Text.exp} {Messages.for_buy_gems}",
                     Keyboard.BackKeyboard);
             
-            await User.Messages.SendMessage(User, Messages.thanks_for_buying_gems, Keyboard.BackKeyboard);
+            await User.Messages.SendMessage(Messages.thanks_for_buying_gems, Keyboard.BackKeyboard);
             
             if (User.InviteInfo?.TasksProgress is { } tp && !tp.Donate)
             {

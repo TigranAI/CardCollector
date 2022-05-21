@@ -19,7 +19,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Auction
             Context.Attach(auction);
             Context.Remove(auction);
             await User.AddSticker(auction.Sticker, auction.Count);
-            await User.Messages.EditMessage(User,
+            await User.Messages.EditMessage(
                 string.Format(Messages.successfully_returned, auction.Count, auction.Sticker.Title),
                 Keyboard.BackKeyboard);
         }

@@ -26,8 +26,9 @@ namespace CardCollector.Commands.CallbackQueryHandler.Group
 
             var repo = new UserInfoRepository();
             var info = await repo.GetAsync(User);
-            if (info!.TryClaimLadder(MAX_LADDER_PRIZES))
+            if (info.TryClaimLadder(MAX_LADDER_PRIZES))
             {
+                User.UserStats.IncreaseGiftsReceived();
                 var chat = await Context.TelegramChats.FindById(chatId);
                 var packId = int.Parse(data[2]);
                 var pack = await Context.Packs.FindById(packId);

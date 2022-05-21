@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 using CardCollector.Extensions;
 using CardCollector.Extensions.Database.Entity;
 using CardCollector.Resources.Enums;
@@ -45,12 +45,11 @@ namespace CardCollector.Database.Entity.NotMapped
             return this;
         }
 
-
-        public Income Payout(Cash cash)
+        public async Task<Income> Payout(User user)
         {
-            cash.Coins += Coins;
-            cash.Gems += Gems;
-            cash.Candies += Candies;
+            user.Cash.Coins += Coins;
+            await user.AddGems(Gems);
+            user.Cash.Candies += Candies;
             return this;
         }
 

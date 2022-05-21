@@ -16,7 +16,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin
         {
             User.Session.State = UserState.EditSticker;
             User.Session.GetModule<AdminModule>().SelectedPackId = int.Parse(CallbackQuery.Data!.Split('=')[1]);
-            await User.Messages.EditMessage(User, Messages.select_sticker, Keyboard.ShowStickers);
+            await User.Messages.EditMessage(Messages.select_sticker, Keyboard.ShowStickers);
         }
 
         public override bool Match()

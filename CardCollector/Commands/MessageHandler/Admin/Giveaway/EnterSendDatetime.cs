@@ -27,19 +27,19 @@ namespace CardCollector.Commands.MessageHandler.Admin.Giveaway
                 var module = User.Session.GetModule<AdminModule>();
                 if (module.SelectedChannelGiveawayId == null) return;
                 var giveaway = await Context.ChannelGiveaways.FindById(module.SelectedChannelGiveawayId.Value);
-                giveaway.SendAt = datetime;
-                await User.Messages.EditMessage(User, Messages.enter_button_text,
+                giveaway!.SendAt = datetime;
+                await User.Messages.EditMessage(Messages.enter_button_text,
                     Keyboard.SkipKeyboard(typeof(EnterButtonText).Name), ParseMode.Html);
                 EnterButtonText.AddToQueue(User.Id);
             }
-            else await User.Messages.EditMessage(User, Messages.incorrect_datetime_format,
+            else await User.Messages.EditMessage(Messages.incorrect_datetime_format,
                     Keyboard.SkipKeyboard(GetType().Name));
         }
 
         public static async Task Skip(User user, BotDatabaseContext botDatabaseContext)
         {
             RemoveFromQueue(user.Id);
-            await user.Messages.EditMessage(user, Messages.enter_button_text,
+            await user.Messages.EditMessage(Messages.enter_button_text,
                 Keyboard.SkipKeyboard(typeof(EnterButtonText).Name), ParseMode.Html);
             EnterButtonText.AddToQueue(user.Id);
         }

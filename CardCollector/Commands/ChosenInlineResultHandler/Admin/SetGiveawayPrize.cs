@@ -23,7 +23,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Admin
             giveaway.Prize = PrizeType.SelectedSticker;
             giveaway.SelectedSticker = sticker;
             module.SelectedChannelGiveawayId = giveaway.Id;
-            await User.Messages.EditMessage(User, Messages.select_channel, Keyboard.SelectChannel);
+            await User.Messages.EditMessage(Messages.select_channel, Keyboard.SelectChannel);
         }
     }
 }

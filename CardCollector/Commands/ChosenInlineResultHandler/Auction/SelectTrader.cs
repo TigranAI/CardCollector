@@ -17,7 +17,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Auction
             var module = User.Session.GetModule<AuctionModule>();
             module.SelectedAuctionId = productId;
             module.Count = 1;
-            await User.Messages.EditMessage(User, product.Sticker.ToString(product.Count), 
+            await User.Messages.EditMessage(product.Sticker.ToString(product.Count), 
                 Keyboard.GetAuctionProductKeyboard(product, User, module.Count));
         }
     }

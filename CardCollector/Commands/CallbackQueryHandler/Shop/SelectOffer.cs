@@ -11,15 +11,15 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
 
         protected override async Task Execute()
         {
-            await User.Messages.ClearChat(User);
+            await User.Messages.ClearChat();
             var orderId = int.Parse(CallbackQuery.Data!.Split('=')[1]);
             var orderInfo = await Context.SpecialOrders.FindById(orderId);
             if (orderInfo == null) return;
             User.Session.GetModule<ShopModule>().SelectedOrderId = orderId;
             if (orderInfo.PreviewFileId == null)
-                await User.Messages.EditMessage(User, orderInfo.Title, Keyboard.OrderKeyboard(orderInfo));
+                await User.Messages.EditMessage(orderInfo.Title, Keyboard.OrderKeyboard(orderInfo));
             else
-                await User.Messages.SendSticker(User, orderInfo.PreviewFileId, Keyboard.OrderKeyboard(orderInfo));
+                await User.Messages.SendSticker(orderInfo.PreviewFileId, Keyboard.OrderKeyboard(orderInfo));
         }
     }
 }

@@ -19,12 +19,12 @@ namespace CardCollector.Commands.MessageHandler.TextCommands
                 User.FirstReward = true;
                 var packInfo = await Context.Packs.FindById(1);
                 User.AddPack(packInfo, 7);
-                await User.Messages.SendSticker(User, packInfo.PreviewFileId!);
-                await User.Messages.SendMessage(User, Messages.first_reward, Keyboard.MyPacks, ParseMode.Html);
+                await User.Messages.SendSticker(packInfo.PreviewFileId!);
+                await User.Messages.SendMessage(Messages.first_reward, Keyboard.MyPacks, ParseMode.Html);
             }
             
             var isFirstOrderPicked = User.SpecialOrdersUser.Any(item => item.Id == 2);
-            await User.Messages.SendMessage(User, Messages.start_message, Keyboard.Menu(isFirstOrderPicked));
+            await User.Messages.SendMessage(Messages.start_message, Keyboard.Menu(isFirstOrderPicked));
         }
 
         protected override async Task AfterExecute()

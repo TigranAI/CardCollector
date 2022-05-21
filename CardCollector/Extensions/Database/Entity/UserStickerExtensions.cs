@@ -14,7 +14,7 @@ namespace CardCollector.Extensions.Database.Entity
             if (userSticker.ExclusiveTaskProgress < userSticker.Sticker.ExclusiveTaskGoal) return;
             userSticker.IsUnlocked = true;
             userSticker.Payout = DateTime.Today.AddDays(-1);
-            await userSticker.User.Messages.SendMessage(userSticker.User, 
+            await userSticker.User.Messages.SendMessage( 
                 string.Format(Messages.congratulations_sticker_unlocked, userSticker.Sticker.Title));
         }
 

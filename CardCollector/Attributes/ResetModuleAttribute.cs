@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace CardCollector.Attributes
+namespace CardCollector.Attributes;
+
+[NotInherited]
+public class ResetModuleAttribute : Attribute
 {
-    [NotInherited]
-    public class ResetModuleAttribute : Attribute
-    {
         
-    }
 }

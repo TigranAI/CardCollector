@@ -1,5 +1,4 @@
 global using static CardCollector.Controllers.MessageController;
-
 using System.Threading;
 using System.Threading.Tasks;
 using CardCollector.Controllers;
@@ -24,7 +23,7 @@ namespace CardCollector
         {
             CheckArgs(args);
             await UpdateDatabase();
-
+            
             TimerTask.SetupAll();
             
             await Client.SetMyCommandsAsync(Constants.PrivateCommands, BotCommandScope.AllPrivateChats());

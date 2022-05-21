@@ -30,7 +30,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
                 $"\n{Messages.invite_friend} ({CompleteSelector(tp.InviteFriend)})" +
                 $"\n{string.Format(Messages.days_left_to_complete, timespan.Days, timespan.Hours, timespan.Minutes)}";
 
-            await User.Messages.EditMessage(User, message, Keyboard.BackKeyboard);
+            await User.Messages.EditMessage(message, Keyboard.BackKeyboard);
         }
 
         private string CompleteSelector(bool expression)

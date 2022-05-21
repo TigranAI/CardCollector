@@ -26,7 +26,7 @@ namespace CardCollector.Commands.MessageHandler.Admin.Distribution
             var distribution = await Context.ChatDistributions.FindById(module.ChatDistributionId!.Value);
             distribution.ImageFileId = Message.Photo![0].FileId;
             
-            await User.Messages.SendMessage(User, Messages.send_distribution_sticker, 
+            await User.Messages.SendMessage(Messages.send_distribution_sticker, 
                 Keyboard.StickerSkipKeyboard(typeof(SetDistributionSticker).Name));
             
             User.Session.State = UserState.SendDistributionSticker;
@@ -35,7 +35,7 @@ namespace CardCollector.Commands.MessageHandler.Admin.Distribution
         public static async Task Skip(User user, BotDatabaseContext context)
         {
             RemoveFromQueue(user.Id);
-            await user.Messages.SendMessage(user, Messages.send_distribution_sticker, 
+            await user.Messages.SendMessage(Messages.send_distribution_sticker, 
                 Keyboard.StickerSkipKeyboard(typeof(SetDistributionSticker).Name));
             
             user.Session.State = UserState.SendDistributionSticker;

@@ -21,7 +21,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin.Distribution
             
             distribution.Buttons.Last().Type = ButtonType.InlineMenu;
             
-            await User.Messages.SendMessage(User, Messages.choose_option, Keyboard.DistributionInlineOptions);
+            await User.Messages.SendMessage(Messages.choose_option, Keyboard.DistributionInlineOptions);
         }
     }
 }

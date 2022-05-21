@@ -38,7 +38,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin
                 $"\n{LogsTranslations.GroupCountWasActive}: {logsPage.GroupCountWasActive}" +
                 $"\n{LogsTranslations.RoulettePlayCount}: {logsPage.RoulettePlayCount}" +
                 $"\n{LogsTranslations.GroupPrizeCount}: {logsPage.GroupPrizeCount}";
-            await User.Messages.EditMessage(User, message, Keyboard.LogsMenu(date), ParseMode.Html);
+            await User.Messages.EditMessage(message, Keyboard.LogsMenu(date), ParseMode.Html);
         }
 
         private async Task<CountLogs> GetCurrentResults()

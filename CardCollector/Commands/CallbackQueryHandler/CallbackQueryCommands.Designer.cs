@@ -61,6 +61,15 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ACZ.
+        /// </summary>
+        internal static string add_puzzle {
+            get {
+                return ResourceManager.GetString("add_puzzle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AAA.
         /// </summary>
         internal static string add_sticker_preview {
@@ -327,6 +336,15 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         internal static string edit_sticker {
             get {
                 return ResourceManager.GetString("edit_sticker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ACY.
+        /// </summary>
+        internal static string edit_stickerpack {
+            get {
+                return ResourceManager.GetString("edit_stickerpack", resourceCulture);
             }
         }
         

@@ -59,7 +59,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Private
             {
                 var packInfo = await Context.Packs.FindById(1);
                 User.AddPack(packInfo, 1);
-                await User.Messages.SendDailyTaskComplete(User);
+                await User.Messages.SendDailyTaskComplete();
                 await User.Stickers
                     .Where(sticker => sticker.Sticker.ExclusiveTask is ExclusiveTask.CompleteDailyTask)
                     .ApplyAsync(async sticker => await sticker.DoExclusiveTask());
@@ -69,7 +69,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Private
         private async Task SendAlert(DailyTask dailyTask)
         {
             if (User.Settings[UserSettingsTypes.DailyTaskProgress])
-                await User.Messages.SendDailyTaskProgress(User,
+                await User.Messages.SendDailyTaskProgress(
                     $"{Messages.send_sticker_progress}: " +
                     $"{TaskGoals.Goals[TaskKeys.SendStickersToUsers] - dailyTask.Progress}" +
                     $" / {TaskGoals.Goals[TaskKeys.SendStickersToUsers]}");

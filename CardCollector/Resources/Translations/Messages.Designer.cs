@@ -308,6 +308,15 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выберите действие.
+        /// </summary>
+        internal static string choose_action {
+            get {
+                return ResourceManager.GetString("choose_action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Выберите автора из списка ниже:.
         /// </summary>
         internal static string choose_author {
@@ -1521,6 +1530,18 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Отправьте архив с пазлами к данному стикеру. Название файла должно отражать порядковый номер пазла, начиная с 0, например:
+        ///0.webp
+        ///1.webp
+        ///2.tgs.
+        /// </summary>
+        internal static string send_puzzle_archive {
+            get {
+                return ResourceManager.GetString("send_puzzle_archive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to за отправку стикера в беседу.
         /// </summary>
         internal static string send_sticker {
@@ -1750,6 +1771,16 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Вы заняли {0} место в &quot;{1}&quot;. Вы получаете награду: {2}.
+        ///Следующие результаты будут через 2 недели..
+        /// </summary>
+        internal static string top_reward_message {
+            get {
+                return ResourceManager.GetString("top_reward_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Не забывайте собирать прибыль во вкладке профиля. Несобранная прибыль составляет.
         /// </summary>
         internal static string uncollected_income {
@@ -1786,7 +1817,7 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Стикер заменен успешно!.
+        ///   Looks up a localized string similar to Стикер загружен успешно!.
         /// </summary>
         internal static string update_sticker_success {
             get {

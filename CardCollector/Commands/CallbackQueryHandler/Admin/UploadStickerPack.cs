@@ -14,7 +14,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin
         protected override async Task Execute()
         {
             User.Session.State = UserState.UploadSticker;
-            await User.Messages.EditMessage(User, Messages.upload_your_stickers, Keyboard.BackKeyboard);
+            await User.Messages.EditMessage(Messages.upload_your_stickers, Keyboard.BackKeyboard);
         }
 
         public override bool Match()

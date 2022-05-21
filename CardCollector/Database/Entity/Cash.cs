@@ -1,13 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Threading.Tasks;
 using CardCollector.Database.Entity.NotMapped;
 using CardCollector.Resources.Translations;
 
 namespace CardCollector.Database.Entity
 {
+    [Table("user_cash")]
     public class Cash
     {
+        [Key, ForeignKey("id")]
+        public virtual User User { get; set; }
         public int Coins { get; set; }
         public int Gems { get; set; }
         public int Candies { get; set; }
@@ -21,12 +27,12 @@ namespace CardCollector.Database.Entity
                 .ApplyLimits(MaxCapacity, -1, stickers.Count(sticker => sticker.Sticker.Tier == 10));
         }
 
-        public Income Payout(ICollection<UserSticker> stickers)
+        public async Task<Income> Payout()
         {
-            return new Income()
-                .Calculate(stickers, LastPayout = DateTime.Now, true)
-                .ApplyLimits(MaxCapacity, -1, stickers.Count(sticker => sticker.Sticker.Tier == 10))
-                .Payout(this);
+            return await new Income()
+                .Calculate(User.Stickers, LastPayout = DateTime.Now, true)
+                .ApplyLimits(MaxCapacity, -1, User.Stickers.Count(sticker => sticker.Sticker.Tier == 10))
+                .Payout(User);
         }
 
         public override string ToString()

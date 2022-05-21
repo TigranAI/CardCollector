@@ -50,7 +50,7 @@ namespace CardCollector.TimerTasks
                         user.AddPack(pack, packsCount);
 
                         if (user.Settings[UserSettingsTypes.StickerEffects])
-                            await user.Messages.SendMessage(user,
+                            await user.Messages.SendMessage(
                                 $"{Messages.effect_Random1Pack5Day} {packsCount}{Text.items}");
                     }
                 }
@@ -87,7 +87,7 @@ namespace CardCollector.TimerTasks
                         }
 
                         if (user.Settings[UserSettingsTypes.StickerEffects])
-                            await user.Messages.SendMessage(user, message);
+                            await user.Messages.SendMessage(message);
                     }
                 }
 
@@ -123,7 +123,7 @@ namespace CardCollector.TimerTasks
                         }
 
                         if (user.Settings[UserSettingsTypes.StickerEffects])
-                            await user.Messages.SendMessage(user, message);
+                            await user.Messages.SendMessage(message);
                     }
                 }
 

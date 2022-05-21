@@ -20,9 +20,9 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Auction
             var sticker = await Context.Stickers.FindById(stickerId);
             var positionsCount =
                 await Context.Auctions.GetCountByStickerId(stickerId, User.Session.GetModule<FiltersModule>());
-            await User.Messages.ClearChat(User);
-            await User.Messages.SendSticker(User, sticker.ForSaleFileId ?? sticker.FileId);
-            await User.Messages.SendMessage(User, sticker.ToString(positionsCount), Keyboard.AuctionStickerKeyboard);
+            await User.Messages.ClearChat();
+            await User.Messages.SendSticker(sticker.ForSaleFileId ?? sticker.FileId);
+            await User.Messages.SendMessage(sticker.ToString(positionsCount), Keyboard.AuctionStickerKeyboard);
         }
 
         public override bool Match()

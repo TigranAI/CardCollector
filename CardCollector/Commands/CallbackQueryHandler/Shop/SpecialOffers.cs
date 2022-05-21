@@ -24,7 +24,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
             if (availableOffers.Count < 1)
                 await AnswerCallbackQuery(User, CallbackQuery.Id, Messages.offers_not_found, true);
             else
-                await User.Messages.EditMessage(User, Messages.available_offers, Keyboard.SpecialOrdersKeyboard(availableOffers));
+                await User.Messages.EditMessage(Messages.available_offers, Keyboard.SpecialOrdersKeyboard(availableOffers));
         }
     }
 }

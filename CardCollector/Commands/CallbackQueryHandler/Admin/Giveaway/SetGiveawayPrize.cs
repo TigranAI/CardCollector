@@ -19,9 +19,9 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin.Giveaway
             giveaway!.Prize = (PrizeType) int.Parse(CallbackQuery.Data!.Split("=")[1]);
             module.SelectedChannelGiveawayId = giveaway.Id;
             if (giveaway.Prize is PrizeType.RandomSticker)
-                await User.Messages.EditMessage(User, Messages.choose_tier, Keyboard.GiveawayTier);
+                await User.Messages.EditMessage(Messages.choose_tier, Keyboard.GiveawayTier);
             else
-                await User.Messages.EditMessage(User, Messages.select_channel, Keyboard.SelectChannel);
+                await User.Messages.EditMessage(Messages.select_channel, Keyboard.SelectChannel);
         }
 
         public override bool Match()

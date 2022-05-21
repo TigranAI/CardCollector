@@ -16,7 +16,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
         {
             var random = User.Packs.SingleOrDefault(item => item.Pack.Id == 1);
             var authorCount = User.Packs.Sum(item => item.Count) - (random?.Count ?? 0);
-            await User.Messages.EditMessage(User, 
+            await User.Messages.EditMessage(
                 $"{Messages.your_packs}" +
                 $"\n{Messages.random_packs}: {random?.Count ?? 0}{Text.items}" +
                 $"\n{Messages.author_pack}: {authorCount}{Text.items}",

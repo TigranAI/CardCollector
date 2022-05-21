@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using CardCollector.Database;
 using CardCollector.Database.Entity;
 using CardCollector.Database.EntityDao;
-using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 using CardCollector.Session;
 
@@ -34,8 +33,8 @@ namespace CardCollector.Controllers
                 {
                     session.EndSession();
                     var user = await context.Users.FindById(userId);
-                    await user.Messages.ClearChat(user);
-                    await user.Messages.SendMessage(user, Messages.bot_turning_off);
+                    await user!.Messages.ClearChat();
+                    await user.Messages.SendMessage(Messages.bot_turning_off);
                 }
 
                 await context.SaveChangesAsync();

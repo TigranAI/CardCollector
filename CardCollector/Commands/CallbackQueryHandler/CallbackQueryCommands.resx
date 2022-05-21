@@ -249,4 +249,10 @@
     <data name="upload_stickerpack_beta" xml:space="preserve">
         <value>ACX</value>
     </data>
+    <data name="edit_stickerpack" xml:space="preserve">
+        <value>ACY</value>
+    </data>
+    <data name="add_puzzle" xml:space="preserve">
+        <value>ACZ</value>
+    </data>
 </root>

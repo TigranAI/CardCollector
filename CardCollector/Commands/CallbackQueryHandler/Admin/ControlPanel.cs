@@ -16,7 +16,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin
 
         protected override async Task Execute()
         {
-            await User.Messages.EditMessage(User, Messages.control_panel, Keyboard(User.PrivilegeLevel), ParseMode.Html);
+            await User.Messages.EditMessage(Messages.control_panel, Keyboard(User.PrivilegeLevel), ParseMode.Html);
         }
 
         public override bool Match()
@@ -74,19 +74,9 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin
                     },
                     new[]
                     {
-                        InlineKeyboardButton.WithCallbackData(Text.add_for_sale_sticker,
-                            $"{CallbackQueryCommands.choose_pack}={CallbackQueryCommands.select_for_sale_pack}=0")
-                    },
-                    new[]
-                    {
-                        InlineKeyboardButton.WithCallbackData(Text.add_sticker_preview,
-                            $"{CallbackQueryCommands.choose_pack}={CallbackQueryCommands.add_sticker_preview}=0")
-                    },
-                    new[]
-                    {
-                        InlineKeyboardButton.WithCallbackData(Text.edit_sticker,
-                            $"{CallbackQueryCommands.choose_pack}={CallbackQueryCommands.edit_sticker}=0")
-                    },
+                        InlineKeyboardButton.WithCallbackData(Text.edit_stickerpack,
+                            $"{CallbackQueryCommands.choose_pack}={CallbackQueryCommands.edit_stickerpack}=0")
+                    }
                 });
             keyboard.Add(new[] {InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back)});
             return new InlineKeyboardMarkup(keyboard);

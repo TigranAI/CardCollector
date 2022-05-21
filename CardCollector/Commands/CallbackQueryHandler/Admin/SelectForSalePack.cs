@@ -18,7 +18,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin
             User.Session.State = UserState.LoadForSaleSticker;
             var packId = int.Parse(CallbackQuery.Data!.Split('=')[1]);
             User.Session.GetModule<AdminModule>().SelectedPackId = packId;
-            await User.Messages.EditMessage(User, Messages.choose_sticker, Keyboard.ShowStickers);
+            await User.Messages.EditMessage(Messages.choose_sticker, Keyboard.ShowStickers);
         }
 
         public override bool Match()

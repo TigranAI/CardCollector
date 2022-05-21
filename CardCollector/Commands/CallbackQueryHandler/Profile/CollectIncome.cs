@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Attributes;
-using CardCollector.Controllers;
 using CardCollector.Database.Entity;
 using CardCollector.Database.EntityDao;
 using CardCollector.Extensions.Database.Entity;
@@ -17,13 +16,13 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
 
         protected override async Task Execute()
         {
-            var result = User.Cash.Payout(User.Stickers);
+            var result = await User.Cash.Payout();
             await AnswerCallbackQuery(User, CallbackQuery.Id,
                 $"{Messages.you_collected} {result} " +
                 $"\n\n{Messages.your_cash}: {User.Cash}", true);
             var currentLevel = await Context.Levels.FindLevel(User.Level.Level + 1);
             var expGoal = currentLevel?.LevelExpGoal.ToString() ?? "∞";
-            await User.Messages.EditMessage(User, User.GetProfileMessage(expGoal),
+            await User.Messages.EditMessage(User.GetProfileMessage(expGoal),
                 Keyboard.GetProfileKeyboard(User.Packs.Sum(pack => pack.Count), User.InviteInfo));
 
             if (User.InviteInfo?.TasksProgress is { } tp && tp.CollectIncome < BeginnersTasksProgress.CollectIncomeGoal)

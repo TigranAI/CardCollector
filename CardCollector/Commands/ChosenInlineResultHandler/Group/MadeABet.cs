@@ -19,7 +19,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Group
             var repo = new ChosenResultRepository();
             var chatId = await repo.GetAsync(User.Id);
             if (chatId == null)
-                await User.Messages.SendMessage(User, Messages.cant_define_bet);
+                await User.Messages.SendMessage(Messages.cant_define_bet);
             else
             {
                 await repo.DeleteAsync(User.Id);

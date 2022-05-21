@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Database;
 using CardCollector.Database.Entity;
-using CardCollector.Resources;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
 using Microsoft.EntityFrameworkCore;
@@ -43,21 +42,38 @@ namespace CardCollector.Session.Modules
             return text;
         }
 
-        public List<Sticker> ApplyTo(List<Sticker> list)
+        public IEnumerable<Sticker> ApplyTo(IEnumerable<Sticker> list)
         {
             if (Author is { } author)
-                list.RemoveAll(item => !item.Author.Contains(author));
+                list = list.Where(item => item.Author.Contains(author));
             if (Tier is { } tier)
-                list.RemoveAll(item => !item.Tier.Equals(tier));
+                list = list.Where(item => item.Tier.Equals(tier));
             if (Emoji is { } emoji)
-                list.RemoveAll(item => !item.Emoji.Contains(emoji));
+                list = list.Where(item => item.Emoji.Contains(emoji));
             return Sorting switch
             {
-                SortingTypes.None => list,
                 SortingTypes.ByAuthor => list.OrderBy(item => item.Author).ToList(),
                 SortingTypes.ByTitle => list.OrderBy(item => item.Title).ToList(),
                 SortingTypes.ByTierIncrease => list.OrderBy(item => item.Tier).ToList(),
                 SortingTypes.ByTierDecrease => list.OrderByDescending(item => item.Tier).ToList(),
+                _ => list
+            };
+        }
+
+        public IEnumerable<UserSticker> ApplyTo(IEnumerable<UserSticker> list)
+        {
+            if (Author is { } author)
+                list = list.Where(item => item.Sticker.Author.Contains(author));
+            if (Tier is { } tier)
+                list = list.Where(item => item.Sticker.Tier.Equals(tier));
+            if (Emoji is { } emoji)
+                list = list.Where(item => item.Sticker.Emoji.Contains(emoji));
+            return Sorting switch
+            {
+                SortingTypes.ByAuthor => list.OrderBy(item => item.Sticker.Author).ToList(),
+                SortingTypes.ByTitle => list.OrderBy(item => item.Sticker.Title).ToList(),
+                SortingTypes.ByTierIncrease => list.OrderBy(item => item.Sticker.Tier).ToList(),
+                SortingTypes.ByTierDecrease => list.OrderByDescending(item => item.Sticker.Tier).ToList(),
                 _ => list
             };
         }

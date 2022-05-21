@@ -13,7 +13,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
         
         protected override async Task Execute()
         {
-            await User.Messages.ClearChat(User);
+            await User.Messages.ClearChat();
             var count = int.Parse(CallbackQuery.Data!.Split('=')[1]);
             var label = string.Format(Text.gems_title, count, count / 5);
             var description = string.Format(Text.gems_description, count);

@@ -49,28 +49,29 @@ public class UploadStickerPackZip : MessageHandler
 
     protected override async Task Execute()
     {
-        await User.Messages.ClearChat(User);
-        await User.Messages.SendMessage(User, Messages.downloading_file);
+        await User.Messages.ClearChat();
+        await User.Messages.SendMessage(Messages.downloading_file);
         var fileName = await Utilities.DownloadFile(Message.Document!, User.ChatId);
         var dirName = Path.GetDirectoryName(fileName)!;
 
-        await User.Messages.EditMessage(User, Messages.unzip_file);
+        await User.Messages.EditMessage(Messages.unzip_file);
         ZipFile.ExtractToDirectory(fileName, dirName, true);
         System.IO.File.Delete(fileName);
 
-        await User.Messages.EditMessage(User, Messages.reading_document);
+        await User.Messages.EditMessage(Messages.reading_document);
         var table = System.IO.File.Open(dirName + EXCEL_TABLE_NAME, FileMode.Open);
         var pack = ParseExcelFile(table);
         table.Close();
 
-        await User.Messages.EditMessage(User, Messages.uploading_stickers);
+        await User.Messages.EditMessage(Messages.uploading_stickers);
         await UploadPackPreviews(dirName, pack);
         await UploadStickers(dirName, pack);
 
         await Context.Packs.AddAsync(pack);
-        await User.Messages.EditMessage(User, Messages.stickers_succesfully_uploaded);
+        await User.Messages.EditMessage(Messages.stickers_succesfully_uploaded);
         
-        TimerController.SetupTimer(60 * 1000, delegate { ClearChat(); });
+        TimerController.SetupTimer(30 * 1000, delegate { ClearChat(); });
+        User.Session.State = UserState.Default;
     }
 
     private async void ClearChat()
@@ -230,7 +231,7 @@ public class UploadStickerPackZip : MessageHandler
     {
         var file = FileOf(stickerName +
                           (System.IO.File.Exists(stickerName + WEBP_EXTENSION) ? WEBP_EXTENSION : TGS_EXTENSION));
-        var message = await Bot.Client.SendStickerAsync(User.ChatId, new InputMedia(file.Content!, file.FileName));
+        var message = await Bot.Client.SendStickerAsync(User.ChatId, new InputMedia(file.Content!, file.FileName!));
         
         if (!StickerMessages.ContainsKey(User.Id)) StickerMessages.Add(User.Id, new List<int>());
         StickerMessages[User.Id].Add(message.MessageId);

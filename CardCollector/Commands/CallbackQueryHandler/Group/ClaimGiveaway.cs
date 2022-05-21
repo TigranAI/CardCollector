@@ -73,6 +73,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Group
 
             await chat.EditMessage(string.Format(Messages.user_claim_giveaway, User.Username, prizeMessage,
                 chat.GiveawayDuration), CallbackQuery.Message!.MessageId);
+            User.UserStats.IncreaseGiftsReceived();
         }
 
         private async Task<string> ClaimSticker(long stickerId)

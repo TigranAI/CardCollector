@@ -8,7 +8,7 @@ namespace CardCollector.Commands.MessageHandler.TextCommands
         protected override string CommandText => MessageCommands.help;
         protected override async Task Execute()
         {
-            await User.Messages.EditMessage(User, Messages.help);
+            await User.Messages.EditMessage(Messages.help);
         }
     }
 }

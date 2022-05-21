@@ -12,7 +12,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
 
         protected override async Task Execute()
         {
-            await User.Messages.EditMessage(User, Messages.buy_gems, Keyboard.BuyGems);
+            await User.Messages.EditMessage(Messages.buy_gems, Keyboard.BuyGems);
         }
     }
 }

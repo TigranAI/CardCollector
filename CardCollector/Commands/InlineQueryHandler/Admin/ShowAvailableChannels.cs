@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using CardCollector.Commands.ChosenInlineResultHandler;
 using CardCollector.Extensions;
+using CardCollector.Others;
 using CardCollector.Resources.Enums;
 using Microsoft.EntityFrameworkCore;
 using Telegram.Bot.Types.Enums;
@@ -12,18 +13,19 @@ namespace CardCollector.Commands.InlineQueryHandler.Admin
     {
         protected override async Task Execute()
         {
-            var offset = int.Parse(InlineQuery.Offset == "" ? "0" : InlineQuery.Offset);
+            var offset = Offset.Of(InlineQuery);
             var length = 0;
-            var channels = await Context.TelegramChats
-                .Where(item => !item.IsBlocked && item.ChatType == ChatType.Channel && item.Title.Contains(InlineQuery.Query))
+            
+            var results = (await Context.TelegramChats
+                .Where(item =>
+                    !item.IsBlocked
+                    && item.ChatType == ChatType.Channel
+                    && item.Title.Contains(InlineQuery.Query))
                 .And(list => length = list.Count())
-                .Skip(offset)
-                .Take(50)
-                .ToListAsync();
-            var newOffset = offset + 50 > length ? "" : (offset + 50).ToString();
-            var results = channels
-                .Select(item => item.AsTelegramArticle(ChosenInlineResultCommands.set_giveaway_channel));
-            await AnswerInlineQuery(User, InlineQuery.Id, results, newOffset);
+                .ToListAsync())
+                .ToTelegramResults(ChosenInlineResultCommands.set_giveaway_channel, offset);
+            
+            await AnswerInlineQuery(User, InlineQuery.Id, results, offset.GetNext(length));
         }
 
         public override bool Match()

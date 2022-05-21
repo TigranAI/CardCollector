@@ -11,11 +11,11 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin.Distribution
         protected override string CommandText => CallbackQueryCommands.check_distribution;
         protected override async Task Execute()
         {
-            await User.Messages.ClearChat(User);
+            await User.Messages.ClearChat();
             var module = User.Session.GetModule<AdminModule>();
             var distribution = await Context.ChatDistributions.FindById(module.ChatDistributionId!.Value);
             await distribution.Send(User.ChatId);
-            await User.Messages.SendMessage(User, Messages.send_distribution, Keyboard.SendDistribution);
+            await User.Messages.SendMessage(Messages.send_distribution, Keyboard.SendDistribution);
         }
     }
 }

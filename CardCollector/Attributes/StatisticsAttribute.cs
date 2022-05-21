@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace CardCollector.Attributes
+namespace CardCollector.Attributes;
+
+[NotInherited]
+public class StatisticsAttribute : Attribute
 {
-    [NotInherited]
-    public class StatisticsAttribute : Attribute
-    {
         
-    }
 }

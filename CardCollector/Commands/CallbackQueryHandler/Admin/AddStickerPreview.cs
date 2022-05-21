@@ -16,11 +16,13 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin
             User.Session.State = UserState.UploadPackPreview;
             var packId = int.Parse(CallbackQuery.Data!.Split('=')[1]);
             User.Session.GetModule<AdminModule>().SelectedPackId = packId;
-            await User.Messages.EditMessage(User, Messages.please_upload_preview, Keyboard.BackKeyboard);
+            await User.Messages.EditMessage(Messages.please_upload_preview, Keyboard.BackKeyboard);
         }
 
         public override bool Match()
         {
+            Logs.LogOut(base.Match());
+            Logs.LogOut(User.PrivilegeLevel >= PrivilegeLevel.Programmer);
             return base.Match() && User.PrivilegeLevel >= PrivilegeLevel.Programmer;
         }
     }

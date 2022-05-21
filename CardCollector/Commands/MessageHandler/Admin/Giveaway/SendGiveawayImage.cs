@@ -24,11 +24,11 @@ namespace CardCollector.Commands.MessageHandler.Admin.Giveaway
             var module = User.Session.GetModule<AdminModule>();
             if (module.SelectedChannelGiveawayId == null) return;
             var giveaway = await Context.ChannelGiveaways.FindById(module.SelectedChannelGiveawayId.Value);
-            giveaway.ImageFileId = Message.Photo?.First().FileId;
-            await User.Messages.ClearChat(User);
-            await User.Messages.SendPhoto(User, giveaway.ImageFileId!, giveaway.GetFormattedMessage(),
+            giveaway!.ImageFileId = Message.Photo?.First().FileId;
+            await User.Messages.ClearChat();
+            await User.Messages.SendPhoto(giveaway.ImageFileId!, giveaway.GetFormattedMessage(),
                 giveaway.GetFormattedKeyboard(CallbackQueryCommands.ignore));
-            await User.Messages.SendMessage(User, Messages.please_confirm_this_giveaway, Keyboard.CreateGiveaway);
+            await User.Messages.SendMessage(Messages.please_confirm_this_giveaway, Keyboard.CreateGiveaway);
         }
 
         public static async Task Skip(User user, BotDatabaseContext context)
@@ -37,10 +37,10 @@ namespace CardCollector.Commands.MessageHandler.Admin.Giveaway
             var module = user.Session.GetModule<AdminModule>();
             if (module.SelectedChannelGiveawayId == null) return;
             var giveaway = await context.ChannelGiveaways.FindById(module.SelectedChannelGiveawayId.Value);
-            await user.Messages.ClearChat(user);
-            await user.Messages.SendMessage(user, giveaway.GetFormattedMessage(), 
+            await user.Messages.ClearChat();
+            await user.Messages.SendMessage(giveaway!.GetFormattedMessage(), 
                 giveaway.GetFormattedKeyboard(CallbackQueryCommands.ignore));
-            await user.Messages.SendMessage(user, Messages.please_confirm_this_giveaway, Keyboard.CreateGiveaway);
+            await user.Messages.SendMessage(Messages.please_confirm_this_giveaway, Keyboard.CreateGiveaway);
         }
 
         public static void AddToQueue(long userId)

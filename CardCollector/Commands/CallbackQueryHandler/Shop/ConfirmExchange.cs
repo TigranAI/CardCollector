@@ -18,7 +18,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Shop
             {
                 User.Cash.Gems -= module.EnteredExchangeSum;
                 User.Cash.Coins += module.EnteredExchangeSum * 10;
-                await User.Messages.EditMessage(User,
+                await User.Messages.EditMessage(
                     $"{Messages.you_got} {module.EnteredExchangeSum * 10}{Text.coin} {Text.per} {module.EnteredExchangeSum}{Text.gem}");
             }
         }

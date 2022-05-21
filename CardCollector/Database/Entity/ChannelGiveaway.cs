@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Timers;
 using CardCollector.Commands.CallbackQueryHandler;
 using CardCollector.Commands.MessageHandler.UrlCommands;
-using CardCollector.Controllers;
 using CardCollector.Database.EntityDao;
 using CardCollector.Others;
 using CardCollector.Resources;
@@ -49,7 +48,7 @@ namespace CardCollector.Database.Entity
 
         public string GetFormattedMessage()
         {
-            return string.Format(Message, PrizeCount, PrizeText());
+            return string.Format(Message!, PrizeCount, PrizeText());
         }
 
         public InlineKeyboardMarkup GetFormattedKeyboard(string? command = null)
@@ -58,7 +57,7 @@ namespace CardCollector.Database.Entity
             {
                 new[]
                 {
-                    InlineKeyboardButton.WithCallbackData(string.Format(ButtonText, PrizeCount, PrizeText()),
+                    InlineKeyboardButton.WithCallbackData(string.Format(ButtonText!, PrizeCount, PrizeText()),
                         command ?? $"{CallbackQueryCommands.claim_giveaway}={Id}")
                 }
             });
@@ -71,6 +70,7 @@ namespace CardCollector.Database.Entity
 
         public async Task Claim(User user, BotDatabaseContext context)
         {
+            user.UserStats.IncreaseGiftsReceived();
             PrizeCount--;
             switch (Prize)
             {
@@ -100,11 +100,11 @@ namespace CardCollector.Database.Entity
         {
             if (PrizeCount <= 0)
             {
-                await DeleteMessage(Channel.ChatId, MessageId);
+                await DeleteMessage(Channel!.ChatId, MessageId);
                 await SendMessage(Channel.ChatId, Messages.giveaway_now_ended);
             }
             else if (ButtonText == null || ButtonText.Contains("{0}") || ButtonText.Contains("{1}"))
-                await Bot.Client.EditMessageReplyMarkupAsync(Channel.ChatId, MessageId, GetFormattedKeyboard());
+                await Bot.Client.EditMessageReplyMarkupAsync(Channel!.ChatId, MessageId, GetFormattedKeyboard());
         }
 
         public string GetUrl()
@@ -141,7 +141,7 @@ namespace CardCollector.Database.Entity
 
         private async Task Send()
         {
-            if (Channel.IsBlocked) throw new Exception(Messages.selected_chat_is_blocked);
+            if (Channel!.IsBlocked) throw new Exception(Messages.selected_chat_is_blocked);
             if (ImageFileId != null)
             {
                 var message = await Bot.Client.SendPhotoAsync(Channel.ChatId,

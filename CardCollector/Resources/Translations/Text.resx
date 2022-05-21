@@ -462,4 +462,34 @@
     <data name="buy_exclusive" xml:space="preserve">
         <value>Эксклюзивный пак</value>
     </data>
+    <data name="edit_stickerpack" xml:space="preserve">
+        <value>Редактировать набор</value>
+    </data>
+    <data name="add_puzzle" xml:space="preserve">
+        <value>Добавить пазл</value>
+    </data>
+    <data name="top_reward" xml:space="preserve">
+        <value>{0}💎 алмазов, {1}🧪 опыта, {2}💰 золота</value>
+    </data>
+    <data name="top_by_exp" xml:space="preserve">
+        <value>Топ по опыту</value>
+    </data>
+    <data name="top_by_tier_4_sticker" xml:space="preserve">
+        <value>Топ по полученным 4* стикерам</value>
+    </data>
+    <data name="top_by_roulette_games" xml:space="preserve">
+        <value>Топ по играм в рулетку</value>
+    </data>
+    <data name="top_by_ladder_games" xml:space="preserve">
+        <value>Топ по играм в лесенку</value>
+    </data>
+    <data name="top_by_puzzle_games" xml:space="preserve">
+        <value>Топ по играм в пазл</value>
+    </data>
+    <data name="top_by_gifts_received" xml:space="preserve">
+        <value>Топ по полученным подаркам</value>
+    </data>
+    <data name="top_by_invited_friends" xml:space="preserve">
+        <value>Топ по приглашенным друзьям</value>
+    </data>
 </root>

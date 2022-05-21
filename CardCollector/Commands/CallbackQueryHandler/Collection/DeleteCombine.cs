@@ -19,7 +19,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Collection
             module.CombineList.RemoveAll(item => item.Item1.Id == stickerId);
             if (module.CombineList.Count == 0)
                 await new Back().Init(User, Context, new Update() {CallbackQuery = CallbackQuery}).PrepareAndExecute();
-            else await User.Messages.EditMessage(User, module.ToString(), Keyboard.GetCombineKeyboard(module));
+            else await User.Messages.EditMessage(module.ToString(), Keyboard.GetCombineKeyboard(module));
         }
     }
 }

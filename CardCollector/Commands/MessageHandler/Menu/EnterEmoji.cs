@@ -19,13 +19,13 @@ namespace CardCollector.Commands.MessageHandler.Menu
         {
             var input = Message.Text;
             if (!Regex.IsMatch(input!, ONLY_EMOJI_PATTERN))
-                await User.Messages.EditMessage(User, Messages.please_enter_emoji, Keyboard.EmojiOptions);
+                await User.Messages.EditMessage(Messages.please_enter_emoji, Keyboard.EmojiOptions);
             else
             {
                 var filtersModule = User.Session.GetModule<FiltersModule>();
                 filtersModule.Emoji = input;
                 var text = filtersModule.ToString(User.Session.State);
-                await User.Messages.EditMessage(User, text, Keyboard.GetSortingMenu(User.Session.State));
+                await User.Messages.EditMessage(text, Keyboard.GetSortingMenu(User.Session.State));
                 Queue.Remove(User.Id);
             }
         }

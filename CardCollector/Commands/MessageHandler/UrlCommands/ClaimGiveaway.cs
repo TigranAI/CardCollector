@@ -13,13 +13,13 @@ namespace CardCollector.Commands.MessageHandler.UrlCommands
         {
             var giveaway = await Context.ChannelGiveaways.FindById(int.Parse(StartData[1]));
             if (giveaway == null || giveaway.IsEnded())
-                await User.Messages.EditMessage(User, Messages.giveaway_now_ended, Keyboard.BackKeyboard);
+                await User.Messages.EditMessage(Messages.giveaway_now_ended, Keyboard.BackKeyboard);
             else if (giveaway.IsAwarded(User.Id))
-                await User.Messages.EditMessage(User, Messages.you_are_now_awarded, Keyboard.BackKeyboard);
+                await User.Messages.EditMessage(Messages.you_are_now_awarded, Keyboard.BackKeyboard);
             else
             {
                 await giveaway.Claim(User, Context);
-                await User.Messages.EditMessage(User,
+                await User.Messages.EditMessage(
                     string.Format(Messages.you_got_from_this_giveaway, giveaway.PrizeText()), Keyboard.BackKeyboard);
             }
         }

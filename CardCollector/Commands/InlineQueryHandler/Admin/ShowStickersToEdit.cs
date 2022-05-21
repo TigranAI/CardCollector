@@ -16,19 +16,18 @@ namespace CardCollector.Commands.InlineQueryHandler.Admin
     {
         protected override async Task Execute()
         {
+            var offset = Offset.Of(InlineQuery);
+            var length = 0;
+            
             var packId = User.Session.GetModule<AdminModule>().SelectedPackId;
             var pack = await Context.Packs.FindById(packId);
-            var length = 0;
-            var stickersList = pack.Stickers
+            var results = pack.Stickers
                 .Where(item => item.Contains(InlineQuery.Query))
-                .And(list => length = list.Count())
                 .OrderBy(sticker => sticker.Tier)
-                .ToList();
-            var offset = int.Parse(InlineQuery.Offset == "" ? "0" : InlineQuery.Offset);
-            var newOffset = offset + 50 > length ? "" : (offset + 50).ToString();
-            var results = stickersList
-                .ToTelegramStickers(ChosenInlineResultCommands.select_edit_sticker, offset);
-            await AnswerInlineQuery(User, InlineQuery.Id, results, newOffset);
+                .And(list => length = list.Count())
+                .ToTelegramResults(ChosenInlineResultCommands.select_edit_sticker, offset);
+            
+            await AnswerInlineQuery(User, InlineQuery.Id, results, offset.GetNext(length));
         }
 
         public override bool Match()

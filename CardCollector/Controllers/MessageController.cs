@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CardCollector.Database.Entity;
+using CardCollector.Others;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
 using Telegram.Bot;
@@ -154,13 +155,13 @@ namespace CardCollector.Controllers
             User user,
             string queryId,
             IEnumerable<InlineQueryResult> results,
-            string offset = "")
+            Offset offset)
         {
             if (user.IsBlocked) return;
             try
             {
-                await Bot.Client.AnswerInlineQueryAsync(queryId, results, isPersonal: true, nextOffset: offset,
-                    cacheTime: Constants.INLINE_RESULTS_CACHE_TIME);
+                await Bot.Client.AnswerInlineQueryAsync(queryId, results, isPersonal: true,
+                    nextOffset: offset.ToString(), cacheTime: Constants.INLINE_RESULTS_CACHE_TIME);
             }
             catch (ApiRequestException e)
             {
@@ -253,7 +254,8 @@ namespace CardCollector.Controllers
             }
         }
 
-        public static async Task<int> SendDocument(long chatId, InputFileStream file, InlineKeyboardMarkup? keyboard = null)
+        public static async Task<int> SendDocument(long chatId, InputFileStream file,
+            InlineKeyboardMarkup? keyboard = null)
         {
             try
             {

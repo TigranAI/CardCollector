@@ -86,6 +86,8 @@ namespace CardCollector.Database.Entity
                     );
                     foreach (var bet in Bets)
                     {
+                        bet.User.UserStats.IncreaseRouletteGames();
+                        
                         await stickerWinner.User.AddSticker(bet.Sticker, 1);
                         
                         if (bet.User.InviteInfo?.TasksProgress is { } tp 

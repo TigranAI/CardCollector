@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using CardCollector.Database;
+using CardCollector.Database.EntityDao;
 
 namespace CardCollector.Cache.Entity
 {
@@ -22,10 +25,19 @@ namespace CardCollector.Cache.Entity
             StickerIds.Add(stickerId);
         }
 
-        public bool TryComplete(int goal)
+        public async Task<bool> TryComplete(int goal)
         {
             if (StickerIds.Count != goal) return false;
             GamesToday++;
+            using (var context = new BotDatabaseContext())
+            {
+                foreach (var userId in UserIds)
+                {
+                    var user = await context.Users.FindById(userId);
+                    user!.UserStats.IncreaseLadderGames();
+                }
+                await context.SaveChangesAsync();
+            }
             Reset();
             return true;
         }

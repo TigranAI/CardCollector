@@ -20,7 +20,7 @@ namespace CardCollector.Commands.MessageHandler.Admin.Giveaway
             var module = User.Session.GetModule<AdminModule>();
             var giveaway = await Context.ChannelGiveaways.FindById(module.SelectedChannelGiveawayId);
             giveaway!.Message = Message.Text;
-            await User.Messages.EditMessage(User, Messages.enter_when_giveaway_will_be_sended,
+            await User.Messages.EditMessage(Messages.enter_when_giveaway_will_be_sended,
                 Keyboard.SkipKeyboard(typeof(EnterSendDatetime).Name));
             EnterSendDatetime.AddToQueue(User.Id);
         }

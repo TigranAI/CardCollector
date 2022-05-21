@@ -10,7 +10,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Filters
 
         protected override async Task Execute()
         {
-            await User.Messages.EditMessage(User, Messages.choose_tier, Keyboard.TierOptions);
+            await User.Messages.EditMessage(Messages.choose_tier, Keyboard.TierOptions);
         }
     }
 }

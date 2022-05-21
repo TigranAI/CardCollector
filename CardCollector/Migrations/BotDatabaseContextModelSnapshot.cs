@@ -54,6 +54,38 @@ namespace CardCollector.Migrations
                     b.ToTable("auctions", (string)null);
                 });
 
+            modelBuilder.Entity("CardCollector.Database.Entity.Cash", b =>
+                {
+                    b.Property<long>("id")
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    b.Property<int>("Candies")
+                        .HasColumnType("int")
+                        .HasColumnName("candies");
+
+                    b.Property<int>("Coins")
+                        .HasColumnType("int")
+                        .HasColumnName("coins");
+
+                    b.Property<int>("Gems")
+                        .HasColumnType("int")
+                        .HasColumnName("gems");
+
+                    b.Property<DateTime>("LastPayout")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("last_payout");
+
+                    b.Property<int>("MaxCapacity")
+                        .HasColumnType("int")
+                        .HasColumnName("max_capacity");
+
+                    b.HasKey("id")
+                        .HasName("pk_user_cash");
+
+                    b.ToTable("user_cash", (string)null);
+                });
+
             modelBuilder.Entity("CardCollector.Database.Entity.ChannelGiveaway", b =>
                 {
                     b.Property<int>("Id")
@@ -696,6 +728,53 @@ namespace CardCollector.Migrations
                     b.ToTable("telegram_chats", (string)null);
                 });
 
+            modelBuilder.Entity("CardCollector.Database.Entity.TopHistory", b =>
+                {
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("date");
+
+                    b.Property<string>("Exp")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("exp");
+
+                    b.Property<string>("Gift")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("gift");
+
+                    b.Property<string>("Invite")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("invite");
+
+                    b.Property<string>("Ladder")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("ladder");
+
+                    b.Property<string>("Puzzle")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("puzzle");
+
+                    b.Property<string>("Roulette")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("roulette");
+
+                    b.Property<string>("Tier4")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("tier4");
+
+                    b.HasKey("Date")
+                        .HasName("pk_top_history");
+
+                    b.ToTable("top_history", (string)null);
+                });
+
             modelBuilder.Entity("CardCollector.Database.Entity.User", b =>
                 {
                     b.Property<long>("Id")
@@ -778,6 +857,76 @@ namespace CardCollector.Migrations
                     b.ToTable("user_activities", (string)null);
                 });
 
+            modelBuilder.Entity("CardCollector.Database.Entity.UserLevel", b =>
+                {
+                    b.Property<long>("id")
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    b.Property<long>("CurrentExp")
+                        .HasColumnType("bigint")
+                        .HasColumnName("current_exp");
+
+                    b.Property<int>("Level")
+                        .HasColumnType("int")
+                        .HasColumnName("level");
+
+                    b.Property<long>("TotalExp")
+                        .HasColumnType("bigint")
+                        .HasColumnName("total_exp");
+
+                    b.HasKey("id")
+                        .HasName("pk_user_level");
+
+                    b.ToTable("user_level", (string)null);
+                });
+
+            modelBuilder.Entity("CardCollector.Database.Entity.UserMessages", b =>
+                {
+                    b.Property<long>("id")
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    b.Property<string>("ChatMessages")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("chat_messages");
+
+                    b.Property<string>("ChatStickers")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("chat_stickers");
+
+                    b.Property<int>("CollectIncomeMessageId")
+                        .HasColumnType("int")
+                        .HasColumnName("collect_income_message_id");
+
+                    b.Property<int>("DailyTaskAlertMessageId")
+                        .HasColumnType("int")
+                        .HasColumnName("daily_task_alert_message_id");
+
+                    b.Property<int>("DailyTaskMessageId")
+                        .HasColumnType("int")
+                        .HasColumnName("daily_task_message_id");
+
+                    b.Property<int>("DailyTaskProgressMessageId")
+                        .HasColumnType("int")
+                        .HasColumnName("daily_task_progress_message_id");
+
+                    b.Property<int>("MenuMessageId")
+                        .HasColumnType("int")
+                        .HasColumnName("menu_message_id");
+
+                    b.Property<int>("TopUsersMessageId")
+                        .HasColumnType("int")
+                        .HasColumnName("top_users_message_id");
+
+                    b.HasKey("id")
+                        .HasName("pk_user_messages");
+
+                    b.ToTable("user_messages", (string)null);
+                });
+
             modelBuilder.Entity("CardCollector.Database.Entity.UserPacks", b =>
                 {
                     b.Property<long>("Id")
@@ -807,6 +956,91 @@ namespace CardCollector.Migrations
                         .HasDatabaseName("ix_user_packs_user_id");
 
                     b.ToTable("user_packs", (string)null);
+                });
+
+            modelBuilder.Entity("CardCollector.Database.Entity.UserSettings", b =>
+                {
+                    b.Property<long>("id")
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Settings")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("settings");
+
+                    b.HasKey("id")
+                        .HasName("pk_user_settings");
+
+                    b.ToTable("user_settings", (string)null);
+                });
+
+            modelBuilder.Entity("CardCollector.Database.Entity.UserStats", b =>
+                {
+                    b.Property<long>("id")
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    b.Property<int>("Earned4TierStickers")
+                        .HasColumnType("int")
+                        .HasColumnName("earned4tier_stickers");
+
+                    b.Property<long>("EarnedExp")
+                        .HasColumnType("bigint")
+                        .HasColumnName("earned_exp");
+
+                    b.Property<int>("FriendsInvited")
+                        .HasColumnType("int")
+                        .HasColumnName("friends_invited");
+
+                    b.Property<int>("GiftsReceived")
+                        .HasColumnType("int")
+                        .HasColumnName("gifts_received");
+
+                    b.Property<int>("LadderGames")
+                        .HasColumnType("int")
+                        .HasColumnName("ladder_games");
+
+                    b.Property<DateTime>("Last4TierStickerAccrual")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("last4tier_sticker_accrual");
+
+                    b.Property<DateTime>("LastExpAccrual")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("last_exp_accrual");
+
+                    b.Property<DateTime>("LastInvitedFriend")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("last_invited_friend");
+
+                    b.Property<DateTime>("LastLadderGame")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("last_ladder_game");
+
+                    b.Property<DateTime>("LastPuzzleGame")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("last_puzzle_game");
+
+                    b.Property<DateTime>("LastReceivedGift")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("last_received_gift");
+
+                    b.Property<DateTime>("LastRouletteGame")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("last_roulette_game");
+
+                    b.Property<int>("PuzzleGames")
+                        .HasColumnType("int")
+                        .HasColumnName("puzzle_games");
+
+                    b.Property<int>("RouletteGames")
+                        .HasColumnType("int")
+                        .HasColumnName("roulette_games");
+
+                    b.HasKey("id")
+                        .HasName("pk_users_stats");
+
+                    b.ToTable("users_stats", (string)null);
                 });
 
             modelBuilder.Entity("CardCollector.Database.Entity.UserSticker", b =>
@@ -924,6 +1158,18 @@ namespace CardCollector.Migrations
                     b.Navigation("Sticker");
 
                     b.Navigation("Trader");
+                });
+
+            modelBuilder.Entity("CardCollector.Database.Entity.Cash", b =>
+                {
+                    b.HasOne("CardCollector.Database.Entity.User", "User")
+                        .WithOne("Cash")
+                        .HasForeignKey("CardCollector.Database.Entity.Cash", "id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_user_cash_users_id");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("CardCollector.Database.Entity.ChannelGiveaway", b =>
@@ -1140,153 +1386,6 @@ namespace CardCollector.Migrations
                         .WithMany("InvitedFriends")
                         .HasForeignKey("InviteInfoid")
                         .HasConstraintName("fk_users_invite_info_invite_infoid");
-
-                    b.OwnsOne("CardCollector.Database.Entity.Cash", "Cash", b1 =>
-                        {
-                            b1.Property<long>("UserId")
-                                .HasColumnType("bigint")
-                                .HasColumnName("id");
-
-                            b1.Property<int>("Candies")
-                                .HasColumnType("int")
-                                .HasColumnName("candies");
-
-                            b1.Property<int>("Coins")
-                                .HasColumnType("int")
-                                .HasColumnName("coins");
-
-                            b1.Property<int>("Gems")
-                                .HasColumnType("int")
-                                .HasColumnName("gems");
-
-                            b1.Property<DateTime>("LastPayout")
-                                .HasColumnType("datetime(6)")
-                                .HasColumnName("last_payout");
-
-                            b1.Property<int>("MaxCapacity")
-                                .HasColumnType("int")
-                                .HasColumnName("max_capacity");
-
-                            b1.HasKey("UserId")
-                                .HasName("pk_user_cash");
-
-                            b1.ToTable("user_cash", (string)null);
-
-                            b1.WithOwner()
-                                .HasForeignKey("UserId")
-                                .HasConstraintName("fk_user_cash_users_id");
-                        });
-
-                    b.OwnsOne("CardCollector.Database.Entity.UserLevel", "Level", b1 =>
-                        {
-                            b1.Property<long>("UserId")
-                                .HasColumnType("bigint")
-                                .HasColumnName("id");
-
-                            b1.Property<long>("CurrentExp")
-                                .HasColumnType("bigint")
-                                .HasColumnName("current_exp");
-
-                            b1.Property<int>("Level")
-                                .HasColumnType("int")
-                                .HasColumnName("level");
-
-                            b1.Property<long>("TotalExp")
-                                .HasColumnType("bigint")
-                                .HasColumnName("total_exp");
-
-                            b1.HasKey("UserId")
-                                .HasName("pk_user_level");
-
-                            b1.ToTable("user_level", (string)null);
-
-                            b1.WithOwner()
-                                .HasForeignKey("UserId")
-                                .HasConstraintName("fk_user_level_users_id");
-                        });
-
-                    b.OwnsOne("CardCollector.Database.Entity.UserMessages", "Messages", b1 =>
-                        {
-                            b1.Property<long>("UserId")
-                                .HasColumnType("bigint")
-                                .HasColumnName("id");
-
-                            b1.Property<string>("ChatMessages")
-                                .IsRequired()
-                                .HasColumnType("longtext")
-                                .HasColumnName("chat_messages");
-
-                            b1.Property<string>("ChatStickers")
-                                .IsRequired()
-                                .HasColumnType("longtext")
-                                .HasColumnName("chat_stickers");
-
-                            b1.Property<int>("CollectIncomeMessageId")
-                                .HasColumnType("int")
-                                .HasColumnName("collect_income_message_id");
-
-                            b1.Property<int>("DailyTaskAlertMessageId")
-                                .HasColumnType("int")
-                                .HasColumnName("daily_task_alert_message_id");
-
-                            b1.Property<int>("DailyTaskMessageId")
-                                .HasColumnType("int")
-                                .HasColumnName("daily_task_message_id");
-
-                            b1.Property<int>("DailyTaskProgressMessageId")
-                                .HasColumnType("int")
-                                .HasColumnName("daily_task_progress_message_id");
-
-                            b1.Property<int>("MenuMessageId")
-                                .HasColumnType("int")
-                                .HasColumnName("menu_message_id");
-
-                            b1.Property<int>("TopUsersMessageId")
-                                .HasColumnType("int")
-                                .HasColumnName("top_users_message_id");
-
-                            b1.HasKey("UserId")
-                                .HasName("pk_user_messages");
-
-                            b1.ToTable("user_messages", (string)null);
-
-                            b1.WithOwner()
-                                .HasForeignKey("UserId")
-                                .HasConstraintName("fk_user_messages_users_id");
-                        });
-
-                    b.OwnsOne("CardCollector.Database.Entity.UserSettings", "Settings", b1 =>
-                        {
-                            b1.Property<long>("UserId")
-                                .HasColumnType("bigint")
-                                .HasColumnName("id");
-
-                            b1.Property<string>("Settings")
-                                .IsRequired()
-                                .HasColumnType("longtext")
-                                .HasColumnName("settings");
-
-                            b1.HasKey("UserId")
-                                .HasName("pk_user_settings");
-
-                            b1.ToTable("user_settings", (string)null);
-
-                            b1.WithOwner()
-                                .HasForeignKey("UserId")
-                                .HasConstraintName("fk_user_settings_users_id");
-                        });
-
-                    b.Navigation("Cash")
-                        .IsRequired();
-
-                    b.Navigation("Level")
-                        .IsRequired();
-
-                    b.Navigation("Messages")
-                        .IsRequired();
-
-                    b.Navigation("Settings")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("CardCollector.Database.Entity.UserActivity", b =>
@@ -1295,6 +1394,30 @@ namespace CardCollector.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .HasConstraintName("fk_user_activities_users_user_id");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CardCollector.Database.Entity.UserLevel", b =>
+                {
+                    b.HasOne("CardCollector.Database.Entity.User", "User")
+                        .WithOne("Level")
+                        .HasForeignKey("CardCollector.Database.Entity.UserLevel", "id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_user_level_users_id");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CardCollector.Database.Entity.UserMessages", b =>
+                {
+                    b.HasOne("CardCollector.Database.Entity.User", "User")
+                        .WithOne("Messages")
+                        .HasForeignKey("CardCollector.Database.Entity.UserMessages", "id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_user_messages_users_id");
 
                     b.Navigation("User");
                 });
@@ -1316,6 +1439,30 @@ namespace CardCollector.Migrations
                         .HasConstraintName("fk_user_packs_users_user_id");
 
                     b.Navigation("Pack");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CardCollector.Database.Entity.UserSettings", b =>
+                {
+                    b.HasOne("CardCollector.Database.Entity.User", "User")
+                        .WithOne("Settings")
+                        .HasForeignKey("CardCollector.Database.Entity.UserSettings", "id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_user_settings_users_id");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CardCollector.Database.Entity.UserStats", b =>
+                {
+                    b.HasOne("CardCollector.Database.Entity.User", "User")
+                        .WithOne("UserStats")
+                        .HasForeignKey("CardCollector.Database.Entity.UserStats", "id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_users_stats_users_id");
 
                     b.Navigation("User");
                 });
@@ -1402,15 +1549,30 @@ namespace CardCollector.Migrations
 
             modelBuilder.Entity("CardCollector.Database.Entity.User", b =>
                 {
+                    b.Navigation("Cash")
+                        .IsRequired();
+
                     b.Navigation("DailyTasks");
 
                     b.Navigation("InviteInfo");
 
+                    b.Navigation("Level")
+                        .IsRequired();
+
+                    b.Navigation("Messages")
+                        .IsRequired();
+
                     b.Navigation("Packs");
+
+                    b.Navigation("Settings")
+                        .IsRequired();
 
                     b.Navigation("SpecialOrdersUser");
 
                     b.Navigation("Stickers");
+
+                    b.Navigation("UserStats")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

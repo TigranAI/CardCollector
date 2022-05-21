@@ -20,7 +20,7 @@ namespace CardCollector.Commands.MessageHandler.Admin
             var pack = await Context.Packs.FindById(packId);
             pack.PreviewFileId = Message.Sticker!.FileId;
             pack.IsPreviewAnimated = Message.Sticker.IsAnimated;
-            await User.Messages.EditMessage(User, Messages.update_preview_success, Keyboard.BackKeyboard);
+            await User.Messages.EditMessage(Messages.update_preview_success, Keyboard.BackKeyboard);
             
             await Context.SaveChangesAsync();
             await new RequestBuilder()

@@ -21,7 +21,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
 
             var url = User.InviteInfo.GetTelegramUrl();
             
-            await User.Messages.EditMessage(User, string.Format(Messages.your_invite_link, url),
+            await User.Messages.EditMessage(string.Format(Messages.your_invite_link, url),
                 Keyboard.InviteMenu(url), ParseMode.Html);
         }
     }

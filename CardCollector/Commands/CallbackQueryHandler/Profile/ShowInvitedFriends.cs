@@ -23,7 +23,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
                 })
             );
             if (message == "") message = Messages.you_havent_invite_friends;
-            await User.Messages.EditMessage(User, message, Keyboard.BackKeyboard);
+            await User.Messages.EditMessage(message, Keyboard.BackKeyboard);
         }
     }
 }

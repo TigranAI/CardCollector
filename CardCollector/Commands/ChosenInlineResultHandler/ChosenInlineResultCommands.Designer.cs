@@ -61,6 +61,15 @@ namespace CardCollector.Commands.ChosenInlineResultHandler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AAK.
+        /// </summary>
+        internal static string add_puzzle {
+            get {
+                return ResourceManager.GetString("add_puzzle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AAA.
         /// </summary>
         internal static string chat_send_sticker {
@@ -88,7 +97,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AAI.
+        ///   Looks up a localized string similar to AAJ.
         /// </summary>
         internal static string select_puzzle {
             get {

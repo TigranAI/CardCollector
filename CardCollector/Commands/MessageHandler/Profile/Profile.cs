@@ -22,7 +22,7 @@ namespace CardCollector.Commands.MessageHandler.Profile
             var expGoal = currentLevel?.LevelExpGoal.ToString() ?? "∞";
             var packsCount = User.Packs.Sum(item => item.Count);
 
-            await User.Messages.EditMessage(User, User.GetProfileMessage(expGoal),
+            await User.Messages.EditMessage(User.GetProfileMessage(expGoal),
                 Keyboard.GetProfileKeyboard(packsCount, User.InviteInfo, income));
         }
     }

@@ -23,11 +23,11 @@ namespace CardCollector.Commands.MessageHandler.Admin.Giveaway
                 if (module.SelectedChannelGiveawayId == null) return;
                 var giveaway = await Context.ChannelGiveaways.FindById(module.SelectedChannelGiveawayId.Value);
                 giveaway.PrizeCount = count;
-                await User.Messages.EditMessage(User, Messages.enter_giveaway_message, Keyboard.BackKeyboard,
+                await User.Messages.EditMessage(Messages.enter_giveaway_message, Keyboard.BackKeyboard,
                     ParseMode.Html);
                 EnterGiveawayMessage.AddToQueue(User.Id);
             }
-            else await User.Messages.EditMessage(User, Messages.please_enter_integer, Keyboard.BackKeyboard);
+            else await User.Messages.EditMessage(Messages.please_enter_integer, Keyboard.BackKeyboard);
         }
 
         public static void AddToQueue(long userId)

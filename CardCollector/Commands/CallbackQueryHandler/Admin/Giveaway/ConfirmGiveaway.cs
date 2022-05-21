@@ -16,13 +16,13 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin.Giveaway
 
         protected override async Task Execute()
         {
-            await User.Messages.ClearChat(User);
+            await User.Messages.ClearChat();
             var giveawayId = User.Session.GetModule<AdminModule>().SelectedChannelGiveawayId;
             var giveaway = await Context.ChannelGiveaways.FindById(giveawayId);
             try
             {
                 var timer = await giveaway!.Prepare();
-                await User.Messages.SendMessage(User,
+                await User.Messages.SendMessage(
                     string.Format(Messages.giveaway_successfully_created, giveaway.GetUrl()),
                     Keyboard.BackKeyboard, ParseMode.Html);
                 if (timer != null)
@@ -34,7 +34,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin.Giveaway
             }
             catch (Exception e)
             {
-                await User.Messages.SendMessage(User,
+                await User.Messages.SendMessage(
                     string.Format(Messages.error_when_preparing_giveaway, e.Message), Keyboard.BackKeyboard);
                 Logs.LogOutWarning(e);
                 if (giveaway != null)
