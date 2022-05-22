@@ -74,19 +74,20 @@ public class UserStats
 
     public void Reset()
     {
-        EarnedExp = 0;
-        Earned4TierStickers = 0;
-        RouletteGames = 0;
-        LadderGames = 0;
-        PuzzleGames = 0;
-        GiftsReceived = 0;
+        EarnedExp = 
+        Earned4TierStickers = 
+        RouletteGames = 
+        LadderGames = 
+        PuzzleGames = 
+        GiftsReceived = 
         FriendsInvited = 0;
+        
         LastExpAccrual = 
-            Last4TierStickerAccrual = 
-                LastRouletteGame = 
-                    LastLadderGame = 
-                        LastPuzzleGame = 
-                            LastReceivedGift = 
-                                LastInvitedFriend = DateTime.Now;
+        Last4TierStickerAccrual = 
+        LastRouletteGame = 
+        LastLadderGame = 
+        LastPuzzleGame = 
+        LastReceivedGift = 
+        LastInvitedFriend = DateTime.Now;
     }
 }

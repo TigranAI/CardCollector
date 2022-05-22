@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.Controllers;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 
@@ -13,8 +12,10 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
 
         protected override async Task Execute()
         {
-            var packId = int.Parse(CallbackQuery.Data!.Split("=")[1]);
-            var userPack = User.Packs.SingleOrDefault(item => item.Pack.Id == packId);
+            var data = CallbackQuery.Data!.Split("=");
+            var packId = data.Length == 2 ? int.Parse(CallbackQuery.Data!.Split("=")[1]) : -1;
+            var userPack = User.Packs
+                .SingleOrDefault(item => item.Id == packId || (packId == -1 && item.Pack.Id == 1));
             if (userPack == null || userPack.Count < 1)
                 await AnswerCallbackQuery(User, CallbackQuery.Id, Messages.packs_count_zero, true);
             else

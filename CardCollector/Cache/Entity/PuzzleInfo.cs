@@ -31,8 +31,8 @@ public class PuzzleInfo
 
     public bool TryMakeAMove(PuzzlePiece piece)
     {
-        if (piece.Order != Turn && StickerId != piece.Sticker.Id) return false;
-
+        if (Turn == 0) StickerId = piece.Sticker.Id;
+        if (piece.Order != Turn || StickerId != piece.Sticker.Id) return false;
         Turn++;
         return true;
     }
@@ -67,7 +67,7 @@ public class PuzzleInfo
 
     public bool IsSuperGame()
     {
-        var chance = Utilities.Rnd.Next(100);
+        var chance = Utilities.Rnd.Next(1000);
         if (chance < 25) SuperGame = true;
         return SuperGame;
     }

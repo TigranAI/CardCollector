@@ -64,7 +64,7 @@ namespace CardCollector.Database.Entity
 
         public async Task EditMessage(string message,
             InlineKeyboardMarkup? keyboard = null,
-            ParseMode? parseMode = null)
+            ParseMode parseMode = ParseMode.Html)
         {
             if (User.IsBlocked) return;
             if (ChatMessages.Count == 0) await SendMessage(message, keyboard, parseMode);
@@ -78,7 +78,7 @@ namespace CardCollector.Database.Entity
 
         public async Task SendMessage(string message,
             IReplyMarkup? keyboard = null,
-            ParseMode? parseMode = null)
+            ParseMode parseMode = ParseMode.Html)
         {
             if (User.IsBlocked) return;
             var messageId = await MessageController.SendMessage(User.ChatId, message, keyboard, parseMode);

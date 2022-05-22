@@ -178,6 +178,15 @@ namespace CardCollector.Commands.CallbackQueryHandler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ADA.
+        /// </summary>
+        internal static string choose_user_pack {
+            get {
+                return ResourceManager.GetString("choose_user_pack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ACB.
         /// </summary>
         internal static string claim_giveaway {

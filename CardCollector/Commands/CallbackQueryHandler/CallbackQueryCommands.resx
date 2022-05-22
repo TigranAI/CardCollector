@@ -255,4 +255,7 @@
     <data name="add_puzzle" xml:space="preserve">
         <value>ACZ</value>
     </data>
+    <data name="choose_user_pack" xml:space="preserve">
+        <value>ADA</value>
+    </data>
 </root>

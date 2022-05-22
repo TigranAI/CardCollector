@@ -492,4 +492,7 @@
     <data name="top_by_invited_friends" xml:space="preserve">
         <value>Топ по приглашенным друзьям</value>
     </data>
+    <data name="open_exclusive" xml:space="preserve">
+        <value>Открыть эксклюзивный пак</value>
+    </data>
 </root>

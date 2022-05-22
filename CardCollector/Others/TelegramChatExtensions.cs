@@ -9,7 +9,7 @@ namespace CardCollector.Others
     public static class TelegramChatExtensions
     {
         public static async Task<int> SendMessage(this TelegramChat chat, string message, IReplyMarkup? keyboard = null,
-            ParseMode? parseMode = null)
+            ParseMode parseMode = ParseMode.Html)
         {
             if (chat.IsBlocked) return -1;
             return await MessageController.SendMessage(chat.ChatId, message, keyboard, parseMode);
@@ -24,7 +24,7 @@ namespace CardCollector.Others
         }*/
 
         public static async Task<int> EditMessage(this TelegramChat chat, string message, int messageId,
-            InlineKeyboardMarkup? keyboard = null, ParseMode? parseMode = null)
+            InlineKeyboardMarkup? keyboard = null, ParseMode parseMode = ParseMode.Html)
         {
             if (chat.IsBlocked) return -1;
             return await MessageController.EditMessage(chat.ChatId, messageId, message, keyboard, parseMode);

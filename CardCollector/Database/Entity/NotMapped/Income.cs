@@ -21,16 +21,19 @@ namespace CardCollector.Database.Entity.NotMapped
                 switch (sticker.Sticker.IncomeType)
                 {
                     case IncomeType.Coins:
-                        if (updateTime) sticker.Payout = payoutTime;
-                        Coins += sticker.GetIncome(payoutTime);
+                        var coinIncome = sticker.GetIncome(payoutTime);
+                        if (updateTime && coinIncome > 0) sticker.Payout = payoutTime;
+                        Coins += coinIncome;
                         break;
                     case IncomeType.Gems:
-                        if (updateTime) sticker.Payout = payoutTime;
-                        Gems += sticker.GetIncome(payoutTime);
+                        var gemIncome = sticker.GetIncome(payoutTime);
+                        if (updateTime && gemIncome > 0) sticker.Payout = payoutTime;
+                        Gems += gemIncome;
                         break;
                     case IncomeType.Candies when sticker.IsUnlocked:
-                        if (updateTime) sticker.Payout = DateTime.Today;
-                        Candies += sticker.GetIncome(payoutTime);
+                        var candyIncome = sticker.GetIncome(payoutTime);
+                        if (updateTime && candyIncome != 0) sticker.Payout = DateTime.Today;
+                        Candies += candyIncome;
                         break;
                 }
             });

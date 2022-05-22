@@ -134,8 +134,9 @@ public class UploadStickerPackZip : MessageHandler
             sticker.Title =
                 xl[i, columns[TITLE_COLUMN]].Value.ToString() ??
                 throw new Exception(string.Format(ExceptionMessages.column_not_initialized, i, TITLE_COLUMN));
-            sticker.Tier =
-                int.Parse(xl[i, columns[TIER_COLUMN]].Value.ToString() ??
+            sticker.Tier = isExclusive
+                ? 10
+                : int.Parse(xl[i, columns[TIER_COLUMN]].Value.ToString() ??
                           throw new Exception(string.Format(ExceptionMessages.column_not_initialized, i, TIER_COLUMN)));
             sticker.Emoji =
                 xl[i, columns[EMOJI_COLUMN]].Value.ToString() ??
@@ -201,7 +202,7 @@ public class UploadStickerPackZip : MessageHandler
             throw new Exception(string.Format(ExceptionMessages.column_not_found, FILE_NAME_COLUMN));
         if (columns[TITLE_COLUMN] == -1)
             throw new Exception(string.Format(ExceptionMessages.column_not_found, TITLE_COLUMN));
-        if (columns[TIER_COLUMN] == -1)
+        if (!isExclusive && columns[TIER_COLUMN] == -1)
             throw new Exception(string.Format(ExceptionMessages.column_not_found, TIER_COLUMN));
         if (columns[EMOJI_COLUMN] == -1)
             throw new Exception(string.Format(ExceptionMessages.column_not_found, EMOJI_COLUMN));
@@ -229,8 +230,11 @@ public class UploadStickerPackZip : MessageHandler
 
     private async Task<Telegram.Bot.Types.Sticker> GetSticker(string stickerName)
     {
-        var file = FileOf(stickerName +
-                          (System.IO.File.Exists(stickerName + WEBP_EXTENSION) ? WEBP_EXTENSION : TGS_EXTENSION));
+        var fileName = stickerName;
+        fileName += System.IO.File.Exists(stickerName + WEBP_EXTENSION)
+            ? WEBP_EXTENSION
+            : TGS_EXTENSION;
+        var file = FileOf(fileName);
         var message = await Bot.Client.SendStickerAsync(User.ChatId, new InputMedia(file.Content!, file.FileName!));
         
         if (!StickerMessages.ContainsKey(User.Id)) StickerMessages.Add(User.Id, new List<int>());

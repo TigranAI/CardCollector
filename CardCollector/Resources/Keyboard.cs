@@ -520,39 +520,6 @@ namespace CardCollector.Resources
             return new InlineKeyboardMarkup(keyboardList);
         }
 
-        public static InlineKeyboardMarkup GetPacksKeyboard(List<Pack> list,
-            int offset, int totalCount, string command)
-        {
-            var keyboardList = new List<InlineKeyboardButton[]>();
-            foreach (var (item, i) in list.WithIndex())
-            {
-                if (i % 2 == 0)
-                    keyboardList.Add(new[]
-                    {
-                        InlineKeyboardButton.WithCallbackData(item.Author, $"{command}={item.Id}")
-                    });
-                else
-                    keyboardList[keyboardList.Count - 1] = new[]
-                    {
-                        keyboardList[keyboardList.Count - 1][0],
-                        InlineKeyboardButton.WithCallbackData(item.Author, $"{command}={item.Id}")
-                    };
-            }
-
-            var arrows = new List<InlineKeyboardButton>();
-            if (offset > 9)
-                arrows.Add(InlineKeyboardButton
-                    .WithCallbackData(Text.previous,
-                        $"{CallbackQueryCommands.choose_pack}={command}={offset - 10}"));
-            arrows.Add(InlineKeyboardButton.WithCallbackData(Text.back, CallbackQueryCommands.back));
-            if (totalCount > offset + list.Count)
-                arrows.Add(InlineKeyboardButton
-                    .WithCallbackData(Text.next,
-                        $"{CallbackQueryCommands.choose_pack}={command}={offset + list.Count}"));
-            keyboardList.Add(arrows.ToArray());
-            return new InlineKeyboardMarkup(keyboardList);
-        }
-
         public static InlineKeyboardMarkup GetUserPacksKeyboard(List<UserPacks> list, int offset,
             int totalCount)
         {
@@ -723,7 +690,8 @@ namespace CardCollector.Resources
             if (income != null && !income.Empty())
                 keyboard.Add(new[]
                 {
-                    InlineKeyboardButton.WithCallbackData($"{Text.collect} {income}",CallbackQueryCommands.collect_income)
+                    InlineKeyboardButton.WithCallbackData($"{Text.collect} {income}",
+                        CallbackQueryCommands.collect_income)
                 });
             keyboard.AddRange(new[]
             {

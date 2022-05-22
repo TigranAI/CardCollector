@@ -9,7 +9,7 @@ namespace CardCollector.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
+            /*migrationBuilder.DropForeignKey(
                 name: "fk_cash_users_id",
                 table: "cash");
 
@@ -58,7 +58,7 @@ namespace CardCollector.Migrations
             migrationBuilder.AddPrimaryKey(
                 name: "pk_user_cash",
                 table: "user_cash",
-                column: "id");
+                column: "id");*/
 
             migrationBuilder.CreateTable(
                 name: "top_history",
@@ -86,7 +86,7 @@ namespace CardCollector.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.AddForeignKey(
+            /*migrationBuilder.AddForeignKey(
                 name: "fk_user_cash_users_id",
                 table: "user_cash",
                 column: "id",
@@ -108,12 +108,12 @@ namespace CardCollector.Migrations
                 column: "id",
                 principalTable: "users",
                 principalColumn: "id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade);*/
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
+            /*migrationBuilder.DropForeignKey(
                 name: "fk_user_cash_users_id",
                 table: "user_cash");
 
@@ -123,12 +123,12 @@ namespace CardCollector.Migrations
 
             migrationBuilder.DropForeignKey(
                 name: "fk_user_settings_users_id",
-                table: "user_settings");
+                table: "user_settings");*/
 
             migrationBuilder.DropTable(
                 name: "top_history");
 
-            migrationBuilder.DropPrimaryKey(
+            /*migrationBuilder.DropPrimaryKey(
                 name: "pk_user_settings",
                 table: "user_settings");
 
@@ -189,7 +189,7 @@ namespace CardCollector.Migrations
                 column: "id",
                 principalTable: "users",
                 principalColumn: "id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade);*/
         }
     }
 }

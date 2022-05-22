@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using CardCollector.Attributes;
 using CardCollector.Commands.MessageHandler.Collection;
-using CardCollector.Controllers;
 using CardCollector.Database.EntityDao;
 using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
@@ -24,7 +23,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Collection
             {
                 EnterGemsPrice.RemoveFromQueue(User.Id);
                 var userSticker =
-                    User.Stickers.SingleOrDefault(item => item.Sticker.Id == collectionModule.SelectedStickerId);
+                    User.Stickers.SingleOrDefault(item => item.Id == collectionModule.SelectedStickerId);
                 if (userSticker == null) return;
                 userSticker.Count -= collectionModule.Count;
                 await Context.Auctions.AddAsync(User, userSticker.Sticker, collectionModule.Count,

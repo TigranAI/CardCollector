@@ -59,5 +59,86 @@ namespace CardCollector.Resources.Translations {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Нет задачи (нельзя прокачать).
+        /// </summary>
+        internal static string _0 {
+            get {
+                return ResourceManager.GetString("0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Победить в рулетке {0} раз.
+        /// </summary>
+        internal static string _1 {
+            get {
+                return ResourceManager.GetString("1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выполнить ежедневное задание {0} раз.
+        /// </summary>
+        internal static string _2 {
+            get {
+                return ResourceManager.GetString("2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Забрать награду в &quot;Лесенке&quot; {0} раз.
+        /// </summary>
+        internal static string _3 {
+            get {
+                return ResourceManager.GetString("3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Получить награду в &quot;Пазле&quot; {0} раз.
+        /// </summary>
+        internal static string _4 {
+            get {
+                return ResourceManager.GetString("4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;a href=&quot;https://t.me/WyrmStickerBot&quot;&gt;Забрать раздачу из официального канала {0} раз&lt;/a&gt;.
+        /// </summary>
+        internal static string _5 {
+            get {
+                return ResourceManager.GetString("5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Получить {0} алмазов.
+        /// </summary>
+        internal static string _6 {
+            get {
+                return ResourceManager.GetString("6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пригласить {0} друзей.
+        /// </summary>
+        internal static string _7 {
+            get {
+                return ResourceManager.GetString("7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Потратить {0} золота.
+        /// </summary>
+        internal static string _8 {
+            get {
+                return ResourceManager.GetString("8", resourceCulture);
+            }
+        }
     }
 }

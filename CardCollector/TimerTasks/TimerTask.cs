@@ -26,10 +26,28 @@ namespace CardCollector.TimerTasks
         protected static void SetupTimer(Timer timer, TimeSpan timeToRun)
         {
             var interval = timeToRun - DateTime.Now.TimeOfDay;
-            if (interval < TimeSpan.Zero) interval += new TimeSpan(1, 0, 0, 0);
-            timer.AutoReset = false;
-            timer.Enabled = true;
-            timer.Interval = interval.TotalMilliseconds;
+            while (interval < TimeSpan.Zero) interval += new TimeSpan(1, 0, 0, 0);
+            SetupTimer(timer, interval.TotalMilliseconds);
+        }
+
+        protected static void SetupTimer(Timer timer, double interval)
+        {
+            if (interval < int.MaxValue)
+            {
+                timer.AutoReset = false;
+                timer.Enabled = true;
+                timer.Interval = interval;
+            }
+            else
+            {
+                var t = new Timer()
+                {
+                    Interval = int.MaxValue,
+                    AutoReset = false,
+                    Enabled = true
+                };
+                t.Elapsed += delegate { SetupTimer(timer, interval - int.MaxValue); };
+            }
         }
 
         protected abstract void TimerCallback(object o, ElapsedEventArgs e);

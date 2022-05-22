@@ -24,7 +24,8 @@ namespace CardCollector.TimerTasks
                 foreach (var user in users.Where(user => user.Settings[UserSettingsTypes.PiggyBankCapacity]))
                 {
                     var income = user.Cash.GetIncome(user.Stickers);
-                    await user.Messages.SendPiggyBankAlert($"{Messages.uncollected_income}: {income}");
+                    if (!income.Empty())
+                        await user.Messages.SendPiggyBankAlert($"{Messages.uncollected_income}: {income}");
                 }
 
                 await context.SaveChangesAsync();

@@ -550,7 +550,7 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Поздравляем! Вы прокачали стикер {1}! Вам доступна цветная версия стикера, теперь он приносит 1🍬 в день..
+        ///   Looks up a localized string similar to Поздравляем! Вы прокачали стикер {0}! Вам доступна цветная версия стикера, теперь он приносит 1🍬 в день..
         /// </summary>
         internal static string congratulations_sticker_unlocked {
             get {
@@ -849,6 +849,15 @@ namespace CardCollector.Resources.Translations {
         internal static string exchange_mesage {
             get {
                 return ResourceManager.GetString("exchange_mesage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Эксклюзивный набор:.
+        /// </summary>
+        internal static string exlusive_pack {
+            get {
+                return ResourceManager.GetString("exlusive_pack", resourceCulture);
             }
         }
         
@@ -1341,7 +1350,7 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Игра началась! У вас есть 30 секунд на ход, порядок ходов следующий:
+        ///   Looks up a localized string similar to Игра началась! У каждого есть 30 секунд на ход, порядок ходов следующий:
         ///{0}.
         /// </summary>
         internal static string puzzle_start_message {

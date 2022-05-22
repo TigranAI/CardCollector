@@ -26,5 +26,6 @@ public class SelectPuzzle : ChosenInlineResultHandler
         
         if (!puzzleInfo.TryMakeAMove(piece)) await Puzzle.BreakGame(Context, chat);
         else if (puzzleInfo.IsEndOfGame()) await Puzzle.EndOfGame(Context, chat, puzzleRepo, puzzleInfo);
+        else await puzzleRepo.SaveAsync(chat, puzzleInfo);
     }
 }

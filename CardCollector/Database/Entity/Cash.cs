@@ -24,14 +24,14 @@ namespace CardCollector.Database.Entity
         {
             return new Income()
                 .Calculate(stickers, LastPayout = DateTime.Now)
-                .ApplyLimits(MaxCapacity, -1, stickers.Count(sticker => sticker.Sticker.Tier == 10));
+                .ApplyLimits(MaxCapacity, 0, stickers.Count(sticker => sticker.Sticker.Tier == 10));
         }
 
         public async Task<Income> Payout()
         {
             return await new Income()
                 .Calculate(User.Stickers, LastPayout = DateTime.Now, true)
-                .ApplyLimits(MaxCapacity, -1, User.Stickers.Count(sticker => sticker.Sticker.Tier == 10))
+                .ApplyLimits(MaxCapacity, 0, User.Stickers.Count(sticker => sticker.Sticker.Tier == 10))
                 .Payout(User);
         }
 

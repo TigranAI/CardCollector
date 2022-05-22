@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using CardCollector.Database.Entity;
-using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
 using Telegram.Bot.Types.InlineQueryResults;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace CardCollector.Others
 {
@@ -32,12 +32,7 @@ namespace CardCollector.Others
         {
             return list
                 .ApplyOffset(offset)
-                .Select(sticker =>
-                {
-                    var result = (InlineQueryResultCachedSticker) sticker.ToMessageResult(command);
-                    result.InputMessageContent = new InputTextMessageContent(Text.select);
-                    return result;
-                });
+                .Select(sticker => sticker.ToMessageResult(command));
         }
 
         public static IEnumerable<(T item, int index)> WithIndex<T>(this IEnumerable<T> source)

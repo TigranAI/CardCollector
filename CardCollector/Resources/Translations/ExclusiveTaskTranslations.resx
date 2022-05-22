@@ -18,4 +18,31 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    <data name="0" xml:space="preserve">
+        <value>Нет задачи (нельзя прокачать)</value>
+    </data>
+    <data name="1" xml:space="preserve">
+        <value>Победить в рулетке {0} раз</value>
+    </data>
+    <data name="2" xml:space="preserve">
+        <value>Выполнить ежедневное задание {0} раз</value>
+    </data>
+    <data name="3" xml:space="preserve">
+        <value>Забрать награду в "Лесенке" {0} раз</value>
+    </data>
+    <data name="4" xml:space="preserve">
+        <value>Получить награду в "Пазле" {0} раз</value>
+    </data>
+    <data name="5" xml:space="preserve">
+        <value>&lt;a href="https://t.me/WyrmStickerBot"&gt;Забрать раздачу из официального канала {0} раз&lt;/a&gt;</value>
+    </data>
+    <data name="6" xml:space="preserve">
+        <value>Получить {0} алмазов</value>
+    </data>
+    <data name="7" xml:space="preserve">
+        <value>Пригласить {0} друзей</value>
+    </data>
+    <data name="8" xml:space="preserve">
+        <value>Потратить {0} золота</value>
+    </data>
 </root>

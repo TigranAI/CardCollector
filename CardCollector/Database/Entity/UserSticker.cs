@@ -5,6 +5,7 @@ using CardCollector.Others;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
 using Telegram.Bot.Types.InlineQueryResults;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace CardCollector.Database.Entity
 {

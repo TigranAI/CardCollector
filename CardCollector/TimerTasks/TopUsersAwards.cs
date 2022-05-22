@@ -7,6 +7,7 @@ using System.Timers;
 using CardCollector.Database;
 using CardCollector.Database.Entity;
 using CardCollector.Database.EntityDao;
+using CardCollector.Extensions;
 using CardCollector.Others;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
@@ -59,11 +60,14 @@ public class TopUsersAwards : TimerTask
                 Invite = await RewardByTop(context, UserStatsDao.GetTopByInvitedFriends, Text.top_by_invited_friends)
             };
             await context.TopHistory.AddAsync(topHistory);
+            (await context.UsersStats.ToListAsync())
+                .Apply(item => item.Reset());
             await context.SaveChangesAsync();
         }
     }
 
-    private async Task<string> RewardByTop(BotDatabaseContext context, Func<DbSet<UserStats>, Task<List<UserStats>>> topExpr,
+    private async Task<string> RewardByTop(BotDatabaseContext context,
+        Func<DbSet<UserStats>, Task<List<UserStats>>> topExpr,
         string topType)
     {
         var top = await topExpr.Invoke(context.UsersStats);
@@ -75,6 +79,7 @@ public class TopUsersAwards : TimerTask
                 string.Format(Messages.top_reward_message, topPosition.index + 1, topType, reward));
             await reward.RewardUser(context, user);
         }
+
         return string.Join(", ", top.Select(item => item.User.Id));
     }
 }

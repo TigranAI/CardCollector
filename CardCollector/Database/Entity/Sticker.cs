@@ -8,6 +8,7 @@ using CardCollector.Others;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
 using Telegram.Bot.Types.InlineQueryResults;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace CardCollector.Database.Entity
 {
@@ -48,8 +49,11 @@ namespace CardCollector.Database.Entity
                 str += $"\n{Text.effect}: " +
                        $"{EffectTranslations.ResourceManager.GetString(((int) Effect).ToString())}";
             if (ExclusiveTask != ExclusiveTask.None)
+            {
+                var task = ExclusiveTaskTranslations.ResourceManager.GetString(((int) ExclusiveTask).ToString());
                 str += $"\n{Text.upgradable}: " +
-                       $"{ExclusiveTaskTranslations.ResourceManager.GetString(((int) Effect).ToString())}";
+                       $"{string.Format(task, ExclusiveTaskGoal)}";
+            }
             if (Description != "") str += $"\n\n{Text.description}: {Description}";
             return str;
         }
@@ -80,8 +84,11 @@ namespace CardCollector.Database.Entity
                 str += $"\n{Text.effect}: " +
                        $"{EffectTranslations.ResourceManager.GetString(((int) Effect).ToString())}";
             if (ExclusiveTask != ExclusiveTask.None)
+            {
+                var task = ExclusiveTaskTranslations.ResourceManager.GetString(((int) ExclusiveTask).ToString());
                 str += $"\n{Text.upgradable}: " +
-                       $"{ExclusiveTaskTranslations.ResourceManager.GetString(((int) Effect).ToString())}";
+                       $"{string.Format(task, ExclusiveTaskGoal)}";
+            }
             if (Description != "") str += $"\n\n{Text.description}: {Description}";
             return str;
         }

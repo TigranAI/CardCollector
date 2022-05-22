@@ -21,8 +21,6 @@ namespace CardCollector.Commands.CallbackQueryHandler.Admin
 
         public override bool Match()
         {
-            Logs.LogOut(base.Match());
-            Logs.LogOut(User.PrivilegeLevel >= PrivilegeLevel.Programmer);
             return base.Match() && User.PrivilegeLevel >= PrivilegeLevel.Programmer;
         }
     }

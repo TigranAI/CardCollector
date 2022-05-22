@@ -58,7 +58,7 @@ namespace CardCollector.Controllers
             int messageId,
             string message,
             InlineKeyboardMarkup? keyboard = null,
-            ParseMode? parseMode = null)
+            ParseMode parseMode = ParseMode.Html)
         {
             try
             {
@@ -77,7 +77,7 @@ namespace CardCollector.Controllers
             long chatId,
             string message,
             IReplyMarkup? keyboard = null,
-            ParseMode? parseMode = null)
+            ParseMode parseMode = ParseMode.Html)
         {
             try
             {

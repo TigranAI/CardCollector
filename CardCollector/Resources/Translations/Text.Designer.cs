@@ -862,6 +862,15 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Открыть эксклюзивный пак.
+        /// </summary>
+        internal static string open_exclusive {
+            get {
+                return ResourceManager.GetString("open_exclusive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Открыть ещё.
         /// </summary>
         internal static string open_more {

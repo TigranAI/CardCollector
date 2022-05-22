@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Database.EntityDao;
 using CardCollector.Others;
+using CardCollector.Resources.Enums;
 using Telegram.Bot.Types;
 
 namespace CardCollector.Database.Entity
@@ -43,7 +44,7 @@ namespace CardCollector.Database.Entity
             using (var context = new BotDatabaseContext())
             {
                 var stickers = await context.Stickers.FindAllByTier(tier);
-                return stickers.Random();
+                return stickers.Where(sticker => sticker.ExclusiveTask == ExclusiveTask.None).Random();
             }
         }
 
