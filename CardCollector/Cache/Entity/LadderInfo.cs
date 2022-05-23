@@ -12,15 +12,10 @@ namespace CardCollector.Cache.Entity
         public List<long> UserIds = new();
         public List<long> StickerIds = new();
 
-        public void SetPack(int packId)
+        public void Add(long userId, int packId, long stickerId)
         {
-            if (CurrentPackId != packId) Reset();
+            if (CurrentPackId != packId || UserIds.Contains(userId) || StickerIds.Contains(stickerId)) Reset();
             CurrentPackId = packId;
-        }
-
-        public void Add(long userId, long stickerId)
-        {
-            if (UserIds.Contains(userId) || StickerIds.Contains(stickerId)) Reset();
             UserIds.Add(userId);
             StickerIds.Add(stickerId);
         }

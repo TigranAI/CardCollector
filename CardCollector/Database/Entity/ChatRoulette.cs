@@ -97,6 +97,7 @@ namespace CardCollector.Database.Entity
                             await bet.User.InviteInfo.CheckRewards(context);
                         }
                     }
+                    Bets.Clear();
                     
                     await stickerWinner.User.Stickers
                         .Where(sticker => sticker.Sticker.ExclusiveTask is ExclusiveTask.WinRoulette)

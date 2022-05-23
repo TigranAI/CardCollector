@@ -99,7 +99,7 @@ namespace CardCollector.Database.Entity
             if (User.IsBlocked) return;
             await ClearChat();
             if (MenuMessageId != -1) await DeleteMessage(User.ChatId, MenuMessageId);
-            var isFirstOrderPicked = User.SpecialOrdersUser.Any(item => item.Id == 2);
+            var isFirstOrderPicked = User.SpecialOrdersUser.Any(item => item.Order.Id == 2);
             MenuMessageId = await MessageController.SendMessage(User.ChatId, Messages.main_menu,
                 Keyboard.Menu(isFirstOrderPicked), ParseMode.Html);
         }

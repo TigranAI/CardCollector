@@ -31,7 +31,7 @@ public class User
     public virtual UserSettings Settings { get; set; }
     public virtual UserMessages Messages { get; set; }
     public virtual InviteInfo? InviteInfo { get; set; }
-    public virtual UserStats UserStats { get; set; } = new();
+    public virtual UserStats? UserStats { get; set; }
     public virtual ICollection<UserSticker> Stickers { get; set; }
     public virtual ICollection<UserPacks> Packs { get; set; }
     public virtual ICollection<DailyTask> DailyTasks { get; set; }

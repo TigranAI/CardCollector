@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.Database.Entity;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
 using CardCollector.Session.Modules;
+using Telegram.Bot.Types;
+using Sticker = CardCollector.Database.Entity.Sticker;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Collection
 {
-    public class Combine : CombineMenu
+    public class Combine : CallbackQueryHandler
     {
         protected override string CommandText => CallbackQueryCommands.combine;
 
@@ -37,7 +38,8 @@ namespace CardCollector.Commands.CallbackQueryHandler.Collection
                 }
                 combineModule.CombineList.Add(new Tuple<Sticker, int>(selectedSticker.Sticker, combineModule.Count));
             }
-            await base.Execute();
+
+            await new CombineMenu().Init(User, Context, new Update() {CallbackQuery = CallbackQuery}).PrepareAndExecute();
         }
     }
 }

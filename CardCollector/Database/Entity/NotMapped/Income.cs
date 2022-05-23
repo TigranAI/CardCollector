@@ -22,17 +22,20 @@ namespace CardCollector.Database.Entity.NotMapped
                 {
                     case IncomeType.Coins:
                         var coinIncome = sticker.GetIncome(payoutTime);
-                        if (updateTime && coinIncome > 0) sticker.Payout = payoutTime;
+                        if (coinIncome <= 0) break;
+                        if (updateTime) sticker.Payout = payoutTime;
                         Coins += coinIncome;
                         break;
                     case IncomeType.Gems:
                         var gemIncome = sticker.GetIncome(payoutTime);
-                        if (updateTime && gemIncome > 0) sticker.Payout = payoutTime;
+                        if (gemIncome <= 0) break;
+                        if (updateTime) sticker.Payout = payoutTime;
                         Gems += gemIncome;
                         break;
                     case IncomeType.Candies when sticker.IsUnlocked:
                         var candyIncome = sticker.GetIncome(payoutTime);
-                        if (updateTime && candyIncome != 0) sticker.Payout = DateTime.Today;
+                        if (candyIncome <= 0) break;
+                        if (updateTime) sticker.Payout = DateTime.Today;
                         Candies += candyIncome;
                         break;
                 }
@@ -50,15 +53,15 @@ namespace CardCollector.Database.Entity.NotMapped
 
         public async Task<Income> Payout(User user)
         {
-            user.Cash.Coins += Coins;
-            await user.AddGems(Gems);
-            user.Cash.Candies += Candies;
+            if (Coins > 0) user.Cash.Coins += Coins;
+            if (Gems > 0) await user.AddGems(Gems);
+            if (Candies > 0) user.Cash.Candies += Candies;
             return this;
         }
 
         public bool Empty()
         {
-            return Coins == 0 && Gems == 0 && Candies == 0;
+            return Coins <= 0 && Gems <= 0 && Candies <= 0;
         }
 
         public override string ToString()

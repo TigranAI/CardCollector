@@ -15,7 +15,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Collection
         protected override async Task Execute()
         {
             var module = User.Session.GetModule<CollectionModule>();
-            var userSticker = User.Stickers.FirstOrDefault(item => item.Sticker.Id == module.SelectedStickerId);
+            var userSticker = User.Stickers.FirstOrDefault(item => item.Id == module.SelectedStickerId);
             if (CallbackQuery.Data!.Contains(Text.plus))
             {
                 if (module.Count < userSticker?.Count) module.Count++;

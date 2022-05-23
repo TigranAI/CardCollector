@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Attributes;
-using CardCollector.Cache.Entity;
 using CardCollector.Cache.Repository;
 using CardCollector.Database.Entity;
 using CardCollector.Database.EntityDao;
@@ -10,7 +9,6 @@ using CardCollector.Games;
 using CardCollector.Resources;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
-using Telegram.Bot;
 
 namespace CardCollector.Commands.ChosenInlineResultHandler.Group
 {
@@ -47,8 +45,6 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Group
             }
 
             await User.Level.CheckLevelUp(Context);
-
-            
             User.Stickers.SingleOrDefault(item => item.Id == userStickerId)?.UpdateLastUsage();
         }
 

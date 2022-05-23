@@ -33,6 +33,7 @@ namespace CardCollector.Commands
         {
             try
             {
+                await InitFields();
                 await BeforeExecute();
                 await Execute();
                 await AfterExecute();
@@ -40,6 +41,15 @@ namespace CardCollector.Commands
             catch (Exception e)
             {
                 await OnFallback(e);
+            }
+        }
+
+        private async Task InitFields()
+        {
+            if (User.UserStats is null)
+            {
+                var stats = await Context.UsersStats.AddAsync(new UserStats() {User = User});
+                User.UserStats = stats.Entity;
             }
         }
 

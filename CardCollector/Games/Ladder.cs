@@ -37,8 +37,7 @@ namespace CardCollector.Games
             }
             var pack = sticker.Pack;
 
-            info.SetPack(pack.Id);
-            info.Add(user.Id, sticker.Id);
+            info.Add(user.Id, pack.Id, sticker.Id);
 
             if (await info.TryComplete(LADDER_GOAL))
             {

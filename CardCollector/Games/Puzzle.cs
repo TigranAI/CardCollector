@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Timers;
 using CardCollector.Cache.Entity;
 using CardCollector.Cache.Repository;
 using CardCollector.Commands.CallbackQueryHandler;
@@ -22,7 +21,7 @@ namespace CardCollector.Games;
 
 public static class Puzzle
 {
-    private static readonly Dictionary<long, Timer> TurnTimers = new();
+    public static readonly Dictionary<long, PuzzleTimer> TurnTimers = new();
 
     public static readonly int PUZZLE_MIN_PLAYERS = Constants.DEBUG ? 1 : 2;
     public static readonly int PUZZLE_MAX_PLAYERS = Constants.DEBUG ? 2 : 5;
@@ -230,7 +229,7 @@ public static class Puzzle
                 ? await context.Stickers.FindAllByTier(1)
                 : await context.Packs.FindById(1);
 
-            if (rewardList.Count < players.Count || players.Count == 5)
+            if (rewardList.Count < players.Count - 1 || players.Count == 5)
                 rewardList.Add(await GetReward(reward, user));
         });
 
