@@ -24,6 +24,7 @@ namespace CardCollector.Commands.CallbackQueryHandler
             var context = new BotDatabaseContext();
             var user = await context.Users.FindUser(update.CallbackQuery!.From);
             if (user.IsBlocked) return new IgnoreHandler();
+            await context.SaveChangesAsync();
             
             user.InitSession();
 

@@ -24,7 +24,8 @@ namespace CardCollector.Commands.ChosenInlineResultHandler
             var context = new BotDatabaseContext();
             var user = await context.Users.FindUser(update.ChosenInlineResult!.From);
             if (user.IsBlocked) return new IgnoreHandler();
-
+            await context.SaveChangesAsync();
+            
             user.InitSession();
             
             foreach (var handlerType in Commands)

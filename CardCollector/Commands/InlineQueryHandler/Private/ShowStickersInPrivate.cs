@@ -21,7 +21,7 @@ namespace CardCollector.Commands.InlineQueryHandler.Private
                 .OrderByDescending(item => item.LastUsage)
                 .And(list => length = list.Count())
                 .ToTelegramResults(ChosenInlineResultCommands.send_private_sticker, offset);
-            
+            Logs.LogOut(results.Count());
             await AnswerInlineQuery(User, InlineQuery.Id, results, offset.GetNext(length));
         }
         

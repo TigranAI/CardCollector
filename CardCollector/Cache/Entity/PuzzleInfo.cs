@@ -76,4 +76,9 @@ public class PuzzleInfo
     {
         return Turn - 1 == Players.Count;
     }
+
+    public void ResetRestrictions()
+    {
+        GamesToday = 0;
+    }
 }

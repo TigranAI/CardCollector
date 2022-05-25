@@ -570,7 +570,7 @@ namespace CardCollector.Resources
                     InlineKeyboardButton.WithCallbackData(Text.plus, $"{CallbackQueryCommands.count}={Text.plus}"),
                 }
             };
-            if (sticker.Tier != 4)
+            if (sticker.Tier < 4)
                 keyboard.Add(
                     new[]
                     {

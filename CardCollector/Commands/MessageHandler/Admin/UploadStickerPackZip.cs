@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.Database.Entity;
 using CardCollector.Extensions;
+using CardCollector.Others;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
 using OfficeOpenXml;
@@ -21,6 +22,8 @@ namespace CardCollector.Commands.MessageHandler.Admin;
 
 public class UploadStickerPackZip : MessageHandler
 {
+    private int _packId;
+    private bool _withGif;
     public static readonly Dictionary<long, List<int>> StickerMessages = new ();
 
     protected override string CommandText => "";
@@ -67,11 +70,13 @@ public class UploadStickerPackZip : MessageHandler
         await UploadPackPreviews(dirName, pack);
         await UploadStickers(dirName, pack);
 
-        await Context.Packs.AddAsync(pack);
+        var entity = await Context.Packs.AddAsync(pack);
         await User.Messages.EditMessage(Messages.stickers_succesfully_uploaded);
         
         TimerController.SetupTimer(30 * 1000, delegate { ClearChat(); });
         User.Session.State = UserState.Default;
+        await Context.SaveChangesAsync();
+        _packId = entity.Entity.Id;
     }
 
     private async void ClearChat()
@@ -106,7 +111,10 @@ public class UploadStickerPackZip : MessageHandler
 
         var thumbGifName = dirName + STICKER_PACK_THUMB_GIF_NAME;
         if (System.IO.File.Exists(thumbGifName))
+        {
             pack.SetGifPreview(await GetFile(thumbGifName));
+            _withGif = true;
+        }
     }
 
     private Pack ParseExcelFile(FileStream table)
@@ -143,7 +151,7 @@ public class UploadStickerPackZip : MessageHandler
                 throw new Exception(string.Format(ExceptionMessages.column_not_initialized, i, EMOJI_COLUMN));
 
             if (columns[DESCRIPTION_COLUMN] > 0)
-                sticker.Description = xl[i, columns[DESCRIPTION_COLUMN]].Value.ToString();
+                sticker.Description = xl[i, columns[DESCRIPTION_COLUMN]].Value?.ToString();
 
             if (isExclusive)
             {
@@ -261,5 +269,23 @@ public class UploadStickerPackZip : MessageHandler
                && User.Session.State is UserState.UploadStickerPackZip
                && Message.Type is MessageType.Document
                && Message.Document!.MimeType == "application/zip";
+    }
+
+    protected override async Task AfterExecute()
+    {
+        await base.AfterExecute();
+        await new RequestBuilder()
+            .SetUrl("recache")
+            .AddParam("packId", _packId)
+            .AddParam("type", (int) RecacheType.UploadPack)
+            .Send();
+        if (_withGif)
+        {
+            await new RequestBuilder()
+                .SetUrl("recache")
+                .AddParam("packId", _packId)
+                .AddParam("type", (int) RecacheType.UploadPackGifPreview)
+                .Send();
+        }
     }
 }

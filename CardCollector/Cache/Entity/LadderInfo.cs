@@ -14,7 +14,8 @@ namespace CardCollector.Cache.Entity
 
         public void Add(long userId, int packId, long stickerId)
         {
-            if (CurrentPackId != packId || UserIds.Contains(userId) || StickerIds.Contains(stickerId)) Reset();
+            if (CurrentPackId != -1 &&
+                (CurrentPackId != packId || UserIds.Contains(userId) || StickerIds.Contains(stickerId))) Reset();
             CurrentPackId = packId;
             UserIds.Add(userId);
             StickerIds.Add(stickerId);
@@ -23,6 +24,7 @@ namespace CardCollector.Cache.Entity
         public async Task<bool> TryComplete(int goal)
         {
             if (StickerIds.Count != goal) return false;
+            
             GamesToday++;
             using (var context = new BotDatabaseContext())
             {
@@ -31,8 +33,10 @@ namespace CardCollector.Cache.Entity
                     var user = await context.Users.FindById(userId);
                     user!.UserStats.IncreaseLadderGames();
                 }
+
                 await context.SaveChangesAsync();
             }
+
             Reset();
             return true;
         }
@@ -41,7 +45,7 @@ namespace CardCollector.Cache.Entity
         {
             return GamesToday >= maxGames;
         }
-        
+
         public void Reset()
         {
             UserIds.Clear();

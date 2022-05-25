@@ -4,18 +4,27 @@ namespace CardCollector.Others;
 
 public struct Offset
 {
-    public int Value { get; }
+    public readonly int Value { get; }
+    public readonly int Step { get; }
 
     public Offset()
     {
-        Value = -1;
+        Value = 0;
+        Step = 50;
     }
     
     public Offset(int val)
     {
         Value = val;
+        Step = 50;
     }
-    
+
+    public Offset(int value, int step)
+    {
+        Value = value;
+        Step = step;
+    }
+
     public static Offset Of(InlineQuery query)
     {
         if (query.Offset == "") return new Offset();
@@ -26,18 +35,13 @@ public struct Offset
 
     public Offset GetNext(int maxVal, int step = 50)
     {
-        if (maxVal != -1 && Value + step >= maxVal) return new Offset();
-        return this + step;
+        if (Value + step >= maxVal) return new Offset();
+        return new Offset(Value + step, step);
     }
 
     public override string ToString()
     {
-        if (Value == -1) return "";
+        if (Value == 0) return "";
         return Value.ToString();
-    }
-    
-    public static Offset operator+(Offset source, int val)
-    {
-        return new Offset(source.Value + val);
     }
 }

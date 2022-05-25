@@ -38,10 +38,11 @@ namespace CardCollector.TimerTasks
             });
         }
 
-        private static async Task ResetChatsRestrictions(BotDatabaseContext context)
+        public static async Task ResetChatsRestrictions(BotDatabaseContext context)
         {
             var chatRepo = new ChatInfoRepository();
             var ladderRepo = new LadderInfoRepository();
+            var puzzleRepo = new PuzzleInfoRepository();
             var chats = await context.TelegramChats.Where(chat => !chat.IsBlocked).ToListAsync();
             await chats.ApplyAsync(async chat =>
             {
@@ -52,6 +53,10 @@ namespace CardCollector.TimerTasks
                 var ladderInfo = await ladderRepo.GetAsync(chat);
                 ladderInfo.ResetRestrictions();
                 await ladderRepo.SaveAsync(chat, ladderInfo);
+
+                var puzzleInfo = await puzzleRepo.GetAsync(chat);
+                puzzleInfo.ResetRestrictions();
+                await puzzleRepo.SaveAsync(chat, puzzleInfo);
             });
         }
     }

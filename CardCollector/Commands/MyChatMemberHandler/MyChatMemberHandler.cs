@@ -23,7 +23,10 @@ namespace CardCollector.Commands.MyChatMemberHandler
         public static async Task<HandlerModel> Factory(Update update)
         {
             var context = new BotDatabaseContext();
-            var user = await context.Users.FindUser(update.MyChatMember!.From);
+            var user = await context.Users.FindByChatId(update.MyChatMember!.From.Id);
+            if (user == null) return new IgnoreHandler();
+            user = await context.Users.FindUser(update.MyChatMember!.From);
+            await context.SaveChangesAsync();
 
             user.InitSession();
 

@@ -23,10 +23,10 @@ namespace CardCollector.Database.EntityDao
                 .SingleOrDefaultAsync(user => user.Id == userId);
         }
 
-        public static async Task<User> FindByChatId(this DbSet<User> users, long chatId)
+        public static async Task<User?> FindByChatId(this DbSet<User> users, long chatId)
         {
             return await users
-                .SingleAsync(user => user.ChatId == chatId);
+                .SingleOrDefaultAsync(user => user.ChatId == chatId);
         }
 
         public static async Task<List<User>> FindTopByExp(this DbSet<User> users, int top = 5)

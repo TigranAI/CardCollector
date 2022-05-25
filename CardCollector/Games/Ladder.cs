@@ -45,7 +45,7 @@ namespace CardCollector.Games
                 await SaveActivity(context, chat.Id);
                 await AddToLadderList(chat.Id);
             }
-
+            
             await repo.SaveAsync(chat, info);
         }
 

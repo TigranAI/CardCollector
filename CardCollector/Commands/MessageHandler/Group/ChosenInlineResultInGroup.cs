@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using CardCollector.Cache.Repository;
+using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
 using Telegram.Bot.Types.Enums;
 
@@ -12,7 +13,8 @@ namespace CardCollector.Commands.MessageHandler.Group
         protected override async Task Execute()
         {
             var repo = new ChosenResultRepository();
-            await repo.SaveAsync(User.Id, Message.Chat.Id);
+            var chat = await Context.TelegramChats.FindByChatId(Message.Chat.Id);
+            await repo.SaveAsync(User, chat.Id);
         }
 
         public override bool Match()

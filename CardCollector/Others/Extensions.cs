@@ -4,7 +4,6 @@ using System.Linq;
 using CardCollector.Database.Entity;
 using CardCollector.Session.Modules;
 using Telegram.Bot.Types.InlineQueryResults;
-using Telegram.Bot.Types.ReplyMarkups;
 
 namespace CardCollector.Others
 {
@@ -44,7 +43,7 @@ namespace CardCollector.Others
         {
             return source
                 .Skip(offset.Value)
-                .Take(50);
+                .Take(offset.Step);
         }
 
         public static IEnumerable<Sticker> ApplyFilters(this IEnumerable<Sticker> source, FiltersModule filters)

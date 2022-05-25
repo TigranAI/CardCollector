@@ -26,6 +26,7 @@ public class ShowPuzzlesSticker : InlineQueryHandler
         
         if (puzzleInfo.CreatorId == 0 || puzzleInfo.StickerId == -1) return await Ignore();
         var order = puzzleInfo.GetOrder(User.Id);
+        if (order != puzzleInfo.Turn) return false;
         if (order == 0) return await ShowCreatorStickers(puzzleInfo.Players.Count + 1);
         if (order > 0 && puzzleInfo.StickerId != 0) return await ShowPlayerStickers(puzzleInfo.StickerId, order);
         

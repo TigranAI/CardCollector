@@ -18,6 +18,7 @@ namespace CardCollector.Controllers
                 if (chat.IsBlocked) return;
                 
                 var user = await context.Users.FindUser(message.From!);
+                await context.SaveChangesAsync();
                 chat.MembersCount = await Bot.Client.GetChatMemberCountAsync(message.Chat.Id);
                 
                 if (!chat.Members.Contains(user)) chat.Members.Add(user);

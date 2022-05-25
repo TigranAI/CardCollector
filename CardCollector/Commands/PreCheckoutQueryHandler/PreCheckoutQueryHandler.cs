@@ -26,6 +26,7 @@ namespace CardCollector.Commands.PreCheckoutQueryHandler
             var context = new BotDatabaseContext();
             var user = await context.Users.FindUser(update.PreCheckoutQuery!.From);
             if (user.IsBlocked) return new IgnoreHandler();
+            await context.SaveChangesAsync();
             
             user.InitSession();
             

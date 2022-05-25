@@ -1,6 +1,8 @@
-﻿namespace CardCollector.Cache.Repository
+﻿using CardCollector.Database.Entity;
+
+namespace CardCollector.Cache.Repository
 {
-    public class ChosenResultRepository : BaseRedisRepository<long, long?>
+    public class ChosenResultRepository : BaseRedisRepository<User, long?>
     {
         public ChosenResultRepository() : base(11)
         {
@@ -11,9 +13,9 @@
             return null;
         }
 
-        protected override string GetKey(long key)
+        protected override string GetKey(User key)
         {
-            return key.ToString();
+            return key.Id.ToString();
         }
     }
 }
