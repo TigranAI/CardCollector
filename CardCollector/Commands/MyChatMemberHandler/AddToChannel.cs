@@ -1,10 +1,6 @@
 ﻿using System.Threading.Tasks;
-using CardCollector.Database;
-using CardCollector.Database.Entity;
-using Microsoft.EntityFrameworkCore;
-using Telegram.Bot.Types;
+using CardCollector.Database.EntityDao;
 using Telegram.Bot.Types.Enums;
-using User = CardCollector.Database.Entity.User;
 
 namespace CardCollector.Commands.MyChatMemberHandler
 {
@@ -12,22 +8,7 @@ namespace CardCollector.Commands.MyChatMemberHandler
     {
         protected override async Task Execute()
         {
-            var telegramChat = await Context.TelegramChats
-                .SingleOrDefaultAsync(item => item.ChatId == ChatMemberUpdated.Chat.Id);
-            if (telegramChat == null)
-            {
-                telegramChat = (
-                    await Context.TelegramChats.AddAsync(
-                        new TelegramChat()
-                        {
-                            ChatId = ChatMemberUpdated.Chat.Id,
-                            ChatType = ChatMemberUpdated.Chat.Type,
-                            Title = ChatMemberUpdated.Chat.Title
-                        }
-                    )
-                ).Entity;
-            }
-
+            var telegramChat = await Context.TelegramChats.FindByChat(ChatMemberUpdated.Chat);
             telegramChat.IsBlocked = false;
         }
 

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CardCollector.Controllers;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
+using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.InputFiles;
 using Telegram.Bot.Types.ReplyMarkups;
@@ -14,16 +15,16 @@ namespace CardCollector.Database.Entity
 {
     public class UserMessages
     {
-        [Key, ForeignKey("id")]
-        public virtual User User { get; set; }
+        [Key, ForeignKey("id")] public virtual User User { get; set; }
+        public int StartMessageId { get; set; } = -1;
         public int MenuMessageId { get; set; } = -1;
         public int CollectIncomeMessageId { get; set; } = -1;
         public int TopUsersMessageId { get; set; } = -1;
         public int DailyTaskMessageId { get; set; } = -1;
         public int DailyTaskAlertMessageId { get; set; } = -1;
         public int DailyTaskProgressMessageId { get; set; } = -1;
-        public HashSet<int> ChatMessages { get; set; } = new ();
-        public HashSet<int> ChatStickers { get; set; } = new ();
+        public HashSet<int> ChatMessages { get; set; } = new();
+        public HashSet<int> ChatStickers { get; set; } = new();
 
         public async Task ClearChat()
         {
@@ -126,7 +127,8 @@ namespace CardCollector.Database.Entity
             if (User.IsBlocked) return;
             await ClearChat();
             if (DailyTaskMessageId != -1) await DeleteMessage(User.ChatId, DailyTaskMessageId);
-            DailyTaskMessageId = await MessageController.SendMessage(User.ChatId, Messages.pack_prize, Keyboard.MyPacks);
+            DailyTaskMessageId =
+                await MessageController.SendMessage(User.ChatId, Messages.pack_prize, Keyboard.MyPacks);
             ChatMessages.Add(DailyTaskMessageId);
         }
 
@@ -150,6 +152,16 @@ namespace CardCollector.Database.Entity
         {
             if (User.IsBlocked) return;
             ChatMessages.Add(await MessageController.SendDocument(User.ChatId, file, keyboard));
+        }
+
+        public async Task SendStartMessage(bool isFirstOrderPicked)
+        {
+            if (User.IsBlocked) return;
+            if (StartMessageId != -1) await DeleteMessage(User.ChatId, StartMessageId);
+            var message = await MessageController.SendMessage(User.ChatId, Messages.start_message,
+                Keyboard.Menu(isFirstOrderPicked));
+            StartMessageId = message;
+            await Bot.Client.PinChatMessageAsync(User.ChatId, StartMessageId, disableNotification: true);
         }
     }
 }

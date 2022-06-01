@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using CardCollector.Others;
 using CardCollector.Resources.Translations;
+using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.InlineQueryResults;
 
@@ -31,6 +32,13 @@ namespace CardCollector.Database.Entity
             {
                 Description = $"{Text.members_count}: {Members.Count}"
             };
+        }
+
+        public TelegramChat Update(Chat chat)
+        {
+            if (ChatType != chat.Type) ChatType = chat.Type;
+            if (Title != chat.Title) Title = chat.Title;
+            return this;
         }
     }
 }

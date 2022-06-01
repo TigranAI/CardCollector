@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using CardCollector.Others;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
+using CardCollector.Resources.Translations.Providers;
 using Telegram.Bot.Types.InlineQueryResults;
 using Telegram.Bot.Types.ReplyMarkups;
 
@@ -16,6 +17,7 @@ namespace CardCollector.Database.Entity
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
+
         [MaxLength(256)] public string Title { get; set; }
         [MaxLength(128)] public string Author { get; set; }
         public int Income { get; set; }
@@ -34,9 +36,9 @@ namespace CardCollector.Database.Entity
         [MaxLength(127)] public string? GrayFileId { get; set; }
         public int ExclusiveTaskGoal { get; set; }
         public virtual ICollection<PuzzlePiece> PuzzlePieces { get; set; }
-        
+
         [NotMapped] public string Filename { get; set; }
-        
+
         public override string ToString()
         {
             var str = $"\n{Title} {TierAsStars()}" +
@@ -46,14 +48,10 @@ namespace CardCollector.Database.Entity
                 ? $"\n{Income}{Text.coin} {IncomeTime}{Text.time}{Text.minutes}"
                 : $"\n1{Text.candy} 1{Text.sun}{Text.day}";
             if (Effect != Effect.None)
-                str += $"\n{Text.effect}: " +
-                       $"{EffectTranslations.ResourceManager.GetString(((int) Effect).ToString())}";
+                str += $"\n{Text.effect}: {EffectTranslationsProvider.Instance[Effect]}";
             if (ExclusiveTask != ExclusiveTask.None)
-            {
-                var task = ExclusiveTaskTranslations.ResourceManager.GetString(((int) ExclusiveTask).ToString());
                 str += $"\n{Text.upgradable}: " +
-                       $"{string.Format(task, ExclusiveTaskGoal)}";
-            }
+                       $"{string.Format(ExclusiveTaskTranslationsProvider.Instance[ExclusiveTask]!, ExclusiveTaskGoal)}";
             if (Description != "") str += $"\n\n{Text.description}: {Description}";
             return str;
         }
@@ -81,14 +79,10 @@ namespace CardCollector.Database.Entity
                 ? $"\n{Income}{Text.coin} {IncomeTime}{Text.time}{Text.minutes}"
                 : $"\n1{Text.candy} 1{Text.sun}{Text.day}";
             if (Effect != Effect.None)
-                str += $"\n{Text.effect}: " +
-                       $"{EffectTranslations.ResourceManager.GetString(((int) Effect).ToString())}";
+                str += $"\n{Text.effect}: {EffectTranslationsProvider.Instance[Effect]}";
             if (ExclusiveTask != ExclusiveTask.None)
-            {
-                var task = ExclusiveTaskTranslations.ResourceManager.GetString(((int) ExclusiveTask).ToString());
                 str += $"\n{Text.upgradable}: " +
-                       $"{string.Format(task, ExclusiveTaskGoal)}";
-            }
+                       $"{string.Format(ExclusiveTaskTranslationsProvider.Instance[ExclusiveTask]!, ExclusiveTaskGoal)}";
             if (Description != "") str += $"\n\n{Text.description}: {Description}";
             return str;
         }

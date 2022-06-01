@@ -16,13 +16,14 @@ namespace CardCollector.Commands.MessageHandler.Profile
 
         protected override async Task Execute()
         {
+            await User.Messages.ClearChat();
             User.Session.ResetModules();
             var income = User.Cash.GetIncome(User.Stickers);
             var currentLevel = await Context.Levels.FindLevel(User.Level.Level + 1);
             var expGoal = currentLevel?.LevelExpGoal.ToString() ?? "∞";
             var packsCount = User.Packs.Sum(item => item.Count);
 
-            await User.Messages.EditMessage(User.GetProfileMessage(expGoal),
+            await User.Messages.SendMessage(User.GetProfileMessage(expGoal),
                 Keyboard.GetProfileKeyboard(packsCount, User.InviteInfo, income));
         }
     }

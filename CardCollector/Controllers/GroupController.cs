@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using CardCollector.Database;
 using CardCollector.Database.EntityDao;
 using CardCollector.Games;
@@ -19,13 +20,17 @@ namespace CardCollector.Controllers
                 
                 var user = await context.Users.FindUser(message.From!);
                 await context.SaveChangesAsync();
-                chat.MembersCount = await Bot.Client.GetChatMemberCountAsync(message.Chat.Id);
-                
-                if (!chat.Members.Contains(user)) chat.Members.Add(user);
+                try
+                {
+                    chat.MembersCount = await Bot.Client.GetChatMemberCountAsync(message.Chat.Id);
 
-                await Giveaway.OnMessageReceived(context, chat);
+                    if (!chat.Members.Contains(user)) chat.Members.Add(user);
+                    await context.SaveChangesAsync();
 
-                await context.SaveChangesAsync();
+                    await Giveaway.OnMessageReceived(context, chat);
+
+                    await context.SaveChangesAsync();
+                } catch (Exception e){ }
             }
         }
     }

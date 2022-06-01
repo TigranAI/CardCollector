@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Database.Entity;
@@ -23,8 +24,9 @@ namespace CardCollector.Database.EntityDao
 
         public static async Task<TelegramChat> FindByChat(this DbSet<TelegramChat> table, Chat chat)
         {
-            return await table.SingleOrDefaultAsync(item => item.ChatId == chat.Id)
-                   ?? await table.Create(chat);
+            var result = await table.SingleOrDefaultAsync(item => item.ChatId == chat.Id)
+                         ?? await table.Create(chat);
+            return result.Update(chat);
         }
 
         public static async Task<TelegramChat> Create(this DbSet<TelegramChat> table, Chat chat)

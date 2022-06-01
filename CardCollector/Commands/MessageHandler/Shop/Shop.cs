@@ -18,12 +18,13 @@ namespace CardCollector.Commands.MessageHandler.Shop
 
         protected override async Task Execute()
         {
+            await User.Messages.ClearChat();
             User.Session.ResetModules();
             User.Session.State = UserState.ShopMenu;
             var availableSpecialOrders = await Context.SpecialOrders.FindAll();
             var haveSpecialOffers = availableSpecialOrders.Any(item => item.IsInfinite 
                 || !User.SpecialOrdersUser.Any(usedOrders => usedOrders.Order.Id == item.Id));
-            await User.Messages.EditMessage(Messages.shop_message,
+            await User.Messages.SendMessage(Messages.shop_message,
                 Keyboard.ShopKeyboard(haveSpecialOffers, User.PrivilegeLevel), ParseMode.Html);
         }
 

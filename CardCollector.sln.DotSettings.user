@@ -12,7 +12,7 @@
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FCommands_002FChosenInlineResultHandler_002FChosenInlineResultCommands/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FCommands_002FInlineQueryHandler_002FInlineQueryCommands/@EntryIndexedValue">False</s:Boolean>
 	
-	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FCommands_002FMessageHandler_002FMessageCommands/@EntryIndexedValue">False</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FCommands_002FMessageHandler_002FMessageCommands/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FCommands_002FMessageHandler_002FUrlCommands_002FMessageUrlCommands/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FCommands_002FPreCheckoutQueryHandler_002FPreCheckoutQueryCommands/@EntryIndexedValue">False</s:Boolean>
 	
@@ -40,7 +40,7 @@
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FResources_002FTranslations_002FExclusiveTaskTranslations/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FResources_002FTranslations_002FLogsTranslations/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FResources_002FTranslations_002FMessages/@EntryIndexedValue">False</s:Boolean>
-	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FResources_002FTranslations_002FSortingTypes/@EntryIndexedValue">False</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FResources_002FTranslations_002FSortingTypes/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FResources_002FTranslations_002FText/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FResources_002FTranslations_002FTopByTexts/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=CardCollector_002FStickerEffects_002FEffectTranslations/@EntryIndexedValue">True</s:Boolean>

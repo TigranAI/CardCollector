@@ -11,6 +11,7 @@ using CardCollector.Commands.MyChatMemberHandler;
 using CardCollector.Commands.PreCheckoutQueryHandler;
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
+using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
@@ -18,18 +19,13 @@ namespace CardCollector.Controllers
 {
     using static Logs;
 
-    public static class UpdateController
+    public class UpdateController : IUpdateHandler
     {
-        private static ConcurrentQueue<HandlerModel> Handlers = new();
+        private ConcurrentQueue<HandlerModel> Handlers;
 
-        public static async Task HandleUpdateAsync(ITelegramBotClient client, Update update, CancellationToken ct)
+        public UpdateController()
         {
-            var handler = await BuildHandler(update);
-            Handlers.Enqueue(handler);
-        }
-
-        public static void Run()
-        {
+            Handlers = new ConcurrentQueue<HandlerModel>();
             Task.Run(async () =>
             {
                 while (true)
@@ -40,7 +36,21 @@ namespace CardCollector.Controllers
             });
         }
 
-        private static async Task<HandlerModel> BuildHandler(Update update)
+        async Task IUpdateHandler.HandleUpdateAsync(ITelegramBotClient botClient, Update update,
+            CancellationToken cancellationToken)
+        {
+            try
+            {
+                var handler = await BuildHandler(update);
+                Handlers.Enqueue(handler);
+            }
+            catch (Exception e)
+            {
+                LogOutError(e);
+            }
+        }
+
+        private async Task<HandlerModel> BuildHandler(Update update)
         {
             return update.Type switch
             {
@@ -54,12 +64,12 @@ namespace CardCollector.Controllers
             };
         }
 
-        public static Task HandleErrorAsync(ITelegramBotClient client, Exception e, CancellationToken ct)
+        public Task HandlePollingErrorAsync(ITelegramBotClient client, Exception e, CancellationToken ct)
         {
             switch (e)
             {
                 case ApiRequestException:
-                    LogOutWarning(e.Message);
+                    LogOutWarning(e);
                     break;
                 default:
                     LogOutError(e);

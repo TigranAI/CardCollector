@@ -38,10 +38,12 @@ public class TopUsersAwards : TimerTask
 
     private static TimeSpan GetStartOfNextEvenWeek()
     {
+        int AsStartOfMonday(DayOfWeek dayOfWeek) => dayOfWeek is DayOfWeek.Sunday ? 7 : (int) dayOfWeek;
+        
         var dateTime = DateTime.Now;
         var cal = CultureInfo.InvariantCulture.Calendar;
         var week = cal.GetWeekOfYear(dateTime, CalendarWeekRule.FirstFullWeek, DayOfWeek.Monday);
-        var day = dateTime.Day - (int) dateTime.DayOfWeek + 14 - week % 2 * 7;
+        var day = 7 - AsStartOfMonday(dateTime.DayOfWeek) + week % 2 * 7;
         return new TimeSpan(day, 0, 0, 0);
     }
 

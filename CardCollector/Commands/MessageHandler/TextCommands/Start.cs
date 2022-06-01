@@ -14,6 +14,8 @@ namespace CardCollector.Commands.MessageHandler.TextCommands
         
         protected override async Task Execute()
         {
+            var isFirstOrderPicked = User.SpecialOrdersUser.Any(item => item.Id == 2);
+            await User.Messages.SendStartMessage(isFirstOrderPicked);
             if (!User.FirstReward)
             {
                 User.FirstReward = true;
@@ -22,9 +24,6 @@ namespace CardCollector.Commands.MessageHandler.TextCommands
                 await User.Messages.SendSticker(packInfo.PreviewFileId!);
                 await User.Messages.SendMessage(Messages.first_reward, Keyboard.MyPacks, ParseMode.Html);
             }
-            
-            var isFirstOrderPicked = User.SpecialOrdersUser.Any(item => item.Id == 2);
-            await User.Messages.SendMessage(Messages.start_message, Keyboard.Menu(isFirstOrderPicked));
         }
 
         protected override async Task AfterExecute()

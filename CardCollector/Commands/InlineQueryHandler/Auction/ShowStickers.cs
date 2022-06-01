@@ -19,8 +19,10 @@ namespace CardCollector.Commands.InlineQueryHandler.Auction
             var offset = Offset.Of(InlineQuery);
             var length = 0;
             
-            var stickersList = await Context.Auctions.FindAll(User.Session.GetModule<FiltersModule>());
+            var stickersList = await Context.Auctions.FindAll();
             var results = stickersList
+                .ApplyFilters(User.Session.GetModule<FiltersModule>())
+                .DistinctBy(item => item.Id)
                 .Where(item => item.Contains(InlineQuery.Query))
                 .And(list => length = list.Count())
                 .ToTelegramResults(ChosenInlineResultCommands.select_sticker, offset);

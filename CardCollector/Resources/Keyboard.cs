@@ -8,6 +8,7 @@ using CardCollector.Database.Entity.NotMapped;
 using CardCollector.Others;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
+using CardCollector.Resources.Translations.Providers;
 using CardCollector.Session.Modules;
 using Telegram.Bot.Types.ReplyMarkups;
 using SortingTypes = CardCollector.Resources.Enums.SortingTypes;
@@ -846,7 +847,7 @@ namespace CardCollector.Resources
             return new InlineKeyboardMarkup(new[]
             {
                 InlineKeyboardButton.WithCallbackData(
-                    TopByTexts.ResourceManager.GetString(((int) topBy).ToString()) ?? string.Empty,
+                    TopByTextsProvider.Instance[topBy] ?? string.Empty,
                     $"{CallbackQueryCommands.show_top_by}={(int) topBy}")
             });
         }

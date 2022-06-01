@@ -11,7 +11,6 @@ using Telegram.Bot.Types;
 
 namespace CardCollector
 {
-    using static UpdateController;
     public static class Bot
     {
         private static TelegramBotClient? _client;
@@ -29,8 +28,7 @@ namespace CardCollector
             await Client.SetMyCommandsAsync(Constants.PrivateCommands, BotCommandScope.AllPrivateChats());
             await Client.SetMyCommandsAsync(Constants.GroupCommands, BotCommandScope.AllGroupChats());
 
-            Client.StartReceiving(HandleUpdateAsync, HandleErrorAsync);
-            Run();
+            Client.StartReceiving(new UpdateController());
             
             RunWaitQueueResolver();
             

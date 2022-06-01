@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using CardCollector.Database.Entity;
@@ -54,6 +55,19 @@ namespace CardCollector.Others
         public static IEnumerable<UserSticker> ApplyFilters(this IEnumerable<UserSticker> source, FiltersModule filters)
         {
             return filters.ApplyTo(source);
+        }
+
+        public static IEnumerable<Sticker> ApplyFilters(this IEnumerable<Auction> source, FiltersModule filters)
+        {
+            return source
+                .ApplyFiltersPrice(filters)
+                .Select(item => item.Sticker)
+                .ApplyFilters(filters);
+        }
+
+        public static IEnumerable<Auction> ApplyFiltersPrice(this IEnumerable<Auction> source, FiltersModule filters)
+        {
+            return filters.ApplyPriceTo(source);
         }
     }
 }

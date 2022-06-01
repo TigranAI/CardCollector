@@ -20,10 +20,10 @@ namespace CardCollector.Commands.InlineQueryHandler.Auction
             
             var module = User.Session.GetModule<AuctionModule>();
             var tradersList = await Context.Auctions.FindAllOrders(module.SelectedStickerId, InlineQuery.Query);
-            User.Session.GetModule<FiltersModule>().ApplyPriceTo(tradersList);
             var discount = User.HasAuctionDiscount() ? 0.95 : 1;
             var results = tradersList
-                .And(list => length = list.Count)
+                .ApplyFiltersPrice(User.Session.GetModule<FiltersModule>())
+                .And(list => length = list.Count())
                 .ApplyOffset(offset)
                 .Select(item => item.AsTelegramArticle(discount));
             

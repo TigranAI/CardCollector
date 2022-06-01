@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using CardCollector.Database;
 using CardCollector.Database.Entity;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
-using Microsoft.EntityFrameworkCore;
+using CardCollector.Resources.Translations.Providers;
 using SortingTypes = CardCollector.Resources.Enums.SortingTypes;
 
 namespace CardCollector.Session.Modules
@@ -15,8 +13,6 @@ namespace CardCollector.Session.Modules
         public string? Author;
         public int? Tier;
         public string? Emoji;
-        public int? PriceCoinsFrom;
-        public int? PriceCoinsTo;
         public int? PriceGemsFrom;
         public int? PriceGemsTo;
         public SortingTypes Sorting;
@@ -27,17 +23,10 @@ namespace CardCollector.Session.Modules
                        $"{Messages.author}: {Author ?? Messages.all}\n" +
                        $"{Messages.tier}: {Tier?.ToString() ?? Messages.all}\n" +
                        $"{Messages.emoji}: {Emoji ?? Messages.all}\n";
-            switch (state)
-            {
-                case UserState.AuctionMenu:
-                    text += $"{Messages.price}: 💎 {PriceGemsFrom ?? 0} - {PriceGemsTo?.ToString() ?? "∞"}\n";
-                    break;
-                case UserState.ShopMenu:
-                    text += $"{Messages.price}: 💰 {PriceCoinsFrom ?? 0} - {PriceCoinsTo?.ToString() ?? "∞"}\n";
-                    break;
-            }
+            if (state is UserState.AuctionMenu)
+                text += $"{Messages.price}: 💎 {PriceGemsFrom ?? 0} - {PriceGemsTo?.ToString() ?? "∞"}\n";
 
-            text += $"{Messages.sorting} {Resources.Translations.SortingTypes.ResourceManager.GetString(Sorting.ToString())}" +
+            text += $"{Messages.sorting} {SortingTypesProvider.Instance[Sorting]}" +
                     $"\n\n{Messages.select_filter}:";
             return text;
         }
@@ -78,43 +67,15 @@ namespace CardCollector.Session.Modules
             };
         }
 
-        public async Task ApplyPriceTo(BotDatabaseContext context, List<Sticker> list)
-        {
-            if (PriceGemsFrom == null && PriceGemsTo == null) return;
-            if (PriceGemsFrom is { } && PriceGemsTo is { })
-            {
-                var stickers = await context.Auctions
-                    .Where(item => item.Price >= PriceGemsFrom && item.Price <= PriceGemsTo)
-                    .DistinctBy(item => item.Sticker.Id)
-                    .ToListAsync();
-                list.RemoveAll(item => !stickers.Any(auction => auction.Sticker.Id == item.Id));
-            }
-            else if (PriceGemsFrom is { })
-            {
-                var stickers = await context.Auctions
-                    .Where(item => item.Price >= PriceGemsFrom)
-                    .DistinctBy(item => item.Sticker.Id)
-                    .ToListAsync();
-                list.RemoveAll(item => !stickers.Any(auction => auction.Sticker.Id == item.Id));
-            }
-            else if (PriceGemsTo is { })
-            {
-                var stickers = await context.Auctions
-                    .Where(item => item.Price <= PriceGemsTo)
-                    .DistinctBy(item => item.Sticker.Id)
-                    .ToListAsync();
-                list.RemoveAll(item => !stickers.Any(auction => auction.Sticker.Id == item.Id));
-            }
-        }
-
-        public void ApplyPriceTo(List<Auction> list)
+        public IEnumerable<Auction> ApplyPriceTo(IEnumerable<Auction> list)
         {
             if (PriceGemsFrom is { } && PriceGemsTo is { })
-                list.RemoveAll(item => item.Price <= PriceCoinsFrom || item.Price >= PriceGemsTo);
-            else if (PriceGemsFrom is { })
-                list.RemoveAll(item => item.Price <= PriceCoinsFrom);
-            else if (PriceGemsTo is { })
-                list.RemoveAll(item => item.Price >= PriceGemsTo);
+                return list.Where(item => item.Price >= PriceGemsFrom && item.Price <= PriceGemsTo);
+            if (PriceGemsFrom is { })
+                return list.Where(item => item.Price >= PriceGemsFrom);
+            if (PriceGemsTo is { })
+                return list.Where(item => item.Price <= PriceGemsTo);
+            return list;
         }
 
         public void Reset()
@@ -122,8 +83,6 @@ namespace CardCollector.Session.Modules
             Author = null;
             Tier = null;
             Emoji = null;
-            PriceCoinsFrom = null;
-            PriceCoinsTo = null;
             PriceGemsFrom = null;
             PriceGemsTo = null;
             Sorting = SortingTypes.None;

@@ -15,10 +15,11 @@ namespace CardCollector.Commands.MessageHandler.Collection
 
         protected override async Task Execute()
         {
+            await User.Messages.ClearChat();
             User.Session.ResetModules();
             User.Session.State = UserState.CollectionMenu;
             var text = User.Session.GetModule<FiltersModule>().ToString(User.Session.State);
-            await User.Messages.EditMessage(text, Keyboard.GetSortingMenu(User.Session.State));
+            await User.Messages.SendMessage(text, Keyboard.GetSortingMenu(User.Session.State));
         }
     }
 }

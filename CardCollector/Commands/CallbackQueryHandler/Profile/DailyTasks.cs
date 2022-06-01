@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
+using CardCollector.Resources.Translations.Providers;
 using CardCollector.UserDailyTask;
 
 namespace CardCollector.Commands.CallbackQueryHandler.Profile
@@ -14,7 +15,7 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
             var text = Messages.your_daily_tasks;
             foreach (var task in User.DailyTasks)
             {
-                var title = Titles.ResourceManager.GetString(task.TaskId.ToString());
+                var title = TitlesProvider.Instance[task];
                 var goal = TaskGoals.Goals[task.TaskId];
                 text += $"\n{title} ({goal - task.Progress}/{goal})";
             }

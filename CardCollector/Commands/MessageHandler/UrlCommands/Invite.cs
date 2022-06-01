@@ -23,6 +23,9 @@ public class Invite : MessageUrlHandler
 
     protected override async Task Execute()
     {
+        var isFirstOrderPicked = User.SpecialOrdersUser.Any(item => item.Id == 2);
+        await User.Messages.SendStartMessage(isFirstOrderPicked);
+        
         if (!User.IsNew() && !(User.IsUnblocked() && User.IsNotInvited()))
         {
             await User.Messages.SendMessage(Messages.you_cant_be_invited);
@@ -46,9 +49,6 @@ public class Invite : MessageUrlHandler
             await User.Messages.SendSticker(packInfo.PreviewFileId!);
             await User.Messages.SendMessage(Messages.first_reward, Keyboard.MyPacks, ParseMode.Html);
         }
-
-        var isFirstOrderPicked = User.SpecialOrdersUser.Any(item => item.Id == 2);
-        await User.Messages.SendMessage(Messages.start_message, Keyboard.Menu(isFirstOrderPicked));
 
         inviteInfo.InvitedFriends.Add(User);
         User.InviteInfo = new InviteInfo()

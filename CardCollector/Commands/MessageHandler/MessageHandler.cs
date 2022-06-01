@@ -8,6 +8,7 @@ using CardCollector.Database;
 using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
+using Microsoft.EntityFrameworkCore;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -27,7 +28,7 @@ public abstract class MessageHandler : HandlerModel
     public static async Task<HandlerModel> Factory(Update update)
     {
         var context = new BotDatabaseContext();
-        if (update.Message.MigrateToChatId != null) await Migrate(context, update);
+        if (update.Message!.MigrateToChatId != null) update = await Migrate(context, update);
         var user = await context.Users.FindUser(update.Message!.From!);
         if (user.IsBlocked) return new IgnoreHandler();
         await context.SaveChangesAsync();
@@ -55,16 +56,18 @@ public abstract class MessageHandler : HandlerModel
         return new IgnoreHandler();
     }
 
-    private static async Task Migrate(BotDatabaseContext context, Update update)
+    private static async Task<Update> Migrate(BotDatabaseContext context, Update update)
     {
-        var chat = await context.TelegramChats.FindByChatId(update.Message.Chat.Id);
-        chat.ChatId = update.Message.MigrateToChatId!.Value;
-        chat.ChatType = chat.ChatType is ChatType.Group
-            ? ChatType.Supergroup
-            : ChatType.Group;
+        var newChatId = update.Message!.MigrateToChatId!.Value;
+        if (!await context.TelegramChats.AnyAsync(item => item.ChatId == newChatId))
+        {
+            var chat = await context.TelegramChats.FindByChat(update.Message!.Chat);
+            chat.ChatId = newChatId;
+        }
+        
+        update.Message.Chat.Id = newChatId;
         await context.SaveChangesAsync();
-        update.Message.Chat.Id = chat.ChatId;
-        update.Message.Chat.Type = chat.ChatType;
+        return update;
     }
 
     public override bool Match()

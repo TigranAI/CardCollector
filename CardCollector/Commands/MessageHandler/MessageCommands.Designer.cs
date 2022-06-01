@@ -70,11 +70,29 @@ namespace CardCollector.Commands.MessageHandler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /auction.
+        /// </summary>
+        internal static string auction_text {
+            get {
+                return ResourceManager.GetString("auction_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Коллекция.
         /// </summary>
         internal static string collection {
             get {
                 return ResourceManager.GetString("collection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /collection.
+        /// </summary>
+        internal static string collection_text {
+            get {
+                return ResourceManager.GetString("collection_text", resourceCulture);
             }
         }
         
@@ -124,6 +142,15 @@ namespace CardCollector.Commands.MessageHandler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /profile.
+        /// </summary>
+        internal static string profile_text {
+            get {
+                return ResourceManager.GetString("profile_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /roulette.
         /// </summary>
         internal static string roulette {
@@ -138,6 +165,15 @@ namespace CardCollector.Commands.MessageHandler {
         internal static string shop {
             get {
                 return ResourceManager.GetString("shop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /shop.
+        /// </summary>
+        internal static string shop_text {
+            get {
+                return ResourceManager.GetString("shop_text", resourceCulture);
             }
         }
         

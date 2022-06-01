@@ -51,4 +51,16 @@
     <data name="start_puzzle" xml:space="preserve">
         <value>/puzzle</value>
     </data>
+    <data name="auction_text" xml:space="preserve">
+        <value>/auction</value>
+    </data>
+    <data name="collection_text" xml:space="preserve">
+        <value>/collection</value>
+    </data>
+    <data name="profile_text" xml:space="preserve">
+        <value>/profile</value>
+    </data>
+    <data name="shop_text" xml:space="preserve">
+        <value>/shop</value>
+    </data>
 </root>

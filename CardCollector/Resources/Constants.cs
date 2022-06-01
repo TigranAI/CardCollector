@@ -31,6 +31,10 @@ namespace CardCollector.Resources
             /*new BotCommand {Command = Text.start, Description = "Запуск бота"},*/
             new BotCommand {Command = MessageCommands.menu, Description = "Показать меню"},
             new BotCommand {Command = MessageCommands.help, Description = "Показать информацию"},
+            new BotCommand {Command = MessageCommands.profile_text, Description = "Профиль"},
+            new BotCommand {Command = MessageCommands.shop_text, Description = "Магазин"},
+            new BotCommand {Command = MessageCommands.collection_text, Description = "Коллекция"},
+            new BotCommand {Command = MessageCommands.auction_text, Description = "Аукцион"},
             /*new BotCommand {Command = "/error", Description = "Сообщить об ошибке"},*/
         };
         

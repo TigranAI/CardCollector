@@ -36,18 +36,6 @@ namespace CardCollector.Commands.CallbackQueryHandler.Filters
                         ? null
                         : int.Parse(value);
                     break;
-                case FilterKeys.PriceCoinsFrom:
-                    filters.PriceCoinsFrom = value == null
-                        ? null
-                        : int.Parse(value);
-                    if (filters.PriceCoinsFrom > filters.PriceCoinsTo) filters.PriceCoinsTo = null;
-                    break;
-                case FilterKeys.PriceCoinsTo:
-                    filters.PriceCoinsTo = value == null
-                        ? null
-                        : int.Parse(value);
-                    if (filters.PriceCoinsFrom > filters.PriceCoinsTo) filters.PriceCoinsFrom = null;
-                    break;
                 case FilterKeys.PriceGemsFrom:
                     filters.PriceGemsFrom = value == null
                         ? null
