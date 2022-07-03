@@ -484,6 +484,15 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 👑.
+        /// </summary>
+        internal static string crown {
+            get {
+                return ResourceManager.GetString("crown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Топ-5 по опыту.
         /// </summary>
         internal static string daily_exp_top {
@@ -718,6 +727,15 @@ namespace CardCollector.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Приносит.
+        /// </summary>
+        internal static string income {
+            get {
+                return ResourceManager.GetString("income", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Информация.
         /// </summary>
         internal static string info {
@@ -894,6 +912,15 @@ namespace CardCollector.Resources.Translations {
         internal static string open_random {
             get {
                 return ResourceManager.GetString("open_random", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Открыть стартовые паки.
+        /// </summary>
+        internal static string open_start_packs {
+            get {
+                return ResourceManager.GetString("open_start_packs", resourceCulture);
             }
         }
         
@@ -1461,6 +1488,15 @@ namespace CardCollector.Resources.Translations {
         internal static string upgradable {
             get {
                 return ResourceManager.GetString("upgradable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to В прокачанном состоянии будет приносить.
+        /// </summary>
+        internal static string upgradable_income {
+            get {
+                return ResourceManager.GetString("upgradable_income", resourceCulture);
             }
         }
         

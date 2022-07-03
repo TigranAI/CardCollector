@@ -68,13 +68,12 @@ public static class Puzzle
         puzzleInfo.StickerId = 0;
         puzzleInfo.Players.Shuffle();
         if (puzzleInfo.IsSuperGame())
-            await chat.SendMessage(Text.fireworks, SuperGameKeyboard());
+            await chat.SendMessage(Text.crown, SuperGameKeyboard());
         await chat.SendMessage(
             string.Format(Messages.puzzle_start_message, await GetMentionList(context, puzzleInfo.GetPlayers())),
-            ChooseStickerKeyboard(),
-            ParseMode.Html);
+            ChooseStickerKeyboard());
 
-        TurnTimers.Add(chat.Id, PuzzleTimer.Of(delegate { BreakGame(chat.Id); }));
+        TurnTimers.TryAdd(chat.Id, PuzzleTimer.Of(delegate { BreakGame(chat.Id); }));
     }
 
     private static async Task UndoGame(BotDatabaseContext context, TelegramChat chat, PuzzleInfo puzzleInfo,
@@ -92,8 +91,7 @@ public static class Puzzle
         await players.ApplyAsync(async playerId =>
         {
             var user = await context.Users.FindById(playerId);
-            if (success)
-                user!.UserStats.IncreasePuzzleGames();
+            if (success) user!.UserStats.IncreasePuzzleGames();
             var info = await userRepo.GetAsync(user!);
             info.PuzzleChatId = 0;
             await userRepo.SaveAsync(user, info);
@@ -203,10 +201,10 @@ public static class Puzzle
         var message = string.Format(Messages.congratulation_you_solve_puzzle,
             chat.MembersCount > MIN_MEMBERS_IN_CHAT
                 ? puzzleInfo.GamesToday < PUZZLE_MAX_REWARDS
-                    ? await GetRewards(context, players)
+                    ? await GetRewards(context, players, puzzleInfo.SuperGame)
                     : Messages.no_rewards_available
                 : Messages.no_rewards_available_in_this_chat);
-
+        await chat.SendMessage(Text.fireworks);
         await chat.SendMessage(message, parseMode: ParseMode.Html);
 
         await ClearPlayerList(context, players, true);
@@ -214,7 +212,7 @@ public static class Puzzle
         await puzzleRepo.SaveAsync(chat, puzzleInfo);
     }
 
-    private static async Task<string> GetRewards(BotDatabaseContext context, List<long> players)
+    private static async Task<string> GetRewards(BotDatabaseContext context, List<long> players, bool isSuperGame)
     {
         var rewardList = new List<string>();
         var userRepo = new UserInfoRepository();
@@ -233,6 +231,12 @@ public static class Puzzle
                 rewardList.Add(await GetReward(reward, user));
         });
 
+        if (isSuperGame)
+        {
+            var user = await context.Users.FindById(players.Random());
+            rewardList.Add('\n' + await GetReward(await context.Stickers.FindAllByTier(3), user!));
+        }
+        
         return string.Join("\n", rewardList);
     }
 

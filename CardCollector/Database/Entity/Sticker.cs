@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using CardCollector.Others;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
 using CardCollector.Resources.Translations.Providers;
 using Telegram.Bot.Types.InlineQueryResults;
-using Telegram.Bot.Types.ReplyMarkups;
 
 namespace CardCollector.Database.Entity
 {
@@ -39,23 +39,6 @@ namespace CardCollector.Database.Entity
 
         [NotMapped] public string Filename { get; set; }
 
-        public override string ToString()
-        {
-            var str = $"\n{Title} {TierAsStars()}" +
-                      $"\n{Text.emoji}: {Emoji}" +
-                      $"\n{Text.author}: {Author}";
-            str += Tier != 10
-                ? $"\n{Income}{Text.coin} {IncomeTime}{Text.time}{Text.minutes}"
-                : $"\n1{Text.candy} 1{Text.sun}{Text.day}";
-            if (Effect != Effect.None)
-                str += $"\n{Text.effect}: {EffectTranslationsProvider.Instance[Effect]}";
-            if (ExclusiveTask != ExclusiveTask.None)
-                str += $"\n{Text.upgradable}: " +
-                       $"{string.Format(ExclusiveTaskTranslationsProvider.Instance[ExclusiveTask]!, ExclusiveTaskGoal)}";
-            if (Description != "") str += $"\n\n{Text.description}: {Description}";
-            return str;
-        }
-
         public InlineQueryResult ToMessageResult(string command)
         {
             return new InlineQueryResultCachedSticker($"{command}={Id}", FileId)
@@ -69,22 +52,35 @@ namespace CardCollector.Database.Entity
             return new InlineQueryResultCachedSticker($"{command}={Id}", FileId);
         }
 
-        public string ToString(int count)
+        public override string ToString()
         {
-            var str = $"\n{Title} {TierAsStars()}" +
-                      $"\n{Text.emoji}: {Emoji}" +
-                      $"\n{Text.author}: {Author}" +
-                      $"\n{Text.count}: {count}";
-            str += Tier != 10
-                ? $"\n{Income}{Text.coin} {IncomeTime}{Text.time}{Text.minutes}"
-                : $"\n1{Text.candy} 1{Text.sun}{Text.day}";
+            return ToString(null);
+        }
+
+        public string ToString(int? count)
+        {
+            var builder = new StringBuilder();
+            builder.Append($"\n{Title} {TierAsStars()}")
+                .Append($"\n{Text.emoji}: {Emoji}")
+                .Append($"\n{Text.author}: {Author}");
+                
+            if (count != null)
+                builder.Append($"\n{Text.count}: {count}");
+            
+            if (Tier != 10)
+                builder.Append($"\n{Text.income}: {Income}{Text.coin} {IncomeTime}{Text.time}{Text.minutes}");
+            else
+                builder.Append($"\n{Text.upgradable_income}: 1{Text.candy} 1{Text.sun}{Text.day}");
+            
             if (Effect != Effect.None)
-                str += $"\n{Text.effect}: {EffectTranslationsProvider.Instance[Effect]}";
+                builder.Append($"\n{Text.effect}: {EffectTranslationsProvider.Instance[Effect]}");
             if (ExclusiveTask != ExclusiveTask.None)
-                str += $"\n{Text.upgradable}: " +
-                       $"{string.Format(ExclusiveTaskTranslationsProvider.Instance[ExclusiveTask]!, ExclusiveTaskGoal)}";
-            if (Description != "") str += $"\n\n{Text.description}: {Description}";
-            return str;
+                builder.Append($"\n{Text.upgradable}: {string.Format(ExclusiveTaskTranslationsProvider.Instance[ExclusiveTask]!, ExclusiveTaskGoal)}");
+
+            if (Description != "")
+                builder.Append($"\n\n{Text.description}: {Description}");
+
+            return builder.ToString();
         }
 
         public string TierAsStars()

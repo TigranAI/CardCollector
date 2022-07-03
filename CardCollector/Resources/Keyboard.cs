@@ -347,6 +347,11 @@ namespace CardCollector.Resources
             },
             new[]
             {
+                InlineKeyboardButton.WithCallbackData("Эксклюзивные",
+                    $"{CallbackQueryCommands.set}={(int) FilterKeys.Tier}=10")
+            },
+            new[]
+            {
                 InlineKeyboardButton.WithCallbackData("1",
                     $"{CallbackQueryCommands.set}={(int) FilterKeys.Tier}=1")
             },

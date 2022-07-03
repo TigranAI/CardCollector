@@ -1,15 +1,19 @@
 ﻿using System.Threading.Tasks;
+using CardCollector.Commands.CallbackQueryHandler;
 using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
 using CardCollector.Resources.Translations;
+using Telegram.Bot.Types.ReplyMarkups;
 
-namespace CardCollector.Commands.MessageHandler.UrlCommands
+namespace CardCollector.Commands.MessageHandler.UrlCommands;
+
+public class ClaimGiveaway : MessageUrlHandler
 {
-    public class ClaimGiveaway : MessageUrlHandler
-    {
-        protected override string CommandText => MessageUrlCommands.claim_giveaway;
+    protected override string CommandText => MessageUrlCommands.claim_giveaway;
 
-        protected override async Task Execute()
+    protected override async Task Execute()
+    {
+        if (User.OpenStartPack == 0)
         {
             var giveaway = await Context.ChannelGiveaways.FindById(int.Parse(StartData[1]));
             if (giveaway == null || giveaway.IsEnded())
@@ -23,5 +27,24 @@ namespace CardCollector.Commands.MessageHandler.UrlCommands
                     string.Format(Messages.you_got_from_this_giveaway, giveaway.PrizeText()), Keyboard.BackKeyboard);
             }
         }
+        else
+        {
+            var packInfo = await Context.Packs.FindById(1);
+            await User.Messages.SendSticker(packInfo.PreviewFileId, OpenStartPacks());
+            if (!User.FirstReward)
+            {
+                User.FirstReward = true;
+                User.AddPack(packInfo, 7);
+                await User.Messages.SendSticker(packInfo.PreviewFileId!, OpenStartPacks());
+            }
+        }
+    }
+
+    private InlineKeyboardMarkup OpenStartPacks()
+    {
+        return new InlineKeyboardMarkup(new[]
+        {
+            new[] {InlineKeyboardButton.WithCallbackData(Text.open_start_packs, CallbackQueryCommands.open_pack)}
+        });
     }
 }

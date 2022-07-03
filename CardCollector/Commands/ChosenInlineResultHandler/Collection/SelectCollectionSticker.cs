@@ -9,6 +9,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Collection
     public class SelectCollectionSticker : ChosenInlineResultHandler
     {
         protected override string CommandText => ChosenInlineResultCommands.select_sticker;
+
         protected override async Task Execute()
         {
             var stickerId = long.Parse(ChosenInlineResult.ResultId.Split('=')[1]);
@@ -17,7 +18,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Collection
             {
                 await User.Messages.ClearChat();
                 await User.Messages.SendSticker(userSticker.Sticker.FileId);
-                await User.Messages.SendMessage(userSticker.Sticker.ToString(userSticker.Count),
+                await User.Messages.SendMessage(userSticker.ToString(),
                     Keyboard.GetStickerKeyboard(userSticker.Sticker));
             }
             else
@@ -27,7 +28,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Collection
                 module.SelectedStickerId = stickerId;
                 await User.Messages.ClearChat();
                 await User.Messages.SendSticker(userSticker.Sticker.FileId);
-                await User.Messages.SendMessage(userSticker.Sticker.ToString(userSticker.Count),
+                await User.Messages.SendMessage(userSticker.ToString(),
                     Keyboard.GetCollectionStickerKeyboard(userSticker.Sticker, module.Count));
             }
         }

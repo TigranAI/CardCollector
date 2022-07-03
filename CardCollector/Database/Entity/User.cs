@@ -26,6 +26,7 @@ public class User
     public DateTime UnblockedAt { get; set; }
     public PrivilegeLevel PrivilegeLevel { get; set; }
     public bool FirstReward { get; set; }
+    public int OpenStartPack { get; set; }
     public virtual UserLevel Level { get; set; }
     public virtual Cash Cash { get; set; }
     public virtual UserSettings Settings { get; set; }
@@ -97,6 +98,7 @@ public class User
         ChatId = telegramUser.Id;
         PrivilegeLevel = PrivilegeLevel.User;
         IsBlocked = telegramUser.IsBot;
+        OpenStartPack = 7;
 
         Level = new UserLevel();
         Cash = new Cash();

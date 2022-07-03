@@ -13,11 +13,10 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Collection
         protected override async Task Execute()
         {
             var stickerId = long.Parse(ChosenInlineResult.ResultId.Split('=')[1]);
-            var sticker = await Context.Stickers.FindById(stickerId);
             var userSticker = User.Stickers.Single(item => item.Sticker.Id == stickerId);
             await User.Messages.ClearChat();
-            await User.Messages.SendSticker(sticker.FileId);
-            await User.Messages.SendMessage(sticker.ToString(userSticker.Count),
+            await User.Messages.SendSticker(userSticker.Sticker.FileId);
+            await User.Messages.SendMessage(userSticker.ToString(),
                 Keyboard.StickerInfoKeyboard);
         }
 

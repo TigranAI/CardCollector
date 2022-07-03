@@ -44,7 +44,7 @@ public class TopUsersAwards : TimerTask
         var cal = CultureInfo.InvariantCulture.Calendar;
         var week = cal.GetWeekOfYear(dateTime, CalendarWeekRule.FirstFullWeek, DayOfWeek.Monday);
         var day = 7 - AsStartOfMonday(dateTime.DayOfWeek) + week % 2 * 7;
-        return new TimeSpan(day, 0, 0, 0);
+        return new TimeSpan(day == 0 ? 14 : day, 0, 0, 0);
     }
 
     protected override async void TimerCallback(object o, ElapsedEventArgs e)

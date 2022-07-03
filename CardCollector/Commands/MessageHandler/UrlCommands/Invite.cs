@@ -2,15 +2,15 @@
 using System.Linq;
 using System.Threading.Tasks;
 using CardCollector.Attributes;
+using CardCollector.Commands.CallbackQueryHandler;
 using CardCollector.Database;
 using CardCollector.Database.Entity;
 using CardCollector.Database.EntityDao;
 using CardCollector.Extensions;
 using CardCollector.Extensions.Database.Entity;
-using CardCollector.Resources;
 using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
-using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace CardCollector.Commands.MessageHandler.UrlCommands;
 
@@ -43,11 +43,16 @@ public class Invite : MessageUrlHandler
 
         if (!User.FirstReward)
         {
-            User.FirstReward = true;
             var packInfo = await Context.Packs.FindById(1);
+            User.FirstReward = true;
             User.AddPack(packInfo, 7);
-            await User.Messages.SendSticker(packInfo.PreviewFileId!);
-            await User.Messages.SendMessage(Messages.first_reward, Keyboard.MyPacks, ParseMode.Html);
+            await User.Messages.SendSticker(packInfo.PreviewFileId!, OpenStartPacks());
+            if (!User.FirstReward)
+            {
+                User.FirstReward = true;
+                User.AddPack(packInfo, 7);
+                await User.Messages.SendSticker(packInfo.PreviewFileId!, OpenStartPacks());
+            }
         }
 
         inviteInfo.InvitedFriends.Add(User);
@@ -84,6 +89,14 @@ public class Invite : MessageUrlHandler
     {
         await DeleteMessage(User.ChatId, Message.MessageId);
         await base.AfterExecute();
+    }
+
+    private InlineKeyboardMarkup OpenStartPacks()
+    {
+        return new InlineKeyboardMarkup(new[]
+        {
+            new[] {InlineKeyboardButton.WithCallbackData(Text.open_start_packs, CallbackQueryCommands.open_pack)}
+        });
     }
 
     protected override async Task SaveActivity(BotDatabaseContext context)

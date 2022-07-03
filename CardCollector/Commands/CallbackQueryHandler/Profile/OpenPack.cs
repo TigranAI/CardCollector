@@ -8,18 +8,20 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
     public class OpenPack : CallbackQueryHandler
     {
         protected override string CommandText => CallbackQueryCommands.open_pack;
-        protected override bool ClearStickers => true;
 
         protected override async Task Execute()
         {
             var data = CallbackQuery.Data!.Split("=");
             var packId = data.Length == 2 ? int.Parse(CallbackQuery.Data!.Split("=")[1]) : -1;
-            var userPack = User.Packs
-                .SingleOrDefault(item => item.Id == packId || (packId == -1 && item.Pack.Id == 1));
+            var userPack = User.Packs.SingleOrDefault(item => item.Id == packId || (packId == -1 && item.Pack.Id == 1));
             if (userPack == null || userPack.Count < 1)
+            {
                 await AnswerCallbackQuery(User, CallbackQuery.Id, Messages.packs_count_zero, true);
+                await User.Messages.ClearChat();
+            }
             else
             {
+                await User.Messages.ClearChat();
                 var sticker = await userPack.Open();
                 await User.Messages.ClearChat();
                 await User.Messages.SendSticker(sticker.FileId);
@@ -34,6 +36,8 @@ namespace CardCollector.Commands.CallbackQueryHandler.Profile
                     tp.OpenPack = true;
                     await User.InviteInfo.CheckRewards(Context);
                 }
+
+                if (User.OpenStartPack != 0 && packId == -1) User.OpenStartPack--;
             }
         }
     }

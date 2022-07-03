@@ -19,9 +19,10 @@ namespace CardCollector.Session.Modules
 
         public string ToString(UserState state)
         {
+            var tier = Tier == 10 ? "Эксклюзивные" : Tier?.ToString() ?? Messages.all;
             var text = $"{Messages.current_filters}:\n" +
                        $"{Messages.author}: {Author ?? Messages.all}\n" +
-                       $"{Messages.tier}: {Tier?.ToString() ?? Messages.all}\n" +
+                       $"{Messages.tier}: {tier}\n" +
                        $"{Messages.emoji}: {Emoji ?? Messages.all}\n";
             if (state is UserState.AuctionMenu)
                 text += $"{Messages.price}: 💎 {PriceGemsFrom ?? 0} - {PriceGemsTo?.ToString() ?? "∞"}\n";

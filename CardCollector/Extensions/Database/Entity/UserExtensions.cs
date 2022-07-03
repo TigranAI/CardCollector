@@ -19,6 +19,7 @@ namespace CardCollector.Extensions.Database.Entity
             if (user.InviteInfo?.ShowInvitedBy() is true)
                 rows.Add($"{Messages.inviter}: {user.InviteInfo.InvitedBy!.Username}");
             rows.Add($"{Messages.see_your_stickers}");
+            rows.Add($"{Messages.send_your_stickers}");
             return string.Join("\n", rows);
         }
 

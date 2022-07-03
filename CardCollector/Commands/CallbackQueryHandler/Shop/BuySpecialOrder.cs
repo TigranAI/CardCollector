@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using CardCollector.Controllers;
 using CardCollector.Database.Entity;
 using CardCollector.Database.EntityDao;
 using CardCollector.Others;

@@ -495,4 +495,16 @@
     <data name="open_exclusive" xml:space="preserve">
         <value>Открыть эксклюзивный пак</value>
     </data>
+    <data name="crown" xml:space="preserve">
+        <value>👑</value>
+    </data>
+    <data name="upgradable_income" xml:space="preserve">
+        <value>В прокачанном состоянии будет приносить</value>
+    </data>
+    <data name="income" xml:space="preserve">
+        <value>Приносит</value>
+    </data>
+    <data name="open_start_packs" xml:space="preserve">
+        <value>Открыть стартовые паки</value>
+    </data>
 </root>

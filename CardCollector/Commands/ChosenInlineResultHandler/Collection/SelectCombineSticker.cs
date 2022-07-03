@@ -18,7 +18,7 @@ namespace CardCollector.Commands.ChosenInlineResultHandler.Collection
             var userSticker = User.Stickers.Single(item => item.Id == stickerId);
             await User.Messages.ClearChat();
             await User.Messages.SendSticker(userSticker.GetFileId());
-            await User.Messages.SendMessage(userSticker.Sticker.ToString(userSticker.Count), 
+            await User.Messages.SendMessage(userSticker.ToString(), 
                 Keyboard.GetCombineStickerKeyboard(module));
         }
 

@@ -1,9 +1,14 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
+using CardCollector.Database.Entity.NotMapped;
 using CardCollector.Others;
 using CardCollector.Resources;
+using CardCollector.Resources.Enums;
 using CardCollector.Resources.Translations;
+using CardCollector.Resources.Translations.Providers;
+using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.InlineQueryResults;
 using Telegram.Bot.Types.ReplyMarkups;
 
@@ -48,6 +53,32 @@ namespace CardCollector.Database.Entity
                 Description = $"{Text.tier}: {Sticker.TierAsStars()} | {Text.count}: {Count}",
                 ReplyMarkup = Keyboard.AnswerBet
             };
+        }
+
+        public override string ToString()
+        {
+            var builder = new StringBuilder();
+            builder.Append($"\n{Sticker.Title} {Sticker.TierAsStars()}")
+                .Append($"\n{Text.emoji}: {Sticker.Emoji}")
+                .Append($"\n{Text.author}: {Sticker.Author}")
+                .Append($"\n{Text.count}: {Count}");
+            
+            if (Sticker.Tier != 10)
+                builder.Append($"\n{Text.income}: {Sticker.Income}{Text.coin} {Sticker.IncomeTime}{Text.time}{Text.minutes}");
+            else if (IsUnlocked)
+                builder.Append($"\n{Text.income}: 1{Text.candy} 1{Text.sun}{Text.day}");
+            else
+                builder.Append($"\n{Text.upgradable_income}: 1{Text.candy} 1{Text.sun}{Text.day}");
+            
+            if (Sticker.Effect != Effect.None)
+                builder.Append($"\n{Text.effect}: {EffectTranslationsProvider.Instance[Sticker.Effect]}");
+            if (Sticker.ExclusiveTask != ExclusiveTask.None)
+                builder.Append($"\n{Text.upgradable}: {string.Format(ExclusiveTaskTranslationsProvider.Instance[Sticker.ExclusiveTask]!, Sticker.ExclusiveTaskGoal)}");
+
+            if (Sticker.Description != "")
+                builder.Append($"\n\n{Text.description}: {Sticker.Description}");
+
+            return builder.ToString();
         }
     }
 }
