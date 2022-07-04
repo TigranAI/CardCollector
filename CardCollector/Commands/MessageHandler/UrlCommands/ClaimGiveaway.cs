@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using CardCollector.Attributes;
 using CardCollector.Commands.CallbackQueryHandler;
 using CardCollector.Database.EntityDao;
 using CardCollector.Resources;
@@ -7,12 +8,14 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace CardCollector.Commands.MessageHandler.UrlCommands;
 
+[MenuPoint]
 public class ClaimGiveaway : MessageUrlHandler
 {
     protected override string CommandText => MessageUrlCommands.claim_giveaway;
 
     protected override async Task Execute()
     {
+        await User.Messages.ClearChat();
         if (User.OpenStartPack == 0)
         {
             var giveaway = await Context.ChannelGiveaways.FindById(int.Parse(StartData[1]));
@@ -35,7 +38,6 @@ public class ClaimGiveaway : MessageUrlHandler
             {
                 User.FirstReward = true;
                 User.AddPack(packInfo, 7);
-                await User.Messages.SendSticker(packInfo.PreviewFileId!, OpenStartPacks());
             }
         }
     }

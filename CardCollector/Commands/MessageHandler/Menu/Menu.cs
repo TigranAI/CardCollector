@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using CardCollector.Attributes;
 using CardCollector.Commands.CallbackQueryHandler;
 using CardCollector.Database.EntityDao;
 using CardCollector.Resources.Translations;
@@ -6,6 +7,7 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace CardCollector.Commands.MessageHandler.Menu;
 
+[MenuPoint]
 public class Menu : MessageHandler
 {
     protected override string CommandText => MessageCommands.menu;
@@ -25,7 +27,6 @@ public class Menu : MessageHandler
             {
                 User.FirstReward = true;
                 User.AddPack(packInfo, 7);
-                await User.Messages.SendSticker(packInfo.PreviewFileId!, OpenStartPacks());
             }
         }
     }

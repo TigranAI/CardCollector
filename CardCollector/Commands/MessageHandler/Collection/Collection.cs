@@ -35,7 +35,6 @@ public class Collection : MessageHandler
             {
                 User.FirstReward = true;
                 User.AddPack(packInfo, 7);
-                await User.Messages.SendSticker(packInfo.PreviewFileId!, OpenStartPacks());
             }
         }
     }

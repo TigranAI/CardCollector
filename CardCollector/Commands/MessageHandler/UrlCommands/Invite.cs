@@ -14,7 +14,7 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace CardCollector.Commands.MessageHandler.UrlCommands;
 
-[Statistics]
+[Statistics, MenuPoint]
 public class Invite : MessageUrlHandler
 {
     protected override string CommandText => MessageUrlCommands.invite_friend;
@@ -23,6 +23,7 @@ public class Invite : MessageUrlHandler
 
     protected override async Task Execute()
     {
+        await User.Messages.ClearChat();
         var isFirstOrderPicked = User.SpecialOrdersUser.Any(item => item.Id == 2);
         await User.Messages.SendStartMessage(isFirstOrderPicked);
         
@@ -51,7 +52,6 @@ public class Invite : MessageUrlHandler
             {
                 User.FirstReward = true;
                 User.AddPack(packInfo, 7);
-                await User.Messages.SendSticker(packInfo.PreviewFileId!, OpenStartPacks());
             }
         }
 
